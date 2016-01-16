@@ -1,0 +1,5 @@
+{
+    "component": "1dbc51200e11614",
+    "state": "click",
+    "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+}  

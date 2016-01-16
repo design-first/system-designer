@@ -1,0 +1,49 @@
+{
+    "name": "system-designer",
+    "version": "0.1.2",
+    "description": "An IDE to create client and server JavaScript applications",
+    "homepage": "https://systemdesigner.io",
+    "keywords": [
+        "mda",
+        "metamodel",
+        "model",
+        "design",
+        "component",
+        "system"
+    ],
+    "author": {
+        "name": "erwan carriou",
+        "email": "erwan.carriou@mac.com",
+        "twitter": "@ecarriou"
+    },
+    "license": "GPL-3.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/system-designer/system-designer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/system-designer/system-designer/issues"
+    },
+    "main": "web/index.html",
+    "scripts": {
+        "test": "grunt test",
+        "watch": "grunt watch:system",
+        "clean": "grunt clean",
+        "debug": "grunt debug",
+        "start": "grunt connect:server",
+        "startDebug": "grunt connect:serverDebug"
+    },
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-cli": "^0.1.13",
+        "grunt-contrib-clean": "^0.7.0",
+        "grunt-contrib-concat": "^0.5.0",
+        "grunt-contrib-connect": "^0.11.2",
+        "grunt-contrib-copy": "^0.8.0",
+        "grunt-contrib-jshint": "^0.11.3",
+        "grunt-contrib-uglify": "^0.11.0",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-jsbeautifier": "^0.2.7",
+        "grunt-merge-json": "^0.9.5"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "_id": "Worker",
+    "_name": "Worker",
+    "_schema": "WorkerSchema",
+    "_inherit": [
+        "MonocoComponent"
+    ],
+    "worker": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "send": {
+        "params" : [
+            {
+                "name": "message",
+                "type": "object"
+            }
+        ]
+    }
+}

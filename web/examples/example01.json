@@ -1,0 +1,122 @@
+{
+	"schemas": {
+		"CSSSchema": {
+			"_name": "CSSSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"source": "property",
+			"_id": "CSSSchema"
+		},
+		"CSS": {
+			"_name": "CSS",
+			"_schema": "CSSSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"source": {
+				"type": "css",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"_id": "CSS"
+		},
+		"HTMLSchema": {
+			"_name": "HTMLSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"source": "property",
+			"_id": "HTMLSchema"
+		},
+		"HTML": {
+			"_name": "HTML",
+			"_schema": "HTMLSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"source": {
+				"type": "html",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"_id": "HTML"
+		},
+		"ButtonSchema": {
+			"_name": "ButtonSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"css": "property",
+			"html": "property",
+			"label": "property",
+			"render": "method",
+			"click": "event",
+			"_id": "ButtonSchema"
+		},
+		"Button": {
+			"_name": "Button",
+			"_schema": "ButtonSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"css": {
+				"type": "@CSS",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"html": {
+				"type": "@HTML",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"label": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"render": {},
+			"click": {},
+			"_id": "Button"
+		}
+	},
+	"types": {},
+	"behaviors": {
+		"1051915f671fa9b": {
+			"_id": "1051915f671fa9b",
+			"component": "Button",
+			"state": "render",
+			"action": "function render() {\n                document.querySelector('body').insertAdjacentHTML('afterbegin', '<style>' + this.css().source() + '</style>');\n                document.querySelector('body').insertAdjacentHTML('afterbegin', this.html().source().replace('{{label}}', this.label()));\n                \n                var html = document.getElementsByClassName('monoco-button');\n                html[0].addEventListener('click', function () {\n                    this.click();\n                }.bind(this));\n            }",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1c5dd1b63f14aa9": {
+			"_id": "1c5dd1b63f14aa9",
+			"component": "Button",
+			"state": "click",
+			"action": "function click() {\n    alert('You have no will!');\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1514f1123c107d9": {
+			"_id": "1514f1123c107d9",
+			"component": "114cc1877218067",
+			"state": "main",
+			"action": "function main() {\n                var CSS = this.require('CSS'),\n                    HTML = this.require('HTML'),\n                    Button = this.require('Button');\n                \n                var css = new CSS({\n                    'source': '.monoco-button {width: 200px;height: 50px;position: relative;top:200px;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);}\"'\n                });\n                var html = new HTML({\n                    'source': '<button type=\"button\" class=\"monoco-button\">{{label}}</button>'\n                });\n                \n                var button = new Button({\n                    'css': css,\n                    'html': html,\n                    'label': 'click me!'\n                });\n                button.render();                         \n            }",
+			"useCoreAPI": false,
+			"core": false
+		}
+	},
+	"components": {},
+	"name": "example",
+	"version": "0.0.1",
+	"description": "",
+	"_id": "114cc1877218067",
+	"master": true,
+	"subsystem": false
+}

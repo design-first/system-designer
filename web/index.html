@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A Designer for Systems">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="icon" href="img/favicon.ico">
+    <title>System Designer</title>
+    <!-- bootstrap -->
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- monoco designer system -->
+    <link href="systems/design.json" async="true" type="application/json" rel="system">
+    <!-- monoco designer -->
+    <link href="styles/designer.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Menubar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Menu header -->
+            <div id="monoco-menubar-header" class="navbar-header"></div>
+            <div>
+                <!-- Menu items -->
+                <ul id="monoco-menubar-items" class="nav navbar-nav"></ul>
+                <!-- Menu actions -->
+                <ul id="monoco-menubar-actions" class="nav navbar-nav navbar-right"></ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Toobar -->
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul id="monoco-toolbar-items" class="nav nav-sidebar"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-1 col-md-10 col-md-offset-1 main">
+            <!-- Dialogs -->
+            <div id="monoco-dialog-import"></div>
+            <div id="monoco-dialog-export"></div>
+            <div id="monoco-dialog-drop-file"></div>
+            <div id="monoco-dialog-import-file"></div>
+            <div id="monoco-dialog-system-creation"></div>
+            <div id="monoco-dialog-type-creation"></div>
+            <div id="monoco-dialog-schema-creation"></div>
+            <div id="monoco-dialog-model-creation"></div>
+            <div id="monoco-dialog-behavior-creation"></div>
+            <div id="monoco-dialog-component-creation"></div>
+            <div id="monoco-dialog-config"></div>
+            <div id="monoco-dialog-copyright"></div>
+            <div id="monoco-dialog-check"></div>
+            <!-- Message -->
+            <div id="monoco-message"></div>
+            <!-- Workspace -->
+            <div id="monoco-workspace" class="row placeholders"></div>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="lib/jquery/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- monoco -->
+    <script type="text/javascript" src="lib/monoco/monoco.min.js"></script>
+    <!-- monoco designer -->
+    <script type="text/javascript" src="scripts/designer.min.js"></script>
+</body>
+
+</html>

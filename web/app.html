@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- monoco -->
+    <script type="text/javascript" src="lib/monoco/monoco.min.js"></script>
+    <script>
+        monoco.on('ready', function () {
+            var system = monoco.system('app');
+            var metamodel = monoco.require('metamodel');
+
+            // MONOCO ADMIN 
+            metamodel.schema({
+                "_id": "Worker",
+                "_name": "Worker",
+                "_schema": "WorkerSchema",
+                "_inherit": [
+                    "MonocoComponent"
+                ],
+                "_core": true,
+                "worker": {
+                    "type": "object",
+                    "readOnly": false,
+                    "mandatory": false,
+                    "default": {}
+                },
+                "send": {
+                    "params": [
+                        {
+                            "name": "message",
+                            "type": "object"
+                        }
+                    ]
+                }
+            });
+
+            metamodel.schema({
+                "_id": "WorkerSchema",
+                "_name": "WorkerSchema",
+                "_inherit": [
+                    "MonocoComponentSchema"
+                ],
+                "_core": true,
+                "worker": "property",
+                "send": "method"
+            });
+
+            metamodel.schema({
+                "_id": "MonocoAdminSchema",
+                "_name": "MonocoAdminSchema",
+                "_inherit": [
+                    "MonocoComponentSchema"
+                ],
+                "_core": true,
+                "start": "method"
+            });
+
+            metamodel.schema({
+                "_id": "MonocoAdmin",
+                "_name": "MonocoAdmin",
+                "_schema": "MonocoAdminSchema",
+                "_inherit": [
+                    "MonocoComponent"
+                ],
+                "_core": true,
+                "start": {}
+            });
+
+
+            metamodel.schema({
+                "_id": "MonocoChannelEventSchema",
+                "_name": "MonocoChannelEventSchema",
+                "_core": true,
+                "getInitSystem": "event",
+                "setInitSystem": "event"
+            });
+
+
+            metamodel.schema({
+                "_id": "MonocoChannelEvent",
+                "_name": "MonocoChannelEvent",
+                "_schema": "MonocoChannelEventSchema",
+                "_core": true,
+                "getInitSystem": {
+                    "params": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "setInitSystem": {
+                    "params": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        },
+                        {
+                            "name": "system",
+                            "type": "object"
+                        }
+                    ]
+                }
+            });            
+
+            metamodel.create();
+
+            // ADMIN
+            var MonocoAdmin = monoco.require('MonocoAdmin');
+            MonocoAdmin.on('start', function () {
+                var Worker = null,
+                        worker = null,
+                        sysid = '';
+
+                Worker = this.require('Worker');
+                worker = new Worker({
+                    "_id": "worker",
+                    "worker": new SharedWorker('./scripts/worker.js'),
+                });
+                worker.worker().port.onmessage = function (e) {
+                    $db.MonocoMessage.insert(e.data);
+                }
+
+                MonocoChannel = this.require('MonocoChannel');
+                channel = new MonocoChannel({
+                    '_id': 'channel'
+                });
+
+                channel.on('send', function (message) {
+                    this.require('worker').worker().port.postMessage(message);
+                });
+
+                channel.on('setInitSystem', function (id, system) {
+                    ;
+                    delete system.classInfo;
+                    var systemID = this.require('db').system(system);
+
+                    console.info('monoco: the system is loaded.')
+
+                    monoco.require(systemID).main();
+                });
+
+                sysid = document.location.search.split('?')[1].split('id=')[1];
+                channel.getInitSystem(sysid);
+                console.info('monoco: loading the system...');
+            }, true);
+
+            //
+            var admin = new MonocoAdmin();
+            admin.start();
+        });
+    </script>
+</body>
+
+</html>

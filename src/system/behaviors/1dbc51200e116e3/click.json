@@ -1,0 +1,5 @@
+{
+    "component": "1dbc51200e116e3",
+    "state": "click",
+    "action": "function click() {\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        this.hide();\n    });\n}"
+}

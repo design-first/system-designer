@@ -1,0 +1,2330 @@
+{
+	"_id": "e89c617b6b15d28",
+	"name": "system-designer",
+	"description": "A Designer for Systems",
+	"version": "0.1.0",
+	"components": {
+		"JS": {
+			"util": {
+				"_id": "util",
+				"source": ""
+			}
+		},
+		"HTML": {
+			"dialog-modal-behavior-creation.html": {
+				"_id": "dialog-modal-behavior-creation.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-behavior-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">Model</label>                         <div class=\"col-sm-8\">                             <select id=\"monoco-dialog-behavior-creation-model\" name=\"model\" class=\"form-control\">                                 {{models}}                             </select>                         </div>                     </div>                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">State</label>                         <div class=\"col-sm-8\">                             <select id=\"monoco-dialog-behavior-creation-state\" name=\"state\" class=\"form-control\">                                 {{states}}                             </select>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-behavior-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-behavior-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-check.html": {
+				"_id": "dialog-modal-check.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-check-modal\" tabindex=\"-1\" role=\"dialog\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 {{message}}             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-component-creation.html": {
+				"_id": "dialog-modal-component-creation.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-component-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">Model</label>                         <div class=\"col-sm-8\">                             <select id=\"monoco-dialog-component-creation-model\" name=\"schema\" class=\"form-control\">                                 {{models}}                             </select>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-component-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-component-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-config.html": {
+				"_id": "dialog-modal-config.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-config-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <div class=\"col-sm-10 col-sm-offset-1\">                             <label class=\"checkbox-inline\">                                 <input type=\"checkbox\" value=\"enum\" id=\"monoco-dialog-type-config-isdebug\">debug mode                             </label>                         </div>                     </div>                     <div class=\"form-group\">                         <div class=\"col-sm-10\">                             <label class=\"checkbox-inline\">                                 <button type=\"button\" class=\"btn btn-default\" aria-label=\"Left Align\" id=\"monoco-dialog-type-config-reset\">                                     <span>Reset System Designer</span>                                 </button>                             </label>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-config-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-config-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-copyright.html": {
+				"_id": "dialog-modal-copyright.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-copyright-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-lg\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 {{message}}             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-copyright-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-drop-file.html": {
+				"_id": "dialog-modal-drop-file.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-drop-file-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 {{message}}             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-drop-file-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-default\" id=\"monoco-dialog-drop-file-modal-merge\">Merge</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-drop-file-modal-import\">Import</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-export.html": {
+				"_id": "dialog-modal-export.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-export-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <div class=\"col-sm-12\">                             <input type=\"text\" class=\"form-control\" placeholder=\"schema name\" value=\"{{message}}\" readonly>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-export-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-export-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-import-file.html": {
+				"_id": "dialog-modal-import-file.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-import-file-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <div class=\"col-sm-10\">                             <label class=\"checkbox-inline\">                                 <input type=\"file\" id=\"monoco-dialog-import-file-modal-file\">                             </label>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-import-file-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-default\" id=\"monoco-dialog-import-file-modal-merge\">Merge</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-import-file-modal-import\">Import</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-import.html": {
+				"_id": "dialog-modal-import.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-import-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 {{message}}             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-import-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-import-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-model-creation.html": {
+				"_id": "dialog-modal-model-creation.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-model-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"control-label col-sm-4\">Name</label>                         <div class=\"col-sm-8\">                             <input type=\"text\" class=\"form-control\" placeholder=\"model name\" id=\"monoco-dialog-model-creation-name\">                         </div>                     </div>                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"control-label col-sm-4\">Schema</label>                         <div class=\"col-sm-8\">                             <select id=\"monoco-dialog-model-creation-schema\" name=\"schema\" class=\"form-control\">                                 {{schemas}}                             </select>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-model-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-model-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-schema-creation.html": {
+				"_id": "dialog-modal-schema-creation.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-schema-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">Name</label>                         <div class=\"col-sm-8\">                             <input type=\"text\" class=\"form-control\" placeholder=\"schema name\" id=\"monoco-dialog-schema-creation-name\">                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-schema-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-schema-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-system-creation.html": {
+				"_id": "dialog-modal-system-creation.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-system-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label class=\"col-sm-4 control-label\">Name</label>                         <div class=\"col-sm-8\">                             <input type=\"text\" class=\"form-control\" placeholder=\"system name\" id=\"monoco-dialog-system-creation-name\">                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-system-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-system-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal-type-creation.html": {
+				"_id": "dialog-modal-type-creation.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-type-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">Name</label>                         <div class=\"col-sm-8\">                             <input type=\"text\" class=\"form-control\" placeholder=\"type name\" id=\"monoco-dialog-type-creation-name\">                         </div>                     </div>                     <div class=\"form-group\">                         <div class=\"col-sm-offset-4 col-sm-8\">                             <label class=\"checkbox-inline\">                                 <input type=\"checkbox\" value=\"enum\" id=\"monoco-dialog-type-creation-isEnum\">Enumeration                             </label>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-type-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-type-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"dialog-modal.html": {
+				"_id": "dialog-modal.html",
+				"source": "<div class=\"modal fade\" id=\"monoco-dialog-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 {{message}}             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+			},
+			"menu-action-search.html": {
+				"_id": "menu-action-search.html",
+				"source": "<form class=\"navbar-form navbar-left\" role=\"search\">     <div class=\"form-group\">         <input id=\"monoco-menu-action-search\" type=\"text\" class=\"form-control\" placeholder=\"Search\">     </div> </form>"
+			},
+			"menu-action-version.html": {
+				"_id": "menu-action-version.html",
+				"source": "<a href=\"index.html\" target=\"_blank\">system designer | v0.1</a>"
+			},
+			"menu-header-behavior.html": {
+				"_id": "menu-header-behavior.html",
+				"source": "<a class=\"navbar-brand\" href=\"#\">Behavior</a>"
+			},
+			"menu-header-component.html": {
+				"_id": "menu-header-component.html",
+				"source": "<a class=\"navbar-brand\" href=\"#\">Component</a>"
+			},
+			"menu-header-model.html": {
+				"_id": "menu-header-model.html",
+				"source": "<a class=\"navbar-brand\" href=\"#\">Model</a>"
+			},
+			"menu-header-schema.html": {
+				"_id": "menu-header-schema.html",
+				"source": "<a class=\"navbar-brand\" href=\"#\">Schema</a>"
+			},
+			"menu-header-system.html": {
+				"_id": "menu-header-system.html",
+				"source": "<a class=\"navbar-brand\" href=\"#\">System</a>"
+			},
+			"menu-header-type.html": {
+				"_id": "menu-header-type.html",
+				"source": "<a class=\"navbar-brand\" href=\"#\">Type</a>"
+			},
+			"menu-header.html": {
+				"_id": "menu-header.html",
+				"source": "<a class=\"navbar-brand\" href=\"#\">system designer</a>"
+			},
+			"menu-item-action.html": {
+				"_id": "menu-item-action.html",
+				"source": "<a id=\"monoco-menu-item-action\" href=\"#action\">Action</a>"
+			},
+			"menu-item-behaviors.html": {
+				"_id": "menu-item-behaviors.html",
+				"source": "<a id=\"monoco-menu-item-behaviors\" href=\"#behaviors\">Behaviors</a>"
+			},
+			"menu-item-components.html": {
+				"_id": "menu-item-components.html",
+				"source": "<a id=\"monoco-menu-item-components\" href=\"#components\">Components</a>"
+			},
+			"menu-item-json.html": {
+				"_id": "menu-item-json.html",
+				"source": "<a id=\"monoco-menu-item-json\" href=\"#json\">JSON</a>"
+			},
+			"menu-item-message-save.html": {
+				"_id": "menu-item-message-save.html",
+				"source": "<a id=\"monoco-menu-message-save\"> file saved!</a>"
+			},
+			"menu-item-models.html": {
+				"_id": "menu-item-models.html",
+				"source": "<a id=\"monoco-menu-item-models\" href=\"#models\">Models</a>"
+			},
+			"menu-item-mson.html": {
+				"_id": "menu-item-mson.html",
+				"source": "<a id=\"monoco-menu-item-mson\" href=\"#mson\">MSON</a>"
+			},
+			"menu-item-schemas.html": {
+				"_id": "menu-item-schemas.html",
+				"source": "<a id=\"monoco-menu-item-schemas\" href=\"#schemas\">Schemas</a>"
+			},
+			"menu-item-system.html": {
+				"_id": "menu-item-system.html",
+				"source": "<a id=\"monoco-menu-item-system\" href=\"#system\">Systems</a>"
+			},
+			"menu-item-types.html": {
+				"_id": "menu-item-types.html",
+				"source": "<a id=\"monoco-menu-item-type\" href=\"#types\">Types</a>"
+			},
+			"message-alert-danger.html": {
+				"_id": "message-alert-danger.html",
+				"source": "<div class=\"alert alert-danger monoco-message-danger\" role=\"alert\">{{message}}</div>"
+			},
+			"message-alert-info.html": {
+				"_id": "message-alert-info.html",
+				"source": "<div class=\"alert alert-info monoco-message-info\" role=\"alert\">{{message}}</div>"
+			},
+			"message-alert-success.html": {
+				"_id": "message-alert-success.html",
+				"source": "<div class=\"alert alert-success monoco-message-success\" role=\"alert\">{{message}}</div>"
+			},
+			"message-alert-warning.html": {
+				"_id": "message-alert-warning.html",
+				"source": "<div class=\"alert alert-warning monoco-message-warning\" role=\"alert\">{{message}}</div>"
+			},
+			"model-behavior.html": {
+				"_id": "model-behavior.html",
+				"source": "<div id=\"monoco-behavior-{{_id}}\" class=\"col-xs-6 col-sm-3 placeholder\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default monoco-model-behavior-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default monoco-model-behavior-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit code</span>             </button>            </div>     </div> </div>"
+			},
+			"model-class.html": {
+				"_id": "model-class.html",
+				"source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"monoco-class-{{id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default monoco-model-class-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default monoco-model-class-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit MSON</span>             </button>            </div>     </div> </div>"
+			},
+			"model-component.html": {
+				"_id": "model-component.html",
+				"source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"monoco-component-{{_id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default monoco-model-component-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>             <button type=\"button\" class=\"btn btn-default monoco-model-component-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit JSON</span>             </button>         </div>     </div> </div>"
+			},
+			"model-schema.html": {
+				"_id": "model-schema.html",
+				"source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"monoco-schema-{{id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default monoco-model-schema-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>             <button type=\"button\" class=\"btn btn-default monoco-model-schema-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit MSON</span>             </button>         </div>     </div> </div>"
+			},
+			"model-system.html": {
+				"_id": "model-system.html",
+				"source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"monoco-system-{{_id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default monoco-model-system-delete-{{_id}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default monoco-model-system-open-{{_id}}\" aria-label=\"Left Align\">                 <span>Edit JSON</span>             </button>                <button type=\"button\" class=\"btn btn-default monoco-model-system-design-{{_id}}\" aria-label=\"Left Align\">                 <span>Set as current</span>             </button>           </div>     </div> </div>"
+			},
+			"model-type.html": {
+				"_id": "model-type.html",
+				"source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"monoco-type-{{id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default  monoco-model-type-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default monoco-model-type-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit MSON</span>             </button>            </div>     </div> </div>"
+			},
+			"toolbar-item-config.html": {
+				"_id": "toolbar-item-config.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-config\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-cog\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-copyright.html": {
+				"_id": "toolbar-item-copyright.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-copyright\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-copyright-mark\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-create.html": {
+				"_id": "toolbar-item-create.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-create\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-export.html": {
+				"_id": "toolbar-item-export.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-export\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-export\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-help.html": {
+				"_id": "toolbar-item-help.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-help\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-import.html": {
+				"_id": "toolbar-item-import.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-import\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-import\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-publish.html": {
+				"_id": "toolbar-item-publish.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-publish\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-refresh.html": {
+				"_id": "toolbar-item-refresh.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-refresh\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-camera\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-save.html": {
+				"_id": "toolbar-item-save.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-save\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-save\" aria-hidden=\"true\"></span> </button>"
+			},
+			"toolbar-item-share.html": {
+				"_id": "toolbar-item-share.html",
+				"source": "<button type=\"button\" id=\"monoco-toolbar-item-share\" class=\"btn btn-default btn-lg\">     <span class=\"glyphicon glyphicon-send\" aria-hidden=\"true\"></span> </button>"
+			}
+		},
+		"CSS": {
+			"page.css": {
+				"_id": "page.css",
+				"source": "html, body {   padding: 0px;    margin: 0px;    width: 100%;    height: 100%; }  .monoco-full {   width: 100%;   height: 100%;   /*background-color: gray;*/ }"
+			}
+		},
+		"MenuAction": {
+			"1f8571164c179be": {
+				"_id": "1f8571164c179be",
+				"html": "menu-action-version.html",
+				"position": 10,
+				"type": "system"
+			},
+			"1f8571164c179bf": {
+				"_id": "1f8571164c179bf",
+				"html": "menu-action-version.html",
+				"position": 10,
+				"type": "type"
+			},
+			"1f8571164c179bg": {
+				"_id": "1f8571164c179bg",
+				"html": "menu-action-version.html",
+				"position": 10,
+				"type": "schema"
+			},
+			"1f8571164c179bh": {
+				"_id": "1f8571164c179bh",
+				"html": "menu-action-version.html",
+				"position": 10,
+				"type": "model"
+			},
+			"1f8571164c179bi": {
+				"_id": "1f8571164c179bi",
+				"html": "menu-action-version.html",
+				"position": 10,
+				"type": "behavior"
+			},
+			"1f8571164c179bj": {
+				"_id": "1f8571164c179bj",
+				"html": "menu-action-version.html",
+				"position": 10,
+				"type": "component"
+			}
+		},
+		"MenuHeader": {
+			"1fb101b99813a12": {
+				"_id": "1fb101b99813a12",
+				"html": "menu-header.html",
+				"type": "designer"
+			},
+			"1fb101b99813a13": {
+				"_id": "1fb101b99813a13",
+				"html": "menu-header-system.html",
+				"type": "system"
+			},
+			"1fb101b99813a14": {
+				"_id": "1fb101b99813a14",
+				"html": "menu-header-type.html",
+				"type": "type"
+			},
+			"1fb101b99813a15": {
+				"_id": "1fb101b99813a15",
+				"html": "menu-header-schema.html",
+				"type": "schema"
+			},
+			"1fb101b99813a16": {
+				"_id": "1fb101b99813a16",
+				"html": "menu-header-model.html",
+				"type": "model"
+			},
+			"1fb101b99813a17": {
+				"_id": "1fb101b99813a17",
+				"html": "menu-header-behavior.html",
+				"type": "behavior"
+			},
+			"1fb101b99813a18": {
+				"_id": "1fb101b99813a18",
+				"html": "menu-header-component.html",
+				"type": "component"
+			}
+		},
+		"MenuItem": {
+			"14f481302c106e6": {
+				"_id": "14f481302c106e6",
+				"name": "models",
+				"html": "menu-item-models.html",
+				"position": 20,
+				"type": "designer"
+			},
+			"154dd1323f1ffg0a": {
+				"_id": "154dd1323f1ffg0a",
+				"name": "system",
+				"html": "menu-item-system.html",
+				"position": 10,
+				"type": "designer"
+			},
+			"154dd1323f1ffg1a": {
+				"_id": "154dd1323f1ffg1a",
+				"name": "schemas",
+				"html": "menu-item-schemas.html",
+				"position": 10,
+				"type": "designer"
+			},
+			"19ec81ce751e196": {
+				"_id": "19ec81ce751e196",
+				"name": "components",
+				"html": "menu-item-components.html",
+				"position": 50,
+				"type": "designer"
+			},
+			"1eb9d188b11824c": {
+				"_id": "1eb9d188b11824c",
+				"name": "behaviors",
+				"html": "menu-item-behaviors.html",
+				"position": 40,
+				"type": "designer"
+			},
+			"1f1781882618102": {
+				"_id": "1f1781882618102",
+				"name": "json",
+				"html": "menu-item-json.html",
+				"position": 10,
+				"type": "system"
+			},
+			"1f1781882618104": {
+				"_id": "1f1781882618104",
+				"name": "json",
+				"html": "menu-item-mson.html",
+				"position": 10,
+				"type": "type"
+			},
+			"1f1781882618106": {
+				"_id": "1f1781882618106",
+				"name": "json",
+				"html": "menu-item-mson.html",
+				"position": 10,
+				"type": "schema"
+			},
+			"1f1781882618108": {
+				"_id": "1f1781882618108",
+				"name": "json",
+				"html": "menu-item-mson.html",
+				"position": 10,
+				"type": "model"
+			},
+			"1f1781882618110": {
+				"_id": "1f1781882618110",
+				"name": "action",
+				"html": "menu-item-action.html",
+				"position": 10,
+				"type": "behavior"
+			},
+			"1f1781882618111": {
+				"_id": "1f1781882618111",
+				"name": "json",
+				"html": "menu-item-json.html",
+				"position": 20,
+				"type": "behavior"
+			},
+			"1f1781882618113": {
+				"_id": "1f1781882618113",
+				"name": "json",
+				"html": "menu-item-json.html",
+				"position": 200,
+				"type": "component"
+			},
+			"1fd911618e18ea9": {
+				"_id": "1fd911618e18ea9",
+				"name": "types",
+				"html": "menu-item-types.html",
+				"position": 30,
+				"type": "designer"
+			}
+		},
+		"MenuSearch": {
+			"10d07178311d4be": {
+				"_id": "10d07178311d4be",
+				"html": "menu-action-search.html",
+				"position": 10,
+				"type": "designer"
+			}
+		},
+		"Message": {
+			"message": {
+				"_id": "message"
+			}
+		},
+		"ToolBarItem": {
+			"10bcb1a0511e09f": {
+				"_id": "10bcb1a0511e09f",
+				"html": "toolbar-item-create.html",
+				"position": 20,
+				"type": "designer"
+			},
+			"13a291c27f16310": {
+				"_id": "13a291c27f16310",
+				"html": "toolbar-item-copyright.html",
+				"position": 90,
+				"type": "designer"
+			},
+			"13a291c27f16311": {
+				"_id": "13a291c27f16311",
+				"html": "toolbar-item-copyright.html",
+				"position": 30,
+				"type": "system"
+			},
+			"13a291c27f16313": {
+				"_id": "13a291c27f16313",
+				"html": "toolbar-item-share.html",
+				"position": 60,
+				"type": "designer"
+			},
+			"13a291c27f16314": {
+				"_id": "13a291c27f16314",
+				"html": "toolbar-item-help.html",
+				"position": 80,
+				"type": "designer"
+			},
+			"13f70137b61b19b": {
+				"_id": "13f70137b61b19b",
+				"html": "toolbar-item-publish.html",
+				"position": 30,
+				"type": "designer"
+			},
+			"163a01b7ca1935c": {
+				"_id": "163a01b7ca1935c",
+				"html": "toolbar-item-refresh.html",
+				"position": 40,
+				"type": "designer"
+			},
+			"163a01b7ca1935d": {
+				"_id": "163a01b7ca1935d",
+				"html": "toolbar-item-import.html",
+				"position": 40,
+				"type": "designer"
+			},
+			"163a01b7ca1935e": {
+				"_id": "163a01b7ca1935e",
+				"html": "toolbar-item-export.html",
+				"position": 50,
+				"type": "designer"
+			},
+			"1dbc51200e11510": {
+				"_id": "1dbc51200e11510",
+				"html": "toolbar-item-help.html",
+				"position": 20,
+				"type": "schema"
+			},
+			"1dbc51200e11610": {
+				"_id": "1dbc51200e11610",
+				"html": "toolbar-item-copyright.html",
+				"position": 30,
+				"type": "model"
+			},
+			"1dbc51200e11611": {
+				"_id": "1dbc51200e11611",
+				"html": "toolbar-item-save.html",
+				"position": 10,
+				"type": "behavior"
+			},
+			"1dbc51200e11612": {
+				"_id": "1dbc51200e11612",
+				"html": "toolbar-item-copyright.html",
+				"position": 30,
+				"type": "behavior"
+			},
+			"1dbc51200e11613": {
+				"_id": "1dbc51200e11613",
+				"html": "toolbar-item-save.html",
+				"position": 10,
+				"type": "component"
+			},
+			"1dbc51200e11614": {
+				"_id": "1dbc51200e11614",
+				"html": "toolbar-item-copyright.html",
+				"position": 30,
+				"type": "component"
+			},
+			"1dbc51200e11615": {
+				"_id": "1dbc51200e11615",
+				"html": "toolbar-item-help.html",
+				"position": 20,
+				"type": "model"
+			},
+			"1dbc51200e11616": {
+				"_id": "1dbc51200e11616",
+				"html": "toolbar-item-help.html",
+				"position": 20,
+				"type": "behavior"
+			},
+			"1dbc51200e11617": {
+				"_id": "1dbc51200e11617",
+				"html": "toolbar-item-help.html",
+				"position": 20,
+				"type": "component"
+			},
+			"1dbc51200e116e10": {
+				"_id": "1dbc51200e116e10",
+				"html": "toolbar-item-help.html",
+				"position": 20,
+				"type": "type"
+			},
+			"1dbc51200e116e3": {
+				"_id": "1dbc51200e116e3",
+				"html": "toolbar-item-config.html",
+				"position": 70,
+				"type": "designer"
+			},
+			"1dbc51200e116e4": {
+				"_id": "1dbc51200e116e4",
+				"html": "toolbar-item-save.html",
+				"position": 10,
+				"type": "system"
+			},
+			"1dbc51200e116e5": {
+				"_id": "1dbc51200e116e5",
+				"html": "toolbar-item-save.html",
+				"position": 10,
+				"type": "type"
+			},
+			"1dbc51200e116e6": {
+				"_id": "1dbc51200e116e6",
+				"html": "toolbar-item-copyright.html",
+				"position": 30,
+				"type": "type"
+			},
+			"1dbc51200e116e7": {
+				"_id": "1dbc51200e116e7",
+				"html": "toolbar-item-save.html",
+				"position": 10,
+				"type": "schema"
+			},
+			"1dbc51200e116e8": {
+				"_id": "1dbc51200e116e8",
+				"html": "toolbar-item-copyright.html",
+				"position": 30,
+				"type": "schema"
+			},
+			"1dbc51200e116e9": {
+				"_id": "1dbc51200e116e9",
+				"html": "toolbar-item-save.html",
+				"position": 10,
+				"type": "model"
+			},
+			"1dbc51200e11z10": {
+				"_id": "1dbc51200e11z10",
+				"html": "toolbar-item-help.html",
+				"position": 20,
+				"type": "system"
+			}
+		}
+	},
+	"behaviors": {
+		"12c55183a818e62": {
+			"_id": "12c55183a818e62",
+			"component": "10bcb1a0511e09f",
+			"state": "click",
+			"action": "function click() { this.require('designer').workspace().create(); }"
+		},
+		"11e541274417f90": {
+			"_id": "11e541274417f90",
+			"component": "13a291c27f16310",
+			"state": "click",
+			"action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"13aad1a76e11568": {
+			"_id": "13aad1a76e11568",
+			"component": "13a291c27f16311",
+			"state": "click",
+			"action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"1d0c013863185f8": {
+			"_id": "1d0c013863185f8",
+			"component": "13a291c27f16313",
+			"state": "click",
+			"action": "function click() {\n    var DialogExport = this.require('DialogExport'),\n    system = this.require('designer').system(),\n    message = this.require('message');\n    \n    if (system && Object.keys(system).length) {\n        DialogExport = new DialogExport({\n            'title': 'Copy the link to the system'\n        });\n        DialogExport.show();\n        DialogExport.on('ok', function () {\n            this.hide();\n        });\n        message.success('the url has been generated.')\n    }    \n}"
+		},
+		"1701317f05110fb": {
+			"_id": "1701317f05110fb",
+			"component": "13a291c27f16314",
+			"state": "click",
+			"action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
+		},
+		"110cc104541d8b7": {
+			"_id": "110cc104541d8b7",
+			"component": "13f70137b61b19b",
+			"state": "click",
+			"action": "function click() { var designer = this.require('designer'); window.open('app.html?id=' + designer.system().id());}"
+		},
+		"129d219fdb19d9b": {
+			"_id": "129d219fdb19d9b",
+			"component": "163a01b7ca1935c",
+			"state": "click",
+			"action": "function click() { this.require('channel').sync();}"
+		},
+		"146941f6f41e842": {
+			"_id": "146941f6f41e842",
+			"component": "163a01b7ca1935d",
+			"state": "click",
+			"action": "function click() {\n    var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Select a system to import'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name ='',\n            modelName = '',\n            designer = this.require('designer'),\n            system = designer.system(),\n            message = this.require('message');\n\n        sys = this.data();\n        \n        if (Object.keys(sys).length) {\n            for (name in sys.schemas) {\n                system.schemas()[name] = sys.schemas[name];    \n            }\n            \n            for (name in sys.types) {\n                system.types()[name] = sys.types[name];    \n            }\n            \n            for (name in sys.behaviors) {\n                system.behaviors()[name] = sys.behaviors[name];    \n            }\n            \n            for (name in sys.components) {\n                if (!system.components()[name]) {\n                    system.components()[name] = {}; \n                }\n                for (modelName in sys.components[name]) {\n                    system.components()[name][modelName] = sys.components[name][modelName];     \n                }\n            }\n            \n            designer.save();\n            designer.workspace().refresh();\n    \n            this.hide();\n            designer.save();\n            message.success('merge of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid.');\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            designer.save();\n            designer.workspace().refresh();\n    \n            this.hide();\n            designer.save();\n            \n            message.success('importation of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid');\n        }\n    });\n}"
+		},
+		"11c4c1308e1b8cd": {
+			"_id": "11c4c1308e1b8cd",
+			"component": "163a01b7ca1935e",
+			"state": "click",
+			"action": "function click() {\n    // code inspired from the blog post\n    // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n    if (this.require('designer').system()) {\n        var system = this.require('db').collections().System.find({\n            '_id': this.require('designer').system().id()\n        })[0],\n        message = this.require('message'),\n        textToWrite = JSON.stringify(system),\n    \ttextFileAsBlob = new Blob([textToWrite], {\n    \t    type:'text/plain'\n    \t}),\n    \tfileNameToSaveAs = this.require('designer').system().name() + '.json',\n    \tdownloadLink = document.createElement('a');\n    \t\n    \tdownloadLink.download = fileNameToSaveAs;\n    \tdownloadLink.innerHTML = 'Download File';\n    \tif (window.webkitURL != null) {\n    \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n    \t} else {\n    \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n    \t\tdownloadLink.onclick = function (event) {\n    \t\t    document.body.removeChild(event.target)\n    \t\t};\n    \t\tdownloadLink.style.display = 'none';\n    \t\tdocument.body.appendChild(downloadLink);\n    \t}\n    \n    \tdownloadLink.click();\n    \t\n    \tmessage.success('exportation of the system is done.');\n    }\n}"
+		},
+		"18371193651178f": {
+			"_id": "18371193651178f",
+			"component": "16a55136141d9ac",
+			"state": "click",
+			"action": "function click() { this.require('designer').clear(); }"
+		},
+		"161ff1dc0d1368b": {
+			"_id": "161ff1dc0d1368b",
+			"component": "1dbc51200e11510",
+			"state": "click",
+			"action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
+		},
+		"1ae441883914e6f": {
+			"_id": "1ae441883914e6f",
+			"component": "1dbc51200e11610",
+			"state": "click",
+			"action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"1332c11a7c1575c": {
+			"_id": "1332c11a7c1575c",
+			"component": "1dbc51200e11611",
+			"state": "click",
+			"action": "function click() { this.require('designer').save(); }"
+		},
+		"1b8d11a7d61d4cc": {
+			"_id": "1b8d11a7d61d4cc",
+			"component": "1dbc51200e11612",
+			"state": "click",
+			"action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"165d41f3a315e0d": {
+			"_id": "165d41f3a315e0d",
+			"component": "1dbc51200e11613",
+			"state": "click",
+			"action": "function click() { this.require('designer').save(); }"
+		},
+		"13a9d1375615b14": {
+			"_id": "13a9d1375615b14",
+			"component": "1dbc51200e11614",
+			"state": "click",
+			"action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"1a9d1136dc1e940": {
+			"_id": "1a9d1136dc1e940",
+			"component": "1dbc51200e11615",
+			"state": "click",
+			"action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
+		},
+		"1c8971bb0d124c5": {
+			"_id": "1c8971bb0d124c5",
+			"component": "1dbc51200e11616",
+			"state": "click",
+			"action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
+		},
+		"1de1c1222510701": {
+			"_id": "1de1c1222510701",
+			"component": "1dbc51200e11617",
+			"state": "click",
+			"action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
+		},
+		"151d31dc9712964": {
+			"_id": "151d31dc9712964",
+			"component": "1dbc51200e116e10",
+			"state": "click",
+			"action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
+		},
+		"15da813993108ee": {
+			"_id": "15da813993108ee",
+			"component": "1dbc51200e116e3",
+			"state": "click",
+			"action": "function click() {\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"1fa1b1dc0e1a6d2": {
+			"_id": "1fa1b1dc0e1a6d2",
+			"component": "1dbc51200e116e4",
+			"state": "click",
+			"action": "function click() { this.require('designer').save(); }"
+		},
+		"156c619af91c4dd": {
+			"_id": "156c619af91c4dd",
+			"component": "1dbc51200e116e5",
+			"state": "click",
+			"action": "function click() { this.require('designer').save(); }"
+		},
+		"12f98139791d516": {
+			"_id": "12f98139791d516",
+			"component": "1dbc51200e116e6",
+			"state": "click",
+			"action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"1a3431b3691fa08": {
+			"_id": "1a3431b3691fa08",
+			"component": "1dbc51200e116e7",
+			"state": "click",
+			"action": "function click() { this.require('designer').save(); }"
+		},
+		"1d0cb17e03130bb": {
+			"_id": "1d0cb17e03130bb",
+			"component": "1dbc51200e116e8",
+			"state": "click",
+			"action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/ecarriou/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"http://monoco.io\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+		},
+		"135051338e1099a": {
+			"_id": "135051338e1099a",
+			"component": "1dbc51200e116e9",
+			"state": "click",
+			"action": "function click() { this.require('designer').save(); }"
+		},
+		"14a5b1d7be1bc18": {
+			"_id": "14a5b1d7be1bc18",
+			"component": "1dbc51200e11z10",
+			"state": "click",
+			"action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
+		},
+		"19daa16ecb1489a": {
+			"_id": "19daa16ecb1489a",
+			"component": "MenuItem",
+			"state": "click",
+			"action": "function click() { this.require('designer').context(this.name()); }"
+		},
+		"16ca716dbb1663e": {
+			"_id": "16ca716dbb1663e",
+			"component": "Message",
+			"state": "danger",
+			"action": "function danger(message) {var html = this.require('message-alert-danger.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-danger').fadeIn(500);setTimeout(function () {$('.monoco-message-danger').fadeOut(1000);}, 3000);}"
+		},
+		"100d416f39160b8": {
+			"_id": "100d416f39160b8",
+			"component": "Message",
+			"state": "info",
+			"action": "function info(message) {var html = this.require('message-alert-info.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-info').fadeIn(500);setTimeout(function () {$('.monoco-message-info').fadeOut(1000);}, 3000);}"
+		},
+		"1fda914f391e647": {
+			"_id": "1fda914f391e647",
+			"component": "Message",
+			"state": "success",
+			"action": "function success(message) {var html = this.require('message-alert-success.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-success').fadeIn(500);setTimeout(function () {$('.monoco-message-success').fadeOut(1000);}, 3000);}"
+		},
+		"1724d16a7017b92": {
+			"_id": "1724d16a7017b92",
+			"component": "Message",
+			"state": "warning",
+			"action": "function warning(message) {var html = this.require('message-alert-warning.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-warning').fadeIn(500);setTimeout(function () {$('.monoco-message-warning').fadeOut(1000);}, 3000);}"
+		}
+	},
+	"schemas": {
+		"CSS": {
+			"_id": "CSS",
+			"_name": "CSS",
+			"_schema": "CSSSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"source": {
+				"type": "css",
+				"readOnly": true,
+				"mandatory": true,
+				"default": ""
+			}
+		},
+		"CSSSchema": {
+			"_id": "CSSSchema",
+			"_name": "CSSSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"source": "property"
+		},
+		"Designer": {
+			"_id": "Designer",
+			"_name": "Designer",
+			"_schema": "DesignerSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"menubar": {
+				"type": "@MenuBar",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"toolbar": {
+				"type": "@ToolBar",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"workspace": {
+				"type": "@Workspace",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"server": {
+				"type": "@Server",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"system": {
+				"type": "@System",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"store": {
+				"type": "@Store",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"debug": {
+				"type": "boolean",
+				"readOnly": false,
+				"mandatory": false,
+				"default": false
+			},
+			"context": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"filter": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"type": {
+				"type": "editorType",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "designer"
+			},
+			"refresh": {},
+			"save": {},
+			"check": {},
+			"clear": {},
+			"render": {}
+		},
+		"DesignerSchema": {
+			"_id": "DesignerSchema",
+			"_name": "DesignerSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"menubar": "property",
+			"toolbar": "property",
+			"workspace": "property",
+			"context": "property",
+			"server": "property",
+			"system": "property",
+			"debug": "property",
+			"filter": "property",
+			"type": "property",
+			"store": "property",
+			"refresh": "method",
+			"save": "method",
+			"clear": "method",
+			"check": "method",
+			"render": "event"
+		},
+		"Dialog": {
+			"_id": "Dialog",
+			"_name": "Dialog",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"_schema": "DialogSchema",
+			"title": {
+				"type": "string",
+				"readOnly": true,
+				"mandatory": true,
+				"default": ""
+			},
+			"message": {
+				"type": "string",
+				"readOnly": true,
+				"mandatory": false,
+				"default": ""
+			},
+			"data": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"show": {},
+			"hide": {},
+			"cancel": {},
+			"ok": {}
+		},
+		"DialogBehaviorCreation": {
+			"_id": "DialogBehaviorCreation",
+			"_name": "DialogBehaviorCreation",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogBehaviorCreationSchema"
+		},
+		"DialogBehaviorCreationSchema": {
+			"_id": "DialogBehaviorCreationSchema",
+			"_name": "DialogBehaviorCreationSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogCheck": {
+			"_id": "DialogCheck",
+			"_name": "DialogCheck",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogCheckSchema"
+		},
+		"DialogCheckSchema": {
+			"_id": "DialogCheckSchema",
+			"_name": "DialogCheckSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogComponentCreation": {
+			"_id": "DialogComponentCreation",
+			"_name": "DialogComponentCreation",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogComponentCreationSchema"
+		},
+		"DialogComponentCreationSchema": {
+			"_id": "DialogComponentCreationSchema",
+			"_name": "DialogComponentCreationSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogConfig": {
+			"_id": "DialogConfig",
+			"_name": "DialogConfig",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogConfigSchema"
+		},
+		"DialogConfigSchema": {
+			"_id": "DialogConfigSchema",
+			"_name": "DialogConfigSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogCopyright": {
+			"_id": "DialogCopyright",
+			"_name": "DialogCopyright",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogCopyrightSchema"
+		},
+		"DialogCopyrightSchema": {
+			"_id": "DialogCopyrightSchema",
+			"_name": "DialogCopyrightSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogDropFile": {
+			"_id": "DialogDropFile",
+			"_name": "DialogDropFile",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogDropFileSchema",
+			"mergeSystem": {},
+			"importSystem": {}
+		},
+		"DialogDropFileSchema": {
+			"_id": "DialogDropFileSchema",
+			"_name": "DialogDropFileSchema",
+			"_inherit": [
+				"DialogSchema"
+			],
+			"mergeSystem": "event",
+			"importSystem": "event"
+		},
+		"DialogExport": {
+			"_id": "DialogExport",
+			"_name": "DialogExport",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogExportSchema"
+		},
+		"DialogExportSchema": {
+			"_id": "DialogExportSchema",
+			"_name": "DialogExportSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogImport": {
+			"_id": "DialogImport",
+			"_name": "DialogImport",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogImportSchema"
+		},
+		"DialogImportFile": {
+			"_id": "DialogImportFile",
+			"_name": "DialogImportFile",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogImportFileSchema",
+			"mergeSystem": {},
+			"importSystem": {}
+		},
+		"DialogImportFileSchema": {
+			"_id": "DialogImportFileSchema",
+			"_name": "DialogImportFileSchema",
+			"_inherit": [
+				"DialogSchema"
+			],
+			"mergeSystem": "event",
+			"importSystem": "event"
+		},
+		"DialogImportSchema": {
+			"_id": "DialogImportSchema",
+			"_name": "DialogImportSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogModelCreation": {
+			"_id": "DialogModelCreation",
+			"_name": "DialogModelCreation",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogModelCreationSchema"
+		},
+		"DialogModelCreationSchema": {
+			"_id": "DialogModelCreationSchema",
+			"_name": "DialogModelCreationSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogSchema": {
+			"_id": "DialogSchema",
+			"_name": "DialogSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"title": "property",
+			"message": "property",
+			"data": "property",
+			"ok": "event",
+			"cancel": "event",
+			"show": "method",
+			"hide": "method"
+		},
+		"DialogSchemaCreation": {
+			"_id": "DialogSchemaCreation",
+			"_name": "DialogSchemaCreation",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogSchemaCreationSchema"
+		},
+		"DialogSchemaCreationSchema": {
+			"_id": "DialogSchemaCreationSchema",
+			"_name": "DialogSchemaCreationSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogSystemCreation": {
+			"_id": "DialogSystemCreation",
+			"_name": "DialogSystemCreation",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogSystemCreationSchema"
+		},
+		"DialogSystemCreationSchema": {
+			"_id": "DialogSystemCreationSchema",
+			"_name": "DialogSystemCreationSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"DialogTypeCreation": {
+			"_id": "DialogTypeCreation",
+			"_name": "DialogTypeCreation",
+			"_inherit": [
+				"Dialog"
+			],
+			"_schema": "DialogTypeCreationSchema"
+		},
+		"DialogTypeCreationSchema": {
+			"_id": "DialogTypeCreationSchema",
+			"_name": "DialogTypeCreationSchema",
+			"_inherit": [
+				"DialogSchema"
+			]
+		},
+		"Editor": {
+			"_id": "Editor",
+			"_name": "Editor",
+			"_schema": "EditorSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"editor": {
+				"type": "object",
+				"readOnly": true,
+				"mandatory": true,
+				"default": {}
+			},
+			"render": {}
+		},
+		"EditorSchema": {
+			"_id": "EditorSchema",
+			"_name": "EditorSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"editor": "property",
+			"render": "method"
+		},
+		"HTML": {
+			"_id": "HTML",
+			"_name": "HTML",
+			"_schema": "HTMLSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"source": {
+				"type": "html",
+				"readOnly": true,
+				"mandatory": true,
+				"default": ""
+			}
+		},
+		"HTMLSchema": {
+			"_id": "HTMLSchema",
+			"_name": "HTMLSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"source": "property"
+		},
+		"JS": {
+			"_id": "JS",
+			"_name": "JS",
+			"_schema": "JSSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"source": {
+				"type": "javascript",
+				"readOnly": true,
+				"mandatory": true,
+				"default": ""
+			}
+		},
+		"JSSchema": {
+			"_id": "JSSchema",
+			"_name": "JSSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"source": "property"
+		},
+		"MenuLogo": {
+			"_id": "MenuLogo",
+			"_name": "MenuLogo",
+			"_schema": "MenuLogoSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"html": {
+				"type": "@HTML",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"MenuAction": {
+			"_id": "MenuAction",
+			"_name": "MenuAction",
+			"_schema": "MenuActionSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"html": {
+				"type": "@HTML",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"position": {
+				"type": "number",
+				"readOnly": false,
+				"mandatory": false,
+				"default": 0
+			},
+			"type": {
+				"type": "editorType",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "designer"
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"MenuActionSchema": {
+			"_id": "MenuActionSchema",
+			"_name": "MenuActionSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"html": "property",
+			"position": "property",
+			"type": "property",
+			"hide": "method",
+			"show": "method",
+			"render": "method"
+		},
+		"MenuBar": {
+			"_id": "MenuBar",
+			"_name": "MenuBar",
+			"_schema": "MenuBarSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"designer": {
+				"type": "@Designer",
+				"readOnly": true,
+				"mandatory": false,
+				"default": {}
+			},
+			"logo": {
+				"type": "@MenuLogo",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"header": {
+				"type": "@MenuHeader",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"items": {
+				"type": [
+					"@MenuItem"
+				],
+				"readOnly": false,
+				"mandatory": false,
+				"default": []
+			},
+			"actions": {
+				"type": [
+					"@MenuAction"
+				],
+				"readOnly": false,
+				"mandatory": false,
+				"default": []
+			},
+			"clear": {},
+			"render": {}
+		},
+		"MenuBarSchema": {
+			"_id": "MenuBarSchema",
+			"_name": "MenuBarSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"designer": "property",
+			"logo": "property",
+			"header": "property",
+			"items": "collection",
+			"actions": "collection",
+			"render": "method",
+			"clear": "method"
+		},
+		"MenuHeader": {
+			"_id": "MenuHeader",
+			"_name": "MenuHeader",
+			"_schema": "MenuHeaderSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"html": {
+				"type": "@HTML",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"type": {
+				"type": "editorType",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "designer"
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"MenuHeaderSchema": {
+			"_id": "MenuHeaderSchema",
+			"_name": "MenuHeaderSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"html": "property",
+			"type": "property",
+			"hide": "method",
+			"show": "method",
+			"render": "method"
+		},
+		"MenuItem": {
+			"_id": "MenuItem",
+			"_name": "MenuItem",
+			"_schema": "MenuItemSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"html": {
+				"type": "@HTML",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"position": {
+				"type": "number",
+				"readOnly": false,
+				"mandatory": false,
+				"default": 0
+			},
+			"name": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"type": {
+				"type": "editorType",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "designer"
+			},
+			"hide": {},
+			"show": {},
+			"render": {},
+			"click": {}
+		},
+		"MenuItemSchema": {
+			"_id": "MenuItemSchema",
+			"_name": "MenuItemSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"html": "property",
+			"position": "property",
+			"type": "property",
+			"name": "property",
+			"hide": "method",
+			"show": "method",
+			"render": "method",
+			"click": "event"
+		},
+		"MenuLogoSchema": {
+			"_id": "MenuLogoSchema",
+			"_name": "MenuLogoSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"html": "property",
+			"hide": "method",
+			"show": "method",
+			"render": "method"
+		},
+		"MenuSchema": {
+			"_id": "MenuSchema",
+			"_name": "MenuSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"items": "collection",
+			"hide": "method",
+			"show": "method",
+			"render": "method"
+		},
+		"MenuSearch": {
+			"_id": "MenuSearch",
+			"_name": "MenuSearch",
+			"_schema": "MenuSearchSchema",
+			"_inherit": [
+				"MonocoComponent",
+				"MenuAction"
+			]
+		},
+		"MenuSearchSchema": {
+			"_id": "MenuSearchSchema",
+			"_name": "MenuSearchSchema",
+			"_inherit": [
+				"MonocoComponentSchema",
+				"MenuActionSchema"
+			]
+		},
+		"Message": {
+			"_id": "Message",
+			"_name": "Message",
+			"_schema": "MessageSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"success": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			},
+			"info": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			},
+			"warning": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			},
+			"danger": {
+				"params": [
+					{
+						"name": "message",
+						"type": "string"
+					}
+				]
+			}
+		},
+		"MessageSchema": {
+			"_id": "MessageSchema",
+			"_name": "MessageSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"success": "method",
+			"info": "method",
+			"warning": "method",
+			"danger": "method"
+		},
+		"ModelBehavior": {
+			"_id": "ModelBehavior",
+			"_name": "ModelBehavior",
+			"_schema": "ModelBehaviorSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"uuid": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"title": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"ModelBehaviorSchema": {
+			"_id": "ModelBehaviorSchema",
+			"_name": "ModelBehaviorSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"uuid": "property",
+			"title": "property",
+			"render": "method",
+			"hide": "method",
+			"show": "method"
+		},
+		"ModelClass": {
+			"_id": "ModelClass",
+			"_name": "ModelClass",
+			"_schema": "ModelClassSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"title": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"uuid": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"ModelClassSchema": {
+			"_id": "ModelClassSchema",
+			"_name": "ModelClassSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"title": "property",
+			"uuid": "property",
+			"render": "method",
+			"hide": "method",
+			"show": "method"
+		},
+		"ModelComponent": {
+			"_id": "ModelComponent",
+			"_name": "ModelComponent",
+			"_schema": "ModelComponentSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"title": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"uuid": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"model": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"ModelComponentSchema": {
+			"_id": "ModelComponentSchema",
+			"_name": "ModelComponentSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"title": "property",
+			"uuid": "property",
+			"model": "property",
+			"render": "method",
+			"hide": "method",
+			"show": "method"
+		},
+		"ModelSchema": {
+			"_id": "ModelSchema",
+			"_name": "ModelSchema",
+			"_schema": "ModelSchemaSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"title": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"uuid": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"ModelSchemaSchema": {
+			"_id": "ModelSchemaSchema",
+			"_name": "ModelSchemaSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"title": "property",
+			"uuid": "property",
+			"render": "method",
+			"hide": "method",
+			"show": "method"
+		},
+		"ModelSystem": {
+			"_id": "ModelSystem",
+			"_name": "ModelSystem",
+			"_schema": "ModelSystemSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"title": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"uuid": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"ModelSystemSchema": {
+			"_id": "ModelSystemSchema",
+			"_name": "ModelSystemSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"title": "property",
+			"uuid": "property",
+			"render": "method",
+			"hide": "method",
+			"show": "method"
+		},
+		"ModelType": {
+			"_id": "ModelType",
+			"_name": "ModelType",
+			"_schema": "ModelTypeSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"title": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"uuid": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"hide": {},
+			"show": {},
+			"render": {}
+		},
+		"ModelTypeSchema": {
+			"_id": "ModelTypeSchema",
+			"_name": "ModelTypeSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"title": "property",
+			"uuid": "property",
+			"render": "method",
+			"hide": "method",
+			"show": "method"
+		},
+		"MonocoChannelEvent": {
+			"_id": "MonocoChannelEvent",
+			"_name": "MonocoChannelEvent",
+			"_schema": "MonocoChannelEventSchema",
+			"getSystem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"setSystem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			},
+			"getInitSystem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"setInitSystem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			},
+			"getType": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"setType": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "type",
+						"type": "object"
+					}
+				]
+			},
+			"getSchema": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"setSchema": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "schema",
+						"type": "object"
+					}
+				]
+			},
+			"getModel": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"setModel": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "model",
+						"type": "object"
+					}
+				]
+			},
+			"getBehavior": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					}
+				]
+			},
+			"setBehavior": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "behavior",
+						"type": "object"
+					}
+				]
+			},
+			"getComponent": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "collection",
+						"type": "string"
+					}
+				]
+			},
+			"setComponent": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "collection",
+						"type": "string"
+					},
+					{
+						"name": "model",
+						"type": "object"
+					},
+					{
+						"name": "component",
+						"type": "object"
+					}
+				]
+			},
+			"sync": {},
+			"loadSystem": {
+				"params": [
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			},
+			"updateBehavior": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "behavior",
+						"type": "object"
+					}
+				]
+			},
+			"updateComponent": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "collection",
+						"type": "string"
+					},
+					{
+						"name": "component",
+						"type": "object"
+					}
+				]
+			},
+			"publish": {
+				"params": [
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			},
+			"updateType": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "type",
+						"type": "object"
+					}
+				]
+			},
+			"updateSchema": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "schema",
+						"type": "object"
+					}
+				]
+			},
+			"updateModel": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "model",
+						"type": "object"
+					}
+				]
+			},
+			"updateSystem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			}
+		},
+		"MonocoChannelEventSchema": {
+			"_id": "MonocoChannelEventSchema",
+			"_name": "MonocoChannelEventSchema",
+			"getSystem": "event",
+			"setSystem": "event",
+			"getInitSystem": "event",
+			"setInitSystem": "event",
+			"getType": "event",
+			"setType": "event",
+			"getSchema": "event",
+			"setSchema": "event",
+			"getModel": "event",
+			"setModel": "event",
+			"getBehavior": "event",
+			"setBehavior": "event",
+			"getComponent": "event",
+			"setComponent": "event",
+			"sync": "event",
+			"loadSystem": "event",
+			"updateBehavior": "event",
+			"updateComponent": "event",
+			"updateType": "event",
+			"updateSchema": "event",
+			"updateModel": "event",
+			"updateSystem": "event",
+			"publish": "event"
+		},
+		"Search": {
+			"_id": "Search",
+			"_name": "Search",
+			"_schema": "SearchSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"search": {}
+		},
+		"SearchSchema": {
+			"_id": "SearchSchema",
+			"_name": "SearchSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"search": "method"
+		},
+		"Server": {
+			"_id": "Server",
+			"_name": "Server",
+			"_schema": "ServerSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"designer": {
+				"type": "@Designer",
+				"readOnly": true,
+				"mandatory": true,
+				"default": {}
+			},
+			"start": {}
+		},
+		"ServerSchema": {
+			"_id": "ServerSchema",
+			"_name": "ServerSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"designer": "property",
+			"start": "method"
+		},
+		"Store": {
+			"_id": "Store",
+			"_name": "Store",
+			"_schema": "StoreSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"uuid": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"collection": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"data": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"extra": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			}
+		},
+		"StoreSchema": {
+			"_id": "StoreSchema",
+			"_name": "StoreSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"uuid": "property",
+			"collection": "property",
+			"data": "property",
+			"extra": "property"
+		},
+		"System": {
+			"_id": "System",
+			"_name": "System",
+			"_schema": "SystemSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"name": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "system"
+			},
+			"master": {
+				"type": "boolean",
+				"readOnly": false,
+				"mandatory": false,
+				"default": false
+			},
+			"subsystem": {
+				"type": "boolean",
+				"readOnly": false,
+				"mandatory": false,
+				"default": false
+			},
+			"version": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "0.0.1"
+			},
+			"description": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"schemas": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"behaviors": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"types": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"components": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			}
+		},
+		"SystemSchema": {
+			"_id": "SystemSchema",
+			"_name": "SystemSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"name": "property",
+			"master": "property",
+			"subsystem": "property",
+			"version": "property",
+			"description": "property",
+			"schemas": "property",
+			"behaviors": "property",
+			"types": "property",
+			"components": "property"
+		},
+		"ToolBar": {
+			"_id": "ToolBar",
+			"_name": "ToolBar",
+			"_schema": "ToolBarSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"designer": {
+				"type": "@Designer",
+				"readOnly": true,
+				"mandatory": true,
+				"default": {}
+			},
+			"items": {
+				"type": [
+					"@ToolBarItem"
+				],
+				"readOnly": false,
+				"mandatory": false,
+				"default": []
+			},
+			"render": {}
+		},
+		"ToolBarItem": {
+			"_id": "ToolBarItem",
+			"_name": "ToolBarItem",
+			"_schema": "ToolBarItemSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"html": {
+				"type": "@HTML",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"position": {
+				"type": "number",
+				"readOnly": false,
+				"mandatory": false,
+				"default": 0
+			},
+			"type": {
+				"type": "editorType",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "designer"
+			},
+			"hide": {},
+			"show": {},
+			"render": {},
+			"click": {}
+		},
+		"ToolBarItemSchema": {
+			"_id": "ToolBarItemSchema",
+			"_name": "ToolBarItemSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"html": "property",
+			"position": "property",
+			"type": "property",
+			"hide": "method",
+			"show": "method",
+			"render": "method",
+			"click": "event"
+		},
+		"ToolBarSchema": {
+			"_id": "ToolBarSchema",
+			"_name": "ToolBarSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"designer": "property",
+			"items": "collection",
+			"render": "method"
+		},
+		"Worker": {
+			"_id": "Worker",
+			"_name": "Worker",
+			"_schema": "WorkerSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"worker": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"send": {
+				"params": [
+					{
+						"name": "message",
+						"type": "object"
+					}
+				]
+			}
+		},
+		"WorkerSchema": {
+			"_id": "WorkerSchema",
+			"_name": "WorkerSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"worker": "property",
+			"send": "method"
+		},
+		"Workspace": {
+			"_id": "Workspace",
+			"_name": "Workspace",
+			"_schema": "WorkspaceSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"designer": {
+				"type": "@Designer",
+				"readOnly": true,
+				"mandatory": true,
+				"default": {}
+			},
+			"create": {},
+			"load": {},
+			"clear": {},
+			"refresh": {},
+			"render": {}
+		},
+		"WorkspaceSchema": {
+			"_id": "WorkspaceSchema",
+			"_name": "WorkspaceSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"designer": "property",
+			"create": "method",
+			"load": "method",
+			"clear": "method",
+			"refresh": "method",
+			"render": "method"
+		}
+	},
+	"types": {
+		"dialogtype": {
+			"name": "dialogtype",
+			"type": "string",
+			"value": [
+				"sync",
+				"system",
+				"type",
+				"schema",
+				"model",
+				"behavior",
+				"component"
+			]
+		},
+		"editorType": {
+			"name": "editorType",
+			"type": "string",
+			"value": [
+				"designer",
+				"system",
+				"type",
+				"schema",
+				"model",
+				"behavior",
+				"component"
+			]
+		}
+	}
+}

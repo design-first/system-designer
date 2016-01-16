@@ -1,0 +1,44 @@
+{
+    "_id": "MenuBar",
+    "_name": "MenuBar",
+    "_schema": "MenuBarSchema",
+    "_inherit": [
+        "MonocoComponent"
+    ],
+    "designer": {
+        "type": "@Designer",
+        "readOnly": true,
+        "mandatory": false,
+        "default": {}
+    },
+    "logo": {
+        "type": "@MenuLogo",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "header": {
+        "type": "@MenuHeader",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "items": {
+        "type": [
+            "@MenuItem"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+    },
+    "actions": {
+        "type": [
+            "@MenuAction"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+    },
+    "clear": {},
+    "render": {}
+}

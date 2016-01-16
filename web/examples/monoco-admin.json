@@ -1,0 +1,141 @@
+{
+	"schemas": {
+		"MonocoChannelEvent": {
+			"_id": "MonocoChannelEvent",
+			"_name": "MonocoChannelEvent",
+			"_schema": "MonocoChannelEventSchema",
+			"_core": true,
+			"sync": {},
+			"loadSystem": {
+				"params": [
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			},
+			"updateBehavior": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "behavior",
+						"type": "object"
+					}
+				]
+			}
+		},
+		"MonocoChannelEventSchema": {
+			"_id": "MonocoChannelEventSchema",
+			"_name": "MonocoChannelEventSchema",
+			"_core": true,
+			"sync": "event",
+			"loadSystem": "event",
+			"updateBehavior": "event"
+		},
+		"Worker": {
+			"_id": "Worker",
+			"_name": "Worker",
+			"_schema": "WorkerSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"_core": true,
+			"worker": {
+				"type": "object",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"send": {
+				"params": [
+					{
+						"name": "message",
+						"type": "object"
+					}
+				]
+			}
+		},
+		"WorkerSchema": {
+			"_id": "WorkerSchema",
+			"_name": "WorkerSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"_core": true,
+			"worker": "property",
+			"send": "method"
+		},
+		"MonocoAdminSchema": {
+			"_id": "MonocoAdminSchema",
+			"_name": "MonocoAdminSchema",
+			"_inherit": [
+				"MonocoComponentSchema"
+			],
+			"_core": true,
+			"start": "method"
+		},
+		"MonocoAdmin": {
+			"_id": "MonocoAdmin",
+			"_name": "MonocoAdmin",
+			"_schema": "MonocoAdminSchema",
+			"_inherit": [
+				"MonocoComponent"
+			],
+			"_core": true,
+			"start": {}
+		}
+	},
+	"types": {},
+	"behaviors": {
+		"1c00c107e01c9b3": {
+			"_id": "1c00c107e01c9b3",
+			"component": "MonocoAdmin",
+			"state": "start",
+			"action": "function () {\n                var Worker = null,\n                worker = null;\n                \n                Worker = this.require('Worker');\n                worker = new Worker({\n                    \"_id\": \"worker\",\n                    \"worker\": new SharedWorker('../scripts/worker.js'),\n                });\n                worker.worker().port.onmessage = function (e) {\n                  $db.MonocoMessage.insert(e.data);\n                }\n                \n                MonocoChannel = this.require('MonocoChannel');\n                channel = new MonocoChannel({\n                    '_id': 'channel'\n                });\n            }",
+			"useCoreAPI": true,
+			"core": true
+		},
+		"1eb4818ab11ca61": {
+			"_id": "1eb4818ab11ca61",
+			"component": "18ed81de331252c",
+			"state": "main",
+			"action": "function () {\n                var MonocoAdmin = this.require('MonocoAdmin');\n                var admin = new MonocoAdmin();\n                admin.start();\n            }",
+			"useCoreAPI": false,
+			"core": true
+		},
+		"18afb10f841b94b": {
+			"_id": "18afb10f841b94b",
+			"component": "channel",
+			"state": "send",
+			"action": "function (message) {\n                    this.require('worker').worker().port.postMessage(message);\n                }",
+			"useCoreAPI": false,
+			"core": true
+		},
+		"1058d10a651fb87": {
+			"_id": "1058d10a651fb87",
+			"component": "channel",
+			"state": "sync",
+			"action": "function () {\n                   this.loadSystem(JSON.parse(this.require('db').system()));\n                }",
+			"useCoreAPI": false,
+			"core": true
+		},
+		"1f58e1d4221466a": {
+			"_id": "1f58e1d4221466a",
+			"component": "channel",
+			"state": "updateBehavior",
+			"action": "function (id, behavior) {\n                    this.require(id).action(behavior.action);\n                }",
+			"useCoreAPI": false,
+			"core": true
+		}
+	},
+	"components": {},
+	"name": "example",
+	"version": "0.0.1",
+	"description": "",
+	"_id": "18ed81de331252c",
+	"master": false,
+	"subsystem": false
+}
