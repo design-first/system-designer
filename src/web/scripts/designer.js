@@ -83,6 +83,36 @@ monoco.on('ready', function () {
         $('#monoco-dialog-check-modal').modal('hide');
     });
     
+    // DIALOG CHECK
+    var DialogWelcome = this.require('DialogWelcome');
+    DialogWelcome.on('init', function (config) {
+        var html = '',
+            dom = null;
+
+        $('#monoco-dialog-welcome').empty();
+
+        html = this.require('dialog-modal-welcome.html');
+        document.querySelector('#monoco-dialog-welcome').insertAdjacentHTML('afterbegin',
+            html.source()
+                .replace(/{{title}}/gi, this.title())
+            );
+            
+        // events
+        dom = document.getElementById('monoco-dialog-welcome-modal-ok');
+        dom.addEventListener('click', function (event) {
+            this.ok();
+        }.bind(this));
+
+    });
+
+    DialogWelcome.on('show', function () {
+        $('#monoco-dialog-welcome-modal').modal('show');
+    });
+
+    DialogWelcome.on('hide', function () {
+        $('#monoco-dialog-welcome-modal').modal('hide');
+    });
+    
     // DIALOG EXPORT
     var DialogExport = this.require('DialogExport');
     DialogExport.on('init', function (config) {
@@ -2025,6 +2055,7 @@ monoco.on('ready', function () {
             }
         }
         this.check();
+        this.welcome();
     });
 
     Designer.on('check', function () {
@@ -2038,6 +2069,23 @@ monoco.on('ready', function () {
                 'message': 'Your browser has not all the features to use correctly System Designer.<br><br>Please use:<br><br>- Mozilla Firefox (recommended), <br>- Google Chrome, <br>- or Opera.<br><br>'
             })
             dialog.show();
+        }
+    });
+
+    Designer.on('welcome', function () {
+        var Dialog = null,
+            dialog = null;
+
+        if (typeof SharedWorker !== 'undefined' && document.cookie.indexOf('sysDesWelcome=true') === -1) {
+            Dialog = this.require('DialogWelcome');
+            dialog = new Dialog({
+                'title': 'Welcome to System Designer'
+            })
+            dialog.show();
+            dialog.on('ok', function () {
+                document.cookie = 'sysDesWelcome=true';
+                this.hide();
+            })
         }
     });
 

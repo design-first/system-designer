@@ -63,6 +63,10 @@
                 "_id": "dialog-modal-type-creation.html",
                 "source": "<div class=\"modal fade\" id=\"monoco-dialog-type-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">Name</label>                         <div class=\"col-sm-8\">                             <input type=\"text\" class=\"form-control\" placeholder=\"type name\" id=\"monoco-dialog-type-creation-name\">                         </div>                     </div>                     <div class=\"form-group\">                         <div class=\"col-sm-offset-4 col-sm-8\">                             <label class=\"checkbox-inline\">                                 <input type=\"checkbox\" value=\"enum\" id=\"monoco-dialog-type-creation-isEnum\">Enumeration                             </label>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-type-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-type-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
             },
+            "dialog-modal-welcome.html": {
+                "_id": "dialog-modal-welcome.html",
+                "source": "<div class=\"modal fade\" id=\"monoco-dialog-welcome-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-lg\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     System Designer will help you to design your application before coding.                     <br>To do so System Designer embraces the <b>System Driven Development</b> methodology, it means that you                     have to follow these steps to create your application:                     <br>                     <br>                     <u>Simple steps:</u>                     <br>                     <br> 1. create a <b>system</b>,                     <br> 2. add your code in the <i>main</i> <b>behavior</b> of your system and                     <br> 3. run your system.                     <br>                     <br>                     <u>Normal steps:</u>                     <br>                     <br> 1. create a <b>system</b>,                     <br> 2. create a <b>schema</b>,                     <br> 3. create a <b>model</b> that implements your schema,                     <br> 4. create <b>behaviors</b>,                     <br> 4. create <b>components</b>,                     <br> 4. add code in the <i>main</i> <b>behavior</b> of your system,                     <br> 5. run your system,                     <br> 6. open the console of your browser and                     <br> 7. use <i>monoco</i> apis to manage your system.                     <br>                     <br>                     <i>A complete documentation will come soon.</i>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-welcome-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+            },
             "dialog-modal.html": {
                 "_id": "dialog-modal.html",
                 "source": "<div class=\"modal fade\" id=\"monoco-dialog-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 {{message}}             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"monoco-dialog-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"monoco-dialog-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
@@ -577,200 +581,200 @@
         }
     },
     "behaviors": {
-        "1dfc317c341d3e7": {
-            "_id": "1dfc317c341d3e7",
+        "11d8b1f50e12824": {
+            "_id": "11d8b1f50e12824",
             "component": "10bcb1a0511e09f",
             "state": "click",
             "action": "function click() { this.require('designer').workspace().create(); }"
         },
-        "1596d175221b936": {
-            "_id": "1596d175221b936",
+        "15ae312a9512307": {
+            "_id": "15ae312a9512307",
             "component": "13a291c27f16310",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1.3<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-designer/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://github.com/system-designer/monoco\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1796d12dca10a34": {
-            "_id": "1796d12dca10a34",
+        "102b91cb2114eed": {
+            "_id": "102b91cb2114eed",
             "component": "13a291c27f16311",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1.3<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-designer/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://github.com/system-designer/monoco\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1a6f11a45c1f575": {
-            "_id": "1a6f11a45c1f575",
+        "1efb8166c618f07": {
+            "_id": "1efb8166c618f07",
             "component": "13a291c27f16313",
             "state": "click",
             "action": "function click() {\n    var DialogExport = this.require('DialogExport'),\n    system = this.require('designer').system(),\n    message = this.require('message');\n    \n    if (system && Object.keys(system).length) {\n        DialogExport = new DialogExport({\n            'title': 'Copy the link to the system'\n        });\n        DialogExport.show();\n        DialogExport.on('ok', function () {\n            this.hide();\n        });\n        message.success('the url has been generated.')\n    }    \n}"
         },
-        "1a37d1b13d10330": {
-            "_id": "1a37d1b13d10330",
+        "17b481d04919748": {
+            "_id": "17b481d04919748",
             "component": "13a291c27f16314",
             "state": "click",
             "action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
         },
-        "1af6316f6a10bcc": {
-            "_id": "1af6316f6a10bcc",
+        "1ea3d17dd414989": {
+            "_id": "1ea3d17dd414989",
             "component": "13f70137b61b19b",
             "state": "click",
             "action": "function click() { var designer = this.require('designer'); window.open('app.html?id=' + designer.system().id());}"
         },
-        "1f84f14f3016af0": {
-            "_id": "1f84f14f3016af0",
+        "1317c13f83129e7": {
+            "_id": "1317c13f83129e7",
             "component": "163a01b7ca1935c",
             "state": "click",
             "action": "function click() { this.require('channel').sync();}"
         },
-        "1a8e91678912156": {
-            "_id": "1a8e91678912156",
+        "13cbb145e119d63": {
+            "_id": "13cbb145e119d63",
             "component": "163a01b7ca1935d",
             "state": "click",
             "action": "function click() {\n    var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Select a system to import'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name ='',\n            modelName = '',\n            designer = this.require('designer'),\n            system = designer.system(),\n            message = this.require('message');\n\n        sys = this.data();\n        \n        if (Object.keys(sys).length) {\n            for (name in sys.schemas) {\n                system.schemas()[name] = sys.schemas[name];    \n            }\n            \n            for (name in sys.types) {\n                system.types()[name] = sys.types[name];    \n            }\n            \n            for (name in sys.behaviors) {\n                system.behaviors()[name] = sys.behaviors[name];    \n            }\n            \n            for (name in sys.components) {\n                if (!system.components()[name]) {\n                    system.components()[name] = {}; \n                }\n                for (modelName in sys.components[name]) {\n                    system.components()[name][modelName] = sys.components[name][modelName];     \n                }\n            }\n            \n            designer.save();\n            designer.workspace().refresh();\n    \n            this.hide();\n            designer.save();\n            message.success('merge of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid.');\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            designer.save();\n            designer.workspace().refresh();\n    \n            this.hide();\n            designer.save();\n            \n            message.success('importation of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid');\n        }\n    });\n}"
         },
-        "1f3701434b1af33": {
-            "_id": "1f3701434b1af33",
+        "1c5c317716165dc": {
+            "_id": "1c5c317716165dc",
             "component": "163a01b7ca1935e",
             "state": "click",
             "action": "function click() {\n    // code inspired from the blog post\n    // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n    if (this.require('designer').system()) {\n        var system = this.require('db').collections().System.find({\n            '_id': this.require('designer').system().id()\n        })[0],\n        message = this.require('message'),\n        textToWrite = JSON.stringify(system),\n    \ttextFileAsBlob = new Blob([textToWrite], {\n    \t    type:'text/plain'\n    \t}),\n    \tfileNameToSaveAs = this.require('designer').system().name() + '.json',\n    \tdownloadLink = document.createElement('a');\n    \t\n    \tdownloadLink.download = fileNameToSaveAs;\n    \tdownloadLink.innerHTML = 'Download File';\n    \tif (window.webkitURL != null) {\n    \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n    \t} else {\n    \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n    \t\tdownloadLink.onclick = function (event) {\n    \t\t    document.body.removeChild(event.target)\n    \t\t};\n    \t\tdownloadLink.style.display = 'none';\n    \t\tdocument.body.appendChild(downloadLink);\n    \t}\n    \n    \tdownloadLink.click();\n    \t\n    \tmessage.success('exportation of the system is done.');\n    }\n}"
         },
-        "14c6d1d509114e4": {
-            "_id": "14c6d1d509114e4",
+        "10d4b154401b728": {
+            "_id": "10d4b154401b728",
             "component": "16a55136141d9ac",
             "state": "click",
             "action": "function click() { this.require('designer').clear(); }"
         },
-        "18c941e55717c0e": {
-            "_id": "18c941e55717c0e",
+        "1ba5d1b45910783": {
+            "_id": "1ba5d1b45910783",
             "component": "1dbc51200e11510",
             "state": "click",
             "action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
         },
-        "1611c1842911a55": {
-            "_id": "1611c1842911a55",
+        "13de810bc11e3f6": {
+            "_id": "13de810bc11e3f6",
             "component": "1dbc51200e11610",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1.3<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-designer/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://github.com/system-designer/monoco\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1b2e21b05a193e2": {
-            "_id": "1b2e21b05a193e2",
+        "13aef1eb691ed54": {
+            "_id": "13aef1eb691ed54",
             "component": "1dbc51200e11611",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "187a012f6f1e102": {
-            "_id": "187a012f6f1e102",
+        "132db1fd6518d63": {
+            "_id": "132db1fd6518d63",
             "component": "1dbc51200e11612",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1.3<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-designer/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://github.com/system-designer/monoco\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "147e8193971c8aa": {
-            "_id": "147e8193971c8aa",
+        "11840112661d280": {
+            "_id": "11840112661d280",
             "component": "1dbc51200e11613",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1dda61d8881776a": {
-            "_id": "1dda61d8881776a",
+        "1780f1ea5b1b621": {
+            "_id": "1780f1ea5b1b621",
             "component": "1dbc51200e11614",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1.3<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-designer/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://github.com/system-designer/monoco\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1871e163be1f4d0": {
-            "_id": "1871e163be1f4d0",
+        "188a7193dd11c8e": {
+            "_id": "188a7193dd11c8e",
             "component": "1dbc51200e11615",
             "state": "click",
             "action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
         },
-        "12cd0164ba13040": {
-            "_id": "12cd0164ba13040",
+        "141b21ee5714574": {
+            "_id": "141b21ee5714574",
             "component": "1dbc51200e11616",
             "state": "click",
             "action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
         },
-        "1573614a7a1746a": {
-            "_id": "1573614a7a1746a",
+        "1d16a10aa71775f": {
+            "_id": "1d16a10aa71775f",
             "component": "1dbc51200e11617",
             "state": "click",
             "action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
         },
-        "1160910de519c76": {
-            "_id": "1160910de519c76",
+        "147c0175571491f": {
+            "_id": "147c0175571491f",
             "component": "1dbc51200e116e10",
             "state": "click",
             "action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
         },
-        "182861e49f1da3a": {
-            "_id": "182861e49f1da3a",
+        "1059a1984a1ad56": {
+            "_id": "1059a1984a1ad56",
             "component": "1dbc51200e116e3",
             "state": "click",
             "action": "function click() {\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1dfd118dd71f9f5": {
-            "_id": "1dfd118dd71f9f5",
+        "128d9112ee14181": {
+            "_id": "128d9112ee14181",
             "component": "1dbc51200e116e4",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "18c4b10efe10bbd": {
-            "_id": "18c4b10efe10bbd",
+        "170a310a0f18b6f": {
+            "_id": "170a310a0f18b6f",
             "component": "1dbc51200e116e5",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1bd561e22e1f7da": {
-            "_id": "1bd561e22e1f7da",
+        "146761b11018842": {
+            "_id": "146761b11018842",
             "component": "1dbc51200e116e6",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1.3<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-designer/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://github.com/system-designer/monoco\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "159e5182961392f": {
-            "_id": "159e5182961392f",
+        "1c912177381c161": {
+            "_id": "1c912177381c161",
             "component": "1dbc51200e116e7",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1901f1770d1dd3c": {
-            "_id": "1901f1770d1dd3c",
+        "1be7a1699f110b9": {
+            "_id": "1be7a1699f110b9",
             "component": "1dbc51200e116e8",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.1.3<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-designer/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://github.com/system-designer/monoco\" target=\"_blank\">monoco</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "198881f74d17b0c": {
-            "_id": "198881f74d17b0c",
+        "1e28d1eb2f12685": {
+            "_id": "1e28d1eb2f12685",
             "component": "1dbc51200e116e9",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "16b31196e81652d": {
-            "_id": "16b31196e81652d",
+        "12bda17e4512bb6": {
+            "_id": "12bda17e4512bb6",
             "component": "1dbc51200e11z10",
             "state": "click",
             "action": "function click() { window.open('https://monoco.readme.io/docs/1-overview'); }"
         },
-        "1f0da13581185b1": {
-            "_id": "1f0da13581185b1",
+        "1aef111d9415db9": {
+            "_id": "1aef111d9415db9",
             "component": "MenuItem",
             "state": "click",
             "action": "function click() { this.require('designer').context(this.name()); }"
         },
-        "1e6c6171db10d97": {
-            "_id": "1e6c6171db10d97",
+        "1e3a11eef613053": {
+            "_id": "1e3a11eef613053",
             "component": "Message",
             "state": "danger",
             "action": "function danger(message) {var html = this.require('message-alert-danger.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-danger').fadeIn(500);setTimeout(function () {$('.monoco-message-danger').fadeOut(1000);}, 3000);}"
         },
-        "140351188316bf4": {
-            "_id": "140351188316bf4",
+        "1b76814bfb17a4f": {
+            "_id": "1b76814bfb17a4f",
             "component": "Message",
             "state": "info",
             "action": "function info(message) {var html = this.require('message-alert-info.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-info').fadeIn(500);setTimeout(function () {$('.monoco-message-info').fadeOut(1000);}, 3000);}"
         },
-        "12196190271a3ff": {
-            "_id": "12196190271a3ff",
+        "13cd919ce41d2b5": {
+            "_id": "13cd919ce41d2b5",
             "component": "Message",
             "state": "success",
             "action": "function success(message) {var html = this.require('message-alert-success.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-success').fadeIn(500);setTimeout(function () {$('.monoco-message-success').fadeOut(1000);}, 3000);}"
         },
-        "1593a1600a118d8": {
-            "_id": "1593a1600a118d8",
+        "132ef176aa1870f": {
+            "_id": "132ef176aa1870f",
             "component": "Message",
             "state": "warning",
             "action": "function warning(message) {var html = this.require('message-alert-warning.html').source();$('#monoco-message').empty();document.querySelector('#monoco-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>system designer:</strong> ' + message));$('.monoco-message-warning').fadeIn(500);setTimeout(function () {$('.monoco-message-warning').fadeOut(1000);}, 3000);}"
@@ -869,6 +873,7 @@
             "refresh": {},
             "save": {},
             "check": {},
+            "welcome": {},
             "clear": {},
             "render": {}
         },
@@ -892,6 +897,7 @@
             "save": "method",
             "clear": "method",
             "check": "method",
+            "welcome": "method",
             "render": "event"
         },
         "Dialog": {
@@ -1137,6 +1143,21 @@
         "DialogTypeCreationSchema": {
             "_id": "DialogTypeCreationSchema",
             "_name": "DialogTypeCreationSchema",
+            "_inherit": [
+                "DialogSchema"
+            ]
+        },
+        "DialogWelcome": {
+            "_id": "DialogWelcome",
+            "_name": "DialogWelcome",
+            "_inherit": [
+                "Dialog"
+            ],
+            "_schema": "DialogWelcomeSchema"
+        },
+        "DialogWelcomeSchema": {
+            "_id": "DialogWelcomeSchema",
+            "_name": "DialogWelcomeSchema",
             "_inherit": [
                 "DialogSchema"
             ]
