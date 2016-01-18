@@ -73,6 +73,11 @@ monoco.on('ready', function () {
                 .replace(/{{message}}/gi, this.message())
             );
 
+        dom = document.getElementById('monoco-dialog-check-modal-ok');
+        dom.addEventListener('click', function (event) {
+            this.ok();
+        }.bind(this));
+
     });
 
     DialogCheck.on('show', function () {
@@ -81,6 +86,10 @@ monoco.on('ready', function () {
 
     DialogCheck.on('hide', function () {
         $('#monoco-dialog-check-modal').modal('hide');
+    });
+
+    DialogCheck.on('ok', function () {
+        this.hide();
     });
     
     // DIALOG CHECK
@@ -2066,7 +2075,7 @@ monoco.on('ready', function () {
             Dialog = this.require('DialogCheck');
             dialog = new Dialog({
                 'title': 'Hem... You will laugh',
-                'message': 'Your browser has not all the features to use correctly System Designer.<br><br>Please use:<br><br>- Mozilla Firefox (recommended), <br>- Google Chrome, <br>- or Opera.<br><br>'
+                'message': 'Your browser has not all the features to use correctly System Designer.<br><br>Please use:<br><br>- Mozilla Firefox (recommended) or <br>- Google Chrome (desktop only).<br><br>'
             })
             dialog.show();
         }
