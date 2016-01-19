@@ -5,7 +5,7 @@
 
 #### What is System Designer ?
 
-System Designer is a free and Open Source IDE to create client and server JavaScript applications.
+System Designer is a free and Open Source IDE to create client and server JavaScript application systems.
 
 Features:
 
@@ -71,6 +71,10 @@ $ grunt start
 ```
 
 To run System Designer, go to [http://localhost:9001/](http://localhost:9001/) .
+
+## Documentation
+
+Soon...
 
 
 ## Licence
