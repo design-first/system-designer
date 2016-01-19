@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-monoco.on('ready', function () {
+syrup.on('ready', function () {
     var system = this.system('design'); 
     
     // DIALOG COPYRIGHT
@@ -28,17 +28,17 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-copyright').empty();
+        $('#designer-dialog-copyright').empty();
 
         html = this.require('dialog-modal-copyright.html');
-        document.querySelector('#monoco-dialog-copyright').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-copyright').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{message}}/gi, this.message())
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-copyright-modal-ok');
+        dom = document.getElementById('designer-dialog-copyright-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -46,11 +46,11 @@ monoco.on('ready', function () {
     });
 
     DialogCopyright.on('show', function () {
-        $('#monoco-dialog-copyright-modal').modal('show');
+        $('#designer-dialog-copyright-modal').modal('show');
     });
 
     DialogCopyright.on('hide', function () {
-        $('#monoco-dialog-copyright-modal').modal('hide');
+        $('#designer-dialog-copyright-modal').modal('hide');
     }); 
     
     // MenuBar
@@ -120,9 +120,9 @@ monoco.on('ready', function () {
         var length = 0,
             i = 0,
             item = null,
-            domHeader = document.getElementById('monoco-menubar-header'),
-            domItems = document.getElementById('monoco-menubar-items'),
-            domAction = document.getElementById('monoco-menubar-actions'),
+            domHeader = document.getElementById('designer-menubar-header'),
+            domItems = document.getElementById('designer-menubar-items'),
+            domAction = document.getElementById('designer-menubar-actions'),
             self = this;
 
         function _removeActive() {
@@ -200,7 +200,7 @@ monoco.on('ready', function () {
     });
 
     ToolBar.on('render', function () {
-        var domItems = document.getElementById('monoco-toolbar-items'),
+        var domItems = document.getElementById('designer-toolbar-items'),
             i = 0,
             length = 0,
             item = null,
@@ -230,7 +230,7 @@ monoco.on('ready', function () {
         Editor = this.require('Editor');
         editor = new Editor({
             '_id': 'editor',
-            'editor': ace.edit('monoco-editor')
+            'editor': ace.edit('designer-editor')
         });
     });
 
@@ -243,7 +243,7 @@ monoco.on('ready', function () {
     Server.on('start', function () {
         var Worker = null,
             worker = null,
-            MonocoChannel = null,
+            SyrupChannel = null,
             channel = null,
             id = '';
 
@@ -253,11 +253,11 @@ monoco.on('ready', function () {
             "worker": new SharedWorker('./scripts/worker.js'),
         });
         worker.worker().port.onmessage = function (e) {
-            $db.MonocoMessage.insert(e.data);
+            $db.SyrupMessage.insert(e.data);
         }
 
-        MonocoChannel = this.require('MonocoChannel');
-        channel = new MonocoChannel({
+        SyrupChannel = this.require('SyrupChannel');
+        channel = new SyrupChannel({
             '_id': 'channel'
         });
 
@@ -299,7 +299,7 @@ monoco.on('ready', function () {
             name: 'myCommand',
             bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
             exec: function (editor) {
-                monoco.require('designer').save();
+                syrup.require('designer').save();
             }
         });
     });

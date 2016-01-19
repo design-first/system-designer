@@ -54,7 +54,7 @@ module.exports = function (grunt) {
             'build/*.json',
             'build/*/*.json',
             'web/lib/jquery/**',
-            'web/lib/monoco/**',
+            'web/lib/system-runtime/**',
             'web/systems/design.json',
             'web/scripts/*.js',
             'web/styles/*.css'
@@ -430,7 +430,7 @@ module.exports = function (grunt) {
             }
         },
         "merge-json": {
-            monoco: {
+            syrupjs: {
                 src: ["build/js/js.json", "build/html/html.json", "build/css/css.json", "src/addons/*.json", "build/system/design.json"],
                 dest: "build/system/design.json"
             }
@@ -519,8 +519,8 @@ module.exports = function (grunt) {
                         dest: 'web/lib/jquery/jquery.min.js',
                     },
                     {
-                        src: 'bower_components/monoco/build/monoco.min.js',
-                        dest: 'web/lib/monoco/monoco.min.js'
+                        src: 'bower_components/system-runtime/build/system-runtime.min.js',
+                        dest: 'web/lib/system-runtime/system-runtime.min.js'
                     }
                 ],
                 options: {

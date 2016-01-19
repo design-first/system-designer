@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>App</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
-    <!-- monoco -->
-    <script type="text/javascript" src="lib/monoco/monoco.min.js"></script>
+    <!-- SyrupJS -->
+    <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
     <script>
-        monoco.on('ready', function () {
-            var system = monoco.system('app');
-            var metamodel = monoco.require('metamodel');
+        syrup.on('ready', function () {
+            var system = syrup.system('app');
+            var metamodel = syrup.require('metamodel');
 
-            // MONOCO ADMIN 
+            // SYRUP ADMIN 
             metamodel.schema({
                 "_id": "Worker",
                 "_name": "Worker",
                 "_schema": "WorkerSchema",
                 "_inherit": [
-                    "MonocoComponent"
+                    "SyrupComponent"
                 ],
                 "_core": true,
                 "worker": {
@@ -44,7 +42,7 @@
                 "_id": "WorkerSchema",
                 "_name": "WorkerSchema",
                 "_inherit": [
-                    "MonocoComponentSchema"
+                    "SyrupComponentSchema"
                 ],
                 "_core": true,
                 "worker": "property",
@@ -52,21 +50,21 @@
             });
 
             metamodel.schema({
-                "_id": "MonocoAdminSchema",
-                "_name": "MonocoAdminSchema",
+                "_id": "SyrupAdminSchema",
+                "_name": "SyrupAdminSchema",
                 "_inherit": [
-                    "MonocoComponentSchema"
+                    "SyrupComponentSchema"
                 ],
                 "_core": true,
                 "start": "method"
             });
 
             metamodel.schema({
-                "_id": "MonocoAdmin",
-                "_name": "MonocoAdmin",
-                "_schema": "MonocoAdminSchema",
+                "_id": "SyrupAdmin",
+                "_name": "SyrupAdmin",
+                "_schema": "SyrupAdminSchema",
                 "_inherit": [
-                    "MonocoComponent"
+                    "SyrupComponent"
                 ],
                 "_core": true,
                 "start": {}
@@ -74,8 +72,8 @@
 
 
             metamodel.schema({
-                "_id": "MonocoChannelEventSchema",
-                "_name": "MonocoChannelEventSchema",
+                "_id": "SyrupChannelEventSchema",
+                "_name": "SyrupChannelEventSchema",
                 "_core": true,
                 "getInitSystem": "event",
                 "setInitSystem": "event"
@@ -83,9 +81,9 @@
 
 
             metamodel.schema({
-                "_id": "MonocoChannelEvent",
-                "_name": "MonocoChannelEvent",
-                "_schema": "MonocoChannelEventSchema",
+                "_id": "SyrupChannelEvent",
+                "_name": "SyrupChannelEvent",
+                "_schema": "SyrupChannelEventSchema",
                 "_core": true,
                 "getInitSystem": {
                     "params": [
@@ -112,8 +110,8 @@
             metamodel.create();
 
             // ADMIN
-            var MonocoAdmin = monoco.require('MonocoAdmin');
-            MonocoAdmin.on('start', function () {
+            var SyrupAdmin = syrup.require('SyrupAdmin');
+            SyrupAdmin.on('start', function () {
                 var Worker = null,
                         worker = null,
                         sysid = '';
@@ -124,11 +122,11 @@
                     "worker": new SharedWorker('./scripts/worker.js'),
                 });
                 worker.worker().port.onmessage = function (e) {
-                    $db.MonocoMessage.insert(e.data);
+                    $db.SyrupMessage.insert(e.data);
                 }
 
-                MonocoChannel = this.require('MonocoChannel');
-                channel = new MonocoChannel({
+                SyrupChannel = this.require('SyrupChannel');
+                channel = new SyrupChannel({
                     '_id': 'channel'
                 });
 
@@ -141,18 +139,18 @@
                     delete system.classInfo;
                     var systemID = this.require('db').system(system);
 
-                    console.info('monoco: the system is loaded.')
+                    console.info('syrup: the system is loaded.')
 
-                    monoco.require(systemID).main();
+                    syrup.require(systemID).main();
                 });
 
                 sysid = document.location.search.split('?')[1].split('id=')[1];
                 channel.getInitSystem(sysid);
-                console.info('monoco: loading the system...');
+                console.info('syrup: loading the system...');
             }, true);
 
             //
-            var admin = new MonocoAdmin();
+            var admin = new SyrupAdmin();
             admin.start();
         });
     </script>

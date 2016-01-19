@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-monoco.on('ready', function () {
+syrup.on('ready', function () {
     var system = this.system('design');
 
     // DIALOG IMPORT
@@ -28,22 +28,22 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-import').empty();
+        $('#designer-dialog-import').empty();
 
         html = this.require('dialog-modal-import.html');
-        document.querySelector('#monoco-dialog-import').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-import').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{message}}/gi, this.message())
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-import-modal-cancel');
+        dom = document.getElementById('designer-dialog-import-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-import-modal-ok');
+        dom = document.getElementById('designer-dialog-import-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -51,11 +51,11 @@ monoco.on('ready', function () {
     });
 
     DialogImport.on('show', function () {
-        $('#monoco-dialog-import-modal').modal('show');
+        $('#designer-dialog-import-modal').modal('show');
     });
 
     DialogImport.on('hide', function () {
-        $('#monoco-dialog-import-modal').modal('hide');
+        $('#designer-dialog-import-modal').modal('hide');
     });
     
     // DIALOG CHECK
@@ -64,16 +64,16 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-check').empty();
+        $('#designer-dialog-check').empty();
 
         html = this.require('dialog-modal-check.html');
-        document.querySelector('#monoco-dialog-check').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-check').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{message}}/gi, this.message())
             );
 
-        dom = document.getElementById('monoco-dialog-check-modal-ok');
+        dom = document.getElementById('designer-dialog-check-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -81,11 +81,11 @@ monoco.on('ready', function () {
     });
 
     DialogCheck.on('show', function () {
-        $('#monoco-dialog-check-modal').modal('show');
+        $('#designer-dialog-check-modal').modal('show');
     });
 
     DialogCheck.on('hide', function () {
-        $('#monoco-dialog-check-modal').modal('hide');
+        $('#designer-dialog-check-modal').modal('hide');
     });
 
     DialogCheck.on('ok', function () {
@@ -98,16 +98,16 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-welcome').empty();
+        $('#designer-dialog-welcome').empty();
 
         html = this.require('dialog-modal-welcome.html');
-        document.querySelector('#monoco-dialog-welcome').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-welcome').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
             );
             
         // events
-        dom = document.getElementById('monoco-dialog-welcome-modal-ok');
+        dom = document.getElementById('designer-dialog-welcome-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -115,11 +115,11 @@ monoco.on('ready', function () {
     });
 
     DialogWelcome.on('show', function () {
-        $('#monoco-dialog-welcome-modal').modal('show');
+        $('#designer-dialog-welcome-modal').modal('show');
     });
 
     DialogWelcome.on('hide', function () {
-        $('#monoco-dialog-welcome-modal').modal('hide');
+        $('#designer-dialog-welcome-modal').modal('hide');
     });
     
     // DIALOG EXPORT
@@ -129,26 +129,26 @@ monoco.on('ready', function () {
             dom = null,
             sys = '';
 
-        $('#monoco-dialog-export').empty();
+        $('#designer-dialog-export').empty();
 
         sys = this.require('db').collections().System.find({
             '_id': this.require('designer').system().id()
         })[0];
 
         html = this.require('dialog-modal-export.html');
-        document.querySelector('#monoco-dialog-export').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-export').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{message}}/gi, window.location.toString().split('#')[0] + '?system=' + encodeURI(JSON.stringify(sys)))
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-export-modal-cancel');
+        dom = document.getElementById('designer-dialog-export-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-export-modal-ok');
+        dom = document.getElementById('designer-dialog-export-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -156,11 +156,11 @@ monoco.on('ready', function () {
     });
 
     DialogExport.on('show', function () {
-        $('#monoco-dialog-export-modal').modal('show');
+        $('#designer-dialog-export-modal').modal('show');
     });
 
     DialogExport.on('hide', function () {
-        $('#monoco-dialog-export-modal').modal('hide');
+        $('#designer-dialog-export-modal').modal('hide');
     });
     
     // DIALOG COPYRIGHT
@@ -169,17 +169,17 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-copyright').empty();
+        $('#designer-dialog-copyright').empty();
 
         html = this.require('dialog-modal-copyright.html');
-        document.querySelector('#monoco-dialog-copyright').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-copyright').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{message}}/gi, this.message())
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-copyright-modal-ok');
+        dom = document.getElementById('designer-dialog-copyright-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -187,11 +187,11 @@ monoco.on('ready', function () {
     });
 
     DialogCopyright.on('show', function () {
-        $('#monoco-dialog-copyright-modal').modal('show');
+        $('#designer-dialog-copyright-modal').modal('show');
     });
 
     DialogCopyright.on('hide', function () {
-        $('#monoco-dialog-copyright-modal').modal('hide');
+        $('#designer-dialog-copyright-modal').modal('hide');
     });
     
     // DIALOG CONFIG
@@ -202,41 +202,41 @@ monoco.on('ready', function () {
             that = this,
             designer = that.require('designer');
 
-        $('#monoco-dialog-config').empty();
+        $('#designer-dialog-config').empty();
 
         html = this.require('dialog-modal-config.html');
-        document.querySelector('#monoco-dialog-config').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-config').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
             );
          
         // default value
-        $('#monoco-dialog-type-config-isdebug')[0].checked = designer.debug();       
+        $('#designer-dialog-type-config-isdebug')[0].checked = designer.debug();       
                 
         //events
-        dom = document.getElementById('monoco-dialog-config-modal-cancel');
+        dom = document.getElementById('designer-dialog-config-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-config-modal-ok');
+        dom = document.getElementById('designer-dialog-config-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-type-config-reset');
+        dom = document.getElementById('designer-dialog-type-config-reset');
         dom.addEventListener('click', function (event) {
             window.localStorage.clear();
             this.require('designer').workspace().refresh();
             this.require('message').success('system designer has been reseted.');
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-type-config-isdebug');
+        dom = document.getElementById('designer-dialog-type-config-isdebug');
         dom.addEventListener('click', function (obj) {
             var designer = that.require('designer'),
                 isEnum = false;
 
-            isEnum = $('#monoco-dialog-type-config-isdebug')[0].checked;
+            isEnum = $('#designer-dialog-type-config-isdebug')[0].checked;
             if (isEnum) {
                 designer.debug(true);
             } else {
@@ -246,11 +246,11 @@ monoco.on('ready', function () {
     });
 
     DialogConfig.on('show', function () {
-        $('#monoco-dialog-config-modal').modal('show');
+        $('#designer-dialog-config-modal').modal('show');
     });
 
     DialogConfig.on('hide', function () {
-        $('#monoco-dialog-config-modal').modal('hide');
+        $('#designer-dialog-config-modal').modal('hide');
     });
     
     // DIALOG IMPORT FILE
@@ -261,31 +261,31 @@ monoco.on('ready', function () {
             that = this,
             designer = that.require('designer');
 
-        $('#monoco-dialog-import-file').empty();
+        $('#designer-dialog-import-file').empty();
 
         html = this.require('dialog-modal-import-file.html');
-        document.querySelector('#monoco-dialog-import-file').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-import-file').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
             );
                
         //events
-        dom = document.getElementById('monoco-dialog-import-file-modal-cancel');
+        dom = document.getElementById('designer-dialog-import-file-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-import-file-modal-merge');
+        dom = document.getElementById('designer-dialog-import-file-modal-merge');
         dom.addEventListener('click', function (event) {
             this.mergeSystem();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-import-file-modal-import');
+        dom = document.getElementById('designer-dialog-import-file-modal-import');
         dom.addEventListener('click', function (event) {
             this.importSystem();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-import-file-modal-file');
+        dom = document.getElementById('designer-dialog-import-file-modal-file');
         dom.addEventListener('change', function (e) {
             e.stopPropagation();
             e.preventDefault();
@@ -310,11 +310,11 @@ monoco.on('ready', function () {
     });
 
     DialogImportFile.on('show', function () {
-        $('#monoco-dialog-import-file-modal').modal('show');
+        $('#designer-dialog-import-file-modal').modal('show');
     });
 
     DialogImportFile.on('hide', function () {
-        $('#monoco-dialog-import-file-modal').modal('hide');
+        $('#designer-dialog-import-file-modal').modal('hide');
     });
     
     // DIALOG DROP FILE
@@ -323,27 +323,27 @@ monoco.on('ready', function () {
         var html = null,
             dom = null;
 
-        $('#monoco-dialog-drop-file').empty();
+        $('#designer-dialog-drop-file').empty();
 
         html = this.require('dialog-modal-drop-file.html');
-        document.querySelector('#monoco-dialog-drop-file').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-drop-file').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{message}}/gi, this.message())
             );
                
         //events
-        dom = document.getElementById('monoco-dialog-drop-file-modal-cancel');
+        dom = document.getElementById('designer-dialog-drop-file-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-drop-file-modal-merge');
+        dom = document.getElementById('designer-dialog-drop-file-modal-merge');
         dom.addEventListener('click', function (event) {
             this.mergeSystem();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-drop-file-modal-import');
+        dom = document.getElementById('designer-dialog-drop-file-modal-import');
         dom.addEventListener('click', function (event) {
             this.importSystem();
         }.bind(this));
@@ -409,11 +409,11 @@ monoco.on('ready', function () {
     });
 
     DialogDropFile.on('show', function () {
-        $('#monoco-dialog-drop-file-modal').modal('show');
+        $('#designer-dialog-drop-file-modal').modal('show');
     });
 
     DialogDropFile.on('hide', function () {
-        $('#monoco-dialog-drop-file-modal').modal('hide');
+        $('#designer-dialog-drop-file-modal').modal('hide');
     });
     
     // DIALOG TYPE CREATION
@@ -422,33 +422,33 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-type-creation').empty();
+        $('#designer-dialog-type-creation').empty();
 
         html = this.require('dialog-modal-type-creation.html');
-        document.querySelector('#monoco-dialog-type-creation').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-type-creation').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-type-creation-name');
+        dom = document.getElementById('designer-dialog-type-creation-name');
         dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
-                if ($('#monoco-dialog-type-creation-name').val()) {
+                if ($('#designer-dialog-type-creation-name').val()) {
                     this.ok();
                 }
                 return false;
             }
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-type-creation-modal-cancel');
+        dom = document.getElementById('designer-dialog-type-creation-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-type-creation-modal-ok');
+        dom = document.getElementById('designer-dialog-type-creation-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -456,11 +456,11 @@ monoco.on('ready', function () {
     });
 
     dialogTypeCreation.on('show', function () {
-        $('#monoco-dialog-type-creation-modal').modal('show');
+        $('#designer-dialog-type-creation-modal').modal('show');
     });
 
     dialogTypeCreation.on('hide', function () {
-        $('#monoco-dialog-type-creation-modal').modal('hide');
+        $('#designer-dialog-type-creation-modal').modal('hide');
     });
     
     // DIALOG SCHEMA CREATION
@@ -469,33 +469,33 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-schema-creation').empty();
+        $('#designer-dialog-schema-creation').empty();
 
         html = this.require('dialog-modal-schema-creation.html');
-        document.querySelector('#monoco-dialog-schema-creation').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-schema-creation').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-schema-creation-name');
+        dom = document.getElementById('designer-dialog-schema-creation-name');
         dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
-                if ($('#monoco-dialog-schema-creation-name').val()) {
+                if ($('#designer-dialog-schema-creation-name').val()) {
                     this.ok();
                 }
                 return false;
             }
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-schema-creation-modal-cancel');
+        dom = document.getElementById('designer-dialog-schema-creation-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-schema-creation-modal-ok');
+        dom = document.getElementById('designer-dialog-schema-creation-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -503,11 +503,11 @@ monoco.on('ready', function () {
     });
 
     dialogSchemaCreation.on('show', function () {
-        $('#monoco-dialog-schema-creation-modal').modal('show');
+        $('#designer-dialog-schema-creation-modal').modal('show');
     });
 
     dialogSchemaCreation.on('hide', function () {
-        $('#monoco-dialog-schema-creation-modal').modal('hide');
+        $('#designer-dialog-schema-creation-modal').modal('hide');
     });  
     
     // DIALOG SYSTEM CREATION
@@ -516,33 +516,33 @@ monoco.on('ready', function () {
         var html = '',
             dom = null;
 
-        $('#monoco-dialog-system-creation').empty();
+        $('#designer-dialog-system-creation').empty();
 
         html = this.require('dialog-modal-system-creation.html');
-        document.querySelector('#monoco-dialog-system-creation').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-system-creation').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-system-creation-name');
+        dom = document.getElementById('designer-dialog-system-creation-name');
         dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
-                if ($('#monoco-dialog-system-creation-name').val()) {
+                if ($('#designer-dialog-system-creation-name').val()) {
                     this.ok();
                 }
                 return false;
             }
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-system-creation-modal-cancel');
+        dom = document.getElementById('designer-dialog-system-creation-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-system-creation-modal-ok');
+        dom = document.getElementById('designer-dialog-system-creation-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -550,11 +550,11 @@ monoco.on('ready', function () {
     });
 
     dialogSystemCreation.on('show', function () {
-        $('#monoco-dialog-system-creation-modal').modal('show');
+        $('#designer-dialog-system-creation-modal').modal('show');
     });
 
     dialogSystemCreation.on('hide', function () {
-        $('#monoco-dialog-system-creation-modal').modal('hide');
+        $('#designer-dialog-system-creation-modal').modal('hide');
     });
       
     // DIALOG MODEL CREATION
@@ -566,7 +566,7 @@ monoco.on('ready', function () {
             designer = this.require('designer'),
             schemas = designer.system().schemas();
 
-        $('#monoco-dialog-model-creation').empty();
+        $('#designer-dialog-model-creation').empty();
 
         for (name in schemas) {
             if (!schemas[name]._schema) {
@@ -575,31 +575,31 @@ monoco.on('ready', function () {
         }
 
         html = this.require('dialog-modal-model-creation.html');
-        document.querySelector('#monoco-dialog-model-creation').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-model-creation').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{schemas}}/gi, selectSchemas)
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-model-creation-name');
+        dom = document.getElementById('designer-dialog-model-creation-name');
         dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
-                if ($('#monoco-dialog-model-creation-name').val()) {
+                if ($('#designer-dialog-model-creation-name').val()) {
                     this.ok();
                 }
                 return false;
             }
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-model-creation-modal-cancel');
+        dom = document.getElementById('designer-dialog-model-creation-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-model-creation-modal-ok');
+        dom = document.getElementById('designer-dialog-model-creation-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
@@ -607,11 +607,11 @@ monoco.on('ready', function () {
     });
 
     dialogModelCreation.on('show', function () {
-        $('#monoco-dialog-model-creation-modal').modal('show');
+        $('#designer-dialog-model-creation-modal').modal('show');
     });
 
     dialogModelCreation.on('hide', function () {
-        $('#monoco-dialog-model-creation-modal').modal('hide');
+        $('#designer-dialog-model-creation-modal').modal('hide');
     });  
     
     // DIALOG BEHAVIOR CREATION
@@ -627,7 +627,7 @@ monoco.on('ready', function () {
             designer = this.require('designer'),
             schemas = designer.system().schemas();
 
-        $('#monoco-dialog-behavior-creation').empty();
+        $('#designer-dialog-behavior-creation').empty();
 
         for (name in schemas) {
             if (schemas[name]._schema) {
@@ -644,7 +644,7 @@ monoco.on('ready', function () {
             });
 
         if (models.length) {
-            states.push('init'); // TODO check if inherit from MonocoComponent
+            states.push('init'); // TODO check if inherit from SyrupComponent
             for (name in designer.system().schemas()[models[0].name]) {
                 switch (designer.system().schemas()[models[0].schema][name]) {
                     case 'property':
@@ -666,7 +666,7 @@ monoco.on('ready', function () {
             });
 
         html = this.require('dialog-modal-behavior-creation.html');
-        document.querySelector('#monoco-dialog-behavior-creation').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-behavior-creation').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{models}}/gi, selectSchemas)
@@ -674,17 +674,17 @@ monoco.on('ready', function () {
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-behavior-creation-modal-cancel');
+        dom = document.getElementById('designer-dialog-behavior-creation-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-behavior-creation-modal-ok');
+        dom = document.getElementById('designer-dialog-behavior-creation-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-behavior-creation-model');
+        dom = document.getElementById('designer-dialog-behavior-creation-model');
         dom.addEventListener('change', function (obj) {
             var modelName = '',
                 schemaName = '',
@@ -696,7 +696,7 @@ monoco.on('ready', function () {
             modelName = this.value;
             schemaName = schemas[modelName]._schema;
 
-            $('#monoco-dialog-behavior-creation-state').empty();
+            $('#designer-dialog-behavior-creation-state').empty();
 
             for (att in schemas[schemaName]) {
                 if (schemas[schemaName][att] === 'method') {
@@ -708,7 +708,7 @@ monoco.on('ready', function () {
             methods.sort();
             methods.forEach(
                 function (name) {
-                    document.querySelector('#monoco-dialog-behavior-creation-state').insertAdjacentHTML('afterbegin',
+                    document.querySelector('#designer-dialog-behavior-creation-state').insertAdjacentHTML('afterbegin',
                         '<option value="' + name + '">' + name + '</option>'
                         )
                 });
@@ -717,11 +717,11 @@ monoco.on('ready', function () {
     });
 
     dialogBehaviorCreation.on('show', function () {
-        $('#monoco-dialog-behavior-creation-modal').modal('show');
+        $('#designer-dialog-behavior-creation-modal').modal('show');
     });
 
     dialogBehaviorCreation.on('hide', function () {
-        $('#monoco-dialog-behavior-creation-modal').modal('hide');
+        $('#designer-dialog-behavior-creation-modal').modal('hide');
     }); 
     
     // DIALOG COMPONENT CREATION
@@ -733,7 +733,7 @@ monoco.on('ready', function () {
             designer = this.require('designer'),
             schemas = designer.system().schemas();
 
-        $('#monoco-dialog-component-creation').empty();
+        $('#designer-dialog-component-creation').empty();
 
         for (name in schemas) {
             if (schemas[name]._schema) {
@@ -742,30 +742,30 @@ monoco.on('ready', function () {
         }
 
         html = this.require('dialog-modal-component-creation.html');
-        document.querySelector('#monoco-dialog-component-creation').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-dialog-component-creation').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{models}}/gi, selectSchemas)
             );
                 
         //events
-        dom = document.getElementById('monoco-dialog-component-creation-modal-cancel');
+        dom = document.getElementById('designer-dialog-component-creation-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('monoco-dialog-component-creation-modal-ok');
+        dom = document.getElementById('designer-dialog-component-creation-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
     });
 
     dialogComponentCreation.on('show', function () {
-        $('#monoco-dialog-component-creation-modal').modal('show');
+        $('#designer-dialog-component-creation-modal').modal('show');
     });
 
     dialogComponentCreation.on('hide', function () {
-        $('#monoco-dialog-component-creation-modal').modal('hide');
+        $('#designer-dialog-component-creation-modal').modal('hide');
     }); 
       
     // MODELSYSTEM
@@ -777,19 +777,19 @@ monoco.on('ready', function () {
         // html 
         html = this.require('model-system.html');
 
-        document.querySelector('#monoco-workspace').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{_id}}/gi, this.uuid())
             );
 
         //events
-        html = document.getElementsByClassName('monoco-model-system-open-' + this.uuid());
+        html = document.getElementsByClassName('designer-model-system-open-' + this.uuid());
         html[0].addEventListener('click', function (event) {
             window.open('system.html?_id=' + that.uuid());
         });
 
-        html = document.getElementsByClassName('monoco-model-system-design-' + this.uuid());
+        html = document.getElementsByClassName('designer-model-system-design-' + this.uuid());
         html[0].addEventListener('click', function (event) {
             var designer = this.require('designer'),
                 system = JSON.parse(window.localStorage.getItem(this.uuid())),
@@ -801,7 +801,7 @@ monoco.on('ready', function () {
             }
         }.bind(this));
 
-        html = document.getElementsByClassName('monoco-model-system-delete-' + this.uuid());
+        html = document.getElementsByClassName('designer-model-system-delete-' + this.uuid());
         html[0].addEventListener('click', function (event) {
 
             var systems = JSON.parse(window.localStorage.getItem('systems')),
@@ -822,18 +822,18 @@ monoco.on('ready', function () {
                 designer.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
             }
 
-            $('#monoco-system-' + this.uuid()).remove();
+            $('#designer-system-' + this.uuid()).remove();
             this.destroy();
             message.success('the system has been destroyed.');
         }.bind(this));
     });
 
     ModelSystem.on('hide', function () {
-        $('#monoco-system-' + this.uuid()).hide();
+        $('#designer-system-' + this.uuid()).hide();
     });
 
     ModelSystem.on('show', function () {
-        $('#monoco-system-' + this.uuid()).show();
+        $('#designer-system-' + this.uuid()).show();
     });
     
     // MODELTYPE
@@ -845,23 +845,23 @@ monoco.on('ready', function () {
         // html 
         html = this.require('model-type.html');
 
-        document.querySelector('#monoco-workspace').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{id}}/gi, this.title())
             );
 
         //events
-        html = document.getElementsByClassName('monoco-model-type-open-' + this.title());
+        html = document.getElementsByClassName('designer-model-type-open-' + this.title());
         html[0].addEventListener('click', function (event) {
             window.open('type.html?_id=' + that.title());
         });
 
-        html = document.getElementsByClassName('monoco-model-type-delete-' + this.title());
+        html = document.getElementsByClassName('designer-model-type-delete-' + this.title());
         html[0].addEventListener('click', function (event) {
             var designer = this.require('designer');
             delete designer.system().types()[this.title()];
-            $('#monoco-type-' + this.title()).remove();
+            $('#designer-type-' + this.title()).remove();
             this.destroy();
             designer.save();
             designer.require('message').success('the type has been destroyed.')
@@ -869,11 +869,11 @@ monoco.on('ready', function () {
     });
 
     ModelType.on('hide', function () {
-        $('#monoco-type-' + this.title()).hide();
+        $('#designer-type-' + this.title()).hide();
     });
 
     ModelType.on('show', function () {
-        $('#monoco-type-' + this.title()).show();
+        $('#designer-type-' + this.title()).show();
     });
    
     // MODELSCHEMA
@@ -885,23 +885,23 @@ monoco.on('ready', function () {
         // html 
         html = this.require('model-schema.html');
 
-        document.querySelector('#monoco-workspace').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{id}}/gi, this.title())
             );
 
         //events
-        html = document.getElementsByClassName('monoco-model-schema-open-' + this.title());
+        html = document.getElementsByClassName('designer-model-schema-open-' + this.title());
         html[0].addEventListener('click', function (event) {
             window.open('schema.html?_id=' + that.title());
         });
 
-        html = document.getElementsByClassName('monoco-model-schema-delete-' + this.title());
+        html = document.getElementsByClassName('designer-model-schema-delete-' + this.title());
         html[0].addEventListener('click', function (event) {
             var designer = this.require('designer');
             delete designer.system().schemas()[this.title()];
-            $('#monoco-schema-' + this.title()).remove();
+            $('#designer-schema-' + this.title()).remove();
             this.destroy();
             designer.save();
             designer.require('message').success('the schema has been destroyed.')
@@ -909,11 +909,11 @@ monoco.on('ready', function () {
     });
 
     ModelSchema.on('hide', function () {
-        $('#monoco-schema-' + this.title()).hide();
+        $('#designer-schema-' + this.title()).hide();
     });
 
     ModelSchema.on('show', function () {
-        $('#monoco-schema-' + this.title()).show();
+        $('#designer-schema-' + this.title()).show();
     });
     
     // MODELCLASS
@@ -925,23 +925,23 @@ monoco.on('ready', function () {
         // html 
         html = this.require('model-class.html');
 
-        document.querySelector('#monoco-workspace').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{id}}/gi, this.title())
             );
 
         //events
-        html = document.getElementsByClassName('monoco-model-class-open-' + this.title());
+        html = document.getElementsByClassName('designer-model-class-open-' + this.title());
         html[0].addEventListener('click', function (event) {
             window.open('model.html?_id=' + that.title());
         });
 
-        html = document.getElementsByClassName('monoco-model-class-delete-' + this.title());
+        html = document.getElementsByClassName('designer-model-class-delete-' + this.title());
         html[0].addEventListener('click', function (event) {
             var designer = this.require('designer');
             delete designer.system().schemas()[this.title()];
-            $('#monoco-class-' + this.title()).remove();
+            $('#designer-class-' + this.title()).remove();
             this.destroy();
             designer.save();
             designer.require('message').success('the model has been destroyed.')
@@ -949,11 +949,11 @@ monoco.on('ready', function () {
     });
 
     ModelClass.on('hide', function () {
-        $('#monoco-class-' + this.title()).hide();
+        $('#designer-class-' + this.title()).hide();
     });
 
     ModelClass.on('show', function () {
-        $('#monoco-class-' + this.title()).show();
+        $('#designer-class-' + this.title()).show();
     });
     
     // MODELBEHAVIOR
@@ -969,19 +969,19 @@ monoco.on('ready', function () {
         html = template.source().replace(/{{title}}/gi, this.title());
         html = html.replace(/{{_id}}/gi, this.uuid());
 
-        document.querySelector('#monoco-workspace').insertAdjacentHTML('afterbegin', html);
+        document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin', html);
 
         //events
-        dom = document.getElementsByClassName('monoco-model-behavior-open-' + this.title());
+        dom = document.getElementsByClassName('designer-model-behavior-open-' + this.title());
         dom[0].addEventListener('click', function (event) {
             window.open('behavior.html?_id=' + that.uuid());
         });
 
-        html = document.getElementsByClassName('monoco-model-behavior-delete-' + this.title());
+        html = document.getElementsByClassName('designer-model-behavior-delete-' + this.title());
         html[0].addEventListener('click', function (event) {
             var designer = this.require('designer');
             delete designer.system().behaviors()[this.uuid()];
-            $('#monoco-behavior-' + this.uuid()).remove();
+            $('#designer-behavior-' + this.uuid()).remove();
             this.destroy();
             designer.save();
             designer.require('message').success('the behavior has been destroyed.')
@@ -989,11 +989,11 @@ monoco.on('ready', function () {
     });
 
     ModelBehavior.on('hide', function () {
-        $('#monoco-behavior-' + this.uuid()).hide();
+        $('#designer-behavior-' + this.uuid()).hide();
     });
 
     ModelBehavior.on('show', function () {
-        $('#monoco-behavior-' + this.uuid()).show();
+        $('#designer-behavior-' + this.uuid()).show();
     });
     
     // MODELCOMPONENT
@@ -1005,19 +1005,19 @@ monoco.on('ready', function () {
         // html 
         html = this.require('model-component.html');
 
-        document.querySelector('#monoco-workspace').insertAdjacentHTML('afterbegin',
+        document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{_id}}/gi, this.uuid())
             );
 
         //events
-        html = document.getElementsByClassName('monoco-model-component-open-' + this.title());
+        html = document.getElementsByClassName('designer-model-component-open-' + this.title());
         html[0].addEventListener('click', function (event) {
             window.open('component.html?_id=' + encodeURI(that.title()));
         });
 
-        html = document.getElementsByClassName('monoco-model-component-delete-' + this.title());
+        html = document.getElementsByClassName('designer-model-component-delete-' + this.title());
         html[0].addEventListener('click', function (event) {
             var designer = this.require('designer');
 
@@ -1025,7 +1025,7 @@ monoco.on('ready', function () {
             if (Object.keys(designer.system().components()[this.model()])) {
                 delete designer.system().components()[this.model()];
             }
-            $('#monoco-component-' + this.uuid()).remove();
+            $('#designer-component-' + this.uuid()).remove();
             this.destroy();
             designer.save();
             designer.require('message').success('the component has been destroyed.')
@@ -1033,11 +1033,11 @@ monoco.on('ready', function () {
     });
 
     ModelComponent.on('hide', function () {
-        $('#monoco-component-' + this.uuid()).hide();
+        $('#designer-component-' + this.uuid()).hide();
     });
 
     ModelComponent.on('show', function () {
-        $('#monoco-component-' + this.uuid()).show();
+        $('#designer-component-' + this.uuid()).show();
     });  
     
     // MenuBar
@@ -1107,9 +1107,9 @@ monoco.on('ready', function () {
         var length = 0,
             i = 0,
             item = null,
-            domHeader = document.getElementById('monoco-menubar-header'),
-            domItems = document.getElementById('monoco-menubar-items'),
-            domAction = document.getElementById('monoco-menubar-actions'),
+            domHeader = document.getElementById('designer-menubar-header'),
+            domItems = document.getElementById('designer-menubar-items'),
+            domAction = document.getElementById('designer-menubar-actions'),
             self = this;
 
         function _removeActive() {
@@ -1158,8 +1158,8 @@ monoco.on('ready', function () {
         }
 
         var that = this;
-        $('#monoco-menu-action-search').on('keyup', function (event) {
-            var value = $('#monoco-menu-action-search').val();
+        $('#designer-menu-action-search').on('keyup', function (event) {
+            var value = $('#designer-menu-action-search').val();
             that.designer().filter(value);
         });
     });
@@ -1193,7 +1193,7 @@ monoco.on('ready', function () {
     });
 
     ToolBar.on('render', function () {
-        var domItems = document.getElementById('monoco-toolbar-items'),
+        var domItems = document.getElementById('designer-toolbar-items'),
             i = 0,
             length = 0,
             item = null,
@@ -1272,7 +1272,7 @@ monoco.on('ready', function () {
                         message = this.require('message');
                         
                     // get value
-                    name = $('#monoco-dialog-system-creation-name').val();
+                    name = $('#designer-dialog-system-creation-name').val();
 
                     function generateId() {
                         function gen() {
@@ -1343,13 +1343,13 @@ monoco.on('ready', function () {
                             message = this.require('message');
                         
                         // get value
-                        name = $('#monoco-dialog-schema-creation-name').val();
+                        name = $('#designer-dialog-schema-creation-name').val();
                         
                         // set schema
                         schema = {
                             "_id": name,
                             "_name": name,
-                            "_inherit": ["MonocoComponentSchema"]
+                            "_inherit": ["SyrupComponentSchema"]
                         };
                     
                         // add (TODO improve)
@@ -1384,15 +1384,15 @@ monoco.on('ready', function () {
                             message = this.require('message');
                     
                         // get value
-                        name = $('#monoco-dialog-model-creation-name').val();
-                        schema = $('#monoco-dialog-model-creation-schema').val();
+                        name = $('#designer-dialog-model-creation-name').val();
+                        schema = $('#designer-dialog-model-creation-schema').val();
                         
                         // set model
                         model = {
                             "_id": name,
                             "_name": name,
                             "_schema": schema,
-                            "_inherit": ["MonocoComponent"]
+                            "_inherit": ["SyrupComponent"]
                         };
                     
                         // prepare model
@@ -1474,8 +1474,8 @@ monoco.on('ready', function () {
                             message = this.require('message');
                         
                         // get value
-                        name = $('#monoco-dialog-type-creation-name').val();
-                        isEnum = $('#monoco-dialog-type-creation-isEnum')[0].checked;
+                        name = $('#designer-dialog-type-creation-name').val();
+                        isEnum = $('#designer-dialog-type-creation-isEnum')[0].checked;
                         
                         // set system
                         if (isEnum) {
@@ -1526,7 +1526,7 @@ monoco.on('ready', function () {
                             message = this.require('message');
                     
                         // get value
-                        model = $('#monoco-dialog-component-creation-model').val();
+                        model = $('#designer-dialog-component-creation-model').val();
 
                         function generateId() {
                             function gen() {
@@ -1606,8 +1606,8 @@ monoco.on('ready', function () {
                             message = this.require('message');
                     
                         // get value
-                        model = $('#monoco-dialog-behavior-creation-model').val();
-                        state = $('#monoco-dialog-behavior-creation-state').val();
+                        model = $('#designer-dialog-behavior-creation-model').val();
+                        state = $('#designer-dialog-behavior-creation-state').val();
 
                         function generateId() {
                             function gen() {
@@ -1811,19 +1811,19 @@ monoco.on('ready', function () {
     });
 
     Workspace.on('clear', function () {
-        $('#monoco-workspace').empty();
+        $('#designer-workspace').empty();
     });
     
     // Server
     var Server = this.require('Server');
     Server.on('start', function () {
-        var MonocoChannel = null,
+        var SyrupChannel = null,
             channel = null,
             Worker = null,
             worker = null;
 
-        MonocoChannel = this.require('MonocoChannel');
-        channel = new MonocoChannel({
+        SyrupChannel = this.require('SyrupChannel');
+        channel = new SyrupChannel({
             '_id': 'channel'
         });
 
@@ -1990,7 +1990,7 @@ monoco.on('ready', function () {
             "worker": new SharedWorker('./scripts/worker.js'),
         });
         worker.worker().port.onmessage = function (e) {
-            $db.MonocoMessage.insert(e.data);
+            $db.SyrupMessage.insert(e.data);
         }
 
     }, true);
@@ -2036,10 +2036,10 @@ monoco.on('ready', function () {
         this.server(server);
         
         // message
-        this.require('monoco').on('warning', function (message) {
+        this.require('syrup').on('warning', function (message) {
             this.require('message').warning(message);
         });
-        this.require('monoco').on('error', function (error) {
+        this.require('syrup').on('error', function (error) {
             this.require('message').danger(error.message);
         });
         
