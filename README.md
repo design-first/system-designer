@@ -1,11 +1,12 @@
 # System Designer
 
+[![npm version](https://badge.fury.io/js/system-designer.svg)](http://badge.fury.io/js/system-designer)
 [![Build Status](https://travis-ci.org/system-designer/system-designer.svg?branch=master)](https://travis-ci.org/system-designer/system-designer)
 [![devDependency Status](https://david-dm.org/system-designer/system-designer/dev-status.svg)](https://david-dm.org/system-designer/system-designer#info=devDependencies)
 
 #### What is System Designer ?
 
-System Designer is a free and Open Source IDE to create client and server JavaScript Application systems.
+System Designer is a free and Open Source IDE to create client and server JavaScript Application Systems.
 
 Features:
 
