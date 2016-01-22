@@ -1,8 +1,8 @@
 # System Designer
 
 [![npm version](https://badge.fury.io/js/system-designer.svg)](http://badge.fury.io/js/system-designer)
-[![Build Status](https://travis-ci.org/system-designer/system-designer.svg?branch=master)](https://travis-ci.org/system-designer/system-designer)
-[![devDependency Status](https://david-dm.org/system-designer/system-designer/dev-status.svg)](https://david-dm.org/system-designer/system-designer#info=devDependencies)
+[![Build Status](https://travis-ci.org/system-sdk/system-designer.svg?branch=master)](https://travis-ci.org/system-sdk/system-designer)
+[![devDependency Status](https://david-dm.org/system-sdk/system-designer/dev-status.svg)](https://david-dm.org/system-sdk/system-designer#info=devDependencies)
 
 #### What is System Designer ?
 
@@ -18,7 +18,7 @@ Features:
 
 #### Direct download
 
-* [Download the zip file](https://github.com/system-designer/system-designer/archive/master.zip) of this project,
+* [Download the zip file](https://github.com/system-sdk/system-designer/archive/master.zip) of this project,
 * unzip it and
 * open `/system-designer-master/web/index.html` with Mozilla Firefox or Google Chrome.
 
@@ -75,7 +75,7 @@ To run System Designer, go to [http://localhost:9001/](http://localhost:9001/) .
 
 ## Documentation
 
-* [Web site](https://systemdesigner.readme.io/docs) [ work in progress ]
+* [Web site](http://doc.systemdesigner.io) [ work in progress ]
 
 
 ## Licence
