@@ -276,8 +276,8 @@ syrup.on('ready', function () {
             designer.store().uuid(id);
             designer.store().data(behavior);
 
-            $($('.navbar-header a')[0]).text('Behavior ' + id);
-            document.title = id + ' | system designer';
+            $($('.navbar-header a')[0]).text('Behavior ' + behavior.component + '.' +behavior.state);
+            document.title = behavior.component + '.' +behavior.state + ' | system designer';
 
             editor.setValue(behavior.action);
 

@@ -465,7 +465,17 @@ syrup.on('ready', function () {
             store[designer.context()] = val;
         }
         designer.store().data(store);
-        console.log(store)
+        
+        // check if ID change
+        if (designer.store().uuid() !== designer.store().data()._id) {
+            this.require('channel').deleteComponent(designer.store().uuid(), designer.store().collection());
+            designer.store().uuid(designer.store().data()._id);
+            
+            // update title
+            $($('.navbar-header a')[0]).text('Component ' + designer.store().uuid());
+            document.title = designer.store().uuid() + ' | system designer';
+        }
+
         this.require('channel').updateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());
         this.require('message').success('file saved !')
     });

@@ -1911,6 +1911,30 @@ syrup.on('ready', function () {
             var designer = this.require('designer');
             designer.system().components()[collection][id] = component;
             designer.save();
+            
+            designer.workspace().refresh();
+        });
+
+        channel.on('deleteComponent', function (id, collection) {
+            var designer = this.require('designer'),
+            models = [],
+            model = null;
+            
+            models = this.require('db').collections().ModelComponent.find({
+                'uuid': id
+            });
+            if (models.length) {
+                model = this.require(models[0]._id);
+                if (model) {
+                    model.hide();
+                    model.destroy();
+                }
+            }
+            
+            delete designer.system().components()[collection][id];
+            
+            designer.save();
+            designer.workspace().refresh();
         });
 
         channel.on('updateSystem', function (id, system) {
