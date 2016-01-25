@@ -14,13 +14,15 @@ Features:
 * **plugin based architecture** and
 * no server need, **full web application**.
 
+You can test System Designer [here](http://studio.systemdesigner.io).
+
 ## Installation
 
 #### Direct download
 
 * [Download the zip file](https://github.com/system-sdk/system-designer/archive/master.zip) of this project,
 * unzip it and
-* open `/system-designer-master/web/index.html` with Mozilla Firefox or Google Chrome.
+* open `/system-designer-master/web/index.html` with Mozilla Firefox.
 
 #### Node.js
 
