@@ -6,7 +6,7 @@
 
 #### What is System Designer ?
 
-[System Designer](http://systemdesigner.io) is a free and Open Source IDE to create client and server JavaScript Application Systems.
+[System Designer](https://system-designer.github.io) is a free and Open Source IDE to create client and server JavaScript Application Systems.
 
 Features:
 
@@ -14,7 +14,10 @@ Features:
 * **plugin based architecture** and
 * no server need, **full web application**.
 
-You can test System Designer [here](http://studio.systemdesigner.io).
+You can test System Designer [here](https://system-designer.github.io).
+
+System Designer is part of the [System SDK project](https://github.com/system-sdk).
+System SDK is a SDK for building JavaScript Application Systems.
 
 ## Installation
 
@@ -77,8 +80,8 @@ To run System Designer, go to [http://localhost:9001/](http://localhost:9001/) .
 
 ## Documentation
 
-* [Quick Start](https://systemdesigner.readme.io/docs/quick-start)
-* [Guides](https://systemdesigner.readme.io)
+* [Quick Start](https://system-designer.readme.io/docs/quick-start)
+* [Guides](https://system-designer.readme.io)
 
 ## Licence
 

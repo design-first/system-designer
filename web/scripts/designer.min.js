@@ -1,6 +1,6 @@
 /*
 * System Designer
-* http://systemdesigner.io
+* https://system-designer.github.io
 * @ecarriou
 *
 * Copyright (C) 2016 - Erwan Carriou

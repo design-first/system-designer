@@ -1,6 +1,6 @@
 /* 
  * System Designer
- * http://systemdesigner.io
+ * https://system-designer.github.io
  * @ecarriou
  *
  * Copyright (C) 2016 - Erwan Carriou
@@ -440,7 +440,7 @@ module.exports = function (grunt) {
                 banner:
                 '/*\n' +
                 '* System Designer\n' +
-                '* http://systemdesigner.io\n' +
+                '* https://system-designer.github.io\n' +
                 '* @ecarriou\n' +
                 '*\n' +
                 '* Copyright (C) 2016 - Erwan Carriou\n' +

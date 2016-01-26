@@ -94,7 +94,7 @@
 			"_id": "1c00c107e01c9b3",
 			"component": "SyrupAdmin",
 			"state": "start",
-			"action": "function () {\n                var Worker = null,\n                worker = null;\n                \n                Worker = this.require('Worker');\n                worker = new Worker({\n                    \"_id\": \"worker\",\n                    \"worker\": new SharedWorker('../scripts/worker.js'),\n                });\n                worker.worker().port.onmessage = function (e) {\n                  $db.SyrupMessage.insert(e.data);\n                }\n                \n                SyrupChannel = this.require('SyrupChannel');\n                channel = new SyrupChannel({\n                    '_id': 'channel'\n                });\n            }",
+			"action": "function () {\n                var Worker = null,\n                worker = null;\n                \n                Worker = this.require('Worker');\n                worker = new Worker({\n                    \"_id\": \"worker\",\"_core\":true,\n                    \"worker\": new SharedWorker('../scripts/worker.js'),\n                });\n                worker.worker().port.onmessage = function (e) {\n                  $db.SyrupMessage.insert(e.data);\n                }\n                \n                SyrupChannel = this.require('SyrupChannel');\n                channel = new SyrupChannel({\n                    '_id': 'channel'\n                });\n            }",
 			"useCoreAPI": true,
 			"core": true
 		},
@@ -102,7 +102,7 @@
 			"_id": "1eb4818ab11ca61",
 			"component": "18ed81de331252c",
 			"state": "main",
-			"action": "function () {\n                var SyrupAdmin = this.require('SyrupAdmin');\n                var admin = new SyrupAdmin();\n                admin.start();\n            }",
+			"action": "function () {\n                var SyrupAdmin = this.require('SyrupAdmin');\n                var admin = new SyrupAdmin({\"_core\":true});\n                admin.start();\n            }",
 			"useCoreAPI": false,
 			"core": true
 		},
