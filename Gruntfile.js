@@ -30,8 +30,8 @@ module.exports = function (grunt) {
                     'src/js/*.js',
                     'src/system/*/*.json',
                     'src/system/*/*/*.json',
-                    'src/web/styles/*.css',
-                    'src/web/scripts/*.js',
+                    'src/designer/styles/*.css',
+                    'src/designer/scripts/*.js',
                 ],
                 tasks: [
                     'build'
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                     livereload: true
                 },
                 files: [
-                    'web/*.html'
+                    'designer/*.html'
                 ]
             }
         },
@@ -53,11 +53,11 @@ module.exports = function (grunt) {
             'build/*.js',
             'build/*.json',
             'build/*/*.json',
-            'web/lib/jquery/**',
-            'web/lib/system-runtime/**',
-            'web/systems/design.json',
-            'web/scripts/*.js',
-            'web/styles/*.css'
+            'designer/lib/jquery/**',
+            'designer/lib/system-runtime/**',
+            'designer/systems/design.json',
+            'designer/scripts/*.js',
+            'designer/styles/*.css'
         ],
         jshint: {
             files: [
@@ -461,54 +461,54 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'web/scripts/behavior.min.js': ['src/web/scripts/behavior.js'],
-                    'web/scripts/component.min.js': ['src/web/scripts/component.js'],
-                    'web/scripts/designer.min.js': ['src/web/scripts/designer.js'],
-                    'web/scripts/model.min.js': ['src/web/scripts/model.js'],
-                    'web/scripts/schema.min.js': ['src/web/scripts/schema.js'],
-                    'web/scripts/system.min.js': ['src/web/scripts/system.js'],
-                    'web/scripts/type.min.js': ['src/web/scripts/type.js']
+                    'designer/scripts/behavior.min.js': ['src/designer/scripts/behavior.js'],
+                    'designer/scripts/component.min.js': ['src/designer/scripts/component.js'],
+                    'designer/scripts/designer.min.js': ['src/designer/scripts/designer.js'],
+                    'designer/scripts/model.min.js': ['src/designer/scripts/model.js'],
+                    'designer/scripts/schema.min.js': ['src/designer/scripts/schema.js'],
+                    'designer/scripts/system.min.js': ['src/designer/scripts/system.js'],
+                    'designer/scripts/type.min.js': ['src/designer/scripts/type.js']
                 }
             }
         },
         copy: {
             system: {
                 src: 'build/system/design.json',
-                dest: 'web/systems/design.json',
+                dest: 'designer/systems/design.json',
             },
             worker: {
-                src: 'src/web/scripts/worker.js',
-                dest: 'web/scripts/worker.js',
+                src: 'src/designer/scripts/worker.js',
+                dest: 'designer/scripts/worker.js',
             },
             css: {
                 files: [
                     {
-                        src: 'src/web/styles/behavior.css',
-                        dest: 'web/styles/behavior.css',
+                        src: 'src/designer/styles/behavior.css',
+                        dest: 'designer/styles/behavior.css',
                     },
                     {
-                        src: 'src/web/styles/component.css',
-                        dest: 'web/styles/component.css',
+                        src: 'src/designer/styles/component.css',
+                        dest: 'designer/styles/component.css',
                     },
                     {
-                        src: 'src/web/styles/designer.css',
-                        dest: 'web/styles/designer.css',
+                        src: 'src/designer/styles/designer.css',
+                        dest: 'designer/styles/designer.css',
                     },
                     {
-                        src: 'src/web/styles/model.css',
-                        dest: 'web/styles/model.css',
+                        src: 'src/designer/styles/model.css',
+                        dest: 'designer/styles/model.css',
                     },
                     {
-                        src: 'src/web/styles/schema.css',
-                        dest: 'web/styles/schema.css',
+                        src: 'src/designer/styles/schema.css',
+                        dest: 'designer/styles/schema.css',
                     },
                     {
-                        src: 'src/web/styles/system.css',
-                        dest: 'web/styles/system.css',
+                        src: 'src/designer/styles/system.css',
+                        dest: 'designer/styles/system.css',
                     },
                     {
-                        src: 'src/web/styles/type.css',
-                        dest: 'web/styles/type.css',
+                        src: 'src/designer/styles/type.css',
+                        dest: 'designer/styles/type.css',
                     }
                 ]
             },
@@ -516,11 +516,11 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: 'bower_components/jquery/dist/jquery.min.js',
-                        dest: 'web/lib/jquery/jquery.min.js',
+                        dest: 'designer/lib/jquery/jquery.min.js',
                     },
                     {
                         src: 'bower_components/system-runtime/build/system-runtime.min.js',
-                        dest: 'web/lib/system-runtime/system-runtime.min.js'
+                        dest: 'designer/lib/system-runtime/system-runtime.min.js'
                     }
                 ],
                 options: {
@@ -539,14 +539,14 @@ module.exports = function (grunt) {
                 options: {
                     keepalive: true,
                     port: 9001,
-                    base: 'web'
+                    base: 'designer'
                 }
             },
             serverDebug: {
                 options: {
                     livereload: true,
                     port: 9001,
-                    base: 'web'
+                    base: 'designer'
                 }
             }
         }
