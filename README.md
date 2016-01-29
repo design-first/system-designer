@@ -25,7 +25,7 @@ System SDK is a SDK for building JavaScript Application Systems.
 
 * [Download the zip file](https://github.com/system-sdk/system-designer/archive/master.zip) of this project,
 * unzip it and
-* open `/system-designer-master/web/index.html` with Mozilla Firefox.
+* open `/system-designer-master/designer/index.html` with Mozilla Firefox.
 
 #### Node.js
 
@@ -35,7 +35,7 @@ $ npm install system-designer --save
 
 Then:
 
-* open `/node_modules/system-designer/web/index.html` with Mozilla Firefox or Google Chrome.
+* open `/node_modules/system-designer/designer/index.html` with Mozilla Firefox or Google Chrome.
 
 #### Bower
 
@@ -45,7 +45,7 @@ $ bower install system-designer --save
 
 Then:
 
-* open `/bower_components/system-designer/web/index.html` with Mozilla Firefox or Google Chrome.
+* open `/bower_components/system-designer/designer/index.html` with Mozilla Firefox or Google Chrome.
 
 ## Build
 
