@@ -325,7 +325,9 @@ syrup.on('ready', function () {
         var editor = this.require('editor').editor(),
             designer = this.require('designer');
 
-        designer.store().data().action = editor.getValue();
+        if (editor.getValue().indexOf('{') !== 0) {
+            designer.store().data().action = editor.getValue();    
+        }
         editor.getSession().setMode('ace/mode/json');
         editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
 
