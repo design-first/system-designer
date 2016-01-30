@@ -1828,7 +1828,11 @@ syrup.on('ready', function () {
                         behavior = new ModelBehavior({
                             'uuid': system.behaviors()[name]._id
                         });
-                        behavior.title(system.behaviors()[name].component + '.' + system.behaviors()[name].state);
+                        if (system.behaviors()[name].component === this.require('designer').system().id()) {
+                            behavior.title(system.behaviors()[name].state);
+                        } else {
+                            behavior.title(system.behaviors()[name].component + '.' + system.behaviors()[name].state);
+                        }
                         behavior.render();
                     }
                     break;
@@ -2206,10 +2210,10 @@ syrup.on('ready', function () {
             this.refresh();
             this.require('message').success('the system \'' + systemParam.name + '\' was imported');
         } else {
-            if (systems && systems.length) {
+            if (systems && systems.systems && systems.systems.length) {
                 this.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
-                this.refresh();
             }
+            this.refresh();
         }
         this.check();
         this.welcome();
