@@ -13,7 +13,7 @@ Features:
 
 * **No file-system**: focus on your business logic and not on the structure of your project. Your entire project is stored in a NoSQL DB and it can be exported in a single JSON object.
 * **Hot-reload**: updating a method in System Designer will automatically inject it in your connected app. You do not need to reload your app to see your latests modifications.
-* **Remove designing** : get the model, behaviors and components of all running apps and update them live.
+* **Remote designing** : get the model, behaviors and components of all running apps and update them live.
 * **Module builder**: Your HTML or CSS can be required in your app.
 
 You can test System Designer [here](https://system-designer.github.io).
