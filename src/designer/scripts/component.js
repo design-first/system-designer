@@ -443,6 +443,11 @@ syrup.on('ready', function () {
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
+        
+        // TODO create a function
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } })
+        })
     });
 
     Designer.on('clear', function () {
@@ -477,7 +482,7 @@ syrup.on('ready', function () {
         }
 
         this.require('channel').updateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());
-        this.require('message').success('file saved !')
+        this.require('message').success('component saved.')
     });
 
     // main

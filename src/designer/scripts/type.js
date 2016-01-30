@@ -359,6 +359,11 @@ syrup.on('ready', function () {
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
+        
+        // TODO create a function
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } })
+        })
     });
 
     Designer.on('clear', function () {
@@ -375,8 +380,19 @@ syrup.on('ready', function () {
             designer = this.require('designer');
 
         designer.store().data(JSON.parse(val));
+        
+        // check if ID change
+        if (designer.store().uuid() !== designer.store().data().name) {
+            this.require('channel').deleteType(designer.store().uuid());
+            designer.store().uuid(designer.store().data().name);
+            
+            // update title
+            $($('.navbar-header a')[0]).text('Type ' + designer.store().uuid());
+            document.title = designer.store().uuid() + ' | system designer';
+        }
+
         this.require('channel').updateType(designer.store().uuid(), designer.store().data());
-        this.require('message').success('file saved !');
+        this.require('message').success('type saved.');
     });
 
     // main

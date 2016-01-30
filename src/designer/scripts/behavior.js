@@ -276,8 +276,8 @@ syrup.on('ready', function () {
             designer.store().uuid(id);
             designer.store().data(behavior);
 
-            $($('.navbar-header a')[0]).text('Behavior ' + behavior.component + '.' +behavior.state);
-            document.title = behavior.component + '.' +behavior.state + ' | system designer';
+            $($('.navbar-header a')[0]).text('Behavior ' + behavior.component + '.' + behavior.state);
+            document.title = behavior.component + '.' + behavior.state + ' | system designer';
 
             editor.setValue(behavior.action);
 
@@ -326,7 +326,7 @@ syrup.on('ready', function () {
             designer = this.require('designer');
 
         if (editor.getValue().indexOf('{') !== 0) {
-            designer.store().data().action = editor.getValue();    
+            designer.store().data().action = editor.getValue();
         }
         editor.getSession().setMode('ace/mode/json');
         editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
@@ -392,6 +392,11 @@ syrup.on('ready', function () {
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
+        
+        // TODO create a function
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } })
+        })
     });
 
     Designer.on('clear', function () {
@@ -414,9 +419,19 @@ syrup.on('ready', function () {
             store = JSON.parse(val);
         }
         designer.store().data(store);
+        
+        // check if ID change
+        if (designer.store().uuid() !== designer.store().data()._id) {
+            this.require('channel').deleteBehavior(designer.store().uuid());
+            designer.store().uuid(designer.store().data()._id);
+        }
+        
+        // TODO improve
+        $($('.navbar-header a')[0]).text('Behavior ' + designer.store().data().component + '.' + designer.store().data().state);
+        document.title = designer.store().data().component + '.' + designer.store().data().state + ' | system designer';
 
         this.require('channel').updateBehavior(designer.store().uuid(), designer.store().data());
-        this.require('message').success('file saved !')
+        this.require('message').success('behavior saved.')
     });
 
     // main

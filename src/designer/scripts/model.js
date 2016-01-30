@@ -302,6 +302,11 @@ syrup.on('ready', function () {
                 syrup.require('designer').save();
             }
         });
+        
+        // TODO create a function
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } })
+        })
     });
 
     // Designer
@@ -372,11 +377,28 @@ syrup.on('ready', function () {
 
     Designer.on('save', function () {
         var val = this.require('editor').editor().getValue(),
-            designer = this.require('designer');
+            designer = this.require('designer'),
+            message = this.require('message'),
+            model = JSON.parse(val);
 
-        designer.store().data(JSON.parse(val));
-        this.require('channel').updateModel(designer.store().uuid(), designer.store().data());
-        this.require('message').success('file saved !');
+        if (model._id === model._name) {
+            designer.store().data(model);
+            
+            // check if ID change
+            if (designer.store().uuid() !== designer.store().data()._id) {
+                this.require('channel').deleteModel(designer.store().uuid());
+                designer.store().uuid(designer.store().data()._id);
+            
+                // update title
+                $($('.navbar-header a')[0]).text('Model ' + designer.store().uuid());
+                document.title = designer.store().uuid() + ' | system designer';
+            }
+
+            this.require('channel').updateModel(designer.store().uuid(), designer.store().data());
+            message.success('model saved.');
+        } else {
+            message.danger('\'_id\’ and \‘_name\’ properties must have the same value.');
+        }
     });
 
     // main

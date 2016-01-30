@@ -226,8 +226,12 @@ syrup.on('ready', function () {
 
         dom = document.getElementById('designer-dialog-type-config-reset');
         dom.addEventListener('click', function (event) {
+            var System = this.require('System');
+
             window.localStorage.clear();
-            this.require('designer').workspace().refresh();
+            this.require('designer').system().destroy();
+
+            this.require('designer').workspace().clear();
             this.require('message').success('system designer has been reseted.');
         }.bind(this));
 
@@ -1273,58 +1277,64 @@ syrup.on('ready', function () {
                         
                     // get value
                     name = $('#designer-dialog-system-creation-name').val();
-
-                    function generateId() {
-                        function gen() {
-                            return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                        }
-                        return gen() + gen() + gen();
-                    }
-
-                    uuid = generateId();
-                    mainUuid = generateId();
-                        
-                    // set system
-                    system = {
-                        "name": name,
-                        "master": false,
-                        "subsystem": false,
-                        "version": "0.0.1",
-                        "description": "",
-                        "schemas": {},
-                        "behaviors": {},
-                        "types": {},
-                        "components": {},
-                        "_id": uuid
-                    };
                     
-                    // add main method
-                    system.behaviors[mainUuid] = {
-                        "_id": mainUuid,
-                        "component": uuid,
-                        "state": "main",
-                        "action": "function main() { \n}",
-                        "useCoreAPI": false,
-                        "core": false
-                    };
+                    // clean
+                    name = name.trim();
+                    name = name.replace(/ /gi, '_');
+
+                    if (name) {
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
+
+                        uuid = generateId();
+                        mainUuid = generateId();
+                        
+                        // set system
+                        system = {
+                            "name": name,
+                            "master": false,
+                            "subsystem": false,
+                            "version": "0.0.1",
+                            "description": "",
+                            "schemas": {},
+                            "behaviors": {},
+                            "types": {},
+                            "components": {},
+                            "_id": uuid
+                        };
+                    
+                        // add main method
+                        system.behaviors[mainUuid] = {
+                            "_id": mainUuid,
+                            "component": uuid,
+                            "state": "main",
+                            "action": "function main() { \n}",
+                            "useCoreAPI": false,
+                            "core": false
+                        };
                        
-                    // add (TODO improve)
-                    if (designer.system()) {
-                        designer.system().destroy();
+                        // add (TODO improve)
+                        if (designer.system()) {
+                            designer.system().destroy();
+                        }
+
+                        designer.system(new System(system));
+
+                        ModelSystem = this.require('ModelSystem');
+                        modelSystem = new ModelSystem({
+                            'title': name
+                        });
+                        modelSystem.uuid(uuid);
+                        this.hide();
+                        modelSystem.render();
+                        designer.save();
+
+                        message.success('the system \'' + name + '\' has been created.');
                     }
-
-                    designer.system(new System(system));
-
-                    ModelSystem = this.require('ModelSystem');
-                    modelSystem = new ModelSystem({
-                        'title': name
-                    });
-                    modelSystem.uuid(uuid);
-                    this.hide();
-                    modelSystem.render();
-                    designer.save();
-
-                    message.success('the system \'' + name + '\' has been created.');
                 });
                 break;
             case 'schemas':
@@ -1345,25 +1355,31 @@ syrup.on('ready', function () {
                         // get value
                         name = $('#designer-dialog-schema-creation-name').val();
                         
-                        // set schema
-                        schema = {
-                            "_id": name,
-                            "_name": name,
-                            "_inherit": ["SyrupComponentSchema"]
-                        };
+                        // clean
+                        name = name.trim();
+                        name = name.replace(/ /gi, '_');
+
+                        if (name) {
+                            // set schema
+                            schema = {
+                                "_id": name,
+                                "_name": name,
+                                "_inherit": ["SyrupComponentSchema"]
+                            };
                     
-                        // add (TODO improve)
-                        designer.system().schemas()[name] = schema;
+                            // add (TODO improve)
+                            designer.system().schemas()[name] = schema;
 
-                        ModelSchema = this.require('ModelSchema');
-                        modelSchema = new ModelSchema({
-                            'title': name
-                        });
-                        this.hide();
-                        modelSchema.render();
-                        designer.save();
+                            ModelSchema = this.require('ModelSchema');
+                            modelSchema = new ModelSchema({
+                                'title': name
+                            });
+                            this.hide();
+                            modelSchema.render();
+                            designer.save();
 
-                        message.success('the schema \'' + name + '\' has been created.');
+                            message.success('the schema \'' + name + '\' has been created.');
+                        }
                     });
                 }
                 break;
@@ -1387,73 +1403,79 @@ syrup.on('ready', function () {
                         name = $('#designer-dialog-model-creation-name').val();
                         schema = $('#designer-dialog-model-creation-schema').val();
                         
-                        // set model
-                        model = {
-                            "_id": name,
-                            "_name": name,
-                            "_schema": schema,
-                            "_inherit": ["SyrupComponent"]
-                        };
+                        // clean
+                        name = name.trim();
+                        name = name.replace(/ /gi, '_');
+
+                        if (name && schema) {
+                            // set model
+                            model = {
+                                "_id": name,
+                                "_name": name,
+                                "_schema": schema,
+                                "_inherit": ["SyrupComponent"]
+                            };
                     
-                        // prepare model
-                        for (var att in designer.system().schemas()[schema]) {
-                            switch (true) {
-                                case designer.system().schemas()[schema][att] === 'property':
-                                    model[att] = {
-                                        "type": "string",
-                                        "readOnly": false,
-                                        "mandatory": false,
-                                        "default": ""
-                                    };
-                                    break;
-                                case designer.system().schemas()[schema][att] === 'method':
-                                    model[att] = {
-                                        "params": [
-                                            {
-                                                "name": "param",
-                                                "type": "string",
-                                                "mandatory": false
-                                            }
-                                        ],
-                                        "result": "string"
-                                    };
-                                    break;
-                                case designer.system().schemas()[schema][att] === 'event':
-                                    model[att] = {
-                                        "params": [
-                                            {
-                                                "name": "param",
-                                                "type": "string",
-                                                "mandatory": false
-                                            }
-                                        ]
-                                    };
-                                    break;
-                                case designer.system().schemas()[schema][att] === 'collection':
-                                    model[att] = {
-                                        "type": ["string"],
-                                        "readOnly": false,
-                                        "mandatory": false,
-                                        "default": []
-                                    };
-                                    break;
-                                default:
-                                    break;
+                            // prepare model
+                            for (var att in designer.system().schemas()[schema]) {
+                                switch (true) {
+                                    case designer.system().schemas()[schema][att] === 'property':
+                                        model[att] = {
+                                            "type": "string",
+                                            "readOnly": false,
+                                            "mandatory": false,
+                                            "default": ""
+                                        };
+                                        break;
+                                    case designer.system().schemas()[schema][att] === 'method':
+                                        model[att] = {
+                                            "params": [
+                                                {
+                                                    "name": "param",
+                                                    "type": "string",
+                                                    "mandatory": false
+                                                }
+                                            ],
+                                            "result": "string"
+                                        };
+                                        break;
+                                    case designer.system().schemas()[schema][att] === 'event':
+                                        model[att] = {
+                                            "params": [
+                                                {
+                                                    "name": "param",
+                                                    "type": "string",
+                                                    "mandatory": false
+                                                }
+                                            ]
+                                        };
+                                        break;
+                                    case designer.system().schemas()[schema][att] === 'collection':
+                                        model[att] = {
+                                            "type": ["string"],
+                                            "readOnly": false,
+                                            "mandatory": false,
+                                            "default": []
+                                        };
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
-                        }
                     
-                        // add (TODO improve)
-                        designer.system().schemas()[name] = model;
+                            // add (TODO improve)
+                            designer.system().schemas()[name] = model;
 
-                        ModelClass = this.require('ModelClass');
-                        modelClass = new ModelClass({
-                            'title': name
-                        });
-                        this.hide();
-                        modelClass.render();
-                        designer.save();
+                            ModelClass = this.require('ModelClass');
+                            modelClass = new ModelClass({
+                                'title': name
+                            });
+                            this.hide();
+                            modelClass.render();
+                            designer.save();
 
-                        message.success('the model \'' + name + '\' has been created.');
+                            message.success('the model \'' + name + '\' has been created.');
+                        }
                     });
                 }
                 break;
@@ -1477,34 +1499,40 @@ syrup.on('ready', function () {
                         name = $('#designer-dialog-type-creation-name').val();
                         isEnum = $('#designer-dialog-type-creation-isEnum')[0].checked;
                         
-                        // set system
-                        if (isEnum) {
-                            type = {
-                                "name": name,
-                                "type": "string",
-                                "value": [""]
-                            };
-                        } else {
-                            type = {
-                                'name': name,
-                                'type': 'object',
-                                'schema': {
-                                }
-                            };
-                        }
+                        // clean
+                        name = name.trim();
+                        name = name.replace(/ /gi, '_');
+
+                        if (name) {
+                            // set system
+                            if (isEnum) {
+                                type = {
+                                    "name": name,
+                                    "type": "string",
+                                    "value": [""]
+                                };
+                            } else {
+                                type = {
+                                    'name': name,
+                                    'type': 'object',
+                                    'schema': {
+                                    }
+                                };
+                            }
                     
-                        // add (TODO improve)
-                        designer.system().types()[name] = type;
+                            // add (TODO improve)
+                            designer.system().types()[name] = type;
 
-                        ModelType = this.require('ModelType');
-                        modelType = new ModelType({
-                            'title': name
-                        });
-                        this.hide();
-                        modelType.render();
-                        designer.save();
+                            ModelType = this.require('ModelType');
+                            modelType = new ModelType({
+                                'title': name
+                            });
+                            this.hide();
+                            modelType.render();
+                            designer.save();
 
-                        message.success('the type \'' + name + '\' has been created.');
+                            message.success('the type \'' + name + '\' has been created.');
+                        }
                     });
                 }
                 break;
@@ -1528,55 +1556,57 @@ syrup.on('ready', function () {
                         // get value
                         model = $('#designer-dialog-component-creation-model').val();
 
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                        if (model) {
+                            function generateId() {
+                                function gen() {
+                                    return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                                }
+                                return gen() + gen() + gen();
                             }
-                            return gen() + gen() + gen();
-                        }
 
-                        uuid = generateId();
+                            uuid = generateId();
                         
-                        // set component
-                        component = {
-                            "_id": uuid,
-                        };
+                            // set component
+                            component = {
+                                "_id": uuid,
+                            };
                     
-                        // set properties default values
-                        var schemaName = schemas[model]._schema;
-                        var schema = schemas[schemaName];
-                        var propertyNames = [];
+                            // set properties default values
+                            var schemaName = schemas[model]._schema;
+                            var schema = schemas[schemaName];
+                            var propertyNames = [];
 
-                        for (var att in schema) {
-                            if (schema[att] === 'property') {
-                                propertyNames.push(att);
+                            for (var att in schema) {
+                                if (schema[att] === 'property') {
+                                    propertyNames.push(att);
+                                }
                             }
+                            propertyNames.sort();
+                            length = propertyNames.length;
+                            for (var i = 0; i < length; i++) {
+                                component[propertyNames[i]] = schemas[model][propertyNames[i]].default;
+                            } 
+
+                            // add (TODO improve)
+                            if (!designer.system().components()[model]) {
+                                designer.system().components()[model] = {};
+                            }
+                            designer.system().components()[model][uuid] = component;
+
+                            ModelComponent = this.require('ModelComponent');
+
+                            modelComponent = new ModelComponent({
+                                title: uuid.toString() + ' (' + model + ')'
+                            });
+                            modelComponent.model(model);
+                            modelComponent.uuid(uuid.toString());
+
+                            this.hide();
+                            modelComponent.render();
+                            designer.save();
+
+                            message.success('the component \'' + uuid.toString() + ' (' + model + ')' + '\' has been created.');
                         }
-                        propertyNames.sort();
-                        length = propertyNames.length;
-                        for (var i = 0; i < length; i++) {
-                            component[propertyNames[i]] = schemas[model][propertyNames[i]].default;
-                        } 
-
-                        // add (TODO improve)
-                        if (!designer.system().components()[model]) {
-                            designer.system().components()[model] = {};
-                        }
-                        designer.system().components()[model][uuid] = component;
-
-                        ModelComponent = this.require('ModelComponent');
-
-                        modelComponent = new ModelComponent({
-                            title: uuid.toString() + ' (' + model + ')'
-                        });
-                        modelComponent.model(model);
-                        modelComponent.uuid(uuid.toString());
-
-                        this.hide();
-                        modelComponent.render();
-                        designer.save();
-
-                        message.success('the component \'' + uuid.toString() + ' (' + model + ')' + '\' has been created.');
                     });
                 }
                 break;
@@ -1609,94 +1639,96 @@ syrup.on('ready', function () {
                         model = $('#designer-dialog-behavior-creation-model').val();
                         state = $('#designer-dialog-behavior-creation-state').val();
 
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                        if (model && state) {
+                            function generateId() {
+                                function gen() {
+                                    return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                                }
+                                return gen() + gen() + gen();
                             }
-                            return gen() + gen() + gen();
-                        }
 
-                        uuid = generateId();
+                            uuid = generateId();
                     
-                        // schema
-                        schemaModel = schemas[model]._schema;
+                            // schema
+                            schemaModel = schemas[model]._schema;
 
-                        // params
-                        if (schemas[model][state]) {
-                            methodDef = schemas[model][state].params;
-                        }
-                        if (methodDef && methodDef.length) {
-                            length = methodDef.length;
-                            for (i = 0; i < length; i++) {
-                                if (i === 0) {
-                                    params = methodDef[i].name;
-                                } else {
-                                    params = params + ', ' + methodDef[i].name;
+                            // params
+                            if (schemas[model][state]) {
+                                methodDef = schemas[model][state].params;
+                            }
+                            if (methodDef && methodDef.length) {
+                                length = methodDef.length;
+                                for (i = 0; i < length; i++) {
+                                    if (i === 0) {
+                                        params = methodDef[i].name;
+                                    } else {
+                                        params = params + ', ' + methodDef[i].name;
+                                    }
                                 }
                             }
-                        }
 
-                        if (schemas[schemaModel][state] === 'property') {
-                            params = 'value';
-                        }
-
-                        if (schemas[schemaModel][state] === 'collection') {
-                            params = 'size, value, event';
-                        }
-
-                        if (state === 'init') {
-                            params = 'conf';
-                        }
-                    
-                        // body
-                        if (schemas[model][state]) {
-                            result = schemas[model][state].result;
-                        }
-                        if (result) {
-                            switch (result) {
-                                case 'string':
-                                    body = "\tvar result = '';\n\treturn result;\n";
-                                    break;
-                                case 'array':
-                                    body = "\tvar result = [];\n\treturn result;\n";
-                                    break;
-                                case 'number':
-                                    body = "\tvar result = 0;\n\treturn result;\n";
-                                    break;
-                                case 'object':
-                                    body = "\tvar result = {};\n\treturn result;\n";
-                                    break;
-                                default:
-                                    body = "\tvar result = {};\n\treturn result;\n";
-                                    break;
+                            if (schemas[schemaModel][state] === 'property') {
+                                params = 'value';
                             }
-                        }
-                        
-                        // set model
-                        behavior = {
-                            "_id": uuid,
-                            "component": model,
-                            "state": state,
-                            "action": "function " + state + "(" + params + ") {\n" + body + "}",
-                            "useCoreAPI": false,
-                            "core": false
-                        };
+
+                            if (schemas[schemaModel][state] === 'collection') {
+                                params = 'size, value, event';
+                            }
+
+                            if (state === 'init') {
+                                params = 'conf';
+                            }
                     
-                        // add (TODO improve)
-                        designer.system().behaviors()[uuid] = behavior;
+                            // body
+                            if (schemas[model][state]) {
+                                result = schemas[model][state].result;
+                            }
+                            if (result) {
+                                switch (result) {
+                                    case 'string':
+                                        body = "\tvar result = '';\n\treturn result;\n";
+                                        break;
+                                    case 'array':
+                                        body = "\tvar result = [];\n\treturn result;\n";
+                                        break;
+                                    case 'number':
+                                        body = "\tvar result = 0;\n\treturn result;\n";
+                                        break;
+                                    case 'object':
+                                        body = "\tvar result = {};\n\treturn result;\n";
+                                        break;
+                                    default:
+                                        body = "\tvar result = {};\n\treturn result;\n";
+                                        break;
+                                }
+                            }
+                        
+                            // set model
+                            behavior = {
+                                "_id": uuid,
+                                "component": model,
+                                "state": state,
+                                "action": "function " + state + "(" + params + ") {\n" + body + "}",
+                                "useCoreAPI": false,
+                                "core": false
+                            };
+                    
+                            // add (TODO improve)
+                            designer.system().behaviors()[uuid] = behavior;
 
-                        ModelBehavior = this.require('ModelBehavior');
+                            ModelBehavior = this.require('ModelBehavior');
 
-                        modelBehavior = new ModelBehavior({
-                            'uuid': uuid
-                        });
+                            modelBehavior = new ModelBehavior({
+                                'uuid': uuid
+                            });
 
-                        modelBehavior.title(model + '.' + state);
-                        this.hide();
-                        modelBehavior.render();
-                        designer.save();
+                            modelBehavior.title(model + '.' + state);
+                            this.hide();
+                            modelBehavior.render();
+                            designer.save();
 
-                        message.success('the behavior \'' + model + '.' + state + '\' has been created.');
+                            message.success('the behavior \'' + model + '.' + state + '\' has been created.');
+                        }
                     });
                 }
                 break;
@@ -1887,39 +1919,131 @@ syrup.on('ready', function () {
             var designer = this.require('designer');
             designer.system().types()[id] = type;
             designer.save();
+            designer.workspace().refresh();
+        });
+
+        channel.on('deleteType', function (id) {
+            var designer = this.require('designer'),
+                types = [],
+                type = null;
+
+            types = this.require('db').collections().ModelType.find({
+                'uuid': id
+            });
+            if (types.length) {
+                type = this.require(types[0]._id);
+                if (type) {
+                    type.hide();
+                    type.destroy();
+                }
+            }
+
+            delete designer.system().types()[id];
+
+            designer.save();
+            designer.workspace().refresh();
         });
 
         channel.on('updateSchema', function (id, schema) {
             var designer = this.require('designer');
             designer.system().schemas()[id] = schema;
             designer.save();
+            designer.workspace().refresh();
+        });
+
+        channel.on('deleteSchema', function (id) {
+            var designer = this.require('designer'),
+                schemas = [],
+                schema = null;
+
+            schemas = this.require('db').collections().ModelSchema.find({
+                'uuid': id
+            });
+            if (schemas.length) {
+                schema = this.require(schemas[0]._id);
+                if (schema) {
+                    schema.hide();
+                    schema.destroy();
+                }
+            }
+
+            delete designer.system().schemas()[id];
+
+            designer.save();
+            designer.workspace().refresh();
         });
 
         channel.on('updateModel', function (id, model) {
             var designer = this.require('designer');
             designer.system().schemas()[id] = model;
             designer.save();
+            designer.workspace().refresh();
+        });
+
+        channel.on('deleteModel', function (id) {
+            var designer = this.require('designer'),
+                models = [],
+                model = null;
+
+            models = this.require('db').collections().ModelClass.find({
+                'uuid': id
+            });
+            if (models.length) {
+                model = this.require(models[0]._id);
+                if (model) {
+                    model.hide();
+                    model.destroy();
+                }
+            }
+
+            delete designer.system().schemas()[id];
+
+            designer.save();
+            designer.workspace().refresh();
         });
 
         channel.on('updateBehavior', function (id, behavior) {
             var designer = this.require('designer');
             designer.system().behaviors()[id] = behavior;
             designer.save();
+            designer.workspace().refresh();
+        });
+
+        channel.on('deleteBehavior', function (id) {
+            var designer = this.require('designer'),
+                behaviors = [],
+                behavior = null;
+
+            behaviors = this.require('db').collections().ModelBehavior.find({
+                'uuid': id
+            });
+            if (behaviors.length) {
+                behavior = this.require(behaviors[0]._id);
+                if (behavior) {
+                    behavior.hide();
+                    behavior.destroy();
+                }
+            }
+
+            delete designer.system().behaviors()[id];
+
+            designer.save();
+            designer.workspace().refresh();
         });
 
         channel.on('updateComponent', function (id, collection, component) {
             var designer = this.require('designer');
             designer.system().components()[collection][id] = component;
             designer.save();
-            
+
             designer.workspace().refresh();
         });
 
         channel.on('deleteComponent', function (id, collection) {
             var designer = this.require('designer'),
-            models = [],
-            model = null;
-            
+                models = [],
+                model = null;
+
             models = this.require('db').collections().ModelComponent.find({
                 'uuid': id
             });
@@ -1930,9 +2054,9 @@ syrup.on('ready', function () {
                     model.destroy();
                 }
             }
-            
+
             delete designer.system().components()[collection][id];
-            
+
             designer.save();
             designer.workspace().refresh();
         });
@@ -2082,7 +2206,7 @@ syrup.on('ready', function () {
             this.refresh();
             this.require('message').success('the system \'' + systemParam.name + '\' was imported');
         } else {
-            if (systems) {
+            if (systems && systems.length) {
                 this.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
                 this.refresh();
             }
@@ -2125,6 +2249,10 @@ syrup.on('ready', function () {
     Designer.on('render', function () {
         this.menubar().render();
         this.toolbar().render();
+        // TODO create a function
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } })
+        })
     });
 
     Designer.on('filter', function (val) {
