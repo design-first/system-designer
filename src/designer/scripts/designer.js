@@ -1868,20 +1868,29 @@ syrup.on('ready', function () {
         });
 
         channel.on('getSystem', function (id) {
+            var system = null;
+
             if (id === this.require('designer').system().id()) {
-                this.setSystem(id, this.require('db').collections().System.find({
+                system = this.require('db').collections().System.find({
                     '_id': id
-                })[0]);
+                })[0];
+                system = JSON.parse(JSON.stringify(system));
+                delete system.classInfo;
+                this.setSystem(id, system);
             } else {
                 this.setSystem(id, JSON.parse(window.localStorage.getItem(id)));
             }
         });
 
         channel.on('getInitSystem', function (id) {
+            var system = null;
             if (id === this.require('designer').system().id()) {
-                this.setInitSystem(id, this.require('db').collections().System.find({
+                system = this.require('db').collections().System.find({
                     '_id': id
-                })[0]);
+                })[0];
+                system = JSON.parse(JSON.stringify(system));
+                delete system.classInfo;
+                this.setInitSystem(id, system);
             } else {
                 this.setInitSystem(id, JSON.parse(window.localStorage.getItem(id)));
             }

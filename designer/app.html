@@ -135,7 +135,6 @@
                 });
 
                 channel.on('setInitSystem', function (id, system) {
-                    ;
                     delete system.classInfo;
                     var systemID = this.require('db').system(system);
 
