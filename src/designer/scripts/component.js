@@ -281,10 +281,10 @@ syrup.on('ready', function () {
             this.require('worker').worker().port.postMessage(message);
         });
 
-        title = document.location.search.split('?')[1].split('id=')[1];
+        title = document.location.search.split('?')[1];
         title = decodeURI(title);
-        id = title.split('(')[0].trim();
-        collection = title.split('(')[1].replace(')', '').trim();
+        id = title.split('_id=')[1].split('&')[0].trim();
+        collection = title.split('_id=')[1].split('&model=')[1].trim();
 
         channel.getComponent(id, collection);
 
@@ -359,7 +359,7 @@ syrup.on('ready', function () {
             designer.store().extra(result);
             _init(result);
 
-            $($('.navbar-header a')[0]).text('Component ' + id);
+            //$($('.navbar-header a span')[0]).text('Component ' + id);
             document.title = id + ' | system designer';
 
             editor = this.require('editor').editor();
@@ -477,7 +477,7 @@ syrup.on('ready', function () {
             designer.store().uuid(designer.store().data()._id);
             
             // update title
-            $($('.navbar-header a')[0]).text('Component ' + designer.store().uuid());
+            //$($('.navbar-header a span')[0]).text('Component ' + designer.store().uuid());
             document.title = designer.store().uuid() + ' | system designer';
         }
 

@@ -275,7 +275,7 @@ syrup.on('ready', function () {
             designer.store().uuid(id);
             designer.store().data(system);
 
-            $($('.navbar-header a')[0]).text('System ' + system.name);
+            //$($('.navbar-header a')[0]).text('System ' + system.name);
             document.title = system.name + ' | system designer';
 
             editor.setValue(JSON.stringify(system, null, '\t'));

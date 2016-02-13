@@ -275,7 +275,7 @@ syrup.on('ready', function () {
             designer.store().uuid(id);
             designer.store().data(model);
 
-            $($('.navbar-header a')[0]).text('Model ' + id);
+            //$($('.navbar-header a')[0]).text('Model ' + id);
             document.title = id + ' | system designer';
 
             editor.setValue(JSON.stringify(model, null, '\t'));
@@ -390,7 +390,7 @@ syrup.on('ready', function () {
                 designer.store().uuid(designer.store().data()._id);
             
                 // update title
-                $($('.navbar-header a')[0]).text('Model ' + designer.store().uuid());
+                //$($('.navbar-header a')[0]).text('Model ' + designer.store().uuid());
                 document.title = designer.store().uuid() + ' | system designer';
             }
 

@@ -2,12 +2,12 @@
     "_id": "e89c617b6b15d33",
     "name": "html",
     "description": "html components",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "components": {
         "HTML": {
             "dialog-modal-behavior-creation.html": {
                 "_id": "dialog-modal-behavior-creation.html",
-                "source": "<div class=\"modal fade\" id=\"designer-dialog-behavior-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">Model</label>                         <div class=\"col-sm-8\">                             <select id=\"designer-dialog-behavior-creation-model\" name=\"model\" class=\"form-control\">                                 {{models}}                             </select>                         </div>                     </div>                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">State</label>                         <div class=\"col-sm-8\">                             <select id=\"designer-dialog-behavior-creation-state\" name=\"state\" class=\"form-control\">                                 {{states}}                             </select>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-behavior-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-behavior-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+                "source": "<div class=\"modal fade\" id=\"designer-dialog-behavior-creation-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label for=\"inputPassword3\" class=\"col-sm-4 control-label\">State</label>                         <div class=\"col-sm-8\">                             <select id=\"designer-dialog-behavior-creation-state\" name=\"state\" class=\"form-control\">                                 {{states}}                             </select>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-behavior-creation-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-behavior-creation-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
             },
             "dialog-modal-check.html": {
                 "_id": "dialog-modal-check.html",
@@ -71,35 +71,35 @@
             },
             "menu-action-version.html": {
                 "_id": "menu-action-version.html",
-                "source": "<a href=\"index.html\" target=\"_blank\">system designer | v0.3.0</a>"
+                "source": "<a href=\"index.html\" target=\"_blank\">system designer | v0.5.0</a>"
             },
             "menu-header-behavior.html": {
                 "_id": "menu-header-behavior.html",
-                "source": "<a class=\"navbar-brand\" href=\"#\">Behavior</a>"
+                "source": "<a class=\"navbar-brand\" style=\"padding:7px\"><img src=\"img/logo.png\" style=\"width:35px;height:35px\"></img></a>"
             },
             "menu-header-component.html": {
                 "_id": "menu-header-component.html",
-                "source": "<a class=\"navbar-brand\" href=\"#\">Component</a>"
+                "source": "<a class=\"navbar-brand\" style=\"padding:7px\"><img src=\"img/logo.png\" style=\"width:35px;height:35px;\"></img></a>"
             },
             "menu-header-model.html": {
                 "_id": "menu-header-model.html",
-                "source": "<a class=\"navbar-brand\" href=\"#\">Model</a>"
+                "source": "<a class=\"navbar-brand\" style=\"padding:7px\"><img src=\"img/logo.png\" style=\"width:35px;height:35px\"></img></a>"
             },
             "menu-header-schema.html": {
                 "_id": "menu-header-schema.html",
-                "source": "<a class=\"navbar-brand\" href=\"#\">Schema</a>"
+                "source": "<a class=\"navbar-brand\" style=\"padding:7px\"><img src=\"img/logo.png\" style=\"width:35px;height:35px;\"></img></a>"
             },
             "menu-header-system.html": {
                 "_id": "menu-header-system.html",
-                "source": "<a class=\"navbar-brand\" href=\"#\">System</a>"
+                "source": "<a class=\"navbar-brand\" style=\"padding:7px\"><img src=\"img/logo.png\" style=\"width:35px;height:35px\"></img></a>"
             },
             "menu-header-type.html": {
                 "_id": "menu-header-type.html",
-                "source": "<a class=\"navbar-brand\" href=\"#\">Type</a>"
+                "source": "<a class=\"navbar-brand\" style=\"padding:7px\"><img src=\"img/logo.png\" style=\"width:35px;height:35px\"></img></a>"
             },
             "menu-header.html": {
                 "_id": "menu-header.html",
-                "source": "<a class=\"navbar-brand\" href=\"#\">system designer</a>"
+                "source": "<a class=\"navbar-brand\" style=\"padding:7px\"><img src=\"img/logo.png\" style=\"width:35px;height:35px\"></img></a>"
             },
             "menu-item-action.html": {
                 "_id": "menu-item-action.html",
@@ -159,27 +159,27 @@
             },
             "model-behavior.html": {
                 "_id": "model-behavior.html",
-                "source": "<div id=\"designer-behavior-{{_id}}\" class=\"col-xs-6 col-sm-3 placeholder\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default designer-model-behavior-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default designer-model-behavior-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit code</span>             </button>            </div>     </div> </div>"
+                "source": "<div id=\"designer-behavior-{{_id}}\" class=\"col-xs-6 col-sm-6 placeholder designer-behavior\">     <div class=\"panel panel-default\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <pre class=\"language-javascript\"><code class=\"language-javascript\">{{content}}</code></pre>         </div>     </div> </div>"
             },
             "model-class.html": {
                 "_id": "model-class.html",
-                "source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"designer-class-{{id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default designer-model-class-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default designer-model-class-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit MSON</span>             </button>            </div>     </div> </div>"
+                "source": "<div class=\"col-xs-8 col-sm-8 placeholder designer-model\" id=\"designer-class-{{_id}}\">     <div class=\"panel panel-default\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <ul class=\"list-group\">                 {{attributes}}                 <li class=\"list-group-item list-group-item-methods\" style=\"padding: 0px;height: 3px;background-color: #DDDDDD\"></li>                 {{methods}}             </ul>         </div>     </div> </div>"
             },
             "model-component.html": {
                 "_id": "model-component.html",
-                "source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"designer-component-{{_id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default designer-model-component-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>             <button type=\"button\" class=\"btn btn-default designer-model-component-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit JSON</span>             </button>         </div>     </div> </div>"
+                "source": "<div class=\"col-xs-6 col-sm-3 placeholder designer-component\" id=\"designer-component-{{_id}}\">     <div class=\"panel panel-default\">         <table class=\"table\">             <thead>             </thead>             <tbody>                 {{content}}             </tbody>         </table>     </div> </div>"
             },
             "model-schema.html": {
                 "_id": "model-schema.html",
-                "source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"designer-schema-{{id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default designer-model-schema-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>             <button type=\"button\" class=\"btn btn-default designer-model-schema-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit MSON</span>             </button>         </div>     </div> </div>"
+                "source": "<div class=\"col-xs-6 col-sm-3 placeholder designer-schema\" id=\"designer-schema-{{id}}\">     <div class=\"panel panel-default\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <table class=\"table\">                 <thead>                 </thead>                 <tbody>                     {{content}}                 </tbody>             </table>         </div>     </div> </div>"
             },
             "model-system.html": {
                 "_id": "model-system.html",
-                "source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"designer-system-{{_id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default designer-model-system-delete-{{_id}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default designer-model-system-open-{{_id}}\" aria-label=\"Left Align\">                 <span>Edit JSON</span>             </button>                <button type=\"button\" class=\"btn btn-default designer-model-system-design-{{_id}}\" aria-label=\"Left Align\">                 <span>Set as current</span>             </button>           </div>     </div> </div>"
+                "source": "<div class=\"col-xs-6 col-sm-3 placeholder designer-system\" id=\"designer-system-{{_id}}\">     <div class=\"panel panel-default\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <table class=\"table\">                 <thead>                 </thead>                 <tbody>                     {{content}}                 </tbody>             </table>         </div>     </div> </div>"
             },
             "model-type.html": {
                 "_id": "model-type.html",
-                "source": "<div class=\"col-xs-6 col-sm-3 placeholder\" id=\"designer-type-{{id}}\">     <div class=\"panel panel-primary\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">             <button type=\"button\" class=\"btn btn-default  designer-model-type-delete-{{title}}\" aria-label=\"Left Align\">                 <span>Delete</span>             </button>                 <button type=\"button\" class=\"btn btn-default designer-model-type-open-{{title}}\" aria-label=\"Left Align\">                 <span>Edit MSON</span>             </button>            </div>     </div> </div>"
+                "source": "<div class=\"col-xs-6 col-sm-3 placeholder designer-type\" id=\"designer-type-{{id}}\">     <div class=\"panel panel-default\">         <div class=\"panel-heading\">             <h3 class=\"panel-title\">{{title}}</h3>         </div>         <div class=\"panel-body\">          <ul class=\"list-group\">                 {{content}}             </ul>         </div>     </div> </div>"
             },
             "toolbar-item-config.html": {
                 "_id": "toolbar-item-config.html",
@@ -192,6 +192,10 @@
             "toolbar-item-create.html": {
                 "_id": "toolbar-item-create.html",
                 "source": "<button type=\"button\" id=\"designer-toolbar-item-create\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Create a new item\">     <span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span> </button>"
+            },
+            "toolbar-item-delete.html": {
+                "_id": "toolbar-item-delete.html",
+                "source": "<button type=\"button\" id=\"designer-toolbar-item-delete\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Delete\">     <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span> </button>"
             },
             "toolbar-item-export.html": {
                 "_id": "toolbar-item-export.html",

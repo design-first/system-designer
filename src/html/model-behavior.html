@@ -1,15 +1,10 @@
-<div id="designer-behavior-{{_id}}" class="col-xs-6 col-sm-3 placeholder">
-    <div class="panel panel-primary">
+<div id="designer-behavior-{{_id}}" class="col-xs-6 col-sm-6 placeholder designer-behavior">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{title}}</h3>
         </div>
         <div class="panel-body">
-            <button type="button" class="btn btn-default designer-model-behavior-delete-{{title}}" aria-label="Left Align">
-                <span>Delete</span>
-            </button>    
-            <button type="button" class="btn btn-default designer-model-behavior-open-{{title}}" aria-label="Left Align">
-                <span>Edit code</span>
-            </button>   
+            <pre class="language-javascript"><code class="language-javascript">{{content}}</code></pre>
         </div>
     </div>
 </div>

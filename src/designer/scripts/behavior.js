@@ -276,7 +276,7 @@ syrup.on('ready', function () {
             designer.store().uuid(id);
             designer.store().data(behavior);
 
-            $($('.navbar-header a')[0]).text('Behavior ' + behavior.component + '.' + behavior.state);
+            //$($('.navbar-header a')[0]).text('Behavior ' + behavior.component + '.' + behavior.state);
             document.title = behavior.component + '.' + behavior.state + ' | system designer';
 
             editor.setValue(behavior.action);
@@ -427,7 +427,7 @@ syrup.on('ready', function () {
         }
         
         // TODO improve
-        $($('.navbar-header a')[0]).text('Behavior ' + designer.store().data().component + '.' + designer.store().data().state);
+        //$($('.navbar-header a')[0]).text('Behavior ' + designer.store().data().component + '.' + designer.store().data().state);
         document.title = designer.store().data().component + '.' + designer.store().data().state + ' | system designer';
 
         this.require('channel').updateBehavior(designer.store().uuid(), designer.store().data());

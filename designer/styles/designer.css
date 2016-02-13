@@ -300,6 +300,21 @@ body,
     border-right: 1px solid #eee;
   }
 
+.spaces {
+    position: fixed;
+    width: 210px;
+    top: 40px;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    padding-top: 11px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #F8F8F8;
+    border-left: 1px solid #eee;
+  }
 
 /* Sidebar navigation */
 .nav-sidebar {
@@ -327,7 +342,7 @@ body,
 }
 .placeholder {
     padding:10px; /**/
-    width:350px; /*default width*/
+    min-width:300px; /*default width*/
     margin-bottom: 20px;
 }
 .placeholder img {
@@ -357,7 +372,7 @@ body,
    z-index: 1000;
    padding-right: 20px;
    position: fixed;
-   right: 0;
+   right: 210px;
    bottom: 0;
    width: 550px;
  }
@@ -371,3 +386,178 @@ body,
 .tooltip.in {opacity: 1;}
 .tooltip.bottom .tooltip-arrow { border-bottom-color:#E7E7E7!important;}
 .tooltip.right .tooltip-arrow { border-right-color:#E7E7E7 !important; border-bottom-color:white!important;}
+
+/* spaces */ 
+#designer-spaces-items li:hover {
+   background-color: #E7E7E7;
+ }
+ 
+#designer-spaces-items > .active {
+    color: #555;
+    background-color: #E7E7E7;
+}
+
+.placeholder.designer-component > div:hover {
+    cursor: pointer;
+   /* background-color: #E7E7E7;*/
+}
+
+.placeholder.designer-component > div {
+        background-color: #FFFFFF;
+}
+
+.placeholder.designer-behavior > div:hover {
+    cursor: pointer;
+}
+
+.panel {
+        border: 2px solid #7F949D;
+        border-radius: 10px;
+}
+/*
+.panel-heading {
+        border: 2px solid #7F949D;
+        border-radius: 10px;
+        margin: 3px;
+        border-color: #7F949D;
+}*/
+
+.panel-heading {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+}
+
+.placeholder.designer-component > div > table{
+    text-align: left;
+}
+
+
+.table > tbody > tr  {
+  border: 0px;
+}
+.table > tbody > tr > td {
+  border: 0px;
+}
+
+.main {
+  margin-left: 35px;
+  /*margin-top: -20px;*/
+}
+
+/* model */
+
+.placeholder.designer-model > div:hover {
+    cursor: pointer;
+}
+
+.placeholder.designer-behavior > div > .panel-body {
+    text-align: left;
+}
+
+
+.placeholder.designer-model > div > .panel-body > table {
+    text-align: left;
+}
+
+.placeholder.designer-model > div > .panel-body {
+    padding: 0px;
+}
+
+.placeholder.designer-model > div > .panel-body > .list-group {
+    margin-bottom: 0px;
+}
+
+.list-group-item-attributes {
+    color: black;
+    background-color: #F8F8F8;
+    border-top-left-radius: 0px!important;
+    border-top-right-radius: 0px!important;
+}
+
+.list-group-item-collections{
+    color: black;
+    background-color: #F8F8F8;
+    border-top-left-radius: 0px!important;
+    border-top-right-radius: 0px!important;
+}
+
+.list-group-item-methods {
+    color: black;
+    background-color: #F8F8F8;
+    border-top-left-radius: 0px!important;
+    border-top-right-radius: 0px!important;
+}
+
+.list-group-item-events {
+    color: black;
+    background-color: #F8F8F8;
+    border-top-left-radius: 0px!important;
+    border-top-right-radius: 0px!important;
+}
+
+.list-group-item {
+    border-left-width: 0px;
+    border-right-width: 0px;
+
+    color: color!important;
+    border:0px;
+}
+
+
+
+.placeholder.designer-behavior > div > .panel-body {
+    padding: 0px;
+}
+
+.placeholder.designer-behavior > div > .panel-body > pre {
+    border: 0px;
+    margin: 0px;
+}
+
+/* type */
+
+.placeholder.designer-type > div:hover {
+    cursor: pointer;
+}
+
+.placeholder.designer-type > div > .panel-body > table {
+    text-align: left;
+}
+
+.placeholder.designer-type > div > .panel-body {
+    padding: 0px;
+}
+
+.placeholder.designer-type > div > .panel-body > .list-group {
+    margin-bottom: 0px;
+}
+
+/* schema */
+
+.placeholder.designer-schema > div:hover {
+    cursor: pointer;
+}
+
+.placeholder.designer-schema > div > .panel-body {
+    padding: 0px;
+}
+
+.placeholder.designer-schema > div > .panel-body > .table {
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+/* system */
+
+.placeholder.designer-system > div:hover {
+    cursor: pointer;
+}
+
+.placeholder.designer-system > div > .panel-body {
+    padding: 0px;
+}
+
+.placeholder.designer-system > div > .panel-body > .table {
+    margin-bottom: 0px;
+    text-align: left;
+}

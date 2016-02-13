@@ -1,0 +1,5 @@
+{
+	"component": "1dbc51200e11619",
+	"state": "click",
+	"action": "function click() { \n    var designer = this.require('designer');\n    \n    this.require('channel').deleteBehavior(designer.store().uuid());\n    this.require('message').success('the behavior has been destroyed.');\n}"
+}
