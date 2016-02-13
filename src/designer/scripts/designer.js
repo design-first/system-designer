@@ -405,6 +405,9 @@ syrup.on('ready', function () {
         sys = new System(this.data());
         designer.system(sys);
         designer.save();
+        
+        designer.space(sys.name());
+        designer.spaces().render();
         designer.workspace().refresh();
 
         this.hide();
@@ -753,38 +756,25 @@ syrup.on('ready', function () {
             );
 
         //events
-        html = document.getElementById('designer-system-' + this.uuid()).children[0];
+        html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
             window.open('system.html?_id=' + that.uuid());
         });
-        
-        /*
-        html = document.getElementsByClassName('designer-model-system-open-' + this.uuid());
-        html[0].addEventListener('click', function (event) {
+
+        html = document.getElementById('designer-system-' + this.uuid() + '-edit');
+
+        html.addEventListener('click', function (event) {
             window.open('system.html?_id=' + that.uuid());
-        });
+        })
 
-        html = document.getElementsByClassName('designer-model-system-design-' + this.uuid());
-        html[0].addEventListener('click', function (event) {
-            var designer = this.require('designer'),
-                system = JSON.parse(window.localStorage.getItem(this.uuid())),
-                System = this.require('System'),
-                message = this.require('message');
-            if (system) {
-                designer.system(new System(system));
-                message.success('the system \'' + system.name + '\' is ready to be designed.');
-            }
-        }.bind(this));
+        html = document.getElementById('designer-system-' + this.uuid() + '-delete');
 
-        html = document.getElementsByClassName('designer-model-system-delete-' + this.uuid());
-        html[0].addEventListener('click', function (event) {
-
+        html.addEventListener('click', function (event) {
             var systems = JSON.parse(window.localStorage.getItem('systems')),
                 designer = this.require('designer'),
                 System = this.require('System'),
-                systemId = this.uuid(),
-                message = this.require('message');
+                systemId = this.uuid();
             
             // remove from localstorage
             window.localStorage.removeItem(systemId);
@@ -800,8 +790,13 @@ syrup.on('ready', function () {
 
             $('#designer-system-' + this.uuid()).remove();
             this.destroy();
-            message.success('the system has been destroyed.');
-        }.bind(this));*/
+
+            //designer.save();
+
+            designer.space('');
+            designer.spaces().render();
+            designer.workspace().refresh();
+        }.bind(this));
     });
 
     ModelSystem.on('hide', function () {
@@ -857,11 +852,31 @@ syrup.on('ready', function () {
             );
 
         //events
-        html = document.getElementById('designer-type-' + this.uuid()).children[0];
+        html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
             window.open('type.html?_id=' + that.uuid());
         });
+
+        html = document.getElementById('designer-type-' + this.uuid() + '-edit');
+
+        html.addEventListener('click', function (event) {
+            window.open('type.html?_id=' + that.uuid());
+        })
+
+        html = document.getElementById('designer-type-' + this.uuid() + '-delete');
+
+        html.addEventListener('click', function (event) {
+            var designer = this.require('designer');
+            delete designer.system().types()[this.title()];
+            $('#designer-type-' + this.title()).remove();
+            this.destroy();
+            designer.save();
+
+            designer.space('');
+            designer.spaces().render();
+            designer.workspace().refresh();
+        }.bind(this));
     });
 
     ModelType.on('hide', function () {
@@ -903,11 +918,31 @@ syrup.on('ready', function () {
             );
 
         //events
-        html = document.getElementById('designer-schema-' + this.uuid()).children[0];
+        html = document.getElementById('designer-schema-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
             window.open('schema.html?_id=' + that.uuid());
         });
+
+        html = document.getElementById('designer-schema-' + this.uuid() + '-edit');
+
+        html.addEventListener('click', function (event) {
+            window.open('schema.html?_id=' + that.uuid());
+        })
+
+        html = document.getElementById('designer-schema-' + this.uuid() + '-delete');
+
+        html.addEventListener('click', function (event) {
+            var designer = this.require('designer');
+            delete designer.system().schemas()[this.title()];
+            $('#designer-schema-' + this.title()).remove();
+            this.destroy();
+            designer.save();
+
+            designer.space('');
+            designer.spaces().render();
+            designer.workspace().refresh();
+        }.bind(this));
     });
 
     ModelSchema.on('hide', function () {
@@ -995,11 +1030,31 @@ syrup.on('ready', function () {
             );
 
         //events
-        html = document.getElementById('designer-class-' + this.uuid()).children[0];
+        html = document.getElementById('designer-model-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
             window.open('model.html?_id=' + that.uuid());
         });
+
+        html = document.getElementById('designer-model-' + this.uuid() + '-edit');
+
+        html.addEventListener('click', function (event) {
+            window.open('schema.html?_id=' + that.uuid());
+        })
+
+        html = document.getElementById('designer-model-' + this.uuid() + '-delete');
+
+        html.addEventListener('click', function (event) {
+            var designer = this.require('designer');
+            delete designer.system().schemas()[this.title()];
+            $('#designer-model-' + this.title()).remove();
+            this.destroy();
+            designer.save();
+
+            designer.space('');
+            designer.spaces().render();
+            designer.workspace().refresh();
+        }.bind(this));
     });
 
     ModelClass.on('hide', function () {
@@ -1028,11 +1083,31 @@ syrup.on('ready', function () {
             );    
             
         //events
-        html = document.getElementById('designer-behavior-' + this.uuid()).children[0];
+        html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
             window.open('behavior.html?_id=' + that.uuid());
         });
+
+        html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
+
+        html.addEventListener('click', function (event) {
+            window.open('behavior.html?_id=' + that.uuid());
+        })
+
+        html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
+
+        html.addEventListener('click', function (event) {
+            var designer = this.require('designer');
+            delete designer.system().behaviors()[this.uuid()];
+            $('#designer-behavior-' + this.uuid()).remove();
+            this.destroy();
+            designer.save();
+
+            designer.space('');
+            designer.spaces().render();
+            designer.workspace().refresh();
+        }.bind(this));
     });
 
     ModelBehavior.on('hide', function () {
@@ -1054,7 +1129,7 @@ syrup.on('ready', function () {
             propVal = '';
 
         for (propName in this.document()) {
-            if (this.document().hasOwnProperty(propName)) {
+            if (this.document().hasOwnProperty(propName) && propName !== '_id') {
                 propVal = this.document()[propName];
                 doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>'
             }
@@ -1071,11 +1146,33 @@ syrup.on('ready', function () {
             );
         
         //events
-        html = document.getElementById('designer-component-' + this.uuid()).children[0];
+        html = document.getElementById('designer-component-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
             window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()));
         });
+
+        html = document.getElementById('designer-component-' + this.uuid() + '-edit');
+
+        html.addEventListener('click', function (event) {
+            window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()));
+        })
+
+        html = document.getElementById('designer-component-' + this.uuid() + '-delete');
+
+        html.addEventListener('click', function (event) {
+            var designer = this.require('designer');
+
+            delete designer.system().components()[this.model()][this.uuid()];
+            // if (Object.keys(designer.system().components()[this.model()])) {
+            //     delete designer.system().components()[this.model()];
+            //}
+            $('#designer-component-' + this.uuid()).fadeOut(500, function () {
+                $(this).remove();
+            });
+            this.destroy();
+            designer.save();
+        }.bind(this));
     });
 
     ModelComponent.on('hide', function () {
@@ -1291,12 +1388,14 @@ syrup.on('ready', function () {
                 $(item).removeClass('active');
             }
         }
+        
+        // clear
+        $('#designer-spaces-items').empty();
 
         if (system) {
             switch (this.designer().context()) {
                 case 'system':
-                    // clear
-                    $('#designer-spaces-items').empty();
+                    
 
                     // TODO find better way
                     this.items().forEach(function (item) {
@@ -2580,6 +2679,9 @@ syrup.on('ready', function () {
                 sys = new System(this.data());
                 designer.system(sys);
                 designer.save();
+               
+               	designer.space(sys.name());
+                designer.spaces().render(); 
                 designer.workspace().refresh();
 
                 this.hide();

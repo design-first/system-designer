@@ -397,16 +397,22 @@ body,
     background-color: #E7E7E7;
 }
 
-.placeholder.designer-component > div:hover {
+/* component */
+
+.placeholder.designer-component > div > .panel-body:hover {
     cursor: pointer;
-   /* background-color: #E7E7E7;*/
 }
 
-.placeholder.designer-component > div {
-        background-color: #FFFFFF;
+.placeholder.designer-component > div > .panel-body {
+    padding: 10px;
 }
 
-.placeholder.designer-behavior > div:hover {
+.placeholder.designer-component > div > .panel-body > .table {
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+.placeholder.designer-behavior > div > .panel-body:hover  {
     cursor: pointer;
 }
 
@@ -446,7 +452,7 @@ body,
 
 /* model */
 
-.placeholder.designer-model > div:hover {
+.placeholder.designer-model > div > .panel-body:hover  {
     cursor: pointer;
 }
 
@@ -464,7 +470,7 @@ body,
 }
 
 .placeholder.designer-model > div > .panel-body > .list-group {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .list-group-item-attributes {
@@ -503,7 +509,7 @@ body,
     border:0px;
 }
 
-
+/* behavior */
 
 .placeholder.designer-behavior > div > .panel-body {
     padding: 0px;
@@ -511,12 +517,11 @@ body,
 
 .placeholder.designer-behavior > div > .panel-body > pre {
     border: 0px;
-    margin: 0px;
 }
 
 /* type */
 
-.placeholder.designer-type > div:hover {
+.placeholder.designer-type > div > .panel-body:hover {
     cursor: pointer;
 }
 
@@ -529,12 +534,12 @@ body,
 }
 
 .placeholder.designer-type > div > .panel-body > .list-group {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 /* schema */
 
-.placeholder.designer-schema > div:hover {
+.placeholder.designer-schema > div > .panel-body:hover  {
     cursor: pointer;
 }
 
@@ -549,7 +554,7 @@ body,
 
 /* system */
 
-.placeholder.designer-system > div:hover {
+.placeholder.designer-system > div > .panel-body:hover {
     cursor: pointer;
 }
 
@@ -560,4 +565,23 @@ body,
 .placeholder.designer-system > div > .panel-body > .table {
     margin-bottom: 0px;
     text-align: left;
+}
+
+/* dropdown */
+.dropdown-menu-right {
+    right: 17px;
+    left: auto;
+    position: absolute;
+    top: 17px;
+}
+
+.panel > .panel-heading > .dropdown > button {
+    padding: 3px 9px;
+    border-radius: 5px;
+}
+
+/* prism */
+
+pre[class*="language-"] {
+    background-color: #FFFFFF;
 }

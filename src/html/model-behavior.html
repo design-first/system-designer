@@ -2,6 +2,15 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{{title}}</h3>
+            <div class="dropdown dropdown-menu-right">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#" id="designer-behavior-{{_id}}-edit">Edit</a></li>
+                    <li><a href="#" id="designer-behavior-{{_id}}-delete">Delete</a></li>
+                </ul>
+            </div>
         </div>
         <div class="panel-body">
             <pre class="language-javascript"><code class="language-javascript">{{content}}</code></pre>
