@@ -593,206 +593,206 @@
         }
     },
     "behaviors": {
-        "154391e66f174dd": {
-            "_id": "154391e66f174dd",
+        "1cc121db8910302": {
+            "_id": "1cc121db8910302",
             "component": "10bcb1a0511e09f",
             "state": "click",
             "action": "function click() { \n    var message = this.require('message'),\n    designer = this.require('designer');\n    \n    if (!designer.system() && designer.context() !== 'system') {\n        message.warning('you have no system: create first a system to continue.');\n    } else {\n        designer.workspace().create();\n    }\n}"
         },
-        "1e45b1214010853": {
-            "_id": "1e45b1214010853",
+        "11342153301e3ec": {
+            "_id": "11342153301e3ec",
             "component": "13a291c27f16310",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.5.0<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://syrupjs.github.io\" target=\"_blank\">SyrupJS</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "14ed01bfaa1ecba": {
-            "_id": "14ed01bfaa1ecba",
+        "18e4a19e8014225": {
+            "_id": "18e4a19e8014225",
             "component": "13a291c27f16311",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.5.0<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://syrupjs.github.io\" target=\"_blank\">SyrupJS</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1c8a61dc741a90b": {
-            "_id": "1c8a61dc741a90b",
+        "1b581155a01bcaf": {
+            "_id": "1b581155a01bcaf",
             "component": "13a291c27f16313",
             "state": "click",
             "action": "function click() {\n    var DialogShare = this.require('DialogShare'),\n    system = this.require('designer').system();\n    \n    if (system && Object.keys(system).length) {\n        DialogShare = new DialogShare({\n            'title': 'Copy the link to the system'\n        });\n        DialogShare.show();\n        DialogShare.on('ok', function () {\n            this.hide();\n        });\n    }    \n}"
         },
-        "1e160145c11fcef": {
-            "_id": "1e160145c11fcef",
+        "104c01be691886c": {
+            "_id": "104c01be691886c",
             "component": "13a291c27f16314",
             "state": "click",
             "action": "function click() { window.open('https://system-designer.readme.io'); }"
         },
-        "11be210cb212828": {
-            "_id": "11be210cb212828",
+        "15aca1645412d12": {
+            "_id": "15aca1645412d12",
             "component": "13f70137b61b19b",
             "state": "click",
             "action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message');\n    \n    if (designer.system()) {\n        window.open('app.html?id=' + designer.system().id());\n    } else {\n        message.warning('you have no system to run.')\n    }\n}"
         },
-        "134ae141d0135de": {
-            "_id": "134ae141d0135de",
+        "1655611b5a1788d": {
+            "_id": "1655611b5a1788d",
             "component": "163a01b7ca1935c",
             "state": "click",
             "action": "function click() { this.require('channel').sync();}"
         },
-        "1eb7f1f96317b53": {
-            "_id": "1eb7f1f96317b53",
+        "1621c1f13216a79": {
+            "_id": "1621c1f13216a79",
             "component": "163a01b7ca1935d",
             "state": "click",
             "action": "function click() {\n    var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Select a system to import'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name ='',\n            modelName = '',\n            designer = this.require('designer'),\n            system = designer.system(),\n            message = this.require('message');\n\n        sys = this.data();\n        \n        if (Object.keys(sys).length) {\n            for (name in sys.schemas) {\n                system.schemas()[name] = sys.schemas[name];    \n            }\n            \n            for (name in sys.types) {\n                system.types()[name] = sys.types[name];    \n            }\n            \n            for (name in sys.behaviors) {\n                system.behaviors()[name] = sys.behaviors[name];    \n            }\n            \n            for (name in sys.components) {\n                if (!system.components()[name]) {\n                    system.components()[name] = {}; \n                }\n                for (modelName in sys.components[name]) {\n                    system.components()[name][modelName] = sys.components[name][modelName];     \n                }\n            }\n            \n            designer.save();\n            \n            designer.spaces().render();\n            designer.workspace().refresh();\n    \n            this.hide();\n            designer.save();\n            message.success('merge of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid.');\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            designer.save();\n            \n            designer.space(sys.name());\n            designer.spaces().render();\n            designer.workspace().refresh();\n    \n            this.hide();\n\n            message.success('importation of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid');\n        }\n    });\n}"
         },
-        "1f44613c01151a2": {
-            "_id": "1f44613c01151a2",
+        "118591e9891d590": {
+            "_id": "118591e9891d590",
             "component": "163a01b7ca1935e",
             "state": "click",
             "action": "function click() {\n    var Dialog = this.require('DialogExport');\n    var dialog = new Dialog({\n        'title': 'Exportation',\n    });\n    dialog.show();\n    \n    dialog.on('ok', function () {\n        var message = this.require('message');\n        // code inspired from the blog post\n        // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n        if (this.require('designer').system()) {\n            var system = null,\n            textToWrite = null,\n            textFileAsBlob = null,\n            fileNameToSaveAs = null,\n            downloadLink = null,\n            js = '';\n            source = '';\n            \n            system = this.require('db').collections().System.find({\n                '_id': this.require('designer').system().id()\n            })[0];\n            system = JSON.parse(JSON.stringify(system));\n            delete system.classInfo;\n            \n            if ($('#designer-dialog-export-json').prop(\"checked\")) {\n                textToWrite = JSON.stringify(system);\n                fileNameToSaveAs = this.require('designer').system().name() + '.json';\n\n            }\n            \n            if ($('#designer-dialog-export-html').prop(\"checked\")) {\n                js = decodeURI(this.require('syrupjs.js').source());\n                source = this.require('export-app.html').source();\n                source = source\n                            .replace(/{{syrupjs}}/gi, js)\n                            .replace(/{{name}}/gi, this.require('designer').system().name())\n                            .replace(/{{system}}/gi, JSON.stringify(system));\n                textToWrite = source;\n                fileNameToSaveAs = this.require('designer').system().name() + '.html';\n            }\n            \n        \ttextFileAsBlob = new Blob([textToWrite], {\n        \t    type:'text/plain'\n        \t});\n        \tdownloadLink = document.createElement('a');\n        \t\n        \tdownloadLink.download = fileNameToSaveAs;\n        \tdownloadLink.innerHTML = 'Download File';\n        \tif (window.webkitURL != null) {\n        \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n        \t} else {\n        \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n        \t\tdownloadLink.onclick = function (event) {\n        \t\t    document.body.removeChild(event.target)\n        \t\t};\n        \t\tdownloadLink.style.display = 'none';\n        \t\tdocument.body.appendChild(downloadLink);\n        \t}\n        \n        \tdownloadLink.click();\n        \tthis.hide();\n        \t\n        } else {\n            message.warning('you have no system to export.')\n        }\n    });\n}"
         },
-        "1701e177591bd16": {
-            "_id": "1701e177591bd16",
+        "1641f1ba13141b5": {
+            "_id": "1641f1ba13141b5",
             "component": "16a55136141d9ac",
             "state": "click",
             "action": "function click() { this.require('designer').clear(); }"
         },
-        "164491416314621": {
-            "_id": "164491416314621",
+        "1ecf716e35119f7": {
+            "_id": "1ecf716e35119f7",
             "component": "1dbc51200e11510",
             "state": "click",
             "action": "function click() { window.open('https://system-designer.readme.io/docs/create-a-schema'); }"
         },
-        "13a2b1d3c51eca6": {
-            "_id": "13a2b1d3c51eca6",
+        "1d074150fc1eda1": {
+            "_id": "1d074150fc1eda1",
             "component": "1dbc51200e11610",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.5.0<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://syrupjs.github.io\" target=\"_blank\">SyrupJS</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "14d9619b8f106ca": {
-            "_id": "14d9619b8f106ca",
+        "13775113a61e496": {
+            "_id": "13775113a61e496",
             "component": "1dbc51200e11611",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "151981a12e1ec36": {
-            "_id": "151981a12e1ec36",
+        "141db16cfd114d4": {
+            "_id": "141db16cfd114d4",
             "component": "1dbc51200e11612",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.5.0<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://syrupjs.github.io\" target=\"_blank\">SyrupJS</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "16f8b130b61d0e4": {
-            "_id": "16f8b130b61d0e4",
+        "10914164531d029": {
+            "_id": "10914164531d029",
             "component": "1dbc51200e11613",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1275e1d7dc1f35c": {
-            "_id": "1275e1d7dc1f35c",
+        "1c337124e61f489": {
+            "_id": "1c337124e61f489",
             "component": "1dbc51200e11614",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.5.0<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://syrupjs.github.io\" target=\"_blank\">SyrupJS</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1f4ea17b7f10df3": {
-            "_id": "1f4ea17b7f10df3",
+        "19304186fe19d96": {
+            "_id": "19304186fe19d96",
             "component": "1dbc51200e11615",
             "state": "click",
             "action": "function click() { window.open('https://system-designer.readme.io/docs/create-a-model'); }"
         },
-        "19264142ce130ca": {
-            "_id": "19264142ce130ca",
+        "1df971883c12f4b": {
+            "_id": "1df971883c12f4b",
             "component": "1dbc51200e11616",
             "state": "click",
             "action": "function click() { window.open('https://system-designer.readme.io/docs/create-a-behavior'); }"
         },
-        "1452d114c210a64": {
-            "_id": "1452d114c210a64",
+        "1f9b51d6c813ea2": {
+            "_id": "1f9b51d6c813ea2",
             "component": "1dbc51200e11617",
             "state": "click",
             "action": "function click() { window.open('https://system-designer.readme.io/docs/create-a-component'); }"
         },
-        "1d4ae1f99f1f6d4": {
-            "_id": "1d4ae1f99f1f6d4",
+        "170b31702516ce7": {
+            "_id": "170b31702516ce7",
             "component": "1dbc51200e116e10",
             "state": "click",
             "action": "function click() { window.open('https://system-designer.readme.io/docs/create-a-type'); }"
         },
-        "14bc416a2016e98": {
-            "_id": "14bc416a2016e98",
+        "1141c169fe104ac": {
+            "_id": "1141c169fe104ac",
             "component": "1dbc51200e116e3",
             "state": "click",
             "action": "function click() {\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1328215e4918743": {
-            "_id": "1328215e4918743",
+        "12711170971b5a1": {
+            "_id": "12711170971b5a1",
             "component": "1dbc51200e116e4",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "18aba19d221f6c6": {
-            "_id": "18aba19d221f6c6",
+        "1302718cba1612b": {
+            "_id": "1302718cba1612b",
             "component": "1dbc51200e116e5",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1584e18968192fb": {
-            "_id": "1584e18968192fb",
+        "1a931133c9164ea": {
+            "_id": "1a931133c9164ea",
             "component": "1dbc51200e116e6",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.5.0<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://syrupjs.github.io\" target=\"_blank\">SyrupJS</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1efa71cc31164fc": {
-            "_id": "1efa71cc31164fc",
+        "166cb1c8fd1a6fd": {
+            "_id": "166cb1c8fd1a6fd",
             "component": "1dbc51200e116e7",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "184751040e1b675": {
-            "_id": "184751040e1b675",
+        "126011c85f11d46": {
+            "_id": "126011c85f11d46",
             "component": "1dbc51200e116e8",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.5.0<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://syrupjs.github.io\" target=\"_blank\">SyrupJS</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "165631d4bc1ecac": {
-            "_id": "165631d4bc1ecac",
+        "1ef341086517b35": {
+            "_id": "1ef341086517b35",
             "component": "1dbc51200e116e9",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1f46e15c601347f": {
-            "_id": "1f46e15c601347f",
+        "17115176eb17a16": {
+            "_id": "17115176eb17a16",
             "component": "1dbc51200e11z10",
             "state": "click",
             "action": "function click() { window.open('https://system-designer.readme.io/docs/create-a-system'); }"
         },
-        "161fc110b91e073": {
-            "_id": "161fc110b91e073",
+        "19a2b1221012d4a": {
+            "_id": "19a2b1221012d4a",
             "component": "MenuItem",
             "state": "click",
             "action": "function click() { this.require('designer').context(this.name()); }"
         },
-        "1e8031c1091a7b2": {
-            "_id": "1e8031c1091a7b2",
+        "1bb2b13aef1e030": {
+            "_id": "1bb2b13aef1e030",
             "component": "Message",
             "state": "danger",
             "action": "function danger(message) {var html = this.require('message-alert-danger.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>error:</strong> ' + message));$('.designer-message-danger').fadeIn(500);setTimeout(function () {$('.designer-message-danger').fadeOut(1000);}, 3000);}"
         },
-        "1ef9716b04155a2": {
-            "_id": "1ef9716b04155a2",
+        "184d61d5a11f5b9": {
+            "_id": "184d61d5a11f5b9",
             "component": "Message",
             "state": "info",
             "action": "function info(message) {var html = this.require('message-alert-info.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-info').fadeIn(500);setTimeout(function () {$('.designer-message-info').fadeOut(1000);}, 3000);}"
         },
-        "1350d171251ca7e": {
-            "_id": "1350d171251ca7e",
+        "16643186641331a": {
+            "_id": "16643186641331a",
             "component": "Message",
             "state": "success",
             "action": "function success(message) {var html = this.require('message-alert-success.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-success').fadeIn(500);setTimeout(function () {$('.designer-message-success').fadeOut(1000);}, 3000);}"
         },
-        "195441f2ed158e6": {
-            "_id": "195441f2ed158e6",
+        "1362516ff51282b": {
+            "_id": "1362516ff51282b",
             "component": "Message",
             "state": "warning",
             "action": "function warning(message) {var html = this.require('message-alert-warning.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>warning:</strong> ' + message));$('.designer-message-warning').fadeIn(500);setTimeout(function () {$('.designer-message-warning').fadeOut(1000);}, 3000);}"
         },
-        "159a91d5131d8d4": {
-            "_id": "159a91d5131d8d4",
+        "1234719d8f1d726": {
+            "_id": "1234719d8f1d726",
             "component": "SpaceItem",
             "state": "click",
             "action": "function click() { this.require('designer').space(this.name()); }"

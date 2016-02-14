@@ -865,7 +865,7 @@ syrup.on('ready', function () {
 
         if (this.document().value) {
             this.document().value.forEach(function (val) {
-                doc = doc + '<a href="#" class="list-group-item" style="text-align: left">"' + val + '"</a>';
+                doc = doc + '<a href="#" class="list-group-item" style="text-align: left">' + val + '</a>';
             });
         }
 
@@ -2746,6 +2746,9 @@ syrup.on('ready', function () {
                 System = this.require('System');
                 designer.system(new System(JSON.parse(system)));
                 designer.save();
+                
+                designer.space(designer.system().name());
+                designer.spaces().render();
                 designer.workspace().refresh();
             }
         });
