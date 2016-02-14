@@ -671,21 +671,24 @@ syrup.on('ready', function () {
 
         $('#designer-dialog-behavior-creation').empty();
 
-        schema = schemas[space]._schema;
-
-        states.push('init'); // TODO check if inherit from SyrupComponent
-        for (name in designer.system().schemas()[schema]) {
-            switch (designer.system().schemas()[schema][name]) {
-                case 'property':
-                case 'collection':
-                case 'event':
-                case 'method':
-                    states.push(name);
-                    break;
-                default:
-                    break;
-            }
-        };
+        if (space !== designer.system().name()) {
+            schema = schemas[space]._schema;
+            states.push('init'); // TODO check if inherit from SyrupComponent
+            for (name in designer.system().schemas()[schema]) {
+                switch (designer.system().schemas()[schema][name]) {
+                    case 'property':
+                    case 'collection':
+                    case 'event':
+                    case 'method':
+                        states.push(name);
+                        break;
+                    default:
+                        break;
+                }
+            };
+        } else {
+            states.push('main');
+        }
 
         states.sort();
         states.forEach(
@@ -1398,7 +1401,8 @@ syrup.on('ready', function () {
     });
 
     Spaces.on('clear', function () {
-        $('#designer-spaces').empty();
+        this.require('designer').space('');
+        $('#designer-spaces-items').empty();
     });
 
     Spaces.on('render', function () {
@@ -1430,8 +1434,7 @@ syrup.on('ready', function () {
         if (system) {
             switch (this.designer().context()) {
                 case 'system':
-                    
-
+                   
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -1450,6 +1453,7 @@ syrup.on('ready', function () {
 
                     for (i = 0; i < length; i++) {
                         system = JSON.parse(window.localStorage.getItem(systemIds[i]));
+
                         spaceItem = new SpaceItem({
                             'name': system.name,
                             'uuid': system._id
@@ -2200,6 +2204,7 @@ syrup.on('ready', function () {
                         state = $('#designer-dialog-behavior-creation-state').val();
 
                         if (model && state) {
+
                             function generateId() {
                                 function gen() {
                                     return Math.floor((1 + Math.random()) * 0x10000).toString(16);
@@ -2208,59 +2213,64 @@ syrup.on('ready', function () {
                             }
 
                             uuid = generateId();
-                    
-                            // schema
-                            schemaModel = schemas[model]._schema;
 
-                            // params
-                            if (schemas[model][state]) {
-                                methodDef = schemas[model][state].params;
-                            }
-                            if (methodDef && methodDef.length) {
-                                length = methodDef.length;
-                                for (i = 0; i < length; i++) {
-                                    if (i === 0) {
-                                        params = methodDef[i].name;
-                                    } else {
-                                        params = params + ', ' + methodDef[i].name;
+
+                            if (model !== designer.system().name()) {
+                                // schema
+                                schemaModel = schemas[model]._schema;
+
+                                // params
+                                if (schemas[model][state]) {
+                                    methodDef = schemas[model][state].params;
+                                }
+                                if (methodDef && methodDef.length) {
+                                    length = methodDef.length;
+                                    for (i = 0; i < length; i++) {
+                                        if (i === 0) {
+                                            params = methodDef[i].name;
+                                        } else {
+                                            params = params + ', ' + methodDef[i].name;
+                                        }
                                     }
                                 }
-                            }
 
-                            if (schemas[schemaModel][state] === 'property') {
-                                params = 'value';
-                            }
-
-                            if (schemas[schemaModel][state] === 'collection') {
-                                params = 'size, value, event';
-                            }
-
-                            if (state === 'init') {
-                                params = 'conf';
-                            }
-                    
-                            // body
-                            if (schemas[model][state]) {
-                                result = schemas[model][state].result;
-                            }
-                            if (result) {
-                                switch (result) {
-                                    case 'string':
-                                        body = "\tvar result = '';\n\treturn result;\n";
-                                        break;
-                                    case 'array':
-                                        body = "\tvar result = [];\n\treturn result;\n";
-                                        break;
-                                    case 'number':
-                                        body = "\tvar result = 0;\n\treturn result;\n";
-                                        break;
-                                    case 'object':
-                                        body = "\tvar result = {};\n\treturn result;\n";
-                                        break;
-                                    default:
-                                        body = "\tvar result = {};\n\treturn result;\n";
-                                        break;
+                                if (schemas[schemaModel][state] === 'property') {
+                                    params = 'value';
                                 }
+
+                                if (schemas[schemaModel][state] === 'collection') {
+                                    params = 'size, value, event';
+                                }
+
+                                if (state === 'init') {
+                                    params = 'conf';
+                                }
+                    
+                                // body
+                                if (schemas[model][state]) {
+                                    result = schemas[model][state].result;
+                                }
+                                if (result) {
+                                    switch (result) {
+                                        case 'string':
+                                            body = "\tvar result = '';\n\treturn result;\n";
+                                            break;
+                                        case 'array':
+                                            body = "\tvar result = [];\n\treturn result;\n";
+                                            break;
+                                        case 'number':
+                                            body = "\tvar result = 0;\n\treturn result;\n";
+                                            break;
+                                        case 'object':
+                                            body = "\tvar result = {};\n\treturn result;\n";
+                                            break;
+                                        default:
+                                            body = "\tvar result = {};\n\treturn result;\n";
+                                            break;
+                                    }
+                                }
+                            } else {
+                                model = designer.system().id();
                             }
                         
                             // set model
