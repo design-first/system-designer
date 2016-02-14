@@ -1013,7 +1013,7 @@ syrup.on('ready', function () {
                         if (!Array.isArray(propVal.type)) {
                             attributes = attributes + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + ' : ' + propVal.type.replace('@', '') + '</a>';
                         } else {
-                            attributes = attributes + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + ' : ' + JSON.stringify(propVal.type) + '</a>';
+                            attributes = attributes + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</a>';
                         }
                         break;
                     case typeof propVal.params !== 'undefined':
@@ -1027,9 +1027,12 @@ syrup.on('ready', function () {
 
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
+                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + params + ': ' + result + '</a>';
+                        } else {
+                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + params + '</a>';
                         }
 
-                        methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + params + ': ' + result + '</a>';
+
                         break;
                     case propName.indexOf('_') !== -1:
                         if (propName !== '_id' && propName !== '_name' && propName !== '_schema') {
@@ -1040,8 +1043,10 @@ syrup.on('ready', function () {
                         var result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
+                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + '(): ' + result + '</a>';
+                        } else {
+                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + '()</a>';
                         }
-                        methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + '(): ' + result + '</a>';
                         break;
                 }
             }
