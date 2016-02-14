@@ -1138,13 +1138,11 @@ syrup.on('ready', function () {
         html.addEventListener('click', function (event) {
             var designer = this.require('designer');
             delete designer.system().behaviors()[this.uuid()];
-            $('#designer-behavior-' + this.uuid()).remove();
+            $('#designer-behavior-' + this.uuid()).fadeOut(500, function () {
+                $(this).remove();
+            });
             this.destroy();
             designer.save();
-
-            designer.space('');
-            designer.spaces().render();
-            designer.workspace().refresh();
         }.bind(this));
     });
 
