@@ -405,7 +405,7 @@ syrup.on('ready', function () {
         sys = new System(this.data());
         designer.system(sys);
         designer.save();
-        
+
         designer.space(sys.name());
         designer.spaces().render();
         designer.workspace().refresh();
@@ -424,7 +424,7 @@ syrup.on('ready', function () {
         $('#designer-dialog-drop-file-modal').modal('hide');
     });
     
-        // DIALOG TYPE CREATION
+    // DIALOG TYPE CREATION
     var dialogTypeCreation = this.require('DialogTypeCreation');
     dialogTypeCreation.on('init', function (config) {
         var html = '',
@@ -1490,9 +1490,16 @@ syrup.on('ready', function () {
                         if ($('#designer-space-' + this.require('designer').space()).length) {
                             $('#designer-space-' + this.require('designer').space()).addClass('active');
                         } else {
-                            item = domItems.children[0];
-                            $(item).addClass('active');
-                            this.require('designer').space(this.items(0).name());
+                            if (this.require('designer').system()) {
+                                if ($('#designer-space-' + this.require('designer').system().name()).length) {
+                                    $('#designer-space-' + this.require('designer').system().name()).addClass('active');
+                                    this.require('designer').space(this.require('designer').system().name());
+                                }
+                            } else {
+                                item = domItems.children[0];
+                                $(item).addClass('active');
+                                this.require('designer').space(this.items(0).name());
+                            }
                         }
                     }
                     break;
@@ -2714,9 +2721,9 @@ syrup.on('ready', function () {
                 sys = new System(this.data());
                 designer.system(sys);
                 designer.save();
-               
+
                	designer.space(sys.name());
-                designer.spaces().render(); 
+                designer.spaces().render();
                 designer.workspace().refresh();
 
                 this.hide();
@@ -2746,7 +2753,7 @@ syrup.on('ready', function () {
                 System = this.require('System');
                 designer.system(new System(JSON.parse(system)));
                 designer.save();
-                
+
                 designer.space(designer.system().name());
                 designer.spaces().render();
                 designer.workspace().refresh();
