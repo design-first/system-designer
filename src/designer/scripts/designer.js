@@ -122,45 +122,45 @@ syrup.on('ready', function () {
         $('#designer-dialog-welcome-modal').modal('hide');
     });
     
-    // DIALOG EXPORT
-    var DialogExport = this.require('DialogExport');
-    DialogExport.on('init', function (config) {
+    // DIALOG SHARE
+    var DialogShare = this.require('DialogShare');
+    DialogShare.on('init', function (config) {
         var html = null,
             dom = null,
             sys = '';
 
-        $('#designer-dialog-export').empty();
+        $('#designer-dialog-share').empty();
 
         sys = this.require('db').collections().System.find({
             '_id': this.require('designer').system().id()
         })[0];
 
-        html = this.require('dialog-modal-export.html');
-        document.querySelector('#designer-dialog-export').insertAdjacentHTML('afterbegin',
+        html = this.require('dialog-modal-share.html');
+        document.querySelector('#designer-dialog-share').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{message}}/gi, window.location.toString().split('#')[0] + '?system=' + encodeURI(JSON.stringify(sys)))
             );
                 
         //events
-        dom = document.getElementById('designer-dialog-export-modal-cancel');
+        dom = document.getElementById('designer-dialog-share-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
-        dom = document.getElementById('designer-dialog-export-modal-ok');
+        dom = document.getElementById('designer-dialog-share-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogExport.on('show', function () {
-        $('#designer-dialog-export-modal').modal('show');
+    DialogShare.on('show', function () {
+        $('#designer-dialog-share-modal').modal('show');
     });
 
-    DialogExport.on('hide', function () {
-        $('#designer-dialog-export-modal').modal('hide');
+    DialogShare.on('hide', function () {
+        $('#designer-dialog-share-modal').modal('hide');
     });
     
     // DIALOG COPYRIGHT
