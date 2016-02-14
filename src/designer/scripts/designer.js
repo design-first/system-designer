@@ -424,7 +424,7 @@ syrup.on('ready', function () {
         $('#designer-dialog-drop-file-modal').modal('hide');
     });
     
-    // DIALOG TYPE CREATION
+        // DIALOG TYPE CREATION
     var dialogTypeCreation = this.require('DialogTypeCreation');
     dialogTypeCreation.on('init', function (config) {
         var html = '',
@@ -469,6 +469,41 @@ syrup.on('ready', function () {
 
     dialogTypeCreation.on('hide', function () {
         $('#designer-dialog-type-creation-modal').modal('hide');
+    });
+    
+    // DIALOG EXPORT
+    var DialogExport = this.require('DialogExport');
+    DialogExport.on('init', function (config) {
+        var html = '',
+            dom = null;
+
+        $('#designer-dialog-export').empty();
+
+        html = this.require('dialog-modal-export.html');
+        document.querySelector('#designer-dialog-export').insertAdjacentHTML('afterbegin',
+            html.source()
+                .replace(/{{title}}/gi, this.title())
+            );
+                
+        //events
+        dom = document.getElementById('designer-dialog-export-modal-cancel');
+        dom.addEventListener('click', function (event) {
+            this.cancel();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-export-modal-ok');
+        dom.addEventListener('click', function (event) {
+            this.ok();
+        }.bind(this));
+
+    });
+
+    DialogExport.on('show', function () {
+        $('#designer-dialog-export-modal').modal('show');
+    });
+
+    DialogExport.on('hide', function () {
+        $('#designer-dialog-export-modal').modal('hide');
     });
     
     // DIALOG SCHEMA CREATION

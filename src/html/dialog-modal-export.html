@@ -1,0 +1,30 @@
+<div class="modal fade" id="designer-dialog-export-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <label for="sel1">Select the format:</label>
+                    <div class="form-group" id="sel1">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optradio" id="designer-dialog-export-json" checked>JSON</label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optradio" id="designer-dialog-export-html">HTML</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="designer-dialog-export-modal-cancel">Cancel</button>
+                <button type="button" class="btn btn-primary" id="designer-dialog-export-modal-ok">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
