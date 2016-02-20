@@ -303,10 +303,10 @@ syrup.on('ready', function () {
                     length = 0,
                     i = 0;
 
-                 if ($(this).hasClass('active')) {
-                     $(this).removeClass('active');
-                     that.data(null);
-                 }  else {
+                if ($(this).hasClass('active')) {
+                    $(this).removeClass('active');
+                    that.data(null);
+                } else {
                     id = this.getAttribute('id').replace('designer-dialog-import-file-modal-library-', '');
 
                     that.data(JSON.parse(decodeURI(that.require(id).source())));
@@ -321,7 +321,7 @@ syrup.on('ready', function () {
                     
                     // add current active
                     $(this).addClass('active');
-                 }
+                }
             });
         }
 
@@ -1018,31 +1018,36 @@ syrup.on('ready', function () {
             );
 
         //events
-        html = document.getElementById('designer-schema-' + this.uuid()).children[0].children[1];
+        if (this.uuid() !== 'SyrupComponentSchema') {
+            html = document.getElementById('designer-schema-' + this.uuid()).children[0].children[1];
 
-        html.addEventListener('click', function (event) {
-            window.open('schema.html?_id=' + that.uuid());
-        });
+            html.addEventListener('click', function (event) {
+                window.open('schema.html?_id=' + that.uuid());
+            });
 
-        html = document.getElementById('designer-schema-' + this.uuid() + '-edit');
+            html = document.getElementById('designer-schema-' + this.uuid() + '-edit');
 
-        html.addEventListener('click', function (event) {
-            window.open('schema.html?_id=' + that.uuid());
-        })
+            html.addEventListener('click', function (event) {
+                window.open('schema.html?_id=' + that.uuid());
+            })
 
-        html = document.getElementById('designer-schema-' + this.uuid() + '-delete');
+            html = document.getElementById('designer-schema-' + this.uuid() + '-delete');
 
-        html.addEventListener('click', function (event) {
-            var designer = this.require('designer');
-            delete designer.system().schemas()[this.title()];
-            $('#designer-schema-' + this.title()).remove();
-            this.destroy();
-            designer.save();
+            html.addEventListener('click', function (event) {
+                var designer = this.require('designer');
+                delete designer.system().schemas()[this.title()];
+                $('#designer-schema-' + this.title()).remove();
+                this.destroy();
+                designer.save();
 
-            designer.space('');
-            designer.spaces().render();
-            designer.workspace().refresh();
-        }.bind(this));
+                designer.space('');
+                designer.spaces().render();
+                designer.workspace().refresh();
+            }.bind(this));
+        } else {
+            $('#designer-model-panel-SyrupComponentSchema div div').hide();
+            $('#designer-schema-SyrupComponentSchema > div > .panel-body').attr('style', 'cursor: inherit');
+        }
     });
 
     ModelSchema.on('hide', function () {
@@ -1074,20 +1079,36 @@ syrup.on('ready', function () {
                     case typeof propVal.type !== 'undefined':
                         if (!Array.isArray(propVal.type)) {
                             if (propVal.type.indexOf('@') !== -1) {
-                                attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type.replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
+                                if (this.uuid() !== 'SyrupComponent') {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type.replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
+                                } else {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';
+                                }
                             } else {
                                 if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type + '</a></div>';
+                                    if (this.uuid() !== 'SyrupComponent') {
+                                        attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type + '</a></div>';
+                                    } else {
+                                        attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type + '</div>';
+                                    }
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type + '</div>';
                                 }
                             }
                         } else {
                             if (propVal.type[0].indexOf('@') !== -1) {
-                                attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type[0].replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
+                                if (this.uuid() !== 'SyrupComponent') {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type[0].replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
+                                } else {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
+                                }
                             } else {
                                 if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
+                                    if (this.uuid() !== 'SyrupComponent') {
+                                        attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
+                                    } else {
+                                        attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
+                                    }
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0] + ' [ ]</div>';
                                 }
@@ -1105,9 +1126,17 @@ syrup.on('ready', function () {
 
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
+                            if (this.uuid() !== 'SyrupComponent') {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
+                            } else {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ': ' + result + '</div>';
+                            }
                         } else {
-                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
+                            if (this.uuid() !== 'SyrupComponent') {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
+                            } else {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + '</div>';
+                            }
                         }
 
 
@@ -1121,9 +1150,17 @@ syrup.on('ready', function () {
                         var result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>(): ' + result + '</div>';
+                            if (this.uuid() !== 'SyrupComponent') {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>(): ' + result + '</div>';
+                            } else {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '(): ' + result + '</div>';
+                            }
                         } else {
-                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
+                            if (this.uuid() !== 'SyrupComponent') {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
+                            } else {
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '()</div>';
+                            }
                         }
                         break;
                 }
@@ -1152,31 +1189,36 @@ syrup.on('ready', function () {
             );
 
         //events
-        html = document.getElementById('designer-model-' + this.uuid()).children[0].children[1];
+        if (this.uuid() !== 'SyrupComponent') {
+            html = document.getElementById('designer-model-' + this.uuid()).children[0].children[1];
 
-        html.addEventListener('click', function (event) {
-            window.open('model.html?_id=' + that.uuid());
-        });
+            html.addEventListener('click', function (event) {
+                window.open('model.html?_id=' + that.uuid());
+            });
 
-        html = document.getElementById('designer-model-' + this.uuid() + '-edit');
+            html = document.getElementById('designer-model-' + this.uuid() + '-edit');
 
-        html.addEventListener('click', function (event) {
-            window.open('schema.html?_id=' + that.uuid());
-        })
+            html.addEventListener('click', function (event) {
+                window.open('schema.html?_id=' + that.uuid());
+            })
 
-        html = document.getElementById('designer-model-' + this.uuid() + '-delete');
+            html = document.getElementById('designer-model-' + this.uuid() + '-delete');
 
-        html.addEventListener('click', function (event) {
-            var designer = this.require('designer');
-            delete designer.system().schemas()[this.title()];
-            $('#designer-model-' + this.title()).remove();
-            this.destroy();
-            designer.save();
+            html.addEventListener('click', function (event) {
+                var designer = this.require('designer');
+                delete designer.system().schemas()[this.title()];
+                $('#designer-model-' + this.title()).remove();
+                this.destroy();
+                designer.save();
 
-            designer.space('');
-            designer.spaces().render();
-            designer.workspace().refresh();
-        }.bind(this));
+                designer.space('');
+                designer.spaces().render();
+                designer.workspace().refresh();
+            }.bind(this));
+        } else {
+            $('#designer-model-SyrupComponent > div > div > div > button').hide();
+            $('#designer-model-SyrupComponent > div > .panel-body').attr('style', 'cursor: inherit');
+        }
     });
 
     ModelClass.on('hide', function () {
@@ -2428,7 +2470,6 @@ syrup.on('ready', function () {
             modelclass = null,
             ModelType = null,
             type = null,
-            className = '',
             ModelComponent = null,
             component = null,
             ModelBehavior = null,
@@ -2476,6 +2517,45 @@ syrup.on('ready', function () {
                                 modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[name])));
                                 modelSchema.content(JSON.stringify(system.schemas()[name]));
                                 modelSchema.render();
+                                
+                                // create parent if any
+                                var parents = system.schemas()[name]._inherit;
+                                var length = 0;
+                                if (parents) {
+                                    length = parents.length;
+                                }
+
+                                for (i = 0; i < length; i++) {
+                                    modelSchema = new ModelSchema({
+                                        'title': parents[i]
+                                    });
+                                    modelSchema.uuid(parents[i]);
+                                    if (parents[i] === 'SyrupComponentSchema') {
+                                        var schemaSyrup = {
+                                            "_id": "SyrupComponentSchema",
+                                            "_name": "SyrupComponentSchema",
+                                            "_core": true,
+                                            "classInfo": "property",
+                                            "on": "method",
+                                            "off": "method",
+                                            "require": "method",
+                                            "destroy": "method",
+                                            "init": "method",
+                                            "error": "event"
+                                        };
+
+                                        modelSchema.document(schemaSyrup);
+                                        modelSchema.content(JSON.stringify(schemaSyrup));
+                                    } else {
+                                        modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[parents[i]])));
+                                        modelSchema.content(JSON.stringify(system.schemas()[parents[i]]));
+                                    }
+                                    modelSchema.render();
+                                }
+
+                                for (i = 0; i < length; i++) {
+                                    this.designer().linkModel(name, parents[i]);
+                                }
                             }
                         }
                     }
@@ -2492,6 +2572,97 @@ syrup.on('ready', function () {
                                 modelclass.document(JSON.parse(JSON.stringify(system.schemas()[name])));
                                 modelclass.content(JSON.stringify(system.schemas()[name]));
                                 modelclass.render();
+                                                                                         
+                                // create parent if any
+                                var parents = system.schemas()[name]._inherit;
+                                var length = 0;
+                                if (parents) {
+                                    length = parents.length;
+                                }
+
+                                for (i = 0; i < length; i++) {
+                                    modelclass = new ModelClass({
+                                        'title': parents[i]
+                                    });
+                                    modelclass.uuid(parents[i]);
+                                    if (parents[i] === 'SyrupComponent') {
+                                        var modelSyrup = {
+                                            "_id": "SyrupComponent",
+                                            "_name": "SyrupComponent",
+                                            "_schema": "SyrupComponentSchema",
+                                            "_core": true,
+                                            "on": {
+                                                "params": [{
+                                                    "name": "state",
+                                                    "type": "string"
+                                                },
+                                                    {
+                                                        "name": "handler",
+                                                        "type": "function"
+                                                    },
+                                                    {
+                                                        "name": "useCoreAPI",
+                                                        "type": "boolean",
+                                                        "mandatory": false
+                                                    }
+                                                ]
+                                            },
+                                            "off": {
+                                                "params": [{
+                                                    "name": "state",
+                                                    "type": "string"
+                                                },
+                                                    {
+                                                        "name": "behaviorId",
+                                                        "type": "string",
+                                                        "mandatory": false
+                                                    }
+                                                ]
+                                            },
+                                            "require": {
+                                                "params": [{
+                                                    "name": "id",
+                                                    "type": "string"
+                                                }
+                                                ]
+                                            },
+                                            "destroy": {
+                                                "params": []
+                                            },
+                                            "classInfo": {
+                                                "type": "@SyrupClassInfo",
+                                                "readOnly": false,
+                                                "mandatory": false,
+                                                "default": {}
+                                            },
+                                            "init": {
+                                                "params": [{
+                                                    "name": "conf",
+                                                    "type": "object"
+                                                }
+                                                ]
+                                            },
+                                            "error": {
+                                                "params": [{
+                                                    "name": "data",
+                                                    "type": "errorParam"
+                                                }
+                                                ]
+                                            }
+                                        }
+
+                                        modelclass.document(modelSyrup);
+                                        modelclass.content(JSON.stringify(modelSyrup));
+                                    } else {
+                                        modelclass.document(JSON.parse(JSON.stringify(system.schemas()[parents[i]])));
+                                        modelclass.content(JSON.stringify(system.schemas()[parents[i]]));
+                                    }
+                                    modelclass.render();
+                                }
+
+                                for (i = 0; i < length; i++) {
+                                    this.designer().linkModel(name, parents[i]);
+                                }
                             }
                         }
                     }
@@ -2699,6 +2870,7 @@ syrup.on('ready', function () {
 
         channel.on('updateSchema', function (id, schema) {
             var designer = this.require('designer');
+            jsPlumb.deleteEveryEndpoint();
             designer.syncModel(schema);
             designer.system().schemas()[id] = schema;
             designer.save();
@@ -2729,6 +2901,7 @@ syrup.on('ready', function () {
 
         channel.on('updateModel', function (id, model) {
             var designer = this.require('designer');
+            jsPlumb.deleteEveryEndpoint();
             designer.system().schemas()[id] = model;
             designer.save();
             designer.workspace().refresh();
@@ -3063,6 +3236,10 @@ syrup.on('ready', function () {
 
             that.updateRouter();
         }
+        // resize event
+        $(window).resize(function () {
+            jsPlumb.repaintEverything();
+        });
 
     });
 
@@ -3154,12 +3331,14 @@ syrup.on('ready', function () {
     });
 
     Designer.on('context', function (val) {
+        jsPlumb.deleteEveryEndpoint();
         this.spaces().render();
         this.workspace().clear();
         this.workspace().refresh();
     });
 
     Designer.on('space', function (val) {
+        jsPlumb.deleteEveryEndpoint();
         this.workspace().refresh();
         if (this.context() === 'system') {
             this.updateRouter();
@@ -3215,15 +3394,15 @@ syrup.on('ready', function () {
             if (schemas.hasOwnProperty(name)) {
                 if (typeof schemas[name]._schema !== 'undefined' && schemas[name]._schema === schema._name) {
                     oldSchema = schemas[schema._name];
-                    
+
                     for (propName in schema) {
-                        
+
                         if (schema.hasOwnProperty(propName) &&
                             propName.indexOf('_') !== 0 && (
-                            typeof oldSchema[propName] === 'undefined' ||
-                            oldSchema[propName] !== schema[propName]
-                            )) {
-                                model = schemas[name];
+                                typeof oldSchema[propName] === 'undefined' ||
+                                oldSchema[propName] !== schema[propName]
+                                )) {
+                            model = schemas[name];
                             switch (true) {
                                 case schema[propName] === 'property':
                                     model[propName] = {
@@ -3277,6 +3456,26 @@ syrup.on('ready', function () {
                 }
             }
         }
+    });
+
+    Designer.on('linkModel', function (source, target) {
+        jsPlumb.setContainer('body');
+
+        jsPlumb.connect({
+            paintStyle: {
+                strokeStyle: '#7F949D',
+                lineWidth: 3
+            },
+            source: 'designer-model-panel-' + source,
+            target: 'designer-model-panel-' + target,
+            overlays: [
+                ['Arrow', { location: 1 }]
+            ]
+        }, {
+                connector: ['Flowchart'],
+                anchor: ['Left', 'Right'],
+                endpoint: 'Blank'
+            });
     });
 
     Designer.on('save', function () {

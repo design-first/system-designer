@@ -87,10 +87,26 @@
     "syncModel": {
         "params": [
             {
-                "name":"schema",
+                "name": "schema",
                 "type": "object",
                 "mandatory": false,
                 "default": {}
+            }
+        ]
+    },
+    "linkModel": {
+        "params": [
+            {
+                "name": "source",
+                "type": "string",
+                "mandatory": false,
+                "default": ""
+            },
+            {
+                "name": "target",
+                "type": "string",
+                "mandatory": false,
+                "default": ""
             }
         ]
     },

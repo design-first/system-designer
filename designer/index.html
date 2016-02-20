@@ -18,7 +18,7 @@
     <link href="styles/designer.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="body">
     <!-- Menubar -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -74,10 +74,45 @@
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- prism -->
     <script src="lib/prism/prism.js"></script>
+    <!-- jsPlumb -->
+    <script src="lib/jsPlumb/jsPlumb-2.0.7-min.js"></script>
     <!-- SyrupJS -->
     <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
     <!-- designer -->
     <script type="text/javascript" src="scripts/designer.min.js"></script>
+    <script>
+        /*
+        function ok() {
+        jsPlumb.ready(function() {
+            jsPlumb.setContainer("body");
+            var common = {
+             connector: ["Flowchart"],
+              anchor: ["Bottom"],
+              endpoint:"Blank"
+            };
+
+            jsPlumb.connect({
+                paintStyle:{ strokeStyle:"#7F949D", lineWidth:3 },
+                source:"designer-component-panel-1189e1a1b01d0cc",
+                target:["designer-component-panel-15cd01a4c6130cd"],
+                overlays:[ 
+                    ["Arrow" , { location: 1 }]
+                ]
+            }, common);
+            
+                 /*  jsPlumb.connect({
+                paintStyle:{ strokeStyle:"#7F949D", lineWidth:3 },
+                source:"designer-component-panel-166c21e4a01dd30",
+                target:["designer-component-panel-1934d1941217932"],
+                overlays:[ 
+                    ["Arrow" , { location: 1 }]
+                ]
+            }, common);
+            
+           // jsPlumb.deleteEveryEndpoint();
+        });
+        }*/
+    </script>
 </body>
 
 </html>
