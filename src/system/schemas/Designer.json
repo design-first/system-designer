@@ -77,6 +77,23 @@
         "mandatory": false,
         "default": "designer"
     },
+    "state": {
+        "type": "@DesignerState",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "updateRouter": {},
+    "syncModel": {
+        "params": [
+            {
+                "name":"schema",
+                "type": "object",
+                "mandatory": false,
+                "default": {}
+            }
+        ]
+    },
     "refresh": {},
     "save": {},
     "check": {},

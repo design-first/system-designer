@@ -92,7 +92,7 @@ syrup.on('ready', function () {
         this.hide();
     });
     
-    // DIALOG CHECK
+    // DIALOG WELCOME
     var DialogWelcome = this.require('DialogWelcome');
     DialogWelcome.on('init', function (config) {
         var html = '',
@@ -233,6 +233,8 @@ syrup.on('ready', function () {
 
             this.require('designer').spaces().clear();
             this.require('designer').workspace().clear();
+
+            this.require('designer').updateRouter();
             this.require('message').success('system designer has been reseted.');
         }.bind(this));
 
@@ -264,17 +266,77 @@ syrup.on('ready', function () {
         var html = '',
             dom = null,
             that = this,
-            designer = that.require('designer');
+            libraries = [],
+            library = '',
+            length = 0,
+            i = 0,
+            list = '';
 
         $('#designer-dialog-import-file').empty();
+
+        libraries = this.require('db').collections().JSON.find();
+        length = libraries.length;
+        for (i = 0; i < length; i++) {
+            library = this.require(libraries[i]._id);
+
+            list = list + '<a class="list-group-item" id="designer-dialog-import-file-modal-library-' + library.id() + '">' +
+            '<h4 class="list-group-item-heading">' + JSON.parse(decodeURI(library.source())).name + '</h4>' +
+            '<p class="list-group-item-text">' + JSON.parse(decodeURI(library.source())).description + '</p>' +
+            '</a>';
+        }
 
         html = this.require('dialog-modal-import-file.html');
         document.querySelector('#designer-dialog-import-file').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
+                .replace(/{{library}}/gi, list)
             );
                
-        //events
+        //events     
+        for (i = 0; i < length; i++) {
+            library = this.require(libraries[i]._id);
+            dom = document.getElementById('designer-dialog-import-file-modal-library-' + library.id());
+
+            dom.addEventListener('click', function (event) {
+                var id = '',
+                    libraries = null,
+                    length = 0,
+                    i = 0;
+
+                 if ($(this).hasClass('active')) {
+                     $(this).removeClass('active');
+                     that.data(null);
+                 }  else {
+                    id = this.getAttribute('id').replace('designer-dialog-import-file-modal-library-', '');
+
+                    that.data(JSON.parse(decodeURI(that.require(id).source())));
+                    
+                    // remove old active
+                    libraries = document.getElementById('designer-dialog-import-file-modal-library');
+
+                    length = libraries.children.length;
+                    for (i = 0; i < length; i++) {
+                        $(libraries.children[i]).removeClass('active');
+                    }
+                    
+                    // add current active
+                    $(this).addClass('active');
+                 }
+            });
+        }
+
+        dom = document.getElementById('designer-dialog-import-modal-from-file');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-import-file-modal-file').show();
+            $('#designer-dialog-import-file-modal-well').hide();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-import-modal-from-library');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-import-file-modal-well').show();
+            $('#designer-dialog-import-file-modal-file').hide();
+        }.bind(this));
+
         dom = document.getElementById('designer-dialog-import-file-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
@@ -861,21 +923,21 @@ syrup.on('ready', function () {
             for (propName in this.document().schema) {
                 if (this.document().schema.hasOwnProperty(propName)) {
                     propVal = this.document().schema[propName].type;
-                    doc = doc + '<a href="#" class="list-group-item" style="text-align: left">' + propName + ' : ' + propVal + '</a>';
+                    doc = doc + '<a class="list-group-item" style="text-align: left">' + propName + ' : ' + propVal + '</a>';
                 }
             }
         }
 
         if (this.document().value) {
             this.document().value.forEach(function (val) {
-                doc = doc + '<a href="#" class="list-group-item" style="text-align: left">' + val + '</a>';
+                doc = doc + '<a class="list-group-item" style="text-align: left">' + val + '</a>';
             });
         }
 
 
         if (!this.document().schema && !this.document().value) {
             propVal = this.document().type;
-            doc = doc + '<a href="#" class="list-group-item" style="text-align: left"><i>alias</i> : ' + propVal + '</a>';
+            doc = doc + '<a class="list-group-item" style="text-align: left"><i>alias</i> : ' + propVal + '</a>';
         }
 
         if (doc === '') {
@@ -1011,9 +1073,25 @@ syrup.on('ready', function () {
                 switch (true) {
                     case typeof propVal.type !== 'undefined':
                         if (!Array.isArray(propVal.type)) {
-                            attributes = attributes + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + ' : ' + propVal.type.replace('@', '') + '</a>';
+                            if (propVal.type.indexOf('@') !== -1) {
+                                attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type.replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
+                            } else {
+                                if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type + '</a></div>';
+                                } else {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type + '</div>';
+                                }
+                            }
                         } else {
-                            attributes = attributes + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</a>';
+                            if (propVal.type[0].indexOf('@') !== -1) {
+                                attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type[0].replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
+                            } else {
+                                if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
+                                } else {
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0] + ' [ ]</div>';
+                                }
+                            }
                         }
                         break;
                     case typeof propVal.params !== 'undefined':
@@ -1027,9 +1105,9 @@ syrup.on('ready', function () {
 
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + params + ': ' + result + '</a>';
+                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
                         } else {
-                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + params + '</a>';
+                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
                         }
 
 
@@ -1043,14 +1121,15 @@ syrup.on('ready', function () {
                         var result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + '(): ' + result + '</a>';
+                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>(): ' + result + '</div>';
                         } else {
-                            methods = methods + '<a href="#" class="list-group-item" style="text-align: left">+' + propName + '()</a>';
+                            methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
                         }
                         break;
                 }
             }
         }
+
 
         if (attributes === '') {
             attributes = attributes + '<a class="list-group-item" style="text-align: left"></a>';
@@ -1294,7 +1373,11 @@ syrup.on('ready', function () {
             domHeader = document.getElementById('designer-menubar-header'),
             domItems = document.getElementById('designer-menubar-items'),
             domAction = document.getElementById('designer-menubar-actions'),
-            self = this;
+            self = this,
+            arr = window.location.href.split('#'),
+            context = 'system',
+            space = '',
+            designer = this.require('designer');
 
         function _removeActive() {
             var length = 0,
@@ -1335,17 +1418,35 @@ syrup.on('ready', function () {
         });
         
         // focus on first element
-        if (length > 0) {
-            this.designer().context(this.items(0).name());
-            item = domItems.children[0];
-            $(item).addClass('active');
+        // or restore the context
+        if (arr.length > 2 && arr[2].length !== 0) {
+            context = arr[2];
         }
+        if (arr.length > 3) {
+            space = arr[3];
+        }
+        if (arr.length > 4) {
+            designer.state().component(arr[4]);
+        }
+
+        for (i = 0; i < length; i++) {
+            if (this.items(i).name() === context) {
+                item = domItems.children[i];
+                $(item).addClass('active');
+            }
+        };
+        if (space) {
+            designer.space(space);
+        }
+        designer.context(context);
 
         var that = this;
         $('#designer-menu-action-search').on('keyup', function (event) {
             var value = $('#designer-menu-action-search').val();
             that.designer().filter(value);
         });
+
+        designer.updateRouter();
     });
     
     // ToolBar
@@ -1433,11 +1534,10 @@ syrup.on('ready', function () {
         
         // clear
         $('#designer-spaces-items').empty();
-
         if (system) {
             switch (this.designer().context()) {
                 case 'system':
-                   
+
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -1465,7 +1565,7 @@ syrup.on('ready', function () {
                     }
 
                     this.items().forEach(function (item) {
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#systems#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + item.uuid() + '#system#' + item.name() + '">' + item.name() + '</a></li>')
                     });
                     
                     // events
@@ -1531,7 +1631,7 @@ syrup.on('ready', function () {
                     }
 
                     this.items().forEach(function (item) {
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#schemas#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#schemas#' + item.name() + '">' + item.name() + '</a></li>')
                     });
                     
                     // events
@@ -1580,7 +1680,7 @@ syrup.on('ready', function () {
                     }
 
                     this.items().forEach(function (item) {
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#models#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#models#' + item.name() + '">' + item.name() + '</a></li>')
                     });
                     
                     // events
@@ -1626,7 +1726,7 @@ syrup.on('ready', function () {
                     }
 
                     this.items().forEach(function (item) {
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#types#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#types#' + item.name() + '">' + item.name() + '</a></li>')
                     });
                     
                     // events
@@ -1678,7 +1778,7 @@ syrup.on('ready', function () {
                     }
 
                     this.items().forEach(function (item) {
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#behaviors#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#behaviors#' + item.name() + '">' + item.name() + '</a></li>')
                     });
                     
                     // events
@@ -1739,7 +1839,7 @@ syrup.on('ready', function () {
                               nbElements = Object.keys(model).length;
                           }*/
 
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#components#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#components#' + item.name() + '">' + item.name() + '</a></li>')
                     });
                     
                     // events
@@ -2413,31 +2513,49 @@ syrup.on('ready', function () {
                     break;
                 case 'components':
                     if (space) {
-                        for (name in system.components()[space]) {
-                            ModelComponent = this.require('ModelComponent');
-                            component = new ModelComponent({
-                                'title': name
-                            });
-                            component.uuid(name);
-                            component.model(space);
-                            component.document(JSON.parse(JSON.stringify(system.components()[space][name])));
-                            component.content(JSON.stringify(system.components()[space][name]));
-                            component.render();
+                        if (this.require('designer').state().component()) {
+                            name = this.require('designer').state().component();
+                            if (system.components()[space][name]) {
+                                ModelComponent = this.require('ModelComponent');
+                                component = new ModelComponent({
+                                    'title': name
+                                });
+                                component.uuid(name);
+                                component.model(space);
+                                component.document(JSON.parse(JSON.stringify(system.components()[space][name])));
+                                component.content(JSON.stringify(system.components()[space][name]));
+                                component.render();
+                            }
+                        } else {
+                            for (name in system.components()[space]) {
+                                ModelComponent = this.require('ModelComponent');
+                                component = new ModelComponent({
+                                    'title': name
+                                });
+                                component.uuid(name);
+                                component.model(space);
+                                component.document(JSON.parse(JSON.stringify(system.components()[space][name])));
+                                component.content(JSON.stringify(system.components()[space][name]));
+                                component.render();
+                            }
                         }
                     }
                     break;
                 case 'behaviors':
                     if (space) {
+                        name = this.require('designer').state().component();
                         for (id in system.behaviors()) {
                             if (system.behaviors()[id].component === space) {
-                                ModelBehavior = this.require('ModelBehavior');
+                                if ((name && system.behaviors()[id].state === name) || name === '') {
+                                    ModelBehavior = this.require('ModelBehavior');
 
-                                behavior = new ModelBehavior({
-                                    'uuid': system.behaviors()[id]._id
-                                });
-                                behavior.title(system.behaviors()[id].state);
-                                behavior.content(JSON.parse(JSON.stringify(system.behaviors()[id].action)));
-                                behavior.render();
+                                    behavior = new ModelBehavior({
+                                        'uuid': system.behaviors()[id]._id
+                                    });
+                                    behavior.title(system.behaviors()[id].state);
+                                    behavior.content(JSON.parse(JSON.stringify(system.behaviors()[id].action)));
+                                    behavior.render();
+                                }
                             }
                             
                             // system
@@ -2581,6 +2699,7 @@ syrup.on('ready', function () {
 
         channel.on('updateSchema', function (id, schema) {
             var designer = this.require('designer');
+            designer.syncModel(schema);
             designer.system().schemas()[id] = schema;
             designer.save();
             designer.workspace().refresh();
@@ -2793,9 +2912,12 @@ syrup.on('ready', function () {
             toolbar = null,
             Workspace = null,
             workspace = null,
+            DesignerState = null,
+            designerState = null,
             Spaces = null,
             spaces = null,
             System = null,
+            systemId = '',
             Server = null,
             server = null;
       
@@ -2841,28 +2963,107 @@ syrup.on('ready', function () {
             this.require('message').danger(error.message);
         });
         
+        // state
+        DesignerState = this.require('DesignerState');
+        designerState = new DesignerState();
+
+        this.state(designerState);
+        
         // system
         System = this.require('System');
         var systems = JSON.parse(window.localStorage.getItem('systems'));
         
         // case of url
-        if (document.location.search.split('?')[1]) {
-            var systemParam = JSON.parse(decodeURI(document.location.search.split('?')[1].split('system=')[1]));
-            var sys = null;
+        switch (true) {
+            case typeof document.location.search.split('?')[1] === 'string':
+                var systemParam = JSON.parse(decodeURI(document.location.search.split('?')[1].split('system=')[1]));
+                var sys = null;
 
-            sys = new System(systemParam);
-            this.system(sys);
-            this.save();
-            this.refresh();
-            this.require('message').success('the system \'' + systemParam.name + '\' was imported');
-        } else {
-            if (systems && systems.systems && systems.systems.length) {
-                this.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
-            }
-            this.refresh();
+                sys = new System(systemParam);
+                this.system(sys);
+                this.save();
+                this.refresh();
+                this.require('message').success('the system \'' + systemParam.name + '\' was imported');
+                break;
+
+            case window.location.href.split('#').length > 1 && window.location.href.split('#')[1].length > 0:
+                systemId = window.location.href.split('#')[1];
+                if (window.localStorage.getItem(systemId)) {
+                    this.system(new System(JSON.parse(window.localStorage.getItem(systemId))));
+                    this.refresh();
+                }
+                break;
+
+            default:
+                if (systems && systems.systems && systems.systems.length && systems.systems[0].length) {
+                    this.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
+                }
+                this.refresh();
+                break;
         }
         this.check();
         this.welcome();
+        
+        // add event when history change
+        var that = this;
+        window.onhashchange = function (e) {
+            var arr = window.location.href.split('#'),
+                system = '',
+                collection = 'system',
+                component = '',
+                i = 0,
+                length = 0,
+                item = null,
+                domItems = null;
+
+            if (arr.length > 1) {
+                system = arr[1];
+            }
+
+            if (arr.length > 2) {
+                collection = arr[2];
+            }
+
+            if (arr.length > 3) {
+                component = arr[3];
+            }
+
+            if (arr.length > 4) {
+                that.state().component(arr[4]);
+            } else {
+                that.state().component('');
+            }
+
+            if (arr.length > 1 && system) {
+                that.system(new System(JSON.parse(window.localStorage.getItem(system))));
+            } else {
+                if (systems && systems.systems && systems.systems.length) {
+                    that.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
+                }
+            }
+            //if (component) {
+            that.space(component);
+            //}
+            that.context(collection);
+
+            // focus
+            domItems = document.getElementById('designer-menubar-items');
+            length = that.menubar().items().length;
+            for (i = 0; i < length; i++) {
+                item = domItems.children[i];
+                $(item).removeClass('active');
+
+            };
+            for (i = 0; i < length; i++) {
+                if (that.menubar().items(i).name() === collection) {
+                    item = domItems.children[i];
+                    $(item).addClass('active');
+                }
+            };
+
+            that.updateRouter();
+        }
+
     });
 
     Designer.on('check', function () {
@@ -2953,13 +3154,129 @@ syrup.on('ready', function () {
     });
 
     Designer.on('context', function (val) {
+        this.spaces().render();
         this.workspace().clear();
         this.workspace().refresh();
-        this.spaces().render();
     });
 
     Designer.on('space', function (val) {
         this.workspace().refresh();
+        if (this.context() === 'system') {
+            this.updateRouter();
+        }
+    });
+
+    Designer.on('updateRouter', function () {
+        var menubar = [],
+            i = 0,
+            length = 0,
+            collection = '',
+            href = '';
+        
+        // update menubar
+        if (this.require('designer').system()) {
+            menubar = $('#designer-menubar-items > li > a');
+            length = menubar.length;
+            for (i = 0; i < length; i++) {
+                href = menubar[i].href;
+                collection = href.split('#')[href.split('#').length - 1]; // TODO FIX BUG WHEN URL WITH NO #
+                menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
+            }
+        } else {
+            menubar = $('#designer-menubar-items > li > a');
+            length = menubar.length;
+            for (i = 0; i < length; i++) {
+                href = menubar[i].href;
+                collection = href.split('#')[href.split('#').length - 1]; // TODO FIX BUG WHEN URL WITH NO #
+                menubar[i].href = '##' + collection;
+            }
+        }
+        
+        // update spaces
+        /*
+        spaces = $('#designer-spaces-items > li > a');
+        length = spaces.length;
+        for (i = 0; i < length; i++) {
+            href = spaces[i].href;
+            collection = href.split('#')[href.split('#').length - 2];
+            component = href.split('#')[href.split('#').length - 1];
+            spaces[i].href = '#' + this.require('designer').system().id() + '#' + collection + '#' + component;
+        }*/
+    });
+
+    Designer.on('syncModel', function (schema) {
+        var schemas = this.system().schemas(),
+            name = '',
+            propName = '',
+            model = null,
+            oldSchema = null;
+
+        for (name in schemas) {
+            if (schemas.hasOwnProperty(name)) {
+                if (typeof schemas[name]._schema !== 'undefined' && schemas[name]._schema === schema._name) {
+                    oldSchema = schemas[schema._name];
+                    
+                    for (propName in schema) {
+                        
+                        if (schema.hasOwnProperty(propName) &&
+                            propName.indexOf('_') !== 0 && (
+                            typeof oldSchema[propName] === 'undefined' ||
+                            oldSchema[propName] !== schema[propName]
+                            )) {
+                                model = schemas[name];
+                            switch (true) {
+                                case schema[propName] === 'property':
+                                    model[propName] = {
+                                        "type": "string",
+                                        "readOnly": false,
+                                        "mandatory": false,
+                                        "default": ""
+                                    };
+                                    break;
+                                case schema[propName] === 'method':
+                                    model[propName] = {
+                                        "params": [
+                                            {
+                                                "name": "param",
+                                                "type": "string",
+                                                "mandatory": false
+                                            }
+                                        ],
+                                        "result": "string"
+                                    };
+                                    break;
+                                case schema[propName] === 'event':
+                                    model[propName] = {
+                                        "params": [
+                                            {
+                                                "name": "param",
+                                                "type": "string",
+                                                "mandatory": false
+                                            }
+                                        ]
+                                    };
+                                    break;
+                                case schema[propName] === 'collection':
+                                    model[propName] = {
+                                        "type": ["string"],
+                                        "readOnly": false,
+                                        "mandatory": false,
+                                        "default": []
+                                    };
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    for (propName in oldSchema) {
+                        if (schemas[name].hasOwnProperty(propName) && propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
+                            delete schemas[name][propName];
+                        }
+                    }
+                }
+            }
+        }
     });
 
     Designer.on('save', function () {

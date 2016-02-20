@@ -108,9 +108,9 @@ module.exports = function (grunt) {
                             //fileName = fileName.replace('\.js', '');
                             
                             // clean
-                            src = src.replace(/\n/g, ' ');
-                            src = src.replace(/\r/g, ' ');
-                            src = src.replace(/\t/g, ' ');
+                            //src = src.replace(/\n/g, ' ');
+                            //src = src.replace(/\r/g, ' ');
+                            //src = src.replace(/\t/g, ' ');
                             
                             src = encodeURI(src);
 
@@ -141,6 +141,69 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'build/js/js.json': ['build/js/js.json', 'src/template/footer/js.txt']
+                }
+            },
+            jsonComponent: {
+                options: {
+                    process: function (src, filepath) {
+                        var result = '',
+                            fileName = '';
+
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
+
+                        if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
+
+                            if (filepath.indexOf('banner') !== -1) {
+
+                                // ID & version
+                                src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
+                                src = src.replace('{id}', generateId());
+
+                                result = src + '\n"components" :  { "JSON" : {';
+                            } else {
+                                result = src;
+                            }
+
+                        } else {
+                            
+                            // filename
+                            fileName = filepath.split('json/')[1];
+                            fileName = fileName.split('/')[0];
+                            
+                            src = encodeURI(src);
+
+                            result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
+                            '"source":"' + src.trim() + '"},';
+                        }
+
+                        return result;
+                    }
+                },
+                files: {
+                    'build/json/json.json': ['src/template/banner/json.txt', 'src/json/*.json']
+                }
+            },
+            jsonClean: {
+                options: {
+                    process: function (src, filepath) {
+                        var result = '';
+
+                        if (filepath.indexOf('build') !== -1 && src.indexOf('"JSON": {}') === -1) {
+                            result = src.trim().substring(0, src.length - 1);
+                        } else {
+                            result = src;
+                        }
+
+                        return result;
+                    }
+                },
+                files: {
+                    'build/json/json.json': ['build/json/json.json', 'src/template/footer/json.txt']
                 }
             },
             htmlComponent: {
@@ -432,7 +495,7 @@ module.exports = function (grunt) {
         },
         "merge-json": {
             syrupjs: {
-                src: ["build/js/js.json", "build/html/html.json", "build/css/css.json", "src/addons/*.json", "build/system/design.json"],
+                src: ["build/js/js.json", "build/json/json.json", "build/html/html.json", "build/css/css.json", "src/addons/*.json", "build/system/design.json"],
                 dest: "build/system/design.json"
             }
         },
@@ -568,6 +631,8 @@ module.exports = function (grunt) {
     grunt.registerTask('system-json', [
         'concat:jsComponent',
         'concat:jsClean',
+        'concat:jsonComponent',
+        'concat:jsonClean',
         'concat:htmlComponent',
         'concat:htmlClean',
         'concat:cssComponent',
