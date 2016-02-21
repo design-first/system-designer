@@ -20,7 +20,8 @@
                 "_core": true,
                 "getInitSystem": "event",
                 "setInitSystem": "event",
-                "addComponent": "event"
+                "addComponent": "event",
+                "updateBehavior": "event"
             });
 
             system.require('metamodel').schema({
@@ -59,7 +60,19 @@
                             "type": "object"
                         }
                     ]
-                }
+                },
+                "updateBehavior": {
+                    "params": [
+                        {
+                            "name": "id",
+                            "type": "string"
+                        },
+                        {
+                            "name": "behavior",
+                            "type": "object"
+                        }
+                    ]
+                },
             });            
 
             system.require('metamodel').create();
@@ -88,10 +101,13 @@
                 channel.on('send', function (message) {
                     this.require('worker-run').worker().port.postMessage(message);
                 });
+                
                 channel.on('addComponent', function (model, component) {
                     $db[model].insert(component);
                 }, true);
-
+                channel.on('updateBehavior', function updateBehavior(id, behavior) {
+                    this.require(id).action(behavior.action);
+                });
                 channel.on('setInitSystem', function (id, system) {
                     delete system.classInfo;
                     var systemID = this.require('db').system(system);
