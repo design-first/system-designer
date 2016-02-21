@@ -3328,6 +3328,15 @@ syrup.on('ready', function () {
                 model.show();
             });
         }
+
+        switch (this.context()) {
+            case 'schemas':
+            case 'models':
+                jsPlumb.repaintEverything();
+                break;
+            default:
+                break;
+        }
     });
 
     Designer.on('context', function (val) {
