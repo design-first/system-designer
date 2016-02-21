@@ -85,7 +85,16 @@
 				"SyrupComponent"
 			],
 			"_core": true,
-			"start": {}
+			"start": {
+				"params": [
+					{
+						"name": "path",
+						"type": "string",
+						"mandatory": false,
+						"default": ""
+					}
+				]
+			}
 		}
 	},
 	"types": {},
@@ -94,16 +103,8 @@
 			"_id": "1c00c107e01c9b3",
 			"component": "SyrupAdmin",
 			"state": "start",
-			"action": "function () {\n                var Worker = null,\n                worker = null;\n                \n                Worker = this.require('Worker');\n                worker = new Worker({\n                    \"_id\": \"worker\",\"_core\":true,\n                    \"worker\": new SharedWorker('../scripts/worker.js'),\n                });\n                worker.worker().port.onmessage = function (e) {\n                  $db.SyrupMessage.insert(e.data);\n                }\n                \n                SyrupChannel = this.require('SyrupChannel');\n                channel = new SyrupChannel({\n                    '_id': 'channel'\n                });\n            }",
+			"action": "function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = '';\n    \n    if (path) {\n        workerPath = path + '/scripts/worker.js';\n        workerPath = workerPath.replace(/\\/\\//g,'/');\n    } else {\n        workerPath = '/designer/scripts/worker.js';\n    }\n    \n    console.log(workerPath)\n    \n    if (typeof SharedWorker !== 'undefined') {\n        Worker = this.require('Worker');\n        worker = new Worker({\n            '_id': 'worker',\n            '_core': true,\n            'worker': new SharedWorker(workerPath),\n        });\n        \n        worker.worker().port.onmessage = function (e) {\n          $db.SyrupMessage.insert(e.data);\n        };\n        \n        SyrupChannel = this.require('SyrupChannel');\n        channel = new SyrupChannel({\n            '_id': 'channel'\n        });\n    }\n}",
 			"useCoreAPI": true,
-			"core": true
-		},
-		"1eb4818ab11ca61": {
-			"_id": "1eb4818ab11ca61",
-			"component": "18ed81de331252c",
-			"state": "main",
-			"action": "function () {\n                var SyrupAdmin = this.require('SyrupAdmin');\n                var admin = new SyrupAdmin({\"_core\":true});\n                admin.start();\n            }",
-			"useCoreAPI": false,
 			"core": true
 		},
 		"18afb10f841b94b": {
@@ -131,7 +132,13 @@
 			"core": true
 		}
 	},
-	"components": {},
+	"components": {
+		"SyrupAdmin": {
+			"admin": {
+				"_id": "admin"
+			}
+		}
+	},
 	"name": "example",
 	"version": "0.0.1",
 	"description": "",
