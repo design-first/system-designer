@@ -2780,7 +2780,6 @@ syrup.on('ready', function () {
 
         channel.on('getSystem', function (id) {
             var system = null;
-
             if (id === this.require('designer').system().id()) {
                 system = this.require('db').collections().System.find({
                     '_id': id
@@ -2843,6 +2842,9 @@ syrup.on('ready', function () {
             var designer = this.require('designer');
             designer.system().types()[id] = type;
             designer.save();
+            
+            designer.space(type.name);
+            designer.spaces().render();
             designer.workspace().refresh();
         });
 
@@ -2871,9 +2873,13 @@ syrup.on('ready', function () {
         channel.on('updateSchema', function (id, schema) {
             var designer = this.require('designer');
             jsPlumb.deleteEveryEndpoint();
+            
             designer.syncModel(schema);
             designer.system().schemas()[id] = schema;
             designer.save();
+            
+            designer.space(schema._name);
+            designer.spaces().render();
             designer.workspace().refresh();
         });
 
@@ -2904,6 +2910,9 @@ syrup.on('ready', function () {
             jsPlumb.deleteEveryEndpoint();
             designer.system().schemas()[id] = model;
             designer.save();
+            
+            designer.space(model._name);
+            designer.spaces().render();
             designer.workspace().refresh();
         });
 
@@ -2999,10 +3008,14 @@ syrup.on('ready', function () {
             sys = new System(system);
             designer.system(sys);
             designer.save();
+            
+            designer.space(system.name);
+            designer.spaces().render();
             designer.workspace().refresh();
         });
 
         channel.on('loadSystem', function (system) {
+            console.log('ca passe');
             var Dialog = null,
                 dialog = null;
 

@@ -1,89 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>App</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <!-- SyrupJS -->
     <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
     <script>
         syrup.on('ready', function () {
             var system = syrup.system('app');
-            var metamodel = syrup.require('metamodel');
-
-            // SYRUP ADMIN 
-            metamodel.schema({
-                "_id": "Worker",
-                "_name": "Worker",
-                "_schema": "WorkerSchema",
-                "_inherit": [
-                    "SyrupComponent"
-                ],
-                "_core": true,
-                "worker": {
-                    "type": "object",
-                    "readOnly": false,
-                    "mandatory": false,
-                    "default": {}
-                },
-                "send": {
-                    "params": [
-                        {
-                            "name": "message",
-                            "type": "object"
-                        }
-                    ]
-                }
-            });
-
-            metamodel.schema({
-                "_id": "WorkerSchema",
-                "_name": "WorkerSchema",
-                "_inherit": [
-                    "SyrupComponentSchema"
-                ],
-                "_core": true,
-                "worker": "property",
-                "send": "method"
-            });
-
-            metamodel.schema({
-                "_id": "SyrupAdminSchema",
-                "_name": "SyrupAdminSchema",
-                "_inherit": [
-                    "SyrupComponentSchema"
-                ],
-                "_core": true,
-                "start": "method"
-            });
-
-            metamodel.schema({
-                "_id": "SyrupAdmin",
-                "_name": "SyrupAdmin",
-                "_schema": "SyrupAdminSchema",
-                "_inherit": [
-                    "SyrupComponent"
-                ],
-                "_core": true,
-                "start": {}
-            });
-
-
-            metamodel.schema({
-                "_id": "SyrupChannelEventSchema",
-                "_name": "SyrupChannelEventSchema",
+            
+            system.require('metamodel').schema({
+                "_id": "SyrupChannelSchema",
+                "_name": "SyrupChannelSchema",
                 "_core": true,
                 "getInitSystem": "event",
                 "setInitSystem": "event"
             });
 
-
-            metamodel.schema({
-                "_id": "SyrupChannelEvent",
-                "_name": "SyrupChannelEvent",
-                "_schema": "SyrupChannelEventSchema",
+            system.require('metamodel').schema({
+                "_id": "SyrupChannel",
+                "_name": "SyrupChannel",
+                "_schema": "SyrupChannelSchema",
                 "_core": true,
                 "getInitSystem": {
                     "params": [
@@ -107,31 +49,31 @@
                 }
             });            
 
-            metamodel.create();
+            system.require('metamodel').create();
 
-            // ADMIN
-            var SyrupAdmin = syrup.require('SyrupAdmin');
-            SyrupAdmin.on('start', function () {
+            system.on('main', function () {
                 var Worker = null,
-                        worker = null,
-                        sysid = '';
+                    worker = null,
+                    sysid = '';
 
+                // Worker
                 Worker = this.require('Worker');
                 worker = new Worker({
-                    "_id": "worker",
-                    "worker": new SharedWorker('./scripts/worker.js'),
+                    '_core': true,
+                    '_id': 'worker-run',
+                    'worker': new SharedWorker('./scripts/worker.js'),
                 });
                 worker.worker().port.onmessage = function (e) {
                     $db.SyrupMessage.insert(e.data);
                 }
 
+                // Channel
                 SyrupChannel = this.require('SyrupChannel');
                 channel = new SyrupChannel({
-                    '_id': 'channel'
+                    '_core': true
                 });
-
                 channel.on('send', function (message) {
-                    this.require('worker').worker().port.postMessage(message);
+                    this.require('worker-run').worker().port.postMessage(message);
                 });
 
                 channel.on('setInitSystem', function (id, system) {
@@ -140,17 +82,16 @@
 
                     console.info('syrup: the system is loaded.')
 
-                    syrup.require(systemID).main();
+                    this.require(systemID).main();
                 });
 
                 sysid = document.location.search.split('?')[1].split('id=')[1];
                 channel.getInitSystem(sysid);
+                
                 console.info('syrup: loading the system...');
             }, true);
-
-            //
-            var admin = new SyrupAdmin();
-            admin.start();
+            
+            system.main();
         });
     </script>
 </body>

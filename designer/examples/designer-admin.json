@@ -1,40 +1,5 @@
 {
 	"schemas": {
-		"SyrupChannelEvent": {
-			"_id": "SyrupChannelEvent",
-			"_name": "SyrupChannelEvent",
-			"_schema": "SyrupChannelEventSchema",
-			"_core": true,
-			"sync": {},
-			"loadSystem": {
-				"params": [
-					{
-						"name": "system",
-						"type": "object"
-					}
-				]
-			},
-			"updateBehavior": {
-				"params": [
-					{
-						"name": "id",
-						"type": "string"
-					},
-					{
-						"name": "behavior",
-						"type": "object"
-					}
-				]
-			}
-		},
-		"SyrupChannelEventSchema": {
-			"_id": "SyrupChannelEventSchema",
-			"_name": "SyrupChannelEventSchema",
-			"_core": true,
-			"sync": "event",
-			"loadSystem": "event",
-			"updateBehavior": "event"
-		},
 		"Worker": {
 			"_id": "Worker",
 			"_name": "Worker",
@@ -95,6 +60,42 @@
 					}
 				]
 			}
+		},
+		"SyrupChannelSchema": {
+			"_id": "SyrupChannelSchema",
+			"_name": "SyrupChannelSchema",
+			"sync": "event",
+			"loadSystem": "event",
+			"updateBehavior": "event"
+		},
+		"SyrupChannel": {
+			"_id": "SyrupChannel",
+			"_name": "SyrupChannel",
+			"_schema": "SyrupChannelSchema",
+			"_inherit": [
+				"SyrupComponent"
+			],
+			"sync": {},
+			"loadSystem": {
+				"params": [
+					{
+						"name": "system",
+						"type": "object"
+					}
+				]
+			},
+			"updateBehavior": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "behavior",
+						"type": "object"
+					}
+				]
+			}
 		}
 	},
 	"types": {},
@@ -103,31 +104,31 @@
 			"_id": "1c00c107e01c9b3",
 			"component": "SyrupAdmin",
 			"state": "start",
-			"action": "function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = '';\n    \n    if (path) {\n        workerPath = path + '/scripts/worker.js';\n        workerPath = workerPath.replace(/\\/\\//g,'/');\n    } else {\n        workerPath = '/designer/scripts/worker.js';\n    }\n    \n    console.log(workerPath)\n    \n    if (typeof SharedWorker !== 'undefined') {\n        Worker = this.require('Worker');\n        worker = new Worker({\n            '_id': 'worker',\n            '_core': true,\n            'worker': new SharedWorker(workerPath),\n        });\n        \n        worker.worker().port.onmessage = function (e) {\n          $db.SyrupMessage.insert(e.data);\n        };\n        \n        SyrupChannel = this.require('SyrupChannel');\n        channel = new SyrupChannel({\n            '_id': 'channel'\n        });\n    }\n}",
+			"action": "function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = '';\n    \n    if (path) {\n        workerPath = path + '/scripts/worker.js';\n        workerPath = workerPath.replace(/\\/\\//g,'/');\n    } else {\n        workerPath = '/designer/scripts/worker.js';\n    }\n    \n    if (typeof SharedWorker !== 'undefined') {\n        Worker = this.require('Worker');\n        worker = new Worker({\n            '_id': 'worker',\n            '_core': true,\n            'worker': new SharedWorker(workerPath),\n        });\n        \n        worker.worker().port.onmessage = function (e) {\n          $db.SyrupMessage.insert(e.data);\n        };\n    }\n}",
 			"useCoreAPI": true,
 			"core": true
 		},
 		"18afb10f841b94b": {
 			"_id": "18afb10f841b94b",
-			"component": "channel",
+			"component": "SyrupChannel",
 			"state": "send",
-			"action": "function (message) {\n                    this.require('worker').worker().port.postMessage(message);\n                }",
+			"action": "function send(message) {\n    this.require('worker').worker().port.postMessage(message);\n}",
 			"useCoreAPI": false,
 			"core": true
 		},
 		"1058d10a651fb87": {
 			"_id": "1058d10a651fb87",
-			"component": "channel",
+			"component": "SyrupChannel",
 			"state": "sync",
-			"action": "function () {\n                   this.loadSystem(JSON.parse(this.require('db').system()));\n                }",
+			"action": "function sync() {\n    this.loadSystem(JSON.parse(this.require('db').system()));\n}",
 			"useCoreAPI": false,
 			"core": true
 		},
 		"1f58e1d4221466a": {
 			"_id": "1f58e1d4221466a",
-			"component": "channel",
+			"component": "SyrupChannel",
 			"state": "updateBehavior",
-			"action": "function (id, behavior) {\n                    this.require(id).action(behavior.action);\n                }",
+			"action": "function updateBehavior(id, behavior) {\n    this.require(id).action(behavior.action);\n}",
 			"useCoreAPI": false,
 			"core": true
 		}
@@ -136,6 +137,16 @@
 		"SyrupAdmin": {
 			"admin": {
 				"_id": "admin"
+			}
+		},
+		"SyrupChannelEvent": {
+			"108ae1968d14bf9": {
+				"_id": "108ae1968d14bf9"
+			}
+		},
+		"SyrupChannel": {
+			"1aec3130d71b6f1": {
+				"_id": "1aec3130d71b6f1"
 			}
 		}
 	},

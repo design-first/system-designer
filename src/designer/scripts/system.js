@@ -262,6 +262,7 @@ syrup.on('ready', function () {
         });
 
         channel.on('send', function (message) {
+            console.log(message)
             this.require('worker').worker().port.postMessage(message);
         });
 
@@ -380,6 +381,9 @@ syrup.on('ready', function () {
             designer = this.require('designer');
 
         designer.store().data(JSON.parse(val));
+        
+        document.title = JSON.parse(val).name + ' | system designer'; 
+        
         this.require('channel').updateSystem(designer.store().uuid(), designer.store().data());
         this.require('message').success('system saved.');
     });
