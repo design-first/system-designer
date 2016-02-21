@@ -2317,6 +2317,8 @@ syrup.on('ready', function () {
                         $('#designer-component-' + uuid.toString()).fadeIn(1000);
 
                         designer.save();
+                        
+                        this.require('channel').addComponent(model, component);
                     }
                 }
                 break;
