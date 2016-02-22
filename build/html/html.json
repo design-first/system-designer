@@ -71,7 +71,7 @@
             },
             "export-app.html": {
                 "_id": "export-app.html",
-                "source": "<!DOCTYPE html> <html> <head>     <title>{{name}}</title>     <meta charset=\"UTF-8\">     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> </head> <body>     <!-- SyrupJS -->     <script>     {{syrupjs}}     </script>     <!-- System -->     <script>     syrup.on('ready', function () {         var systemId = syrup.require('db').system({{system}});          var system = syrup.require(systemId);         system.main();     });     </script> </body> </html>"
+                "source": "<!DOCTYPE html> <html> <head>     <title>{{name}}</title>     <meta charset=\"UTF-8\">     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> </head> <body>     <!-- SyrupJS -->     <script>     {{library}}     </script>     <!-- System -->     <script>     syrup.on('ready', function () {         var systemId = syrup.require('db').system({{system}});          var system = syrup.require(systemId);         system.main();     });     </script> </body> </html>"
             },
             "menu-action-search.html": {
                 "_id": "menu-action-search.html",
