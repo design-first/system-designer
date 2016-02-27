@@ -381,13 +381,16 @@ syrup.on('ready', function () {
             message = this.require('message'),
             model = JSON.parse(val);
 
-        if (model._id === model._name) {
+        // TODO create a check consistency method
+        if (model._id && model._id !== model._name) {
+            message.danger('\'_id\’ and \‘_name\’ properties must have the same value.');
+        } else {
             designer.store().data(model);
             
             // check if ID change
-            if (designer.store().uuid() !== designer.store().data()._id) {
+            if (designer.store().uuid() !== designer.store().data()._name) {
                 this.require('channel').deleteModel(designer.store().uuid());
-                designer.store().uuid(designer.store().data()._id);
+                designer.store().uuid(designer.store().data()._name);
             
                 // update title
                 //$($('.navbar-header a')[0]).text('Model ' + designer.store().uuid());
@@ -396,8 +399,6 @@ syrup.on('ready', function () {
 
             this.require('channel').updateModel(designer.store().uuid(), designer.store().data());
             message.success('model saved.');
-        } else {
-            message.danger('\'_id\’ and \‘_name\’ properties must have the same value.');
         }
     });
 

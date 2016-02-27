@@ -163,6 +163,14 @@
             }
         ]
     },
+    "createBehavior": {
+        "params": [
+            {
+                "name": "behavior",
+                "type": "object"
+            }
+        ]
+    },
     "updateBehavior": {
         "params": [
             {
@@ -180,6 +188,18 @@
             {
                 "name": "id",
                 "type": "string"
+            }
+        ]
+    },
+    "createComponent": {
+        "params": [
+            {
+                "name": "collection",
+                "type": "string"
+            },
+            {
+                "name": "component",
+                "type": "object"
             }
         ]
     },
@@ -219,6 +239,18 @@
             }
         ]
     },
+    "createType": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "type",
+                "type": "object"
+            }
+        ]
+    },
     "updateType": {
         "params": [
             {
@@ -239,6 +271,18 @@
             }
         ]
     },
+    "createSchema": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "schema",
+                "type": "object"
+            }
+        ]
+    },
     "updateSchema": {
         "params": [
             {
@@ -256,6 +300,18 @@
             {
                 "name": "id",
                 "type": "string"
+            }
+        ]
+    },
+    "createModel": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "model",
+                "type": "object"
             }
         ]
     },
@@ -283,18 +339,6 @@
         "params": [
             {
                 "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "system",
-                "type": "object"
-            }
-        ]
-    },
-    "addComponent": {
-        "params": [
-            {
-                "name": "collection",
                 "type": "string"
             },
             {

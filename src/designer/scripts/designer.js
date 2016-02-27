@@ -122,6 +122,36 @@ syrup.on('ready', function () {
         $('#designer-dialog-welcome-modal').modal('hide');
     });
     
+    // DIALOG SYNC
+    var DialogSync = this.require('DialogSync');
+    DialogSync.on('init', function (config) {
+        var html = '',
+            dom = null;
+
+        $('#designer-dialog-sync').empty();
+
+        html = this.require('dialog-modal-sync.html');
+        document.querySelector('#designer-dialog-sync').insertAdjacentHTML('afterbegin',
+            html.source()
+                .replace(/{{title}}/gi, this.title())
+            );
+            
+        // events
+        dom = document.getElementById('designer-dialog-sync-modal-ok');
+        dom.addEventListener('click', function (event) {
+            this.ok();
+        }.bind(this));
+
+    });
+
+    DialogSync.on('show', function () {
+        $('#designer-dialog-sync-modal').modal('show');
+    });
+
+    DialogSync.on('hide', function () {
+        $('#designer-dialog-sync-modal').modal('hide');
+    });
+    
     // DIALOG SHARE
     var DialogShare = this.require('DialogShare');
     DialogShare.on('init', function (config) {
@@ -970,6 +1000,9 @@ syrup.on('ready', function () {
             var designer = this.require('designer');
             delete designer.system().types()[this.title()];
             $('#designer-type-' + this.title()).remove();
+
+            this.require('channel').deleteType(this.uuid());
+
             this.destroy();
             designer.save();
 
@@ -1037,6 +1070,9 @@ syrup.on('ready', function () {
                 var designer = this.require('designer');
                 delete designer.system().schemas()[this.title()];
                 $('#designer-schema-' + this.title()).remove();
+
+                this.require('channel').deleteSchema(this.uuid());
+
                 this.destroy();
                 designer.save();
 
@@ -1079,7 +1115,7 @@ syrup.on('ready', function () {
                     case typeof propVal.type !== 'undefined':
                         if (!Array.isArray(propVal.type)) {
                             if (propVal.type.indexOf('@') !== -1) {
-                                if (this.uuid() !== 'SyrupComponent') {
+                                if (this.uuid() !== 'SyrupComponent' && propVal.type !== '@SyrupComponent') {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type.replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';
@@ -1207,7 +1243,11 @@ syrup.on('ready', function () {
             html.addEventListener('click', function (event) {
                 var designer = this.require('designer');
                 delete designer.system().schemas()[this.title()];
+                delete designer.system().components()[this.title()];
                 $('#designer-model-' + this.title()).remove();
+
+                this.require('channel').deleteModel(this.uuid());
+
                 this.destroy();
                 designer.save();
 
@@ -1267,6 +1307,9 @@ syrup.on('ready', function () {
             $('#designer-behavior-' + this.uuid()).fadeOut(500, function () {
                 $(this).remove();
             });
+
+            this.require('channel').deleteBehavior(this.uuid());
+
             this.destroy();
             designer.save();
         }.bind(this));
@@ -1332,8 +1375,12 @@ syrup.on('ready', function () {
             $('#designer-component-' + this.uuid()).fadeOut(500, function () {
                 $(this).remove();
             });
+
+            this.require('channel').deleteComponent(this.uuid(), this.model());
+
             this.destroy();
             designer.save();
+
         }.bind(this));
     });
 
@@ -1384,12 +1431,12 @@ syrup.on('ready', function () {
         menuActions = this.require('db').collections().MenuAction.find({
             "type": "designer"
         })
-
+/*
         menuSearch = this.require('db').collections().MenuSearch.find({
             "type": "designer"
         })
-
         menuActions = menuActions.concat(menuSearch);
+*/        
 
         menuActions.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
@@ -1579,6 +1626,12 @@ syrup.on('ready', function () {
         if (system) {
             switch (this.designer().context()) {
                 case 'system':
+
+                    //document.getElementById('designer-spaces-type').innerHTML = 'System';
+
+
+
+
 
                     // TODO find better way
                     this.items().forEach(function (item) {
@@ -2061,7 +2114,6 @@ syrup.on('ready', function () {
                         if (name) {
                             // set schema
                             schema = {
-                                "_id": name,
                                 "_name": name,
                                 "_inherit": ["SyrupComponentSchema"]
                             };
@@ -2078,6 +2130,8 @@ syrup.on('ready', function () {
                             modelSchema.content(JSON.stringify(schema));
 
                             designer.save();
+
+                            this.require('channel').createSchema(name, schema);
 
                             this.hide();
 
@@ -2114,10 +2168,9 @@ syrup.on('ready', function () {
                         if (name && schema) {
                             // set model
                             model = {
-                                "_id": name,
                                 "_name": name,
                                 "_schema": schema,
-                                "_inherit": ["SyrupComponent"]
+                                "_inherit": ["SyrupComponent"] // TODO only if schema inherits from SyrupComponentSchema
                             };
                     
                             // prepare model
@@ -2129,6 +2182,14 @@ syrup.on('ready', function () {
                                             "readOnly": false,
                                             "mandatory": false,
                                             "default": ""
+                                        };
+                                        break;
+                                    case designer.system().schemas()[schema][att] === 'link':
+                                        model[att] = {
+                                            "type": "@SyrupComponent",
+                                            "readOnly": false,
+                                            "mandatory": false,
+                                            "default": {}
                                         };
                                         break;
                                     case designer.system().schemas()[schema][att] === 'method':
@@ -2178,6 +2239,8 @@ syrup.on('ready', function () {
                             modelClass.content(JSON.stringify(model));
 
                             designer.save();
+
+                            this.require('channel').createModel(name, model);
 
                             this.hide();
 
@@ -2246,6 +2309,8 @@ syrup.on('ready', function () {
                             designer.space(name);
                             designer.spaces().render();
                             designer.workspace.refresh();
+
+                            this.require('channel').createType(name, type);
                         }
                     });
                 }
@@ -2287,6 +2352,9 @@ syrup.on('ready', function () {
                             if (schema[att] === 'property') {
                                 propertyNames.push(att);
                             }
+                            if (schema[att] === 'link') {
+                                propertyNames.push(att);
+                            }
                         }
                         propertyNames.sort();
                         length = propertyNames.length;
@@ -2317,8 +2385,8 @@ syrup.on('ready', function () {
                         $('#designer-component-' + uuid.toString()).fadeIn(1000);
 
                         designer.save();
-                        
-                        this.require('channel').addComponent(model, component);
+
+                        this.require('channel').createComponent(model, component);
                     }
                 }
                 break;
@@ -2452,6 +2520,8 @@ syrup.on('ready', function () {
                             $('#designer-behavior-' + uuid.toString()).fadeIn(1000);
 
                             designer.save();
+
+                            this.require('channel').createBehavior(behavior);
                         }
                     });
                 }
@@ -2512,13 +2582,6 @@ syrup.on('ready', function () {
                         for (name in system.schemas()) {
                             if (system.schemas()[name]._name === space) {
                                 ModelSchema = this.require('ModelSchema');
-                                modelSchema = new ModelSchema({
-                                    'title': name
-                                });
-                                modelSchema.uuid(name);
-                                modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[name])));
-                                modelSchema.content(JSON.stringify(system.schemas()[name]));
-                                modelSchema.render();
                                 
                                 // create parent if any
                                 var parents = system.schemas()[name]._inherit;
@@ -2534,7 +2597,6 @@ syrup.on('ready', function () {
                                     modelSchema.uuid(parents[i]);
                                     if (parents[i] === 'SyrupComponentSchema') {
                                         var schemaSyrup = {
-                                            "_id": "SyrupComponentSchema",
                                             "_name": "SyrupComponentSchema",
                                             "_core": true,
                                             "classInfo": "property",
@@ -2555,6 +2617,14 @@ syrup.on('ready', function () {
                                     modelSchema.render();
                                 }
 
+                                modelSchema = new ModelSchema({
+                                    'title': name
+                                });
+                                modelSchema.uuid(name);
+                                modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[name])));
+                                modelSchema.content(JSON.stringify(system.schemas()[name]));
+                                modelSchema.render();
+
                                 for (i = 0; i < length; i++) {
                                     this.designer().linkModel(name, parents[i]);
                                 }
@@ -2567,13 +2637,6 @@ syrup.on('ready', function () {
                         for (name in system.schemas()) {
                             if (system.schemas()[name]._name === space) {
                                 ModelClass = this.require('ModelClass');
-                                modelclass = new ModelClass({
-                                    'title': name
-                                });
-                                modelclass.uuid(name);
-                                modelclass.document(JSON.parse(JSON.stringify(system.schemas()[name])));
-                                modelclass.content(JSON.stringify(system.schemas()[name]));
-                                modelclass.render();
                                                                                          
                                 // create parent if any
                                 var parents = system.schemas()[name]._inherit;
@@ -2589,7 +2652,6 @@ syrup.on('ready', function () {
                                     modelclass.uuid(parents[i]);
                                     if (parents[i] === 'SyrupComponent') {
                                         var modelSyrup = {
-                                            "_id": "SyrupComponent",
                                             "_name": "SyrupComponent",
                                             "_schema": "SyrupComponentSchema",
                                             "_core": true,
@@ -2661,6 +2723,14 @@ syrup.on('ready', function () {
                                     }
                                     modelclass.render();
                                 }
+
+                                modelclass = new ModelClass({
+                                    'title': name
+                                });
+                                modelclass.uuid(name);
+                                modelclass.document(JSON.parse(JSON.stringify(system.schemas()[name])));
+                                modelclass.content(JSON.stringify(system.schemas()[name]));
+                                modelclass.render();
 
                                 for (i = 0; i < length; i++) {
                                     this.designer().linkModel(name, parents[i]);
@@ -2844,7 +2914,7 @@ syrup.on('ready', function () {
             var designer = this.require('designer');
             designer.system().types()[id] = type;
             designer.save();
-            
+
             designer.space(type.name);
             designer.spaces().render();
             designer.workspace().refresh();
@@ -2875,11 +2945,11 @@ syrup.on('ready', function () {
         channel.on('updateSchema', function (id, schema) {
             var designer = this.require('designer');
             jsPlumb.deleteEveryEndpoint();
-            
+
             designer.syncModel(schema);
             designer.system().schemas()[id] = schema;
             designer.save();
-            
+
             designer.space(schema._name);
             designer.spaces().render();
             designer.workspace().refresh();
@@ -2912,7 +2982,7 @@ syrup.on('ready', function () {
             jsPlumb.deleteEveryEndpoint();
             designer.system().schemas()[id] = model;
             designer.save();
-            
+
             designer.space(model._name);
             designer.spaces().render();
             designer.workspace().refresh();
@@ -3010,14 +3080,13 @@ syrup.on('ready', function () {
             sys = new System(system);
             designer.system(sys);
             designer.save();
-            
+
             designer.space(system.name);
             designer.spaces().render();
             designer.workspace().refresh();
         });
 
         channel.on('loadSystem', function (system) {
-            console.log('ca passe');
             var Dialog = null,
                 dialog = null;
 
@@ -3411,6 +3480,8 @@ syrup.on('ready', function () {
         var schemas = this.system().schemas(),
             name = '',
             propName = '',
+            component = null,
+            behavior = null,
             model = null,
             oldSchema = null;
 
@@ -3418,15 +3489,15 @@ syrup.on('ready', function () {
             if (schemas.hasOwnProperty(name)) {
                 if (typeof schemas[name]._schema !== 'undefined' && schemas[name]._schema === schema._name) {
                     oldSchema = schemas[schema._name];
-
+                    model = schemas[name];
+                    
                     for (propName in schema) {
-
                         if (schema.hasOwnProperty(propName) &&
                             propName.indexOf('_') !== 0 && (
                                 typeof oldSchema[propName] === 'undefined' ||
                                 oldSchema[propName] !== schema[propName]
                                 )) {
-                            model = schemas[name];
+
                             switch (true) {
                                 case schema[propName] === 'property':
                                     model[propName] = {
@@ -3435,6 +3506,24 @@ syrup.on('ready', function () {
                                         "mandatory": false,
                                         "default": ""
                                     };
+
+                                    for (component in this.system().components()[name]) {
+                                        this.system().components()[name][component][propName] = model[propName].default;
+                                    }
+
+                                    break;
+                                case schema[propName] === 'link':
+                                    model[propName] = {
+                                        "type": "@SyrupComponent",
+                                        "readOnly": false,
+                                        "mandatory": false,
+                                        "default": {}
+                                    };
+                                    
+                                    for (component in this.system().components()[name]) {
+                                        this.system().components()[name][component][propName] = model[propName].default;
+                                    }
+                                    
                                     break;
                                 case schema[propName] === 'method':
                                     model[propName] = {
@@ -3447,6 +3536,11 @@ syrup.on('ready', function () {
                                         ],
                                         "result": "string"
                                     };
+                                    
+                                    for (component in this.system().components()[name]) {
+                                        this.system().components()[name][component][propName] = model[propName].default;
+                                    }
+                                    
                                     break;
                                 case schema[propName] === 'event':
                                     model[propName] = {
@@ -3458,6 +3552,11 @@ syrup.on('ready', function () {
                                             }
                                         ]
                                     };
+                                    
+                                    for (component in this.system().components()[name]) {
+                                        this.system().components()[name][component][propName] = model[propName].default;
+                                    }
+                                    
                                     break;
                                 case schema[propName] === 'collection':
                                     model[propName] = {
@@ -3466,6 +3565,11 @@ syrup.on('ready', function () {
                                         "mandatory": false,
                                         "default": []
                                     };
+                                    
+                                    for (component in this.system().components()[name]) {
+                                        this.system().components()[name][component][propName] = model[propName].default;
+                                    }
+                                    
                                     break;
                                 default:
                                     break;
@@ -3475,6 +3579,15 @@ syrup.on('ready', function () {
                     for (propName in oldSchema) {
                         if (schemas[name].hasOwnProperty(propName) && propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
                             delete schemas[name][propName];
+                            
+                            for (component in this.system().components()[name]) {
+                                delete this.system().components()[name][component][propName];
+                            }
+                            for (behavior in this.system().behaviors()) {
+                                if (model && this.system().behaviors()[behavior].component === model._name && this.system().behaviors()[behavior].state === propName) {
+                                    delete this.system().behaviors()[behavior];
+                                }
+                            }
                         }
                     }
                 }

@@ -384,13 +384,15 @@ syrup.on('ready', function () {
             propVal = '';
 
         // TODO create a check consistency method
-        if (schema._id === schema._name) {
+        if (schema._id && schema._id !== schema._name) {
+            message.danger('\'_id\’ and \‘_name\’ properties must have the same value.');
+        } else {
 
             for (property in schema) {
                 if (schema.hasOwnProperty(property) && property.indexOf('_') !== 0) {
                     propVal = schema[property];
-                    if (['property', 'collection', 'event', 'method'].indexOf(propVal) === -1) {
-                        message.danger('invalid value for the property \'' + property + '\’.<br>Authorized values are: \'property\', \'collection\', \'event\' and \'method\'.');
+                    if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) === -1) {
+                        message.danger('invalid value for the property \'' + property + '\’.<br>Authorized values are: \'property\', \'link\', \'collection\', \'event\' and \'method\'.');
                         return;
                     }
                 }
@@ -399,9 +401,9 @@ syrup.on('ready', function () {
             designer.store().data(schema);
             
             // check if ID change
-            if (designer.store().uuid() !== designer.store().data()._id) {
+            if (designer.store().uuid() !== designer.store().data()._name) {
                 this.require('channel').deleteSchema(designer.store().uuid());
-                designer.store().uuid(designer.store().data()._id);
+                designer.store().uuid(designer.store().data()._name);
             
                 // update title
                 //$($('.navbar-header a')[0]).text('Schema ' + designer.store().uuid());
@@ -410,8 +412,6 @@ syrup.on('ready', function () {
 
             this.require('channel').updateSchema(designer.store().uuid(), designer.store().data());
             message.success('schema saved.')
-        } else {
-            message.danger('\'_id\’ and \‘_name\’ properties must have the same value.');
         }
     });
 

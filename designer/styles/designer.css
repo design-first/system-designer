@@ -34,7 +34,7 @@ body {
 body,
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  min-width: 970px;
+  min-width: 770px;
 }
 
 /* Don't let the lead text change font-size. */
@@ -302,7 +302,7 @@ body,
 
 .spaces {
     position: fixed;
-    width: 210px;
+   /* width: 210px;*/
     top: 40px;
     bottom: 0;
     right: 0;
@@ -374,7 +374,7 @@ body,
    position: fixed;
    right: 210px;
    bottom: 0;
-   width: 550px;
+   width: 400px;
  }
  
  #designer-menubar-items li:hover {
@@ -404,9 +404,12 @@ body,
 }
 
 .placeholder.designer-component > div > .panel-body {
-    padding: 10px;
     max-height: 300px;
     overflow: auto;
+    
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 5px;
 }
 
 .placeholder.designer-component > div > .panel-body > .table {
@@ -464,6 +467,9 @@ body,
 
 .placeholder.designer-behavior > div > .panel-body {
     text-align: left;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 5px;
 }
 
 
@@ -555,7 +561,7 @@ body,
 }
 
 .placeholder.designer-schema > div > .panel-body > .table {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     text-align: left;
 }
 
@@ -570,7 +576,7 @@ body,
 }
 
 .placeholder.designer-system > div > .panel-body > .table {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     text-align: left;
 }
 
@@ -604,4 +610,21 @@ pre[class*="language-"] {
 .list-group.designer-library {
     cursor: pointer; 
     margin-bottom: 0px;
+}
+
+/* modal */
+.modal-dialog .modal-content .modal-footer {
+    border:0px;
+}
+
+/* hover */
+
+.designer-system tr:hover {
+    background-color: #F5F5F5;
+}
+.designer-schema tr:hover {
+    background-color: #F5F5F5;
+}
+.designer-model .list-group-item:hover {
+    background-color: #F5F5F5;
 }

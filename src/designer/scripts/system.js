@@ -262,7 +262,6 @@ syrup.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            console.log(message)
             this.require('worker').worker().port.postMessage(message);
         });
 
