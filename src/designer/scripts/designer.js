@@ -1627,7 +1627,7 @@ syrup.on('ready', function () {
             switch (this.designer().context()) {
                 case 'system':
 
-                    document.getElementById('designer-spaces-type').innerHTML = 'System';
+                    document.getElementById('designer-spaces-type').innerHTML = 'Systems';
 
                     // TODO find better way
                     this.items().forEach(function (item) {
