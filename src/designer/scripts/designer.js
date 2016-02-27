@@ -1431,12 +1431,12 @@ syrup.on('ready', function () {
         menuActions = this.require('db').collections().MenuAction.find({
             "type": "designer"
         })
-/*
-        menuSearch = this.require('db').collections().MenuSearch.find({
-            "type": "designer"
-        })
-        menuActions = menuActions.concat(menuSearch);
-*/        
+        /*
+                menuSearch = this.require('db').collections().MenuSearch.find({
+                    "type": "designer"
+                })
+                menuActions = menuActions.concat(menuSearch);
+        */
 
         menuActions.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
@@ -1627,11 +1627,7 @@ syrup.on('ready', function () {
             switch (this.designer().context()) {
                 case 'system':
 
-                    //document.getElementById('designer-spaces-type').innerHTML = 'System';
-
-
-
-
+                    document.getElementById('designer-spaces-type').innerHTML = 'System';
 
                     // TODO find better way
                     this.items().forEach(function (item) {
@@ -1707,6 +1703,9 @@ syrup.on('ready', function () {
                     break;
 
                 case 'schemas':
+
+                    document.getElementById('designer-spaces-type').innerHTML = 'Schemas';
+                                    
                     // clear
                     $('#designer-spaces-items').empty();
 
@@ -1756,6 +1755,9 @@ syrup.on('ready', function () {
                     break;
 
                 case 'models':
+
+                    document.getElementById('designer-spaces-type').innerHTML = 'Models';
+                    
                     // clear
                     $('#designer-spaces-items').empty();
                     
@@ -1804,6 +1806,9 @@ syrup.on('ready', function () {
                     }
                     break;
                 case 'types':
+                
+                    document.getElementById('designer-spaces-type').innerHTML = 'Types';
+                
                     // clear
                     $('#designer-spaces-items').empty();
                     
@@ -1848,6 +1853,9 @@ syrup.on('ready', function () {
                     }
                     break;
                 case 'behaviors':
+                
+                    document.getElementById('designer-spaces-type').innerHTML = 'Behaviors';
+                    
                     // clear
                     $('#designer-spaces-items').empty();
                     
@@ -1901,6 +1909,9 @@ syrup.on('ready', function () {
                     break;
 
                 case 'components':
+                
+                    document.getElementById('designer-spaces-type').innerHTML = 'Components';
+                
                     // clear
                     $('#designer-spaces-items').empty();
                     
@@ -3490,7 +3501,7 @@ syrup.on('ready', function () {
                 if (typeof schemas[name]._schema !== 'undefined' && schemas[name]._schema === schema._name) {
                     oldSchema = schemas[schema._name];
                     model = schemas[name];
-                    
+
                     for (propName in schema) {
                         if (schema.hasOwnProperty(propName) &&
                             propName.indexOf('_') !== 0 && (
@@ -3519,11 +3530,11 @@ syrup.on('ready', function () {
                                         "mandatory": false,
                                         "default": {}
                                     };
-                                    
+
                                     for (component in this.system().components()[name]) {
                                         this.system().components()[name][component][propName] = model[propName].default;
                                     }
-                                    
+
                                     break;
                                 case schema[propName] === 'method':
                                     model[propName] = {
@@ -3536,11 +3547,11 @@ syrup.on('ready', function () {
                                         ],
                                         "result": "string"
                                     };
-                                    
+
                                     for (component in this.system().components()[name]) {
                                         this.system().components()[name][component][propName] = model[propName].default;
                                     }
-                                    
+
                                     break;
                                 case schema[propName] === 'event':
                                     model[propName] = {
@@ -3552,11 +3563,11 @@ syrup.on('ready', function () {
                                             }
                                         ]
                                     };
-                                    
+
                                     for (component in this.system().components()[name]) {
                                         this.system().components()[name][component][propName] = model[propName].default;
                                     }
-                                    
+
                                     break;
                                 case schema[propName] === 'collection':
                                     model[propName] = {
@@ -3565,11 +3576,11 @@ syrup.on('ready', function () {
                                         "mandatory": false,
                                         "default": []
                                     };
-                                    
+
                                     for (component in this.system().components()[name]) {
                                         this.system().components()[name][component][propName] = model[propName].default;
                                     }
-                                    
+
                                     break;
                                 default:
                                     break;
@@ -3579,7 +3590,7 @@ syrup.on('ready', function () {
                     for (propName in oldSchema) {
                         if (schemas[name].hasOwnProperty(propName) && propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
                             delete schemas[name][propName];
-                            
+
                             for (component in this.system().components()[name]) {
                                 delete this.system().components()[name][component][propName];
                             }
