@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/system-sdk/system-designer.svg?branch=master)](https://travis-ci.org/system-sdk/system-designer)
 [![devDependency Status](https://david-dm.org/system-sdk/system-designer/dev-status.svg)](https://david-dm.org/system-sdk/system-designer#info=devDependencies)
 
+![Image Alt](http://designfirst.io/img/v2/system-designer.png)
+
 #### What is System Designer ?
 
 Design is the base of every app. 
