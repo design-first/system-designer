@@ -766,9 +766,11 @@ syrup.on('ready', function () {
         if (space !== designer.system().name()) {
             schema = schemas[space]._schema;
             states.push('init'); // TODO check if inherit from SyrupComponent
+            states.push('destroy'); 
             for (name in designer.system().schemas()[schema]) {
                 switch (designer.system().schemas()[schema][name]) {
                     case 'property':
+                    case 'link':
                     case 'collection':
                     case 'event':
                     case 'method':
@@ -872,7 +874,7 @@ syrup.on('ready', function () {
         html = this.require('model-system.html');
 
         for (propName in this.document()) {
-            if (['name', 'master', 'subsystem', 'description', 'version'].indexOf(propName) !== -1) {
+            if (['name', 'description', 'version'].indexOf(propName) !== -1) {
                 propVal = this.document()[propName];
                 doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>'
             }

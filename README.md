@@ -82,8 +82,7 @@ To run System Designer, go to [http://localhost:9001/](http://localhost:9001/) .
 
 ## Documentation
 
-* [Quick Start](https://system-designer.readme.io/docs/quick-start)
-* [Guides](https://system-designer.readme.io)
+* [Quick Start](https://system-designer.github.io/documentation/documentation.html)
 
 ## Licence
 

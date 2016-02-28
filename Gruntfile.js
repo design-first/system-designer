@@ -531,7 +531,8 @@ module.exports = function (grunt) {
                     'designer/scripts/model.min.js': ['src/designer/scripts/model.js'],
                     'designer/scripts/schema.min.js': ['src/designer/scripts/schema.js'],
                     'designer/scripts/system.min.js': ['src/designer/scripts/system.js'],
-                    'designer/scripts/type.min.js': ['src/designer/scripts/type.js']
+                    'designer/scripts/type.min.js': ['src/designer/scripts/type.js'],
+                    'designer/scripts/documentation.min.js': ['src/designer/scripts/documentation.js']
                 }
             }
         },

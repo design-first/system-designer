@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A Designer for Systems">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="icon" href="../img/favicon.ico">
+    <title>Documentation | system designer</title>
+    <!-- bootstrap -->
+    <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- prism -->
+    <link href="../lib/prism/prism.css" rel="stylesheet">
+    <!-- designer system -->
+    <link href="../systems/design.json" async="true" type="application/json" rel="system">
+    <!-- designer -->
+    <link href="../styles/documentation.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Menubar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Menu header -->
+            <div id="designer-menubar-header" class="navbar-header"></div>
+            <div>
+                <!-- Menu items -->
+                <ul id="designer-menubar-items" class="nav navbar-nav"></ul>
+                <!-- Menu actions -->
+                <ul id="designer-menubar-actions" class="nav navbar-nav navbar-right"></ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <!-- Toobar -->
+            <div class="col-xs-1 sidebar">
+                <ul id="designer-toolbar-items" class="nav nav-sidebar"></ul>
+            </div>
+            <div class="col-xs-offset-1 col-xs-11 main">
+                <!-- Dialog -->
+                <div id="designer-dialog-copyright"></div>
+                <!-- Documentation -->
+                <div id="designer-documentation"></div>
+            </div>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="../lib/jquery/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- prism -->
+    <script src="../lib/prism/prism.js"></script>
+    <!-- SyrupJS -->
+    <script type="text/javascript" src="../lib/system-runtime/system-runtime.min.js"></script>
+    <!-- designer -->
+    <script type="text/javascript" src="../scripts/documentation.min.js"></script>
+</body>
+
+</html>
