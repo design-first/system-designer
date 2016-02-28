@@ -1599,16 +1599,13 @@ syrup.on('ready', function () {
     });
 
     Spaces.on('render', function () {
-        var items = '',
-            item = null,
+        var item = null,
             system = this.designer().system(),
-            collections = {},
             SpaceItem = this.require('SpaceItem'),
             spaceItem = null,
             domItems = document.getElementById('designer-spaces-items'),
             self = this;
-
-
+            
         function _removeActive() {
             var length = 0,
                 i = 0,
@@ -1621,14 +1618,37 @@ syrup.on('ready', function () {
             }
         }
         
+        // update header
+        switch (this.designer().context()) {
+            case 'system':
+                document.getElementById('designer-spaces-type').innerHTML = 'Systems';
+                break;
+            case 'schemas':
+                document.getElementById('designer-spaces-type').innerHTML = 'Schemas';
+                break;
+            case 'models':
+                document.getElementById('designer-spaces-type').innerHTML = 'Models';
+                break;
+            case 'types':
+                document.getElementById('designer-spaces-type').innerHTML = 'Types';
+                break;
+            case 'behaviors':
+                document.getElementById('designer-spaces-type').innerHTML = 'Behaviors';
+                break;
+            case 'components':
+                document.getElementById('designer-spaces-type').innerHTML = 'Components';
+                break;
+            default:
+                break;
+        }
+
+        // update spaces
         // clear
         $('#designer-spaces-items').empty();
         if (system) {
             switch (this.designer().context()) {
+                
                 case 'system':
-
-                    document.getElementById('designer-spaces-type').innerHTML = 'Systems';
-
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -1702,13 +1722,7 @@ syrup.on('ready', function () {
                     }
                     break;
 
-                case 'schemas':
-
-                    document.getElementById('designer-spaces-type').innerHTML = 'Schemas';
-                                    
-                    // clear
-                    $('#designer-spaces-items').empty();
-
+                case 'schemas':                                   
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -1755,12 +1769,6 @@ syrup.on('ready', function () {
                     break;
 
                 case 'models':
-
-                    document.getElementById('designer-spaces-type').innerHTML = 'Models';
-                    
-                    // clear
-                    $('#designer-spaces-items').empty();
-                    
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -1805,13 +1813,7 @@ syrup.on('ready', function () {
                         this.require('designer').space('');
                     }
                     break;
-                case 'types':
-                
-                    document.getElementById('designer-spaces-type').innerHTML = 'Types';
-                
-                    // clear
-                    $('#designer-spaces-items').empty();
-                    
+                case 'types':          
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -1852,13 +1854,7 @@ syrup.on('ready', function () {
                         }
                     }
                     break;
-                case 'behaviors':
-                
-                    document.getElementById('designer-spaces-type').innerHTML = 'Behaviors';
-                    
-                    // clear
-                    $('#designer-spaces-items').empty();
-                    
+                case 'behaviors':               
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -1908,13 +1904,7 @@ syrup.on('ready', function () {
                     }
                     break;
 
-                case 'components':
-                
-                    document.getElementById('designer-spaces-type').innerHTML = 'Components';
-                
-                    // clear
-                    $('#designer-spaces-items').empty();
-                    
+                case 'components':       
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
