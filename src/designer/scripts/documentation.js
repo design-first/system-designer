@@ -123,6 +123,9 @@ syrup.on('ready', function () {
             domHeader = document.getElementById('designer-menubar-header'),
             domItems = document.getElementById('designer-menubar-items'),
             domAction = document.getElementById('designer-menubar-actions'),
+            arr = window.location.href.split('#'),
+            context = 'overview',
+            designer = this.require('designer'),
             self = this;
 
         function _removeActive() {
@@ -162,13 +165,19 @@ syrup.on('ready', function () {
         this.actions().forEach(function (action) {
             domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>')
         });
-        
-        // focus on first element
-        if (length > 0) {
-            this.designer().context(this.items(0).name());
-            item = domItems.children[0];
-            $(item).addClass('active');
+
+        if (arr.length > 1) {
+            context = arr[1].trim();
         }
+
+        for (i = 0; i < length; i++) {
+            if (this.items(i).name() === context) {
+                item = domItems.children[i];
+                $(item).addClass('active');
+            }
+        };
+
+        designer.context(context);
     });
     
     // ToolBar
@@ -223,18 +232,22 @@ syrup.on('ready', function () {
     
     // Workspace
     var Workspace = this.require('Workspace');
-    Workspace.on('init', function (conf) {
 
+    Workspace.on('clear', function () {
+        $('#designer-documentation').empty();
     });
 
     Workspace.on('render', function () {
-        var html = this.require('documentation-get-started.html');
+        var html = '',
+            context = this.require('designer').context();
 
-        document.querySelector('#designer-documentation').insertAdjacentHTML('afterbegin',
-            html.source()
-            );
-            
-        Prism.highlightAll();
+        if (context) {
+            html = this.require('documentation-' + context + '.html');
+            document.querySelector('#designer-documentation').insertAdjacentHTML('afterbegin',
+                html.source()
+                );
+            Prism.highlightAll();
+        }
     });
     
     // Server
@@ -243,8 +256,7 @@ syrup.on('ready', function () {
         var Worker = null,
             worker = null,
             SyrupChannel = null,
-            channel = null,
-            id = '';
+            channel = null;
 
         Worker = this.require('Worker');
         worker = new Worker({
@@ -314,12 +326,41 @@ syrup.on('ready', function () {
         this.toolbar(toolbar);
         this.workspace(workspace);
         this.server(server);
+        
+        // add event when history change
+        var that = this;
+        window.onhashchange = function (e) {
+            var arr = window.location.href.split('#'),
+                context = 'overview',
+                domItems = null,
+                item = null,
+                i = 0;
+
+            if (arr.length > 1) {
+                context = arr[1];
+            }
+
+            that.context(context);
+
+            // focus
+            domItems = document.getElementById('designer-menubar-items');
+            length = that.menubar().items().length;
+            for (i = 0; i < length; i++) {
+                item = domItems.children[i];
+                $(item).removeClass('active');
+            };
+            for (i = 0; i < length; i++) {
+                if (that.menubar().items(i).name() === context) {
+                    item = domItems.children[i];
+                    $(item).addClass('active');
+                }
+            };
+        }
     });
 
     Designer.on('render', function () {
         this.menubar().render();
         this.toolbar().render();
-        this.workspace().render();
         this.server().start();
     });
 
@@ -329,7 +370,7 @@ syrup.on('ready', function () {
 
     Designer.on('context', function (val) {
         this.workspace().clear();
-        this.workspace().refresh();
+        this.workspace().render();
     });
 
     // main

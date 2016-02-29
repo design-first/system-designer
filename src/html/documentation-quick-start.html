@@ -118,22 +118,12 @@
         <li>update the code with this:</li>
     </ul>
     <pre class="language-javascript"><code class="language-javascript">function main() {\n 
-   var search = [],\n
-        lukeId = -1,\n
-        luke = null;\n
-   \n
-    // find luke document\n
-    search = this.require('db').collections().Jedi.find({\n
-        'firstName': 'Luke'\n
-    });\n
-    \n
-    // get its id\n
-    lukeId = search[0]._id;\n
-    \n
+   var luke = null;\n
+\n
     // get the component\n
-    luke = this.require(lukeId);\n
-    \n
-    // get the name of the father of Luke\n
+    luke = this.require('166c21e4a01dd30');\n
+\n    
+// get the name of the father of Luke\n
     console.log(luke.father().fullName());\n
 }</code>
 </pre>
@@ -161,7 +151,7 @@
         <li>select <i>JS (node)</i>,</li>
         <li>your system will be exported in a JavaScript file,</li>
         <li>save the file on your server project,</li>
-        <li>in your project, install this package to run of your system:</li>
+        <li>in your project, install this package to run your system:</li>
     </ul>
     <pre class="language-javascript"><code class="language-javascript">npm install system-runtime --save</code></pre>
     <ul>

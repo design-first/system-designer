@@ -450,32 +450,80 @@ syrup.on('ready', function () {
         var sys = null,
             name = '',
             modelName = '',
+            propName = '',
+            compId = '',
             designer = this.require('designer'),
             system = designer.system(),
             message = this.require('message');
 
         sys = this.data();
 
-        for (name in sys.schemas) {
-            system.schemas()[name] = sys.schemas[name];
-        }
-
-        for (name in sys.types) {
-            system.types()[name] = sys.types[name];
-        }
-
-        for (name in sys.behaviors) {
-            system.behaviors()[name] = sys.behaviors[name];
-        }
-
-        for (name in sys.components) {
-            if (!system.components()[name]) {
-                system.components()[name] = {};
+        if (Object.keys(sys).length) {
+            // schemas
+            for (name in sys.schemas) {
+                if (system.schemas()[name]) {
+                    for (propName in sys.schemas[name]) {
+                        system.schemas()[name][propName] = sys.schemas[name][propName];
+                    }
+                } else {
+                    system.schemas()[name] = sys.schemas[name];
+                }
             }
-            for (modelName in sys.components[name]) {
-                system.components()[name][modelName] = sys.components[name][modelName];
+            // types
+            for (name in sys.types) {
+                if (system.types()[name]) {
+                    for (propName in sys.types[name]) {
+                        system.types()[name][propName] = sys.types[name][propName];
+                    }
+                } else {
+                    system.types()[name] = sys.types[name];
+                }
+            }
+            // behaviors
+            for (name in sys.behaviors) {
+                if (name !== sys._id) {
+                    system.behaviors()[name] = sys.behaviors[name]; 
+                }
+            }
+            // components
+            for (modelName in sys.components) {
+                if (!system.components()[modelName]) {
+                    system.components()[modelName] = {};
+                }
+                for (compId in sys.components[modelName]) {
+                    if (system.components()[modelName][compId]) {
+                        for (propName in sys.components[modelName][compId]) {
+                            system.components()[modelName][compId][propName] = sys.components[modelName][compId][propName];
+                        }
+                    } else {
+                        system.components()[modelName][compId] = sys.components[modelName][compId];
+                    }
+                }
             }
         }
+        
+        
+        /*
+                for (name in sys.schemas) {
+                    system.schemas()[name] = sys.schemas[name];
+                }
+        
+                for (name in sys.types) {
+                    system.types()[name] = sys.types[name];
+                }
+        
+                for (name in sys.behaviors) {
+                    system.behaviors()[name] = sys.behaviors[name];
+                }
+        
+                for (name in sys.components) {
+                    if (!system.components()[name]) {
+                        system.components()[name] = {};
+                    }
+                    for (modelName in sys.components[name]) {
+                        system.components()[name][modelName] = sys.components[name][modelName];
+                    }
+                }*/
 
         designer.save();
         designer.workspace().refresh();
@@ -766,7 +814,7 @@ syrup.on('ready', function () {
         if (space !== designer.system().name()) {
             schema = schemas[space]._schema;
             states.push('init'); // TODO check if inherit from SyrupComponent
-            states.push('destroy'); 
+            states.push('destroy');
             for (name in designer.system().schemas()[schema]) {
                 switch (designer.system().schemas()[schema][name]) {
                     case 'property':
@@ -1607,7 +1655,7 @@ syrup.on('ready', function () {
             spaceItem = null,
             domItems = document.getElementById('designer-spaces-items'),
             self = this;
-            
+
         function _removeActive() {
             var length = 0,
                 i = 0,
@@ -1619,26 +1667,40 @@ syrup.on('ready', function () {
                 $(item).removeClass('active');
             }
         }
+
+        $('#designer-spaces-help').empty();
         
-        // update header
+        // update header and help
         switch (this.designer().context()) {
             case 'system':
                 document.getElementById('designer-spaces-type').innerHTML = 'Systems';
+                // help
+                document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-system.html').source());
                 break;
             case 'schemas':
                 document.getElementById('designer-spaces-type').innerHTML = 'Schemas';
+                // help
+                document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-schemas.html').source());
                 break;
             case 'models':
                 document.getElementById('designer-spaces-type').innerHTML = 'Models';
+                // help
+                document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-models.html').source());
                 break;
             case 'types':
                 document.getElementById('designer-spaces-type').innerHTML = 'Types';
+                // help
+                document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-types.html').source());
                 break;
             case 'behaviors':
                 document.getElementById('designer-spaces-type').innerHTML = 'Behaviors';
+                // help
+                document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-behaviors.html').source());
                 break;
             case 'components':
                 document.getElementById('designer-spaces-type').innerHTML = 'Components';
+                // help
+                document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-components.html').source());
                 break;
             default:
                 break;
@@ -1649,7 +1711,7 @@ syrup.on('ready', function () {
         $('#designer-spaces-items').empty();
         if (system) {
             switch (this.designer().context()) {
-                
+
                 case 'system':
                     // TODO find better way
                     this.items().forEach(function (item) {
@@ -1962,7 +2024,7 @@ syrup.on('ready', function () {
                             this.require('designer').space(this.items(0).name());
                         }
                     }
-
+                 
                     break;
                 default:
                     break;
@@ -3312,7 +3374,6 @@ syrup.on('ready', function () {
             for (i = 0; i < length; i++) {
                 item = domItems.children[i];
                 $(item).removeClass('active');
-
             };
             for (i = 0; i < length; i++) {
                 if (that.menubar().items(i).name() === collection) {
