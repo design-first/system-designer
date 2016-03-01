@@ -2514,7 +2514,7 @@ syrup.on('ready', function () {
                                     }
                                 }
 
-                                if (schemas[schemaModel][state] === 'property') {
+                                if (schemas[schemaModel][state] === 'property' || schemas[schemaModel][state] === 'link') {
                                     params = 'value';
                                 }
 
