@@ -482,7 +482,7 @@ syrup.on('ready', function () {
             // behaviors
             for (name in sys.behaviors) {
                 if (name !== sys._id) {
-                    system.behaviors()[name] = sys.behaviors[name]; 
+                    system.behaviors()[name] = sys.behaviors[name];
                 }
             }
             // components
@@ -1021,7 +1021,7 @@ syrup.on('ready', function () {
         }
 
         if (doc === '') {
-            doc = doc + '<a class="list-group-item" style="text-align: left"></a>';
+            doc = doc + '<a class="list-group-item" style="text-align: left"><br/><br/></a>';
         }
 
         document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
@@ -1090,7 +1090,7 @@ syrup.on('ready', function () {
         }
 
         if (doc === '') {
-            doc = doc + '<tr><td></td><td></td></tr>';
+            doc = doc + '<tr><td><br/><br/><br/></td><td><br/><br/><br/></td></tr>';
         }
 
         document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
@@ -1255,10 +1255,10 @@ syrup.on('ready', function () {
 
 
         if (attributes === '') {
-            attributes = attributes + '<a class="list-group-item" style="text-align: left"></a>';
+            attributes = attributes + '<a class="list-group-item" style="text-align: left"><br/></a>';
         }
         if (methods === '') {
-            methods = methods + '<a class="list-group-item" style="text-align: left"></a>';
+            methods = methods + '<a class="list-group-item" style="text-align: left"><br/></a>';
         }
         
         // html 
@@ -1354,7 +1354,8 @@ syrup.on('ready', function () {
         html.addEventListener('click', function (event) {
             var designer = this.require('designer');
             delete designer.system().behaviors()[this.uuid()];
-            $('#designer-behavior-' + this.uuid()).fadeOut(500, function () {
+            
+            $('#designer-behavior-' + this.uuid()).fadeOut(400, function () {
                 $(this).remove();
             });
 
@@ -1389,6 +1390,10 @@ syrup.on('ready', function () {
                 doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>'
             }
         }
+
+        if (doc === '') {
+            doc = doc + '<tr><td><br/><br/></td><td><br/><br/></td></tr>'
+        }
         
         // html 
         htmlComp = this.require('model-component.html');
@@ -1422,10 +1427,10 @@ syrup.on('ready', function () {
             // if (Object.keys(designer.system().components()[this.model()])) {
             //     delete designer.system().components()[this.model()];
             //}
-            $('#designer-component-' + this.uuid()).fadeOut(500, function () {
+            $('#designer-component-' + this.uuid()).fadeOut(400, function () {
                 $(this).remove();
             });
-
+            
             this.require('channel').deleteComponent(this.uuid(), this.model());
 
             this.destroy();
@@ -2024,7 +2029,7 @@ syrup.on('ready', function () {
                             this.require('designer').space(this.items(0).name());
                         }
                     }
-                 
+
                     break;
                 default:
                     break;
@@ -2151,7 +2156,9 @@ syrup.on('ready', function () {
 
                         designer.space(name);
                         designer.spaces().render();
-                        designer.workspace.refresh();
+                        designer.workspace().refresh();
+
+                        this.require('message').success('system created. You can now begin to create schemas.')
                     }
                 });
                 break;
@@ -2202,7 +2209,9 @@ syrup.on('ready', function () {
 
                             designer.space(name);
                             designer.spaces().render();
-                            designer.workspace.refresh();
+                            designer.workspace().refresh();
+
+                            this.require('message').success('schema created. You can now edit it and generate models from this schema.')
                         }
                     });
                 }
@@ -2311,7 +2320,9 @@ syrup.on('ready', function () {
 
                             designer.space(name);
                             designer.spaces().render();
-                            designer.workspace.refresh();
+                            designer.workspace().refresh();
+
+                            this.require('message').success('model generated from the schema. You can now edit it, create behaviors or components from this model.')
                         }
                     });
                 }
@@ -2369,13 +2380,15 @@ syrup.on('ready', function () {
 
                             designer.save();
 
+                            this.require('channel').createType(name, type);
+
                             this.hide();
 
                             designer.space(name);
                             designer.spaces().render();
-                            designer.workspace.refresh();
+                            designer.workspace().refresh();
 
-                            this.require('channel').createType(name, type);
+                            this.require('message').success('type created. You can use it in your model.')
                         }
                     });
                 }
@@ -2418,6 +2431,9 @@ syrup.on('ready', function () {
                                 propertyNames.push(att);
                             }
                             if (schema[att] === 'link') {
+                                propertyNames.push(att);
+                            }
+                            if (schema[att] === 'collection') {
                                 propertyNames.push(att);
                             }
                         }
@@ -2601,6 +2617,7 @@ syrup.on('ready', function () {
             ModelSchema = null,
             ModelClass = null,
             modelSchema = null,
+
             sys = null,
             name = '',
             id = '',
@@ -3116,7 +3133,7 @@ syrup.on('ready', function () {
             var designer = this.require('designer'),
                 models = [],
                 model = null;
-
+                
             models = this.require('db').collections().ModelComponent.find({
                 'uuid': id
             });
