@@ -1,6 +1,6 @@
-var syrup = require('system-runtime');
+var runtime = require('system-runtime');
 
 // import the system
-var systemId = syrup.require('db').system({{system}});
+var systemId = runtime.require('db').system({{system}});
 // run the system
-syrup.require(systemId).main();
+runtime.require(systemId).main();

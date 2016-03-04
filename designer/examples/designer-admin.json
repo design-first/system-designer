@@ -5,7 +5,7 @@
 			"_name": "Worker",
 			"_schema": "WorkerSchema",
 			"_inherit": [
-				"SyrupComponent"
+				"RuntimeComponent"
 			],
 			"_core": true,
 			"worker": {
@@ -27,27 +27,27 @@
 			"_id": "WorkerSchema",
 			"_name": "WorkerSchema",
 			"_inherit": [
-				"SyrupComponentSchema"
+				"RuntimeComponentSchema"
 			],
 			"_core": true,
 			"worker": "property",
 			"send": "method"
 		},
-		"SyrupAdminSchema": {
-			"_id": "SyrupAdminSchema",
-			"_name": "SyrupAdminSchema",
+		"RuntimeAdminSchema": {
+			"_id": "RuntimeAdminSchema",
+			"_name": "RuntimeAdminSchema",
 			"_inherit": [
-				"SyrupComponentSchema"
+				"RuntimeComponentSchema"
 			],
 			"_core": true,
 			"start": "method"
 		},
-		"SyrupAdmin": {
-			"_id": "SyrupAdmin",
-			"_name": "SyrupAdmin",
-			"_schema": "SyrupAdminSchema",
+		"RuntimeAdmin": {
+			"_id": "RuntimeAdmin",
+			"_name": "RuntimeAdmin",
+			"_schema": "RuntimeAdminSchema",
 			"_inherit": [
-				"SyrupComponent"
+				"RuntimeComponent"
 			],
 			"_core": true,
 			"start": {
@@ -61,19 +61,19 @@
 				]
 			}
 		},
-		"SyrupChannelSchema": {
-			"_id": "SyrupChannelSchema",
-			"_name": "SyrupChannelSchema",
+		"RuntimeChannelSchema": {
+			"_id": "RuntimeChannelSchema",
+			"_name": "RuntimeChannelSchema",
 			"sync": "event",
 			"loadSystem": "event",
 			"updateBehavior": "event"
 		},
-		"SyrupChannel": {
-			"_id": "SyrupChannel",
-			"_name": "SyrupChannel",
-			"_schema": "SyrupChannelSchema",
+		"RuntimeChannel": {
+			"_id": "RuntimeChannel",
+			"_name": "RuntimeChannel",
+			"_schema": "RuntimeChannelSchema",
 			"_inherit": [
-				"SyrupComponent"
+				"RuntimeComponent"
 			],
 			"sync": {},
 			"loadSystem": {
@@ -102,15 +102,15 @@
 	"behaviors": {
 		"1c00c107e01c9b3": {
 			"_id": "1c00c107e01c9b3",
-			"component": "SyrupAdmin",
+			"component": "RuntimeAdmin",
 			"state": "start",
-			"action": "function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = '';\n    \n    if (path) {\n        workerPath = path + '/scripts/worker.js';\n        workerPath = workerPath.replace(/\\/\\//g,'/');\n    } else {\n        workerPath = '/designer/scripts/worker.js';\n    }\n    \n    if (typeof SharedWorker !== 'undefined') {\n        Worker = this.require('Worker');\n        worker = new Worker({\n            '_id': 'worker',\n            '_core': true,\n            'worker': new SharedWorker(workerPath),\n        });\n        \n        worker.worker().port.onmessage = function (e) {\n          $db.SyrupMessage.insert(e.data);\n        };\n    }\n}",
+			"action": "function start(path) {\n    var Worker = null,\n    worker = null,\n    workerPath = '';\n    \n    if (path) {\n        workerPath = path + '/scripts/worker.js';\n        workerPath = workerPath.replace(/\\/\\//g,'/');\n    } else {\n        workerPath = '/designer/scripts/worker.js';\n    }\n    \n    if (typeof SharedWorker !== 'undefined') {\n        Worker = this.require('Worker');\n        worker = new Worker({\n            '_id': 'worker',\n            '_core': true,\n            'worker': new SharedWorker(workerPath),\n        });\n        \n        worker.worker().port.onmessage = function (e) {\n          $db.RuntimeMessage.insert(e.data);\n        };\n    }\n}",
 			"useCoreAPI": true,
 			"core": true
 		},
 		"18afb10f841b94b": {
 			"_id": "18afb10f841b94b",
-			"component": "SyrupChannel",
+			"component": "RuntimeChannel",
 			"state": "send",
 			"action": "function send(message) {\n    this.require('worker').worker().port.postMessage(message);\n}",
 			"useCoreAPI": false,
@@ -118,7 +118,7 @@
 		},
 		"1058d10a651fb87": {
 			"_id": "1058d10a651fb87",
-			"component": "SyrupChannel",
+			"component": "RuntimeChannel",
 			"state": "sync",
 			"action": "function sync() {\n    this.loadSystem(JSON.parse(this.require('db').system()));\n}",
 			"useCoreAPI": false,
@@ -126,7 +126,7 @@
 		},
 		"1f58e1d4221466a": {
 			"_id": "1f58e1d4221466a",
-			"component": "SyrupChannel",
+			"component": "RuntimeChannel",
 			"state": "updateBehavior",
 			"action": "function updateBehavior(id, behavior) {\n    this.require(id).action(behavior.action);\n}",
 			"useCoreAPI": false,
@@ -134,17 +134,17 @@
 		}
 	},
 	"components": {
-		"SyrupAdmin": {
+		"RuntimeAdmin": {
 			"admin": {
 				"_id": "admin"
 			}
 		},
-		"SyrupChannelEvent": {
+		"RuntimeChannelEvent": {
 			"108ae1968d14bf9": {
 				"_id": "108ae1968d14bf9"
 			}
 		},
-		"SyrupChannel": {
+		"RuntimeChannel": {
 			"1aec3130d71b6f1": {
 				"_id": "1aec3130d71b6f1"
 			}

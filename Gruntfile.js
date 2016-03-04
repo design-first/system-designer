@@ -494,7 +494,7 @@ module.exports = function (grunt) {
             }
         },
         "merge-json": {
-            syrupjs: {
+            runtime: {
                 src: ["build/js/js.json", "build/json/json.json", "build/html/html.json", "build/css/css.json", "src/addons/*.json", "build/system/design.json"],
                 dest: "build/system/design.json"
             }

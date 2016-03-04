@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-syrup.on('ready', function () {
+runtime.on('ready', function () {
     var system = this.system('design');  
     
     // DIALOG COPYRIGHT
@@ -257,7 +257,7 @@ syrup.on('ready', function () {
     Server.on('start', function () {
         var Worker = null,
             worker = null,
-            SyrupChannel = null,
+            RuntimeChannel = null,
             channel = null,
             id = '',
             title = '',
@@ -269,11 +269,11 @@ syrup.on('ready', function () {
             "worker": new SharedWorker('./scripts/worker.js'),
         });
         worker.worker().port.onmessage = function (e) {
-            $db.SyrupMessage.insert(e.data);
+            $db.RuntimeMessage.insert(e.data);
         }
 
-        SyrupChannel = this.require('SyrupChannel');
-        channel = new SyrupChannel({
+        RuntimeChannel = this.require('RuntimeChannel');
+        channel = new RuntimeChannel({
             '_id': 'channel'
         });
 
@@ -384,7 +384,7 @@ syrup.on('ready', function () {
             name: 'myCommand',
             bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
             exec: function (editor) {
-                syrup.require('designer').save();
+                runtime.require('designer').save();
             }
         });
     });

@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-syrup.on('ready', function () {
+runtime.on('ready', function () {
     var system = this.system('design');
 
     // DIALOG IMPORT
@@ -813,7 +813,7 @@ syrup.on('ready', function () {
 
         if (space !== designer.system().name()) {
             schema = schemas[space]._schema;
-            states.push('init'); // TODO check if inherit from SyrupComponent
+            states.push('init'); // TODO check if inherit from RuntimeComponent
             states.push('destroy');
             for (name in designer.system().schemas()[schema]) {
                 switch (designer.system().schemas()[schema][name]) {
@@ -1101,7 +1101,7 @@ syrup.on('ready', function () {
             );
 
         //events
-        if (this.uuid() !== 'SyrupComponentSchema') {
+        if (this.uuid() !== 'RuntimeComponentSchema') {
             html = document.getElementById('designer-schema-' + this.uuid()).children[0].children[1];
 
             html.addEventListener('click', function (event) {
@@ -1131,8 +1131,8 @@ syrup.on('ready', function () {
                 designer.workspace().refresh();
             }.bind(this));
         } else {
-            $('#designer-model-panel-SyrupComponentSchema div div').hide();
-            $('#designer-schema-SyrupComponentSchema > div > .panel-body').attr('style', 'cursor: inherit');
+            $('#designer-model-panel-RuntimeComponentSchema div div').hide();
+            $('#designer-schema-RuntimeComponentSchema > div > .panel-body').attr('style', 'cursor: inherit');
         }
     });
 
@@ -1165,14 +1165,14 @@ syrup.on('ready', function () {
                     case typeof propVal.type !== 'undefined':
                         if (!Array.isArray(propVal.type)) {
                             if (propVal.type.indexOf('@') !== -1) {
-                                if (this.uuid() !== 'SyrupComponent' && propVal.type !== '@SyrupComponent') {
+                                if (this.uuid() !== 'RuntimeComponent' && propVal.type !== '@RuntimeComponent') {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type.replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';
                                 }
                             } else {
                                 if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    if (this.uuid() !== 'SyrupComponent') {
+                                    if (this.uuid() !== 'RuntimeComponent') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type + '</a></div>';
                                     } else {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type + '</div>';
@@ -1183,14 +1183,14 @@ syrup.on('ready', function () {
                             }
                         } else {
                             if (propVal.type[0].indexOf('@') !== -1) {
-                                if (this.uuid() !== 'SyrupComponent') {
+                                if (this.uuid() !== 'RuntimeComponent') {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type[0].replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
                                 }
                             } else {
                                 if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    if (this.uuid() !== 'SyrupComponent') {
+                                    if (this.uuid() !== 'RuntimeComponent') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                     } else {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
@@ -1212,13 +1212,13 @@ syrup.on('ready', function () {
 
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            if (this.uuid() !== 'SyrupComponent') {
+                            if (this.uuid() !== 'RuntimeComponent') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ': ' + result + '</div>';
                             }
                         } else {
-                            if (this.uuid() !== 'SyrupComponent') {
+                            if (this.uuid() !== 'RuntimeComponent') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + '</div>';
@@ -1236,13 +1236,13 @@ syrup.on('ready', function () {
                         var result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            if (this.uuid() !== 'SyrupComponent') {
+                            if (this.uuid() !== 'RuntimeComponent') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>(): ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '(): ' + result + '</div>';
                             }
                         } else {
-                            if (this.uuid() !== 'SyrupComponent') {
+                            if (this.uuid() !== 'RuntimeComponent') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '()</div>';
@@ -1275,7 +1275,7 @@ syrup.on('ready', function () {
             );
 
         //events
-        if (this.uuid() !== 'SyrupComponent') {
+        if (this.uuid() !== 'RuntimeComponent') {
             html = document.getElementById('designer-model-' + this.uuid()).children[0].children[1];
 
             html.addEventListener('click', function (event) {
@@ -1306,8 +1306,8 @@ syrup.on('ready', function () {
                 designer.workspace().refresh();
             }.bind(this));
         } else {
-            $('#designer-model-SyrupComponent > div > div > div > button').hide();
-            $('#designer-model-SyrupComponent > div > .panel-body').attr('style', 'cursor: inherit');
+            $('#designer-model-RuntimeComponent > div > div > div > button').hide();
+            $('#designer-model-RuntimeComponent > div > .panel-body').attr('style', 'cursor: inherit');
         }
     });
 
@@ -2187,7 +2187,7 @@ syrup.on('ready', function () {
                             // set schema
                             schema = {
                                 "_name": name,
-                                "_inherit": ["SyrupComponentSchema"]
+                                "_inherit": ["RuntimeComponentSchema"]
                             };
                     
                             // add (TODO improve)
@@ -2244,7 +2244,7 @@ syrup.on('ready', function () {
                             model = {
                                 "_name": name,
                                 "_schema": schema,
-                                "_inherit": ["SyrupComponent"] // TODO only if schema inherits from SyrupComponentSchema
+                                "_inherit": ["RuntimeComponent"] // TODO only if schema inherits from RuntimeComponentSchema
                             };
                     
                             // prepare model
@@ -2260,7 +2260,7 @@ syrup.on('ready', function () {
                                         break;
                                     case designer.system().schemas()[schema][att] === 'link':
                                         model[att] = {
-                                            "type": "@SyrupComponent",
+                                            "type": "@RuntimeComponent",
                                             "readOnly": false,
                                             "mandatory": false,
                                             "default": {}
@@ -2677,9 +2677,9 @@ syrup.on('ready', function () {
                                         'title': parents[i]
                                     });
                                     modelSchema.uuid(parents[i]);
-                                    if (parents[i] === 'SyrupComponentSchema') {
-                                        var schemaSyrup = {
-                                            "_name": "SyrupComponentSchema",
+                                    if (parents[i] === 'RuntimeComponentSchema') {
+                                        var schemaRuntime = {
+                                            "_name": "RuntimeComponentSchema",
                                             "_core": true,
                                             "classInfo": "property",
                                             "on": "method",
@@ -2690,8 +2690,8 @@ syrup.on('ready', function () {
                                             "error": "event"
                                         };
 
-                                        modelSchema.document(schemaSyrup);
-                                        modelSchema.content(JSON.stringify(schemaSyrup));
+                                        modelSchema.document(schemaRuntime);
+                                        modelSchema.content(JSON.stringify(schemaRuntime));
                                     } else {
                                         modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[parents[i]])));
                                         modelSchema.content(JSON.stringify(system.schemas()[parents[i]]));
@@ -2732,10 +2732,10 @@ syrup.on('ready', function () {
                                         'title': parents[i]
                                     });
                                     modelclass.uuid(parents[i]);
-                                    if (parents[i] === 'SyrupComponent') {
-                                        var modelSyrup = {
-                                            "_name": "SyrupComponent",
-                                            "_schema": "SyrupComponentSchema",
+                                    if (parents[i] === 'RuntimeComponent') {
+                                        var modelRuntime = {
+                                            "_name": "RuntimeComponent",
+                                            "_schema": "RuntimeComponentSchema",
                                             "_core": true,
                                             "on": {
                                                 "params": [{
@@ -2776,7 +2776,7 @@ syrup.on('ready', function () {
                                                 "params": []
                                             },
                                             "classInfo": {
-                                                "type": "@SyrupClassInfo",
+                                                "type": "@RuntimeClassInfo",
                                                 "readOnly": false,
                                                 "mandatory": false,
                                                 "default": {}
@@ -2797,8 +2797,8 @@ syrup.on('ready', function () {
                                             }
                                         }
 
-                                        modelclass.document(modelSyrup);
-                                        modelclass.content(JSON.stringify(modelSyrup));
+                                        modelclass.document(modelRuntime);
+                                        modelclass.content(JSON.stringify(modelRuntime));
                                     } else {
                                         modelclass.document(JSON.parse(JSON.stringify(system.schemas()[parents[i]])));
                                         modelclass.content(JSON.stringify(system.schemas()[parents[i]]));
@@ -2918,13 +2918,13 @@ syrup.on('ready', function () {
     // Server
     var Server = this.require('Server');
     Server.on('start', function () {
-        var SyrupChannel = null,
+        var RuntimeChannel = null,
             channel = null,
             Worker = null,
             worker = null;
 
-        SyrupChannel = this.require('SyrupChannel');
-        channel = new SyrupChannel({
+        RuntimeChannel = this.require('RuntimeChannel');
+        channel = new RuntimeChannel({
             '_id': 'channel'
         });
 
@@ -3237,7 +3237,7 @@ syrup.on('ready', function () {
             "worker": new SharedWorker('./scripts/worker.js'),
         });
         worker.worker().port.onmessage = function (e) {
-            $db.SyrupMessage.insert(e.data);
+            $db.RuntimeMessage.insert(e.data);
         }
 
     }, true);
@@ -3295,10 +3295,10 @@ syrup.on('ready', function () {
         this.server(server);
         
         // message
-        this.require('syrup').on('warning', function (message) {
+        this.require('runtime').on('warning', function (message) {
             this.require('message').warning(message);
         });
-        this.require('syrup').on('error', function (error) {
+        this.require('runtime').on('error', function (error) {
             this.require('message').danger(error.message);
         });
         
@@ -3595,7 +3595,7 @@ syrup.on('ready', function () {
                                     break;
                                 case schema[propName] === 'link':
                                     model[propName] = {
-                                        "type": "@SyrupComponent",
+                                        "type": "@RuntimeComponent",
                                         "readOnly": false,
                                         "mandatory": false,
                                         "default": {}

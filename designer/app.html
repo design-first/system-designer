@@ -8,24 +8,24 @@
 </head>
 
 <body>
-    <!-- SyrupJS -->
+    <!-- Runtime -->
     <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
     <script>
-        syrup.on('ready', function () {
-            var system = syrup.system('app');
+        runtime.on('ready', function () {
+            var system = runtime.system('app');
             
             system.require('metamodel').schema({
-                "_id": "SyrupChannelSchema",
-                "_name": "SyrupChannelSchema",
+                "_id": "RuntimeChannelSchema",
+                "_name": "RuntimeChannelSchema",
                 "_core": true,
                 "getInitSystem": "event",
                 "setInitSystem": "event"
             });
 
             system.require('metamodel').schema({
-                "_id": "SyrupChannel",
-                "_name": "SyrupChannel",
-                "_schema": "SyrupChannelSchema",
+                "_id": "RuntimeChannel",
+                "_name": "RuntimeChannel",
+                "_schema": "RuntimeChannelSchema",
                 "_core": true,
                 "getInitSystem": {
                     "params": [
@@ -65,7 +65,7 @@
                     delete system.classInfo;
                     var systemID = this.require('db').system(system);
 
-                    console.info('syrup: the system is loaded.')
+                    console.info('runtime: the system is loaded.')
 
                     this.require(systemID).main();
                 });
@@ -75,7 +75,7 @@
                 
                 channel.off('sync');
                 
-                console.info('syrup: loading the system...');
+                console.info('runtime: loading the system...');
             }, true);
             
             system.main();
