@@ -174,7 +174,7 @@ module.exports = function (grunt) {
                             // filename
                             fileName = filepath.split('json/')[1];
                             fileName = fileName.split('/')[0];
-                            
+
                             src = encodeURI(src);
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
@@ -574,6 +574,10 @@ module.exports = function (grunt) {
                     {
                         src: 'src/designer/styles/type.css',
                         dest: 'designer/styles/type.css',
+                    },
+                    {
+                        src: 'src/designer/styles/documentation.css',
+                        dest: 'designer/styles/documentation.css',
                     }
                 ]
             },
