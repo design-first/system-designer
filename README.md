@@ -4,12 +4,12 @@
 [![Build Status](https://travis-ci.org/system-sdk/system-designer.svg?branch=master)](https://travis-ci.org/system-sdk/system-designer)
 [![devDependency Status](https://david-dm.org/system-sdk/system-designer/dev-status.svg)](https://david-dm.org/system-sdk/system-designer#info=devDependencies)
 
-![Image Alt](http://designfirst.io/img/v2/system-designer.png)
+![Image Alt](https://system-designer.github.io/img/v2/system-designer.png)
 
 #### What is System Designer ?
 
 Design is the base of every app. 
-[System Designer](http://designfirst.io) will help you to create **JavaScript Application Systems**, applications driven by the design.
+[System Designer](https://system-designer.github.io) will help you to create **JavaScript Application Systems**, applications driven by the design.
 
 Features:
 
@@ -18,7 +18,7 @@ Features:
 * **Remote designing** : get the model, behaviors and components of all running apps and update them live.
 * **Module builder**: Your HTML or CSS can be required in your app.
 
-You can test System Designer [here](https://system-designer.github.io).
+You can test System Designer [here](https://system-designer.github.io/designer/index.html).
 
 System Designer is part of the [System SDK project](https://github.com/system-sdk).
 System SDK is a SDK for building JavaScript Application Systems.
@@ -84,8 +84,8 @@ To run System Designer, go to [http://localhost:9001/](http://localhost:9001/) .
 
 ## Documentation
 
-* [Quick Start](https://system-designer.github.io/documentation/documentation.html#quick-start)
-* [Documentation](https://system-designer.github.io/documentation/documentation.html)
+* [Quick Start](https://system-designer.github.io/designer/documentation/documentation.html#quick-start)
+* [Documentation](https://system-designer.github.io/designer/documentation/documentation.html)
 
 ## Licence
 
