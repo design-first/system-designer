@@ -9,7 +9,7 @@
 #### What is System Designer ?
 
 Design is the base of every app. 
-[System Designer](https://system-designer.github.io) will help you to create **JavaScript Application Systems**, applications driven by the design.
+System Designer will help you to create **JavaScript Application Systems**, applications driven by the design.
 
 Features:
 

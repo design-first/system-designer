@@ -3443,10 +3443,6 @@ runtime.on('ready', function () {
         this.menubar().render();
         this.toolbar().render();
         this.spaces().render();
-        // TODO create a function
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } })
-        })
     });
 
     Designer.on('filter', function (val) {
