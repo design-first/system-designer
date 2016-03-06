@@ -75,7 +75,7 @@
             },
             "dialog-modal-sync.html": {
                 "_id": "dialog-modal-sync.html",
-                "source": "<div class=\"modal fade\" id=\"designer-dialog-sync-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <div class=\"col-sm-offset-2 col-sm-8\">                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-sync-client\" checked>Client side</label>                             </div>                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-sync-server\">Server side</label>                             </div>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-sync-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-sync-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+                "source": "<div class=\"modal fade\" id=\"designer-dialog-sync-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <div class=\"col-sm-offset-1 col-sm-10\">                             <p style=\"text-align:justify\">System Designer will search for a running application in the same domain.</p>                             <p style=\"text-align:justify\">If System Designer finds one, it will import its system and you will be able to update its models, components and behaviors.</p>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-sync-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-sync-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
             },
             "dialog-modal-system-creation.html": {
                 "_id": "dialog-modal-system-creation.html",
@@ -93,13 +93,17 @@
                 "_id": "dialog-modal.html",
                 "source": "<div class=\"modal fade\" id=\"designer-dialog-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 {{message}}             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
             },
+            "documentation-guide.html": {
+                "_id": "documentation-guide.html",
+                "source": "<div class=\"col-xs-11\">      <p>Work in progress...</p> </div>"
+            },
             "documentation-overview.html": {
                 "_id": "documentation-overview.html",
-                "source": "<div class=\"col-xs-11\">     <h2 class=\"page-header\">What is System Designer ?</h2>     <p>Design is the base of every app.</p>     <p>System Designer will help you to create <b>JavaScript Application Systems</b>, applications driven by the design.</p>     <p>Features:</p>     <ul>         <li><b>No file-system</b>: focus on your business logic and not on the structure of your project. Your entire project             is stored in a NoSQL DB and it can be exported in a single JSON object.</li>         <li><b>Hot-reload</b>: updating a method in System Designer will automatically inject it in your connected app. You do             not need to reload your app to see your latests modifications.</li>         <li><b>Remote designing</b>: get the model, behaviors and components of all running apps and update them live..</li>         <li><b>Module builder</b>: your HTML or CSS can be required in your app.</li>     </ul>     <p>System Designer is part of the <a href=\"https://github.com/system-sdk\" target=\"_blank\">System SDK project</a>. System         SDK is a SDK for building JavaScript Application Systems.</p>      <h2 class=\"page-header\">What is System SDK ?</h2>     <p><a href=\"https://github.com/system-sdk\" target=\"_blank\">System SDK project</a> is a SDK for building JavaScript Application         Systems. It contains:</p>     <ul>         <li><b>System Designer</b>, a UI designer to create JavaScript Application Systems and</li>         <li><b><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a></b>, a JavaScript library             to run and manage JavaScript Application Systems.</li>     </ul>      <h2 class=\"page-header\"> System SDK Architecture</h2>     <img src=\"../img/sdk.png\" class=\"img-thumbnail\" style=\"border:0px\">     <p></p>     <ul>         <li>System Designer is build upon <a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a>,</li>         <li>System Designer can create and import/export systems,</li>         <li><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a> can import and export systems,</li>         <li><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a> can create an application from a system,</li>         <li><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a> can generate a system from an application.</li>     </ul>      <ol class=\"breadcrumb page-header\">         <li><a href=\"#overview\">Documentation</a></li>         <li class=\"active\">Overview</li>     </ol>  </div>"
+                "source": "<div class=\"col-xs-11\">     <h2 class=\"page-header\">What is System Designer ?</h2>     <p>Design is the base of every app.</p>     <p>System Designer will help you to create <b>JavaScript Application Systems</b>, applications driven by the design.</p>     <p>Features:</p>     <ul>         <li><b>No file-system</b>: focus on your business logic and not on the structure of your project. Your entire project             is stored in a NoSQL DB and it can be exported in a single JSON object.</li>         <li><b>Hot-reload</b>: Updating your application in System Designer will automatically update your connected app. You do             not need to reload your app to see your latests modifications.</li>         <li><b>Remote designing</b>: get the model, behaviors and components of all running apps and update them live..</li>         <li><b>Module builder</b>: your HTML or CSS can be required in your app.</li>     </ul>     <p>System Designer is part of the <a href=\"https://github.com/system-sdk\" target=\"_blank\">System SDK project</a>.</p>      <h2 class=\"page-header\">What is System SDK ?</h2>     <p><a href=\"https://github.com/system-sdk\" target=\"_blank\">System SDK project</a> is a SDK for building JavaScript Application         Systems. It contains:</p>     <ul>         <li><b>System Designer</b>, a UI designer to create JavaScript Application Systems and</li>         <li><b><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a></b>, a JavaScript library             to run and manage JavaScript Application Systems.</li>     </ul>      <h2 class=\"page-header\"> System SDK Architecture</h2>     <img src=\"../img/sdk.png\" class=\"img-thumbnail\" style=\"border:0px\">     <p></p>     <ul>         <li>System Designer is build upon <a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a>,</li>         <li>System Designer can create and import/export systems (as JSON file),</li>         <li><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a> can import and export systems,</li>         <li><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a> can create an application from a system,</li>         <li><a href=\"http://system-runtime.github.io/\" target=\"_blank\">Runtime</a> can generate a system from an application.</li>     </ul>      <ol class=\"breadcrumb page-header\">         <li><a href=\"#overview\">Documentation</a></li>         <li class=\"active\">Overview</li>     </ol>  </div>"
             },
             "documentation-quick-start.html": {
                 "_id": "documentation-quick-start.html",
-                "source": "<div class=\"col-xs-11\">      <p>In this quick start, we will:</p>     <ul>         <li>create a system,</li>         <li>run it client side</li>         <li>and server side.</li>     </ul>      <h2 class=\"page-header\">Create a system</h2>     <ul>         <li>click on the + button on the left toolbar,</li>         <li>set <i>StarWars</i> as name,</li>         <li>a new system is now created and appears in the Systems list.</li>     </ul>      <h2 class=\"page-header\">Create a schema</h2>     <ul>         <li>click on the Schema tab,</li>         <li>click on the + button on the left toolbar,</li>         <li>set <i>JediSchema</i> as name,</li>         <li>a new schema is now created and appears in the Schemas list,</li>         <li>click on it,</li>         <li>update the MSON with this:</li>     </ul>     <pre class=\"language-json\"><code class=\"language-json\">{\n   \"_name\": \"JediSchema\",\n   \"_inherit\": [\n     \"RuntimeComponentSchema\"\n   ],\n   \"firstName\": \"property\",\n   \"lastName\": \"property\",\n   \"father\": \"link\",\n   \"fullName\": \"method\"\n }</code> </pre>     <ul>         <li>save.</li>     </ul>     <blockquote>         <p>note:</p>         <p>Use <b>property</b> for creating a property.             <br> Use <b>link</b> for creating a link between models.             <br> Use <b>collection</b> for creating a collection.             <br> Use <b>method</b> for creating a method.             <br> Use <b>event</b> for creating an event.             <br>     </blockquote>      <h2 class=\"page-header\">Create a model</h2>     <ul>         <li>click on the Models tab,</li>         <li>click on the + button on the left toolbar,</li>         <li>set <i>Jedi</i> as name and select <i>JediSchema</i> as schema,,</li>         <li>a new model is now created and appears in the Models list.</li>     </ul>     <blockquote>         <p>The model is generated with the informations you set in the schema.             <br> You can edit these informations by editing the model.</p>     </blockquote>      <h2 class=\"page-header\">Create a behavior</h2>     <ul>         <li>click on the Behaviors tab,</li>         <li>select <i>Jedi</i> on right,</li>         <li>click on the + button on the left toolbar,</li>         <li>select <i>fullName</i>,</li>         <li>a new behavior is now created and appears in the Behaviors list,</li>         <li>click on it,</li>         <li>update the code with this:</li>     </ul>     <pre class=\"language-javascript\"><code class=\"language-javascript\">function fullName(param) {\n   var result = this.firstName() + ' ' + this.lastName();\n   return result;\n }</code> </pre>     <ul>         <li>save.</li>     </ul>      <h2 class=\"page-header\">Create components</h2>     <ul>         <li>click on the Components tab,</li>         <li>select <i>Jedi</i> on right,</li>         <li>click on the + button on the left toolbar,</li>         <li>a new component is now created and appears in the Components list,</li>         <li>click on it,</li>         <li>update the JSON with this:</li>     </ul>     <pre class=\"language-json\"><code class=\"language-json\">{\n   \"_id\": \"13331191e31d2d0\",\n   \"father\": {},\n   \"firstName\": \"Dark\",\n   \"lastName\": \"Vador\"\n }</code></pre>     <ul>         <li>save.</li>         <li>click on the + button on the left toolbar,</li>         <li>a new component is now created and appears in the Components list,</li>         <li>click on it,</li>         <li>update the JSON with this:</li>     </ul>     <pre class=\"language-json\"><code class=\"language-json\">{\n   \"_id\": \"166c21e4a01dd30\",\n   \"father\": \"13331191e31d2d0\",\n   \"firstName\": \"Luke\",\n   \"lastName\": \"Skywalker\"\n }</code></pre>     <ul>         <li>save.</li>     </ul>      <h2 class=\"page-header\"> Add code on the main method of the system </h2>     <ul>         <li>click on the Behaviors tab,</li>         <li>click on StarWars on the right list,</li>         <li>click on the element who has got 'main' as name,</li>         <li>update the code with this:</li>     </ul>     <pre class=\"language-javascript\"><code class=\"language-javascript\">function main() {\n     var luke = null;\n \n     // get the component\n     luke = this.require('166c21e4a01dd30');\n \n     // get the name of the father of Luke\n     console.log(luke.father().fullName());\n }</code> </pre>     <ul>         <li>save.</li>     </ul>      <h2 class=\"page-header\"> Test the system </h2>     <ul>         <li>click on the run button on the left of toolbar,</li>         <li>open the console of the browser and you will see the result.</li>     </ul>      <h2 class=\"page-header\"> Run your system client side </h2>     <ul>         <li>click on the export button,</li>         <li>select <i>HTML</i>,</li>         <li>your system will be exported in a HTML file,</li>         <li>load the page.</li>     </ul>      <h2 class=\"page-header\"> Run your system server side </h2>     <ul>         <li>click on the export button,</li>         <li>select <i>JS (node)</i>,</li>         <li>your system will be exported in a JavaScript file,</li>         <li>save the file on your server project,</li>         <li>in your project, install this package to run your system:</li>     </ul>     <pre class=\"language-javascript\"><code class=\"language-javascript\">npm install system-runtime --save</code></pre>     <ul>         <li>run your system:</li>     </ul>     <pre class=\"language-javascript\"><code class=\"language-javascript\">node StarWars.js</code></pre>      <ol class=\"breadcrumb page-header\">         <li><a href=\"#overview\">Documentation</a></li>         <li class=\"active\">Quick Start</li>     </ol> </div>"
+                "source": "<div class=\"col-xs-11\">      <p>In this quick start, we will:</p>     <ul>         <li>create a system,</li>         <li>run it client side</li>         <li>and server side.</li>     </ul>      <h2 class=\"page-header\">Create a system</h2>     <ul>         <li>click on the + button on the left toolbar,</li>         <li>set <i>StarWars</i> as name,</li>         <li>a new system is now created and appears in the Systems list.</li>     </ul>      <h2 class=\"page-header\">Create a schema</h2>     <ul>         <li>click on the Schema tab,</li>         <li>click on the + button on the left toolbar,</li>         <li>set <i>JediSchema</i> as name,</li>         <li>a new schema is now created and appears in the Schemas list,</li>         <li>click on it,</li>         <li>update the MSON with this:</li>     </ul>     <pre class=\"line-numbers\"><code class=\"language-json\">{\n   \"_name\": \"JediSchema\",\n   \"_inherit\": [\n     \"RuntimeComponentSchema\"\n   ],\n   \"firstName\": \"property\",\n   \"lastName\": \"property\",\n   \"father\": \"link\",\n   \"fullName\": \"method\"\n }</code> </pre>     <ul>         <li>save.</li>     </ul>     <blockquote>         <p>note:</p>         <p>Use <b>property</b> for creating a property.             <br> Use <b>link</b> for creating a link between models.             <br> Use <b>collection</b> for creating a collection.             <br> Use <b>method</b> for creating a method.             <br> Use <b>event</b> for creating an event.             <br>     </blockquote>      <h2 class=\"page-header\">Create a model</h2>     <ul>         <li>click on the Models tab,</li>         <li>click on the + button on the left toolbar,</li>         <li>set <i>Jedi</i> as name and select <i>JediSchema</i> as schema,,</li>         <li>a new model is now created and appears in the Models list.</li>     </ul>     <blockquote>         <p>The model is generated with the informations you set in the schema.             <br> You can edit these informations by editing the model.</p>     </blockquote>      <h2 class=\"page-header\">Create a behavior</h2>     <ul>         <li>click on the Behaviors tab,</li>         <li>select <i>Jedi</i> on right,</li>         <li>click on the + button on the left toolbar,</li>         <li>select <i>fullName</i>,</li>         <li>a new behavior is now created and appears in the Behaviors list,</li>         <li>click on it,</li>         <li>update the code with this:</li>     </ul>     <pre class=\"line-numbers\"><code class=\"language-javascript\">function fullName(param) {\n   var result = this.firstName() + ' ' + this.lastName();\n   return result;\n }</code> </pre>     <ul>         <li>save.</li>     </ul>      <h2 class=\"page-header\">Create components</h2>     <ul>         <li>click on the Components tab,</li>         <li>select <i>Jedi</i> on right,</li>         <li>click on the + button on the left toolbar,</li>         <li>a new component is now created and appears in the Components list,</li>         <li>click on it,</li>         <li>update the JSON with this:</li>     </ul>     <pre class=\"line-numbers\"><code class=\"language-json\">{\n   \"_id\": \"13331191e31d2d0\",\n   \"father\": {},\n   \"firstName\": \"Dark\",\n   \"lastName\": \"Vador\"\n }</code></pre>     <ul>         <li>save.</li>         <li>click on the + button on the left toolbar,</li>         <li>a new component is now created and appears in the Components list,</li>         <li>click on it,</li>         <li>update the JSON with this:</li>     </ul>     <pre class=\"line-numbers\"><code class=\"language-json\">{\n   \"_id\": \"166c21e4a01dd30\",\n   \"father\": \"13331191e31d2d0\",\n   \"firstName\": \"Luke\",\n   \"lastName\": \"Skywalker\"\n }</code></pre>     <ul>         <li>save.</li>     </ul>      <h2 class=\"page-header\"> Add code on the main method of the system </h2>     <ul>         <li>click on the Behaviors tab,</li>         <li>click on StarWars on the right list,</li>         <li>click on the element who has got 'main' as name,</li>         <li>update the code with this:</li>     </ul>     <pre class=\"line-numbers\"><code class=\"language-javascript\">function main() {\n     var luke = null;\n \n     // get the component\n     luke = this.require('166c21e4a01dd30');\n \n     // get the name of the father of Luke\n     console.log(luke.father().fullName());\n }</code> </pre>     <ul>         <li>save.</li>     </ul>      <h2 class=\"page-header\"> Test the system </h2>     <ul>         <li>click on the run button on the left of toolbar,</li>         <li>open the console of the browser and you will see the result.</li>     </ul>      <h2 class=\"page-header\"> Run your system client side </h2>     <ul>         <li>click on the export button,</li>         <li>select <i>HTML</i>,</li>         <li>your system will be exported in a HTML file,</li>         <li>load the page.</li>     </ul>      <h2 class=\"page-header\"> Run your system server side </h2>     <ul>         <li>click on the export button,</li>         <li>select <i>JS (node)</i>,</li>         <li>your system will be exported in a JavaScript file,</li>         <li>save the file on your server project,</li>         <li>in your project, install this package to run your system:</li>     </ul>     <pre class=\"language-javascript\"><code class=\"language-javascript\">npm install system-runtime --save</code></pre>     <ul>         <li>run your system:</li>     </ul>     <pre class=\"language-javascript\"><code class=\"language-javascript\">node StarWars.js</code></pre>      <ol class=\"breadcrumb page-header\">         <li><a href=\"#overview\">Documentation</a></li>         <li class=\"active\">Quick Start</li>     </ol> </div>"
             },
             "export-app.html": {
                 "_id": "export-app.html",
@@ -107,19 +111,19 @@
             },
             "help-behaviors.html": {
                 "_id": "help-behaviors.html",
-                "source": "A behaviors is a method that will be called when a state changed of the class will be invoked."
+                "source": "A behavior is a method that will be called when a class state has changed."
             },
             "help-components.html": {
                 "_id": "help-components.html",
-                "source": "A component is the store of the instance of the model."
+                "source": "A component is the store of an instance of the model."
             },
             "help-models.html": {
                 "_id": "help-models.html",
-                "source": "A model is an UML representation of your classes. When you create a model, you generate it from a schema. A model will be created with the default values, you can edit them after."
+                "source": "A model is an UML representation of your classes. When you create a model, you generate it from a schema. A model will be then created with the default values. You can edit them after."
             },
             "help-schemas.html": {
                 "_id": "help-schemas.html",
-                "source": "A schema is the definition of your model. Your model will be generated based on the schema definition."
+                "source": "A schema is the definition of your model. Models are generated based on the schema definition."
             },
             "help-system.html": {
                 "_id": "help-system.html",
@@ -180,6 +184,10 @@
             "menu-item-components.html": {
                 "_id": "menu-item-components.html",
                 "source": "<a id=\"designer-menu-item-components\" href=\"#components\">Components</a>"
+            },
+            "menu-item-guide.html": {
+                "_id": "menu-item-guide.html",
+                "source": "<a id=\"designer-menu-item-guide\" href=\"#guide\">Guide</a>"
             },
             "menu-item-json.html": {
                 "_id": "menu-item-json.html",
@@ -440,6 +448,13 @@
                 "position": 20,
                 "type": "documentation"
             },
+            "154dd1324f1ffg02": {
+                "_id": "154dd1324f1ffg02",
+                "name": "guide",
+                "html": "menu-item-guide.html",
+                "position": 30,
+                "type": "documentation"
+            },
             "19ec81ce751e196": {
                 "_id": "19ec81ce751e196",
                 "name": "components",
@@ -633,12 +648,6 @@
                 "position": 20,
                 "type": "type"
             },
-            "1dbc51200e116e3": {
-                "_id": "1dbc51200e116e3",
-                "html": "toolbar-item-config.html",
-                "position": 70,
-                "type": "designer"
-            },
             "1dbc51200e116e4": {
                 "_id": "1dbc51200e116e4",
                 "html": "toolbar-item-save.html",
@@ -690,212 +699,212 @@
         }
     },
     "behaviors": {
-        "150bd19a6b1b230": {
-            "_id": "150bd19a6b1b230",
+        "1eb7e1c22f18afb": {
+            "_id": "1eb7e1c22f18afb",
             "component": "10bcb1a0511e09f",
             "state": "click",
             "action": "function click() { \n    var message = this.require('message'),\n    designer = this.require('designer');\n    \n    if (!designer.system() && designer.context() !== 'system') {\n        message.warning('you have no system: create first a system to continue.');\n    } else {\n        designer.workspace().create();\n    }\n}"
         },
-        "1db1b1b89f10a99": {
-            "_id": "1db1b1b89f10a99",
+        "18f461da501d5ca": {
+            "_id": "18f461da501d5ca",
             "component": "13a291c27f16310",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "19689127c81f15a": {
-            "_id": "19689127c81f15a",
+        "154db192eb17a52": {
+            "_id": "154db192eb17a52",
             "component": "13a291c27f16311",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "15b9d18ddc135bc": {
-            "_id": "15b9d18ddc135bc",
+        "123a711d69162ed": {
+            "_id": "123a711d69162ed",
             "component": "13a291c27f16313",
             "state": "click",
             "action": "function click() {\n    var DialogShare = this.require('DialogShare'),\n    system = this.require('designer').system();\n    \n    if (system && Object.keys(system).length) {\n        DialogShare = new DialogShare({\n            'title': 'Copy the link to the system'\n        });\n        DialogShare.show();\n        DialogShare.on('ok', function () {\n            this.hide();\n        });\n    }    \n}"
         },
-        "1a5cf1e7ba19b89": {
-            "_id": "1a5cf1e7ba19b89",
+        "157ed1b10d1b9c6": {
+            "_id": "157ed1b10d1b9c6",
             "component": "13a291c27f16314",
             "state": "click",
             "action": "function click() { window.open('./documentation/documentation.html'); }"
         },
-        "18a9e1eeae148e6": {
-            "_id": "18a9e1eeae148e6",
+        "127c91417a1895e": {
+            "_id": "127c91417a1895e",
             "component": "13f70137b61b19b",
             "state": "click",
             "action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message');\n    \n    if (designer.system()) {\n        window.open('app.html?id=' + designer.system().id());\n    } else {\n        message.warning('you have no system to run.')\n    }\n}"
         },
-        "1787e14e32166a2": {
-            "_id": "1787e14e32166a2",
+        "1cc671240c1fd64": {
+            "_id": "1cc671240c1fd64",
             "component": "163a01b7ca1935c",
             "state": "click",
             "action": "function click() { \n    \n    var Dialog = this.require('DialogSync');\n    var dialog = new Dialog({\n        'title': 'Find a running system',\n    });\n    dialog.show();\n    dialog.on('ok', function () {\n        this.require('channel').sync();\n        this.hide();\n    });\n}"
         },
-        "17b1f17d8e1e8e3": {
-            "_id": "17b1f17d8e1e8e3",
+        "142e21ced215ca2": {
+            "_id": "142e21ced215ca2",
             "component": "163a01b7ca1935d",
             "state": "click",
             "action": "function click() {\n    var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Import a system'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name = '',\n            propName = '',\n            modelName = '',\n            compId = '',\n            designer = this.require('designer'),\n            system = designer.system(),\n            message = this.require('message');\n\n        sys = this.data();\n        if (Object.keys(sys).length) {\n            // schemas\n            for (name in sys.schemas) {\n                if (system.schemas()[name]) {\n                    for (propName in sys.schemas[name]) {\n                        system.schemas()[name][propName] = sys.schemas[name][propName];        \n                    }                \n                } else {\n                    system.schemas()[name] = sys.schemas[name];\n                }\n            }\n            // types\n            for (name in sys.types) {\n                if (system.types()[name]) {\n                    for (propName in sys.types[name]) {\n                        system.types()[name][propName] = sys.types[name][propName];    \n                    }   \n                } else {\n                    system.types()[name] = sys.types[name];    \n                }\n            }\n            // behaviors\n            for (name in sys.behaviors) {\n                if (sys.behaviors[name].component !== sys._id) {\n                    system.behaviors()[name] = sys.behaviors[name];   \n                }\n            }\n            // components\n            for (modelName in sys.components) {\n                if (!system.components()[modelName]) {\n                    system.components()[modelName] = {}; \n                }\n                for (compId in sys.components[modelName]) {\n                    if (system.components()[modelName][compId]) {\n                        for (propName in sys.components[modelName][compId]) {\n                            system.components()[modelName][compId][propName] = sys.components[modelName][compId][propName];     \n                        }\n                    } else {\n                        system.components()[modelName][compId] = sys.components[modelName][compId];     \n                    }\n                }\n            }\n            \n            designer.save();\n            \n            designer.spaces().render();\n            designer.workspace().refresh();\n    \n            this.hide();\n            designer.save();\n            message.success('merge of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid.');\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            designer.save();\n            \n            designer.space(sys.name());\n            designer.spaces().render();\n            designer.workspace().refresh();\n    \n            this.hide();\n\n            message.success('importation of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid');\n        }\n    });\n}"
         },
-        "146141d4aa1f053": {
-            "_id": "146141d4aa1f053",
+        "152821195810a83": {
+            "_id": "152821195810a83",
             "component": "163a01b7ca1935e",
             "state": "click",
             "action": "function click() {\n    var Dialog = this.require('DialogExport');\n    var dialog = new Dialog({\n        'title': 'Export the current system',\n    });\n    dialog.show();\n    \n    dialog.on('ok', function () {\n        var message = this.require('message');\n        // code inspired from the blog post\n        // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n        if (this.require('designer').system()) {\n            var system = null,\n            textToWrite = null,\n            textFileAsBlob = null,\n            fileNameToSaveAs = null,\n            downloadLink = null,\n            js = '';\n            source = '',\n            DialogShare = this.require('DialogShare');\n            \n            system = this.require('db').collections().System.find({\n                '_id': this.require('designer').system().id()\n            })[0];\n            system = JSON.parse(JSON.stringify(system));\n            delete system.classInfo;\n            \n            if ($('#designer-dialog-export-url').prop(\"checked\")) {\n                this.hide();\n\n                DialogShare = new DialogShare({\n                    'title': 'Copy the link to the system'\n                });\n                DialogShare.show();\n                DialogShare.on('ok', function () {\n                    this.hide();\n                });\n                \n            } else {\n            \n                if ($('#designer-dialog-export-json').prop(\"checked\")) {\n                    textToWrite = JSON.stringify(system);\n                    fileNameToSaveAs = this.require('designer').system().name() + '.json';\n                }\n                \n                if ($('#designer-dialog-export-html').prop(\"checked\")) {\n                    js = decodeURI(this.require('system-runtime.min.js').source());\n                    source = this.require('export-app.html').source();\n                    source = source\n                                .replace(/{{library}}/g, js)\n                                .replace(/{{library}}/g, function() {return '\\$&'})\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.html';\n                }\n                \n                if ($('#designer-dialog-export-node').prop(\"checked\")) {\n                    source = decodeURI(this.require('app.js').source());\n                    source = source\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                }\n                \n            \ttextFileAsBlob = new Blob([textToWrite], {\n            \t    type:'text/plain'\n            \t});\n            \tdownloadLink = document.createElement('a');\n            \t\n            \tdownloadLink.download = fileNameToSaveAs;\n            \tdownloadLink.innerHTML = 'Download File';\n            \tif (window.webkitURL != null) {\n            \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n            \t} else {\n            \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n            \t\tdownloadLink.onclick = function (event) {\n            \t\t    document.body.removeChild(event.target)\n            \t\t};\n            \t\tdownloadLink.style.display = 'none';\n            \t\tdocument.body.appendChild(downloadLink);\n            \t}\n            \n            \tdownloadLink.click();\n            \tthis.hide();\n            }\n        \t\n        } else {\n            message.warning('you have no system to export.')\n        }\n    });\n}"
         },
-        "1302b1b69811290": {
-            "_id": "1302b1b69811290",
+        "15d43167ae13a6c": {
+            "_id": "15d43167ae13a6c",
             "component": "16a55136141d9ac",
             "state": "click",
             "action": "function click() { this.require('designer').clear(); }"
         },
-        "18c1c1e12317595": {
-            "_id": "18c1c1e12317595",
+        "1beee12e561a17b": {
+            "_id": "1beee12e561a17b",
             "component": "1dbc51200e11510",
             "state": "click",
             "action": "function click() { window.open('./documentation/documentation.html'); }"
         },
-        "181f613c0d17f57": {
-            "_id": "181f613c0d17f57",
+        "111991922b19551": {
+            "_id": "111991922b19551",
             "component": "1dbc51200e11610",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "191e71fe4a1a7ef": {
-            "_id": "191e71fe4a1a7ef",
+        "17704164cc13866": {
+            "_id": "17704164cc13866",
             "component": "1dbc51200e11611",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1c8a710ff51107a": {
-            "_id": "1c8a710ff51107a",
+        "13b8f1c0f613e16": {
+            "_id": "13b8f1c0f613e16",
             "component": "1dbc51200e11612",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "174d0115e81f9d3": {
-            "_id": "174d0115e81f9d3",
+        "1e68a1dc60130ac": {
+            "_id": "1e68a1dc60130ac",
             "component": "1dbc51200e11613",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "110b01905b1edb1": {
-            "_id": "110b01905b1edb1",
+        "12e891824211129": {
+            "_id": "12e891824211129",
             "component": "1dbc51200e11614",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1afc415f9c1ed63": {
-            "_id": "1afc415f9c1ed63",
+        "1b97416c90138e5": {
+            "_id": "1b97416c90138e5",
             "component": "1dbc51200e11615",
             "state": "click",
             "action": "function click() { window.open('./documentation/documentation.html'); }"
         },
-        "12cd714fb11b064": {
-            "_id": "12cd714fb11b064",
+        "12e44188df1d68c": {
+            "_id": "12e44188df1d68c",
             "component": "1dbc51200e11616",
             "state": "click",
             "action": "function click() { window.open('./documentation/documentation.html'); }"
         },
-        "138e41fa7f16c38": {
-            "_id": "138e41fa7f16c38",
+        "19dcf1a3f816ffa": {
+            "_id": "19dcf1a3f816ffa",
             "component": "1dbc51200e11617",
             "state": "click",
             "action": "function click() { window.open('./documentation/documentation.html'); }"
         },
-        "114fa17d3217d41": {
-            "_id": "114fa17d3217d41",
+        "1a6881dd3e13274": {
+            "_id": "1a6881dd3e13274",
             "component": "1dbc51200e116e10",
             "state": "click",
             "action": "function click() { window.open('./documentation/documentation.html'); }"
         },
-        "1ba5f131471c9c8": {
-            "_id": "1ba5f131471c9c8",
+        "1a2b61bc151bbc9": {
+            "_id": "1a2b61bc151bbc9",
             "component": "1dbc51200e116e3",
             "state": "click",
             "action": "function click() {\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1717e16fa71c2fb": {
-            "_id": "1717e16fa71c2fb",
+        "1da1c193b11180f": {
+            "_id": "1da1c193b11180f",
             "component": "1dbc51200e116e4",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "18891189f21978e": {
-            "_id": "18891189f21978e",
+        "19914145361ab51": {
+            "_id": "19914145361ab51",
             "component": "1dbc51200e116e5",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "118f716dd412ff6": {
-            "_id": "118f716dd412ff6",
+        "1d5d8121f11b663": {
+            "_id": "1d5d8121f11b663",
             "component": "1dbc51200e116e6",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1fdeb16a2b1a655": {
-            "_id": "1fdeb16a2b1a655",
+        "179e01d06d17e5d": {
+            "_id": "179e01d06d17e5d",
             "component": "1dbc51200e116e7",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "1d3bb14a1c1ba48": {
-            "_id": "1d3bb14a1c1ba48",
+        "1f34d1bbd91502d": {
+            "_id": "1f34d1bbd91502d",
             "component": "1dbc51200e116e8",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "1cf531fae91bf27": {
-            "_id": "1cf531fae91bf27",
+        "1f504175c61027c": {
+            "_id": "1f504175c61027c",
             "component": "1dbc51200e116e9",
             "state": "click",
             "action": "function click() { this.require('designer').save(); }"
         },
-        "111c91cef51f02a": {
-            "_id": "111c91cef51f02a",
+        "119af1e3e1177be": {
+            "_id": "119af1e3e1177be",
             "component": "1dbc51200e11z10",
             "state": "click",
             "action": "function click() { window.open('./documentation/documentation.html'); }"
         },
-        "1e6fb123ec136f4": {
-            "_id": "1e6fb123ec136f4",
+        "1a6551d77714ce4": {
+            "_id": "1a6551d77714ce4",
             "component": "1dbc51220e116e1",
             "state": "click",
             "action": "function click() {\n    var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version 0.8.7<br>Copyright 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://github.com/system-sdk/system-designer\" target=\"_blank\">distributed under GPLv3 licence</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">Runtime</a>'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
         },
-        "15eba19f0a12c5b": {
-            "_id": "15eba19f0a12c5b",
+        "19d3f1e039119c0": {
+            "_id": "19d3f1e039119c0",
             "component": "MenuItem",
             "state": "click",
             "action": "function click() { \n    this.require('designer').space(''); \n    this.require('designer').context(this.name());\n}"
         },
-        "11cdb1544e19574": {
-            "_id": "11cdb1544e19574",
+        "1ce301bfb51167f": {
+            "_id": "1ce301bfb51167f",
             "component": "Message",
             "state": "danger",
             "action": "function danger(message) {var html = this.require('message-alert-danger.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>error:</strong> ' + message));$('.designer-message-danger').fadeIn(500);setTimeout(function () {$('.designer-message-danger').fadeOut(1000);}, 4000);}"
         },
-        "107091a4fc1ce37": {
-            "_id": "107091a4fc1ce37",
+        "199501c6901dc0d": {
+            "_id": "199501c6901dc0d",
             "component": "Message",
             "state": "info",
             "action": "function info(message) {var html = this.require('message-alert-info.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-info').fadeIn(500);setTimeout(function () {$('.designer-message-info').fadeOut(1000);}, 4000);}"
         },
-        "1d305142e117cbc": {
-            "_id": "1d305142e117cbc",
+        "15236153be10642": {
+            "_id": "15236153be10642",
             "component": "Message",
             "state": "success",
             "action": "function success(message) {var html = this.require('message-alert-success.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-success').fadeIn(500);setTimeout(function () {$('.designer-message-success').fadeOut(1000);}, 4000);}"
         },
-        "1132e1f4151a44c": {
-            "_id": "1132e1f4151a44c",
+        "1d3661bb8c11850": {
+            "_id": "1d3661bb8c11850",
             "component": "Message",
             "state": "warning",
             "action": "function warning(message) {var html = this.require('message-alert-warning.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>warning:</strong> ' + message));$('.designer-message-warning').fadeIn(500);setTimeout(function () {$('.designer-message-warning').fadeOut(1000);}, 4000);}"
         },
-        "1a3ce1e3b710fb2": {
-            "_id": "1a3ce1e3b710fb2",
+        "185f91adae1599f": {
+            "_id": "185f91adae1599f",
             "component": "SpaceItem",
             "state": "click",
             "action": "function click() { this.require('designer').space(this.name()); }"
