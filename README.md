@@ -23,6 +23,8 @@ You can test System Designer [here](https://system-designer.github.io/designer/i
 System Designer is part of the [System SDK project](https://github.com/system-sdk).
 System SDK is a SDK for building JavaScript Application Systems.
 
+![Image Alt](https://system-designer.github.io/img/system-sdk.png)
+
 ## Installation
 
 #### Direct download
