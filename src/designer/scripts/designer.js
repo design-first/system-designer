@@ -2630,7 +2630,6 @@ runtime.on('ready', function () {
             behavior = null,
             system = this.designer().system(),
             space = this.designer().space();
-
         if (system) {
             this.clear();
             switch (this.designer().context()) {
@@ -3508,8 +3507,8 @@ runtime.on('ready', function () {
     });
 
     Designer.on('space', function (val) {
-        jsPlumb.deleteEveryEndpoint();
-        this.workspace().refresh();
+        //jsPlumb.deleteEveryEndpoint();
+        //this.workspace().refresh();
         if (this.context() === 'system') {
             this.updateRouter();
         }
