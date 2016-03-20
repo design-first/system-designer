@@ -1,33 +1,11 @@
 {
-    "_id": "DesignerState",
     "_name": "DesignerState",
-    "_schema": "DesignerStateSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "system": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "type": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "collection": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "component": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "clear": {}
+    "system": "property",
+    "type": "property",
+    "collection": "property",
+    "component": "property",
+    "clear":"method"
 }

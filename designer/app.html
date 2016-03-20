@@ -15,17 +15,17 @@
             var system = runtime.system('app');
             
             system.require('metamodel').schema({
-                "_id": "RuntimeChannelSchema",
-                "_name": "RuntimeChannelSchema",
+                "_id": "104ad1f48518376",
+                "_name": "RuntimeChannel",
                 "_core": true,
                 "getInitSystem": "event",
                 "setInitSystem": "event"
             });
 
-            system.require('metamodel').schema({
-                "_id": "RuntimeChannel",
+            system.require('metamodel').model({
+                "_id": "135c71078810af2",
                 "_name": "RuntimeChannel",
-                "_schema": "RuntimeChannelSchema",
+                "_schema": "RuntimeChannel",
                 "_core": true,
                 "getInitSystem": {
                     "params": [

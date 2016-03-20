@@ -1,24 +1,10 @@
 {
-    "_id": "Spaces",
     "_name": "Spaces",
-    "_schema": "SpacesSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": false,
-        "default": {}
-    },
-    "items": {
-        "type": [
-            "@SpaceItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-    },
-    "clear": {},
-    "render": {}
+    "designer": "property",
+    "items": "collection",
+    "render": "method",
+    "clear": "method"
 }

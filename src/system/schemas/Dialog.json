@@ -1,30 +1,13 @@
 {
-    "_id": "Dialog",
     "_name": "Dialog",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "_schema": "DialogSchema",
-    "title": {
-        "type": "string",
-        "readOnly": true,
-        "mandatory": true,
-        "default": ""
-    },
-    "message": {
-        "type": "string",
-        "readOnly": true,
-        "mandatory": false,
-        "default": ""
-    },
-    "data": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    },
-    "show": {},
-    "hide": {},
-    "cancel": {},
-    "ok": {}
+    "title": "property",
+    "message": "property",
+    "data": "property",
+    "ok": "event",
+    "cancel": "event",
+    "show": "method",
+    "hide": "method"
 }

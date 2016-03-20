@@ -1,19 +1,10 @@
 {
-    "_id": "MenuLogo",
-    "_name": "MenuLogo",
-    "_schema": "MenuLogoSchema",
+    "_name": "Menu",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "items": {
-        "type": [
-            "@MenuItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-    },
-    "hide": {},
-    "show": {},
-    "render": {}
+    "items": "collection",
+    "hide": "method",
+    "show": "method",
+    "render": "method"
 }

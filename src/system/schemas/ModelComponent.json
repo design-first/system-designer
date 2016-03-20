@@ -1,41 +1,14 @@
 {
-    "_id": "ModelComponent",
     "_name": "ModelComponent",
-    "_schema": "ModelComponentSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "title": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "uuid": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "model": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "document": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    },
-    "content": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "hide": {},
-    "show": {},
-    "render": {}
+    "title": "property",
+    "uuid": "property",
+    "model": "property",
+    "document": "property",
+    "content": "property",
+    "render": "method",
+    "hide": "method",
+    "show": "method"
 }

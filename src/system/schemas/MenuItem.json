@@ -1,36 +1,14 @@
 {
-    "_id": "MenuItem",
     "_name": "MenuItem",
-    "_schema": "MenuItemSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "html": {
-        "type": "@HTML",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    },
-    "position": {
-        "type": "number",
-        "readOnly": false,
-        "mandatory": false,
-        "default": 0
-    },
-    "name": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "type": {
-        "type": "editorType",
-        "readOnly": false,
-        "mandatory": false,
-        "default": "designer"
-    },
-    "hide": {},
-    "show": {},
-    "render": {},
-    "click": {}
+    "html": "property",
+    "position": "property",
+    "type": "property",
+    "name": "property",
+    "hide": "method",
+    "show": "method",
+    "render": "method",
+    "click": "event"
 }

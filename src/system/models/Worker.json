@@ -1,0 +1,21 @@
+{
+    "_name": "Worker",
+    "_schema": "Worker",
+    "_inherit": [
+        "RuntimeComponent"
+    ],
+    "worker": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "send": {
+        "params" : [
+            {
+                "name": "message",
+                "type": "object"
+            }
+        ]
+    }
+}

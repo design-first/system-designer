@@ -1,62 +1,16 @@
 {
-    "_id": "System",
     "_name": "System",
-    "_schema": "SystemSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "name": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": "system"
-    },
-    "master": {
-        "type": "boolean",
-        "readOnly": false,
-        "mandatory": false,
-        "default": false
-    },
-    "subsystem": {
-        "type": "boolean",
-        "readOnly": false,
-        "mandatory": false,
-        "default": false
-    },
-    "version": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": "0.0.1"
-    },
-    "description": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-    },
-    "schemas": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    },
-    "behaviors": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    },
-    "types": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    },
-    "components": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    }
+    "name": "property",
+    "master": "property",
+    "subsystem": "property",
+    "version": "property",
+    "description": "property",
+    "schemas": "property",
+    "models": "property",
+    "behaviors": "property",
+    "types": "property",
+    "components": "property"
 }

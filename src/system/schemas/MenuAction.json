@@ -1,29 +1,12 @@
 {
-    "_id": "MenuAction",
     "_name": "MenuAction",
-    "_schema": "MenuActionSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "html": {
-        "type": "@HTML",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-    },
-    "position": {
-        "type": "number",
-        "readOnly": false,
-        "mandatory": false,
-        "default": 0
-    },
-    "type": {
-        "type": "editorType",
-        "readOnly": false,
-        "mandatory": false,
-        "default": "designer"
-    },
-    "hide": {},
-    "show": {},
-    "render": {}
+    "html": "property",
+    "position": "property",
+    "type": "property",
+    "hide": "method",
+    "show": "method",
+    "render": "method"
 }

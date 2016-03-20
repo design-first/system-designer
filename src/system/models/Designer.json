@@ -1,0 +1,118 @@
+{
+    "_name": "Designer",
+    "_schema": "Designer",
+    "_inherit": [
+        "RuntimeComponent"
+    ],
+    "menubar": {
+        "type": "@MenuBar",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "toolbar": {
+        "type": "@ToolBar",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "workspace": {
+        "type": "@Workspace",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "spaces": {
+        "type": "@Spaces",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "server": {
+        "type": "@Server",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "system": {
+        "type": "@System",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "store": {
+        "type": "@Store",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "debug": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+    },
+    "context": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+    },
+    "space": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+    },
+    "filter": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+    },
+    "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+    },
+    "state": {
+        "type": "@DesignerState",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+    },
+    "updateRouter": {},
+    "syncModel": {
+        "params": [
+            {
+                "name": "schema",
+                "type": "object",
+                "mandatory": false,
+                "default": {}
+            }
+        ]
+    },
+    "linkModel": {
+        "params": [
+            {
+                "name": "source",
+                "type": "string",
+                "mandatory": false,
+                "default": ""
+            },
+            {
+                "name": "target",
+                "type": "string",
+                "mandatory": false,
+                "default": ""
+            }
+        ]
+    },
+    "refresh": {},
+    "save": {},
+    "check": {},
+    "welcome": {},
+    "clear": {},
+    "render": {}
+}

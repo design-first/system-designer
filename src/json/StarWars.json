@@ -1,1 +1,92 @@
-{"name":"StarWars","master":false,"subsystem":false,"version":"0.2.0","description":"Quick start example","schemas":{"JediSchema":{"_id":"JediSchema","_name":"JediSchema","_inherit":["RuntimeComponentSchema"],"firstName":"property","lastName":"property","father":"link","fullName":"method"},"Jedi":{"_name":"Jedi","_schema":"JediSchema","_inherit":["RuntimeComponent"],"firstName":{"type":"string","readOnly":false,"mandatory":false,"default":""},"lastName":{"type":"string","readOnly":false,"mandatory":false,"default":""},"father":{"type":"@RuntimeComponent","readOnly":false,"mandatory":false,"default":{}},"fullName":{"params":[{"name":"param","type":"string","mandatory":false}],"result":"string"}}},"behaviors":{"1c24d1eb061e1fb":{"_id":"1c24d1eb061e1fb","component":"13bd11a5a312267","state":"main","action":"function main() { \n    var luke = null;\n\n    // get the component\n    luke = this.require('166c21e4a01dd30');\n    \n    // get the name of the father of Luke\n    console.log(luke.father().fullName());\n}","useCoreAPI":false,"core":false},"149ec177e718e0b":{"_id":"149ec177e718e0b","component":"Jedi","state":"fullName","action":"function fullName() {\n  var result = this.firstName() + ' ' + this.lastName();\n  return result;\n}","useCoreAPI":false,"core":false}},"types":{},"components":{"Jedi":{"13331191e31d2d0":{"_id":"13331191e31d2d0","father":{},"firstName":"Dark","lastName":"Vador"},"166c21e4a01dd30":{"_id":"166c21e4a01dd30","father":"13331191e31d2d0","firstName":"Luke","lastName":"Skywalker"}}},"_id":"13bd11a5a312267"}
+{
+    "name": "StarWars",
+    "master": false,
+    "subsystem": false,
+    "version": "0.3.0",
+    "description": "Quick start example",
+    "schemas": {
+        "Jedi": {
+            "_name": "Jedi",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "firstName": "property",
+            "lastName": "property",
+            "father": "link",
+            "fullName": "method"
+        }
+    },
+    "models": {
+        "Jedi": {
+            "_name": "Jedi",
+            "_schema": "Jedi",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "firstName": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "lastName": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "father": {
+                "type": "@Jedi",
+                "readOnly": false,
+                "mandatory": false,
+                "default": {}
+            },
+            "fullName": {
+                "params": [
+                    {
+                        "name": "param",
+                        "type": "string",
+                        "mandatory": false
+                    }
+                ],
+                "result": "string"
+            }
+        }
+    },
+    "behaviors": {
+        "1c24d1eb061e1fb": {
+            "_id": "1c24d1eb061e1fb",
+            "component": "13bd11a5a312267",
+            "state": "main",
+            "action": "function main() { \n    var luke = null;\n\n    // get the component\n    luke = this.require('166c21e4a01dd30');\n    \n    // get the name of the father of Luke\n    console.log(luke.father().fullName());\n}",
+            "useCoreAPI": false,
+            "core": false
+        },
+        "149ec177e718e0b": {
+            "_id": "149ec177e718e0b",
+            "component": "Jedi",
+            "state": "fullName",
+            "action": "function fullName() {\n  var result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
+            "useCoreAPI": false,
+            "core": false
+        }
+    },
+    "types": {},
+    "components": {
+        "Jedi": {
+            "13331191e31d2d0": {
+                "_id": "13331191e31d2d0",
+                "father": {},
+                "firstName": "Dark",
+                "lastName": "Vador"
+            },
+            "166c21e4a01dd30": {
+                "_id": "166c21e4a01dd30",
+                "father": "13331191e31d2d0",
+                "firstName": "Luke",
+                "lastName": "Skywalker"
+            }
+        }
+    },
+    "_id": "13bd11a5a312267"
+}

@@ -1,23 +1,9 @@
 {
-    "_id": "ToolBar",
     "_name": "ToolBar",
-    "_schema": "ToolBarSchema",
     "_inherit": [
         "RuntimeComponent"
     ],
-    "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": true,
-        "default": {}
-    },
-    "items": {
-        "type": [
-            "@ToolBarItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-    },
-    "render": {}
+    "designer": "property",
+    "items": "collection",
+    "render": "method"
 }

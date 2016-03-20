@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
         concat: {
             jsComponent: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -101,21 +101,21 @@ module.exports = function (grunt) {
                             }
 
                         } else {
-                            
+
                             // filename
                             fileName = filepath.split('js/')[1];
                             fileName = fileName.split('/')[0];
                             //fileName = fileName.replace('\.js', '');
-                            
+
                             // clean
                             //src = src.replace(/\n/g, ' ');
                             //src = src.replace(/\r/g, ' ');
                             //src = src.replace(/\t/g, ' ');
-                            
+
                             src = encodeURI(src);
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                            '"source":"' + src.trim() + '"},';
+                                '"source":"' + src.trim() + '"},';
                         }
 
                         return result;
@@ -127,7 +127,7 @@ module.exports = function (grunt) {
             },
             jsClean: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"JS": {}') === -1) {
@@ -145,7 +145,7 @@ module.exports = function (grunt) {
             },
             jsonComponent: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -170,7 +170,7 @@ module.exports = function (grunt) {
                             }
 
                         } else {
-                            
+
                             // filename
                             fileName = filepath.split('json/')[1];
                             fileName = fileName.split('/')[0];
@@ -178,7 +178,7 @@ module.exports = function (grunt) {
                             src = encodeURI(src);
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                            '"source":"' + src.trim() + '"},';
+                                '"source":"' + src.trim() + '"},';
                         }
 
                         return result;
@@ -190,7 +190,7 @@ module.exports = function (grunt) {
             },
             jsonClean: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"JSON": {}') === -1) {
@@ -208,7 +208,7 @@ module.exports = function (grunt) {
             },
             htmlComponent: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -233,11 +233,11 @@ module.exports = function (grunt) {
                             }
 
                         } else {
-                            
+
                             // filename
                             fileName = filepath.split('html/')[1];
                             fileName = fileName.split('/')[0];
-                            
+
                             // clean
                             src = src.replace(/\n/g, ' ');
                             src = src.replace(/\r/g, ' ');
@@ -245,7 +245,7 @@ module.exports = function (grunt) {
                             src = src.replace(/"/g, '\\"');
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                            '"source":"' + src.trim() + '"},';
+                                '"source":"' + src.trim() + '"},';
                         }
 
                         return result;
@@ -257,7 +257,7 @@ module.exports = function (grunt) {
             },
             htmlClean: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"HTML": {}') === -1) {
@@ -275,7 +275,7 @@ module.exports = function (grunt) {
             },
             cssComponent: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -300,11 +300,11 @@ module.exports = function (grunt) {
                             }
 
                         } else {
-                            
+
                             // filename
                             fileName = filepath.split('css/')[1];
                             fileName = fileName.split('/')[0];
-                            
+
                             // clean
                             src = src.replace(/\n/g, ' ');
                             src = src.replace(/\r/g, ' ');
@@ -312,7 +312,7 @@ module.exports = function (grunt) {
                             src = src.replace(/"/g, '\\"');
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                            '"source":"' + src.trim() + '"},';
+                                '"source":"' + src.trim() + '"},';
                         }
 
                         return result;
@@ -324,7 +324,7 @@ module.exports = function (grunt) {
             },
             cssClean: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"CSS": {}') === -1) {
@@ -342,7 +342,7 @@ module.exports = function (grunt) {
             },
             systemInfos: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '';
 
                         function generateId() {
@@ -365,7 +365,7 @@ module.exports = function (grunt) {
             },
             systemBehaviors: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             behaviors = {};
@@ -398,16 +398,26 @@ module.exports = function (grunt) {
             },
             systemSchemas: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             schemas = {};
+
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
 
                         if (filepath.indexOf('build') !== -1) {
                             grunt.option('schemas', {});
                             result = src + '\n"schemas" : {},';
                         } else {
                             uuid = JSON.parse(src)._id;
+                            if (typeof uuid === 'undefined') {
+                                uuid = generateId();
+                            }
                             schemas = grunt.option('schemas');
                             schemas[uuid] = JSON.parse(src);
                         }
@@ -418,9 +428,42 @@ module.exports = function (grunt) {
                     'build/system/design.json': ['build/system/design.json', 'src/system/schemas/*.json']
                 }
             },
+            systemModels: {
+                options: {
+                    process: function(src, filepath) {
+                        var result = '',
+                            uuid = '',
+                            models = {};
+
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
+
+                        if (filepath.indexOf('build') !== -1) {
+                            grunt.option('models', {});
+                            result = src + '\n"models" : {},';
+                        } else {
+                            uuid = JSON.parse(src)._id;
+                            if (typeof uuid === 'undefined') {
+                                uuid = generateId();
+                            }
+                            models = grunt.option('models');
+                            models[uuid] = JSON.parse(src);
+                            models[uuid]._id = uuid;
+                        }
+                        return result;
+                    }
+                },
+                files: {
+                    'build/system/design.json': ['build/system/design.json', 'src/system/models/*.json']
+                }
+            },
             systemTypes: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             types = {};
@@ -442,7 +485,7 @@ module.exports = function (grunt) {
             },
             systemComponents: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var result = '',
                             uuid = '',
                             collectionName = '',
@@ -476,12 +519,13 @@ module.exports = function (grunt) {
             },
             systemFill: {
                 options: {
-                    process: function (src, filepath) {
+                    process: function(src, filepath) {
                         var system = {};
 
                         system = JSON.parse(src);
                         system.components = grunt.option('components');
                         system.schemas = grunt.option('schemas');
+                        system.models = grunt.option('models');
                         system.types = grunt.option('types');
                         system.behaviors = grunt.option('behaviors');
 
@@ -593,7 +637,7 @@ module.exports = function (grunt) {
                     }
                 ],
                 options: {
-                    process: function (content, srcpath) {
+                    process: function(content, srcpath) {
                         var result = content;
                         if (srcpath.indexOf('jquery') != -1) {
                             result = content.replace('//# sourceMappingURL=jquery.min.map', '')
@@ -630,7 +674,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jsbeautifier');
     grunt.loadNpmTasks('grunt-merge-json');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-copy');    
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // system JSON task
     grunt.registerTask('system-json', [
@@ -645,6 +689,7 @@ module.exports = function (grunt) {
         'concat:systemInfos',
         'concat:systemBehaviors',
         'concat:systemSchemas',
+        'concat:systemModels',
         'concat:systemTypes',
         'concat:systemComponents',
         'concat:systemFill'
@@ -653,7 +698,7 @@ module.exports = function (grunt) {
     // build task
     grunt.registerTask('start',
         'connect:server'
-        );
+    );
 
     grunt.registerTask('start-debug', [
         'connect:serverDebug',
