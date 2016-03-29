@@ -821,7 +821,22 @@ runtime.on('ready', function() {
         $('#designer-dialog-behavior-creation').empty();
 
         if (space !== designer.system().name()) {
-            schema = models[space]._schema;
+
+            function _getSchemaId(name) {
+                var result = '',
+                    id = '';
+
+                for (id in designer.system().schemas()) {
+                    if (designer.system().schemas()[id]._name === name) {
+                        result = id;
+                        break;
+                    }
+                }
+                return result;
+            }
+
+            schema = _getSchemaId(space);
+
             states.push('init'); // TODO check if inherit from RuntimeComponent
             states.push('destroy');
             for (name in designer.system().schemas()[schema]) {
@@ -1090,7 +1105,6 @@ runtime.on('ready', function() {
 
         // html 
         html = this.require('model-schema.html');
-
         for (propName in this.document()) {
             if (this.document().hasOwnProperty(propName) && propName.indexOf('_') !== 0) {
                 propVal = this.document()[propName];
@@ -1105,12 +1119,12 @@ runtime.on('ready', function() {
         document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{id}}/gi, this.title())
+                .replace(/{{id}}/gi, this.uuid())
                 .replace(/{{content}}/gi, doc)
         );
 
         //events
-        if (this.uuid() !== 'RuntimeComponent') {
+        if (this.uuid() !== '111df11e2b19fde') {
             html = document.getElementById('designer-schema-' + this.uuid()).children[0].children[1];
 
             html.addEventListener('click', function(event) {
@@ -1140,8 +1154,8 @@ runtime.on('ready', function() {
                 designer.workspace().refresh();
             }.bind(this));
         } else {
-            $('#designer-model-panel-RuntimeComponentSchema div div').hide();
-            $('#designer-schema-RuntimeComponentSchema > div > .panel-body').attr('style', 'cursor: inherit');
+            $('#designer-model-panel-111df11e2b19fde div div').hide();
+            $('#designer-schema-111df11e2b19fde > div > .panel-body').attr('style', 'cursor: inherit');
         }
     });
 
@@ -1174,14 +1188,14 @@ runtime.on('ready', function() {
                     case typeof propVal.type !== 'undefined':
                         if (!Array.isArray(propVal.type)) {
                             if (propVal.type.indexOf('@') !== -1) {
-                                if (this.uuid() !== 'RuntimeComponent' && propVal.type !== '@RuntimeComponent') {
+                                if (this.uuid() !== '123751cb591de26' && propVal.type !== '@RuntimeComponent') {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type.replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';
                                 }
                             } else {
-                                if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    if (this.uuid() !== 'RuntimeComponent') {
+                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
+                                    if (this.uuid() !== '123751cb591de26') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type + '</a></div>';
                                     } else {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type + '</div>';
@@ -1192,14 +1206,14 @@ runtime.on('ready', function() {
                             }
                         } else {
                             if (propVal.type[0].indexOf('@') !== -1) {
-                                if (this.uuid() !== 'RuntimeComponent') {
+                                if (this.uuid() !== '123751cb591de26') {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type[0].replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
                                 }
                             } else {
-                                if (['boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    if (this.uuid() !== 'RuntimeComponent') {
+                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
+                                    if (this.uuid() !== '123751cb591de26') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                     } else {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
@@ -1221,13 +1235,13 @@ runtime.on('ready', function() {
 
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            if (this.uuid() !== 'RuntimeComponent') {
+                            if (this.uuid() !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ': ' + result + '</div>';
                             }
                         } else {
-                            if (this.uuid() !== 'RuntimeComponent') {
+                            if (this.uuid() !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + '</div>';
@@ -1245,13 +1259,13 @@ runtime.on('ready', function() {
                         var result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            if (this.uuid() !== 'RuntimeComponent') {
+                            if (this.uuid() !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>(): ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '(): ' + result + '</div>';
                             }
                         } else {
-                            if (this.uuid() !== 'RuntimeComponent') {
+                            if (this.uuid() !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '()</div>';
@@ -1284,7 +1298,7 @@ runtime.on('ready', function() {
         );
 
         //events
-        if (this.uuid() !== 'RuntimeComponent') {
+        if (this.uuid() !== '123751cb591de26') {
             html = document.getElementById('designer-model-' + this.uuid()).children[0].children[1];
 
             html.addEventListener('click', function(event) {
@@ -1315,8 +1329,8 @@ runtime.on('ready', function() {
                 designer.workspace().refresh();
             }.bind(this));
         } else {
-            $('#designer-model-RuntimeComponent > div > div > div > button').hide();
-            $('#designer-model-RuntimeComponent > div > .panel-body').attr('style', 'cursor: inherit');
+            $('#designer-model-123751cb591de26 > div > div > div > button').hide();
+            $('#designer-model-123751cb591de26 > div > .panel-body').attr('style', 'cursor: inherit');
         }
     });
 
@@ -1810,14 +1824,15 @@ runtime.on('ready', function() {
                     for (name in system.schemas()) {
                         if (typeof system.schemas()[name]._schema === 'undefined') {
                             spaceItem = new SpaceItem({
-                                'name': name
+                                'name': system.schemas()[name]._name,
+                                'uuid': name
                             });
                             this.items().push(spaceItem);
                         }
                     }
 
                     this.items().forEach(function(item) {
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#schemas#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.uuid() + '" class=""><a href="#' + system.id() + '#schemas#' + item.uuid() + '">' + item.name() + '</a></li>')
                     });
 
                     // events
@@ -1839,7 +1854,7 @@ runtime.on('ready', function() {
                         } else {
                             item = domItems.children[0];
                             $(item).addClass('active');
-                            this.require('designer').space(this.items(0).name());
+                            this.require('designer').space(this.items(0).uuid());
                         }
                     } else {
                         this.require('designer').space('');
@@ -1856,14 +1871,15 @@ runtime.on('ready', function() {
                     for (name in system.models()) {
                         if (typeof system.models()[name]._schema !== 'undefined') {
                             spaceItem = new SpaceItem({
-                                'name': name
+                                'name': system.models()[name]._name,
+                                'uuid': name
                             });
                             this.items().push(spaceItem);
                         }
                     }
 
                     this.items().forEach(function(item) {
-                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#models#' + item.name() + '">' + item.name() + '</a></li>')
+                        domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.uuid() + '" class=""><a href="#' + system.id() + '#models#' + item.uuid() + '">' + item.name() + '</a></li>')
                     });
 
                     // events
@@ -1885,7 +1901,7 @@ runtime.on('ready', function() {
                         } else {
                             item = domItems.children[0];
                             $(item).addClass('active');
-                            this.require('designer').space(this.items(0).name());
+                            this.require('designer').space(this.items(0).uuid());
                         }
                     } else {
                         this.require('designer').space('');
@@ -1948,7 +1964,8 @@ runtime.on('ready', function() {
                     for (name in system.models()) {
                         if (typeof system.models()[name]._schema !== 'undefined') {
                             spaceItem = new SpaceItem({
-                                'name': name
+                                'name': system.models()[name]._name,
+                                'uuid': name
                             })
                             this.items().push(spaceItem);
                         }
@@ -1977,7 +1994,7 @@ runtime.on('ready', function() {
                         } else {
                             item = domItems.children[0];
                             $(item).addClass('active');
-                            this.require('designer').space(this.items(0).name());
+                            this.require('designer').space(this.items(0).uuid());
                         }
                     }
                     break;
@@ -1999,7 +2016,8 @@ runtime.on('ready', function() {
                     for (name in system.models()) {
                         if (typeof system.models()[name]._schema !== 'undefined') {
                             spaceItem = new SpaceItem({
-                                'name': name
+                                'name': system.models()[name]._name,
+                                'uuid': name
                             });
                             this.items().push(spaceItem);
                         }
@@ -2081,7 +2099,8 @@ runtime.on('ready', function() {
     });
 
     Workspace.on('create', function() {
-        var Dialog = null,
+        var id = '',
+            Dialog = null,
             dialog = null,
             system = this.require('designer').system();
 
@@ -2102,6 +2121,13 @@ runtime.on('ready', function() {
                         ModelSystem = null,
                         modelSystem = null;
 
+                    function generateId() {
+                        function gen() {
+                            return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                        }
+                        return gen() + gen() + gen();
+                    }
+
                     // get value
                     name = $('#designer-dialog-system-creation-name').val();
 
@@ -2110,12 +2136,6 @@ runtime.on('ready', function() {
                     name = name.replace(/ /gi, '_');
 
                     if (name) {
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
 
                         uuid = generateId();
                         mainUuid = generateId();
@@ -2185,6 +2205,13 @@ runtime.on('ready', function() {
                             ModelSchema = null,
                             modelSchema = null;
 
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
+
                         // get value
                         name = $('#designer-dialog-schema-creation-name').val();
 
@@ -2193,14 +2220,18 @@ runtime.on('ready', function() {
                         name = name.replace(/ /gi, '_');
 
                         if (name) {
+
+                            id = generateId().toString();
+
                             // set schema
                             schema = {
+                                "_id": id,
                                 "_name": name,
                                 "_inherit": ["RuntimeComponent"]
                             };
 
                             // add (TODO improve)
-                            designer.system().schemas()[name] = schema;
+                            designer.system().schemas()[id] = schema;
 
                             ModelSchema = this.require('ModelSchema');
                             modelSchema = new ModelSchema({
@@ -2209,14 +2240,17 @@ runtime.on('ready', function() {
 
                             modelSchema.document(JSON.parse(JSON.stringify(schema)));
                             modelSchema.content(JSON.stringify(schema));
+                            modelSchema.uuid(id);
 
                             designer.save();
+
+                            designer.createModel(schema);
 
                             this.require('channel').createSchema(name, schema);
 
                             this.hide();
 
-                            designer.space(name);
+                            designer.space(id);
                             designer.spaces().render();
                             designer.workspace().refresh();
 
@@ -2240,6 +2274,13 @@ runtime.on('ready', function() {
                             ModelClass = null,
                             modelClass = null;
 
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
+
                         // get value
                         name = $('#designer-dialog-model-creation-name').val();
                         schema = $('#designer-dialog-model-creation-schema').val();
@@ -2249,8 +2290,12 @@ runtime.on('ready', function() {
                         name = name.replace(/ /gi, '_');
 
                         if (name && schema) {
+
+                            id = generateId();
+
                             // set model
                             model = {
+                                "_id": id,
                                 "_name": name,
                                 "_schema": schema,
                                 "_inherit": ["RuntimeComponent"] // TODO only if schema inherits from RuntimeComponentSchema
@@ -2312,7 +2357,7 @@ runtime.on('ready', function() {
                             }
 
                             // add (TODO improve)
-                            designer.system().models()[name] = model;
+                            designer.system().models()[id] = model;
 
                             ModelClass = this.require('ModelClass');
                             modelClass = new ModelClass({
@@ -2410,13 +2455,44 @@ runtime.on('ready', function() {
                         component = {},
                         ModelComponent = null,
                         modelComponent = null,
-                        model = '',
-                        uuid = '';
+                        modelId = '',
+                        modelName = '',
+                        schemaName = '',
+                        uuid = '',
+                        schemaDef = null;
+
+                    function _getModelId(name) {
+                        var result = '',
+                            id = '';
+
+                        for (id in designer.system().models()) {
+                            if (designer.system().models()[id]._name === name) {
+                                result = id;
+                                break;
+                            }
+                        }
+                        return result;
+                    }
+
+                    function _getSchemaDef(name) {
+                        var result = '',
+                            id = '';
+
+                        for (id in designer.system().schemas()) {
+                            if (designer.system().schemas()[id]._name === name) {
+                                result = designer.system().schemas()[id];
+                                break;
+                            }
+                        }
+                        return result;
+                    }
 
                     // get value
-                    model = designer.space();
+                    modelId = _getModelId(designer.space());
+                    modelName = designer.space();
+                    schemaDef = _getSchemaDef(modelName);
 
-                    if (model) {
+                    if (Object.keys(schemaDef)) {
                         function generateId() {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
@@ -2430,41 +2506,38 @@ runtime.on('ready', function() {
                         component = {
                             "_id": uuid,
                         };
-
+                        
                         // set properties default values
-                        var schemaName = schemas[model]._schema;
-                        var schema = schemas[schemaName];
                         var propertyNames = [];
-
-                        for (var att in schema) {
-                            if (schema[att] === 'property') {
+                        for (var att in schemaDef) {
+                            if (schemaDef[att] === 'property') {
                                 propertyNames.push(att);
                             }
-                            if (schema[att] === 'link') {
+                            if (schemaDef[att] === 'link') {
                                 propertyNames.push(att);
                             }
-                            if (schema[att] === 'collection') {
+                            if (schemaDef[att] === 'collection') {
                                 propertyNames.push(att);
                             }
                         }
                         propertyNames.sort();
                         length = propertyNames.length;
                         for (var i = 0; i < length; i++) {
-                            component[propertyNames[i]] = models[model][propertyNames[i]].default;
+                            component[propertyNames[i]] = models[modelId][propertyNames[i]].default;
                         }
 
                         // add (TODO improve)
-                        if (!designer.system().components()[model]) {
-                            designer.system().components()[model] = {};
+                        if (!designer.system().components()[modelName]) {
+                            designer.system().components()[modelName] = {};
                         }
-                        designer.system().components()[model][uuid] = component;
+                        designer.system().components()[modelName][uuid] = component;
 
                         ModelComponent = this.require('ModelComponent');
 
                         modelComponent = new ModelComponent({
-                            title: uuid.toString()
+                            title: uuid
                         });
-                        modelComponent.model(model);
+                        modelComponent.model(modelName);
                         modelComponent.uuid(uuid.toString());
                         modelComponent.document(JSON.parse(JSON.stringify(component)));
                         modelComponent.content(JSON.stringify(component));
@@ -2477,7 +2550,7 @@ runtime.on('ready', function() {
 
                         designer.save();
 
-                        this.require('channel').createComponent(model, component);
+                        this.require('channel').createComponent(modelId, component);
                     }
                 }
                 break;
@@ -2488,11 +2561,12 @@ runtime.on('ready', function() {
                         'title': 'Create a new behavior',
                     })
                     dialog.show();
-                    dialog.on('ok', function() {
+                    dialog.on('ok', function ok() {
                         var designer = this.require('designer'),
                             schemas = designer.system().schemas(),
                             models = designer.system().models(),
-                            schemaModel = '',
+                            schemaId = '',
+                            modelId = '',
                             methodDef = null,
                             behavior = {},
                             result = '',
@@ -2519,16 +2593,42 @@ runtime.on('ready', function() {
                                 return gen() + gen() + gen();
                             }
 
+                            function _getSchemaId(name) {
+                                var result = '',
+                                    id = '';
+
+                                for (id in designer.system().schemas()) {
+                                    if (designer.system().schemas()[id]._name === name) {
+                                        result = id;
+                                        break;
+                                    }
+                                }
+                                return result;
+                            }
+
+                            function _getModelId(name) {
+                                var result = '',
+                                    id = '';
+
+                                for (id in designer.system().models()) {
+                                    if (designer.system().models()[id]._name === name) {
+                                        result = id;
+                                        break;
+                                    }
+                                }
+                                return result;
+                            }
+
                             uuid = generateId();
 
-
                             if (model !== designer.system().name()) {
-                                // schema
-                                schemaModel = models[model]._schema;
+
+                                schemaId = _getSchemaId(model);
+                                modelId = _getModelId(model);
 
                                 // params
-                                if (models[model][state]) {
-                                    methodDef = models[model][state].params;
+                                if (models[modelId][state]) {
+                                    methodDef = models[modelId][state].params;
                                 }
                                 if (methodDef && methodDef.length) {
                                     length = methodDef.length;
@@ -2541,11 +2641,11 @@ runtime.on('ready', function() {
                                     }
                                 }
 
-                                if (schemas[schemaModel][state] === 'property' || schemas[schemaModel][state] === 'link') {
+                                if (schemas[schemaId][state] === 'property' || schemas[schemaId][state] === 'link') {
                                     params = 'value';
                                 }
 
-                                if (schemas[schemaModel][state] === 'collection') {
+                                if (schemas[schemaId][state] === 'collection') {
                                     params = 'size, value, event';
                                 }
 
@@ -2554,8 +2654,8 @@ runtime.on('ready', function() {
                                 }
 
                                 // body
-                                if (models[model][state]) {
-                                    result = models[model][state].result;
+                                if (models[modelId][state]) {
+                                    result = models[modelId][state].result;
                                 }
                                 if (result) {
                                     switch (result) {
@@ -2623,12 +2723,11 @@ runtime.on('ready', function() {
         }
     });
 
-    Workspace.on('refresh', function() {
+    Workspace.on('refresh', function refresh() {
         var ModelSystem = null,
             ModelSchema = null,
             ModelClass = null,
             modelSchema = null,
-
             sys = null,
             name = '',
             id = '',
@@ -2640,7 +2739,25 @@ runtime.on('ready', function() {
             ModelBehavior = null,
             behavior = null,
             system = this.designer().system(),
-            space = this.designer().space();
+            space = this.designer().space(),
+            parentId = '',
+            parentsId = [];
+
+
+        function _getSchemaId(name) {
+            var result = '',
+                id = '',
+                name = '';
+
+            for (id in system.schemas()) {
+                if (system.schemas()[id]._name === 'name') {
+                    result = id;
+                    break
+                }
+            }
+            return result;
+        }
+
         if (system) {
             this.clear();
             switch (this.designer().context()) {
@@ -2671,24 +2788,31 @@ runtime.on('ready', function() {
                     break;
                 case 'schemas':
                     if (space) {
-                        for (name in system.schemas()) {
-                            if (system.schemas()[name]._name === space) {
+                        for (id in system.schemas()) {
+                            if (system.schemas()[id]._id === space) {
                                 ModelSchema = this.require('ModelSchema');
 
                                 // create parent if any
-                                var parents = system.schemas()[name]._inherit;
+                                var parents = system.schemas()[id]._inherit;
                                 var length = 0;
                                 if (parents) {
                                     length = parents.length;
                                 }
 
                                 for (i = 0; i < length; i++) {
+
+                                    // TODO GET PARENTS ID
+                                    parentId = _getSchemaId(parents[i]);
+
                                     modelSchema = new ModelSchema({
                                         'title': parents[i]
                                     });
-                                    modelSchema.uuid(parents[i]);
+
                                     if (parents[i] === 'RuntimeComponent') {
+                                        parentId = "111df11e2b19fde";
+
                                         var schemaRuntime = {
+                                            "_id": "RuntimeComponent",
                                             "_name": "RuntimeComponent",
                                             "_core": true,
                                             "classInfo": "property",
@@ -2703,22 +2827,24 @@ runtime.on('ready', function() {
                                         modelSchema.document(schemaRuntime);
                                         modelSchema.content(JSON.stringify(schemaRuntime));
                                     } else {
-                                        modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[parents[i]])));
-                                        modelSchema.content(JSON.stringify(system.schemas()[parents[i]]));
+                                        modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[parentId])));
+                                        modelSchema.content(JSON.stringify(system.schemas()[parentId]));
                                     }
+                                    parentsId.push(parentId);
+                                    modelSchema.uuid(parentId);
                                     modelSchema.render();
                                 }
 
                                 modelSchema = new ModelSchema({
-                                    'title': name
+                                    'title': system.schemas()[id]._name
                                 });
-                                modelSchema.uuid(name);
-                                modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[name])));
-                                modelSchema.content(JSON.stringify(system.schemas()[name]));
+                                modelSchema.uuid(id);
+                                modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[id])));
+                                modelSchema.content(JSON.stringify(system.schemas()[id]));
                                 modelSchema.render();
 
                                 for (i = 0; i < length; i++) {
-                                    this.designer().linkModel(name, parents[i]);
+                                    this.designer().linkModel(id, parentsId[i]);
                                 }
                             }
                         }
@@ -2726,23 +2852,29 @@ runtime.on('ready', function() {
                     break;
                 case 'models':
                     if (space) {
-                        for (name in system.models()) {
-                            if (system.models()[name]._name === space) {
+                        for (id in system.models()) {
+                            if (system.models()[id]._id === space) {
                                 ModelClass = this.require('ModelClass');
 
                                 // create parent if any
-                                var parents = system.models()[name]._inherit;
+                                var parents = system.models()[id]._inherit;
                                 var length = 0;
                                 if (parents) {
                                     length = parents.length;
                                 }
 
                                 for (i = 0; i < length; i++) {
+
+                                    // TODO GET PARENTS ID
+                                    parentId = _getSchemaId(parents[i]);
+
                                     modelclass = new ModelClass({
                                         'title': parents[i]
                                     });
-                                    modelclass.uuid(parents[i]);
+
                                     if (parents[i] === 'RuntimeComponent') {
+                                        parentId = '123751cb591de26';
+
                                         var modelRuntime = {
                                             "_name": "RuntimeComponent",
                                             "_schema": "RuntimeComponent",
@@ -2810,22 +2942,24 @@ runtime.on('ready', function() {
                                         modelclass.document(modelRuntime);
                                         modelclass.content(JSON.stringify(modelRuntime));
                                     } else {
-                                        modelclass.document(JSON.parse(JSON.stringify(system.models()[parents[i]])));
-                                        modelclass.content(JSON.stringify(system.models()[parents[i]]));
+                                        modelclass.document(JSON.parse(JSON.stringify(system.models()[parentId])));
+                                        modelclass.content(JSON.stringify(system.models()[parentId]));
                                     }
+                                    parentsId.push(parentId);
+                                    modelclass.uuid(parentId);
                                     modelclass.render();
                                 }
 
                                 modelclass = new ModelClass({
-                                    'title': name
+                                    'title': system.models()[id]._name
                                 });
-                                modelclass.uuid(name);
-                                modelclass.document(JSON.parse(JSON.stringify(system.models()[name])));
-                                modelclass.content(JSON.stringify(system.models()[name]));
+                                modelclass.uuid(id);
+                                modelclass.document(JSON.parse(JSON.stringify(system.models()[id])));
+                                modelclass.content(JSON.stringify(system.models()[id]));
                                 modelclass.render();
 
                                 for (i = 0; i < length; i++) {
-                                    this.designer().linkModel(name, parents[i]);
+                                    this.designer().linkModel(id, parentsId[i]);
                                 }
                             }
                         }
@@ -2995,11 +3129,28 @@ runtime.on('ready', function() {
         });
 
         channel.on('getComponent', function(id, collection) {
+            var modelId = '',
+                designer = this.require('designer');
+
+            function _getModelId(name) {
+                var result = '',
+                    id = '';
+
+                for (id in designer.system().models()) {
+                    if (designer.system().models()[id]._name === name) {
+                        result = id;
+                        break;
+                    }
+                }
+                return result;
+            }
+            modelId = _getModelId(collection);
+
             this.setComponent(id, collection, this.require('db').collections().System.find({
                 '_id': this.require('designer').system().id()
             })[0].components[collection][id], this.require('db').collections().System.find({
                 '_id': this.require('designer').system().id()
-            })[0].models[collection]);
+            })[0].models[modelId]);
         });
 
         channel.on('updateType', function(id, type) {
@@ -3042,7 +3193,7 @@ runtime.on('ready', function() {
             designer.system().schemas()[id] = schema;
             designer.save();
 
-            designer.space(schema._name);
+            designer.space(id);
             designer.spaces().render();
             designer.workspace().refresh();
         });
@@ -3075,7 +3226,7 @@ runtime.on('ready', function() {
             designer.system().models()[id] = model;
             designer.save();
 
-            designer.space(model._name);
+            designer.space(id);
             designer.spaces().render();
             designer.workspace().refresh();
         });
@@ -3305,11 +3456,11 @@ runtime.on('ready', function() {
         this.server(server);
 
         // message
-        this.require('runtime').on('warning', function(message) {
+        this.require('logger').on('warn', function(message) {
             this.require('message').warning(message);
         });
-        this.require('runtime').on('error', function(error) {
-            this.require('message').danger(error.message);
+        this.require('logger').on('error', function(message) {
+            this.require('message').danger(message);
         });
 
         // state
@@ -3563,120 +3714,306 @@ runtime.on('ready', function() {
         }*/
     });
 
-    Designer.on('syncModel', function(schema) {
+    Designer.on('createBehavior', function(model, state, def) {
+
+        function generateId() {
+            function gen() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+            }
+            return gen() + gen() + gen();
+        }
+
+        uuid = generateId();
+
+        // params
+        methodDef = def.params;
+        if (methodDef && methodDef.length) {
+            length = methodDef.length;
+            for (i = 0; i < length; i++) {
+                if (i === 0) {
+                    params = methodDef[i].name;
+                } else {
+                    params = params + ', ' + methodDef[i].name;
+                }
+            }
+        }
+
+        // body
+        result = def.result;
+        if (result) {
+            switch (result) {
+                case 'string':
+                    body = "\tvar result = '';\n\treturn result;\n";
+                    break;
+                case 'array':
+                    body = "\tvar result = [];\n\treturn result;\n";
+                    break;
+                case 'number':
+                    body = "\tvar result = 0;\n\treturn result;\n";
+                    break;
+                case 'object':
+                    body = "\tvar result = {};\n\treturn result;\n";
+                    break;
+                default:
+                    body = "\tvar result = {};\n\treturn result;\n";
+                    break;
+            }
+        }
+
+        // set model
+        behavior = {
+            "_id": uuid,
+            "component": model,
+            "state": state,
+            "action": "function " + state + "(" + params + ") {\n" + body + "}",
+            "useCoreAPI": false,
+            "core": false
+        };
+
+        this.system().behaviors()[uuid] = behavior;
+        this.save();
+    });
+
+
+    Designer.on('createModel', function(schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
             name = '',
+            id = '',
             propName = '',
             component = null,
             behavior = null,
             model = null,
             oldSchema = null;
 
-        for (name in models) {
-            if (models.hasOwnProperty(name)) {
-                if (typeof models[name]._schema !== 'undefined' && models[name]._schema === schema._name) {
-                    oldSchema = models[schema._name];
-                    model = models[name];
+        function generateId() {
+            function gen() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+            }
+            return gen() + gen() + gen();
+        }
 
-                    for (propName in schema) {
-                        if (schema.hasOwnProperty(propName) &&
-                            propName.indexOf('_') !== 0 && (
-                                typeof oldSchema[propName] === 'undefined' ||
-                                oldSchema[propName] !== schema[propName]
-                            )) {
+        id = generateId();
 
-                            switch (true) {
-                                case schema[propName] === 'property':
-                                    model[propName] = {
-                                        "type": "string",
-                                        "readOnly": false,
-                                        "mandatory": false,
-                                        "default": ""
-                                    };
+        model = {
+            "_id": id,
+            "_name": schema._name,
+            "_schema": schema._name,
+            "_inherit": ["RuntimeComponent"] // TODO only if schema inherits from RuntimeComponentSchema
+        };
 
-                                    for (component in this.system().components()[name]) {
-                                        this.system().components()[name][component][propName] = model[propName].default;
-                                    }
+        for (propName in schema) {
+            if (propName.indexOf('_') !== 0) {
+                switch (true) {
+                    case schema[propName] === 'property':
+                        model[propName] = {
+                            "type": "string",
+                            "readOnly": false,
+                            "mandatory": false,
+                            "default": ""
+                        };
 
-                                    break;
-                                case schema[propName] === 'link':
-                                    model[propName] = {
-                                        "type": "@RuntimeComponent",
-                                        "readOnly": false,
-                                        "mandatory": false,
-                                        "default": {}
-                                    };
-
-                                    for (component in this.system().components()[name]) {
-                                        this.system().components()[name][component][propName] = model[propName].default;
-                                    }
-
-                                    break;
-                                case schema[propName] === 'method':
-                                    model[propName] = {
-                                        "params": [
-                                            {
-                                                "name": "param",
-                                                "type": "string",
-                                                "mandatory": false
-                                            }
-                                        ],
-                                        "result": "string"
-                                    };
-
-                                    for (component in this.system().components()[name]) {
-                                        this.system().components()[name][component][propName] = model[propName].default;
-                                    }
-
-                                    break;
-                                case schema[propName] === 'event':
-                                    model[propName] = {
-                                        "params": [
-                                            {
-                                                "name": "param",
-                                                "type": "string",
-                                                "mandatory": false
-                                            }
-                                        ]
-                                    };
-
-                                    for (component in this.system().components()[name]) {
-                                        this.system().components()[name][component][propName] = model[propName].default;
-                                    }
-
-                                    break;
-                                case schema[propName] === 'collection':
-                                    model[propName] = {
-                                        "type": ["string"],
-                                        "readOnly": false,
-                                        "mandatory": false,
-                                        "default": []
-                                    };
-
-                                    for (component in this.system().components()[name]) {
-                                        this.system().components()[name][component][propName] = model[propName].default;
-                                    }
-
-                                    break;
-                                default:
-                                    break;
-                            }
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
                         }
-                    }
-                    for (propName in oldSchema) {
-                        if (models[name].hasOwnProperty(propName) && propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
-                            delete models[name][propName];
 
-                            for (component in this.system().components()[name]) {
-                                delete this.system().components()[name][component][propName];
-                            }
-                            for (behavior in this.system().behaviors()) {
-                                if (model && this.system().behaviors()[behavior].component === model._name && this.system().behaviors()[behavior].state === propName) {
-                                    delete this.system().behaviors()[behavior];
+                        break;
+                    case schema[propName] === 'link':
+                        model[propName] = {
+                            "type": "@RuntimeComponent",
+                            "readOnly": false,
+                            "mandatory": false,
+                            "default": {}
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        break;
+                    case schema[propName] === 'method':
+                        model[propName] = {
+                            "params": [
+                                {
+                                    "name": "param",
+                                    "type": "string",
+                                    "mandatory": false
                                 }
-                            }
+                            ],
+                            "result": "string"
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
                         }
+
+                        break;
+                    case schema[propName] === 'event':
+                        model[propName] = {
+                            "params": [
+                                {
+                                    "name": "param",
+                                    "type": "string",
+                                    "mandatory": false
+                                }
+                            ]
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        break;
+                    case schema[propName] === 'collection':
+                        model[propName] = {
+                            "type": ["string"],
+                            "readOnly": false,
+                            "mandatory": false,
+                            "default": []
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        models[id] = model;
+        this.save();
+    });
+
+    Designer.on('syncModel', function(schema) {
+        var schemas = this.system().schemas(),
+            models = this.system().models(),
+            name = '',
+            id = '',
+            propName = '',
+            component = null,
+            behavior = null,
+            model = null,
+            oldSchema = null;
+
+        function generateId() {
+            function gen() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+            }
+            return gen() + gen() + gen();
+        }
+
+        // search
+        for (id in models) {
+            if (typeof models[id]._schema !== 'undefined' && models[id]._schema === schema._name) {
+                model = models[id];
+            }
+        }
+
+        // previous schema
+        oldSchema = schemas[schema._id];
+
+        for (propName in schema) {
+            if (schema.hasOwnProperty(propName) &&
+                propName.indexOf('_') !== 0 && (
+                    typeof oldSchema[propName] === 'undefined' ||
+                    oldSchema[propName] !== schema[propName]
+                )) {
+
+                switch (true) {
+                    case schema[propName] === 'property':
+                        model[propName] = {
+                            "type": "any",
+                            "readOnly": false,
+                            "mandatory": false,
+                            "default": null
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        break;
+                    case schema[propName] === 'link':
+                        model[propName] = {
+                            "type": "@RuntimeComponent",
+                            "readOnly": false,
+                            "mandatory": false,
+                            "default": {}
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        break;
+                    case schema[propName] === 'method':
+                        model[propName] = {
+                            "params": [
+                                {
+                                    "name": "param",
+                                    "type": "string",
+                                    "mandatory": false
+                                }
+                            ],
+                            "result": "string"
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        // create behavior
+                        this.createBehavior(models[id]._name, propName, model[propName]);
+
+                        break;
+                    case schema[propName] === 'event':
+                        model[propName] = {
+                            "params": [
+                                {
+                                    "name": "param",
+                                    "type": "string",
+                                    "mandatory": false
+                                }
+                            ]
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        break;
+                    case schema[propName] === 'collection':
+                        model[propName] = {
+                            "type": ["@RuntimeComponent"],
+                            "readOnly": false,
+                            "mandatory": false,
+                            "default": []
+                        };
+
+                        for (component in this.system().components()[name]) {
+                            this.system().components()[name][component][propName] = model[propName].default;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        for (propName in oldSchema) {
+            if (propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
+                delete model[propName];
+
+                for (component in this.system().components()[name]) {
+                    delete this.system().components()[name][component][propName];
+                }
+                for (behavior in this.system().behaviors()) {
+                    if (model && this.system().behaviors()[behavior].component === model._name && this.system().behaviors()[behavior].state === propName) {
+                        delete this.system().behaviors()[behavior];
                     }
                 }
             }

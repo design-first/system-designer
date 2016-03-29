@@ -34,7 +34,7 @@ module.exports = function(grunt) {
                     'src/designer/scripts/*.js',
                 ],
                 tasks: [
-                    'build'
+                    'debug'
                 ],
                 options: {
                     spawn: false
@@ -583,45 +583,81 @@ module.exports = function(grunt) {
         copy: {
             system: {
                 src: 'build/system/design.json',
-                dest: 'designer/systems/design.json',
+                dest: 'designer/systems/design.json'
             },
             worker: {
                 src: 'src/designer/scripts/worker.js',
-                dest: 'designer/scripts/worker.js',
+                dest: 'designer/scripts/worker.js'
             },
             css: {
                 files: [
                     {
                         src: 'src/designer/styles/behavior.css',
-                        dest: 'designer/styles/behavior.css',
+                        dest: 'designer/styles/behavior.css'
                     },
                     {
                         src: 'src/designer/styles/component.css',
-                        dest: 'designer/styles/component.css',
+                        dest: 'designer/styles/component.css'
                     },
                     {
                         src: 'src/designer/styles/designer.css',
-                        dest: 'designer/styles/designer.css',
+                        dest: 'designer/styles/designer.css'
                     },
                     {
                         src: 'src/designer/styles/model.css',
-                        dest: 'designer/styles/model.css',
+                        dest: 'designer/styles/model.css'
                     },
                     {
                         src: 'src/designer/styles/schema.css',
-                        dest: 'designer/styles/schema.css',
+                        dest: 'designer/styles/schema.css'
                     },
                     {
                         src: 'src/designer/styles/system.css',
-                        dest: 'designer/styles/system.css',
+                        dest: 'designer/styles/system.css'
                     },
                     {
                         src: 'src/designer/styles/type.css',
-                        dest: 'designer/styles/type.css',
+                        dest: 'designer/styles/type.css'
                     },
                     {
                         src: 'src/designer/styles/documentation.css',
-                        dest: 'designer/styles/documentation.css',
+                        dest: 'designer/styles/documentation.css'
+                    }
+                ]
+            },
+            debug: {
+                files: [
+                    {
+                        src: 'src/designer/scripts/behavior.js',
+                        dest: 'designer/scripts/behavior.min.js'
+                    },
+                    {
+                        src: 'src/designer/scripts/component.js',
+                        dest: 'designer/scripts/component.min.js'
+                    },
+                    {
+                        src: 'src/designer/scripts/designer.js',
+                        dest: 'designer/scripts/designer.min.js'
+                    },
+                    {
+                        src: 'src/designer/scripts/model.js',
+                        dest: 'designer/scripts/model.min.js'
+                    },
+                    {
+                        src: 'src/designer/scripts/schema.js',
+                        dest: 'designer/scripts/schema.min.js'
+                    },
+                    {
+                        src: 'src/designer/scripts/system.js',
+                        dest: 'designer/scripts/system.min.js'
+                    },
+                    {
+                        src: 'src/designer/scripts/type.js',
+                        dest: 'designer/scripts/type.min.js'
+                    },
+                    {
+                        src: 'src/designer/scripts/documentation.js',
+                        dest: 'designer/scripts/documentation.min.js'
                     }
                 ]
             },
@@ -629,10 +665,10 @@ module.exports = function(grunt) {
                 files: [
                     {
                         src: 'bower_components/jquery/dist/jquery.min.js',
-                        dest: 'designer/lib/jquery/jquery.min.js',
+                        dest: 'designer/lib/jquery/jquery.min.js'
                     },
                     {
-                        src: 'bower_components/system-runtime/build/system-runtime.min.js',
+                        src: 'bower_components/system-runtime/dist/system-runtime.min.js',
                         dest: 'designer/lib/system-runtime/system-runtime.min.js'
                     }
                 ],
@@ -715,6 +751,18 @@ module.exports = function(grunt) {
         'jshint',
         'copy:worker',
         'uglify'
+    ]);
+
+    grunt.registerTask('debug', [
+        'copy:lib',
+        'copy:css',
+        'system-json',
+        'merge-json',
+        'copy:system',
+        'jsbeautifier',
+        'jshint',
+        'copy:worker',
+        'copy:debug'
     ]);
 
     grunt.registerTask('test', [

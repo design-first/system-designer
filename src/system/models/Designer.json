@@ -1,9 +1,6 @@
 {
     "_name": "Designer",
     "_schema": "Designer",
-    "_inherit": [
-        "RuntimeComponent"
-    ],
     "menubar": {
         "type": "@MenuBar",
         "readOnly": false,
@@ -87,6 +84,38 @@
         "params": [
             {
                 "name": "schema",
+                "type": "object",
+                "mandatory": false,
+                "default": {}
+            }
+        ]
+    },
+    "createModel": {
+        "params": [
+            {
+                "name": "schema",
+                "type": "object",
+                "mandatory": false,
+                "default": {}
+            }
+        ]
+    },
+    "createBehavior": {
+        "params": [
+            {
+                "name": "model",
+                "type": "string",
+                "mandatory": false,
+                "default": ""
+            },
+            {
+                "name": "state",
+                "type": "string",
+                "mandatory": false,
+                "default": ""
+            },
+            {
+                "name": "def",
                 "type": "object",
                 "mandatory": false,
                 "default": {}
