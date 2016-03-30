@@ -2,10 +2,11 @@
     "name": "StarWars",
     "master": false,
     "subsystem": false,
-    "version": "0.3.0",
+    "version": "0.1.0",
     "description": "Quick start example",
     "schemas": {
-        "Jedi": {
+        "154661fa5617782": {
+            "_id": "154661fa5617782",
             "_name": "Jedi",
             "_inherit": [
                 "RuntimeComponent"
@@ -16,57 +17,20 @@
             "fullName": "method"
         }
     },
-    "models": {
-        "Jedi": {
-            "_name": "Jedi",
-            "_schema": "Jedi",
-            "_inherit": [
-                "RuntimeComponent"
-            ],
-            "firstName": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "lastName": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "father": {
-                "type": "@Jedi",
-                "readOnly": false,
-                "mandatory": false,
-                "default": {}
-            },
-            "fullName": {
-                "params": [
-                    {
-                        "name": "param",
-                        "type": "string",
-                        "mandatory": false
-                    }
-                ],
-                "result": "string"
-            }
-        }
-    },
     "behaviors": {
-        "1c24d1eb061e1fb": {
-            "_id": "1c24d1eb061e1fb",
-            "component": "13bd11a5a312267",
+        "137491d3c61213b": {
+            "_id": "137491d3c61213b",
+            "component": "100e51f87218a8f",
             "state": "main",
-            "action": "function main() { \n    var luke = null;\n\n    // get the component\n    luke = this.require('166c21e4a01dd30');\n    \n    // get the name of the father of Luke\n    console.log(luke.father().fullName());\n}",
+            "action": "function main() {\n     var luke = null;\n \n     // get the component\n     luke = this.require('166c21e4a01dd30');\n \n     // get the name of the father of Luke\n     console.log(luke.father().fullName());\n }\n\n ",
             "useCoreAPI": false,
             "core": false
         },
-        "149ec177e718e0b": {
-            "_id": "149ec177e718e0b",
+        "1720c19e811c110": {
+            "_id": "1720c19e811c110",
             "component": "Jedi",
             "state": "fullName",
-            "action": "function fullName() {\n  var result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
+            "action": "function fullName(param) {\n\tvar result = this.firstName() + ' ' + this.lastName();\n\treturn result;\n}",
             "useCoreAPI": false,
             "core": false
         }
@@ -88,5 +52,43 @@
             }
         }
     },
-    "_id": "13bd11a5a312267"
+    "_id": "100e51f87218a8f",
+    "models": {
+        "1a3a2150b31c099": {
+            "_id": "1a3a2150b31c099",
+            "_name": "Jedi",
+            "_schema": "Jedi",
+            "_inherit": [
+                "RuntimeComponent"
+            ],
+            "firstName": {
+                "type": "any",
+                "readOnly": false,
+                "mandatory": false,
+                "default": null
+            },
+            "lastName": {
+                "type": "any",
+                "readOnly": false,
+                "mandatory": false,
+                "default": null
+            },
+            "father": {
+                "type": "@RuntimeComponent",
+                "readOnly": false,
+                "mandatory": false,
+                "default": {}
+            },
+            "fullName": {
+                "params": [
+                    {
+                        "name": "param",
+                        "type": "string",
+                        "mandatory": false
+                    }
+                ],
+                "result": "string"
+            }
+        }
+    }
 }

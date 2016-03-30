@@ -65,13 +65,13 @@ runtime.on('ready', function() {
         // menu header
         menuHeader = this.require('db').collections().MenuHeader.find({
             "type": this.designer().type()
-        })
+        });
         this.header(this.require(menuHeader[0]._id));
 
         // menu items
         menuItems = this.require('db').collections().MenuItem.find({
             "type": this.designer().type()
-        })
+        });
 
         menuItems.sort(function(itemA, itemB) {
             if (itemA.position > itemB.position) {
@@ -91,11 +91,11 @@ runtime.on('ready', function() {
         // menu actions
         menuActions = this.require('db').collections().MenuAction.find({
             "type": this.designer().type()
-        })
+        });
 
         menuSearch = this.require('db').collections().MenuSearch.find({
             "type": this.designer().type()
-        })
+        });
 
         menuActions = menuActions.concat(menuSearch);
 
@@ -142,17 +142,18 @@ runtime.on('ready', function() {
 
         // items
         this.items().forEach(function(item) {
-            domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>')
+            domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');
         });
 
         // events
+        var callback = function() {
+            _removeActive();
+            $(this).addClass('active');
+        };
         length = domItems.children.length;
         for (i = 0; i < length; i++) {
             item = domItems.children[i];
-            item.addEventListener('click', function() {
-                _removeActive();
-                $(this).addClass('active');
-            });
+            item.addEventListener('click', callback);
             item.addEventListener('click', function() {
                 this.click();
             }.bind(self.items(i)));
@@ -160,7 +161,7 @@ runtime.on('ready', function() {
 
         // actions
         this.actions().forEach(function(action) {
-            domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>')
+            domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');
         });
 
         // focus on first element
@@ -180,7 +181,7 @@ runtime.on('ready', function() {
         // items
         toolBarItems = this.require('db').collections().ToolBarItem.find({
             "type": this.designer().type()
-        })
+        });
 
         // sort items
         toolBarItems.sort(function(itemA, itemB) {
@@ -208,7 +209,7 @@ runtime.on('ready', function() {
 
         // items
         this.items().forEach(function(item) {
-            domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>')
+            domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');
         });
 
         // events
@@ -254,7 +255,7 @@ runtime.on('ready', function() {
         });
         worker.worker().port.onmessage = function(e) {
             $db.RuntimeMessage.insert(e.data);
-        }
+        };
 
         RuntimeChannel = this.require('RuntimeChannel');
         channel = new RuntimeChannel({
@@ -361,8 +362,8 @@ runtime.on('ready', function() {
 
         // TODO create a function
         $(function() {
-            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } })
-        })
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
+        });
     });
 
     Designer.on('clear', function() {
@@ -404,7 +405,7 @@ runtime.on('ready', function() {
         }
 
         this.require('channel').updateSchema(designer.store().uuid(), designer.store().data());
-        message.success('schema saved.')
+        message.success('schema saved.');
     });
 
     // main

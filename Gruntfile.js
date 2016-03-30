@@ -61,7 +61,7 @@ module.exports = function(grunt) {
         ],
         jshint: {
             files: [
-                'src/*.js'
+                'src/designer/scripts/*.js'
             ],
             options: {
                 jshintrc: true
