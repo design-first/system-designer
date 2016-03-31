@@ -760,7 +760,6 @@ module.exports = function(grunt) {
         'merge-json',
         'copy:system',
         'jsbeautifier',
-        'jshint',
         'copy:worker',
         'copy:debug'
     ]);

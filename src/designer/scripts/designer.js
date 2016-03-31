@@ -1197,6 +1197,19 @@ runtime.on('ready', function() {
             params = params + param.name + ' : ' + param.type + ', ';
         };
 
+        function _getModelId(name) {
+            var result = '',
+                id = '';
+
+            for (id in that.require('designer').system().models()) {
+                if (that.require('designer').system().models()[id]._name === name) {
+                    result = id;
+                    break;
+                }
+            }
+            return result;
+        }
+
         for (propName in this.document()) {
             if (this.document().hasOwnProperty(propName)) {
                 propVal = this.document()[propName];
@@ -1206,7 +1219,7 @@ runtime.on('ready', function() {
                         if (!Array.isArray(propVal.type)) {
                             if (propVal.type.indexOf('@') !== -1) {
                                 if (this.uuid() !== '123751cb591de26' && propVal.type !== '@RuntimeComponent') {
-                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type.replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';
                                 }
@@ -1224,7 +1237,7 @@ runtime.on('ready', function() {
                         } else {
                             if (propVal.type[0].indexOf('@') !== -1) {
                                 if (this.uuid() !== '123751cb591de26') {
-                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + propVal.type[0].replace('@', '') + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
+                                    attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type[0].replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
                                 }
@@ -1788,6 +1801,21 @@ runtime.on('ready', function() {
                         this.items().push(spaceItem);
                     }
 
+                    // sort
+                    this.items().sort(function(idA, idB) {
+                        var a = runtime.require(idA),
+                            b = runtime.require(idB);
+
+                        var result = 0;
+                        if (a.name() > b.name()) {
+                            result = 1;
+                        }
+                        if (a.name() < b.name()) {
+                            result = -1;
+                        }
+                        return result;
+                    });
+
                     this.items().forEach(function(item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + item.uuid() + '#system#' + item.name() + '">' + item.name() + '</a></li>');
                     });
@@ -1853,6 +1881,21 @@ runtime.on('ready', function() {
                         }
                     }
 
+                    // sort
+                    this.items().sort(function(idA, idB) {
+                        var a = runtime.require(idA),
+                            b = runtime.require(idB);
+
+                        var result = 0;
+                        if (a.name() > b.name()) {
+                            result = 1;
+                        }
+                        if (a.name() < b.name()) {
+                            result = -1;
+                        }
+                        return result;
+                    });
+
                     this.items().forEach(function(item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.uuid() + '" class=""><a href="#' + system.id() + '#schemas#' + item.uuid() + '">' + item.name() + '</a></li>');
                     });
@@ -1901,6 +1944,21 @@ runtime.on('ready', function() {
                         }
                     }
 
+                    // sort
+                    this.items().sort(function(idA, idB) {
+                        var a = runtime.require(idA),
+                            b = runtime.require(idB);
+
+                        var result = 0;
+                        if (a.name() > b.name()) {
+                            result = 1;
+                        }
+                        if (a.name() < b.name()) {
+                            result = -1;
+                        }
+                        return result;
+                    });
+
                     this.items().forEach(function(item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.uuid() + '" class=""><a href="#' + system.id() + '#models#' + item.uuid() + '">' + item.name() + '</a></li>');
                     });
@@ -1944,6 +2002,21 @@ runtime.on('ready', function() {
                         });
                         this.items().push(spaceItem);
                     }
+
+                    // sort
+                    this.items().sort(function(idA, idB) {
+                        var a = runtime.require(idA),
+                            b = runtime.require(idB);
+
+                        var result = 0;
+                        if (a.name() > b.name()) {
+                            result = 1;
+                        }
+                        if (a.name() < b.name()) {
+                            result = -1;
+                        }
+                        return result;
+                    });
 
                     this.items().forEach(function(item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#types#' + item.name() + '">' + item.name() + '</a></li>');
@@ -1995,6 +2068,21 @@ runtime.on('ready', function() {
                             this.items().push(spaceItem);
                         }
                     }
+
+                    // sort
+                    this.items().sort(function(idA, idB) {
+                        var a = runtime.require(idA),
+                            b = runtime.require(idB);
+
+                        var result = 0;
+                        if (a.name() > b.name()) {
+                            result = 1;
+                        }
+                        if (a.name() < b.name()) {
+                            result = -1;
+                        }
+                        return result;
+                    });
 
                     this.items().forEach(function(item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#behaviors#' + item.name() + '">' + item.name() + '</a></li>');
@@ -2048,6 +2136,21 @@ runtime.on('ready', function() {
                             this.items().push(spaceItem);
                         }
                     }
+
+                    // sort
+                    this.items().sort(function(idA, idB) {
+                        var a = runtime.require(idA),
+                            b = runtime.require(idB);
+
+                        var result = 0;
+                        if (a.name() > b.name()) {
+                            result = 1;
+                        }
+                        if (a.name() < b.name()) {
+                            result = -1;
+                        }
+                        return result;
+                    });
 
                     this.items().forEach(function(item) {
                         /*  var nbElements = 0,

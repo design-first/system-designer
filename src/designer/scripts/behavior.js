@@ -434,8 +434,6 @@ runtime.on('ready', function() {
             designer.store().uuid(designer.store().data()._id);
         }
 
-        // TODO improve
-        //$($('.navbar-header a')[0]).text('Behavior ' + designer.store().data().component + '.' + designer.store().data().state);
         document.title = designer.store().data().state + ' | system designer';
 
         this.require('channel').updateBehavior(designer.store().uuid(), designer.store().data());

@@ -175,6 +175,7 @@ runtime.on('ready', function() {
     // MenuItem
     var MenuItem = this.require('MenuItem');
     MenuItem.on('click', function() {
+        this.require('designer').oldContext(this.require('designer').context());
         this.require('designer').context(this.name());
     });
 
@@ -248,9 +249,16 @@ runtime.on('ready', function() {
     // Menu items
     this.require('1f1781882618113').on('click', function() {
         var editor = this.require('editor').editor(),
-            designer = this.require('designer');
+            designer = this.require('designer'),
+            oldContext = designer.oldContext();
 
         editor.getSession().setMode('ace/mode/json');
+        
+        // old context
+        if (oldContext) {
+            designer.store().data()[oldContext] = editor.getValue();    
+        }
+         
         editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
 
         editor.gotoLine(1);
@@ -325,10 +333,19 @@ runtime.on('ready', function() {
                     }
                     // render
                     self.require('designer').menubar().render();
+
                     // add events
                     var callback = function(event) {
-                        var editor = self.require('editor').editor();
+                        var editor = null,
+                            component = null;
+
+                        editor = self.require('editor').editor();
                         editor.getSession().setMode('ace/mode/' + props[propName]);
+
+                        designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
+
+                        component = self.require('designer').store().data();
+
                         editor.setValue(component[propName]);
                         editor.gotoLine(1);
 
@@ -367,7 +384,6 @@ runtime.on('ready', function() {
             designer.store().extra(result);
             _init(result);
 
-            //$($('.navbar-header a span')[0]).text('Component ' + id);
             document.title = id + ' | system designer';
 
             editor = this.require('editor').editor();
@@ -485,7 +501,6 @@ runtime.on('ready', function() {
             designer.store().uuid(designer.store().data()._id);
 
             // update title
-            //$($('.navbar-header a span')[0]).text('Component ' + designer.store().uuid());
             document.title = designer.store().uuid() + ' | system designer';
         }
 
