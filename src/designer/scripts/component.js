@@ -468,7 +468,6 @@ runtime.on('ready', function() {
         this.workspace().render();
         this.server().start();
 
-        // TODO create a function
         $(function() {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });

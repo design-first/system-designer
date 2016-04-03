@@ -303,7 +303,6 @@ runtime.on('ready', function() {
             }
         });
 
-        // TODO create a function
         $(function() {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });
@@ -381,21 +380,20 @@ runtime.on('ready', function() {
             message = this.require('message'),
             model = JSON.parse(val);
 
+        if (designer.store().data()._name === model._name) {
+            designer.store().data(model);
 
-        designer.store().data(model);
+            // check if ID change
+            if (designer.store().uuid() !== designer.store().data()._id) {
+                this.require('channel').deleteModel(designer.store().uuid());
+                designer.store().uuid(designer.store().data()._id);
+            }
 
-        // check if ID change
-        if (designer.store().uuid() !== designer.store().data()._name) {
-            this.require('channel').deleteModel(designer.store().uuid());
-            designer.store().uuid(designer.store().data()._id);
-
-            // update title
-            document.title = designer.store().data()._name + ' | system designer';
+            this.require('channel').updateModel(designer.store().uuid(), designer.store().data());
+            message.success('model saved.');
+        } else {
+            message.danger('you can not modify the name of a model.');
         }
-
-        this.require('channel').updateModel(designer.store().uuid(), designer.store().data());
-        message.success('model saved.');
-
     });
 
     // main

@@ -360,7 +360,6 @@ runtime.on('ready', function() {
         this.workspace().render();
         this.server().start();
 
-        // TODO create a function
         $(function() {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });
@@ -393,15 +392,18 @@ runtime.on('ready', function() {
             }
         }
 
+        // check if name change
+        if (designer.store().data()._name !== schema._name) {
+            this.require('channel').updateSchemaName(schema._name, designer.store().uuid());
+            document.title = schema._name + ' | system designer';
+        }
+
         designer.store().data(schema);
 
         // check if ID change
         if (designer.store().uuid() !== designer.store().data()._id) {
             this.require('channel').deleteSchema(designer.store().uuid());
             designer.store().uuid(designer.store().data()._id);
-
-            // update title
-            document.title = designer.store().uuid() + ' | system designer';
         }
 
         this.require('channel').updateSchema(designer.store().uuid(), designer.store().data());

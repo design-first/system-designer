@@ -53,6 +53,12 @@ runtime.on('ready', function() {
         $('#designer-dialog-copyright-modal').modal('hide');
     });
 
+    // MenuItem
+    var MenuItem = this.require('MenuItem');
+    MenuItem.on('click', function() {
+        this.require('designer').context(this.name());
+    });
+
     // MenuBar
     var MenuBar = this.require('MenuBar');
     MenuBar.on('init', function(conf) {
@@ -172,6 +178,37 @@ runtime.on('ready', function() {
         }
     });
 
+    // Menu items 
+    this.require('1f1781882618114').on('click', function() {
+        var editor = this.require('editor').editor(),
+            designer = this.require('designer');
+
+        designer.store().data(JSON.parse(editor.getValue()));
+        editor.getSession().setMode('ace/mode/text');
+        editor.setValue(designer.store().data().description);
+
+        editor.gotoLine(1);
+
+        editor.getSession().$undoManager.reset();
+        editor.getSession().setUndoManager(new ace.UndoManager());
+    });
+
+    this.require('1f1781882618102').on('click', function() {
+        var editor = this.require('editor').editor(),
+            designer = this.require('designer');
+
+        if (editor.getValue().indexOf('{') !== 0) {
+            designer.store().data().description = editor.getValue();
+        }
+        editor.getSession().setMode('ace/mode/json');
+        editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
+
+        editor.gotoLine(1);
+
+        editor.getSession().$undoManager.reset();
+        editor.getSession().setUndoManager(new ace.UndoManager());
+    });
+
     // ToolBar
     var ToolBar = this.require('ToolBar');
     ToolBar.on('init', function(conf) {
@@ -276,10 +313,9 @@ runtime.on('ready', function() {
             designer.store().uuid(id);
             designer.store().data(system);
 
-            //$($('.navbar-header a')[0]).text('System ' + system.name);
             document.title = system.name + ' | system designer';
 
-            editor.setValue(JSON.stringify(system, null, '\t'));
+            editor.setValue(designer.store().data().description);
             editor.gotoLine(1);
             editor.getSession().$undoManager.reset();
             editor.getSession().setUndoManager(new ace.UndoManager());
@@ -291,7 +327,7 @@ runtime.on('ready', function() {
     // Editor
     var Editor = this.require('Editor');
     Editor.on('render', function() {
-        this.editor().getSession().setMode('ace/mode/json');
+        this.editor().getSession().setMode('ace/mode/text');
         this.editor().setShowPrintMargin(false);
         this.editor().setReadOnly(false);
         this.editor().$blockScrolling = Infinity;
@@ -361,7 +397,6 @@ runtime.on('ready', function() {
         this.workspace().render();
         this.server().start();
 
-        // TODO create a function
         $(function() {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });
@@ -378,11 +413,17 @@ runtime.on('ready', function() {
 
     Designer.on('save', function() {
         var val = this.require('editor').editor().getValue(),
-            designer = this.require('designer');
+            designer = this.require('designer'),
+            store = designer.store().data();
 
-        designer.store().data(JSON.parse(val));
+        if (designer.context() === 'description') {
+            store.description = val;
+        } else {
+            store = JSON.parse(val);
+            document.title = store.name + ' | system designer';
+        }
 
-        document.title = JSON.parse(val).name + ' | system designer';
+        designer.store().data(store);
 
         this.require('channel').updateSystem(designer.store().uuid(), designer.store().data());
         this.require('message').success('system saved.');

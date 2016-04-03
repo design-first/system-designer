@@ -5,67 +5,30 @@
     <title>App</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="systems/app.json" type="application/json" rel="system">
 </head>
 
 <body>
     <!-- Runtime -->
-    <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
+    <script type="text/javascript"src="lib/system-runtime/system-runtime.min.js"></script>
     <script>
         runtime.on('ready', function () {
             var system = runtime.system('app');
-            
-            system.require('metamodel').schema({
-                "_id": "104ad1f48518376",
-                "_name": "RuntimeChannel",
-                "_core": true,
-                "getInitSystem": "event",
-                "setInitSystem": "event"
-            });
-
-            system.require('metamodel').model({
-                "_id": "135c71078810af2",
-                "_name": "RuntimeChannel",
-                "_schema": "RuntimeChannel",
-                "_core": true,
-                "getInitSystem": {
-                    "params": [
-                        {
-                            "name": "id",
-                            "type": "string"
-                        }
-                    ]
-                },
-                "setInitSystem": {
-                    "params": [
-                        {
-                            "name": "id",
-                            "type": "string"
-                        },
-                        {
-                            "name": "system",
-                            "type": "object"
-                        }
-                    ]
-                }
-            });            
-
-            system.require('metamodel').create();
-
             system.on('main', function () {
                 var channel = null,
-                    sysid = '';
-                    
-                // start admin    
-                this.require('admin').start('./');    
+                    sysid = ''; 
                 
+                // start admin    
+                this.require('admin').start('./');  
+                              
                 channel = this.require('channel-admin');
                 
-                // system event
+                // channel event
                 channel.on('setInitSystem', function (id, system) {
                     delete system.classInfo;
                     var systemID = this.require('db').system(system);
 
-                    console.info('runtime: the system is loaded.')
+                    this.require('logger').info('the system is loaded')
 
                     this.require(systemID).main();
                 });
@@ -75,7 +38,8 @@
                 
                 channel.off('sync');
                 
-                console.info('runtime: loading the system...');
+                this.require('logger').level('info');
+                this.require('logger').info('loading the system...');
             }, true);
             
             system.main();

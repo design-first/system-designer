@@ -1,7 +1,6 @@
 {
     "_id": "135c71078810af2",
     "_name": "RuntimeChannel",
-    "_schema": "RuntimeChannel",
     "getSystem": {
         "params": [
             {
@@ -79,6 +78,18 @@
             {
                 "name": "schema",
                 "type": "object"
+            }
+        ]
+    },
+    "updateSchemaName": {
+        "params": [
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "id",
+                "type": "string"
             }
         ]
     },

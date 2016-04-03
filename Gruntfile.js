@@ -105,12 +105,6 @@ module.exports = function(grunt) {
                             // filename
                             fileName = filepath.split('js/')[1];
                             fileName = fileName.split('/')[0];
-                            //fileName = fileName.replace('\.js', '');
-
-                            // clean
-                            //src = src.replace(/\n/g, ' ');
-                            //src = src.replace(/\r/g, ' ');
-                            //src = src.replace(/\t/g, ' ');
 
                             src = encodeURI(src);
 

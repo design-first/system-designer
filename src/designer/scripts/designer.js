@@ -37,7 +37,7 @@ runtime.on('ready', function() {
                 .replace(/{{message}}/gi, this.message())
         );
 
-        //events
+        // events
         dom = document.getElementById('designer-dialog-import-modal-cancel');
         dom.addEventListener('click', function(event) {
             this.cancel();
@@ -172,7 +172,7 @@ runtime.on('ready', function() {
                 .replace(/{{message}}/gi, window.location.toString().split('#')[0] + '?system=' + encodeURI(JSON.stringify(sys)))
         );
 
-        //events
+        // events
         dom = document.getElementById('designer-dialog-share-modal-cancel');
         dom.addEventListener('click', function(event) {
             this.cancel();
@@ -208,7 +208,7 @@ runtime.on('ready', function() {
                 .replace(/{{message}}/gi, this.message())
         );
 
-        //events
+        // events
         dom = document.getElementById('designer-dialog-copyright-modal-ok');
         dom.addEventListener('click', function(event) {
             this.ok();
@@ -243,7 +243,7 @@ runtime.on('ready', function() {
         // default value
         $('#designer-dialog-type-config-isdebug')[0].checked = designer.debug();
 
-        //events
+        // events
         dom = document.getElementById('designer-dialog-config-modal-cancel');
         dom.addEventListener('click', function(event) {
             this.cancel();
@@ -513,7 +513,6 @@ runtime.on('ready', function() {
             }
         }
 
-
         /*
                 for (name in sys.schemas) {
                     system.schemas()[name] = sys.schemas[name];
@@ -534,7 +533,8 @@ runtime.on('ready', function() {
                     for (modelName in sys.components[name]) {
                         system.components()[name][modelName] = sys.components[name][modelName];
                     }
-                }*/
+                }
+        */
 
         designer.save();
         designer.workspace().refresh();
@@ -755,42 +755,15 @@ runtime.on('ready', function() {
     var dialogModelCreation = this.require('DialogModelCreation');
     dialogModelCreation.on('init', function(config) {
         var html = '',
-            name = '',
-            dom = null,
-            selectSchemas = '',
-            designer = this.require('designer'),
-            schemas = designer.system().schemas();
+            dom = null;
 
         $('#designer-dialog-model-creation').empty();
-
-        for (name in schemas) {
-            selectSchemas = selectSchemas + '<option value="' + name + '">' + name + '</option>';
-        }
 
         html = this.require('dialog-modal-model-creation.html');
         document.querySelector('#designer-dialog-model-creation').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{schemas}}/gi, selectSchemas)
         );
-
-        //events
-        dom = document.getElementById('designer-dialog-model-creation-name');
-        dom.addEventListener('keydown', function(event) {
-            if (event.keyCode === 13) {
-                event.stopPropagation();
-                event.preventDefault();
-                if ($('#designer-dialog-model-creation-name').val()) {
-                    this.ok();
-                }
-                return false;
-            }
-        }.bind(this));
-
-        dom = document.getElementById('designer-dialog-model-creation-modal-cancel');
-        dom.addEventListener('click', function(event) {
-            this.cancel();
-        }.bind(this));
 
         dom = document.getElementById('designer-dialog-model-creation-modal-ok');
         dom.addEventListener('click', function(event) {
@@ -838,12 +811,12 @@ runtime.on('ready', function() {
 
         if (space !== designer.system().name()) {
 
-
-
             schema = _getSchemaId(space);
 
-            states.push('init'); // TODO check if inherit from RuntimeComponent
-            states.push('destroy');
+            if (designer.system().schemas()[schema]._inherit && designer.system().schemas()[schema]._inherit.indexOf('RuntimeComponent') !== -1) {
+                states.push('init');
+                states.push('destroy');
+            }
             for (name in designer.system().schemas()[schema]) {
                 switch (designer.system().schemas()[schema][name]) {
                     case 'property':
@@ -907,9 +880,7 @@ runtime.on('ready', function() {
         $('#designer-dialog-component-creation').empty();
 
         for (name in models) {
-            if (models[name]._schema) {
-                selectModels = selectModels + '<option value="' + name + '">' + name + '</option>';
-            }
+            selectModels = selectModels + '<option value="' + name + '">' + name + '</option>';
         }
 
         html = this.require('dialog-modal-component-creation.html');
@@ -919,7 +890,7 @@ runtime.on('ready', function() {
                 .replace(/{{models}}/gi, selectModels)
         );
 
-        //events
+        // events
         dom = document.getElementById('designer-dialog-component-creation-modal-cancel');
         dom.addEventListener('click', function(event) {
             this.cancel();
@@ -965,7 +936,7 @@ runtime.on('ready', function() {
                 .replace(/{{content}}/gi, doc)
         );
 
-        //events
+        // events
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function(event) {
@@ -1061,7 +1032,7 @@ runtime.on('ready', function() {
                 .replace(/{{content}}/gi, doc)
         );
 
-        //events
+        // events
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function(event) {
@@ -1107,7 +1078,10 @@ runtime.on('ready', function() {
             doc = '',
             that = this,
             propName = '',
-            propVal = '';
+            propVal = '',
+            htmlId = '';
+
+        htmlId = this.uuid() || this.title();
 
         // html 
         html = this.require('model-schema.html');
@@ -1125,25 +1099,25 @@ runtime.on('ready', function() {
         document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{id}}/gi, this.uuid())
+                .replace(/{{id}}/gi, htmlId)
                 .replace(/{{content}}/gi, doc)
         );
 
         //events
-        if (this.uuid() !== '111df11e2b19fde') {
-            html = document.getElementById('designer-schema-' + this.uuid()).children[0].children[1];
+        if (this.editable()) {
+            html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function(event) {
                 window.open('schema.html?_id=' + that.uuid());
             });
 
-            html = document.getElementById('designer-schema-' + this.uuid() + '-edit');
+            html = document.getElementById('designer-schema-' + htmlId + '-edit');
 
             html.addEventListener('click', function(event) {
                 window.open('schema.html?_id=' + that.uuid());
             });
 
-            html = document.getElementById('designer-schema-' + this.uuid() + '-delete');
+            html = document.getElementById('designer-schema-' + htmlId + '-delete');
 
             html.addEventListener('click', function(event) {
                 var designer = this.require('designer');
@@ -1165,17 +1139,17 @@ runtime.on('ready', function() {
                 designer.workspace().refresh();
             }.bind(this));
         } else {
-            $('#designer-model-panel-111df11e2b19fde div div').hide();
-            $('#designer-schema-111df11e2b19fde > div > .panel-body').attr('style', 'cursor: inherit');
+            $('#designer-model-panel-' + htmlId + ' > div div').hide();
+            $('#designer-schema-' + htmlId + ' > div > .panel-body').attr('style', 'cursor: inherit');
         }
     });
 
     ModelSchema.on('hide', function() {
-        $('#designer-schema-' + this.title()).hide();
+        $('#designer-schema-' + this.uuid()).hide();
     });
 
     ModelSchema.on('show', function() {
-        $('#designer-schema-' + this.title()).show();
+        $('#designer-schema-' + this.uuid()).show();
     });
 
     // MODELCLASS
@@ -1191,7 +1165,10 @@ runtime.on('ready', function() {
             propVal = '',
             result = '',
             callbackProp = null,
+            htmlId = '',
             htmlComp = null;
+
+        htmlId = this.uuid() || this.title();
 
         callbackProp = function(param) {
             params = params + param.name + ' : ' + param.type + ', ';
@@ -1218,14 +1195,14 @@ runtime.on('ready', function() {
                     case typeof propVal.type !== 'undefined':
                         if (!Array.isArray(propVal.type)) {
                             if (propVal.type.indexOf('@') !== -1) {
-                                if (this.uuid() !== '123751cb591de26' && propVal.type !== '@RuntimeComponent') {
+                                if (htmlId !== '123751cb591de26' && propVal.type !== '@RuntimeComponent') {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type.replace('@', '') + '</a></div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';
                                 }
                             } else {
                                 if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    if (this.uuid() !== '123751cb591de26') {
+                                    if (htmlId !== '123751cb591de26') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type + '</a></div>';
                                     } else {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type + '</div>';
@@ -1236,14 +1213,14 @@ runtime.on('ready', function() {
                             }
                         } else {
                             if (propVal.type[0].indexOf('@') !== -1) {
-                                if (this.uuid() !== '123751cb591de26') {
+                                if (htmlId !== '123751cb591de26') {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type[0].replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                 } else {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
                                 }
                             } else {
                                 if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
-                                    if (this.uuid() !== '123751cb591de26') {
+                                    if (htmlId !== '123751cb591de26') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                     } else {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
@@ -1263,13 +1240,13 @@ runtime.on('ready', function() {
 
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            if (this.uuid() !== '123751cb591de26') {
+                            if (htmlId !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ': ' + result + '</div>';
                             }
                         } else {
-                            if (this.uuid() !== '123751cb591de26') {
+                            if (htmlId !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + '</div>';
@@ -1279,7 +1256,7 @@ runtime.on('ready', function() {
 
                         break;
                     case propName.indexOf('_') !== -1:
-                        if (propName !== '_id' && propName !== '_name' && propName !== '_schema') {
+                        if (propName !== '_id' && propName !== '_name') {
                             // doc = doc + '<a href="#" class="list-group-item" style="text-align: left">' + propName.replace('_', '') + ' ' + propVal + '</a>';
                         }
                         break;
@@ -1287,13 +1264,13 @@ runtime.on('ready', function() {
                         result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
-                            if (this.uuid() !== '123751cb591de26') {
+                            if (htmlId !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>(): ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '(): ' + result + '</div>';
                             }
                         } else {
-                            if (this.uuid() !== '123751cb591de26') {
+                            if (htmlId !== '123751cb591de26') {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '()</div>';
@@ -1318,59 +1295,38 @@ runtime.on('ready', function() {
         document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             htmlComp.source()
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{_id}}/gi, this.uuid())
+                .replace(/{{_id}}/gi, htmlId)
                 .replace(/{{attributes}}/gi, attributes)
                 .replace(/{{collections}}/gi, collections)
                 .replace(/{{methods}}/gi, methods)
                 .replace(/{{events}}/gi, events)
         );
 
-        //events
-        if (this.uuid() !== '123751cb591de26') {
-            html = document.getElementById('designer-model-' + this.uuid()).children[0].children[1];
+        // events
+        if (this.editable()) {
+            html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function(event) {
                 window.open('model.html?_id=' + that.uuid());
             });
 
-            html = document.getElementById('designer-model-' + this.uuid() + '-edit');
+            html = document.getElementById('designer-model-' + htmlId + '-edit');
 
             html.addEventListener('click', function(event) {
-                window.open('schema.html?_id=' + that.uuid());
+                window.open('model.html?_id=' + that.uuid());
             });
-
-            html = document.getElementById('designer-model-' + this.uuid() + '-delete');
-
-            html.addEventListener('click', function(event) {
-                var designer = this.require('designer');
-                delete designer.system().models()[this.uuid()];
-                delete designer.system().components()[this.uuid()];
-                $('#designer-model-' + this.uuid()).remove();
-
-                this.require('channel').deleteModel(this.uuid());
-
-                this.destroy();
-
-                jsPlumb.deleteEveryEndpoint();
-
-                designer.save();
-
-                designer.space('');
-                designer.spaces().render();
-                designer.workspace().refresh();
-            }.bind(this));
         } else {
-            $('#designer-model-123751cb591de26 > div > div > div > button').hide();
-            $('#designer-model-123751cb591de26 > div > .panel-body').attr('style', 'cursor: inherit');
+            $('#designer-model-' + htmlId + ' > div > div > div > button').hide();
+            $('#designer-model-' + htmlId + ' > div > .panel-body').attr('style', 'cursor: inherit');
         }
     });
 
     ModelClass.on('hide', function() {
-        $('#designer-class-' + this.title()).hide();
+        $('#designer-class-' + this.uuid()).hide();
     });
 
     ModelClass.on('show', function() {
-        $('#designer-class-' + this.title()).show();
+        $('#designer-class-' + this.uuid()).show();
     });
 
     // MODELBEHAVIOR
@@ -1459,7 +1415,7 @@ runtime.on('ready', function() {
                 .replace(/{{content}}/gi, doc)
         );
 
-        //events
+        // events
         html = document.getElementById('designer-component-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function(event) {
@@ -1872,13 +1828,11 @@ runtime.on('ready', function() {
 
                     // items    
                     for (name in system.schemas()) {
-                        if (typeof system.schemas()[name]._schema === 'undefined') {
-                            spaceItem = new SpaceItem({
-                                'name': system.schemas()[name]._name,
-                                'uuid': name
-                            });
-                            this.items().push(spaceItem);
-                        }
+                        spaceItem = new SpaceItem({
+                            'name': system.schemas()[name]._name,
+                            'uuid': name
+                        });
+                        this.items().push(spaceItem);
                     }
 
                     // sort
@@ -1935,13 +1889,11 @@ runtime.on('ready', function() {
 
                     // items    
                     for (name in system.models()) {
-                        if (typeof system.models()[name]._schema !== 'undefined') {
-                            spaceItem = new SpaceItem({
-                                'name': system.models()[name]._name,
-                                'uuid': name
-                            });
-                            this.items().push(spaceItem);
-                        }
+                        spaceItem = new SpaceItem({
+                            'name': system.models()[name]._name,
+                            'uuid': name
+                        });
+                        this.items().push(spaceItem);
                     }
 
                     // sort
@@ -2060,13 +2012,11 @@ runtime.on('ready', function() {
 
                     // items
                     for (name in system.models()) {
-                        if (typeof system.models()[name]._schema !== 'undefined') {
-                            spaceItem = new SpaceItem({
-                                'name': system.models()[name]._name,
-                                'uuid': name
-                            });
-                            this.items().push(spaceItem);
-                        }
+                        spaceItem = new SpaceItem({
+                            'name': system.models()[name]._name,
+                            'uuid': name
+                        });
+                        this.items().push(spaceItem);
                     }
 
                     // sort
@@ -2108,7 +2058,7 @@ runtime.on('ready', function() {
                         } else {
                             item = domItems.children[0];
                             $(item).addClass('active');
-                            this.require('designer').space(this.items(0).uuid());
+                            this.require('designer').space(this.items(0).name());
                         }
                     }
                     break;
@@ -2120,21 +2070,12 @@ runtime.on('ready', function() {
                     }.bind(this));
 
                     // items
-                    /*
-                    for (name in system.components()) {
-                        spaceItem = new SpaceItem({
-                            'name': name
-                        })
-                        this.items().push(spaceItem);
-                    }*/
                     for (name in system.models()) {
-                        if (typeof system.models()[name]._schema !== 'undefined') {
-                            spaceItem = new SpaceItem({
-                                'name': system.models()[name]._name,
-                                'uuid': name
-                            });
-                            this.items().push(spaceItem);
-                        }
+                        spaceItem = new SpaceItem({
+                            'name': system.models()[name]._name,
+                            'uuid': name
+                        });
+                        this.items().push(spaceItem);
                     }
 
                     // sort
@@ -2153,13 +2094,6 @@ runtime.on('ready', function() {
                     });
 
                     this.items().forEach(function(item) {
-                        /*  var nbElements = 0,
-                              model = item.require('designer').system().components()[item.name()];
-  
-                          if (model) {
-                              nbElements = Object.keys(model).length;
-                          }*/
-
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#components#' + item.name() + '">' + item.name() + '</a></li>');
                     });
 
@@ -2430,117 +2364,7 @@ runtime.on('ready', function() {
                     });
                     dialog.show();
                     dialog.on('ok', function() {
-                        var designer = this.require('designer'),
-                            name = null,
-                            schema = null,
-                            model = {},
-                            ModelClass = null,
-                            modelClass = null;
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
-                        // get value
-                        name = $('#designer-dialog-model-creation-name').val();
-                        schema = $('#designer-dialog-model-creation-schema').val();
-
-                        // clean
-                        name = name.trim();
-                        name = name.replace(/ /gi, '_');
-
-                        if (name && schema) {
-
-                            id = generateId();
-
-                            // set model
-                            model = {
-                                "_id": id,
-                                "_name": name,
-                                "_schema": schema,
-                                "_inherit": ["RuntimeComponent"] // TODO only if schema inherits from RuntimeComponentSchema
-                            };
-
-                            // prepare model
-                            for (var att in designer.system().schemas()[schema]) {
-                                switch (true) {
-                                    case designer.system().schemas()[schema][att] === 'property':
-                                        model[att] = {
-                                            "type": "string",
-                                            "readOnly": false,
-                                            "mandatory": false,
-                                            "default": ""
-                                        };
-                                        break;
-                                    case designer.system().schemas()[schema][att] === 'link':
-                                        model[att] = {
-                                            "type": "@RuntimeComponent",
-                                            "readOnly": false,
-                                            "mandatory": false,
-                                            "default": {}
-                                        };
-                                        break;
-                                    case designer.system().schemas()[schema][att] === 'method':
-                                        model[att] = {
-                                            "params": [
-                                                {
-                                                    "name": "param",
-                                                    "type": "string",
-                                                    "mandatory": false
-                                                }
-                                            ],
-                                            "result": "string"
-                                        };
-                                        break;
-                                    case designer.system().schemas()[schema][att] === 'event':
-                                        model[att] = {
-                                            "params": [
-                                                {
-                                                    "name": "param",
-                                                    "type": "string",
-                                                    "mandatory": false
-                                                }
-                                            ]
-                                        };
-                                        break;
-                                    case designer.system().schemas()[schema][att] === 'collection':
-                                        model[att] = {
-                                            "type": ["string"],
-                                            "readOnly": false,
-                                            "mandatory": false,
-                                            "default": []
-                                        };
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-
-                            // add (TODO improve)
-                            designer.system().models()[id] = model;
-
-                            ModelClass = this.require('ModelClass');
-                            modelClass = new ModelClass({
-                                'title': name
-                            });
-                            modelClass.document(JSON.parse(JSON.stringify(model)));
-                            modelClass.content(JSON.stringify(model));
-
-                            designer.save();
-
-                            this.require('channel').createModel(name, model);
-
-                            this.hide();
-
-                            designer.space(name);
-                            designer.spaces().render();
-                            designer.workspace().refresh();
-
-                            this.require('message').success('model generated from the schema. You can now edit it, create behaviors or components from this model.');
-                        }
+                        this.hide();
                     });
                 }
                 break;
@@ -2681,7 +2505,7 @@ runtime.on('ready', function() {
 
                         designer.save();
 
-                        this.require('channel').createComponent(modelId, component);
+                        this.require('channel').createComponent(modelName, component);
                     }
                 }
                 break;
@@ -2862,6 +2686,7 @@ runtime.on('ready', function() {
             sys = null,
             name = '',
             id = '',
+            schemaId = '',
             modelclass = null,
             ModelType = null,
             type = null,
@@ -2882,7 +2707,20 @@ runtime.on('ready', function() {
                 id = '';
 
             for (id in system.schemas()) {
-                if (system.schemas()[id]._name === 'name') {
+                if (system.schemas()[id]._name === name) {
+                    result = id;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _getModelId(name) {
+            var result = '',
+                id = '';
+
+            for (id in system.models()) {
+                if (system.models()[id]._name === name) {
                     result = id;
                     break;
                 }
@@ -2924,7 +2762,11 @@ runtime.on('ready', function() {
                                 ModelSchema = this.require('ModelSchema');
 
                                 // create parent if any
-                                parents = system.schemas()[id]._inherit;
+                                parentsId = [];
+                                if (system.schemas()[id]._inherit) {
+                                    parents = system.schemas()[id]._inherit.slice();
+                                    parents.reverse();
+                                }
                                 length = 0;
                                 if (parents) {
                                     length = parents.length;
@@ -2932,7 +2774,6 @@ runtime.on('ready', function() {
 
                                 for (i = 0; i < length; i++) {
 
-                                    // TODO GET PARENTS ID
                                     parentId = _getSchemaId(parents[i]);
 
                                     modelSchema = new ModelSchema({
@@ -2957,12 +2798,19 @@ runtime.on('ready', function() {
 
                                         modelSchema.document(schemaRuntime);
                                         modelSchema.content(JSON.stringify(schemaRuntime));
+                                        parentsId.push(parentId);
+                                        modelSchema.uuid(parentId);
                                     } else {
-                                        modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[parentId])));
-                                        modelSchema.content(JSON.stringify(system.schemas()[parentId]));
+                                        if (system.schemas()[_getSchemaId(parents[i])]) {
+                                            modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[_getSchemaId(parents[i])])));
+                                            modelSchema.content(JSON.stringify(system.schemas()[_getSchemaId(parents[i])]));
+                                            parentsId.push(_getSchemaId(parents[i]));
+                                            modelSchema.uuid(_getSchemaId(parents[i]));
+                                        } else {
+                                            parentsId.push(parents[i]);
+                                            modelSchema.uuid(parents[i]);
+                                        }
                                     }
-                                    parentsId.push(parentId);
-                                    modelSchema.uuid(parentId);
                                     modelSchema.render();
                                 }
 
@@ -2972,8 +2820,10 @@ runtime.on('ready', function() {
                                 modelSchema.uuid(id);
                                 modelSchema.document(JSON.parse(JSON.stringify(system.schemas()[id])));
                                 modelSchema.content(JSON.stringify(system.schemas()[id]));
+                                modelSchema.editable(true);
                                 modelSchema.render();
 
+                                length = parentsId.length;
                                 for (i = 0; i < length; i++) {
                                     this.designer().linkModel(id, parentsId[i]);
                                 }
@@ -2988,7 +2838,13 @@ runtime.on('ready', function() {
                                 ModelClass = this.require('ModelClass');
 
                                 // create parent if any
-                                parents = system.models()[id]._inherit;
+                                // parents are search from the schema
+                                schemaId = _getSchemaId(system.models()[id]._name);
+                                parentsId = [];
+                                if (system.schemas()[schemaId]._inherit) {
+                                    parents = system.schemas()[schemaId]._inherit.slice();
+                                    parents.reverse();
+                                }
                                 length = 0;
                                 if (parents) {
                                     length = parents.length;
@@ -2996,7 +2852,6 @@ runtime.on('ready', function() {
 
                                 for (i = 0; i < length; i++) {
 
-                                    // TODO GET PARENTS ID
                                     parentId = _getSchemaId(parents[i]);
 
                                     modelclass = new ModelClass({
@@ -3008,7 +2863,6 @@ runtime.on('ready', function() {
 
                                         var modelRuntime = {
                                             "_name": "RuntimeComponent",
-                                            "_schema": "RuntimeComponent",
                                             "_core": true,
                                             "on": {
                                                 "params": [{
@@ -3072,12 +2926,19 @@ runtime.on('ready', function() {
 
                                         modelclass.document(modelRuntime);
                                         modelclass.content(JSON.stringify(modelRuntime));
+                                        parentsId.push(parentId);
+                                        modelclass.uuid(parentId);
                                     } else {
-                                        modelclass.document(JSON.parse(JSON.stringify(system.models()[parentId])));
-                                        modelclass.content(JSON.stringify(system.models()[parentId]));
+                                        if (system.models()[_getModelId(parents[i])]) {
+                                            modelclass.document(JSON.parse(JSON.stringify(system.models()[_getModelId(parents[i])])));
+                                            modelclass.content(JSON.stringify(system.models()[_getModelId(parents[i])]));
+                                            parentsId.push(_getModelId(parents[i]));
+                                            modelclass.uuid(_getModelId(parents[i]));
+                                        } else {
+                                            parentsId.push(parents[i]);
+                                            modelclass.uuid(parentId);
+                                        }
                                     }
-                                    parentsId.push(parentId);
-                                    modelclass.uuid(parentId);
                                     modelclass.render();
                                 }
 
@@ -3087,8 +2948,10 @@ runtime.on('ready', function() {
                                 modelclass.uuid(id);
                                 modelclass.document(JSON.parse(JSON.stringify(system.models()[id])));
                                 modelclass.content(JSON.stringify(system.models()[id]));
+                                modelclass.editable(true);
                                 modelclass.render();
 
+                                length = parentsId.length;
                                 for (i = 0; i < length; i++) {
                                     this.designer().linkModel(id, parentsId[i]);
                                 }
@@ -3317,6 +3180,46 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
+        channel.on('updateSchemaName', function(name, id) {
+            var designer = this.require('designer'),
+                oldName = designer.system().schemas()[id]._name,
+                modelId = '',
+                behaviorId = '',
+                behavior = null;
+
+            function _getModelId(name, models) {
+                var result = '',
+                    id = '';
+
+                for (id in models) {
+                    if (models[id]._name === name) {
+                        result = id;
+                        break;
+                    }
+                }
+                return result;
+            }
+
+            modelId = _getModelId(oldName, designer.system().models());
+
+            // update model
+            designer.system().models()[modelId]._name = name;
+
+            // update behaviors
+            for (behaviorId in designer.system().behaviors()) {
+                behavior = designer.system().behaviors()[behaviorId];
+                if (behavior.component === oldName) {
+                    behavior.component = name;
+                }
+            }
+
+            // components
+            if (designer.system().components()[oldName]) {
+                designer.system().components()[name] = JSON.parse(JSON.stringify(designer.system().components()[oldName]));
+                delete designer.system().components()[oldName];
+            }
+        });
+
         channel.on('updateSchema', function(id, schema) {
             var designer = this.require('designer');
             jsPlumb.deleteEveryEndpoint();
@@ -3357,6 +3260,8 @@ runtime.on('ready', function() {
             jsPlumb.deleteEveryEndpoint();
             designer.system().models()[id] = model;
             designer.save();
+
+            designer.syncBehavior(model);
 
             designer.space(id);
             designer.spaces().render();
@@ -3736,6 +3641,10 @@ runtime.on('ready', function() {
         this.menubar().render();
         this.toolbar().render();
         this.spaces().render();
+
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
+        });
     });
 
     Designer.on('filter', function(val) {
@@ -3821,7 +3730,7 @@ runtime.on('ready', function() {
             length = menubar.length;
             for (i = 0; i < length; i++) {
                 href = menubar[i].href;
-                collection = href.split('#')[href.split('#').length - 1]; // TODO FIX BUG WHEN URL WITH NO #
+                collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
                 menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
             }
         } else {
@@ -3829,7 +3738,7 @@ runtime.on('ready', function() {
             length = menubar.length;
             for (i = 0; i < length; i++) {
                 href = menubar[i].href;
-                collection = href.split('#')[href.split('#').length - 1]; // TODO FIX BUG WHEN URL WITH NO #
+                collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
                 menubar[i].href = '##' + collection;
             }
         }
@@ -3843,7 +3752,8 @@ runtime.on('ready', function() {
             collection = href.split('#')[href.split('#').length - 2];
             component = href.split('#')[href.split('#').length - 1];
             spaces[i].href = '#' + this.require('designer').system().id() + '#' + collection + '#' + component;
-        }*/
+        }
+        */
     });
 
     Designer.on('createBehavior', function(model, state, def) {
@@ -3972,8 +3882,6 @@ runtime.on('ready', function() {
         model = {
             "_id": id,
             "_name": schema._name,
-            "_schema": schema._name,
-            "_inherit": ["RuntimeComponent"] // TODO only if schema inherits from RuntimeComponentSchema
         };
 
         for (propName in schema) {
@@ -4079,9 +3987,11 @@ runtime.on('ready', function() {
             return gen() + gen() + gen();
         }
 
+        name = schema._name;
+
         // search
         for (id in models) {
-            if (typeof models[id]._schema !== 'undefined' && models[id]._schema === schema._name) {
+            if (models[id]._name === schema._name) {
                 model = models[id];
             }
         }
@@ -4090,11 +4000,10 @@ runtime.on('ready', function() {
         oldSchema = schemas[schema._id];
 
         for (propName in schema) {
-            if (schema.hasOwnProperty(propName) &&
-                propName.indexOf('_') !== 0 && (
-                    typeof oldSchema[propName] === 'undefined' ||
-                    oldSchema[propName] !== schema[propName]
-                )) {
+            if (schema.hasOwnProperty(propName) && (
+                typeof oldSchema[propName] === 'undefined' ||
+                oldSchema[propName] !== schema[propName]
+            )) {
 
                 switch (true) {
                     case schema[propName] === 'property':
@@ -4175,6 +4084,11 @@ runtime.on('ready', function() {
                         }
 
                         break;
+                    case propName.indexOf('_') !== 1:
+                        if (propName !== '_id' && propName !== '_inherit') {
+                            model[propName] = schema[propName];
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -4193,6 +4107,72 @@ runtime.on('ready', function() {
                         delete this.system().behaviors()[behavior];
                     }
                 }
+            }
+        }
+    });
+
+    Designer.on('syncBehavior', function(model) {
+        var schema = null,
+            propName = '',
+            params = '',
+            header = '',
+            def = null,
+            methodDef = null,
+            length = 0,
+            i = 0,
+            behaviorId = '',
+            behavior = null,
+            that = this;
+
+        function _getSchema(name) {
+            var result = '',
+                id = '';
+
+            for (id in that.system().schemas()) {
+                if (that.system().schemas()[id]._name === name) {
+                    result = that.system().schemas()[id];
+                    break;
+                }
+            }
+            return result;
+        }
+
+        schema = _getSchema(model._name);
+
+        for (propName in schema) {
+            switch (true) {
+                case schema[propName] === 'method':
+                case schema[propName] === 'event':
+
+                    // params
+                    def = model[propName];
+                    methodDef = def.params;
+                    if (methodDef && methodDef.length) {
+                        length = methodDef.length;
+                        for (i = 0; i < length; i++) {
+                            if (i === 0) {
+                                params = methodDef[i].name;
+                            } else {
+                                params = params + ', ' + methodDef[i].name;
+                            }
+                        }
+                    }
+
+                    header = 'function ' + propName + '(' + params + ') ';
+
+                    for (behaviorId in this.system().behaviors()) {
+                        behavior = this.system().behaviors()[behaviorId];
+                        if (behavior.component === model._name && behavior.state === propName) {
+                            var action = behavior.action.split('{');
+                            action[0] = header;
+                            this.system().behaviors()[behaviorId].action = action.join('{');
+                            this.save();
+                        }
+                    }
+
+                    break;
+                default:
+                    break;
             }
         }
     });
