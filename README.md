@@ -32,6 +32,7 @@ It contains:
 
 ![Image Alt](https://system-designer.github.io/img/system-sdk.png)
 
+
 ## Installation
 
 #### Direct download
@@ -59,6 +60,7 @@ $ bower install system-designer --save
 Then:
 
 * open `/bower_components/system-designer/designer/index.html` with Mozilla Firefox or Google Chrome.
+
 
 ## Build
 
