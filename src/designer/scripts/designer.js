@@ -454,6 +454,11 @@ runtime.on('ready', function() {
             propName = '',
             compId = '',
             designer = this.require('designer'),
+            schemas = designer.system().schemas(),
+            models = designer.system().models(),
+            types = designer.system().types(),
+            components = designer.system().components(),
+            behaviors = designer.system().behaviors(),
             system = designer.system(),
             message = this.require('message');
 
@@ -462,85 +467,67 @@ runtime.on('ready', function() {
         if (Object.keys(sys).length) {
             // schemas
             for (name in sys.schemas) {
-                if (system.schemas()[name]) {
+                if (schemas[name]) {
                     for (propName in sys.schemas[name]) {
-                        system.schemas()[name][propName] = sys.schemas[name][propName];
+                        schemas[name][propName] = sys.schemas[name][propName];
                     }
                 } else {
-                    system.schemas()[name] = sys.schemas[name];
+                    schemas[name] = sys.schemas[name];
                 }
             }
-            // schemas
+            // models
             for (name in sys.models) {
-                if (system.models()[name]) {
+                if (models[name]) {
                     for (propName in sys.models[name]) {
-                        system.models()[name][propName] = sys.models[name][propName];
+                        models[name][propName] = sys.models[name][propName];
                     }
                 } else {
-                    system.models()[name] = sys.models[name];
+                    models[name] = sys.models[name];
                 }
             }
             // types
             for (name in sys.types) {
-                if (system.types()[name]) {
+                if (types[name]) {
                     for (propName in sys.types[name]) {
-                        system.types()[name][propName] = sys.types[name][propName];
+                        types[name][propName] = sys.types[name][propName];
                     }
                 } else {
-                    system.types()[name] = sys.types[name];
+                    types[name] = sys.types[name];
                 }
             }
             // behaviors
             for (name in sys.behaviors) {
                 if (name !== sys._id) {
-                    system.behaviors()[name] = sys.behaviors[name];
+                    behaviors[name] = sys.behaviors[name];
                 }
             }
             // components
             for (modelName in sys.components) {
-                if (!system.components()[modelName]) {
-                    system.components()[modelName] = {};
+                if (!components[modelName]) {
+                    components[modelName] = {};
                 }
                 for (compId in sys.components[modelName]) {
-                    if (system.components()[modelName][compId]) {
+                    if (components[modelName][compId]) {
                         for (propName in sys.components[modelName][compId]) {
-                            system.components()[modelName][compId][propName] = sys.components[modelName][compId][propName];
+                            components[modelName][compId][propName] = sys.components[modelName][compId][propName];
                         }
                     } else {
-                        system.components()[modelName][compId] = sys.components[modelName][compId];
+                        components[modelName][compId] = sys.components[modelName][compId];
                     }
                 }
             }
         }
 
-        /*
-                for (name in sys.schemas) {
-                    system.schemas()[name] = sys.schemas[name];
-                }
-        
-                for (name in sys.types) {
-                    system.types()[name] = sys.types[name];
-                }
-        
-                for (name in sys.behaviors) {
-                    system.behaviors()[name] = sys.behaviors[name];
-                }
-        
-                for (name in sys.components) {
-                    if (!system.components()[name]) {
-                        system.components()[name] = {};
-                    }
-                    for (modelName in sys.components[name]) {
-                        system.components()[name][modelName] = sys.components[name][modelName];
-                    }
-                }
-        */
+        designer.system().schemas(schemas);
+        designer.system().models(models);
+        designer.system().types(types);
+        designer.system().behaviors(behaviors);
+        designer.system().components(components);
 
         designer.save();
         designer.workspace().refresh();
 
         this.hide();
-        designer.save();
         message.success('merge of the system is done.');
     });
 
@@ -1049,7 +1036,12 @@ runtime.on('ready', function() {
 
         html.addEventListener('click', function(event) {
             var designer = this.require('designer');
-            delete designer.system().types()[this.title()];
+            types = designer.system().types();
+
+
+            delete types[this.title()];
+            designer.system().types(types);
+
             $('#designer-type-' + this.title()).remove();
 
             this.require('channel').deleteType(this.uuid());
@@ -1363,7 +1355,10 @@ runtime.on('ready', function() {
 
         html.addEventListener('click', function(event) {
             var designer = this.require('designer');
-            delete designer.system().behaviors()[this.uuid()];
+            behaviors = designer.system().behaviors();
+
+            delete behaviors[this.uuid()];
+            designer.system().behaviors(behaviors);
 
             $('#designer-behavior-' + this.uuid()).fadeOut(400, function() {
                 $(this).remove();
@@ -1431,12 +1426,12 @@ runtime.on('ready', function() {
         html = document.getElementById('designer-component-' + this.uuid() + '-delete');
 
         html.addEventListener('click', function(event) {
-            var designer = this.require('designer');
+            var designer = this.require('designer'),
+                components = designer.system().components();
 
-            delete designer.system().components()[this.model()][this.uuid()];
-            // if (Object.keys(designer.system().components()[this.model()])) {
-            //     delete designer.system().components()[this.model()];
-            //}
+            delete components[this.model()][this.uuid()];
+            designer.system().components(components);
+
             $('#designer-component-' + this.uuid()).fadeOut(400, function() {
                 $(this).remove();
             });
@@ -2299,6 +2294,7 @@ runtime.on('ready', function() {
                         var designer = this.require('designer'),
                             name = null,
                             schema = {},
+                            schemas = {},
                             ModelSchema = null,
                             modelSchema = null;
 
@@ -2327,8 +2323,9 @@ runtime.on('ready', function() {
                                 "_inherit": ["RuntimeComponent"]
                             };
 
-                            // add (TODO improve)
-                            designer.system().schemas()[id] = schema;
+                            schemas = designer.system().schemas();
+                            schemas[id] = schema;
+                            designer.system().schemas(schemas);
 
                             ModelSchema = this.require('ModelSchema');
                             modelSchema = new ModelSchema({
@@ -2380,6 +2377,7 @@ runtime.on('ready', function() {
                             name = null,
                             isEnum = false,
                             type = {},
+                            types = designer.system().types(),
                             ModelType = null,
                             modelType = null;
 
@@ -2408,8 +2406,8 @@ runtime.on('ready', function() {
                                 };
                             }
 
-                            // add (TODO improve)
-                            designer.system().types()[name] = type;
+                            types[name] = type;
+                            designer.system().types(types);
 
                             ModelType = this.require('ModelType');
                             modelType = new ModelType({
@@ -2439,6 +2437,7 @@ runtime.on('ready', function() {
                     var designer = this.require('designer'),
                         schemas = designer.system().schemas(),
                         models = designer.system().models(),
+                        components = designer.system().components(),
                         component = {},
                         ModelComponent = null,
                         modelComponent = null,
@@ -2481,11 +2480,12 @@ runtime.on('ready', function() {
                             component[propertyNames[i]] = models[modelId][propertyNames[i]].default;
                         }
 
-                        // add (TODO improve)
-                        if (!designer.system().components()[modelName]) {
-                            designer.system().components()[modelName] = {};
+                        if (!components[modelName]) {
+                            components[modelName] = {};
                         }
-                        designer.system().components()[modelName][uuid] = component;
+                        components[modelName][uuid] = component;
+
+                        designer.system().components(components);
 
                         ModelComponent = this.require('ModelComponent');
 
@@ -2520,6 +2520,7 @@ runtime.on('ready', function() {
                         var designer = this.require('designer'),
                             schemas = designer.system().schemas(),
                             models = designer.system().models(),
+                            behaviors = designer.system().behaviors(),
                             schemaId = '',
                             modelId = '',
                             methodDef = null,
@@ -2645,8 +2646,8 @@ runtime.on('ready', function() {
                                 "core": false
                             };
 
-                            // add (TODO improve)
-                            designer.system().behaviors()[uuid] = behavior;
+                            behaviors[uuid] = behavior;
+                            designer.system().behaviors(behaviors);
 
                             ModelBehavior = this.require('ModelBehavior');
 
@@ -3149,8 +3150,12 @@ runtime.on('ready', function() {
         });
 
         channel.on('updateType', function(id, type) {
-            var designer = this.require('designer');
-            designer.system().types()[id] = type;
+            var designer = this.require('designer'),
+                types = designer.system().types();
+
+            types[id] = type;
+            designer.system().types(types);
+
             designer.save();
 
             designer.space(type.name);
@@ -3160,21 +3165,23 @@ runtime.on('ready', function() {
 
         channel.on('deleteType', function(id) {
             var designer = this.require('designer'),
-                types = [],
+                types = designer.system().types,
+                dbTypes = [],
                 type = null;
 
-            types = this.require('db').collections().ModelType.find({
+            dbTypes = this.require('db').collections().ModelType.find({
                 'uuid': id
             });
-            if (types.length) {
-                type = this.require(types[0]._id);
+            if (dbTypes.length) {
+                type = this.require(dbTypes[0]._id);
                 if (type) {
                     type.hide();
                     type.destroy();
                 }
             }
 
-            delete designer.system().types()[id];
+            delete types[id];
+            designer.system().types(types);
 
             designer.save();
             designer.workspace().refresh();
@@ -3183,6 +3190,9 @@ runtime.on('ready', function() {
         channel.on('updateSchemaName', function(name, id) {
             var designer = this.require('designer'),
                 oldName = designer.system().schemas()[id]._name,
+                models = designer.system().models(),
+                behaviors = designer.system().behaviors(),
+                components = designer.system().components(),
                 modelId = '',
                 behaviorId = '',
                 behavior = null;
@@ -3203,29 +3213,38 @@ runtime.on('ready', function() {
             modelId = _getModelId(oldName, designer.system().models());
 
             // update model
-            designer.system().models()[modelId]._name = name;
+            models[modelId]._name = name;
+            designer.system().models(models);
 
             // update behaviors
-            for (behaviorId in designer.system().behaviors()) {
-                behavior = designer.system().behaviors()[behaviorId];
-                if (behavior.component === oldName) {
-                    behavior.component = name;
+            for (behaviorId in behaviors) {
+                if (behaviors[behaviorId].component === oldName) {
+                    behaviors[behaviorId].component = name;
+
+                    designer.system().behaviors(behaviors);
                 }
             }
 
             // components
-            if (designer.system().components()[oldName]) {
-                designer.system().components()[name] = JSON.parse(JSON.stringify(designer.system().components()[oldName]));
-                delete designer.system().components()[oldName];
+            if (components[oldName]) {
+                components[name] = JSON.parse(JSON.stringify(components[oldName]));
+                delete components[oldName];
+
+                designer.system().components(components);
             }
+
+            designer.save();
         });
 
         channel.on('updateSchema', function(id, schema) {
-            var designer = this.require('designer');
+            var designer = this.require('designer'),
+                schemas = designer.system().schemas();
+
             jsPlumb.deleteEveryEndpoint();
 
             designer.syncModel(schema);
-            designer.system().schemas()[id] = schema;
+            schemas[id] = schema;
+            designer.system().schemas(schemas);
             designer.save();
 
             designer.space(id);
@@ -3233,32 +3252,39 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteSchema', function(id) {
+        channel.on('deleteSchema', function deleteSchema(id) {
             var designer = this.require('designer'),
-                schemas = [],
+                schemas = designer.system().schemas(),
+                dbSchemas = [],
                 schema = null;
 
-            schemas = this.require('db').collections().ModelSchema.find({
+            dbSchemas = this.require('db').collections().ModelSchema.find({
                 'uuid': id
             });
-            if (schemas.length) {
-                schema = this.require(schemas[0]._id);
+            if (dbSchemas.length) {
+                schema = this.require(dbSchemas[0]._id);
                 if (schema) {
                     schema.hide();
                     schema.destroy();
                 }
             }
 
-            delete designer.system().schemas()[id];
+            delete schemas[id];
+            designer.system().schemas(schemas);
 
             designer.save();
             designer.workspace().refresh();
         });
 
         channel.on('updateModel', function(id, model) {
-            var designer = this.require('designer');
+            var designer = this.require('designer'),
+                models = designer.system().models();
+
             jsPlumb.deleteEveryEndpoint();
-            designer.system().models()[id] = model;
+
+            models[id] = model;
+            designer.system().models(models);
+
             designer.save();
 
             designer.syncBehavior(model);
@@ -3270,58 +3296,70 @@ runtime.on('ready', function() {
 
         channel.on('deleteModel', function(id) {
             var designer = this.require('designer'),
-                models = [],
+                models = designer.system().models(),
+                dbModels = [],
                 model = null;
 
-            models = this.require('db').collections().ModelClass.find({
+            dbModels = this.require('db').collections().ModelClass.find({
                 'uuid': id
             });
-            if (models.length) {
-                model = this.require(models[0]._id);
+            if (dbModels.length) {
+                model = this.require(dbModels[0]._id);
                 if (model) {
                     model.hide();
                     model.destroy();
                 }
             }
 
-            delete designer.system().models()[id];
+            delete models[id];
+            designer.system().models(models);
 
             designer.save();
             designer.workspace().refresh();
         });
 
         channel.on('updateBehavior', function(id, behavior) {
-            var designer = this.require('designer');
-            designer.system().behaviors()[id] = behavior;
+            var designer = this.require('designer'),
+                behaviors = designer.system().behaviors();
+
+            behaviors[id] = behavior;
+            designer.system().behaviors(behaviors);
+
             designer.save();
             designer.workspace().refresh();
         });
 
         channel.on('deleteBehavior', function(id) {
             var designer = this.require('designer'),
-                behaviors = [],
+                behaviors = esigner.system().behaviors(),
+                dbBehaviors = [],
                 behavior = null;
 
-            behaviors = this.require('db').collections().ModelBehavior.find({
+            dbBehaviors = this.require('db').collections().ModelBehavior.find({
                 'uuid': id
             });
-            if (behaviors.length) {
-                behavior = this.require(behaviors[0]._id);
+            if (dbBehaviors.length) {
+                behavior = this.require(dbBehaviors[0]._id);
                 if (behavior) {
                     behavior.hide();
                     behavior.destroy();
                 }
             }
 
-            delete designer.system().behaviors()[id];
+            delete behaviors[id];
+            designer.system().behaviors(behaviors);
 
             designer.save();
             designer.workspace().refresh();
         });
 
         channel.on('updateComponent', function(id, collection, component) {
-            var designer = this.require('designer');
-            designer.system().components()[collection][id] = component;
+            var designer = this.require('designer'),
+                components = designer.system().components();
+
+            components[collection][id] = component;
+            designer.system().components(components);
+
             designer.save();
 
             designer.workspace().refresh();
@@ -3329,6 +3367,7 @@ runtime.on('ready', function() {
 
         channel.on('deleteComponent', function(id, collection) {
             var designer = this.require('designer'),
+                components = designer.system().components(),
                 models = [],
                 model = null;
 
@@ -3343,7 +3382,8 @@ runtime.on('ready', function() {
                 }
             }
 
-            delete designer.system().components()[collection][id];
+            delete components[collection][id];
+            designer.system().components(components);
 
             designer.save();
             designer.workspace().refresh();
@@ -3757,7 +3797,8 @@ runtime.on('ready', function() {
     });
 
     Designer.on('createBehavior', function(model, state, def) {
-        var body = '';
+        var body = '',
+            behaviors = this.system().behaviors();
 
         function generateId() {
             function gen() {
@@ -3803,7 +3844,7 @@ runtime.on('ready', function() {
             }
         }
 
-        // set model
+        // set behavior
         behavior = {
             "_id": uuid,
             "component": model,
@@ -3813,7 +3854,9 @@ runtime.on('ready', function() {
             "core": false
         };
 
-        this.system().behaviors()[uuid] = behavior;
+        behaviors[uuid] = behavior;
+
+        this.system().behaviors(behaviors);
         this.save();
     });
 
@@ -3821,8 +3864,10 @@ runtime.on('ready', function() {
         var behaviorId = '',
             modelId = '',
             behavior = null,
-            models = this.system().models(),
             schemas = this.system().schemas(),
+            models = this.system().models(),
+            behaviors = this.system().behaviors(),
+            components = this.system().components(),
             schemaName = schemas[id]._name;
 
         function _getModelId(name, models) {
@@ -3839,29 +3884,34 @@ runtime.on('ready', function() {
         }
 
         // components
-        delete this.system().components()[schemaName];
+        delete components[schemaName];
+        this.system().components(components);
 
         // behaviors
-        for (behaviorId in this.system().behaviors()) {
-            behavior = this.system().behaviors()[behaviorId];
+        for (behaviorId in behaviors) {
+            behavior = behaviors[behaviorId];
             if (behavior.component === schemaName) {
-                delete this.system().behaviors()[behaviorId];
+                delete behaviors[behaviorId];
+                this.system().behaviors(behaviors);
             }
         }
 
         // model
         modelId = _getModelId(schemas[id]._name, models);
         if (modelId) {
-            delete this.system().models()[modelId];
+            delete models[modelId];
+            this.system().models(models);
         }
 
         // schema
         delete schemas[id];
+        this.system().schemas(schemas);
     });
 
     Designer.on('createModel', function(schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
+            components = this.system().components(),
             name = '',
             id = '',
             propName = '',
@@ -3895,8 +3945,8 @@ runtime.on('ready', function() {
                             "default": ""
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
                         }
 
                         break;
@@ -3908,8 +3958,8 @@ runtime.on('ready', function() {
                             "default": {}
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
                         }
 
                         break;
@@ -3925,8 +3975,8 @@ runtime.on('ready', function() {
                             "result": "string"
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
                         }
 
                         break;
@@ -3941,8 +3991,8 @@ runtime.on('ready', function() {
                             ]
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
                         }
 
                         break;
@@ -3954,8 +4004,8 @@ runtime.on('ready', function() {
                             "default": []
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
                         }
 
                         break;
@@ -3966,12 +4016,17 @@ runtime.on('ready', function() {
         }
 
         models[id] = model;
+
+        this.system().models(models);
+        this.system().components(components);
         this.save();
     });
 
     Designer.on('syncModel', function(schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
+            components = this.system().components(),
+            behaviors = this.system().behaviors(),
             name = '',
             id = '',
             propName = '',
@@ -4014,8 +4069,9 @@ runtime.on('ready', function() {
                             "default": null
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
+                            this.system().components(components);
                         }
 
                         break;
@@ -4027,8 +4083,9 @@ runtime.on('ready', function() {
                             "default": {}
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
+                            this.system().components(components);
                         }
 
                         break;
@@ -4044,8 +4101,9 @@ runtime.on('ready', function() {
                             "result": "string"
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
+                            this.system().components(components);
                         }
 
                         // create behavior
@@ -4063,8 +4121,9 @@ runtime.on('ready', function() {
                             ]
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
+                            this.system().components(components);
                         }
 
                         // create behavior
@@ -4079,8 +4138,9 @@ runtime.on('ready', function() {
                             "default": []
                         };
 
-                        for (component in this.system().components()[name]) {
-                            this.system().components()[name][component][propName] = model[propName].default;
+                        for (component in components[name]) {
+                            components[name][component][propName] = model[propName].default;
+                            this.system().components(components);
                         }
 
                         break;
@@ -4099,20 +4159,27 @@ runtime.on('ready', function() {
             if (propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
                 delete model[propName];
 
-                for (component in this.system().components()[name]) {
-                    delete this.system().components()[name][component][propName];
+                for (component in components[name]) {
+                    delete components[name][component][propName];
+                    this.system().components(components);
                 }
-                for (behavior in this.system().behaviors()) {
-                    if (model && this.system().behaviors()[behavior].component === model._name && this.system().behaviors()[behavior].state === propName) {
-                        delete this.system().behaviors()[behavior];
+                for (behavior in behaviors) {
+                    if (model && behaviors[behavior].component === model._name && behaviors[behavior].state === propName) {
+                        delete behaviors[behavior];
+                        this.system().behaviors(behaviors);
                     }
                 }
             }
         }
+
+        models[model._id] = model;
+        this.system().models(models);
+        this.save();
     });
 
     Designer.on('syncBehavior', function(model) {
-        var schema = null,
+        var behaviors = this.system().behaviors(),
+            schema = null,
             propName = '',
             params = '',
             header = '',
@@ -4121,6 +4188,7 @@ runtime.on('ready', function() {
             length = 0,
             i = 0,
             behaviorId = '',
+            action = '',
             behavior = null,
             that = this;
 
@@ -4160,12 +4228,14 @@ runtime.on('ready', function() {
 
                     header = 'function ' + propName + '(' + params + ') ';
 
-                    for (behaviorId in this.system().behaviors()) {
-                        behavior = this.system().behaviors()[behaviorId];
+                    for (behaviorId in behaviors) {
+                        behavior = behaviors[behaviorId];
                         if (behavior.component === model._name && behavior.state === propName) {
-                            var action = behavior.action.split('{');
+                            action = behavior.action.split('{');
                             action[0] = header;
-                            this.system().behaviors()[behaviorId].action = action.join('{');
+                            behaviors[behaviorId].action = action.join('{');
+
+                            this.system().behaviors(behaviors);
                             this.save();
                         }
                     }
