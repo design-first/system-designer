@@ -3662,16 +3662,31 @@ runtime.on('ready', function() {
 
     Designer.on('welcome', function() {
         var Dialog = null,
-            dialog = null;
+            dialog = null,
+            config = null;
 
-        if (typeof SharedWorker !== 'undefined' && document.cookie.indexOf('sysDesWelcome=true') === -1) {
+        config = window.localStorage.getItem('system-designer');
+        if (!config) {
+            config = {};
+        } else {
+            config = JSON.parse(config);
+        }
+
+        if (typeof SharedWorker !== 'undefined' && typeof config.welcomeScreen === 'undefined') {
             Dialog = this.require('DialogWelcome');
             dialog = new Dialog({
                 'title': 'Welcome to System Designer'
             });
             dialog.show();
             dialog.on('ok', function() {
-                document.cookie = 'sysDesWelcome=true';
+                var config = window.localStorage.getItem('system-designer');
+                if (!config) {
+                    config = {};
+                } else {
+                    config = JSON.parse(config);
+                }
+                config.welcomeScreen = true;
+                window.localStorage.setItem('system-designer', JSON.stringify(config));
                 this.hide();
             });
         }
