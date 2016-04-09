@@ -35,12 +35,6 @@ It contains:
 
 ## Installation
 
-#### Direct download
-
-* [Download the zip file](https://github.com/system-sdk/system-designer/archive/master.zip) of this project,
-* unzip it and
-* open `/system-designer-master/designer/index.html` with Mozilla Firefox.
-
 #### Node.js
 
 ```sh
@@ -49,7 +43,8 @@ $ npm install system-designer --save
 
 Then:
 
-* open `/node_modules/system-designer/designer/index.html` with Mozilla Firefox or Google Chrome.
+* copy `/node_modules/system-designer/designer` on your web project
+* open `/designer/index.html`.
 
 #### Bower
 
@@ -59,8 +54,8 @@ $ bower install system-designer --save
 
 Then:
 
-* open `/bower_components/system-designer/designer/index.html` with Mozilla Firefox or Google Chrome.
-
+* copy `/node_modules/system-designer/designer` on your web project
+* open `/designer/index.html`.
 
 ## Build
 
