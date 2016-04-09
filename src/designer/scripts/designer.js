@@ -2702,7 +2702,6 @@ runtime.on('ready', function() {
             parents = null,
             length = 0;
 
-
         function _getSchemaId(name) {
             var result = '',
                 id = '';
