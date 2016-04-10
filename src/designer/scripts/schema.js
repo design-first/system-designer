@@ -402,7 +402,7 @@ runtime.on('ready', function() {
 
         // check if ID change
         if (designer.store().uuid() !== designer.store().data()._id) {
-            this.require('channel').deleteSchema(designer.store().uuid());
+            this.require('channel').updateSchemaId(designer.store().uuid(), designer.store().data()._id);
             designer.store().uuid(designer.store().data()._id);
         }
 

@@ -385,7 +385,7 @@ runtime.on('ready', function() {
 
             // check if ID change
             if (designer.store().uuid() !== designer.store().data()._id) {
-                this.require('channel').deleteModel(designer.store().uuid());
+                this.require('channel').updateModelId(designer.store().uuid(), designer.store().data()._id);
                 designer.store().uuid(designer.store().data()._id);
             }
 

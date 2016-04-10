@@ -951,6 +951,11 @@ runtime.on('ready', function() {
 
             designer.system().destroy();
 
+            // remove log
+            designer.logs().forEach(function(item) {
+                this.logs().pop();
+            }.bind(designer));
+
             // set default system
             if (systems.systems.length) {
                 designer.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
@@ -3427,6 +3432,24 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
+        channel.on('updateSchemaId', function updateSchemaId(oldId, newId) {
+            var designer = this.require('designer'),
+                schemas = designer.system().schemas(),
+                dbSchemas = [],
+                schema = null;
+
+            schema = JSON.parse(JSON.stringify(schemas[oldId]));
+
+            delete schemas[oldId];
+
+            schema._id = newId;
+            schemas[newId] = schema;
+            designer.system().schemas(schemas);
+
+            designer.save();
+            designer.workspace().refresh();
+        });
+
         channel.on('updateModel', function(id, model) {
             var designer = this.require('designer'),
                 models = designer.system().models();
@@ -3463,6 +3486,23 @@ runtime.on('ready', function() {
             }
 
             delete models[id];
+            designer.system().models(models);
+
+            designer.save();
+            designer.workspace().refresh();
+        });
+
+        channel.on('updateModelId', function(oldId, newId) {
+            var designer = this.require('designer'),
+                models = designer.system().models(),
+                model = null;
+
+            model = JSON.parse(JSON.stringify(model[oldId]));
+
+            delete models[oldId];
+
+            model._id = newId;
+            models[newId] = model;
             designer.system().models(models);
 
             designer.save();
