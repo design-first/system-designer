@@ -3497,12 +3497,13 @@ runtime.on('ready', function() {
                 models = designer.system().models(),
                 model = null;
 
-            model = JSON.parse(JSON.stringify(model[oldId]));
+            model = JSON.parse(JSON.stringify(models[oldId]));
 
             delete models[oldId];
 
             model._id = newId;
             models[newId] = model;
+            
             designer.system().models(models);
 
             designer.save();
