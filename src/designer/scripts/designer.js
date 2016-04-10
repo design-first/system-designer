@@ -939,7 +939,7 @@ runtime.on('ready', function() {
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
 
         html.addEventListener('click', function(event) {
-            var systems = JSON.parse(window.localStorage.getItem('systems')),
+            var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
                 designer = this.require('designer'),
                 System = this.require('System'),
                 systemId = this.uuid();
@@ -947,7 +947,7 @@ runtime.on('ready', function() {
             // remove from localstorage
             window.localStorage.removeItem(systemId);
             systems.systems.splice(systems.systems.indexOf(systemId), 1);
-            window.localStorage.setItem('systems', JSON.stringify(systems));
+            window.localStorage.setItem('system-designer-systems', JSON.stringify(systems));
 
             designer.system().destroy();
 
@@ -1799,7 +1799,7 @@ runtime.on('ready', function() {
                     }.bind(this));
 
                     // items                   
-                    var systems = JSON.parse(window.localStorage.getItem('systems')),
+                    var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
                         systemIds = [],
                         length = 0,
                         i = 0;
@@ -2071,11 +2071,13 @@ runtime.on('ready', function() {
                         this.items().pop();
                     }.bind(this));
 
-                    spaceItem = new SpaceItem({
-                        'name': this.require('designer').system().name(),
-                        'uuid': this.require('designer').system().id()
-                    });
-                    this.items().push(spaceItem);
+                    if (window.localStorage.getItem('system-designer-systems') && JSON.parse(window.localStorage.getItem('system-designer-systems')).systems.length) {
+                        spaceItem = new SpaceItem({
+                            'name': this.require('designer').system().name(),
+                            'uuid': this.require('designer').system().id()
+                        });
+                        this.items().push(spaceItem);
+                    }
 
                     // items
                     for (name in system.models()) {
@@ -2810,7 +2812,7 @@ runtime.on('ready', function() {
             this.clear();
             switch (this.designer().context()) {
                 case 'system':
-                    var systems = JSON.parse(window.localStorage.getItem('systems')),
+                    var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
                         systemIds = [],
                         i = 0;
 
@@ -3740,7 +3742,7 @@ runtime.on('ready', function() {
 
         // system
         System = this.require('System');
-        var systems = JSON.parse(window.localStorage.getItem('systems'));
+        var systems = JSON.parse(window.localStorage.getItem('system-designer-systems'));
 
         // case of url
         switch (true) {
@@ -4505,7 +4507,7 @@ runtime.on('ready', function() {
     });
 
     Designer.on('save', function() {
-        var systems = JSON.parse(window.localStorage.getItem('systems')),
+        var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
             designer = this.require('designer'),
             system = this.require('db').collections().System.find({
                 '_id': designer.system().id()
@@ -4523,7 +4525,7 @@ runtime.on('ready', function() {
                 systems.systems.push(systemId);
             }
         }
-        window.localStorage.setItem('systems', JSON.stringify(systems));
+        window.localStorage.setItem('system-designer-systems', JSON.stringify(systems));
     });
 
     // main
