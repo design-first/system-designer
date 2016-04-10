@@ -241,8 +241,9 @@ runtime.on('ready', function() {
     Workspace.on('render', function() {
         var html = '',
             context = this.require('designer').context();
-
+            
         if (context) {
+            this.clear();
             html = this.require('documentation-' + context + '.html');
             document.querySelector('#designer-documentation').insertAdjacentHTML('afterbegin',
                 html.source()
@@ -370,7 +371,6 @@ runtime.on('ready', function() {
     });
 
     Designer.on('context', function(val) {
-        this.workspace().clear();
         this.workspace().render();
     });
 

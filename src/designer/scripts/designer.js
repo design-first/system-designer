@@ -1452,6 +1452,63 @@ runtime.on('ready', function() {
         $('#designer-component-' + this.uuid()).show();
     });
 
+    // MODELLOG
+    var ModelLog = this.require('ModelLog');
+    ModelLog.on('render', function() {
+        var html = null,
+            that = this,
+            doc = '',
+            propName = '',
+            propVal = '',
+            logs = '';
+
+        // html 
+        htmlComp = this.require('model-log.html');
+
+        // logs
+        this.require('designer').logs().forEach(function(log) {
+            switch (log.type()) {
+                case 'debug':
+                    logs = logs + '<p class="text-muted">' + log.log() + '</p>';
+                    break;
+                case 'info':
+                    logs = logs + '<p class="text-info">' + log.log() + '</p>';
+                    break;
+                case 'warn':
+                    logs = logs + '<p class="text-warning">' + log.log() + '</p>';
+                    break;
+                case 'error':
+                    logs = logs + '<p class="text-danger">' + log.log() + '</p>';
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
+            htmlComp.source()
+                .replace('{{logs}}', logs)
+        );
+
+        // events       
+        html = document.getElementById('designer-log-clean');
+
+        html.addEventListener('click', function(event) {
+            this.require('designer').logs().forEach(function(item) {
+                this.logs().pop();
+            }.bind(this.require('designer')));
+            document.querySelector('#designer-loug-output').innerHTML = '';
+        }.bind(this));
+    });
+
+    ModelLog.on('hide', function() {
+        $('#designer-log').hide();
+    });
+
+    ModelLog.on('show', function() {
+        $('#designer-log').show();
+    });
+
     // MenuBar
     var MenuBar = this.require('MenuBar');
     MenuBar.on('init', function(conf) {
@@ -1715,6 +1772,11 @@ runtime.on('ready', function() {
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-components.html').source());
                 break;
+            case 'logs':
+                document.getElementById('designer-spaces-type').innerHTML = 'Logs';
+                // help
+                document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-logs.html').source());
+                break;
             default:
                 break;
         }
@@ -1793,6 +1855,10 @@ runtime.on('ready', function() {
                             if (system) {
                                 designer.system(new System(system));
                             }
+                            // empty log
+                            designer.logs().forEach(function(item) {
+                                this.logs().pop();
+                            }.bind(designer));
                         });
                     });
 
@@ -1993,6 +2059,7 @@ runtime.on('ready', function() {
                         }
                     }
                     break;
+
                 case 'behaviors':
                     // TODO find better way
                     this.items().forEach(function(item) {
@@ -2116,6 +2183,10 @@ runtime.on('ready', function() {
                         }
                     }
 
+                    break;
+
+                case 'logs':
+                    domItems.insertAdjacentHTML('beforeend', '<li class="active"><a href="#' + system.id() + '#logs">Console output</a></li>');
                     break;
                 default:
                     break;
@@ -2684,11 +2755,13 @@ runtime.on('ready', function() {
             ModelSchema = null,
             ModelClass = null,
             modelSchema = null,
+            ModelLog = null,
             sys = null,
             name = '',
             id = '',
             schemaId = '',
             modelclass = null,
+            modellog = null,
             ModelType = null,
             type = null,
             ModelComponent = null,
@@ -3039,6 +3112,13 @@ runtime.on('ready', function() {
                         Prism.highlightAll();
                     }
                     break;
+                case 'logs':
+                    ModelLog = this.require('ModelLog');
+
+                    modelLog = new ModelLog();
+                    modelLog.render();
+
+                    break;
                 default:
                     break;
             }
@@ -3069,6 +3149,78 @@ runtime.on('ready', function() {
 
         channel.on('send', function(message) {
             this.require('worker').worker().port.postMessage(message);
+        });
+
+        channel.on('logDebug', function(message) {
+            var log = '',
+                Log = null,
+                type = '',
+                mess = '';
+
+            type = message.type;
+            mess = message.log.replace('runtime:', '');
+
+            Log = this.require('Log');
+            log = new Log({
+                'type': type,
+                'log': mess
+            });
+
+            this.require('designer').logs().push(log);
+        });
+
+        channel.on('logInfo', function(message) {
+            var log = '',
+                Log = null,
+                type = '',
+                mess = '';
+
+            type = message.type;
+            mess = message.log.replace('runtime:', '');
+
+            Log = this.require('Log');
+            log = new Log({
+                'type': type,
+                'log': mess
+            });
+
+            this.require('designer').logs().push(log);
+        });
+
+        channel.on('logWarn', function(message) {
+            var log = '',
+                Log = null,
+                type = '',
+                mess = '';
+
+            type = message.type;
+            mess = message.log.replace('runtime:', '');
+
+            Log = this.require('Log');
+            log = new Log({
+                'type': type,
+                'log': mess
+            });
+
+            this.require('designer').logs().push(log);
+        });
+
+        channel.on('logError', function(message) {
+            var log = '',
+                Log = null,
+                type = '',
+                mess = '';
+
+            type = message.type;
+            mess = message.log.replace('runtime:', '');
+
+            Log = this.require('Log');
+            log = new Log({
+                'type': type,
+                'log': mess
+            });
+
+            this.require('designer').logs().push(log);
         });
 
         channel.on('getSystem', function(id) {
@@ -3659,12 +3811,42 @@ runtime.on('ready', function() {
         }
     });
 
+    Designer.on('logs', function(index, id, action) {
+        var log = null,
+            html = '';
+
+        if (action === 'add' && this.context() === 'logs') {
+            log = this.require(id);
+
+            switch (log.type()) {
+                case 'debug':
+                    html = html + '<p class="text-muted">' + log.log() + '</p>';
+                    break;
+                case 'info':
+                    html = html + '<p class="text-info">' + log.log() + '</p>';
+                    break;
+                case 'warn':
+                    html = html + '<p class="text-warning">' + log.log() + '</p>';
+                    break;
+                case 'error':
+                    html = html + '<p class="text-danger">' + log.log() + '</p>';
+                    break;
+                default:
+                    break;
+            }
+
+            document.querySelector('#designer-loug-output').insertAdjacentHTML('afterbegin',
+                html
+            );
+        }
+    });
+
     Designer.on('welcome', function() {
         var Dialog = null,
             dialog = null,
             config = null;
 
-        config = window.localStorage.getItem('system-designer');
+        config = window.localStorage.getItem('system-designer-config');
         if (!config) {
             config = {};
         } else {
@@ -3678,14 +3860,14 @@ runtime.on('ready', function() {
             });
             dialog.show();
             dialog.on('ok', function() {
-                var config = window.localStorage.getItem('system-designer');
+                var config = window.localStorage.getItem('system-designer-config');
                 if (!config) {
                     config = {};
                 } else {
                     config = JSON.parse(config);
                 }
-                config.welcomeScreen = true;
-                window.localStorage.setItem('system-designer', JSON.stringify(config));
+                config.welcomeScreen = false;
+                window.localStorage.setItem('system-designer-config', JSON.stringify(config));
                 this.hide();
             });
         }

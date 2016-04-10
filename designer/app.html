@@ -26,10 +26,98 @@
                 // channel event
                 channel.on('setInitSystem', function (id, system) {
                     delete system.classInfo;
-                    var systemID = this.require('db').system(system);
+                    var messages = [];
+                    
+                    // message queue
+                    console.log = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        messages.push({
+                            'type': 'debug',
+                            'log': '[' + time + '] ' + message
+                        })
+                    };   
+                    
+                    console.info = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        messages.push({
+                            'type': 'info',
+                            'log': '[' + time + '] ' + message
+                        })
+                    };        
+                    
+                    console.warn = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        messages.push({
+                            'type': 'warn',
+                            'log': '[' + time + '] ' + message
+                        })
+                    }; 
+                    
+                    console.error = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        messages.push({
+                            'type': 'error',
+                            'log': '[' + time + '] ' + message
+                        })
+                    };                         
+                    
+                    this.require('logger').info('loading the system...');
+                    var systemID = this.require('db').system(system);                  
+                                        
+                    // send messages
+                    messages.forEach(function (message) {
+                        this.logInfo(message);  
+                    }.bind(this));
+                    
+                    console.log = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        this.logDebug({
+                            'type': 'debug',
+                            'log': '[' + time + '] ' + message
+                        });    
+                    }.bind(this); 
+                    
+                    console.info = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        this.logInfo({
+                            'type': 'info',
+                            'log': '[' + time + '] ' + message
+                        });    
+                    }.bind(this);  
+                    
+                    console.warn = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        this.logWarn({
+                            'type': 'warn',
+                            'log': '[' + time + '] ' + message
+                        });    
+                    }.bind(this);  
+                    
+                    console.error = function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        this.logError({
+                            'type': 'error',
+                            'log': '[' + time + '] ' + message
+                        });    
+                    }.bind(this);     
 
                     this.require('logger').info('the system is loaded')
-
                     this.require(systemID).main();
                 });
 
@@ -39,7 +127,6 @@
                 channel.off('sync');
                 
                 this.require('logger').level('info');
-                this.require('logger').info('loading the system...');
             }, true);
             
             system.main();
