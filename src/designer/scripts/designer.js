@@ -3160,17 +3160,12 @@ runtime.on('ready', function() {
 
         channel.on('logDebug', function(message) {
             var log = '',
-                Log = null,
-                type = '',
-                mess = '';
-
-            type = message.type;
-            mess = message.log.replace('runtime:', '');
+                Log = null;
 
             Log = this.require('Log');
             log = new Log({
-                'type': type,
-                'log': mess
+                'type': 'debug',
+                'log': message.replace('runtime:', '')
             });
 
             this.require('designer').logs().push(log);
@@ -3178,17 +3173,12 @@ runtime.on('ready', function() {
 
         channel.on('logInfo', function(message) {
             var log = '',
-                Log = null,
-                type = '',
-                mess = '';
-
-            type = message.type;
-            mess = message.log.replace('runtime:', '');
+                Log = null;
 
             Log = this.require('Log');
             log = new Log({
-                'type': type,
-                'log': mess
+                'type': 'info',
+                'log': message.replace('runtime:', '')
             });
 
             this.require('designer').logs().push(log);
@@ -3196,17 +3186,12 @@ runtime.on('ready', function() {
 
         channel.on('logWarn', function(message) {
             var log = '',
-                Log = null,
-                type = '',
-                mess = '';
-
-            type = message.type;
-            mess = message.log.replace('runtime:', '');
+                Log = null;
 
             Log = this.require('Log');
             log = new Log({
-                'type': type,
-                'log': mess
+                'type': 'warn',
+                'log': message.replace('runtime:', '')
             });
 
             this.require('designer').logs().push(log);
@@ -3214,17 +3199,12 @@ runtime.on('ready', function() {
 
         channel.on('logError', function(message) {
             var log = '',
-                Log = null,
-                type = '',
-                mess = '';
-
-            type = message.type;
-            mess = message.log.replace('runtime:', '');
+                Log = null;
 
             Log = this.require('Log');
             log = new Log({
-                'type': type,
-                'log': mess
+                'type': 'error',
+                'log': message.replace('runtime:', '')
             });
 
             this.require('designer').logs().push(log);
@@ -3505,7 +3485,7 @@ runtime.on('ready', function() {
 
             model._id = newId;
             models[newId] = model;
-            
+
             designer.system().models(models);
 
             designer.save();

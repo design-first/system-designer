@@ -108,15 +108,17 @@
         <li>click on the element who has got 'main' as name,</li>
         <li>update the code with this:</li>
     </ul>
-    <pre class="line-numbers"><code class="language-javascript">function main() {\n 
-   var luke = null;\n
-\n
-    // get the component\n
-    luke = this.require('166c21e4a01dd30');\n
-\n    
-// get the name of the father of Luke\n
-    console.log(luke.father().fullName());\n
-}</code>
+    <pre class="line-numbers"><code class="language-javascript">function main() {\n
+     var luke = null,\n
+         logger = null;\n
+ \n
+     // get the component\n
+     luke = this.require('166c21e4a01dd30');\n
+ \n   
+  // get the name of the father of Luke\n
+     logger = this.require('logger');\n
+     logger.debug(luke.father().fullName());\n
+ }</code>
 </pre>
     <ul>
         <li>save.</li>
