@@ -10,7 +10,7 @@
 
 <body>
     <!-- Runtime -->
-    <script type="text/javascript" level="error" src="lib/system-runtime/system-runtime.min.js"></script>
+    <script type="text/javascript" level="warn" src="lib/system-runtime/system-runtime.min.js"></script>
     <script>
         runtime.on('ready', function () {
             var system = runtime.system('app');
@@ -26,25 +26,7 @@
                 // channel event
                 channel.on('setInitSystem', function (id, system) {
                     delete system.classInfo;
-                    var messages = [];                                       
-                    
-                    this.require('logger').info('loading the system...');
-                    var systemID = this.require('db').system(system);                  
-                    this.require('logger').info('the system is loaded');
-                    
-                    this.require('logger').on('debug', function (message) {
-                        var date = new Date(),
-                        time = date.toLocaleTimeString();
-                        
-                        this.require('channel-admin').logDebug('[' + time + '] ' + message);    
-                    }); 
-                    
-                    this.require('logger').on('info', function (message) {
-                        var date = new Date(),
-                        time = date.toLocaleTimeString();
-                        
-                        this.require('channel-admin').logInfo('[' + time + '] ' + message);    
-                    });
+                    var messages = [];             
                     
                     this.require('logger').on('warn', function (message) {
                         var date = new Date(),
@@ -58,7 +40,25 @@
                         time = date.toLocaleTimeString();
                         
                         this.require('channel-admin').logError('[' + time + '] ' + message);    
-                    });     
+                    });                         
+                    
+                    this.require('logger').info('loading the system...');
+                    var systemID = this.require('db').system(system);                  
+                    this.require('logger').info('the system is loaded');
+                            
+                    this.require('logger').on('debug', function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        this.require('channel-admin').logDebug('[' + time + '] ' + message);    
+                    }); 
+                    
+                    this.require('logger').on('info', function (message) {
+                        var date = new Date(),
+                        time = date.toLocaleTimeString();
+                        
+                        this.require('channel-admin').logInfo('[' + time + '] ' + message);    
+                    });    
 
                     this.require('logger').level('debug');
                     this.require(systemID).main();
