@@ -3505,7 +3505,7 @@ runtime.on('ready', function() {
 
         channel.on('deleteBehavior', function(id) {
             var designer = this.require('designer'),
-                behaviors = esigner.system().behaviors(),
+                behaviors = designer.system().behaviors(),
                 dbBehaviors = [],
                 behavior = null;
 
