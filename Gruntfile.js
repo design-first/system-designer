@@ -44,7 +44,7 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: [
-                    'designer/*.html'
+                    'dist/designer/*.html'
                 ]
             }
         },
@@ -52,11 +52,11 @@ module.exports = function(grunt) {
             'build/*.js',
             'build/*.json',
             'build/*/*.json',
-            'designer/lib/jquery/**',
-            'designer/lib/system-runtime/**',
-            'designer/systems/design.json',
-            'designer/scripts/*.js',
-            'designer/styles/*.css'
+            'dist/designer/lib/jquery/**',
+            'dist/designer/lib/system-runtime/**',
+            'dist/designer/systems/design.json',
+            'dist/designer/scripts/*.js',
+            'dist/designer/styles/*.css'
         ],
         jshint: {
             files: [
@@ -561,59 +561,59 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'designer/scripts/behavior.min.js': ['src/designer/scripts/behavior.js'],
-                    'designer/scripts/component.min.js': ['src/designer/scripts/component.js'],
-                    'designer/scripts/designer.min.js': ['src/designer/scripts/designer.js'],
-                    'designer/scripts/model.min.js': ['src/designer/scripts/model.js'],
-                    'designer/scripts/schema.min.js': ['src/designer/scripts/schema.js'],
-                    'designer/scripts/system.min.js': ['src/designer/scripts/system.js'],
-                    'designer/scripts/type.min.js': ['src/designer/scripts/type.js'],
-                    'designer/scripts/documentation.min.js': ['src/designer/scripts/documentation.js']
+                    'dist/designer/scripts/behavior.min.js': ['src/designer/scripts/behavior.js'],
+                    'dist/designer/scripts/component.min.js': ['src/designer/scripts/component.js'],
+                    'dist/designer/scripts/designer.min.js': ['src/designer/scripts/designer.js'],
+                    'dist/designer/scripts/model.min.js': ['src/designer/scripts/model.js'],
+                    'dist/designer/scripts/schema.min.js': ['src/designer/scripts/schema.js'],
+                    'dist/designer/scripts/system.min.js': ['src/designer/scripts/system.js'],
+                    'dist/designer/scripts/type.min.js': ['src/designer/scripts/type.js'],
+                    'dist/designer/scripts/documentation.min.js': ['src/designer/scripts/documentation.js']
                 }
             }
         },
         copy: {
             system: {
                 src: 'build/system/design.json',
-                dest: 'designer/systems/design.json'
+                dest: 'dist/designer/systems/design.json'
             },
             worker: {
                 src: 'src/designer/scripts/worker.js',
-                dest: 'designer/scripts/worker.js'
+                dest: 'dist/designer/scripts/worker.js'
             },
             css: {
                 files: [
                     {
                         src: 'src/designer/styles/behavior.css',
-                        dest: 'designer/styles/behavior.css'
+                        dest: 'dist/designer/styles/behavior.css'
                     },
                     {
                         src: 'src/designer/styles/component.css',
-                        dest: 'designer/styles/component.css'
+                        dest: 'dist/designer/styles/component.css'
                     },
                     {
                         src: 'src/designer/styles/designer.css',
-                        dest: 'designer/styles/designer.css'
+                        dest: 'dist/designer/styles/designer.css'
                     },
                     {
                         src: 'src/designer/styles/model.css',
-                        dest: 'designer/styles/model.css'
+                        dest: 'dist/designer/styles/model.css'
                     },
                     {
                         src: 'src/designer/styles/schema.css',
-                        dest: 'designer/styles/schema.css'
+                        dest: 'dist/designer/styles/schema.css'
                     },
                     {
                         src: 'src/designer/styles/system.css',
-                        dest: 'designer/styles/system.css'
+                        dest: 'dist/designer/styles/system.css'
                     },
                     {
                         src: 'src/designer/styles/type.css',
-                        dest: 'designer/styles/type.css'
+                        dest: 'dist/designer/styles/type.css'
                     },
                     {
                         src: 'src/designer/styles/documentation.css',
-                        dest: 'designer/styles/documentation.css'
+                        dest: 'dist/designer/styles/documentation.css'
                     }
                 ]
             },
@@ -621,35 +621,35 @@ module.exports = function(grunt) {
                 files: [
                     {
                         src: 'src/designer/scripts/behavior.js',
-                        dest: 'designer/scripts/behavior.min.js'
+                        dest: 'dist/designer/scripts/behavior.min.js'
                     },
                     {
                         src: 'src/designer/scripts/component.js',
-                        dest: 'designer/scripts/component.min.js'
+                        dest: 'dist/designer/scripts/component.min.js'
                     },
                     {
                         src: 'src/designer/scripts/designer.js',
-                        dest: 'designer/scripts/designer.min.js'
+                        dest: 'dist/designer/scripts/designer.min.js'
                     },
                     {
                         src: 'src/designer/scripts/model.js',
-                        dest: 'designer/scripts/model.min.js'
+                        dest: 'dist/designer/scripts/model.min.js'
                     },
                     {
                         src: 'src/designer/scripts/schema.js',
-                        dest: 'designer/scripts/schema.min.js'
+                        dest: 'dist/designer/scripts/schema.min.js'
                     },
                     {
                         src: 'src/designer/scripts/system.js',
-                        dest: 'designer/scripts/system.min.js'
+                        dest: 'dist/designer/scripts/system.min.js'
                     },
                     {
                         src: 'src/designer/scripts/type.js',
-                        dest: 'designer/scripts/type.min.js'
+                        dest: 'dist/designer/scripts/type.min.js'
                     },
                     {
                         src: 'src/designer/scripts/documentation.js',
-                        dest: 'designer/scripts/documentation.min.js'
+                        dest: 'dist/designer/scripts/documentation.min.js'
                     }
                 ]
             },
@@ -657,11 +657,11 @@ module.exports = function(grunt) {
                 files: [
                     {
                         src: 'bower_components/jquery/dist/jquery.min.js',
-                        dest: 'designer/lib/jquery/jquery.min.js'
+                        dest: 'dist/designer/lib/jquery/jquery.min.js'
                     },
                     {
                         src: 'bower_components/system-runtime/dist/system-runtime.min.js',
-                        dest: 'designer/lib/system-runtime/system-runtime.min.js'
+                        dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
                     }
                 ],
                 options: {
@@ -680,14 +680,14 @@ module.exports = function(grunt) {
                 options: {
                     keepalive: true,
                     port: 9001,
-                    base: 'designer'
+                    base: 'dist/designer'
                 }
             },
             serverDebug: {
                 options: {
                     livereload: true,
                     port: 9001,
-                    base: 'designer'
+                    base: 'dist/designer'
                 }
             }
         }

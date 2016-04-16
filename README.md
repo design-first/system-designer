@@ -43,7 +43,7 @@ $ npm install system-designer --save
 
 Then:
 
-* copy `/node_modules/system-designer/designer` on your web project and
+* copy `/node_modules/system-designer/dist/designer` on your web project and
 * open `/designer/index.html`.
 
 #### Bower
@@ -54,7 +54,7 @@ $ bower install system-designer --save
 
 Then:
 
-* copy `/bower_components/system-designer/designer` on your web project and
+* copy `/bower_components/system-designer/dist/designer` on your web project and
 * open `/designer/index.html`.
 
 ## Build
