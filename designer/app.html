@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>app</title>
+    <title>Loading...</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="systems/app.json" type="application/json" rel="system">
@@ -45,7 +45,9 @@
                     this.require('logger').info('loading the system...');
                     var systemID = this.require('db').system(system);                  
                     this.require('logger').info('the system is loaded');
-                            
+                    
+                    document.title = system.name;
+                     
                     this.require('logger').on('debug', function (message) {
                         var date = new Date(),
                         time = date.toLocaleTimeString();

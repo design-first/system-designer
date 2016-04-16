@@ -18,12 +18,12 @@
  * limitations under the License.
  */
 
-runtime.on('ready', function() {
+runtime.on('ready', function () {
     var system = this.system('design');
 
     // DIALOG COPYRIGHT
     var DialogCopyright = this.require('DialogCopyright');
-    DialogCopyright.on('init', function(config) {
+    DialogCopyright.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -38,23 +38,23 @@ runtime.on('ready', function() {
 
         //events
         dom = document.getElementById('designer-dialog-copyright-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogCopyright.on('show', function() {
+    DialogCopyright.on('show', function () {
         $('#designer-dialog-copyright-modal').modal('show');
     });
 
-    DialogCopyright.on('hide', function() {
+    DialogCopyright.on('hide', function () {
         $('#designer-dialog-copyright-modal').modal('hide');
     });
 
     // MenuBar
     var MenuBar = this.require('MenuBar');
-    MenuBar.on('init', function(conf) {
+    MenuBar.on('init', function (conf) {
         var menuHeader = [],
             menuItems = [],
             menuActions = [],
@@ -72,7 +72,7 @@ runtime.on('ready', function() {
             "type": this.designer().type()
         });
 
-        menuItems.sort(function(itemA, itemB) {
+        menuItems.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
                 return 1;
             }
@@ -82,7 +82,7 @@ runtime.on('ready', function() {
             return 0;
         });
 
-        menuItems.forEach(function(menuItem) {
+        menuItems.forEach(function (menuItem) {
             var id = menuItem._id;
             self.items().push(self.require(id));
         });
@@ -98,7 +98,7 @@ runtime.on('ready', function() {
 
         menuActions = menuActions.concat(menuSearch);
 
-        menuActions.sort(function(itemA, itemB) {
+        menuActions.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
                 return 1;
             }
@@ -108,14 +108,14 @@ runtime.on('ready', function() {
             return 0;
         });
 
-        menuActions.forEach(function(menuAction) {
+        menuActions.forEach(function (menuAction) {
             var id = menuAction._id;
             self.actions().push(self.require(id));
         });
 
     });
 
-    MenuBar.on('render', function() {
+    MenuBar.on('render', function () {
         var length = 0,
             i = 0,
             item = null,
@@ -140,12 +140,12 @@ runtime.on('ready', function() {
         domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());
 
         // items
-        this.items().forEach(function(item) {
+        this.items().forEach(function (item) {
             domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');
         });
 
         // events
-        var callback = function() {
+        var callback = function () {
             _removeActive();
             $(this).addClass('active');
         };
@@ -153,13 +153,13 @@ runtime.on('ready', function() {
         for (i = 0; i < length; i++) {
             item = domItems.children[i];
             item.addEventListener('click', callback);
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 this.click();
             }.bind(self.items(i)));
         }
 
         // actions
-        this.actions().forEach(function(action) {
+        this.actions().forEach(function (action) {
             domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');
         });
 
@@ -173,7 +173,7 @@ runtime.on('ready', function() {
 
     // ToolBar
     var ToolBar = this.require('ToolBar');
-    ToolBar.on('init', function(conf) {
+    ToolBar.on('init', function (conf) {
         var toolBarItems = [],
             self = this;
 
@@ -183,7 +183,7 @@ runtime.on('ready', function() {
         });
 
         // sort items
-        toolBarItems.sort(function(itemA, itemB) {
+        toolBarItems.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
                 return 1;
             }
@@ -193,13 +193,13 @@ runtime.on('ready', function() {
             return 0;
         });
 
-        toolBarItems.forEach(function(toolBarItem) {
+        toolBarItems.forEach(function (toolBarItem) {
             var id = toolBarItem._id;
             self.items().push(self.require(id));
         });
     });
 
-    ToolBar.on('render', function() {
+    ToolBar.on('render', function () {
         var domItems = document.getElementById('designer-toolbar-items'),
             i = 0,
             length = 0,
@@ -207,7 +207,7 @@ runtime.on('ready', function() {
             self = this;
 
         // items
-        this.items().forEach(function(item) {
+        this.items().forEach(function (item) {
             domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');
         });
 
@@ -215,7 +215,7 @@ runtime.on('ready', function() {
         length = domItems.children.length;
         for (i = 0; i < length; i++) {
             item = domItems.children[i];
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 this.click();
             }.bind(self.items(i)));
         }
@@ -223,7 +223,7 @@ runtime.on('ready', function() {
 
     // Workspace
     var Workspace = this.require('Workspace');
-    Workspace.on('init', function(conf) {
+    Workspace.on('init', function (conf) {
         var Editor = null,
             editor = null;
 
@@ -234,13 +234,13 @@ runtime.on('ready', function() {
         });
     });
 
-    Workspace.on('render', function() {
+    Workspace.on('render', function () {
         this.require('editor').render();
     });
 
     // Server
     var Server = this.require('Server');
-    Server.on('start', function() {
+    Server.on('start', function () {
         var Worker = null,
             worker = null,
             RuntimeChannel = null,
@@ -252,7 +252,7 @@ runtime.on('ready', function() {
             "_id": "worker",
             "worker": new SharedWorker('./scripts/worker.js'),
         });
-        worker.worker().port.onmessage = function(e) {
+        worker.worker().port.onmessage = function (e) {
             $db.RuntimeMessage.insert(e.data);
         };
 
@@ -261,14 +261,14 @@ runtime.on('ready', function() {
             '_id': 'channel'
         });
 
-        channel.on('send', function(message) {
+        channel.on('send', function (message) {
             this.require('worker').worker().port.postMessage(message);
         });
 
         id = document.location.search.split('?')[1].split('id=')[1];
         channel.getModel(id);
 
-        channel.on('setModel', function(id, model) {
+        channel.on('setModel', function (id, model) {
             var editor = this.require('editor').editor(),
                 designer = this.require('designer');
 
@@ -288,7 +288,7 @@ runtime.on('ready', function() {
 
     // Editor
     var Editor = this.require('Editor');
-    Editor.on('render', function() {
+    Editor.on('render', function () {
         this.editor().getSession().setMode('ace/mode/json');
         this.editor().setShowPrintMargin(false);
         this.editor().setReadOnly(false);
@@ -297,19 +297,19 @@ runtime.on('ready', function() {
         this.editor().commands.addCommand({
             name: 'myCommand',
             bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
-            exec: function(editor) {
+            exec: function (editor) {
                 runtime.require('designer').save();
             }
         });
 
-        $(function() {
+        $(function () {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });
     });
 
     // Designer
     var Designer = this.require('Designer');
-    Designer.on('init', function(conf) {
+    Designer.on('init', function (conf) {
         var Store = null,
             store = null,
             MenuBar = null,
@@ -357,23 +357,23 @@ runtime.on('ready', function() {
         this.server(server);
     });
 
-    Designer.on('render', function() {
+    Designer.on('render', function () {
         this.menubar().render();
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
     });
 
-    Designer.on('clear', function() {
+    Designer.on('clear', function () {
         this.refresh();
     });
 
-    Designer.on('context', function(val) {
+    Designer.on('context', function (val) {
         this.workspace().clear();
         this.workspace().refresh();
     });
 
-    Designer.on('save', function() {
+    Designer.on('save', function () {
         var val = this.require('editor').editor().getValue(),
             designer = this.require('designer'),
             message = this.require('message'),
@@ -396,7 +396,7 @@ runtime.on('ready', function() {
     });
 
     // main
-    system.on('main', function() {
+    system.on('main', function () {
         var Designer = null,
             designer = null;
 

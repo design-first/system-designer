@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-runtime.on('ready', function() {
+runtime.on('ready', function () {
 
     var system = this.system('design');
 
     // DIALOG IMPORT
     var DialogImport = this.require('DialogImport');
-    DialogImport.on('init', function(config) {
+    DialogImport.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -39,28 +39,28 @@ runtime.on('ready', function() {
 
         // events
         dom = document.getElementById('designer-dialog-import-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogImport.on('show', function() {
+    DialogImport.on('show', function () {
         $('#designer-dialog-import-modal').modal('show');
     });
 
-    DialogImport.on('hide', function() {
+    DialogImport.on('hide', function () {
         $('#designer-dialog-import-modal').modal('hide');
     });
 
     // DIALOG CHECK
     var DialogCheck = this.require('DialogCheck');
-    DialogCheck.on('init', function(config) {
+    DialogCheck.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -74,27 +74,27 @@ runtime.on('ready', function() {
         );
 
         dom = document.getElementById('designer-dialog-check-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogCheck.on('show', function() {
+    DialogCheck.on('show', function () {
         $('#designer-dialog-check-modal').modal('show');
     });
 
-    DialogCheck.on('hide', function() {
+    DialogCheck.on('hide', function () {
         $('#designer-dialog-check-modal').modal('hide');
     });
 
-    DialogCheck.on('ok', function() {
+    DialogCheck.on('ok', function () {
         this.hide();
     });
 
     // DIALOG WELCOME
     var DialogWelcome = this.require('DialogWelcome');
-    DialogWelcome.on('init', function(config) {
+    DialogWelcome.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -108,23 +108,23 @@ runtime.on('ready', function() {
 
         // events
         dom = document.getElementById('designer-dialog-welcome-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogWelcome.on('show', function() {
+    DialogWelcome.on('show', function () {
         $('#designer-dialog-welcome-modal').modal('show');
     });
 
-    DialogWelcome.on('hide', function() {
+    DialogWelcome.on('hide', function () {
         $('#designer-dialog-welcome-modal').modal('hide');
     });
 
     // DIALOG SYNC
     var DialogSync = this.require('DialogSync');
-    DialogSync.on('init', function(config) {
+    DialogSync.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -138,23 +138,23 @@ runtime.on('ready', function() {
 
         // events
         dom = document.getElementById('designer-dialog-sync-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogSync.on('show', function() {
+    DialogSync.on('show', function () {
         $('#designer-dialog-sync-modal').modal('show');
     });
 
-    DialogSync.on('hide', function() {
+    DialogSync.on('hide', function () {
         $('#designer-dialog-sync-modal').modal('hide');
     });
 
     // DIALOG SHARE
     var DialogShare = this.require('DialogShare');
-    DialogShare.on('init', function(config) {
+    DialogShare.on('init', function (config) {
         var html = null,
             dom = null,
             sys = '';
@@ -174,28 +174,28 @@ runtime.on('ready', function() {
 
         // events
         dom = document.getElementById('designer-dialog-share-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-share-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogShare.on('show', function() {
+    DialogShare.on('show', function () {
         $('#designer-dialog-share-modal').modal('show');
     });
 
-    DialogShare.on('hide', function() {
+    DialogShare.on('hide', function () {
         $('#designer-dialog-share-modal').modal('hide');
     });
 
     // DIALOG COPYRIGHT
     var DialogCopyright = this.require('DialogCopyright');
-    DialogCopyright.on('init', function(config) {
+    DialogCopyright.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -210,23 +210,23 @@ runtime.on('ready', function() {
 
         // events
         dom = document.getElementById('designer-dialog-copyright-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogCopyright.on('show', function() {
+    DialogCopyright.on('show', function () {
         $('#designer-dialog-copyright-modal').modal('show');
     });
 
-    DialogCopyright.on('hide', function() {
+    DialogCopyright.on('hide', function () {
         $('#designer-dialog-copyright-modal').modal('hide');
     });
 
     // DIALOG CONFIG
     var DialogConfig = this.require('DialogConfig');
-    DialogConfig.on('init', function(config) {
+    DialogConfig.on('init', function (config) {
         var html = '',
             dom = null,
             that = this,
@@ -245,17 +245,17 @@ runtime.on('ready', function() {
 
         // events
         dom = document.getElementById('designer-dialog-config-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-type-config-reset');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             var System = this.require('System');
 
             window.localStorage.clear();
@@ -269,7 +269,7 @@ runtime.on('ready', function() {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-type-config-isdebug');
-        dom.addEventListener('click', function(obj) {
+        dom.addEventListener('click', function (obj) {
             var designer = that.require('designer'),
                 isEnum = false;
 
@@ -282,17 +282,17 @@ runtime.on('ready', function() {
         });
     });
 
-    DialogConfig.on('show', function() {
+    DialogConfig.on('show', function () {
         $('#designer-dialog-config-modal').modal('show');
     });
 
-    DialogConfig.on('hide', function() {
+    DialogConfig.on('hide', function () {
         $('#designer-dialog-config-modal').modal('hide');
     });
 
     // DIALOG IMPORT FILE
     var DialogImportFile = this.require('DialogImportFile');
-    DialogImportFile.on('init', function(config) {
+    DialogImportFile.on('init', function (config) {
         var html = '',
             dom = null,
             that = this,
@@ -323,7 +323,7 @@ runtime.on('ready', function() {
         );
 
         //events  
-        var callbackEvent = function(event) {
+        var callbackEvent = function (event) {
             var id = '',
                 libraries = null,
                 length = 0,
@@ -357,34 +357,34 @@ runtime.on('ready', function() {
         }
 
         dom = document.getElementById('designer-dialog-import-modal-from-file');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             $('#designer-dialog-import-file-modal-file').show();
             $('#designer-dialog-import-file-modal-well').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-from-library');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             $('#designer-dialog-import-file-modal-well').show();
             $('#designer-dialog-import-file-modal-file').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-merge');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.mergeSystem();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-import');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.importSystem();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-file');
-        dom.addEventListener('change', function(e) {
+        dom.addEventListener('change', function (e) {
             e.stopPropagation();
             e.preventDefault();
 
@@ -393,10 +393,10 @@ runtime.on('ready', function() {
                 json = '',
                 that = this;
 
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 json = json + event.target.result;
             };
-            reader.onloadend = function() {
+            reader.onloadend = function () {
                 try {
                     that.data(JSON.parse(json));
                 } catch (e) {
@@ -407,17 +407,17 @@ runtime.on('ready', function() {
         }.bind(this));
     });
 
-    DialogImportFile.on('show', function() {
+    DialogImportFile.on('show', function () {
         $('#designer-dialog-import-file-modal').modal('show');
     });
 
-    DialogImportFile.on('hide', function() {
+    DialogImportFile.on('hide', function () {
         $('#designer-dialog-import-file-modal').modal('hide');
     });
 
     // DIALOG DROP FILE
     var DialogDropFile = this.require('DialogDropFile');
-    DialogDropFile.on('init', function(config) {
+    DialogDropFile.on('init', function (config) {
         var html = null,
             dom = null;
 
@@ -432,22 +432,22 @@ runtime.on('ready', function() {
 
         //events
         dom = document.getElementById('designer-dialog-drop-file-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-drop-file-modal-merge');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.mergeSystem();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-drop-file-modal-import');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.importSystem();
         }.bind(this));
     });
 
-    DialogDropFile.on('mergeSystem', function() {
+    DialogDropFile.on('mergeSystem', function () {
         var sys = null,
             name = '',
             modelName = '',
@@ -531,7 +531,7 @@ runtime.on('ready', function() {
         message.success('merge of the system is done.');
     });
 
-    DialogDropFile.on('importSystem', function() {
+    DialogDropFile.on('importSystem', function () {
         var System = this.require('System'),
             sys = null,
             designer = this.require('designer'),
@@ -554,17 +554,17 @@ runtime.on('ready', function() {
         message.success('importation of the system is done.');
     });
 
-    DialogDropFile.on('show', function() {
+    DialogDropFile.on('show', function () {
         $('#designer-dialog-drop-file-modal').modal('show');
     });
 
-    DialogDropFile.on('hide', function() {
+    DialogDropFile.on('hide', function () {
         $('#designer-dialog-drop-file-modal').modal('hide');
     });
 
     // DIALOG TYPE CREATION
     var dialogTypeCreation = this.require('DialogTypeCreation');
-    dialogTypeCreation.on('init', function(config) {
+    dialogTypeCreation.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -578,7 +578,7 @@ runtime.on('ready', function() {
 
         //events
         dom = document.getElementById('designer-dialog-type-creation-name');
-        dom.addEventListener('keydown', function(event) {
+        dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -590,28 +590,28 @@ runtime.on('ready', function() {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-type-creation-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-type-creation-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    dialogTypeCreation.on('show', function() {
+    dialogTypeCreation.on('show', function () {
         $('#designer-dialog-type-creation-modal').modal('show');
     });
 
-    dialogTypeCreation.on('hide', function() {
+    dialogTypeCreation.on('hide', function () {
         $('#designer-dialog-type-creation-modal').modal('hide');
     });
 
     // DIALOG EXPORT
     var DialogExport = this.require('DialogExport');
-    DialogExport.on('init', function(config) {
+    DialogExport.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -625,28 +625,28 @@ runtime.on('ready', function() {
 
         //events
         dom = document.getElementById('designer-dialog-export-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogExport.on('show', function() {
+    DialogExport.on('show', function () {
         $('#designer-dialog-export-modal').modal('show');
     });
 
-    DialogExport.on('hide', function() {
+    DialogExport.on('hide', function () {
         $('#designer-dialog-export-modal').modal('hide');
     });
 
     // DIALOG SCHEMA CREATION
     var dialogSchemaCreation = this.require('DialogSchemaCreation');
-    dialogSchemaCreation.on('init', function(config) {
+    dialogSchemaCreation.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -660,7 +660,7 @@ runtime.on('ready', function() {
 
         //events
         dom = document.getElementById('designer-dialog-schema-creation-name');
-        dom.addEventListener('keydown', function(event) {
+        dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -672,28 +672,28 @@ runtime.on('ready', function() {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-schema-creation-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-schema-creation-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    dialogSchemaCreation.on('show', function() {
+    dialogSchemaCreation.on('show', function () {
         $('#designer-dialog-schema-creation-modal').modal('show');
     });
 
-    dialogSchemaCreation.on('hide', function() {
+    dialogSchemaCreation.on('hide', function () {
         $('#designer-dialog-schema-creation-modal').modal('hide');
     });
 
     // DIALOG SYSTEM CREATION
     var dialogSystemCreation = this.require('DialogSystemCreation');
-    dialogSystemCreation.on('init', function(config) {
+    dialogSystemCreation.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -707,7 +707,7 @@ runtime.on('ready', function() {
 
         //events
         dom = document.getElementById('designer-dialog-system-creation-name');
-        dom.addEventListener('keydown', function(event) {
+        dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -719,28 +719,28 @@ runtime.on('ready', function() {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-system-creation-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-system-creation-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    dialogSystemCreation.on('show', function() {
+    dialogSystemCreation.on('show', function () {
         $('#designer-dialog-system-creation-modal').modal('show');
     });
 
-    dialogSystemCreation.on('hide', function() {
+    dialogSystemCreation.on('hide', function () {
         $('#designer-dialog-system-creation-modal').modal('hide');
     });
 
     // DIALOG MODEL CREATION
     var dialogModelCreation = this.require('DialogModelCreation');
-    dialogModelCreation.on('init', function(config) {
+    dialogModelCreation.on('init', function (config) {
         var html = '',
             dom = null;
 
@@ -753,23 +753,23 @@ runtime.on('ready', function() {
         );
 
         dom = document.getElementById('designer-dialog-model-creation-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
 
     });
 
-    dialogModelCreation.on('show', function() {
+    dialogModelCreation.on('show', function () {
         $('#designer-dialog-model-creation-modal').modal('show');
     });
 
-    dialogModelCreation.on('hide', function() {
+    dialogModelCreation.on('hide', function () {
         $('#designer-dialog-model-creation-modal').modal('hide');
     });
 
     // DIALOG BEHAVIOR CREATION
     var dialogBehaviorCreation = this.require('DialogBehaviorCreation');
-    dialogBehaviorCreation.on('init', function(config) {
+    dialogBehaviorCreation.on('init', function (config) {
         var html = '',
             dom = null,
             selectStates = '',
@@ -823,7 +823,7 @@ runtime.on('ready', function() {
 
         states.sort();
         states.forEach(
-            function(name) {
+            function (name) {
                 selectStates = selectStates + '<option value="' + name + '">' + name + '</option>';
             });
 
@@ -836,27 +836,27 @@ runtime.on('ready', function() {
 
         //events
         dom = document.getElementById('designer-dialog-behavior-creation-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-behavior-creation-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
     });
 
-    dialogBehaviorCreation.on('show', function() {
+    dialogBehaviorCreation.on('show', function () {
         $('#designer-dialog-behavior-creation-modal').modal('show');
     });
 
-    dialogBehaviorCreation.on('hide', function() {
+    dialogBehaviorCreation.on('hide', function () {
         $('#designer-dialog-behavior-creation-modal').modal('hide');
     });
 
     // DIALOG COMPONENT CREATION
     var dialogComponentCreation = this.require('DialogComponentCreation');
-    dialogComponentCreation.on('init', function(config) {
+    dialogComponentCreation.on('init', function (config) {
         var html = '',
             name = '',
             dom = null,
@@ -879,27 +879,27 @@ runtime.on('ready', function() {
 
         // events
         dom = document.getElementById('designer-dialog-component-creation-modal-cancel');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-component-creation-modal-ok');
-        dom.addEventListener('click', function(event) {
+        dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
     });
 
-    dialogComponentCreation.on('show', function() {
+    dialogComponentCreation.on('show', function () {
         $('#designer-dialog-component-creation-modal').modal('show');
     });
 
-    dialogComponentCreation.on('hide', function() {
+    dialogComponentCreation.on('hide', function () {
         $('#designer-dialog-component-creation-modal').modal('hide');
     });
 
     // MODELSYSTEM
     var ModelSystem = this.require('ModelSystem');
-    ModelSystem.on('render', function() {
+    ModelSystem.on('render', function () {
         var html = null,
             that = this,
             doc = '',
@@ -926,19 +926,19 @@ runtime.on('ready', function() {
         // events
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('system.html?_id=' + that.uuid());
         });
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('system.html?_id=' + that.uuid());
         });
 
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
                 designer = this.require('designer'),
                 System = this.require('System'),
@@ -952,7 +952,7 @@ runtime.on('ready', function() {
             designer.system().destroy();
 
             // remove log
-            designer.logs().forEach(function(item) {
+            designer.logs().forEach(function (item) {
                 this.logs().pop();
             }.bind(designer));
 
@@ -972,17 +972,17 @@ runtime.on('ready', function() {
         }.bind(this));
     });
 
-    ModelSystem.on('hide', function() {
+    ModelSystem.on('hide', function () {
         $('#designer-system-' + this.uuid()).hide();
     });
 
-    ModelSystem.on('show', function() {
+    ModelSystem.on('show', function () {
         $('#designer-system-' + this.uuid()).show();
     });
 
     // MODELTYPE
     var ModelType = this.require('ModelType');
-    ModelType.on('render', function() {
+    ModelType.on('render', function () {
         var html = null,
             that = this,
             doc = '',
@@ -1002,7 +1002,7 @@ runtime.on('ready', function() {
         }
 
         if (this.document().value) {
-            this.document().value.forEach(function(val) {
+            this.document().value.forEach(function (val) {
                 doc = doc + '<a class="list-group-item" style="text-align: left">' + val + '</a>';
             });
         }
@@ -1027,19 +1027,19 @@ runtime.on('ready', function() {
         // events
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('type.html?_id=' + that.uuid());
         });
 
         html = document.getElementById('designer-type-' + this.uuid() + '-edit');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('type.html?_id=' + that.uuid());
         });
 
         html = document.getElementById('designer-type-' + this.uuid() + '-delete');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             var designer = this.require('designer');
             types = designer.system().types();
 
@@ -1060,17 +1060,17 @@ runtime.on('ready', function() {
         }.bind(this));
     });
 
-    ModelType.on('hide', function() {
+    ModelType.on('hide', function () {
         $('#designer-type-' + this.title()).hide();
     });
 
-    ModelType.on('show', function() {
+    ModelType.on('show', function () {
         $('#designer-type-' + this.title()).show();
     });
 
     // MODELSCHEMA
     var ModelSchema = this.require('ModelSchema');
-    ModelSchema.on('render', function() {
+    ModelSchema.on('render', function () {
         var html = null,
             doc = '',
             that = this,
@@ -1104,19 +1104,19 @@ runtime.on('ready', function() {
         if (this.editable()) {
             html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
 
-            html.addEventListener('click', function(event) {
+            html.addEventListener('click', function (event) {
                 window.open('schema.html?_id=' + that.uuid());
             });
 
             html = document.getElementById('designer-schema-' + htmlId + '-edit');
 
-            html.addEventListener('click', function(event) {
+            html.addEventListener('click', function (event) {
                 window.open('schema.html?_id=' + that.uuid());
             });
 
             html = document.getElementById('designer-schema-' + htmlId + '-delete');
 
-            html.addEventListener('click', function(event) {
+            html.addEventListener('click', function (event) {
                 var designer = this.require('designer');
 
                 designer.deleteSchema(this.uuid());
@@ -1141,17 +1141,17 @@ runtime.on('ready', function() {
         }
     });
 
-    ModelSchema.on('hide', function() {
+    ModelSchema.on('hide', function () {
         $('#designer-schema-' + this.uuid()).hide();
     });
 
-    ModelSchema.on('show', function() {
+    ModelSchema.on('show', function () {
         $('#designer-schema-' + this.uuid()).show();
     });
 
     // MODELCLASS
     var ModelClass = this.require('ModelClass');
-    ModelClass.on('render', function() {
+    ModelClass.on('render', function () {
         var html = null,
             that = this,
             propName = '',
@@ -1167,8 +1167,12 @@ runtime.on('ready', function() {
 
         htmlId = this.uuid() || this.title();
 
-        callbackProp = function(param) {
-            params = params + param.name + ' : ' + param.type + ', ';
+        callbackProp = function (param) {
+            if (param.type.indexOf('@') !== -1) {
+                params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(param.type.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
+            } else {
+                params = params + param.name + ' : ' + param.type + ', ';
+            }
         };
 
         function _getModelId(name) {
@@ -1231,19 +1235,25 @@ runtime.on('ready', function() {
                     case typeof propVal.params !== 'undefined':
                         result = 'undefined';
                         var params = '(';
-                        propVal.params.forEach(callbackProp);
+                        propVal.params.forEach(callbackProp.bind(this));
                         params = params + ')';
                         params = params.replace(', )', ')');
 
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
                             if (htmlId !== '123751cb591de26') {
+                                if (result.indexOf('@') !== -1) {
+                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
+                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ': ' + result + '</div>';
                             }
                         } else {
                             if (htmlId !== '123751cb591de26') {
+                                if (result.indexOf('@') !== -1) {
+                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
+                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + '</div>';
@@ -1261,13 +1271,20 @@ runtime.on('ready', function() {
                         result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
                             result = propVal.result;
+
                             if (htmlId !== '123751cb591de26') {
+                                if (result.indexOf('@') !== -1) {
+                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
+                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>(): ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '(): ' + result + '</div>';
                             }
                         } else {
                             if (htmlId !== '123751cb591de26') {
+                                if (result.indexOf('@') !== -1) {
+                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
+                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '()</div>';
@@ -1303,13 +1320,13 @@ runtime.on('ready', function() {
         if (this.editable()) {
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
 
-            html.addEventListener('click', function(event) {
+            html.addEventListener('click', function (event) {
                 window.open('model.html?_id=' + that.uuid());
             });
 
             html = document.getElementById('designer-model-' + htmlId + '-edit');
 
-            html.addEventListener('click', function(event) {
+            html.addEventListener('click', function (event) {
                 window.open('model.html?_id=' + that.uuid());
             });
         } else {
@@ -1318,17 +1335,17 @@ runtime.on('ready', function() {
         }
     });
 
-    ModelClass.on('hide', function() {
+    ModelClass.on('hide', function () {
         $('#designer-class-' + this.uuid()).hide();
     });
 
-    ModelClass.on('show', function() {
+    ModelClass.on('show', function () {
         $('#designer-class-' + this.uuid()).show();
     });
 
     // MODELBEHAVIOR
     var ModelBehavior = this.require('ModelBehavior');
-    ModelBehavior.on('render', function() {
+    ModelBehavior.on('render', function () {
         var template = '',
             html = null,
             that = this;
@@ -1346,26 +1363,26 @@ runtime.on('ready', function() {
         //events
         html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('behavior.html?_id=' + that.uuid());
         });
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('behavior.html?_id=' + that.uuid());
         });
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             var designer = this.require('designer');
             behaviors = designer.system().behaviors();
 
             delete behaviors[this.uuid()];
             designer.system().behaviors(behaviors);
 
-            $('#designer-behavior-' + this.uuid()).fadeOut(400, function() {
+            $('#designer-behavior-' + this.uuid()).fadeOut(400, function () {
                 $(this).remove();
             });
 
@@ -1376,17 +1393,17 @@ runtime.on('ready', function() {
         }.bind(this));
     });
 
-    ModelBehavior.on('hide', function() {
+    ModelBehavior.on('hide', function () {
         $('#designer-behavior-' + this.uuid()).hide();
     });
 
-    ModelBehavior.on('show', function() {
+    ModelBehavior.on('show', function () {
         $('#designer-behavior-' + this.uuid()).show();
     });
 
     // MODELCOMPONENT
     var ModelComponent = this.require('ModelComponent');
-    ModelComponent.on('render', function() {
+    ModelComponent.on('render', function () {
         var htmlComp = null,
             html = null,
             doc = '',
@@ -1418,26 +1435,26 @@ runtime.on('ready', function() {
         // events
         html = document.getElementById('designer-component-' + this.uuid()).children[0].children[1];
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()));
         });
 
         html = document.getElementById('designer-component-' + this.uuid() + '-edit');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()));
         });
 
         html = document.getElementById('designer-component-' + this.uuid() + '-delete');
 
-        html.addEventListener('click', function(event) {
+        html.addEventListener('click', function (event) {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
             delete components[this.model()][this.uuid()];
             designer.system().components(components);
 
-            $('#designer-component-' + this.uuid()).fadeOut(400, function() {
+            $('#designer-component-' + this.uuid()).fadeOut(400, function () {
                 $(this).remove();
             });
 
@@ -1449,17 +1466,17 @@ runtime.on('ready', function() {
         }.bind(this));
     });
 
-    ModelComponent.on('hide', function() {
+    ModelComponent.on('hide', function () {
         $('#designer-component-' + this.uuid()).hide();
     });
 
-    ModelComponent.on('show', function() {
+    ModelComponent.on('show', function () {
         $('#designer-component-' + this.uuid()).show();
     });
 
     // MODELLOG
     var ModelLog = this.require('ModelLog');
-    ModelLog.on('render', function() {
+    ModelLog.on('render', function () {
         var html = null,
             that = this,
             doc = '',
@@ -1471,7 +1488,7 @@ runtime.on('ready', function() {
         htmlComp = this.require('model-log.html');
 
         // logs
-        this.require('designer').logs().forEach(function(log) {
+        this.require('designer').logs().forEach(function (log) {
             switch (log.type()) {
                 case 'debug':
                     logs = logs + '<p class="text-muted">' + log.log() + '</p>';
@@ -1498,25 +1515,25 @@ runtime.on('ready', function() {
         // events       
         html = document.getElementById('designer-log-clean');
 
-        html.addEventListener('click', function(event) {
-            this.require('designer').logs().forEach(function(item) {
+        html.addEventListener('click', function (event) {
+            this.require('designer').logs().forEach(function (item) {
                 this.logs().pop();
             }.bind(this.require('designer')));
             document.querySelector('#designer-loug-output').innerHTML = '';
         }.bind(this));
     });
 
-    ModelLog.on('hide', function() {
+    ModelLog.on('hide', function () {
         $('#designer-log').hide();
     });
 
-    ModelLog.on('show', function() {
+    ModelLog.on('show', function () {
         $('#designer-log').show();
     });
 
     // MenuBar
     var MenuBar = this.require('MenuBar');
-    MenuBar.on('init', function(conf) {
+    MenuBar.on('init', function (conf) {
         var menuHeader = [],
             menuItems = [],
             menuActions = [],
@@ -1534,7 +1551,7 @@ runtime.on('ready', function() {
             "type": "designer"
         });
 
-        menuItems.sort(function(itemA, itemB) {
+        menuItems.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
                 return 1;
             }
@@ -1544,7 +1561,7 @@ runtime.on('ready', function() {
             return 0;
         });
 
-        menuItems.forEach(function(menuItem) {
+        menuItems.forEach(function (menuItem) {
             var id = menuItem._id;
             self.items().push(self.require(id));
         });
@@ -1560,7 +1577,7 @@ runtime.on('ready', function() {
                 menuActions = menuActions.concat(menuSearch);
         */
 
-        menuActions.sort(function(itemA, itemB) {
+        menuActions.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
                 return 1;
             }
@@ -1570,14 +1587,14 @@ runtime.on('ready', function() {
             return 0;
         });
 
-        menuActions.forEach(function(menuAction) {
+        menuActions.forEach(function (menuAction) {
             var id = menuAction._id;
             self.actions().push(self.require(id));
         });
 
     });
 
-    MenuBar.on('render', function() {
+    MenuBar.on('render', function () {
         var length = 0,
             i = 0,
             item = null,
@@ -1606,12 +1623,12 @@ runtime.on('ready', function() {
         domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());
 
         // items
-        this.items().forEach(function(item) {
+        this.items().forEach(function (item) {
             domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');
         });
 
         // events
-        var callback = function() {
+        var callback = function () {
             _removeActive();
             $(this).addClass('active');
         };
@@ -1619,13 +1636,13 @@ runtime.on('ready', function() {
         for (i = 0; i < length; i++) {
             item = domItems.children[i];
             item.addEventListener('click', callback);
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 this.click();
             }.bind(self.items(i)));
         }
 
         // actions
-        this.actions().forEach(function(action) {
+        this.actions().forEach(function (action) {
             domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');
         });
 
@@ -1653,7 +1670,7 @@ runtime.on('ready', function() {
         designer.context(context);
 
         var that = this;
-        $('#designer-menu-action-search').on('keyup', function(event) {
+        $('#designer-menu-action-search').on('keyup', function (event) {
             var value = $('#designer-menu-action-search').val();
             that.designer().filter(value);
         });
@@ -1663,7 +1680,7 @@ runtime.on('ready', function() {
 
     // ToolBar
     var ToolBar = this.require('ToolBar');
-    ToolBar.on('init', function(conf) {
+    ToolBar.on('init', function (conf) {
         var toolBarItems = [],
             self = this;
 
@@ -1673,7 +1690,7 @@ runtime.on('ready', function() {
         });
 
         // sort items
-        toolBarItems.sort(function(itemA, itemB) {
+        toolBarItems.sort(function (itemA, itemB) {
             if (itemA.position > itemB.position) {
                 return 1;
             }
@@ -1683,13 +1700,13 @@ runtime.on('ready', function() {
             return 0;
         });
 
-        toolBarItems.forEach(function(toolBarItem) {
+        toolBarItems.forEach(function (toolBarItem) {
             var id = toolBarItem._id;
             self.items().push(self.require(id));
         });
     });
 
-    ToolBar.on('render', function() {
+    ToolBar.on('render', function () {
         var domItems = document.getElementById('designer-toolbar-items'),
             i = 0,
             length = 0,
@@ -1697,7 +1714,7 @@ runtime.on('ready', function() {
             self = this;
 
         // items
-        this.items().forEach(function(item) {
+        this.items().forEach(function (item) {
             domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');
         });
 
@@ -1705,7 +1722,7 @@ runtime.on('ready', function() {
         length = domItems.children.length;
         for (i = 0; i < length; i++) {
             item = domItems.children[i];
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 this.click();
             }.bind(self.items(i)));
         }
@@ -1713,15 +1730,15 @@ runtime.on('ready', function() {
 
     // Spaces
     var Spaces = this.require('Spaces');
-    Spaces.on('init', function(conf) {
+    Spaces.on('init', function (conf) {
     });
 
-    Spaces.on('clear', function() {
+    Spaces.on('clear', function () {
         this.require('designer').space('');
         $('#designer-spaces-items').empty();
     });
 
-    Spaces.on('render', function() {
+    Spaces.on('render', function () {
         var item = null,
             system = this.designer().system(),
             SpaceItem = this.require('SpaceItem'),
@@ -1794,7 +1811,7 @@ runtime.on('ready', function() {
 
                 case 'system':
                     // TODO find better way
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         this.items().pop();
                     }.bind(this));
 
@@ -1820,7 +1837,7 @@ runtime.on('ready', function() {
                     }
 
                     // sort
-                    this.items().sort(function(idA, idB) {
+                    this.items().sort(function (idA, idB) {
                         var a = runtime.require(idA),
                             b = runtime.require(idB);
 
@@ -1834,12 +1851,12 @@ runtime.on('ready', function() {
                         return result;
                     });
 
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + item.uuid() + '#system#' + item.name() + '">' + item.name() + '</a></li>');
                     });
 
                     // events
-                    callback = function() {
+                    callback = function () {
                         _removeActive();
                         $(this).addClass('active');
                     };
@@ -1847,13 +1864,13 @@ runtime.on('ready', function() {
                     for (i = 0; i < length; i++) {
                         item = domItems.children[i];
                         item.addEventListener('click', callback);
-                        item.addEventListener('click', function() {
+                        item.addEventListener('click', function () {
                             this.click();
                         }.bind(self.items(i)));
                     }
 
-                    this.items().forEach(function(item) {
-                        item.on('click', function() {
+                    this.items().forEach(function (item) {
+                        item.on('click', function () {
                             var designer = this.require('designer'),
                                 system = JSON.parse(window.localStorage.getItem(this.uuid())),
                                 System = this.require('System');
@@ -1861,7 +1878,7 @@ runtime.on('ready', function() {
                                 designer.system(new System(system));
                             }
                             // empty log
-                            designer.logs().forEach(function(item) {
+                            designer.logs().forEach(function (item) {
                                 this.logs().pop();
                             }.bind(designer));
                         });
@@ -1888,7 +1905,7 @@ runtime.on('ready', function() {
 
                 case 'schemas':
                     // TODO find better way
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         this.items().pop();
                     }.bind(this));
 
@@ -1902,7 +1919,7 @@ runtime.on('ready', function() {
                     }
 
                     // sort
-                    this.items().sort(function(idA, idB) {
+                    this.items().sort(function (idA, idB) {
                         var a = runtime.require(idA),
                             b = runtime.require(idB);
 
@@ -1916,12 +1933,12 @@ runtime.on('ready', function() {
                         return result;
                     });
 
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.uuid() + '" class=""><a href="#' + system.id() + '#schemas#' + item.uuid() + '">' + item.name() + '</a></li>');
                     });
 
                     // events
-                    callback = function() {
+                    callback = function () {
                         _removeActive();
                         $(this).addClass('active');
                     };
@@ -1929,7 +1946,7 @@ runtime.on('ready', function() {
                     for (i = 0; i < length; i++) {
                         item = domItems.children[i];
                         item.addEventListener('click', callback);
-                        item.addEventListener('click', function() {
+                        item.addEventListener('click', function () {
                             this.click();
                         }.bind(self.items(i)));
                     }
@@ -1949,7 +1966,7 @@ runtime.on('ready', function() {
 
                 case 'models':
                     // TODO find better way
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         this.items().pop();
                     }.bind(this));
 
@@ -1963,7 +1980,7 @@ runtime.on('ready', function() {
                     }
 
                     // sort
-                    this.items().sort(function(idA, idB) {
+                    this.items().sort(function (idA, idB) {
                         var a = runtime.require(idA),
                             b = runtime.require(idB);
 
@@ -1977,12 +1994,12 @@ runtime.on('ready', function() {
                         return result;
                     });
 
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.uuid() + '" class=""><a href="#' + system.id() + '#models#' + item.uuid() + '">' + item.name() + '</a></li>');
                     });
 
                     // events
-                    callback = function() {
+                    callback = function () {
                         _removeActive();
                         $(this).addClass('active');
                     };
@@ -1990,7 +2007,7 @@ runtime.on('ready', function() {
                     for (i = 0; i < length; i++) {
                         item = domItems.children[i];
                         item.addEventListener('click', callback);
-                        item.addEventListener('click', function() {
+                        item.addEventListener('click', function () {
                             this.click();
                         }.bind(self.items(i)));
                     }
@@ -2009,7 +2026,7 @@ runtime.on('ready', function() {
                     break;
                 case 'types':
                     // TODO find better way
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         this.items().pop();
                     }.bind(this));
 
@@ -2022,7 +2039,7 @@ runtime.on('ready', function() {
                     }
 
                     // sort
-                    this.items().sort(function(idA, idB) {
+                    this.items().sort(function (idA, idB) {
                         var a = runtime.require(idA),
                             b = runtime.require(idB);
 
@@ -2036,12 +2053,12 @@ runtime.on('ready', function() {
                         return result;
                     });
 
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#types#' + item.name() + '">' + item.name() + '</a></li>');
                     });
 
                     // events
-                    callback = function() {
+                    callback = function () {
                         _removeActive();
                         $(this).addClass('active');
                     };
@@ -2049,7 +2066,7 @@ runtime.on('ready', function() {
                     for (i = 0; i < length; i++) {
                         item = domItems.children[i];
                         item.addEventListener('click', callback);
-                        item.addEventListener('click', function() {
+                        item.addEventListener('click', function () {
                             this.click();
                         }.bind(self.items(i)));
                     }
@@ -2067,7 +2084,7 @@ runtime.on('ready', function() {
 
                 case 'behaviors':
                     // TODO find better way
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         this.items().pop();
                     }.bind(this));
 
@@ -2089,7 +2106,7 @@ runtime.on('ready', function() {
                     }
 
                     // sort
-                    this.items().sort(function(idA, idB) {
+                    this.items().sort(function (idA, idB) {
                         var a = runtime.require(idA),
                             b = runtime.require(idB);
 
@@ -2103,12 +2120,12 @@ runtime.on('ready', function() {
                         return result;
                     });
 
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#behaviors#' + item.name() + '">' + item.name() + '</a></li>');
                     });
 
                     // events
-                    callback = function() {
+                    callback = function () {
                         _removeActive();
                         $(this).addClass('active');
                     };
@@ -2116,7 +2133,7 @@ runtime.on('ready', function() {
                     for (i = 0; i < length; i++) {
                         item = domItems.children[i];
                         item.addEventListener('click', callback);
-                        item.addEventListener('click', function() {
+                        item.addEventListener('click', function () {
                             this.click();
                         }.bind(self.items(i)));
                     }
@@ -2134,7 +2151,7 @@ runtime.on('ready', function() {
 
                 case 'components':
                     // TODO find better way
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         this.items().pop();
                     }.bind(this));
 
@@ -2148,7 +2165,7 @@ runtime.on('ready', function() {
                     }
 
                     // sort
-                    this.items().sort(function(idA, idB) {
+                    this.items().sort(function (idA, idB) {
                         var a = runtime.require(idA),
                             b = runtime.require(idB);
 
@@ -2162,12 +2179,12 @@ runtime.on('ready', function() {
                         return result;
                     });
 
-                    this.items().forEach(function(item) {
+                    this.items().forEach(function (item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#components#' + item.name() + '">' + item.name() + '</a></li>');
                     });
 
                     // events
-                    callback = function() {
+                    callback = function () {
                         _removeActive();
                         $(this).addClass('active');
                     };
@@ -2175,7 +2192,7 @@ runtime.on('ready', function() {
                     for (i = 0; i < length; i++) {
                         item = domItems.children[i];
                         item.addEventListener('click', callback);
-                        item.addEventListener('click', function() {
+                        item.addEventListener('click', function () {
                             this.click();
                         }.bind(self.items(i)));
                     }
@@ -2203,22 +2220,22 @@ runtime.on('ready', function() {
 
     // Workspace
     var Workspace = this.require('Workspace');
-    Workspace.on('init', function(conf) {
+    Workspace.on('init', function (conf) {
         var that = this;
 
         $('html')
             .on('dragenter dragover', false)
-            .on('drop', function(e) {
+            .on('drop', function (e) {
 
                 e.stopPropagation();
                 e.preventDefault();
                 var files = e.originalEvent.dataTransfer.files;
                 var reader = new FileReader();
                 var json = '';
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     json += event.target.result;
                 };
-                reader.onloadend = function() {
+                reader.onloadend = function () {
                     var sys = JSON.parse(json);
 
                     var DialogDropFile = that.require('DialogDropFile');
@@ -2235,7 +2252,7 @@ runtime.on('ready', function() {
             });
     });
 
-    Workspace.on('create', function() {
+    Workspace.on('create', function () {
         var id = '',
             Dialog = null,
             dialog = null,
@@ -2281,7 +2298,7 @@ runtime.on('ready', function() {
                     'title': 'Create a new system',
                 });
                 dialog.show();
-                dialog.on('ok', function() {
+                dialog.on('ok', function () {
                     var designer = this.require('designer'),
                         name = null,
                         uuid = '',
@@ -2368,7 +2385,7 @@ runtime.on('ready', function() {
                         'title': 'Create a new schema',
                     });
                     dialog.show();
-                    dialog.on('ok', function() {
+                    dialog.on('ok', function () {
                         var designer = this.require('designer'),
                             name = null,
                             schema = {},
@@ -2438,7 +2455,7 @@ runtime.on('ready', function() {
                         'title': 'Create a new model',
                     });
                     dialog.show();
-                    dialog.on('ok', function() {
+                    dialog.on('ok', function () {
                         this.hide();
                     });
                 }
@@ -2450,7 +2467,7 @@ runtime.on('ready', function() {
                         'title': 'Create a new type',
                     });
                     dialog.show();
-                    dialog.on('ok', function() {
+                    dialog.on('ok', function () {
                         var designer = this.require('designer'),
                             name = null,
                             isEnum = false,
@@ -3136,14 +3153,16 @@ runtime.on('ready', function() {
         }
     });
 
-    Workspace.on('clear', function() {
+    Workspace.on('clear', function () {
         $('#designer-workspace').empty();
-        jsPlumb.deleteEveryEndpoint();
+        jsPlumb.ready(function () {
+            jsPlumb.deleteEveryEndpoint();
+        });
     });
 
     // Server
     var Server = this.require('Server');
-    Server.on('start', function() {
+    Server.on('start', function () {
         var RuntimeChannel = null,
             channel = null,
             Worker = null,
@@ -3154,11 +3173,11 @@ runtime.on('ready', function() {
             '_id': 'channel'
         });
 
-        channel.on('send', function(message) {
+        channel.on('send', function (message) {
             this.require('worker').worker().port.postMessage(message);
         });
 
-        channel.on('logDebug', function(message) {
+        channel.on('logDebug', function (message) {
             var log = '',
                 Log = null;
 
@@ -3171,7 +3190,7 @@ runtime.on('ready', function() {
             this.require('designer').logs().push(log);
         });
 
-        channel.on('logInfo', function(message) {
+        channel.on('logInfo', function (message) {
             var log = '',
                 Log = null;
 
@@ -3184,7 +3203,7 @@ runtime.on('ready', function() {
             this.require('designer').logs().push(log);
         });
 
-        channel.on('logWarn', function(message) {
+        channel.on('logWarn', function (message) {
             var log = '',
                 Log = null;
 
@@ -3197,7 +3216,7 @@ runtime.on('ready', function() {
             this.require('designer').logs().push(log);
         });
 
-        channel.on('logError', function(message) {
+        channel.on('logError', function (message) {
             var log = '',
                 Log = null;
 
@@ -3210,7 +3229,7 @@ runtime.on('ready', function() {
             this.require('designer').logs().push(log);
         });
 
-        channel.on('getSystem', function(id) {
+        channel.on('getSystem', function (id) {
             var system = null;
             if (id === this.require('designer').system().id()) {
                 system = this.require('db').collections().System.find({
@@ -3224,7 +3243,7 @@ runtime.on('ready', function() {
             }
         });
 
-        channel.on('getInitSystem', function(id) {
+        channel.on('getInitSystem', function (id) {
             var system = null;
             if (id === this.require('designer').system().id()) {
                 system = this.require('db').collections().System.find({
@@ -3238,31 +3257,31 @@ runtime.on('ready', function() {
             }
         });
 
-        channel.on('getType', function(id) {
+        channel.on('getType', function (id) {
             this.setType(id, this.require('db').collections().System.find({
                 '_id': this.require('designer').system().id()
             })[0].types[id]);
         });
 
-        channel.on('getSchema', function(id) {
+        channel.on('getSchema', function (id) {
             this.setSchema(id, this.require('db').collections().System.find({
                 '_id': this.require('designer').system().id()
             })[0].schemas[id]);
         });
 
-        channel.on('getModel', function(id) {
+        channel.on('getModel', function (id) {
             this.setModel(id, this.require('db').collections().System.find({
                 '_id': this.require('designer').system().id()
             })[0].models[id]);
         });
 
-        channel.on('getBehavior', function(id) {
+        channel.on('getBehavior', function (id) {
             this.setBehavior(id, this.require('db').collections().System.find({
                 '_id': this.require('designer').system().id()
             })[0].behaviors[id]);
         });
 
-        channel.on('getComponent', function(id, collection) {
+        channel.on('getComponent', function (id, collection) {
             var modelId = '',
                 designer = this.require('designer');
 
@@ -3287,7 +3306,7 @@ runtime.on('ready', function() {
             })[0].models[modelId]);
         });
 
-        channel.on('updateType', function(id, type) {
+        channel.on('updateType', function (id, type) {
             var designer = this.require('designer'),
                 types = designer.system().types();
 
@@ -3301,7 +3320,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteType', function(id) {
+        channel.on('deleteType', function (id) {
             var designer = this.require('designer'),
                 types = designer.system().types,
                 dbTypes = [],
@@ -3325,7 +3344,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('updateSchemaName', function(name, id) {
+        channel.on('updateSchemaName', function (name, id) {
             var designer = this.require('designer'),
                 oldName = designer.system().schemas()[id]._name,
                 models = designer.system().models(),
@@ -3374,7 +3393,7 @@ runtime.on('ready', function() {
             designer.save();
         });
 
-        channel.on('updateSchema', function(id, schema) {
+        channel.on('updateSchema', function (id, schema) {
             var designer = this.require('designer'),
                 schemas = designer.system().schemas();
 
@@ -3432,7 +3451,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('updateModel', function(id, model) {
+        channel.on('updateModel', function (id, model) {
             var designer = this.require('designer'),
                 models = designer.system().models();
 
@@ -3450,7 +3469,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteModel', function(id) {
+        channel.on('deleteModel', function (id) {
             var designer = this.require('designer'),
                 models = designer.system().models(),
                 dbModels = [],
@@ -3474,7 +3493,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('updateModelId', function(oldId, newId) {
+        channel.on('updateModelId', function (oldId, newId) {
             var designer = this.require('designer'),
                 models = designer.system().models(),
                 model = null;
@@ -3492,7 +3511,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('updateBehavior', function(id, behavior) {
+        channel.on('updateBehavior', function (id, behavior) {
             var designer = this.require('designer'),
                 behaviors = designer.system().behaviors();
 
@@ -3503,7 +3522,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteBehavior', function(id) {
+        channel.on('deleteBehavior', function (id) {
             var designer = this.require('designer'),
                 behaviors = designer.system().behaviors(),
                 dbBehaviors = [],
@@ -3527,7 +3546,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('updateComponent', function(id, collection, component) {
+        channel.on('updateComponent', function (id, collection, component) {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
@@ -3539,7 +3558,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteComponent', function(id, collection) {
+        channel.on('deleteComponent', function (id, collection) {
             var designer = this.require('designer'),
                 components = designer.system().components(),
                 models = [],
@@ -3563,7 +3582,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('updateSystem', function(id, system) {
+        channel.on('updateSystem', function (id, system) {
             var System = this.require('System'),
                 sys = null,
                 designer = this.require('designer');
@@ -3580,7 +3599,7 @@ runtime.on('ready', function() {
             designer.workspace().refresh();
         });
 
-        channel.on('loadSystem', function(system) {
+        channel.on('loadSystem', function (system) {
             var Dialog = null,
                 dialog = null;
 
@@ -3592,7 +3611,7 @@ runtime.on('ready', function() {
             });
             dialog.show();
 
-            dialog.on('ok', function() {
+            dialog.on('ok', function () {
                 var System = this.require('System'),
                     sys = null,
                     designer = this.require('designer'),
@@ -3617,13 +3636,13 @@ runtime.on('ready', function() {
         });
 
         // DEBUG
-        channel.on('updateBehavior', function(id, behavior) {
+        channel.on('updateBehavior', function (id, behavior) {
             var designer = this.require('designer');
             if (designer.debug()) {
                 this.require(id).action(behavior.action);
             }
         });
-        channel.on('sync', function() {
+        channel.on('sync', function () {
             var System = null,
                 system = null,
                 designer = this.require('designer');
@@ -3648,7 +3667,7 @@ runtime.on('ready', function() {
             "_id": "worker",
             "worker": new SharedWorker('./scripts/worker.js'),
         });
-        worker.worker().port.onmessage = function(e) {
+        worker.worker().port.onmessage = function (e) {
             $db.RuntimeMessage.insert(e.data);
         };
 
@@ -3656,7 +3675,7 @@ runtime.on('ready', function() {
 
     // Designer
     var Designer = this.require('Designer');
-    Designer.on('init', function(conf) {
+    Designer.on('init', function (conf) {
         var MenuBar = null,
             menubar = null,
             ToolBar = null,
@@ -3707,10 +3726,10 @@ runtime.on('ready', function() {
         this.server(server);
 
         // message
-        this.require('logger').on('warn', function(message) {
+        this.require('logger').on('warn', function (message) {
             this.require('message').warning(message);
         });
-        this.require('logger').on('error', function(message) {
+        this.require('logger').on('error', function (message) {
             this.require('message').danger(message);
         });
 
@@ -3757,7 +3776,7 @@ runtime.on('ready', function() {
 
         // add event when history change
         var that = this;
-        window.onhashchange = function(e) {
+        window.onhashchange = function (e) {
             var arr = window.location.href.split('#'),
                 system = '',
                 collection = 'system',
@@ -3814,13 +3833,13 @@ runtime.on('ready', function() {
             that.updateRouter();
         };
         // resize event
-        $(window).resize(function() {
+        $(window).resize(function () {
             jsPlumb.repaintEverything();
         });
 
     });
 
-    Designer.on('check', function() {
+    Designer.on('check', function () {
         var Dialog = null,
             dialog = null;
 
@@ -3834,7 +3853,7 @@ runtime.on('ready', function() {
         }
     });
 
-    Designer.on('logs', function(index, id, action) {
+    Designer.on('logs', function (index, id, action) {
         var log = null,
             html = '';
 
@@ -3864,7 +3883,7 @@ runtime.on('ready', function() {
         }
     });
 
-    Designer.on('welcome', function() {
+    Designer.on('welcome', function () {
         var Dialog = null,
             dialog = null,
             config = null;
@@ -3882,7 +3901,7 @@ runtime.on('ready', function() {
                 'title': 'Welcome to System Designer'
             });
             dialog.show();
-            dialog.on('ok', function() {
+            dialog.on('ok', function () {
                 var config = window.localStorage.getItem('system-designer-config');
                 if (!config) {
                     config = {};
@@ -3896,17 +3915,17 @@ runtime.on('ready', function() {
         }
     });
 
-    Designer.on('render', function() {
+    Designer.on('render', function () {
         this.menubar().render();
         this.toolbar().render();
         this.spaces().render();
 
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { 'show': 2000, 'hide': 100 }, trigger: 'hover' });
         });
     });
 
-    Designer.on('filter', function(val) {
+    Designer.on('filter', function (val) {
         var result = [],
             collectionName = '';
 
@@ -3938,7 +3957,7 @@ runtime.on('ready', function() {
             result.push(this.require(resultTemp[index]._id));
         }
         if (val.length > 0) {
-            result.forEach(function(model) {
+            result.forEach(function (model) {
                 if (model.content().toLowerCase().indexOf(val.toLowerCase()) === -1) {
                     model.hide();
                 } else {
@@ -3946,7 +3965,7 @@ runtime.on('ready', function() {
                 }
             });
         } else {
-            result.forEach(function(model) {
+            result.forEach(function (model) {
                 model.show();
             });
         }
@@ -3961,14 +3980,16 @@ runtime.on('ready', function() {
         }
     });
 
-    Designer.on('context', function(val) {
-        jsPlumb.deleteEveryEndpoint();
+    Designer.on('context', function (val) {
+        jsPlumb.ready(function () {
+            jsPlumb.deleteEveryEndpoint();
+        });
         this.spaces().render();
         this.workspace().clear();
         this.workspace().refresh();
     });
 
-    Designer.on('space', function(val) {
+    Designer.on('space', function (val) {
         //jsPlumb.deleteEveryEndpoint();
         //this.workspace().refresh();
         if (this.context() === 'system') {
@@ -3976,7 +3997,7 @@ runtime.on('ready', function() {
         }
     });
 
-    Designer.on('updateRouter', function() {
+    Designer.on('updateRouter', function () {
         var menubar = [],
             i = 0,
             length = 0,
@@ -4015,7 +4036,7 @@ runtime.on('ready', function() {
         */
     });
 
-    Designer.on('createBehavior', function(model, state, def) {
+    Designer.on('createBehavior', function (model, state, def) {
         var body = '',
             behaviors = this.system().behaviors();
 
@@ -4079,7 +4100,7 @@ runtime.on('ready', function() {
         this.save();
     });
 
-    Designer.on('deleteSchema', function(id) {
+    Designer.on('deleteSchema', function (id) {
         var behaviorId = '',
             modelId = '',
             behavior = null,
@@ -4127,7 +4148,7 @@ runtime.on('ready', function() {
         this.system().schemas(schemas);
     });
 
-    Designer.on('createModel', function(schema) {
+    Designer.on('createModel', function (schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
             components = this.system().components(),
@@ -4241,7 +4262,7 @@ runtime.on('ready', function() {
         this.save();
     });
 
-    Designer.on('syncModel', function(schema) {
+    Designer.on('syncModel', function (schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
             components = this.system().components(),
@@ -4396,7 +4417,7 @@ runtime.on('ready', function() {
         this.save();
     });
 
-    Designer.on('syncBehavior', function(model) {
+    Designer.on('syncBehavior', function (model) {
         var behaviors = this.system().behaviors(),
             schema = null,
             propName = '',
@@ -4466,27 +4487,29 @@ runtime.on('ready', function() {
         }
     });
 
-    Designer.on('linkModel', function(source, target) {
-        jsPlumb.setContainer('body');
+    Designer.on('linkModel', function (source, target) {
+        jsPlumb.ready(function () {
+            jsPlumb.setContainer('body');
 
-        jsPlumb.connect({
-            paintStyle: {
-                strokeStyle: '#7F949D',
-                lineWidth: 3
-            },
-            source: 'designer-model-panel-' + source,
-            target: 'designer-model-panel-' + target,
-            overlays: [
-                ['Arrow', { location: 1 }]
-            ]
-        }, {
-                connector: ['Flowchart'],
-                anchor: ['Left', 'Right'],
-                endpoint: 'Blank'
-            });
+            jsPlumb.connect({
+                paintStyle: {
+                    strokeStyle: '#7F949D',
+                    lineWidth: 3
+                },
+                source: 'designer-model-panel-' + source,
+                target: 'designer-model-panel-' + target,
+                overlays: [
+                    ['Arrow', { location: 1 }]
+                ]
+            }, {
+                    connector: ['Flowchart'],
+                    anchor: ['Left', 'Right'],
+                    endpoint: 'Blank'
+                });
+        });
     });
 
-    Designer.on('save', function() {
+    Designer.on('save', function () {
         var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
             designer = this.require('designer'),
             system = this.require('db').collections().System.find({
@@ -4509,7 +4532,7 @@ runtime.on('ready', function() {
     });
 
     // main
-    system.on('main', function() {
+    system.on('main', function () {
         var Designer = null,
             designer = null;
 
