@@ -542,6 +542,12 @@ runtime.on('ready', function () {
         }
         sys = new System(this.data());
         designer.system(sys);
+
+        // empty log
+        designer.logs().forEach(function (item) {
+            this.logs().pop();
+        }.bind(designer));
+
         designer.save();
 
         designer.space(sys.name());
@@ -2443,7 +2449,7 @@ runtime.on('ready', function () {
                             designer.spaces().render();
                             designer.workspace().refresh();
 
-                            this.require('message').success('schema created. You can now edit it and generate models from this schema.');
+                            this.require('message').success('schema created. A model has been also generated.');
                         }
                     });
                 }
@@ -3622,6 +3628,12 @@ runtime.on('ready', function () {
                 }
                 sys = new System(this.data());
                 designer.system(sys);
+
+                // empty log
+                designer.logs().forEach(function (item) {
+                    this.logs().pop();
+                }.bind(designer));
+
                 designer.save();
 
                	designer.space(sys.name());
