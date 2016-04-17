@@ -2336,7 +2336,7 @@ runtime.on('ready', function () {
                         // set system
                         system = {
                             "name": name,
-                            "master": false,
+                            "master": true,
                             "subsystem": false,
                             "version": "0.0.1",
                             "description": "",
