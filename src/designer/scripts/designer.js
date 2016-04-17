@@ -1251,9 +1251,9 @@ runtime.on('ready', function () {
                                 if (result.indexOf('@') !== -1) {
                                     result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
                                 }
-                                methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ': ' + result + '</div>';
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ' : ' + result + '</div>';
                             } else {
-                                methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ': ' + result + '</div>';
+                                methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ' : ' + result + '</div>';
                             }
                         } else {
                             if (htmlId !== '123751cb591de26') {
