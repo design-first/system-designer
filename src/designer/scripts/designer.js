@@ -1415,12 +1415,18 @@ runtime.on('ready', function () {
             doc = '',
             that = this,
             propName = '',
-            propVal = '';
+            propVal = '',
+            value = '';
 
         for (propName in this.document()) {
             if (this.document().hasOwnProperty(propName) && propName !== '_id') {
                 propVal = this.document()[propName];
-                doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';
+                value = JSON.stringify(propVal);
+                if (value.length < 25) {
+                    doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';
+                } else {
+                    doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal).substring(0, 25) + ' ..."</td></tr>';
+                }
             }
         }
 
