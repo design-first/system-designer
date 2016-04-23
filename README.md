@@ -8,8 +8,8 @@
 
 #### What is System Designer ?
 
-Design is the base of every app. 
-System Designer will help you to create **JavaScript Application Systems**, applications driven by the design.
+System Designer is an IDE for building **JavaScript Application Systems**, applications driven by the model. 
+
 
 Features:
 
@@ -27,7 +27,7 @@ System SDK is a SDK for building JavaScript Application Systems.
 
 It contains:
 
-* System Designer, a UI designer to create JavaScript Application Systems and
+* System Designer, an IDE to create JavaScript Application Systems and
 * [Runtime](https://system-runtime.github.io), a JavaScript library to run and manage JavaScript Application Systems.
 
 ![Image Alt](https://system-designer.github.io/img/system-sdk.png)
