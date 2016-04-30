@@ -3176,9 +3176,7 @@ runtime.on('ready', function () {
     var Server = this.require('Server');
     Server.on('start', function () {
         var RuntimeChannel = null,
-            channel = null,
-            Worker = null,
-            worker = null;
+            channel = null;
 
         RuntimeChannel = this.require('RuntimeChannel');
         channel = new RuntimeChannel({
@@ -3186,7 +3184,7 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            this.require('worker').worker().port.postMessage(message);
+            localStorage.setItem('system-designer-message', JSON.stringify(message));
         });
 
         channel.on('logDebug', function (message) {
@@ -3680,14 +3678,12 @@ runtime.on('ready', function () {
             }
         });
 
-        Worker = this.require('Worker');
-        worker = new Worker({
-            "_id": "worker",
-            "worker": new SharedWorker('./scripts/worker.js'),
+        window.addEventListener("storage", function (e) {
+            if (e.key === 'system-designer-message') {
+                $db.RuntimeMessage.insert(JSON.parse(e.newValue));
+            }
         });
-        worker.worker().port.onmessage = function (e) {
-            $db.RuntimeMessage.insert(e.data);
-        };
+
 
     }, true);
 
@@ -3789,7 +3785,7 @@ runtime.on('ready', function () {
                 this.refresh();
                 break;
         }
-        this.check();
+        //this.check();
         this.welcome();
 
         // add event when history change
@@ -3913,7 +3909,7 @@ runtime.on('ready', function () {
             config = JSON.parse(config);
         }
 
-        if (typeof SharedWorker !== 'undefined' && typeof config.welcomeScreen === 'undefined') {
+        if (typeof config.welcomeScreen === 'undefined') {
             Dialog = this.require('DialogWelcome');
             dialog = new Dialog({
                 'title': 'Welcome to System Designer'
