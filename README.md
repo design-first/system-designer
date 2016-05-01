@@ -10,7 +10,7 @@
 
 No matter the frameworks you use and the code you write, the most important is the model that you define to create your application. System Designer helps you to design this model and to generate the classes and components to build your application.
 
-## Design your application with UML
+#### Design your application with UML
 
 If you look at the different JavaScript frameworks on the market, you will notice that they all have their own way to define a model, generally only with code.
 
@@ -18,25 +18,25 @@ System Designer uses UML, a standard, to define your model. So you probably alre
 
 The definition of the model is stored on a JSON format called MSON. With MSON you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
-## Code the behavior of your model
+#### Code the behavior of your model
 
 Once you have created your model, System Designer generates the skeletons of all your methods. You only have then to add your code to implement them.
 
 System Designer provides you helpers to manage your components. You can easily navigate threw components to create your application.
 
-## Create components graphically
+#### Create components graphically
 
 There is no need to code to instantiate a component. Create a component in System Designer is like creating a document in a NoSQL Database.
 
 In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents.
 
-## Run your application
+#### Run your application
 
 You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module.
 
 Because you have defined a model for your application, a Dynamic Type Check is done on every action of your application. All warnings are send and shown in System Designer.
 
-## Installation
+#### Installation
 
 #### Node.js
 
