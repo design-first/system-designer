@@ -308,9 +308,9 @@ runtime.on('ready', function () {
             var result = {},
                 modelId = '';
 
-            for (modelId in system) {
-                if (system[modelId]._name === name) {
-                    result = system[modelId];
+            for (modelId in system.models) {
+                if (system.models[modelId]._name === name) {
+                    result = system.models[modelId];
                 }
             }
             return result;

@@ -1452,33 +1452,33 @@ runtime.on('ready', function () {
         document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             htmlComp.source()
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{_id}}/gi, this.uuid())
+                .replace(/{{_id}}/gi, this.uuid().replace('.', '-'))
                 .replace(/{{content}}/gi, doc)
         );
 
         // events
-        html = document.getElementById('designer-component-' + this.uuid()).children[0].children[1];
+        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-')).children[0].children[1];
 
         html.addEventListener('click', function (event) {
             window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()) + '&systemId=' + systemId);
         });
 
-        html = document.getElementById('designer-component-' + this.uuid() + '-edit');
+        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-edit');
 
         html.addEventListener('click', function (event) {
             window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()) + '&systemId=' + systemId);
         });
 
-        html = document.getElementById('designer-component-' + this.uuid() + '-delete');
+        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-delete');
 
         html.addEventListener('click', function (event) {
             var designer = this.require('designer'),
                 components = designer.system().components();
-
+            
             delete components[this.model()][this.uuid()];
             designer.system().components(components);
 
-            $('#designer-component-' + this.uuid()).fadeOut(400, function () {
+            $('#designer-component-' + this.uuid().replace('.', '-')).fadeOut(400, function () {
                 $(this).remove();
             });
 
