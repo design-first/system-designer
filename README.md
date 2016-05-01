@@ -8,30 +8,33 @@
 
 #### What is System Designer ?
 
-System Designer is an IDE for building **JavaScript Application Systems**, applications driven by the model. 
+No matter the frameworks you use and the code you write, the most important is the model that you define to create your application. System Designer helps you to design this model and to generate the classes and components to build your application.
 
+## Design your application with UML
 
-Features:
+If you look at the different JavaScript frameworks on the market, you will notice that they all have their own way to define a model, generally only with code.
 
-* **No file-system**: focus on your business logic and not on the structure of your project. Your entire project is stored in a NoSQL DB and it can be exported in a single JSON object.
-* **Hot-reload**: updating a method in System Designer will automatically inject it in your connected app. You do not need to reload your app to see your latests modifications.
-* **Remote designing** : get the model, behaviors and components of all running apps and update them live.
-* **Module builder**: Your HTML or CSS can be required in your app.
+System Designer uses UML, a standard, to define your model. So you probably already know how to create a model in System Designer even if you have never run it.
 
-You can test System Designer [here](https://system-designer.github.io/designer/index.html).
+The definition of the model is stored on a JSON format called MSON. With MSON you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
-#### What is System SDK ?
+## Code the behavior of your model
 
-System Designer is part of the [System SDK project](https://github.com/system-sdk).
-System SDK is a SDK for building JavaScript Application Systems.
+Once you have created your model, System Designer generates the skeletons of all your methods. You only have then to add your code to implement them.
 
-It contains:
+System Designer provides you helpers to manage your components. You can easily navigate threw components to create your application.
 
-* System Designer, an IDE to create JavaScript Application Systems and
-* [Runtime](https://system-runtime.github.io), a JavaScript library to run and manage JavaScript Application Systems.
+## Create components graphically
 
-![Image Alt](https://system-designer.github.io/img/system-sdk.png)
+There is no need to code to instantiate a component. Create a component in System Designer is like creating a document in a NoSQL Database.
 
+In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents.
+
+## Run your application
+
+You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module.
+
+Because you have defined a model for your application, a Dynamic Type Check is done on every action of your application. All warnings are send and shown in System Designer.
 
 ## Installation
 
@@ -57,41 +60,15 @@ Then:
 * copy `/bower_components/system-designer/dist/designer` on your web project and
 * open `/designer/index.html`.
 
-## Build
+#### Test System Designer online
 
-#### Installation
-
-Once you have cloned the repository:
-
-```sh
-# needed by grunt (maybe you have this installed already)
-$ npm install -g grunt-cli
-$ npm install
-$ bower install
-```	 	
-
-#### Grunt tasks
-
-Here are the different tasks you can use to automate tasks:
-
-
-```sh
-# clean
-$ grunt clean
-# build
-$ grunt build
-# watch
-$ grunt watch
-# start the app
-$ grunt start
-```
-
-To run System Designer, go to [http://localhost:9001/](http://localhost:9001/) .
+You can test System Designer [here](https://system-designer.github.io/designer/index.html).
 
 ## Documentation
 
+* [Build](https://system-designer.readme.io/docs/build-system-designer)
 * [Quick Start](https://system-designer.readme.io/docs/quick-start)
-* [Documentation](https://system-designer.readme.io/docs/create-a-system)
+* [Documentation](https://system-designer.readme.io/)
 
 ## Licence
 
