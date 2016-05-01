@@ -577,10 +577,6 @@ module.exports = function(grunt) {
                 src: 'build/system/design.json',
                 dest: 'dist/designer/systems/design.json'
             },
-            worker: {
-                src: 'src/designer/scripts/worker.js',
-                dest: 'dist/designer/scripts/worker.js'
-            },
             css: {
                 files: [
                     {
@@ -741,7 +737,6 @@ module.exports = function(grunt) {
         'copy:system',
         'jsbeautifier',
         'jshint',
-        'copy:worker',
         'uglify'
     ]);
 
@@ -752,7 +747,6 @@ module.exports = function(grunt) {
         'merge-json',
         'copy:system',
         'jsbeautifier',
-        'copy:worker',
         'copy:debug'
     ]);
 
