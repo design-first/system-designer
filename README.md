@@ -14,9 +14,9 @@ No matter the frameworks you use and the code you write, the most important is t
 
 If you look at the different JavaScript frameworks on the market, you will notice that they all have their own way to define a model, generally only with code.
 
-System Designer uses UML, a standard, to define your model. So you probably already know how to create a model in System Designer even if you have never run it.
+System Designer uses [UML](http://www.uml.org), a standard, to define your model. So you probably already know how to create a model in System Designer even if you have never run it.
 
-The definition of the model is stored on a JSON format called MSON. With MSON you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
+The definition of the model is stored on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson). With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
 #### Code the behavior of your model
 
@@ -34,31 +34,7 @@ In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your 
 
 You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module.
 
-Because you have defined a model for your application, a Dynamic Type Check is done on every action of your application. All warnings are send and shown in System Designer.
-
-#### Installation
-
-#### Node.js
-
-```sh
-$ npm install system-designer --save
-```
-
-Then:
-
-* copy `/node_modules/system-designer/dist/designer` on your web project and
-* open `/designer/index.html`.
-
-#### Bower
-
-```sh
-$ bower install system-designer --save
-```
-
-Then:
-
-* copy `/bower_components/system-designer/dist/designer` on your web project and
-* open `/designer/index.html`.
+Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
 
 #### Test System Designer online
 
@@ -66,6 +42,7 @@ You can test System Designer [here](https://system-designer.github.io/designer/i
 
 ## Documentation
 
+* [Installation](https://system-designer.readme.io/docs/install-system-designer)
 * [Build](https://system-designer.readme.io/docs/build-system-designer)
 * [Quick Start](https://system-designer.readme.io/docs/quick-start)
 * [Documentation](https://system-designer.readme.io/)
