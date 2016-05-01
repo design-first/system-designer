@@ -6,7 +6,7 @@
 
 ![Image Alt](https://system-designer.github.io/img/v2/system-designer.png)
 
-#### What is System Designer ?
+## What is System Designer ?
 
 No matter the frameworks you use and the code you write, the most important is the model that you define to create your application. System Designer helps you to design this model and to generate the classes and components to build your application.
 
@@ -36,7 +36,7 @@ You can run your application directly from System Designer and then export it to
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
 
-#### Test System Designer online
+## Test System Designer online
 
 You can test System Designer [here](https://system-designer.github.io/designer/index.html).
 
