@@ -273,7 +273,12 @@ runtime.on('ready', function () {
             channel = null,
             id = '',
             title = '',
-            collection = '';
+            collection = '',
+            self = this,
+            designer = this.require('designer'),
+            result = {},
+            property = '',
+            editor = null;
 
         window.addEventListener('storage', function (e) {
             if (e.key === 'system-designer-message') {
@@ -293,101 +298,106 @@ runtime.on('ready', function () {
         title = document.location.search.split('?')[1];
         title = decodeURI(title);
         id = title.split('_id=')[1].split('&')[0].trim();
-        collection = title.split('_id=')[1].split('&model=')[1].trim();
+        collection = title.split('_id=')[1].split('&model=')[1].split('&systemId=')[0];
+        systemId = title.split('&model=')[1].split('&systemId=')[1].trim();
 
-        channel.getComponent(id, collection);
+        component = JSON.parse(localStorage.getItem(systemId)).components[collection][id];
+        model = _findModel(collection, JSON.parse(localStorage.getItem(systemId)));
 
-        channel.on('setComponent', function (id, collection, component, model) {
-            var self = this,
-                designer = this.require('designer'),
-                result = {},
-                property = '',
-                editor = null;
+        function _findModel(name, system) {
+            var result = {},
+                modelId = '';
 
-            function _init(props) {
-                var propName = '',
-                    position = 0,
-                    menuitem = null,
-                    arrId = [];
-
-                if (Object.keys(props)) {
-                    // add menuitems
-                    for (propName in props) {
-                        self.require('db').collections().HTML.insert({
-                            "_id": "menu-item-property-" + propName + ".html",
-                            "source": '<a id="designer-menu-item-property-' + propName + '" href="#' + propName + '">' + propName + '</a>'
-                        });
-                        arrId = self.require('db').collections().MenuItem.insert({
-                            "name": propName,
-                            "html": "menu-item-property-" + propName + ".html",
-                            "position": position + 10,
-                            "type": "component"
-                        });
-                        self.require('designer').menubar().items().push(self.require(arrId[0]));
-                    }
-                    // render
-                    self.require('designer').menubar().render();
-
-                    // add events
-                    var callback = function (event) {
-                        var editor = null,
-                            component = null;
-
-                        editor = self.require('editor').editor();
-                        editor.getSession().setMode('ace/mode/' + props[propName]);
-
-                        designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
-
-                        component = self.require('designer').store().data();
-
-                        editor.setValue(component[propName]);
-                        editor.gotoLine(1);
-
-                        editor.getSession().$undoManager.reset();
-                        editor.getSession().setUndoManager(new ace.UndoManager());
-                    };
-                    for (propName in props) {
-                        menuitem = document.getElementById('designer-menu-item-property-' + propName);
-                        menuitem.addEventListener('click', callback);
-                    }
+            for (modelId in system) {
+                if (system[modelId]._name === name) {
+                    result = system[modelId];
                 }
             }
+            return result;
+        }
 
-            designer.store().uuid(id);
-            designer.store().collection(collection);
-            designer.store().data(component);
+        function _init(props) {
+            var propName = '',
+                position = 0,
+                menuitem = null,
+                arrId = [];
 
-            for (property in component) {
-                if (model[property] && model[property].type) {
-                    switch (model[property].type) {
-                        case 'html':
-                            result[property] = 'html';
-                            break;
-                        case 'javascript':
-                            result[property] = 'javascript';
-                            break;
-                        case 'css':
-                            result[property] = 'css';
-                            break;
-                        default:
-                            break;
-                    }
+            if (Object.keys(props)) {
+                // add menuitems
+                for (propName in props) {
+                    self.require('db').collections().HTML.insert({
+                        "_id": "menu-item-property-" + propName + ".html",
+                        "source": '<a id="designer-menu-item-property-' + propName + '" href="#' + propName + '">' + propName + '</a>'
+                    });
+                    arrId = self.require('db').collections().MenuItem.insert({
+                        "name": propName,
+                        "html": "menu-item-property-" + propName + ".html",
+                        "position": position + 10,
+                        "type": "component"
+                    });
+                    self.require('designer').menubar().items().push(self.require(arrId[0]));
+                }
+                // render
+                self.require('designer').menubar().render();
+
+                // add events
+                var callback = function (event) {
+                    var editor = null,
+                        component = null;
+
+                    editor = self.require('editor').editor();
+                    editor.getSession().setMode('ace/mode/' + props[propName]);
+
+                    designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
+
+                    component = self.require('designer').store().data();
+
+                    editor.setValue(component[propName]);
+                    editor.gotoLine(1);
+
+                    editor.getSession().$undoManager.reset();
+                    editor.getSession().setUndoManager(new ace.UndoManager());
+                };
+                for (propName in props) {
+                    menuitem = document.getElementById('designer-menu-item-property-' + propName);
+                    menuitem.addEventListener('click', callback);
                 }
             }
+        }
 
-            designer.store().extra(result);
-            _init(result);
+        designer.store().uuid(id);
+        designer.store().collection(collection);
+        designer.store().data(component);
 
-            document.title = id + ' | system designer';
+        for (property in component) {
+            if (model[property] && model[property].type) {
+                switch (model[property].type) {
+                    case 'html':
+                        result[property] = 'html';
+                        break;
+                    case 'javascript':
+                        result[property] = 'javascript';
+                        break;
+                    case 'css':
+                        result[property] = 'css';
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
-            editor = this.require('editor').editor();
-            editor.setValue(JSON.stringify(component, null, '\t'));
-            editor.gotoLine(1);
-            editor.getSession().$undoManager.reset();
-            editor.getSession().setUndoManager(new ace.UndoManager());
+        designer.store().extra(result);
+        _init(result);
 
-            this.off('setComponent');
-        });
+        document.title = id + ' | system designer';
+
+        editor = this.require('editor').editor();
+        editor.setValue(JSON.stringify(component, null, '\t'));
+        editor.gotoLine(1);
+        editor.getSession().$undoManager.reset();
+        editor.getSession().setUndoManager(new ace.UndoManager());
+
     }, true);
 
     // Editor

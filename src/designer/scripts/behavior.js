@@ -250,7 +250,12 @@ runtime.on('ready', function () {
     Server.on('start', function () {
         var RuntimeChannel = null,
             channel = null,
-            id = '';
+            id = '',
+            params = '',
+            designer = this.require('designer'),
+            editor = this.require('editor').editor(),
+            Range = null,
+            endLine = null;
 
         window.addEventListener('storage', function (e) {
             if (e.key === 'system-designer-message') {
@@ -267,68 +272,62 @@ runtime.on('ready', function () {
             localStorage.setItem('system-designer-message', JSON.stringify(message));
         });
 
-        id = document.location.search.split('?')[1].split('id=')[1];
-        channel.getBehavior(id);
+        params = document.location.search.split('?')[1];
+        params = decodeURI(params);
+        id = params.split('_id=')[1].split('&')[0].trim();
+        systemId = params.split('_id=')[1].split('&systemId=')[1].trim();
 
-        channel.on('setBehavior', function (id, behavior) {
-            var designer = null,
-                editor = this.require('editor').editor(),
-                Range = null,
-                endLine = null;
+        behavior = JSON.parse(localStorage.getItem(systemId)).behaviors[id];
 
-            designer = this.require('designer');
+        designer.store().uuid(id);
+        designer.store().data(behavior);
 
-            designer.store().uuid(id);
-            designer.store().data(behavior);
+        document.title = behavior.state + ' | system designer';
 
-            document.title = behavior.state + ' | system designer';
+        editor.setValue(behavior.action);
 
-            editor.setValue(behavior.action);
+        editor.gotoLine(1);
+        editor.getSession().$undoManager.reset();
+        editor.getSession().setUndoManager(new ace.UndoManager());
 
-            editor.gotoLine(1);
-            editor.getSession().$undoManager.reset();
-            editor.getSession().setUndoManager(new ace.UndoManager());
+        Range = ace.require("ace/range").Range;
+        endLine = behavior.action.indexOf('{') + 1;
 
-            Range = ace.require("ace/range").Range;
-            endLine = behavior.action.indexOf('{') + 1;
+        editor.session.addMarker(new Range(0, 0, 0, endLine), "readonly");
 
-            editor.session.addMarker(new Range(0, 0, 0, endLine), "readonly");
-
-            // readonly
-            editor.keyBinding.addKeyboardHandler({
-                handleKeyboard: function (data, hash, keyString, keyCode, event) {
-                    var result = null;
-                    switch (true) {
-                        case (hash === -1 || (keyCode <= 40 && keyCode >= 37)):
-                            result = false;
-                            break;
-                        case intersects(new Range(0, 0, 0, endLine)):
-                            result = {
-                                command: 'null',
-                                passEvent: false
-                            };
-                            runtime.require('message').warning('you can not modify the header of the behavior.');
-                            break;
-                        default:
-                            break;
-                    }
-
-                    if (result) {
-                        return result;
-                    }
+        // readonly
+        editor.keyBinding.addKeyboardHandler({
+            handleKeyboard: function (data, hash, keyString, keyCode, event) {
+                var result = null;
+                switch (true) {
+                    case (hash === -1 || (keyCode <= 40 && keyCode >= 37)):
+                        result = false;
+                        break;
+                    case intersects(new Range(0, 0, 0, endLine)):
+                        result = {
+                            command: 'null',
+                            passEvent: false
+                        };
+                        runtime.require('message').warning('you can not modify the header of the behavior.');
+                        break;
+                    default:
+                        break;
                 }
-            });
 
-            function intersects(range) {
-                var result = false,
-                    selection = editor.getSelectionRange();
-
-                result = (selection.end.row === 0 && selection.end.column < endLine + 1) && selection.intersects(range);
-                return result;
+                if (result) {
+                    return result;
+                }
             }
-
-            this.off('setBehavior');
         });
+
+        function intersects(range) {
+            var result = false,
+                selection = editor.getSelectionRange();
+
+            result = (selection.end.row === 0 && selection.end.column < endLine + 1) && selection.intersects(range);
+            return result;
+        }
+
     }, true);
 
     // Editor

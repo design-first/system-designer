@@ -993,7 +993,10 @@ runtime.on('ready', function () {
             that = this,
             doc = '',
             propName = '',
-            propVal = '';
+            propVal = '',
+            systemId = '';
+
+        systemId = this.require('designer').system().id();
 
         // html 
         html = this.require('model-type.html');
@@ -1034,13 +1037,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('type.html?_id=' + that.uuid());
+            window.open('type.html?_id=' + that.uuid() + '&systemId=' + systemId);
         });
 
         html = document.getElementById('designer-type-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('type.html?_id=' + that.uuid());
+            window.open('type.html?_id=' + that.uuid() + '&systemId=' + systemId);
         });
 
         html = document.getElementById('designer-type-' + this.uuid() + '-delete');
@@ -1085,6 +1088,7 @@ runtime.on('ready', function () {
             htmlId = '';
 
         htmlId = this.uuid() || this.title();
+        systemId = this.require('designer').system().id();
 
         // html 
         html = this.require('model-schema.html');
@@ -1111,13 +1115,13 @@ runtime.on('ready', function () {
             html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function (event) {
-                window.open('schema.html?_id=' + that.uuid());
+                window.open('schema.html?_id=' + that.uuid() + '&systemId=' + systemId);
             });
 
             html = document.getElementById('designer-schema-' + htmlId + '-edit');
 
             html.addEventListener('click', function (event) {
-                window.open('schema.html?_id=' + that.uuid());
+                window.open('schema.html?_id=' + that.uuid() + '&systemId=' + systemId);
             });
 
             html = document.getElementById('designer-schema-' + htmlId + '-delete');
@@ -1169,9 +1173,11 @@ runtime.on('ready', function () {
             result = '',
             callbackProp = null,
             htmlId = '',
-            htmlComp = null;
+            htmlComp = null,
+            systemId = '';
 
         htmlId = this.uuid() || this.title();
+        systemId = this.require('designer').system().id();
 
         callbackProp = function (param) {
             if (param.type.indexOf('@') !== -1) {
@@ -1327,13 +1333,13 @@ runtime.on('ready', function () {
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function (event) {
-                window.open('model.html?_id=' + that.uuid());
+                window.open('model.html?_id=' + that.uuid() + '&systemId=' + systemId);
             });
 
             html = document.getElementById('designer-model-' + htmlId + '-edit');
 
             html.addEventListener('click', function (event) {
-                window.open('model.html?_id=' + that.uuid());
+                window.open('model.html?_id=' + that.uuid() + '&systemId=' + systemId);
             });
         } else {
             $('#designer-model-' + htmlId + ' > div > div > div > button').hide();
@@ -1354,7 +1360,10 @@ runtime.on('ready', function () {
     ModelBehavior.on('render', function () {
         var template = '',
             html = null,
-            that = this;
+            that = this,
+            systemId = '';
+
+        systemId = this.require('designer').system().id();
 
         // html 
         template = this.require('model-behavior.html');
@@ -1370,13 +1379,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('behavior.html?_id=' + that.uuid());
+            window.open('behavior.html?_id=' + that.uuid() + '&systemId=' + systemId);
         });
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('behavior.html?_id=' + that.uuid());
+            window.open('behavior.html?_id=' + that.uuid() + '&systemId=' + systemId);
         });
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
@@ -1416,7 +1425,10 @@ runtime.on('ready', function () {
             that = this,
             propName = '',
             propVal = '',
-            value = '';
+            value = '',
+            systemId = '';
+
+        systemId = this.require('designer').system().id();
 
         for (propName in this.document()) {
             if (this.document().hasOwnProperty(propName) && propName !== '_id') {
@@ -1448,13 +1460,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-component-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()));
+            window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()) + '&systemId=' + systemId);
         });
 
         html = document.getElementById('designer-component-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()));
+            window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()) + '&systemId=' + systemId);
         });
 
         html = document.getElementById('designer-component-' + this.uuid() + '-delete');

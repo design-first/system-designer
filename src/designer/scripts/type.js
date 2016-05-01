@@ -243,7 +243,10 @@ runtime.on('ready', function () {
     Server.on('start', function () {
         var RuntimeChannel = null,
             channel = null,
-            id = '';
+            id = '',
+            params = '',
+            designer = this.require('designer'),
+            editor = this.require('editor').editor();
 
         window.addEventListener('storage', function (e) {
             if (e.key === 'system-designer-message') {
@@ -260,25 +263,23 @@ runtime.on('ready', function () {
             localStorage.setItem('system-designer-message', JSON.stringify(message));
         });
 
-        id = document.location.search.split('?')[1].split('id=')[1];
-        channel.getType(id);
+        params = document.location.search.split('?')[1];
+        params = decodeURI(params);
+        id = params.split('_id=')[1].split('&')[0].trim();
+        systemId = params.split('_id=')[1].split('&systemId=')[1].trim();
+        
+        type = JSON.parse(localStorage.getItem(systemId)).types[id];
 
-        channel.on('setType', function (id, type) {
-            var designer = this.require('designer'),
-                editor = this.require('editor').editor();
+        designer.store().uuid(id);
+        designer.store().data(type);
 
-            designer.store().uuid(id);
-            designer.store().data(type);
+        document.title = id + ' | system designer';
 
-            document.title = id + ' | system designer';
+        editor.setValue(JSON.stringify(type, null, '\t'));
+        editor.gotoLine(1);
+        editor.getSession().$undoManager.reset();
+        editor.getSession().setUndoManager(new ace.UndoManager());
 
-            editor.setValue(JSON.stringify(type, null, '\t'));
-            editor.gotoLine(1);
-            editor.getSession().$undoManager.reset();
-            editor.getSession().setUndoManager(new ace.UndoManager());
-
-            this.off('setType');
-        });
     }, true);
 
     // Editor
