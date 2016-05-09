@@ -544,13 +544,111 @@ module.exports = function (grunt) {
                         system.types = grunt.option('types');
                         system.behaviors = grunt.option('behaviors');
 
+                        grunt.option('system', system);
+
                         return JSON.stringify(system);
                     }
                 },
                 files: {
                     'build/system/design.json': ['build/system/design.json']
                 }
+            },
+            'electron-behavior': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/behavior.min.js': ['dist/designer/scripts/behavior.min.js']
+                }
+            },
+            'electron-component': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/component.min.js': ['dist/designer/scripts/component.min.js']
+                }
+            },
+            'electron-designer': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
+                }
+            }, 'electron-documentation': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/documentation.min.js': ['dist/designer/scripts/documentation.min.js']
+                }
+            },
+            'electron-model': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/model.min.js': ['dist/designer/scripts/model.min.js']
+                }
+            },
+            'electron-schema': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/schema.min.js': ['dist/designer/scripts/schema.min.js']
+                }
+            },
+            'electron-system': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/system.min.js': ['dist/designer/scripts/system.min.js']
+                }
+            },
+            'electron-type': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
+                }
             }
+
         },
         "merge-json": {
             runtime: {
@@ -966,7 +1064,15 @@ module.exports = function (grunt) {
         'copy:system',
         'jsbeautifier',
         'jshint',
-        'uglify'
+        'uglify',
+        'concat:electron-behavior',
+        'concat:electron-component',
+        'concat:electron-designer',
+        'concat:electron-documentation',
+        'concat:electron-model',
+        'concat:electron-schema',
+        'concat:electron-system',
+        'concat:electron-type'
     ]);
 
     grunt.registerTask('debug', [
