@@ -3,7 +3,7 @@
  * https://system-designer.github.io
  * @ecarriou
  *
- * Copyright 2015-2016 Erwan Carriou
+ * Copyright 2016 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
         concat: {
             jsComponent: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -120,7 +120,7 @@ module.exports = function(grunt) {
             },
             jsClean: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"JS": {}') === -1) {
@@ -138,7 +138,7 @@ module.exports = function(grunt) {
             },
             jsonComponent: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -183,7 +183,7 @@ module.exports = function(grunt) {
             },
             jsonClean: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"JSON": {}') === -1) {
@@ -201,7 +201,7 @@ module.exports = function(grunt) {
             },
             htmlComponent: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -231,6 +231,9 @@ module.exports = function(grunt) {
                             fileName = filepath.split('html/')[1];
                             fileName = fileName.split('/')[0];
 
+                            // version 
+                            src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
+
                             // clean
                             src = src.replace(/\n/g, ' ');
                             src = src.replace(/\r/g, ' ');
@@ -250,7 +253,7 @@ module.exports = function(grunt) {
             },
             htmlClean: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"HTML": {}') === -1) {
@@ -268,7 +271,7 @@ module.exports = function(grunt) {
             },
             cssComponent: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             fileName = '';
 
@@ -317,7 +320,7 @@ module.exports = function(grunt) {
             },
             cssClean: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '';
 
                         if (filepath.indexOf('build') !== -1 && src.indexOf('"CSS": {}') === -1) {
@@ -335,7 +338,7 @@ module.exports = function(grunt) {
             },
             systemInfos: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '';
 
                         function generateId() {
@@ -358,7 +361,7 @@ module.exports = function(grunt) {
             },
             systemBehaviors: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             uuid = '',
                             behaviors = {};
@@ -391,7 +394,7 @@ module.exports = function(grunt) {
             },
             systemSchemas: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             uuid = '',
                             schemas = {};
@@ -423,7 +426,7 @@ module.exports = function(grunt) {
             },
             systemModels: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             uuid = '',
                             models = {};
@@ -456,7 +459,7 @@ module.exports = function(grunt) {
             },
             systemTypes: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             uuid = '',
                             types = {};
@@ -478,7 +481,7 @@ module.exports = function(grunt) {
             },
             systemComponents: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var result = '',
                             uuid = '',
                             collectionName = '',
@@ -495,7 +498,7 @@ module.exports = function(grunt) {
                             collectionName = filepath.split('components/')[1];
                             collectionName = collectionName.split('/')[0];
 
-                            src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
+                            src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
 
                             if (typeof components[collectionName] === 'undefined') {
                                 components[collectionName] = {};
@@ -512,7 +515,7 @@ module.exports = function(grunt) {
             },
             systemFill: {
                 options: {
-                    process: function(src, filepath) {
+                    process: function (src, filepath) {
                         var system = {};
 
                         system = JSON.parse(src);
@@ -544,7 +547,7 @@ module.exports = function(grunt) {
                 '* https://system-designer.github.io\n' +
                 '* @ecarriou\n' +
                 '*\n' +
-                '* Copyright 2015-2016 Erwan Carriou\n' +
+                '* Copyright 2016 Erwan Carriou\n' +
                 '*\n' +
                 '* Licensed under the Apache License, Version 2.0 (the "License");\n' +
                 '* you may not use this file except in compliance with the License.\n' +
@@ -658,10 +661,14 @@ module.exports = function(grunt) {
                     {
                         src: 'bower_components/system-runtime/dist/system-runtime.min.js',
                         dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
+                    },
+                    {
+                        src: 'bower_components/system-runtime/dist/system-runtime.min.js',
+                        dest: 'src/js/system-runtime.min.js'
                     }
                 ],
                 options: {
-                    process: function(content, srcpath) {
+                    process: function (content, srcpath) {
                         var result = content;
                         if (srcpath.indexOf('jquery') != -1) {
                             result = content.replace('//# sourceMappingURL=jquery.min.map', '')

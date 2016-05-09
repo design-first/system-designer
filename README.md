@@ -36,10 +36,6 @@ You can run your application directly from System Designer and then export it to
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
 
-## Test System Designer online
-
-You can test System Designer [here](https://system-designer.github.io/designer/index.html).
-
 ## Documentation
 
 * [Installation](https://system-designer.readme.io/docs/install-system-designer)
@@ -49,7 +45,7 @@ You can test System Designer [here](https://system-designer.github.io/designer/i
 
 ## Licence
 
-Copyright 2015-2016 Erwan Carriou
+Copyright 2016 Erwan Carriou
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

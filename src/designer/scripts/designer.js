@@ -3,7 +3,7 @@
  * https://system-designer.github.io
  * @ecarriou
  *
- * Copyright 2015-2016 Erwan Carriou
+ * Copyright 2016 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1474,7 +1474,7 @@ runtime.on('ready', function () {
         html.addEventListener('click', function (event) {
             var designer = this.require('designer'),
                 components = designer.system().components();
-            
+
             delete components[this.model()][this.uuid()];
             designer.system().components(components);
 
@@ -3701,7 +3701,84 @@ runtime.on('ready', function () {
 
     // Designer
     var Designer = this.require('Designer');
-    Designer.on('init', function (conf) {
+
+    Designer.on('check', function () {
+        var Dialog = null,
+            dialog = null;
+
+        if (typeof SharedWorker === 'undefined') {
+            Dialog = this.require('DialogCheck');
+            dialog = new Dialog({
+                'title': 'Hem... You will laugh',
+                'message': 'Your browser has not all the features to use correctly System Designer.<br><br>Please use:<br><br>- Mozilla Firefox (recommended) or <br>- Google Chrome (desktop only).<br><br>'
+            });
+            dialog.show();
+        }
+    });
+
+    Designer.on('logs', function (index, id, action) {
+        var log = null,
+            html = '';
+
+        if (action === 'add' && this.context() === 'logs') {
+            log = this.require(id);
+
+            switch (log.type()) {
+                case 'debug':
+                    html = html + '<p class="text-muted">' + log.log() + '</p>';
+                    break;
+                case 'info':
+                    html = html + '<p class="text-info">' + log.log() + '</p>';
+                    break;
+                case 'warn':
+                    html = html + '<p class="text-warning">' + log.log() + '</p>';
+                    break;
+                case 'error':
+                    html = html + '<p class="text-danger">' + log.log() + '</p>';
+                    break;
+                default:
+                    break;
+            }
+
+            document.querySelector('#designer-loug-output').insertAdjacentHTML('afterbegin',
+                html
+            );
+        }
+    });
+
+    Designer.on('welcome', function () {
+        var Dialog = null,
+            dialog = null,
+            config = null;
+
+        config = window.localStorage.getItem('system-designer-config');
+        if (!config) {
+            config = {};
+        } else {
+            config = JSON.parse(config);
+        }
+
+        if (typeof config.welcomeScreen === 'undefined') {
+            Dialog = this.require('DialogWelcome');
+            dialog = new Dialog({
+                'title': 'Welcome to System Designer'
+            });
+            dialog.show();
+            dialog.on('ok', function () {
+                var config = window.localStorage.getItem('system-designer-config');
+                if (!config) {
+                    config = {};
+                } else {
+                    config = JSON.parse(config);
+                }
+                config.welcomeScreen = false;
+                window.localStorage.setItem('system-designer-config', JSON.stringify(config));
+                this.hide();
+            });
+        }
+    });
+
+    Designer.on('render', function () {
         var MenuBar = null,
             menubar = null,
             ToolBar = null,
@@ -3863,85 +3940,6 @@ runtime.on('ready', function () {
             jsPlumb.repaintEverything();
         });
 
-    });
-
-    Designer.on('check', function () {
-        var Dialog = null,
-            dialog = null;
-
-        if (typeof SharedWorker === 'undefined') {
-            Dialog = this.require('DialogCheck');
-            dialog = new Dialog({
-                'title': 'Hem... You will laugh',
-                'message': 'Your browser has not all the features to use correctly System Designer.<br><br>Please use:<br><br>- Mozilla Firefox (recommended) or <br>- Google Chrome (desktop only).<br><br>'
-            });
-            dialog.show();
-        }
-    });
-
-    Designer.on('logs', function (index, id, action) {
-        var log = null,
-            html = '';
-
-        if (action === 'add' && this.context() === 'logs') {
-            log = this.require(id);
-
-            switch (log.type()) {
-                case 'debug':
-                    html = html + '<p class="text-muted">' + log.log() + '</p>';
-                    break;
-                case 'info':
-                    html = html + '<p class="text-info">' + log.log() + '</p>';
-                    break;
-                case 'warn':
-                    html = html + '<p class="text-warning">' + log.log() + '</p>';
-                    break;
-                case 'error':
-                    html = html + '<p class="text-danger">' + log.log() + '</p>';
-                    break;
-                default:
-                    break;
-            }
-
-            document.querySelector('#designer-loug-output').insertAdjacentHTML('afterbegin',
-                html
-            );
-        }
-    });
-
-    Designer.on('welcome', function () {
-        var Dialog = null,
-            dialog = null,
-            config = null;
-
-        config = window.localStorage.getItem('system-designer-config');
-        if (!config) {
-            config = {};
-        } else {
-            config = JSON.parse(config);
-        }
-
-        if (typeof config.welcomeScreen === 'undefined') {
-            Dialog = this.require('DialogWelcome');
-            dialog = new Dialog({
-                'title': 'Welcome to System Designer'
-            });
-            dialog.show();
-            dialog.on('ok', function () {
-                var config = window.localStorage.getItem('system-designer-config');
-                if (!config) {
-                    config = {};
-                } else {
-                    config = JSON.parse(config);
-                }
-                config.welcomeScreen = false;
-                window.localStorage.setItem('system-designer-config', JSON.stringify(config));
-                this.hide();
-            });
-        }
-    });
-
-    Designer.on('render', function () {
         this.menubar().render();
         this.toolbar().render();
         this.spaces().render();
@@ -3949,6 +3947,8 @@ runtime.on('ready', function () {
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { 'show': 2000, 'hide': 100 }, trigger: 'hover' });
         });
+        
+        this.server().start();
     });
 
     Designer.on('filter', function (val) {
@@ -4559,15 +4559,10 @@ runtime.on('ready', function () {
 
     // main
     system.on('main', function () {
-        var Designer = null,
-            designer = null;
-
-        Designer = this.require('Designer');
-        designer = new Designer({
-            '_id': 'designer'
-        });
+        var designer = null;
+        
+        designer = this.require('designer');
         designer.render();
-        designer.server().start();
     });
 
     system.main();
