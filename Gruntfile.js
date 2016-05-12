@@ -75,7 +75,12 @@ module.exports = function (grunt) {
             'dist/designer/lib/system-runtime/**',
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
-            'dist/designer/styles/*.css'
+            'dist/designer/styles/*.css',
+            'dist/background.js',
+            'dist/icons',
+            'dist/LICENSE',
+            'dist/manifest.json',
+            'dist/README.md'
         ],
         jshint: {
             files: [
@@ -1032,6 +1037,42 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            'scripts-webextension': {
+                files: [
+                    {
+                        src: 'src/target/webextension/scripts/background.js',
+                        dest: 'dist/background.js'
+                    }
+                ]
+            },
+            'conf-webextension': {
+                files: [
+                    {
+                        src: 'src/target/webextension/conf/LICENCE',
+                        dest: 'dist/LICENCE.js'
+                    },
+                    {
+                        src: 'src/target/webextension/conf/manifest.json',
+                        dest: 'dist/manifest.json'
+                    },
+                    {
+                        src: 'src/target/webextension/conf/README.md',
+                        dest: 'dist/README.md'
+                    }
+                ]
+            },
+            'icons-webextension': {
+                files: [
+                    {
+                        src: 'src/target/webextension/icons/page-32.png',
+                        dest: 'dist/icons/page-32.png'
+                    },
+                    {
+                        src: 'src/target/webextension/icons/page-48.png',
+                        dest: 'dist/icons/page-48.png'
+                    }
+                ]
+            },
             'behaviors-electron': {
                 files: [
                     {
@@ -1248,7 +1289,9 @@ module.exports = function (grunt) {
         'copy:html-webextension',
         'copy:behaviors-web',
         'copy:components-webextension',
-        'copy:json',
+        'copy:scripts-webextension',
+        'copy:icons-webextension',
+        'copy:conf-webextension',
         'system-json',
         'merge-json',
         'copy:system',
