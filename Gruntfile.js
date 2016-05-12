@@ -24,13 +24,13 @@ module.exports = function (grunt) {
         watch: {
             system: {
                 files: [
-                    'src/css/*.css',
-                    'src/html/*.html',
-                    'src/js/*.js',
+                    'src/components/css/*.css',
+                    'src/components/html/*.html',
+                    'src/components/js/*.js',
                     'src/system/*/*.json',
                     'src/system/*/*/*.json',
-                    'src/designer/styles/*.css',
-                    'src/designer/scripts/*.js',
+                    'src/styles/*.css',
+                    'src/scripts/*.js',
                 ],
                 tasks: [
                     'debug'
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
             'build/*.js',
             'build/*.json',
             'build/*/*.json',
-            'src/html/dialog-modal-welcome.html',
+            'src/components/html/dialog-modal-welcome.html',
             'src/system/components/ToolBarItem/1dbc51200e116e6.json',
             'src/system/components/ToolBarItem/1dbc51200e116e8.json',
             'src/system/components/ToolBarItem/1dbc51200e11610.json',
@@ -79,7 +79,7 @@ module.exports = function (grunt) {
         ],
         jshint: {
             files: [
-                'src/designer/scripts/*.js'
+                'src/scripts/*.js'
             ],
             options: {
                 jshintrc: true
@@ -134,7 +134,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/js/js.json': ['src/template/banner/js.txt', 'src/js/*.js']
+                    'build/js/js.json': ['src/template/banner/js.txt', 'src/components/js/*.js']
                 }
             },
             jsClean: {
@@ -197,7 +197,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/json/json.json': ['src/template/banner/json.txt', 'src/json/*.json']
+                    'build/json/json.json': ['src/template/banner/json.txt', 'src/components/json/*.json']
                 }
             },
             jsonClean: {
@@ -267,7 +267,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/html/html.json': ['src/template/banner/html.txt', 'src/html/*.html']
+                    'build/html/html.json': ['src/template/banner/html.txt', 'src/components/html/*.html']
                 }
             },
             htmlClean: {
@@ -334,7 +334,7 @@ module.exports = function (grunt) {
                     }
                 },
                 files: {
-                    'build/css/css.json': ['src/template/banner/css.txt', 'src/css/*.css']
+                    'build/css/css.json': ['src/template/banner/css.txt', 'src/components/css/*.css']
                 }
             },
             cssClean: {
@@ -588,7 +588,8 @@ module.exports = function (grunt) {
                 files: {
                     'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
                 }
-            }, 'electron-documentation': {
+            },
+            'electron-documentation': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -647,8 +648,102 @@ module.exports = function (grunt) {
                 files: {
                     'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
                 }
+            },
+            'webextension-behavior': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/behavior.min.js': ['dist/designer/scripts/behavior.min.js']
+                }
+            },
+            'webextension-component': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/component.min.js': ['dist/designer/scripts/component.min.js']
+                }
+            },
+            'webextension-designer': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
+                }
+            }, 'webextension-documentation': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/documentation.min.js': ['dist/designer/scripts/documentation.min.js']
+                }
+            },
+            'webextension-model': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/model.min.js': ['dist/designer/scripts/model.min.js']
+                }
+            },
+            'webextension-schema': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/schema.min.js': ['dist/designer/scripts/schema.min.js']
+                }
+            },
+            'webextension-system': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/system.min.js': ['dist/designer/scripts/system.min.js']
+                }
+            },
+            'webextension-type': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
+                }
             }
-
         },
         "merge-json": {
             runtime: {
@@ -681,14 +776,14 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'dist/designer/scripts/behavior.min.js': ['src/designer/scripts/behavior.js'],
-                    'dist/designer/scripts/component.min.js': ['src/designer/scripts/component.js'],
-                    'dist/designer/scripts/designer.min.js': ['src/designer/scripts/designer.js'],
-                    'dist/designer/scripts/model.min.js': ['src/designer/scripts/model.js'],
-                    'dist/designer/scripts/schema.min.js': ['src/designer/scripts/schema.js'],
-                    'dist/designer/scripts/system.min.js': ['src/designer/scripts/system.js'],
-                    'dist/designer/scripts/type.min.js': ['src/designer/scripts/type.js'],
-                    'dist/designer/scripts/documentation.min.js': ['src/designer/scripts/documentation.js']
+                    'dist/designer/scripts/behavior.min.js': ['src/scripts/behavior.js'],
+                    'dist/designer/scripts/component.min.js': ['src/scripts/component.js'],
+                    'dist/designer/scripts/designer.min.js': ['src/scripts/designer.js'],
+                    'dist/designer/scripts/model.min.js': ['src/scripts/model.js'],
+                    'dist/designer/scripts/schema.min.js': ['src/scripts/schema.js'],
+                    'dist/designer/scripts/system.min.js': ['src/scripts/system.js'],
+                    'dist/designer/scripts/type.min.js': ['src/scripts/type.js'],
+                    'dist/designer/scripts/documentation.min.js': ['src/scripts/documentation.js']
                 }
             }
         },
@@ -700,147 +795,151 @@ module.exports = function (grunt) {
             css: {
                 files: [
                     {
-                        src: 'src/designer/styles/behavior.css',
+                        src: 'src/styles/behavior.css',
                         dest: 'dist/designer/styles/behavior.css'
                     },
                     {
-                        src: 'src/designer/styles/component.css',
+                        src: 'src/styles/component.css',
                         dest: 'dist/designer/styles/component.css'
                     },
                     {
-                        src: 'src/designer/styles/designer.css',
+                        src: 'src/styles/designer.css',
                         dest: 'dist/designer/styles/designer.css'
                     },
                     {
-                        src: 'src/designer/styles/model.css',
+                        src: 'src/styles/model.css',
                         dest: 'dist/designer/styles/model.css'
                     },
                     {
-                        src: 'src/designer/styles/schema.css',
+                        src: 'src/styles/schema.css',
                         dest: 'dist/designer/styles/schema.css'
                     },
                     {
-                        src: 'src/designer/styles/system.css',
+                        src: 'src/styles/system.css',
                         dest: 'dist/designer/styles/system.css'
                     },
                     {
-                        src: 'src/designer/styles/type.css',
+                        src: 'src/styles/type.css',
                         dest: 'dist/designer/styles/type.css'
                     },
                     {
-                        src: 'src/designer/styles/documentation.css',
+                        src: 'src/styles/documentation.css',
                         dest: 'dist/designer/styles/documentation.css'
                     }
                 ]
             },
-            html: {
+            'html-web': {
                 files: [
                     {
-                        src: 'src/designer/html/app.html',
+                        src: 'src/target/web/html/app.html',
                         dest: 'dist/designer/app.html'
                     },
                     {
-                        src: 'src/designer/html/behavior.html',
+                        src: 'src/target/web/html/behavior.html',
                         dest: 'dist/designer/behavior.html'
                     },
                     {
-                        src: 'src/designer/html/component.html',
+                        src: 'src/target/web/html/component.html',
                         dest: 'dist/designer/component.html'
                     },
                     {
-                        src: 'src/designer/html/index.html',
+                        src: 'src/target/web/html/index.html',
                         dest: 'dist/designer/index.html'
                     },
                     {
-                        src: 'src/designer/html/model.html',
+                        src: 'src/target/web/html/model.html',
                         dest: 'dist/designer/model.html'
                     },
                     {
-                        src: 'src/designer/html/schema.html',
+                        src: 'src/target/web/html/schema.html',
                         dest: 'dist/designer/schema.html'
                     },
                     {
-                        src: 'src/designer/html/system.html',
+                        src: 'src/target/web/html/system.html',
                         dest: 'dist/designer/system.html'
                     },
                     {
-                        src: 'src/designer/html/type.html',
+                        src: 'src/target/web/html/type.html',
                         dest: 'dist/designer/type.html'
-                    },
-                    {
-                        src: 'src/designer/components/html/dialog-modal-welcome.html',
-                        dest: 'src/html/dialog-modal-welcome.html'
                     }
                 ]
             },
-            json: {
+            'components-web': {
                 files: [
                     {
-                        src: 'src/designer/components/ToolBarItem/1dbc51200e116e6.json',
+                        src: 'src/target/web/components/html/dialog-modal-welcome.html',
+                        dest: 'src/components/html/dialog-modal-welcome.html'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51200e116e6.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51200e116e6.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/1dbc51200e116e8.json',
+                        src: 'src/target/web/components/ToolBarItem/1dbc51200e116e8.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51200e116e8.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/1dbc51200e11610.json',
+                        src: 'src/target/web/components/ToolBarItem/1dbc51200e11610.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51200e11610.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/1dbc51200e11612.json',
+                        src: 'src/target/web/components/ToolBarItem/1dbc51200e11612.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51200e11612.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/1dbc51200e11614.json',
+                        src: 'src/target/web/components/ToolBarItem/1dbc51200e11614.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51200e11614.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/1dbc51220e116e1.json',
+                        src: 'src/target/web/components/ToolBarItem/1dbc51220e116e1.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51220e116e1.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/13a291c27f16310.json',
+                        src: 'src/target/web/components/ToolBarItem/13a291c27f16310.json',
                         dest: 'src/system/components/ToolBarItem/13a291c27f16310.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/13a291c27f16311.json',
+                        src: 'src/target/web/components/ToolBarItem/13a291c27f16311.json',
                         dest: 'src/system/components/ToolBarItem/13a291c27f16311.json',
                     },
                     {
-                        src: 'src/designer/components/ToolBarItem/163a01b7ca1935c.json',
+                        src: 'src/target/web/components/ToolBarItem/163a01b7ca1935c.json',
                         dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json',
-                    },
+                    }
+                ]
+            },
+            'behaviors-web': {
+                files: [
                     {
-                        src: 'src/designer/behaviors/1dbc51200e11z10/click.json',
+                        src: 'src/target/web/behaviors/1dbc51200e11z10/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11z10/click.json',
                     },
                     {
-                        src: 'src/designer/behaviors/1dbc51200e116e10/click.json',
+                        src: 'src/target/web/behaviors/1dbc51200e116e10/click.json',
                         dest: 'src/system/behaviors/1dbc51200e116e10/click.json',
                     },
                     {
-                        src: 'src/designer/behaviors/1dbc51200e11510/click.json',
+                        src: 'src/target/web/behaviors/1dbc51200e11510/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11510/click.json',
                     },
                     {
-                        src: 'src/designer/behaviors/1dbc51200e11615/click.json',
+                        src: 'src/target/web/behaviors/1dbc51200e11615/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11615/click.json',
                     },
                     {
-                        src: 'src/designer/behaviors/1dbc51200e11616/click.json',
+                        src: 'src/target/web/behaviors/1dbc51200e11616/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11616/click.json',
                     },
                     {
-                        src: 'src/designer/behaviors/1dbc51200e11617/click.json',
+                        src: 'src/target/web/behaviors/1dbc51200e11617/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11617/click.json',
                     },
                     {
-                        src: 'src/designer/behaviors/13a291c27f16314/click.json',
+                        src: 'src/target/web/behaviors/13a291c27f16314/click.json',
                         dest: 'src/system/behaviors/13a291c27f16314/click.json',
                     },
                     {
-                        src: 'src/designer/behaviors/13f70137b61b19b/click.json',
+                        src: 'src/target/web/behaviors/13f70137b61b19b/click.json',
                         dest: 'src/system/behaviors/13f70137b61b19b/click.json',
                     }
                 ]
@@ -848,111 +947,159 @@ module.exports = function (grunt) {
             'html-electron': {
                 files: [
                     {
-                        src: 'src/electron/html/app.html',
+                        src: 'src/target/electron/html/app.html',
                         dest: 'dist/designer/app.html'
                     },
                     {
-                        src: 'src/electron/html/behavior.html',
+                        src: 'src/target/electron/html/behavior.html',
                         dest: 'dist/designer/behavior.html'
                     },
                     {
-                        src: 'src/electron/html/component.html',
+                        src: 'src/target/electron/html/component.html',
                         dest: 'dist/designer/component.html'
                     },
                     {
-                        src: 'src/electron/html/index.html',
+                        src: 'src/target/electron/html/index.html',
                         dest: 'dist/designer/index.html'
                     },
                     {
-                        src: 'src/electron/html/model.html',
+                        src: 'src/target/electron/html/model.html',
                         dest: 'dist/designer/model.html'
                     },
                     {
-                        src: 'src/electron/html/schema.html',
+                        src: 'src/target/electron/html/schema.html',
                         dest: 'dist/designer/schema.html'
                     },
                     {
-                        src: 'src/electron/html/system.html',
+                        src: 'src/target/electron/html/system.html',
                         dest: 'dist/designer/system.html'
                     },
                     {
-                        src: 'src/electron/html/type.html',
+                        src: 'src/target/electron/html/type.html',
                         dest: 'dist/designer/type.html'
-                    },
-                    {
-                        src: 'src/electron/components/html/dialog-modal-welcome.html',
-                        dest: 'src/html/dialog-modal-welcome.html'
                     }
                 ]
             },
-            'json-electron': {
+            'components-electron': {
                 files: [
                     {
-                        src: 'src/electron/behaviors/1dbc51200e11z10/click.json',
+                        src: 'src/target/electron/components/html/dialog-modal-welcome.html',
+                        dest: 'src/components/html/dialog-modal-welcome.html'
+                    }
+                ]
+            },
+            'html-webextension': {
+                files: [
+                    {
+                        src: 'src/target/webextension/html/app.html',
+                        dest: 'dist/designer/app.html'
+                    },
+                    {
+                        src: 'src/target/webextension/html/behavior.html',
+                        dest: 'dist/designer/behavior.html'
+                    },
+                    {
+                        src: 'src/target/webextension/html/component.html',
+                        dest: 'dist/designer/component.html'
+                    },
+                    {
+                        src: 'src/target/webextension/html/index.html',
+                        dest: 'dist/designer/index.html'
+                    },
+                    {
+                        src: 'src/target/webextension/html/model.html',
+                        dest: 'dist/designer/model.html'
+                    },
+                    {
+                        src: 'src/target/webextension/html/schema.html',
+                        dest: 'dist/designer/schema.html'
+                    },
+                    {
+                        src: 'src/target/webextension/html/system.html',
+                        dest: 'dist/designer/system.html'
+                    },
+                    {
+                        src: 'src/target/webextension/html/type.html',
+                        dest: 'dist/designer/type.html'
+                    }
+                ]
+            },
+            'components-webextension': {
+                files: [
+                    {
+                        src: 'src/target/webextension/html/dialog-modal-welcome.html',
+                        dest: 'src/components/html/dialog-modal-welcome.html'
+                    }
+                ]
+            },
+            'behaviors-electron': {
+                files: [
+                    {
+                        src: 'src/target/electron/behaviors/1dbc51200e11z10/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11z10/click.json',
                     },
                     {
-                        src: 'src/electron/behaviors/1dbc51200e116e10/click.json',
+                        src: 'src/target/electron/behaviors/1dbc51200e116e10/click.json',
                         dest: 'src/system/behaviors/1dbc51200e116e10/click.json',
                     },
                     {
-                        src: 'src/electron/behaviors/1dbc51200e11510/click.json',
+                        src: 'src/target/electron/behaviors/1dbc51200e11510/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11510/click.json',
                     },
                     {
-                        src: 'src/electron/behaviors/1dbc51200e11615/click.json',
+                        src: 'src/target/electron/behaviors/1dbc51200e11615/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11615/click.json',
                     },
                     {
-                        src: 'src/electron/behaviors/1dbc51200e11616/click.json',
+                        src: 'src/target/electron/behaviors/1dbc51200e11616/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11616/click.json',
                     },
                     {
-                        src: 'src/electron/behaviors/1dbc51200e11617/click.json',
+                        src: 'src/target/electron/behaviors/1dbc51200e11617/click.json',
                         dest: 'src/system/behaviors/1dbc51200e11617/click.json',
                     },
                     {
-                        src: 'src/electron/behaviors/13a291c27f16314/click.json',
+                        src: 'src/target/electron/behaviors/13a291c27f16314/click.json',
                         dest: 'src/system/behaviors/13a291c27f16314/click.json',
                     },
                     {
-                        src: 'src/electron/behaviors/13f70137b61b19b/click.json',
+                        src: 'src/target/electron/behaviors/13f70137b61b19b/click.json',
                         dest: 'src/system/behaviors/13f70137b61b19b/click.json',
                     }
                 ]
             },
-            debug: {
+            'debug-web': {
                 files: [
                     {
-                        src: 'src/designer/scripts/behavior.js',
+                        src: 'src/scripts/behavior.js',
                         dest: 'dist/designer/scripts/behavior.min.js'
                     },
                     {
-                        src: 'src/designer/scripts/component.js',
+                        src: 'src/scripts/component.js',
                         dest: 'dist/designer/scripts/component.min.js'
                     },
                     {
-                        src: 'src/designer/scripts/designer.js',
+                        src: 'src/scripts/designer.js',
                         dest: 'dist/designer/scripts/designer.min.js'
                     },
                     {
-                        src: 'src/designer/scripts/model.js',
+                        src: 'src/scripts/model.js',
                         dest: 'dist/designer/scripts/model.min.js'
                     },
                     {
-                        src: 'src/designer/scripts/schema.js',
+                        src: 'src/scripts/schema.js',
                         dest: 'dist/designer/scripts/schema.min.js'
                     },
                     {
-                        src: 'src/designer/scripts/system.js',
+                        src: 'src/scripts/system.js',
                         dest: 'dist/designer/scripts/system.min.js'
                     },
                     {
-                        src: 'src/designer/scripts/type.js',
+                        src: 'src/scripts/type.js',
                         dest: 'dist/designer/scripts/type.min.js'
                     },
                     {
-                        src: 'src/designer/scripts/documentation.js',
+                        src: 'src/scripts/documentation.js',
                         dest: 'dist/designer/scripts/documentation.min.js'
                     }
                 ]
@@ -969,7 +1116,7 @@ module.exports = function (grunt) {
                     },
                     {
                         src: 'bower_components/system-runtime/dist/system-runtime.min.js',
-                        dest: 'src/js/system-runtime.min.js'
+                        dest: 'src/components/js/system-runtime.min.js'
                     }
                 ],
                 options: {
@@ -1031,21 +1178,38 @@ module.exports = function (grunt) {
         'concat:systemFill'
     ]);
 
-    // build task
+    // start the server
     grunt.registerTask('start',
         'connect:server'
     );
 
+    // start the server in debug mode
     grunt.registerTask('start-debug', [
         'connect:serverDebug',
         'watch:designer'
     ]);
 
-    grunt.registerTask('build', [
+    // debug for web
+    grunt.registerTask('debug-web', [
         'copy:lib',
         'copy:css',
-        'copy:html',
-        'copy:json',
+        'copy:html-web',
+        'copy:behaviors-web',
+        'copy:components-web',
+        'system-json',
+        'merge-json',
+        'copy:system',
+        'jsbeautifier',
+        'copy:debug-web'
+    ]);
+
+    // build for web
+    grunt.registerTask('build-web', [
+        'copy:lib',
+        'copy:css',
+        'copy:html-web',
+        'copy:behaviors-web',
+        'copy:components-web',
         'system-json',
         'merge-json',
         'copy:system',
@@ -1054,11 +1218,13 @@ module.exports = function (grunt) {
         'uglify'
     ]);
 
+    // build for electron
     grunt.registerTask('build-electron', [
         'copy:lib',
         'copy:css',
         'copy:html-electron',
-        'copy:json-electron',
+        'copy:behaviors-electron',
+        'copy:components-electron',
         'system-json',
         'merge-json',
         'copy:system',
@@ -1075,18 +1241,42 @@ module.exports = function (grunt) {
         'concat:electron-type'
     ]);
 
-    grunt.registerTask('debug', [
+    // build for webextension
+    grunt.registerTask('build-webextension', [
         'copy:lib',
         'copy:css',
-        'copy:html',
+        'copy:html-webextension',
+        'copy:behaviors-web',
+        'copy:components-webextension',
+        'copy:json',
         'system-json',
         'merge-json',
         'copy:system',
         'jsbeautifier',
-        'copy:debug'
+        'jshint',
+        'uglify',
+        'concat:webextension-behavior',
+        'concat:webextension-component',
+        'concat:webextension-designer',
+        'concat:webextension-documentation',
+        'concat:webextension-model',
+        'concat:webextension-schema',
+        'concat:webextension-system',
+        'concat:webextension-type'
     ]);
 
+    // default test
     grunt.registerTask('test', [
-        'build'
+        'build-web'
+    ]);
+
+    // default debug
+    grunt.registerTask('debug', [
+        'debug-web'
+    ]);
+
+    // default build
+    grunt.registerTask('build', [
+        'build-web'
     ]);
 };

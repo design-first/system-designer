@@ -3947,7 +3947,7 @@ runtime.on('ready', function () {
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { 'show': 2000, 'hide': 100 }, trigger: 'hover' });
         });
-        
+
         this.server().start();
     });
 
@@ -4235,7 +4235,8 @@ runtime.on('ready', function () {
                                 {
                                     "name": "param",
                                     "type": "string",
-                                    "mandatory": false
+                                    "mandatory": false,
+                                    "default": ""
                                 }
                             ],
                             "result": "string"
@@ -4252,7 +4253,8 @@ runtime.on('ready', function () {
                                 {
                                     "name": "param",
                                     "type": "string",
-                                    "mandatory": false
+                                    "mandatory": false,
+                                    "default": ""
                                 }
                             ]
                         };
@@ -4361,7 +4363,8 @@ runtime.on('ready', function () {
                                 {
                                     "name": "param",
                                     "type": "string",
-                                    "mandatory": false
+                                    "mandatory": false,
+                                    "default": ""
                                 }
                             ],
                             "result": "string"
@@ -4382,7 +4385,8 @@ runtime.on('ready', function () {
                                 {
                                     "name": "param",
                                     "type": "string",
-                                    "mandatory": false
+                                    "mandatory": false,
+                                    "default": ""
                                 }
                             ]
                         };
@@ -4560,7 +4564,7 @@ runtime.on('ready', function () {
     // main
     system.on('main', function () {
         var designer = null;
-        
+
         designer = this.require('designer');
         designer.render();
     });

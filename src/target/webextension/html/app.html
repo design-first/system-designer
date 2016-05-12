@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Loading...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- Runtime -->
+    <script type="text/javascript" level="warn" src="lib/system-runtime/system-runtime.min.js"></script>
+    <script>
+        
+        runtime.require('db').system({
+    "name": "app",
+    "master": false,
+    "subsystem": false,
+    "version": "0.0.1",
+    "description": "",
+    "schemas": {
+        "104ad1f48518376": {
+            "_id": "104ad1f48518376",
+            "_name": "RuntimeChannel",
+            "_core": true,
+            "getInitSystem": "event",
+            "setInitSystem": "event",
+            "logDebug": "event",
+            "logInfo": "event",
+            "logWarn": "event",
+            "logError": "event"
+        }
+    },
+    "behaviors": {},
+    "types": {},
+    "components": {},
+    "_id": "16d0e138c8170b2",
+    "models": {
+        "135c71078810af2": {
+            "_id": "135c71078810af2",
+            "_name": "RuntimeChannel",
+            "_schema": "RuntimeChannel",
+            "_core": true,
+            "getInitSystem": {
+                "params": [
+                    {
+                        "name": "id",
+                        "type": "string"
+                    }
+                ]
+            },
+            "setInitSystem": {
+                "params": [
+                    {
+                        "name": "id",
+                        "type": "string"
+                    },
+                    {
+                        "name": "system",
+                        "type": "object"
+                    }
+                ]
+            },
+            "logDebug": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            },
+            "logInfo": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            },
+            "logWarn": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            },
+            "logError": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    }
+});
+        
+        runtime.on('ready', function () {
+            var system = runtime.system('app');
+            system.on('main', function () {
+                var channel = null,
+                    sysid = '',
+                    system = '',
+                    messages = [];
+                    
+                // get system
+                sysid = document.location.search.split('?')[1].split('id=')[1];
+                system = JSON.parse(localStorage.getItem(sysid));
+                delete system.classInfo;
+                
+                // start admin    
+                this.require('admin').start();  
+                
+                // get channel              
+                channel = this.require('channel-admin');
+                
+                this.require('logger').on('warn', function (message) {
+                    var date = new Date(),
+                    time = date.toLocaleTimeString();
+                    
+                    this.require('channel-admin').logWarn('[' + time + '] ' + message);    
+                });  
+                
+                this.require('logger').on('error', function (message) {
+                    var date = new Date(),
+                    time = date.toLocaleTimeString();
+                    
+                    this.require('channel-admin').logError('[' + time + '] ' + message);    
+                });                         
+                
+                this.require('logger').info('loading the system...');
+                var systemID = this.require('db').system(system);                  
+                this.require('logger').info('the system is loaded');
+                
+                document.title = system.name;
+                    
+                this.require('logger').on('debug', function (message) {
+                    var date = new Date(),
+                    time = date.toLocaleTimeString();
+                    
+                    this.require('channel-admin').logDebug('[' + time + '] ' + message);    
+                }); 
+                
+                this.require('logger').on('info', function (message) {
+                    var date = new Date(),
+                    time = date.toLocaleTimeString();
+                    
+                    this.require('channel-admin').logInfo('[' + time + '] ' + message);    
+                });    
+
+                this.require('logger').level('debug');
+                this.require(systemID).main();
+                
+            }, true);
+            
+            system.main();
+        });
+    </script>
+</body>
+
+</html>
