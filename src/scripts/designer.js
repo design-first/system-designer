@@ -258,7 +258,7 @@ runtime.on('ready', function () {
         dom.addEventListener('click', function (event) {
             var System = this.require('System');
 
-            window.localStorage.clear();
+            this.require('storage').clear();
             this.require('designer').system().destroy();
 
             this.require('designer').spaces().clear();
@@ -945,15 +945,15 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
 
         html.addEventListener('click', function (event) {
-            var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
+            var systems = this.require('storage').get('system-designer-systems'),
                 designer = this.require('designer'),
                 System = this.require('System'),
                 systemId = this.uuid();
 
-            // remove from localstorage
-            window.localStorage.removeItem(systemId);
+            // remove from storage
+            this.require('storage').remove(systemId);
             systems.systems.splice(systems.systems.indexOf(systemId), 1);
-            window.localStorage.setItem('system-designer-systems', JSON.stringify(systems));
+            this.require('storage').set('system-designer-systems', systems);
 
             designer.system().destroy();
 
@@ -964,7 +964,7 @@ runtime.on('ready', function () {
 
             // set default system
             if (systems.systems.length) {
-                designer.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
+                designer.system(new System(this.require('storage').get(systems.systems[0])));
             }
 
             $('#designer-system-' + this.uuid()).remove();
@@ -1840,7 +1840,7 @@ runtime.on('ready', function () {
                     }.bind(this));
 
                     // items                   
-                    var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
+                    var systems = this.require('storage').get('system-designer-systems'),
                         systemIds = [],
                         length = 0,
                         i = 0;
@@ -1851,7 +1851,7 @@ runtime.on('ready', function () {
                     length = systemIds.length;
 
                     for (i = 0; i < length; i++) {
-                        system = JSON.parse(window.localStorage.getItem(systemIds[i]));
+                        system = this.require('storage').get(systemIds[i]);
 
                         spaceItem = new SpaceItem({
                             'name': system.name,
@@ -1896,7 +1896,7 @@ runtime.on('ready', function () {
                     this.items().forEach(function (item) {
                         item.on('click', function () {
                             var designer = this.require('designer'),
-                                system = JSON.parse(window.localStorage.getItem(this.uuid())),
+                                system = this.require('storage').get(this.uuid()),
                                 System = this.require('System');
                             if (system) {
                                 designer.system(new System(system));
@@ -2112,7 +2112,7 @@ runtime.on('ready', function () {
                         this.items().pop();
                     }.bind(this));
 
-                    if (window.localStorage.getItem('system-designer-systems') && JSON.parse(window.localStorage.getItem('system-designer-systems')).systems.length) {
+                    if (this.require('storage').get('system-designer-systems') && this.require('storage').get('system-designer-systems').systems.length) {
                         spaceItem = new SpaceItem({
                             'name': this.require('designer').system().name(),
                             'uuid': this.require('designer').system().id()
@@ -2853,7 +2853,7 @@ runtime.on('ready', function () {
             this.clear();
             switch (this.designer().context()) {
                 case 'system':
-                    var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
+                    var systems = this.require('storage').get('system-designer-systems'),
                         systemIds = [],
                         i = 0;
 
@@ -2863,7 +2863,7 @@ runtime.on('ready', function () {
                     length = systemIds.length;
 
                     for (i = 0; i < length; i++) {
-                        system = JSON.parse(window.localStorage.getItem(systemIds[i]));
+                        system = this.require('storage').get(systemIds[i]);
                         if (system.name === space) {
                             ModelSystem = this.require('ModelSystem');
                             sys = new ModelSystem({
@@ -3196,7 +3196,7 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            localStorage.setItem('system-designer-message', JSON.stringify(message));
+            this.require('storage').set('system-designer-message', message);
         });
 
         channel.on('logDebug', function (message) {
@@ -3261,7 +3261,7 @@ runtime.on('ready', function () {
                 delete system.classInfo;
                 this.setSystem(id, system);
             } else {
-                this.setSystem(id, JSON.parse(window.localStorage.getItem(id)));
+                this.setSystem(id, this.require('storage').get(id));
             }
         });
 
@@ -3275,7 +3275,7 @@ runtime.on('ready', function () {
                 delete system.classInfo;
                 this.setInitSystem(id, system);
             } else {
-                this.setInitSystem(id, JSON.parse(window.localStorage.getItem(id)));
+                this.setInitSystem(id, this.require('storage').get(id));
             }
         });
 
@@ -3690,12 +3690,11 @@ runtime.on('ready', function () {
             }
         });
 
-        window.addEventListener("storage", function (e) {
-            if (e.key === 'system-designer-message') {
-                $db.RuntimeMessage.insert(JSON.parse(e.newValue));
+        this.require('storage').on('changed', function (obj) {
+            if (typeof obj['system-designer-message'] !== 'undefined') {
+                $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
             }
-        });
-
+        }, true);
 
     }, true);
 
@@ -3751,11 +3750,9 @@ runtime.on('ready', function () {
             dialog = null,
             config = null;
 
-        config = window.localStorage.getItem('system-designer-config');
+        config = this.require('storage').get('system-designer-config');
         if (!config) {
             config = {};
-        } else {
-            config = JSON.parse(config);
         }
 
         if (typeof config.welcomeScreen === 'undefined') {
@@ -3765,14 +3762,12 @@ runtime.on('ready', function () {
             });
             dialog.show();
             dialog.on('ok', function () {
-                var config = window.localStorage.getItem('system-designer-config');
+                var config = this.require('storage').get('system-designer-config');
                 if (!config) {
                     config = {};
-                } else {
-                    config = JSON.parse(config);
                 }
                 config.welcomeScreen = false;
-                window.localStorage.setItem('system-designer-config', JSON.stringify(config));
+                this.require('storage').set('system-designer-config', config);
                 this.hide();
             });
         }
@@ -3844,7 +3839,7 @@ runtime.on('ready', function () {
 
         // system
         System = this.require('System');
-        var systems = JSON.parse(window.localStorage.getItem('system-designer-systems'));
+        var systems = this.require('storage').get('system-designer-systems');
 
         // case of url
         switch (true) {
@@ -3861,15 +3856,15 @@ runtime.on('ready', function () {
 
             case window.location.href.split('#').length > 1 && window.location.href.split('#')[1].length > 0:
                 systemId = window.location.href.split('#')[1];
-                if (window.localStorage.getItem(systemId)) {
-                    this.system(new System(JSON.parse(window.localStorage.getItem(systemId))));
+                if (this.require('storage').get(systemId)) {
+                    this.system(new System(this.require('storage').get(systemId)));
                     this.refresh();
                 }
                 break;
 
             default:
                 if (systems && systems.systems && systems.systems.length && systems.systems[0].length) {
-                    this.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
+                    this.system(new System(this.require('storage').get(systems.systems[0])));
                 }
                 this.refresh();
                 break;
@@ -3908,10 +3903,10 @@ runtime.on('ready', function () {
             }
 
             if (arr.length > 1 && system) {
-                that.system(new System(JSON.parse(window.localStorage.getItem(system))));
+                that.system(new System(that.require('storage').get(system)));
             } else {
                 if (systems && systems.systems && systems.systems.length) {
-                    that.system(new System(JSON.parse(window.localStorage.getItem(systems.systems[0]))));
+                    that.system(new System(that.require('storage').get(systems.systems[0])));
                 }
             }
             //if (component) {
@@ -4540,7 +4535,7 @@ runtime.on('ready', function () {
     });
 
     Designer.on('save', function () {
-        var systems = JSON.parse(window.localStorage.getItem('system-designer-systems')),
+        var systems = this.require('storage').get('system-designer-systems'),
             designer = this.require('designer'),
             system = this.require('db').collections().System.find({
                 '_id': designer.system().id()
@@ -4548,7 +4543,7 @@ runtime.on('ready', function () {
             systemId = system._id;
 
         // save system
-        window.localStorage.setItem(systemId, JSON.stringify(system));
+        this.require('storage').set(systemId, system);
 
         // save index
         if (!systems) {
@@ -4558,7 +4553,7 @@ runtime.on('ready', function () {
                 systems.systems.push(systemId);
             }
         }
-        window.localStorage.setItem('system-designer-systems', JSON.stringify(systems));
+        this.require('storage').set('system-designer-systems', systems);
     });
 
     // main

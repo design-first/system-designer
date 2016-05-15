@@ -75,12 +75,7 @@ module.exports = function (grunt) {
             'dist/designer/lib/system-runtime/**',
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
-            'dist/designer/styles/*.css',
-            'dist/background.js',
-            'dist/icons',
-            'dist/LICENSE',
-            'dist/manifest.json',
-            'dist/README.md'
+            'dist/designer/styles/*.css'
         ],
         jshint: {
             files: [
@@ -653,101 +648,6 @@ module.exports = function (grunt) {
                 files: {
                     'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
                 }
-            },
-            'webextension-behavior': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/behavior.min.js': ['dist/designer/scripts/behavior.min.js']
-                }
-            },
-            'webextension-component': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/component.min.js': ['dist/designer/scripts/component.min.js']
-                }
-            },
-            'webextension-designer': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
-                }
-            }, 'webextension-documentation': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/documentation.min.js': ['dist/designer/scripts/documentation.min.js']
-                }
-            },
-            'webextension-model': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/model.min.js': ['dist/designer/scripts/model.min.js']
-                }
-            },
-            'webextension-schema': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/schema.min.js': ['dist/designer/scripts/schema.min.js']
-                }
-            },
-            'webextension-system': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/system.min.js': ['dist/designer/scripts/system.min.js']
-                }
-            },
-            'webextension-type': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
-                }
             }
         },
         "merge-json": {
@@ -906,11 +806,11 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/components/ToolBarItem/13a291c27f16311.json',
                         dest: 'src/system/components/ToolBarItem/13a291c27f16311.json',
-                    },
+                    }/*,
                     {
                         src: 'src/target/web/components/ToolBarItem/163a01b7ca1935c.json',
                         dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json',
-                    }
+                    }*/
                 ]
             },
             'behaviors-web': {
@@ -990,86 +890,6 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/electron/components/html/dialog-modal-welcome.html',
                         dest: 'src/components/html/dialog-modal-welcome.html'
-                    }
-                ]
-            },
-            'html-webextension': {
-                files: [
-                    {
-                        src: 'src/target/webextension/html/app.html',
-                        dest: 'dist/designer/app.html'
-                    },
-                    {
-                        src: 'src/target/webextension/html/behavior.html',
-                        dest: 'dist/designer/behavior.html'
-                    },
-                    {
-                        src: 'src/target/webextension/html/component.html',
-                        dest: 'dist/designer/component.html'
-                    },
-                    {
-                        src: 'src/target/webextension/html/index.html',
-                        dest: 'dist/designer/index.html'
-                    },
-                    {
-                        src: 'src/target/webextension/html/model.html',
-                        dest: 'dist/designer/model.html'
-                    },
-                    {
-                        src: 'src/target/webextension/html/schema.html',
-                        dest: 'dist/designer/schema.html'
-                    },
-                    {
-                        src: 'src/target/webextension/html/system.html',
-                        dest: 'dist/designer/system.html'
-                    },
-                    {
-                        src: 'src/target/webextension/html/type.html',
-                        dest: 'dist/designer/type.html'
-                    }
-                ]
-            },
-            'components-webextension': {
-                files: [
-                    {
-                        src: 'src/target/webextension/html/dialog-modal-welcome.html',
-                        dest: 'src/components/html/dialog-modal-welcome.html'
-                    }
-                ]
-            },
-            'scripts-webextension': {
-                files: [
-                    {
-                        src: 'src/target/webextension/scripts/background.js',
-                        dest: 'dist/background.js'
-                    }
-                ]
-            },
-            'conf-webextension': {
-                files: [
-                    {
-                        src: 'src/target/webextension/conf/LICENCE',
-                        dest: 'dist/LICENCE.js'
-                    },
-                    {
-                        src: 'src/target/webextension/conf/manifest.json',
-                        dest: 'dist/manifest.json'
-                    },
-                    {
-                        src: 'src/target/webextension/conf/README.md',
-                        dest: 'dist/README.md'
-                    }
-                ]
-            },
-            'icons-webextension': {
-                files: [
-                    {
-                        src: 'src/target/webextension/icons/page-32.png',
-                        dest: 'dist/icons/page-32.png'
-                    },
-                    {
-                        src: 'src/target/webextension/icons/page-48.png',
-                        dest: 'dist/icons/page-48.png'
                     }
                 ]
             },
@@ -1280,32 +1100,6 @@ module.exports = function (grunt) {
         'concat:electron-schema',
         'concat:electron-system',
         'concat:electron-type'
-    ]);
-
-    // build for webextension
-    grunt.registerTask('build-webextension', [
-        'copy:lib',
-        'copy:css',
-        'copy:html-webextension',
-        'copy:behaviors-web',
-        'copy:components-webextension',
-        'copy:scripts-webextension',
-        'copy:icons-webextension',
-        'copy:conf-webextension',
-        'system-json',
-        'merge-json',
-        'copy:system',
-        'jsbeautifier',
-        'jshint',
-        'uglify',
-        'concat:webextension-behavior',
-        'concat:webextension-component',
-        'concat:webextension-designer',
-        'concat:webextension-documentation',
-        'concat:webextension-model',
-        'concat:webextension-schema',
-        'concat:webextension-system',
-        'concat:webextension-type'
     ]);
 
     // default test

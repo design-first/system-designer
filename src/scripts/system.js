@@ -284,11 +284,11 @@ runtime.on('ready', function () {
             editor = this.require('editor').editor(),
             designer = this.require('designer');
 
-        window.addEventListener('storage', function (e) {
-            if (e.key === 'system-designer-message') {
-                $db.RuntimeMessage.insert(JSON.parse(e.newValue));
+        this.require('storage').on('changed', function (obj) {
+            if (typeof obj['system-designer-message'] !== 'undefined') {
+                $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
             }
-        });
+        }, true);
 
         RuntimeChannel = this.require('RuntimeChannel');
         channel = new RuntimeChannel({
@@ -296,12 +296,12 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            localStorage.setItem('system-designer-message', JSON.stringify(message));
+            this.require('storage').set('system-designer-message', message);
         });
 
         // get system
         id = document.location.search.split('?')[1].split('id=')[1];
-        system = JSON.parse(localStorage.getItem(id));
+        system = this.require('storage').get(id);
 
         designer.store().uuid(id);
         designer.store().data(system);
@@ -312,7 +312,7 @@ runtime.on('ready', function () {
         editor.gotoLine(1);
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
-        
+
     }, true);
 
     // Editor

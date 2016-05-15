@@ -257,11 +257,11 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null;
 
-        window.addEventListener('storage', function (e) {
-            if (e.key === 'system-designer-message') {
-                $db.RuntimeMessage.insert(JSON.parse(e.newValue));
+        this.require('storage').on('changed', function (obj) {
+            if (typeof obj['system-designer-message'] !== 'undefined') {
+                $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
             }
-        });
+        }, true);
 
         RuntimeChannel = this.require('RuntimeChannel');
         channel = new RuntimeChannel({
@@ -269,7 +269,7 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            localStorage.setItem('system-designer-message', JSON.stringify(message));
+            this.require('storage').set('system-designer-message', message);
         });
 
     }, true);

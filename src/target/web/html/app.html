@@ -22,7 +22,7 @@
                     
                 // get system
                 sysid = document.location.search.split('?')[1].split('id=')[1];
-                system = JSON.parse(localStorage.getItem(sysid));
+                system = this.require('storage').get(sysid);
                 delete system.classInfo;
                 
                 // start admin    

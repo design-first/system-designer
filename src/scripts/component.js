@@ -280,11 +280,11 @@ runtime.on('ready', function () {
             property = '',
             editor = null;
 
-        window.addEventListener('storage', function (e) {
-            if (e.key === 'system-designer-message') {
-                $db.RuntimeMessage.insert(JSON.parse(e.newValue));
+        this.require('storage').on('changed', function (obj) {
+            if (typeof obj['system-designer-message'] !== 'undefined') {
+                $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
             }
-        });
+        }, true);
 
         RuntimeChannel = this.require('RuntimeChannel');
         channel = new RuntimeChannel({
@@ -292,7 +292,7 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            localStorage.setItem('system-designer-message', JSON.stringify(message));
+            this.require('storage').set('system-designer-message', message);
         });
 
         title = document.location.search.split('?')[1];
@@ -301,8 +301,8 @@ runtime.on('ready', function () {
         collection = title.split('_id=')[1].split('&model=')[1].split('&systemId=')[0];
         systemId = title.split('&model=')[1].split('&systemId=')[1].trim();
 
-        component = JSON.parse(localStorage.getItem(systemId)).components[collection][id];
-        model = _findModel(collection, JSON.parse(localStorage.getItem(systemId)));
+        component = this.require('storage').get(systemId).components[collection][id];
+        model = _findModel(collection, this.require('storage').get(systemId));
 
         function _findModel(name, system) {
             var result = {},

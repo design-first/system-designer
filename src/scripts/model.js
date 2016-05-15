@@ -248,11 +248,11 @@ runtime.on('ready', function () {
             editor = this.require('editor').editor(),
             designer = this.require('designer');
 
-        window.addEventListener('storage', function (e) {
-            if (e.key === 'system-designer-message') {
-                $db.RuntimeMessage.insert(JSON.parse(e.newValue));
+        this.require('storage').on('changed', function (obj) {
+            if (typeof obj['system-designer-message'] !== 'undefined') {
+                $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
             }
-        });
+        }, true);
 
         RuntimeChannel = this.require('RuntimeChannel');
         channel = new RuntimeChannel({
@@ -260,15 +260,15 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            localStorage.setItem('system-designer-message', JSON.stringify(message));
+            this.require('storage').set('system-designer-message', message);
         });
 
         params = document.location.search.split('?')[1];
         params = decodeURI(params);
         id = params.split('_id=')[1].split('&')[0].trim();
         systemId = params.split('_id=')[1].split('&systemId=')[1].trim();
-        
-        model = JSON.parse(localStorage.getItem(systemId)).models[id];
+
+        model = this.require('storage').get(systemId).models[id];
 
         designer.store().uuid(id);
         designer.store().data(model);
