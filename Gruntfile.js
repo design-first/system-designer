@@ -462,6 +462,8 @@ module.exports = function (grunt) {
                             grunt.option('models', {});
                             result = src + '\n"models" : {},';
                         } else {
+                            src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
+                            
                             uuid = JSON.parse(src)._id;
                             if (typeof uuid === 'undefined') {
                                 uuid = generateId();
