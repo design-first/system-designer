@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="system-designer.appcache">
 
 <head>
     <title>Loading...</title>
@@ -21,7 +21,7 @@
                     messages = [];
                     
                 // get system
-                sysid = document.location.search.split('?')[1].split('id=')[1];
+                sysid = document.location.href.split('#')[1];
                 system = this.require('storage').get(sysid);
                 delete system.classInfo;
                 

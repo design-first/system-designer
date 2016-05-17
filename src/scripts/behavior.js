@@ -251,7 +251,6 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null,
             id = '',
-            params = '',
             designer = this.require('designer'),
             editor = this.require('editor').editor(),
             Range = null,
@@ -272,10 +271,8 @@ runtime.on('ready', function () {
             this.require('storage').set('system-designer-message', message);
         });
 
-        params = document.location.search.split('?')[1];
-        params = decodeURI(params);
-        id = params.split('_id=')[1].split('&')[0].trim();
-        systemId = params.split('_id=')[1].split('&systemId=')[1].trim();
+        id = document.location.href.split('#')[1];
+        systemId = document.location.href.split('#')[2];
 
         behavior = this.require('storage').get(systemId).behaviors[id];
 
@@ -433,11 +430,33 @@ runtime.on('ready', function () {
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
+        this.updateRouter();
 
         // TODO create a function
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });
+    });
+
+    Designer.on('updateRouter', function () {
+        var menubar = [],
+            i = 0,
+            length = 0,
+            id = '',
+            systemId = '',
+            href = '';
+
+        id = document.location.href.split('#')[1];
+        systemId = document.location.href.split('#')[2];
+
+        // update menubar
+        menubar = $('#designer-menubar-items > li > a');
+        length = menubar.length;
+        for (i = 0; i < length; i++) {
+            href = menubar[i].href;
+            context = href.split('#')[href.split('#').length - 1];
+            menubar[i].href = '#' + id + '#' + systemId + '#' + context;
+        }
     });
 
     Designer.on('clear', function () {

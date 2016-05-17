@@ -933,13 +933,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('system.html?_id=' + that.uuid());
+            window.open('system.html#' + that.uuid() + '#description');
         });
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('system.html?_id=' + that.uuid());
+            window.open('system.html#' + that.uuid() + '#description');
         });
 
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
@@ -1037,13 +1037,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('type.html?_id=' + that.uuid() + '&systemId=' + systemId);
+            window.open('type.html#' + that.uuid() + '#' + systemId);
         });
 
         html = document.getElementById('designer-type-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('type.html?_id=' + that.uuid() + '&systemId=' + systemId);
+            window.open('type.html#' + that.uuid() + '#' + systemId);
         });
 
         html = document.getElementById('designer-type-' + this.uuid() + '-delete');
@@ -1115,13 +1115,13 @@ runtime.on('ready', function () {
             html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function (event) {
-                window.open('schema.html?_id=' + that.uuid() + '&systemId=' + systemId);
+                window.open('schema.html#' + that.uuid() + '#' + systemId);
             });
 
             html = document.getElementById('designer-schema-' + htmlId + '-edit');
 
             html.addEventListener('click', function (event) {
-                window.open('schema.html?_id=' + that.uuid() + '&systemId=' + systemId);
+                window.open('schema.html#' + that.uuid() + '#' + systemId);
             });
 
             html = document.getElementById('designer-schema-' + htmlId + '-delete');
@@ -1333,13 +1333,13 @@ runtime.on('ready', function () {
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function (event) {
-                window.open('model.html?_id=' + that.uuid() + '&systemId=' + systemId);
+                window.open('model.html#' + that.uuid() + '#' + systemId);
             });
 
             html = document.getElementById('designer-model-' + htmlId + '-edit');
 
             html.addEventListener('click', function (event) {
-                window.open('model.html?_id=' + that.uuid() + '&systemId=' + systemId);
+                window.open('model.html#' + that.uuid() + '#' + systemId);
             });
         } else {
             $('#designer-model-' + htmlId + ' > div > div > div > button').hide();
@@ -1379,13 +1379,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('behavior.html?_id=' + that.uuid() + '&systemId=' + systemId);
+            window.open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
         });
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('behavior.html?_id=' + that.uuid() + '&systemId=' + systemId);
+            window.open('behavior.html#' + that.uuid() + '#' + systemId+ '#action');
         });
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
@@ -1460,13 +1460,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-')).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()) + '&systemId=' + systemId);
+            window.open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
         });
 
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('component.html?_id=' + encodeURI(that.title()) + '&model=' + encodeURI(that.model()) + '&systemId=' + systemId);
+            window.open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
         });
 
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-delete');

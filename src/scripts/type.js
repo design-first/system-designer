@@ -244,7 +244,6 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null,
             id = '',
-            params = '',
             designer = this.require('designer'),
             editor = this.require('editor').editor();
 
@@ -263,10 +262,8 @@ runtime.on('ready', function () {
             this.require('storage').set('system-designer-message', message);
         });
 
-        params = document.location.search.split('?')[1];
-        params = decodeURI(params);
-        id = params.split('_id=')[1].split('&')[0].trim();
-        systemId = params.split('_id=')[1].split('&systemId=')[1].trim();
+        id = document.location.href.split('#')[1];
+        systemId = document.location.href.split('#')[2];
 
         type = this.require('storage').get(systemId).types[id];
 

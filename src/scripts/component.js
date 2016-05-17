@@ -295,11 +295,9 @@ runtime.on('ready', function () {
             this.require('storage').set('system-designer-message', message);
         });
 
-        title = document.location.search.split('?')[1];
-        title = decodeURI(title);
-        id = title.split('_id=')[1].split('&')[0].trim();
-        collection = title.split('_id=')[1].split('&model=')[1].split('&systemId=')[0];
-        systemId = title.split('&model=')[1].split('&systemId=')[1].trim();
+        id = decodeURI(document.location.href.split('#')[1]);
+        collection = document.location.href.split('#')[2];
+        systemId = document.location.href.split('#')[3];
 
         component = this.require('storage').get(systemId).components[collection][id];
         model = _findModel(collection, this.require('storage').get(systemId));
@@ -471,10 +469,33 @@ runtime.on('ready', function () {
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
+        this.updateRouter();
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });
+    });
+
+    Designer.on('updateRouter', function () {
+        var menubar = [],
+            i = 0,
+            length = 0,
+            id = '',
+            systemId = '',
+            href = '';
+
+        id = decodeURI(document.location.href.split('#')[1]);
+        collection = document.location.href.split('#')[2];
+        systemId = document.location.href.split('#')[3];
+
+        // update menubar
+        menubar = $('#designer-menubar-items > li > a');
+        length = menubar.length;
+        for (i = 0; i < length; i++) {
+            href = menubar[i].href;
+            context = href.split('#')[href.split('#').length - 1];
+            menubar[i].href = '#' + id + '#' + collection + '#' + systemId + '#' + context;
+        }
     });
 
     Designer.on('clear', function () {

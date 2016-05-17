@@ -71,6 +71,7 @@ module.exports = function (grunt) {
             'src/system/behaviors/13a291c27f16314',
             'src/system/behaviors/13f70137b61b19b',
             'dist/designer/*.html',
+            'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
             'dist/designer/lib/system-runtime/**',
             'dist/designer/systems/design.json',
@@ -766,6 +767,10 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/html/type.html',
                         dest: 'dist/designer/type.html'
+                    },
+                    {
+                        src: 'src/target/web/manifest/system-designer.appcache',
+                        dest: 'dist/designer/system-designer.appcache'
                     }
                 ]
             },

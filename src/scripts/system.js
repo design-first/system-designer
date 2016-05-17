@@ -300,7 +300,7 @@ runtime.on('ready', function () {
         });
 
         // get system
-        id = document.location.search.split('?')[1].split('id=')[1];
+        id = document.location.href.split('#')[1];
         system = this.require('storage').get(id);
 
         designer.store().uuid(id);
@@ -387,10 +387,28 @@ runtime.on('ready', function () {
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
+        this.updateRouter();
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
         });
+    });
+
+    Designer.on('updateRouter', function () {
+        var menubar = [],
+            i = 0,
+            length = 0,
+            id = '',
+            href = '';
+
+        // update menubar
+        menubar = $('#designer-menubar-items > li > a');
+        length = menubar.length;
+        for (i = 0; i < length; i++) {
+            href = menubar[i].href;
+            context = href.split('#')[href.split('#').length - 1];
+            menubar[i].href = '#' + this.store().uuid() + '#' + context;
+        }
     });
 
     Designer.on('clear', function () {
