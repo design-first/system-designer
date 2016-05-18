@@ -36,6 +36,61 @@ You can run your application directly from System Designer and then export it to
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
 
+## Installation
+
+#### Node.js
+
+```sh
+$ npm install system-designer --save
+```
+
+Then:
+
+* copy `/node_modules/system-designer/dist/designer` on your web project
+* open `/designer/index.html`.
+
+#### Bower
+
+```sh
+$ bower install system-designer --save
+```
+
+Then:
+
+* copy `/node_modules/system-designer/dist/designer` on your web project
+* open `/designer/index.html`.
+
+## Build
+
+#### Installation
+
+Once you have cloned the repository:
+
+```sh
+# needed by grunt (maybe you have this installed already)
+$ npm install -g grunt-cli
+$ npm install
+$ bower install
+```	 	
+
+#### Grunt tasks
+
+Here are the different tasks you can use to automate tasks:
+
+
+```sh
+# clean
+$ grunt clean
+# build
+$ grunt build
+# watch
+$ grunt watch
+# start web server
+$ grunt start
+```
+
+Once server started, go to [http://localhost:9001/](http://localhost:9001/).
+
 ## Documentation
 
 * [Installation](https://system-designer.readme.io/docs/install-system-designer)
