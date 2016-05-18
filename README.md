@@ -57,7 +57,7 @@ $ bower install system-designer --save
 
 Then:
 
-* copy `/node_modules/system-designer/dist/designer` on your web project
+* copy `/bower_components/system-designer/dist/designer` on your web project
 * open `/designer/index.html`.
 
 ## Build
