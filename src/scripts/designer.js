@@ -2760,7 +2760,7 @@ runtime.on('ready', function () {
                                 "_id": uuid,
                                 "component": model,
                                 "state": state,
-                                "action": "function " + state + "(" + params + ") {\n" + body + "}",
+                                "action": "function " + state + "(" + params + ") { \n" + body + "}",
                                 "useCoreAPI": false,
                                 "core": false
                             };
@@ -4110,7 +4110,7 @@ runtime.on('ready', function () {
             "_id": uuid,
             "component": model,
             "state": state,
-            "action": "function " + state + "(" + params + ") {\n" + body + "}",
+            "action": "function " + state + "(" + params + ") { \n" + body + "}",
             "useCoreAPI": false,
             "core": false
         };
@@ -4496,7 +4496,7 @@ runtime.on('ready', function () {
                     for (behaviorId in behaviors) {
                         behavior = behaviors[behaviorId];
                         if (behavior.component === model._name && behavior.state === propName) {
-                            action = behavior.action.split('{');
+                            action = behavior.action.split('{ ');
                             action[0] = header;
                             behaviors[behaviorId].action = action.join('{');
 

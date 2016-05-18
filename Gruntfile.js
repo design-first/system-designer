@@ -463,7 +463,7 @@ module.exports = function (grunt) {
                             result = src + '\n"models" : {},';
                         } else {
                             src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
-                            
+
                             uuid = JSON.parse(src)._id;
                             if (typeof uuid === 'undefined') {
                                 uuid = generateId();
@@ -556,6 +556,18 @@ module.exports = function (grunt) {
                     'build/system/design.json': ['build/system/design.json']
                 }
             },
+            'electron-app': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/app.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
+                }
+            },
             'electron-behavior': {
                 options: {
                     process: function (src, filepath) {
@@ -590,18 +602,6 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
-                }
-            },
-            'electron-documentation': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/documentation.min.js': ['dist/designer/scripts/documentation.min.js']
                 }
             },
             'electron-model': {
@@ -691,7 +691,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/schema.min.js': ['src/scripts/schema.js'],
                     'dist/designer/scripts/system.min.js': ['src/scripts/system.js'],
                     'dist/designer/scripts/type.min.js': ['src/scripts/type.js'],
-                    'dist/designer/scripts/documentation.min.js': ['src/scripts/documentation.js']
+                    'dist/designer/scripts/app.min.js': ['src/scripts/app.js']
                 }
             }
         },
@@ -729,10 +729,6 @@ module.exports = function (grunt) {
                     {
                         src: 'src/styles/type.css',
                         dest: 'dist/designer/styles/type.css'
-                    },
-                    {
-                        src: 'src/styles/documentation.css',
-                        dest: 'dist/designer/styles/documentation.css'
                     }
                 ]
             },
@@ -967,8 +963,8 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/scripts/type.min.js'
                     },
                     {
-                        src: 'src/scripts/documentation.js',
-                        dest: 'dist/designer/scripts/documentation.min.js'
+                        src: 'src/scripts/app.js',
+                        dest: 'dist/designer/scripts/app.min.js'
                     }
                 ]
             },
@@ -1099,10 +1095,10 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'uglify',
+        'concat:electron-app',
         'concat:electron-behavior',
         'concat:electron-component',
         'concat:electron-designer',
-        'concat:electron-documentation',
         'concat:electron-model',
         'concat:electron-schema',
         'concat:electron-system',
