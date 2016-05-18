@@ -1,5 +1,5 @@
 {
 	"component": "13f70137b61b19b",
 	"state": "click",
-	"action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message');\n    \n    if (designer.system()) {\n        $('#designer-toolbar-item-publish').tooltip('hide');\n        window.open('app.html#' + designer.system().id(), 'app');\n    } else {\n        message.warning('you have no system to run.')\n    }\n}"
+	"action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n    \n    if (designer.system()) {\n        $('#designer-toolbar-item-publish').tooltip('hide');\n        if (runWidow && !runWidow.closed) {\n            runWidow.document.location.reload();\n        } else {\n            this.require('designer').runWindow(window.open('app.html#' + designer.system().id(), 'app'));\n        }\n    } else {\n        message.warning('you have no system to run.')\n    }\n}"
 }
