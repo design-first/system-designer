@@ -23,7 +23,8 @@ runtime.on('ready', function () {
     runtime.on('ready', function () {
         var system = runtime.system('app');
         system.on('main', function () {
-            var channel = null,
+            var RuntimeChannel = null,
+                channel = null,
                 sysid = '',
                 system = '',
                 messages = [];
@@ -33,24 +34,114 @@ runtime.on('ready', function () {
             system = this.require('storage').get(sysid);
             delete system.classInfo;
 
-            // start admin    
-            this.require('admin').start();
+            // create channel              
+            RuntimeChannel = this.require('RuntimeChannel');
+            channel = new RuntimeChannel({
+                '_id': 'channel-admin',
+                '_core': true
+            });
 
-            // get channel              
-            channel = this.require('channel-admin');
+            channel.on('send', function send(message) {
+                this.require('storage').set('system-designer-message', message);
+            });
 
+            // schema change events
+            channel.on('createSchema', function createSchema(id, schema) {
+                this.require('metamodel').schema(schema);
+                this.require('metamodel').create();
+            }, true);
+
+            channel.on('updateSchema', function updateSchema(id, schema) {
+                this.require('metamodel').type(schema);
+                this.require('metamodel').create();
+            }, true);
+
+            channel.on('deleteSchema', function deleteSchema(id) {
+                $db.Runtime.remove({ '_id': id });
+                this.require('metamodel').create();
+            }, true);
+
+            // model change events
+            channel.on('createModel', function createModel(id, model) {
+                this.require('metamodel').schema(model);
+                this.require('metamodel').create();
+            }, true);
+
+            channel.on('updateModel', function updateModel(id, model) {
+                this.require('metamodel').type(model);
+                this.require('metamodel').create();
+            }, true);
+
+            channel.on('deleteModel', function deleteModel(id) {
+                $db.Runtime.remove({ '_id': id });
+                this.require('metamodel').create();
+                $component.removeFromMemory(id);
+            }, true);
+
+            // type change events
+            channel.on('createType', function createType(id, type) {
+                this.require('metamodel').type(type);
+                this.require('metamodel').create();
+            }, true);
+
+            channel.on('updateType', function updateType(id, type) {
+                this.require('metamodel').type(type);
+                this.require('metamodel').create();
+            }, true);
+
+            channel.on('deleteType', function deleteType(id) {
+                $db.RuntimeType.remove({ '_id': id });
+                this.require('metamodel').create();
+            }, true);
+
+            // component change events
+            channel.on('createComponent', function createComponent(model, component) {
+                $db[model].insert(component);
+            }, true);
+
+            channel.on('updateComponent', function updateComponent(id, collection, component) {
+                $db[collection].update({ '_id': id }, component);
+            }, true);
+
+            channel.on('deleteComponent', function deleteComponent(id, collection) {
+                $db[collection].remove({ '_id': id });
+            }, true);
+
+            // behavior change events
+            channel.on('createBehavior', function createBehavior(component) {
+                $db.RuntimeBehavior.insert(component);
+            }, true);
+            channel.on('updateBehavior', function updateBehavior(id, behavior) {
+                this.require(id).action(behavior.action);
+            });
+            channel.on('deleteBehavior', function deleteBehavior(id) {
+                $db.RuntimeBehavior.remove({ '_id': id });
+            }, true);
+
+            // System Designer event
+            channel.on('sync', function sync() {
+                this.loadSystem(JSON.parse(this.require('db').system()));
+            });
+
+            this.require('storage').on('changed', function (obj) {
+                if (typeof obj['system-designer-message'] !== 'undefined') {
+                    $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
+                }
+            }, true);
+
+            // logger events
             this.require('logger').on('warn', function (message) {
                 var date = new Date(),
                     time = date.toLocaleTimeString();
 
-                this.require('channel-admin').logWarn('[' + time + '] ' + message);
+                this.require('channel').logWarn('[' + time + '] ' + message);
             });
 
             this.require('logger').on('error', function (message) {
                 var date = new Date(),
                     time = date.toLocaleTimeString();
 
-                this.require('channel-admin').logError('[' + time + '] ' + message);
+                this.require('channel').logError('[' + time + '] ' + message);
             });
 
             this.require('logger').info('loading the system...');
@@ -59,18 +150,19 @@ runtime.on('ready', function () {
 
             document.title = system.name;
 
+            // logger events
             this.require('logger').on('debug', function (message) {
                 var date = new Date(),
                     time = date.toLocaleTimeString();
 
-                this.require('channel-admin').logDebug('[' + time + '] ' + message);
+                this.require('channel').logDebug('[' + time + '] ' + message);
             });
 
             this.require('logger').on('info', function (message) {
                 var date = new Date(),
                     time = date.toLocaleTimeString();
 
-                this.require('channel-admin').logInfo('[' + time + '] ' + message);
+                this.require('channel').logInfo('[' + time + '] ' + message);
             });
 
             this.require('logger').level('debug');

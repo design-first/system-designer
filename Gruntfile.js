@@ -780,75 +780,79 @@ module.exports = function (grunt) {
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51200e116e6.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e6.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e6.json'
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51200e116e8.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e8.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e8.json'
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51200e11610.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e11610.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51200e11610.json'
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51200e11612.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e11612.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51200e11612.json'
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51200e11614.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e11614.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51200e11614.json'
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51220e116e1.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51220e116e1.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51220e116e1.json'
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/13a291c27f16310.json',
-                        dest: 'src/system/components/ToolBarItem/13a291c27f16310.json',
+                        dest: 'src/system/components/ToolBarItem/13a291c27f16310.json'
                     },
                     {
                         src: 'src/target/web/components/ToolBarItem/13a291c27f16311.json',
-                        dest: 'src/system/components/ToolBarItem/13a291c27f16311.json',
-                    }/*,
+                        dest: 'src/system/components/ToolBarItem/13a291c27f16311.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51200e116e3.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e3.json'
+                    },
                     {
                         src: 'src/target/web/components/ToolBarItem/163a01b7ca1935c.json',
-                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json',
-                    }*/
+                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json'
+                    }
                 ]
             },
             'behaviors-web': {
                 files: [
                     {
                         src: 'src/target/web/behaviors/1dbc51200e11z10/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11z10/click.json',
+                        dest: 'src/system/behaviors/1dbc51200e11z10/click.json'
                     },
                     {
                         src: 'src/target/web/behaviors/1dbc51200e116e10/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e116e10/click.json',
+                        dest: 'src/system/behaviors/1dbc51200e116e10/click.json'
                     },
                     {
                         src: 'src/target/web/behaviors/1dbc51200e11510/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11510/click.json',
+                        dest: 'src/system/behaviors/1dbc51200e11510/click.json'
                     },
                     {
                         src: 'src/target/web/behaviors/1dbc51200e11615/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11615/click.json',
+                        dest: 'src/system/behaviors/1dbc51200e11615/click.json'
                     },
                     {
                         src: 'src/target/web/behaviors/1dbc51200e11616/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11616/click.json',
+                        dest: 'src/system/behaviors/1dbc51200e11616/click.json'
                     },
                     {
                         src: 'src/target/web/behaviors/1dbc51200e11617/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11617/click.json',
+                        dest: 'src/system/behaviors/1dbc51200e11617/click.json'
                     },
                     {
                         src: 'src/target/web/behaviors/13a291c27f16314/click.json',
-                        dest: 'src/system/behaviors/13a291c27f16314/click.json',
+                        dest: 'src/system/behaviors/13a291c27f16314/click.json'
                     },
                     {
                         src: 'src/target/web/behaviors/13f70137b61b19b/click.json',
-                        dest: 'src/system/behaviors/13f70137b61b19b/click.json',
+                        dest: 'src/system/behaviors/13f70137b61b19b/click.json'
                     }
                 ]
             },

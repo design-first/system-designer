@@ -1,5 +1,5 @@
 <div class="modal fade" id="designer-dialog-config-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
@@ -7,19 +7,9 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" value="enum" id="designer-dialog-type-config-isdebug">debug mode
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <label class="checkbox-inline">
-                                <button type="button" class="btn btn-default" aria-label="Left Align" id="designer-dialog-type-config-reset">
-                                    <span>Reset System Designer</span>
-                                </button>
-                            </label>
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Page to debug</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <input type="text" class="form-control" placeholder="http://server-name/page-name" id="designer-dialog-config-server-name">
                         </div>
                     </div>
                 </form>

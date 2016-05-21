@@ -230,6 +230,7 @@ runtime.on('ready', function () {
         var html = '',
             dom = null,
             that = this,
+            storeConfig = null,
             designer = that.require('designer');
 
         $('#designer-dialog-config').empty();
@@ -240,10 +241,25 @@ runtime.on('ready', function () {
                 .replace(/{{title}}/gi, this.title())
         );
 
-        // default value
-        $('#designer-dialog-type-config-isdebug')[0].checked = designer.debug();
+        // default server name value
+        storeConfig = this.require('storage').get('system-designer-config');
+        if (storeConfig.serverName) {
+            $('#designer-dialog-config-server-name')[0].value = storeConfig.serverName;
+        }
 
         // events
+        dom = document.getElementById('designer-dialog-config-server-name');
+        dom.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                if ($('#designer-dialog-config-server-name').val()) {
+                    this.ok();
+                }
+                return false;
+            }
+        }.bind(this));
+
         dom = document.getElementById('designer-dialog-config-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
@@ -253,33 +269,6 @@ runtime.on('ready', function () {
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
-
-        dom = document.getElementById('designer-dialog-type-config-reset');
-        dom.addEventListener('click', function (event) {
-            var System = this.require('System');
-
-            this.require('storage').clear();
-            this.require('designer').system().destroy();
-
-            this.require('designer').spaces().clear();
-            this.require('designer').workspace().clear();
-
-            this.require('designer').updateRouter();
-            this.require('message').success('system designer has been reseted.');
-        }.bind(this));
-
-        dom = document.getElementById('designer-dialog-type-config-isdebug');
-        dom.addEventListener('click', function (obj) {
-            var designer = that.require('designer'),
-                isEnum = false;
-
-            isEnum = $('#designer-dialog-type-config-isdebug')[0].checked;
-            if (isEnum) {
-                designer.debug(true);
-            } else {
-                designer.debug(false);
-            }
-        });
     });
 
     DialogConfig.on('show', function () {
@@ -288,6 +277,16 @@ runtime.on('ready', function () {
 
     DialogConfig.on('hide', function () {
         $('#designer-dialog-config-modal').modal('hide');
+    });
+
+    DialogConfig.on('ok', function () {
+        var config = this.require('storage').get('system-designer-config');
+
+        if (!config) {
+            config = {};
+        }
+        config.serverName = $('#designer-dialog-config-server-name')[0].value;
+        this.require('storage').set('system-designer-config', config);
     });
 
     // DIALOG IMPORT FILE
@@ -933,7 +932,7 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('system.html#' + that.uuid() + '#description');
+           window.open('system.html#' + that.uuid() + '#description');
         });
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
@@ -1385,7 +1384,7 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('behavior.html#' + that.uuid() + '#' + systemId+ '#action');
+            window.open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
         });
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
@@ -3197,6 +3196,10 @@ runtime.on('ready', function () {
 
         channel.on('send', function (message) {
             this.require('storage').set('system-designer-message', message);
+
+            if (this.require('designer').debugWindow()) {
+                this.require('designer').debugWindow().postMessage(JSON.stringify(message), '*');
+            }
         });
 
         channel.on('logDebug', function (message) {
@@ -3663,35 +3666,24 @@ runtime.on('ready', function () {
             });
         });
 
-        // DEBUG
-        channel.on('updateBehavior', function (id, behavior) {
-            var designer = this.require('designer');
-            if (designer.debug()) {
-                this.require(id).action(behavior.action);
-            }
-        });
-        channel.on('sync', function () {
-            var System = null,
-                system = null,
-                designer = this.require('designer');
+        window.addEventListener('message', function (event) {
+            var data = null,
+                config = this.require('storage').get('system-designer-config');
 
-            if (designer.debug()) {
-                system = this.require('db').system();
-                if (designer.system()) {
-                    designer.system().destroy();
-                }
-                System = this.require('System');
-                designer.system(new System(JSON.parse(system)));
-                designer.save();
-
-                designer.space(designer.system().name());
-                designer.spaces().render();
-                designer.workspace().refresh();
+            if (!config) {
+                config = {};
             }
-        });
+            data = JSON.parse(event.data);
+            if (data) {
+                $db.RuntimeMessage.insert(data);
+            }
+        }.bind(channel), false);
 
         this.require('storage').on('changed', function (obj) {
             if (typeof obj['system-designer-message'] !== 'undefined') {
+                if (this.require('designer').debugWindow()) {
+                    this.require('designer').debugWindow().postMessage(JSON.stringify(obj['system-designer-message'].newValue), '*');
+                }
                 $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
             }
         }, true);
