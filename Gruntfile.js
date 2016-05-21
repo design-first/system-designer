@@ -61,7 +61,6 @@ module.exports = function (grunt) {
             'src/system/components/ToolBarItem/1dbc51220e116e1.json',
             'src/system/components/ToolBarItem/13a291c27f16310.json',
             'src/system/components/ToolBarItem/13a291c27f16311.json',
-            'src/system/components/ToolBarItem/163a01b7ca1935c.json',
             'dist/designer/*.html',
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
@@ -547,19 +546,7 @@ module.exports = function (grunt) {
                 files: {
                     'build/system/design.json': ['build/system/design.json']
                 }
-            },
-            'electron-app': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/app.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
-                }
-            },
+            }, 
             'electron-behavior': {
                 options: {
                     process: function (src, filepath) {
@@ -805,10 +792,6 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51200e116e3.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51200e116e3.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/163a01b7ca1935c.json',
-                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json'
                     }
                 ]
             },
@@ -1016,7 +999,6 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'uglify',
-        'concat:electron-app',
         'concat:electron-behavior',
         'concat:electron-component',
         'concat:electron-designer',
