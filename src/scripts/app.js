@@ -37,7 +37,7 @@ runtime.on('ready', function () {
             // create channel              
             RuntimeChannel = this.require('RuntimeChannel');
             channel = new RuntimeChannel({
-                '_id': 'channel-admin',
+                '_id': 'channel',
                 '_core': true
             });
 
