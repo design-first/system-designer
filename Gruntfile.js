@@ -546,7 +546,19 @@ module.exports = function (grunt) {
                 files: {
                     'build/system/design.json': ['build/system/design.json']
                 }
-            }, 
+            },
+            'electron-app': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/app.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
+                }
+            },
             'electron-behavior': {
                 options: {
                     process: function (src, filepath) {
@@ -999,6 +1011,7 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'uglify',
+        'concat:electron-app',
         'concat:electron-behavior',
         'concat:electron-component',
         'concat:electron-designer',
