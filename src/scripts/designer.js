@@ -932,14 +932,14 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-           window.open('system.html#' + that.uuid() + '#description');
-        });
+           this.require('designer').open('system.html#' + that.uuid() + '#description');
+        }.bind(this));
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('system.html#' + that.uuid() + '#description');
-        });
+            this.require('designer').open('system.html#' + that.uuid() + '#description');
+        }.bind(this));
 
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
 
@@ -1036,14 +1036,14 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('type.html#' + that.uuid() + '#' + systemId);
-        });
+            this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
+        }.bind(this));
 
         html = document.getElementById('designer-type-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('type.html#' + that.uuid() + '#' + systemId);
-        });
+            this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
+        }.bind(this));
 
         html = document.getElementById('designer-type-' + this.uuid() + '-delete');
 
@@ -1114,14 +1114,14 @@ runtime.on('ready', function () {
             html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function (event) {
-                window.open('schema.html#' + that.uuid() + '#' + systemId);
-            });
+                this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
+            }.bind(this));
 
             html = document.getElementById('designer-schema-' + htmlId + '-edit');
 
             html.addEventListener('click', function (event) {
-                window.open('schema.html#' + that.uuid() + '#' + systemId);
-            });
+                this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
+            }.bind(this));
 
             html = document.getElementById('designer-schema-' + htmlId + '-delete');
 
@@ -1332,14 +1332,14 @@ runtime.on('ready', function () {
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
 
             html.addEventListener('click', function (event) {
-                window.open('model.html#' + that.uuid() + '#' + systemId);
-            });
+                this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
+            }.bind(this));
 
             html = document.getElementById('designer-model-' + htmlId + '-edit');
 
             html.addEventListener('click', function (event) {
-                window.open('model.html#' + that.uuid() + '#' + systemId);
-            });
+                this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
+            }.bind(this));
         } else {
             $('#designer-model-' + htmlId + ' > div > div > div > button').hide();
             $('#designer-model-' + htmlId + ' > div > .panel-body').attr('style', 'cursor: inherit');
@@ -1378,14 +1378,14 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
-        });
+            this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
+        }.bind(this));
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
-        });
+            this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
+        }.bind(this));
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
 
@@ -1459,14 +1459,14 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-')).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            window.open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
-        });
+            this.require('designer').open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
+        }.bind(this));
 
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-edit');
 
         html.addEventListener('click', function (event) {
-            window.open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
-        });
+            this.require('designer').open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
+        }.bind(this));
 
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-delete');
 
@@ -2995,6 +2995,11 @@ runtime.on('ready', function () {
                                                     },
                                                     {
                                                         "name": "useCoreAPI",
+                                                        "type": "boolean",
+                                                        "mandatory": false
+                                                    },
+                                                    {
+                                                        "name": "isCore",
                                                         "type": "boolean",
                                                         "mandatory": false
                                                     }

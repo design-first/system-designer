@@ -62,14 +62,6 @@ module.exports = function (grunt) {
             'src/system/components/ToolBarItem/13a291c27f16310.json',
             'src/system/components/ToolBarItem/13a291c27f16311.json',
             'src/system/components/ToolBarItem/163a01b7ca1935c.json',
-            'src/system/behaviors/1dbc51200e11z10',
-            'src/system/behaviors/1dbc51200e116e10',
-            'src/system/behaviors/1dbc51200e11510',
-            'src/system/behaviors/1dbc51200e11615',
-            'src/system/behaviors/1dbc51200e11616',
-            'src/system/behaviors/1dbc51200e11617',
-            'src/system/behaviors/13a291c27f16314',
-            'src/system/behaviors/13f70137b61b19b',
             'dist/designer/*.html',
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
@@ -820,42 +812,6 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            'behaviors-web': {
-                files: [
-                    {
-                        src: 'src/target/web/behaviors/1dbc51200e11z10/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11z10/click.json'
-                    },
-                    {
-                        src: 'src/target/web/behaviors/1dbc51200e116e10/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e116e10/click.json'
-                    },
-                    {
-                        src: 'src/target/web/behaviors/1dbc51200e11510/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11510/click.json'
-                    },
-                    {
-                        src: 'src/target/web/behaviors/1dbc51200e11615/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11615/click.json'
-                    },
-                    {
-                        src: 'src/target/web/behaviors/1dbc51200e11616/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11616/click.json'
-                    },
-                    {
-                        src: 'src/target/web/behaviors/1dbc51200e11617/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11617/click.json'
-                    },
-                    {
-                        src: 'src/target/web/behaviors/13a291c27f16314/click.json',
-                        dest: 'src/system/behaviors/13a291c27f16314/click.json'
-                    },
-                    {
-                        src: 'src/target/web/behaviors/13f70137b61b19b/click.json',
-                        dest: 'src/system/behaviors/13f70137b61b19b/click.json'
-                    }
-                ]
-            },
             'html-electron': {
                 files: [
                     {
@@ -897,42 +853,6 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/electron/components/html/dialog-modal-welcome.html',
                         dest: 'src/components/html/dialog-modal-welcome.html'
-                    }
-                ]
-            },
-            'behaviors-electron': {
-                files: [
-                    {
-                        src: 'src/target/electron/behaviors/1dbc51200e11z10/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11z10/click.json',
-                    },
-                    {
-                        src: 'src/target/electron/behaviors/1dbc51200e116e10/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e116e10/click.json',
-                    },
-                    {
-                        src: 'src/target/electron/behaviors/1dbc51200e11510/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11510/click.json',
-                    },
-                    {
-                        src: 'src/target/electron/behaviors/1dbc51200e11615/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11615/click.json',
-                    },
-                    {
-                        src: 'src/target/electron/behaviors/1dbc51200e11616/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11616/click.json',
-                    },
-                    {
-                        src: 'src/target/electron/behaviors/1dbc51200e11617/click.json',
-                        dest: 'src/system/behaviors/1dbc51200e11617/click.json',
-                    },
-                    {
-                        src: 'src/target/electron/behaviors/13a291c27f16314/click.json',
-                        dest: 'src/system/behaviors/13a291c27f16314/click.json',
-                    },
-                    {
-                        src: 'src/target/electron/behaviors/13f70137b61b19b/click.json',
-                        dest: 'src/system/behaviors/13f70137b61b19b/click.json',
                     }
                 ]
             },
@@ -1062,7 +982,6 @@ module.exports = function (grunt) {
         'copy:lib',
         'copy:css',
         'copy:html-web',
-        'copy:behaviors-web',
         'copy:components-web',
         'system-json',
         'merge-json',
@@ -1076,7 +995,6 @@ module.exports = function (grunt) {
         'copy:lib',
         'copy:css',
         'copy:html-web',
-        'copy:behaviors-web',
         'copy:components-web',
         'system-json',
         'merge-json',
@@ -1091,7 +1009,6 @@ module.exports = function (grunt) {
         'copy:lib',
         'copy:css',
         'copy:html-electron',
-        'copy:behaviors-electron',
         'copy:components-electron',
         'system-json',
         'merge-json',
