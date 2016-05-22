@@ -741,217 +741,217 @@
 		}
 	},
 	"behaviors": {
-		"11ea81443517f11": {
-			"_id": "11ea81443517f11",
+		"1714016dc914084": {
+			"_id": "1714016dc914084",
 			"component": "10bcb1a0511e09f",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-create').tooltip('hide');\n        var message = this.require('message'),\n    designer = this.require('designer');\n    \n    if (!designer.system() && designer.context() !== 'system') {\n        message.warning('you have no system: create first a system to continue.');\n    } else {\n        designer.workspace().create();\n    }\n}"
 		},
-		"1b6f51faec15363": {
-			"_id": "1b6f51faec15363",
+		"1a5da1812c14499": {
+			"_id": "1a5da1812c14499",
 			"component": "13a291c27f16310",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"182a511fe61518d": {
-			"_id": "182a511fe61518d",
+		"1a291121b81f6e2": {
+			"_id": "1a291121b81f6e2",
 			"component": "13a291c27f16311",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1c4fc1672f1e362": {
-			"_id": "1c4fc1672f1e362",
+		"18b641791a114c6": {
+			"_id": "18b641791a114c6",
 			"component": "13a291c27f16313",
 			"state": "click",
 			"action": "function click() {\n    var DialogShare = this.require('DialogShare'),\n    system = this.require('designer').system();\n    \n    if (system && Object.keys(system).length) {\n        DialogShare = new DialogShare({\n            'title': 'Copy the link to the system'\n        });\n        DialogShare.show();\n        DialogShare.on('ok', function () {\n            this.hide();\n        });\n    }    \n}"
 		},
-		"1275510efe162f1": {
-			"_id": "1275510efe162f1",
+		"187a711e621c714": {
+			"_id": "187a711e621c714",
 			"component": "13a291c27f16314",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/quick-start', '_blank', true); \n}"
 		},
-		"178d61b80417b78": {
-			"_id": "178d61b80417b78",
+		"19e6f1e4601501f": {
+			"_id": "19e6f1e4601501f",
 			"component": "13f70137b61b19b",
 			"state": "click",
-			"action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n    \n    if (designer.system()) {\n        $('#designer-toolbar-item-publish').tooltip('hide');\n        if (runWidow && !runWidow.closed) {\n            runWidow.document.location.reload();\n        } else {\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n        }\n    } else {\n        message.warning('you have no system to run.')\n    }\n}"
+			"action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n    \n    if (designer.system()) {\n        $('#designer-toolbar-item-publish').tooltip('hide');\n        if (runWidow && !runWidow.closed) {\n            if (typeof require === 'undefined') {\n                runWidow.document.location.reload();\n            } else {\n                // TODO \n                // to reload when implemted in electron\n            }\n        } else {\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n        }\n    } else {\n        message.warning('you have no system to run.')\n    }\n}"
 		},
-		"15c3b1524313092": {
-			"_id": "15c3b1524313092",
+		"1547817ad718493": {
+			"_id": "1547817ad718493",
 			"component": "163a01b7ca1935c",
 			"state": "click",
 			"action": "function click() { \n    var debugWindow = this.require('designer').debugWindow(),\n        config = this.require('storage').get('system-designer-config'),\n        message = this.require('message');\n    \n   $('#designer-toolbar-item-refresh').tooltip('hide');    \n   if (config && config.serverName) {\n       if (debugWindow && !debugWindow.closed) {\n          this.require('channel').sync();\n       } else {\n          this.require('designer').debugWindow(this.require('designer').open(config.serverName, 'debug'));\n          this.require('channel').sync();\n       }\n   } else {\n       message.warning('no url set. Please set the url in the configuration panel.');\n   }\n}"
 		},
-		"159c61ff2b139c3": {
-			"_id": "159c61ff2b139c3",
+		"101511168c164db": {
+			"_id": "101511168c164db",
 			"component": "163a01b7ca1935d",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-import').tooltip('hide');\n        var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Import a system'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name = '',\n            propName = '',\n            modelName = '',\n            compId = '',\n            designer = this.require('designer'),\n            schemas = designer.system().schemas(),\n            models = designer.system().models(),\n            types = designer.system().types(),\n            components = designer.system().components(),\n            behaviors = designer.system().behaviors(),\n            system = designer.system(),\n            message = this.require('message');\n\n        sys = this.data();\n        if (Object.keys(sys).length) {\n            // schemas\n            for (name in sys.schemas) {\n                if (schemas[name]) {\n                    for (propName in sys.schemas[name]) {\n                        schemas[name][propName] = sys.schemas[name][propName];\n                    }\n                } else {\n                    schemas[name] = sys.schemas[name];\n                }\n            }\n            // models\n            for (name in sys.models) {\n                if (models[name]) {\n                    for (propName in sys.models[name]) {\n                        models[name][propName] = sys.models[name][propName];\n                    }\n                } else {\n                    models[name] = sys.models[name];\n                }\n            }\n            // types\n            for (name in sys.types) {\n                if (types[name]) {\n                    for (propName in sys.types[name]) {\n                        types[name][propName] = sys.types[name][propName];\n                    }\n                } else {\n                    types[name] = sys.types[name];\n                }\n            }\n            // behaviors\n            for (name in sys.behaviors) {\n                if (name !== sys._id) {\n                    behaviors[name] = sys.behaviors[name];\n                }\n            }\n            // components\n            for (modelName in sys.components) {\n                if (!components[modelName]) {\n                    components[modelName] = {};\n                }\n                for (compId in sys.components[modelName]) {\n                    if (components[modelName][compId]) {\n                        for (propName in sys.components[modelName][compId]) {\n                            components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n                        }\n                    } else {\n                        components[modelName][compId] = sys.components[modelName][compId];\n                    }\n                }\n            }\n            \n            designer.system().schemas(schemas);\n            designer.system().models(models);\n            designer.system().types(types);\n            designer.system().behaviors(behaviors);\n            designer.system().components(components);\n            \n            designer.save();\n            \n            designer.spaces().render();\n            designer.workspace().refresh();\n    \n            this.hide();\n            message.success('merge of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid.');\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            \n            // empty log\n            designer.logs().forEach(function (item) {\n                this.logs().pop();\n            }.bind(designer));\n            \n            designer.save();\n            \n            designer.space(sys.name());\n            designer.spaces().render();\n            designer.workspace().refresh();\n    \n            this.hide();\n\n            message.success('importation of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid');\n        }\n    });\n}"
 		},
-		"1bb79173e815eb0": {
-			"_id": "1bb79173e815eb0",
+		"116951b9ed11bef": {
+			"_id": "116951b9ed11bef",
 			"component": "163a01b7ca1935e",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-export').tooltip('hide');\n        var Dialog = this.require('DialogExport');\n    var dialog = new Dialog({\n        'title': 'Export the current system',\n    });\n    dialog.show();\n    \n    dialog.on('ok', function () {\n        var message = this.require('message');\n        // code inspired from the blog post\n        // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n        if (this.require('designer').system()) {\n            var system = null,\n            textToWrite = null,\n            textFileAsBlob = null,\n            fileNameToSaveAs = null,\n            downloadLink = null,\n            js = '';\n            source = '',\n            DialogShare = this.require('DialogShare');\n            \n            system = this.require('db').collections().System.find({\n                '_id': this.require('designer').system().id()\n            })[0];\n            system = JSON.parse(JSON.stringify(system));\n            delete system.classInfo;\n            \n            if ($('#designer-dialog-export-url').prop(\"checked\")) {\n                this.hide();\n\n                DialogShare = new DialogShare({\n                    'title': 'Copy the link to the system'\n                });\n                DialogShare.show();\n                DialogShare.on('ok', function () {\n                    this.hide();\n                });\n                \n            } else {\n            \n                if ($('#designer-dialog-export-json').prop(\"checked\")) {\n                    textToWrite = JSON.stringify(system);\n                    fileNameToSaveAs = this.require('designer').system().name() + '.json';\n                }\n                \n                if ($('#designer-dialog-export-html').prop(\"checked\")) {\n                    js = decodeURI(this.require('system-runtime.min.js').source());\n                    source = this.require('export-app.html').source();\n                    source = source\n                                .replace(/{{library}}/g, js)\n                                .replace(/{{library}}/g, function() {return '\\$&'})\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.html';\n                }\n                \n                if ($('#designer-dialog-export-node').prop(\"checked\")) {\n                    source = decodeURI(this.require('app.js').source());\n                    source = source\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                }\n                \n            \ttextFileAsBlob = new Blob([textToWrite], {\n            \t    type:'text/plain'\n            \t});\n            \tdownloadLink = document.createElement('a');\n            \t\n            \tdownloadLink.download = fileNameToSaveAs;\n            \tdownloadLink.innerHTML = 'Download File';\n            \tif (window.webkitURL != null) {\n            \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n            \t} else {\n            \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n            \t\tdownloadLink.onclick = function (event) {\n            \t\t    document.body.removeChild(event.target)\n            \t\t};\n            \t\tdownloadLink.style.display = 'none';\n            \t\tdocument.body.appendChild(downloadLink);\n            \t}\n            \n            \tdownloadLink.click();\n            \tthis.hide();\n            }\n        \t\n        } else {\n            message.warning('you have no system to export.')\n        }\n    });\n}"
 		},
-		"1ed4013bfe1d21c": {
-			"_id": "1ed4013bfe1d21c",
+		"12dda187a41f5d6": {
+			"_id": "12dda187a41f5d6",
 			"component": "16a55136141d9ac",
 			"state": "click",
 			"action": "function click() {\n  this.require('designer').clear(); }"
 		},
-		"1d44a1c94a12887": {
-			"_id": "1d44a1c94a12887",
+		"1fe501e4471747d": {
+			"_id": "1fe501e4471747d",
 			"component": "1dbc51200e11510",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true); \n}"
 		},
-		"1281b1587e10b62": {
-			"_id": "1281b1587e10b62",
+		"1a14312f551c57e": {
+			"_id": "1a14312f551c57e",
 			"component": "1dbc51200e11610",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1362814934196b0": {
-			"_id": "1362814934196b0",
+		"1db6915c1f14391": {
+			"_id": "1db6915c1f14391",
 			"component": "1dbc51200e11611",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
 		},
-		"1dd971d4181bbda": {
-			"_id": "1dd971d4181bbda",
+		"1450e1888b13618": {
+			"_id": "1450e1888b13618",
 			"component": "1dbc51200e11612",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1b51e14e2d13252": {
-			"_id": "1b51e14e2d13252",
+		"12a9d1d0fc14730": {
+			"_id": "12a9d1d0fc14730",
 			"component": "1dbc51200e11613",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
 		},
-		"1a4ec1b61111954": {
-			"_id": "1a4ec1b61111954",
+		"139301d21719542": {
+			"_id": "139301d21719542",
 			"component": "1dbc51200e11614",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"124d81a3611458d": {
-			"_id": "124d81a3611458d",
+		"1dbaf1ee6e1b2e9": {
+			"_id": "1dbaf1ee6e1b2e9",
 			"component": "1dbc51200e11615",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/edit-a-model', '_blank', true); \n}"
 		},
-		"1316c110701b40d": {
-			"_id": "1316c110701b40d",
+		"175631bde813ea3": {
+			"_id": "175631bde813ea3",
 			"component": "1dbc51200e11616",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n}"
 		},
-		"1f1f21b915110a2": {
-			"_id": "1f1f21b915110a2",
+		"1baaa1c1c01c056": {
+			"_id": "1baaa1c1c01c056",
 			"component": "1dbc51200e11617",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true);\n}"
 		},
-		"1c5111aebc1ee92": {
-			"_id": "1c5111aebc1ee92",
+		"1c7601b14314382": {
+			"_id": "1c7601b14314382",
 			"component": "1dbc51200e116e10",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-type', '_blank', true); \n}"
 		},
-		"1b52117d94159e4": {
-			"_id": "1b52117d94159e4",
+		"1ef111c7701a8c1": {
+			"_id": "1ef111c7701a8c1",
 			"component": "1dbc51200e116e3",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-config').tooltip('hide');\n var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        var message = this.require('message');\n        \n        this.hide();\n        message.success('configuration saved.')\n    });\n}"
 		},
-		"121eb1ffa7156fb": {
-			"_id": "121eb1ffa7156fb",
+		"16c1e1f9c111c0d": {
+			"_id": "16c1e1f9c111c0d",
 			"component": "1dbc51200e116e4",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
 		},
-		"1af0c145841d6e3": {
-			"_id": "1af0c145841d6e3",
+		"1950a10dfe1773f": {
+			"_id": "1950a10dfe1773f",
 			"component": "1dbc51200e116e5",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
 		},
-		"1cd42128f11d1c8": {
-			"_id": "1cd42128f11d1c8",
+		"18b94170ec11955": {
+			"_id": "18b94170ec11955",
 			"component": "1dbc51200e116e6",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1ebca103dc15515": {
-			"_id": "1ebca103dc15515",
+		"14e081ad8e12d13": {
+			"_id": "14e081ad8e12d13",
 			"component": "1dbc51200e116e7",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
 		},
-		"164ac136751da9f": {
-			"_id": "164ac136751da9f",
+		"1a4a51d61216f88": {
+			"_id": "1a4a51d61216f88",
 			"component": "1dbc51200e116e8",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1baf71edce169fa": {
-			"_id": "1baf71edce169fa",
+		"19fcd1c44c1255c": {
+			"_id": "19fcd1c44c1255c",
 			"component": "1dbc51200e116e9",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
 		},
-		"16f9f17e571bec4": {
-			"_id": "16f9f17e571bec4",
+		"1e065142c71de7c": {
+			"_id": "1e065142c71de7c",
 			"component": "1dbc51200e11z10",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n}"
 		},
-		"1c7721c91c1aa7f": {
-			"_id": "1c7721c91c1aa7f",
+		"16af217f7a18736": {
+			"_id": "16af217f7a18736",
 			"component": "1dbc51220e116e1",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"143261243215852": {
-			"_id": "143261243215852",
+		"140951d15618c51": {
+			"_id": "140951d15618c51",
 			"component": "Designer",
 			"state": "open",
 			"action": "function open(url, target, isExt) {\n    var ref = null;\n    \n    if (typeof require === 'undefined') {\n        ref = window.open(url, target);\n    } else {\n        if (isExt) {\n            ref = require('electron').shell.openExternal(url ,target);  \n        } else {\n            ref = window.open(url, target);\n        }\n    }\n    return ref;\n}"
 		},
-		"16045139d31f434": {
-			"_id": "16045139d31f434",
+		"1adb11380f17e5a": {
+			"_id": "1adb11380f17e5a",
 			"component": "Message",
 			"state": "danger",
 			"action": "function danger(message) {var html = this.require('message-alert-danger.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>error:</strong> ' + message));$('.designer-message-danger').fadeIn(500);setTimeout(function () {$('.designer-message-danger').fadeOut(1000);}, 4000);}"
 		},
-		"11ad41604514a9a": {
-			"_id": "11ad41604514a9a",
+		"162791e1fd177ce": {
+			"_id": "162791e1fd177ce",
 			"component": "Message",
 			"state": "info",
 			"action": "function info(message) {var html = this.require('message-alert-info.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-info').fadeIn(500);setTimeout(function () {$('.designer-message-info').fadeOut(1000);}, 4000);}"
 		},
-		"1412e1249216bde": {
-			"_id": "1412e1249216bde",
+		"1f44b167751f473": {
+			"_id": "1f44b167751f473",
 			"component": "Message",
 			"state": "success",
 			"action": "function success(message) {var html = this.require('message-alert-success.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-success').fadeIn(500);setTimeout(function () {$('.designer-message-success').fadeOut(1000);}, 4000);}"
 		},
-		"1da7c114cd13018": {
-			"_id": "1da7c114cd13018",
+		"1601d16ccc10248": {
+			"_id": "1601d16ccc10248",
 			"component": "Message",
 			"state": "warning",
 			"action": "function warning(message) {var html = this.require('message-alert-warning.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>warning:</strong> ' + message));$('.designer-message-warning').fadeIn(500);setTimeout(function () {$('.designer-message-warning').fadeOut(1000);}, 4000);}"
 		}
 	},
 	"schemas": {
-		"18665164ab14878": {
+		"161171411c11a9a": {
 			"_name": "CSS",
 			"source": "property"
 		},
-		"1ceaf1ee73156da": {
+		"1cdd9156701b6e4": {
 			"_name": "Designer",
 			"version": "property",
 			"menubar": "property",
@@ -986,7 +986,7 @@
 			"render": "event",
 			"logs": "collection"
 		},
-		"1357b1f96a12201": {
+		"1a6461257f1d07f": {
 			"_name": "DesignerState",
 			"system": "property",
 			"type": "property",
@@ -994,7 +994,7 @@
 			"component": "property",
 			"clear": "method"
 		},
-		"1fd591c4ed1f6a5": {
+		"1c7c01f9a8161c2": {
 			"_name": "Dialog",
 			"title": "property",
 			"message": "property",
@@ -1004,37 +1004,37 @@
 			"show": "method",
 			"hide": "method"
 		},
-		"1ca1012d3f1ab2b": {
+		"17fc2171fa1e560": {
 			"_name": "DialogBehaviorCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"10cb010ff815f08": {
+		"12ef0135b91241f": {
 			"_name": "DialogCheck",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"14b441f0b81270b": {
+		"1a98b14a171c159": {
 			"_name": "DialogComponentCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"16f381512c136f3": {
+		"13580109b619a83": {
 			"_name": "DialogConfig",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"19004107211b5ef": {
+		"182b213aa713ab0": {
 			"_name": "DialogCopyright",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1372213e3c105ae": {
+		"114931c68d132a2": {
 			"_name": "DialogDropFile",
 			"_inherit": [
 				"Dialog"
@@ -1042,19 +1042,19 @@
 			"mergeSystem": "event",
 			"importSystem": "event"
 		},
-		"13fd51b26011b25": {
+		"181e01e96110c41": {
 			"_name": "DialogExport",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"15fb512db21fa06": {
+		"1530414cbe1292e": {
 			"_name": "DialogImport",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"14a66129a319065": {
+		"1f2a11ae211ef5f": {
 			"_name": "DialogImportFile",
 			"_inherit": [
 				"Dialog"
@@ -1062,78 +1062,78 @@
 			"mergeSystem": "event",
 			"importSystem": "event"
 		},
-		"1a8291777317d52": {
+		"182391b318169f2": {
 			"_name": "DialogModelCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"169611c13a14163": {
+		"15032179721bd85": {
 			"_name": "DialogSchemaCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"177191d7e31a82e": {
+		"1e66d11d9119bba": {
 			"_name": "DialogShare",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1802f17c2915ee3": {
+		"1a434169f21b136": {
 			"_name": "DialogSync",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"11a501185d1aaaa": {
+		"18f1a1c1cb10c77": {
 			"_name": "DialogSystemCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1a8fc16c4215b84": {
+		"1893b157111fc6e": {
 			"_name": "DialogTypeCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"132671396514d01": {
+		"1071b1226d12b20": {
 			"_name": "DialogWelcome",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"145b912d58165ec": {
+		"17ed91478f1c950": {
 			"_name": "Editor",
 			"editor": "property",
 			"render": "method"
 		},
-		"1d4431aed611fcb": {
+		"194631dd0818658": {
 			"_name": "HTML",
 			"source": "property"
 		},
-		"1f3021df1d1427b": {
+		"10cd1145b91c972": {
 			"_name": "JS",
 			"source": "property"
 		},
-		"1937210a38106e3": {
+		"16f7f15fc014faf": {
 			"_name": "JSON",
 			"source": "property"
 		},
-		"114091729b1e0fe": {
+		"183f7190b01e0be": {
 			"_name": "Log",
 			"type": "property",
 			"log": "property"
 		},
-		"12c271ffb512e25": {
+		"1da7c176c51b928": {
 			"_name": "Menu",
 			"items": "collection",
 			"hide": "method",
 			"show": "method",
 			"render": "method"
 		},
-		"1b8971f6b017c83": {
+		"10ea81b4781320d": {
 			"_name": "MenuAction",
 			"html": "property",
 			"position": "property",
@@ -1142,7 +1142,7 @@
 			"show": "method",
 			"render": "method"
 		},
-		"19f8e17a08170df": {
+		"18ce215b39100e3": {
 			"_name": "MenuBar",
 			"designer": "property",
 			"logo": "property",
@@ -1152,7 +1152,7 @@
 			"render": "method",
 			"clear": "method"
 		},
-		"1af381a3d611a13": {
+		"16e8d19794199a0": {
 			"_name": "MenuHeader",
 			"html": "property",
 			"type": "property",
@@ -1160,7 +1160,7 @@
 			"show": "method",
 			"render": "method"
 		},
-		"105131ca2a11573": {
+		"1f9fd12c4917841": {
 			"_name": "MenuItem",
 			"html": "property",
 			"position": "property",
@@ -1171,27 +1171,27 @@
 			"render": "method",
 			"click": "event"
 		},
-		"15ba7138361c88c": {
+		"189d51ed3c11b22": {
 			"_name": "MenuLogo",
 			"html": "property",
 			"hide": "method",
 			"show": "method",
 			"render": "method"
 		},
-		"11a731eb1d1ca70": {
+		"14c041506c1ccb4": {
 			"_name": "MenuSearch",
 			"_inherit": [
 				"MenuAction"
 			]
 		},
-		"15b52139201b48c": {
+		"134f313a751cd9c": {
 			"_name": "Message",
 			"success": "method",
 			"info": "method",
 			"warning": "method",
 			"danger": "method"
 		},
-		"19b3118e881abb5": {
+		"14a431166916f5e": {
 			"_name": "ModelBehavior",
 			"uuid": "property",
 			"title": "property",
@@ -1200,7 +1200,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"15e071a5be18050": {
+		"1e6a71fccc1bd3f": {
 			"_name": "ModelClass",
 			"title": "property",
 			"uuid": "property",
@@ -1211,7 +1211,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1a754178c81790e": {
+		"1606c1181615ca4": {
 			"_name": "ModelComponent",
 			"title": "property",
 			"uuid": "property",
@@ -1222,7 +1222,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1b48319d5211342": {
+		"10b3316eb018654": {
 			"_name": "ModelLog",
 			"title": "property",
 			"uuid": "property",
@@ -1232,7 +1232,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1bf3a1945c1eb90": {
+		"1b2a51737612237": {
 			"_name": "ModelSchema",
 			"title": "property",
 			"uuid": "property",
@@ -1243,7 +1243,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1009c17d181f826": {
+		"11b861dc0b15c84": {
 			"_name": "ModelSystem",
 			"title": "property",
 			"uuid": "property",
@@ -1253,7 +1253,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1a7b6167551999d": {
+		"1cb2711e12156c1": {
 			"_name": "ModelType",
 			"title": "property",
 			"uuid": "property",
@@ -1307,36 +1307,36 @@
 			"logWarn": "event",
 			"logError": "event"
 		},
-		"186a41ba3018933": {
+		"149531d89e163f4": {
 			"_name": "Search",
 			"search": "method"
 		},
-		"1e9e710802141fc": {
+		"108b11c505157f6": {
 			"_name": "Server",
 			"designer": "property",
 			"start": "method"
 		},
-		"1d34a100c91ecea": {
+		"155831459a151a2": {
 			"_name": "SpaceItem",
 			"name": "property",
 			"uuid": "property",
 			"click": "event"
 		},
-		"1e557156761e662": {
+		"150f919d941d739": {
 			"_name": "Spaces",
 			"designer": "property",
 			"items": "collection",
 			"render": "method",
 			"clear": "method"
 		},
-		"1ec7c1cf1f17f1f": {
+		"1b3b91a3541449b": {
 			"_name": "Store",
 			"uuid": "property",
 			"collection": "property",
 			"data": "property",
 			"extra": "property"
 		},
-		"1ea9714d841d73b": {
+		"10f951365219d1f": {
 			"_name": "System",
 			"name": "property",
 			"master": "property",
@@ -1349,13 +1349,13 @@
 			"types": "property",
 			"components": "property"
 		},
-		"1e9691697f11f17": {
+		"1c367114971753c": {
 			"_name": "ToolBar",
 			"designer": "property",
 			"items": "collection",
 			"render": "method"
 		},
-		"1b9d81039416296": {
+		"14f251ef3818fa7": {
 			"_name": "ToolBarItem",
 			"html": "property",
 			"position": "property",
@@ -1365,7 +1365,7 @@
 			"render": "method",
 			"click": "event"
 		},
-		"1b0091e3561a3fb": {
+		"18dae1aefa16d43": {
 			"_name": "Workspace",
 			"designer": "property",
 			"create": "method",
@@ -1376,7 +1376,7 @@
 		}
 	},
 	"models": {
-		"12bae18bd517c2b": {
+		"107a211b6312018": {
 			"_name": "CSS",
 			"source": {
 				"type": "css",
@@ -1384,9 +1384,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "12bae18bd517c2b"
+			"_id": "107a211b6312018"
 		},
-		"1f4b71c8a3106ef": {
+		"14f6015bb917f6a": {
 			"_name": "Designer",
 			"version": {
 				"type": "string",
@@ -1605,9 +1605,9 @@
 					}
 				]
 			},
-			"_id": "1f4b71c8a3106ef"
+			"_id": "14f6015bb917f6a"
 		},
-		"1dcb61cd8615803": {
+		"1cfaf11a1b1a835": {
 			"_name": "DesignerState",
 			"system": {
 				"type": "string",
@@ -1634,9 +1634,9 @@
 				"default": ""
 			},
 			"clear": {},
-			"_id": "1dcb61cd8615803"
+			"_id": "1cfaf11a1b1a835"
 		},
-		"10f021630d14914": {
+		"1cd1d11bfa13a2f": {
 			"_name": "Dialog",
 			"title": {
 				"type": "string",
@@ -1660,77 +1660,77 @@
 			"hide": {},
 			"cancel": {},
 			"ok": {},
-			"_id": "10f021630d14914"
+			"_id": "1cd1d11bfa13a2f"
 		},
-		"1e1b11cc97145c5": {
+		"14c581bdaf1dab6": {
 			"_name": "DialogBehaviorCreation",
-			"_id": "1e1b11cc97145c5"
+			"_id": "14c581bdaf1dab6"
 		},
-		"194081e1891441c": {
+		"16ae01273f145c7": {
 			"_name": "DialogCheck",
-			"_id": "194081e1891441c"
+			"_id": "16ae01273f145c7"
 		},
-		"128211c04814227": {
+		"10ca7147401fdd6": {
 			"_name": "DialogComponentCreation",
-			"_id": "128211c04814227"
+			"_id": "10ca7147401fdd6"
 		},
-		"1b7e31168a1668d": {
+		"1d7be1e8a91a4b6": {
 			"_name": "DialogConfig",
-			"_id": "1b7e31168a1668d"
+			"_id": "1d7be1e8a91a4b6"
 		},
-		"109431320c117ce": {
+		"1b993128e6133c5": {
 			"_name": "DialogCopyright",
-			"_id": "109431320c117ce"
+			"_id": "1b993128e6133c5"
 		},
-		"128fa1a25914992": {
+		"1b17d1cb7019434": {
 			"_name": "DialogDropFile",
 			"mergeSystem": {},
 			"importSystem": {},
-			"_id": "128fa1a25914992"
+			"_id": "1b17d1cb7019434"
 		},
-		"1871c15dcb1cf90": {
+		"1bd121380a18cb1": {
 			"_name": "DialogExport",
-			"_id": "1871c15dcb1cf90"
+			"_id": "1bd121380a18cb1"
 		},
-		"13c7b19e1114d78": {
+		"10b011d41911999": {
 			"_name": "DialogImport",
-			"_id": "13c7b19e1114d78"
+			"_id": "10b011d41911999"
 		},
-		"1c3981e67817174": {
+		"1372416dc0173a8": {
 			"_name": "DialogImportFile",
 			"mergeSystem": {},
 			"importSystem": {},
-			"_id": "1c3981e67817174"
+			"_id": "1372416dc0173a8"
 		},
-		"108f51f23f181c8": {
+		"1ee351ed1019664": {
 			"_name": "DialogModelCreation",
-			"_id": "108f51f23f181c8"
+			"_id": "1ee351ed1019664"
 		},
-		"15cdc1f7071e4d9": {
+		"1b141149bf1e925": {
 			"_name": "DialogSchemaCreation",
-			"_id": "15cdc1f7071e4d9"
+			"_id": "1b141149bf1e925"
 		},
-		"158b8111931a3c5": {
+		"1f85f17e1c190f6": {
 			"_name": "DialogShare",
-			"_id": "158b8111931a3c5"
+			"_id": "1f85f17e1c190f6"
 		},
-		"19a7e1f9c1150db": {
+		"1f074113b01e881": {
 			"_name": "DialogSync",
-			"_id": "19a7e1f9c1150db"
+			"_id": "1f074113b01e881"
 		},
-		"1694d1a3671cd2e": {
+		"12b661fa761a69c": {
 			"_name": "DialogSystemCreation",
-			"_id": "1694d1a3671cd2e"
+			"_id": "12b661fa761a69c"
 		},
-		"165581070b1743b": {
+		"17458137f31418b": {
 			"_name": "DialogTypeCreation",
-			"_id": "165581070b1743b"
+			"_id": "17458137f31418b"
 		},
-		"167d5110501e4d4": {
+		"1326f18e3f1834b": {
 			"_name": "DialogWelcome",
-			"_id": "167d5110501e4d4"
+			"_id": "1326f18e3f1834b"
 		},
-		"1b14e1dded13680": {
+		"1fecd1907a1efe5": {
 			"_name": "Editor",
 			"editor": {
 				"type": "ace",
@@ -1739,9 +1739,9 @@
 				"default": {}
 			},
 			"render": {},
-			"_id": "1b14e1dded13680"
+			"_id": "1fecd1907a1efe5"
 		},
-		"1e13317c36141d5": {
+		"14c831c17f12935": {
 			"_name": "HTML",
 			"source": {
 				"type": "html",
@@ -1749,9 +1749,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "1e13317c36141d5"
+			"_id": "14c831c17f12935"
 		},
-		"120711b17d10eea": {
+		"195c819a8f1e7b9": {
 			"_name": "JS",
 			"source": {
 				"type": "javascript",
@@ -1759,9 +1759,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "120711b17d10eea"
+			"_id": "195c819a8f1e7b9"
 		},
-		"1acae1d85d1e622": {
+		"1373f118081c737": {
 			"_name": "JSON",
 			"source": {
 				"type": "string",
@@ -1769,9 +1769,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "1acae1d85d1e622"
+			"_id": "1373f118081c737"
 		},
-		"1a8761f9e015eaa": {
+		"1f56b1e0161ac43": {
 			"_name": "Log",
 			"type": {
 				"type": "string",
@@ -1785,9 +1785,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "1a8761f9e015eaa"
+			"_id": "1f56b1e0161ac43"
 		},
-		"15e2d1e2381326d": {
+		"180641d0431ad0e": {
 			"_name": "Menu",
 			"items": {
 				"type": [
@@ -1800,9 +1800,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "15e2d1e2381326d"
+			"_id": "180641d0431ad0e"
 		},
-		"1bf1a1f94a1b7cb": {
+		"140b81f20d1837f": {
 			"_name": "MenuAction",
 			"html": {
 				"type": "@HTML",
@@ -1825,9 +1825,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1bf1a1f94a1b7cb"
+			"_id": "140b81f20d1837f"
 		},
-		"13fcd1633f15f83": {
+		"172dd15b1f1753e": {
 			"_name": "MenuBar",
 			"designer": {
 				"type": "@Designer",
@@ -1865,9 +1865,9 @@
 			},
 			"clear": {},
 			"render": {},
-			"_id": "13fcd1633f15f83"
+			"_id": "172dd15b1f1753e"
 		},
-		"12f2f185b314444": {
+		"1ce7819143188cf": {
 			"_name": "MenuHeader",
 			"html": {
 				"type": "@HTML",
@@ -1884,9 +1884,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "12f2f185b314444"
+			"_id": "1ce7819143188cf"
 		},
-		"183ed1d64c1a461": {
+		"1e1cb11aaa18c34": {
 			"_name": "MenuItem",
 			"html": {
 				"type": "@HTML",
@@ -1916,9 +1916,9 @@
 			"show": {},
 			"render": {},
 			"click": {},
-			"_id": "183ed1d64c1a461"
+			"_id": "1e1cb11aaa18c34"
 		},
-		"13c7f1ba961f5f1": {
+		"12f311aa5e19d95": {
 			"_name": "MenuLogo",
 			"html": {
 				"type": "@HTML",
@@ -1929,13 +1929,13 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "13c7f1ba961f5f1"
+			"_id": "12f311aa5e19d95"
 		},
-		"1e65e1865e1503b": {
+		"1c98216fb715041": {
 			"_name": "MenuSearch",
-			"_id": "1e65e1865e1503b"
+			"_id": "1c98216fb715041"
 		},
-		"1823611a8b1e4c8": {
+		"1a16d1a14710d8a": {
 			"_name": "Message",
 			"success": {
 				"params": [
@@ -1969,9 +1969,9 @@
 					}
 				]
 			},
-			"_id": "1823611a8b1e4c8"
+			"_id": "1a16d1a14710d8a"
 		},
-		"1a9bb12dd21823a": {
+		"12b6d15558158bb": {
 			"_name": "ModelBehavior",
 			"uuid": {
 				"type": "string",
@@ -1994,9 +1994,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1a9bb12dd21823a"
+			"_id": "12b6d15558158bb"
 		},
-		"1f79c1dcb81651c": {
+		"1d8c113e8e16f4c": {
 			"_name": "ModelClass",
 			"title": {
 				"type": "string",
@@ -2031,9 +2031,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1f79c1dcb81651c"
+			"_id": "1d8c113e8e16f4c"
 		},
-		"1e1d41d8f21d529": {
+		"1df0c19d841fbdd": {
 			"_name": "ModelComponent",
 			"title": {
 				"type": "string",
@@ -2068,9 +2068,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1e1d41d8f21d529"
+			"_id": "1df0c19d841fbdd"
 		},
-		"15cfa1ebba169bf": {
+		"1f80a1733b1581b": {
 			"_name": "ModelLog",
 			"title": {
 				"type": "string",
@@ -2099,9 +2099,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "15cfa1ebba169bf"
+			"_id": "1f80a1733b1581b"
 		},
-		"12a0c1e22f16ca9": {
+		"10dee1c65e194fd": {
 			"_name": "ModelSchema",
 			"title": {
 				"type": "string",
@@ -2136,9 +2136,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "12a0c1e22f16ca9"
+			"_id": "10dee1c65e194fd"
 		},
-		"19668179d516c69": {
+		"13c1d151c117ea9": {
 			"_name": "ModelSystem",
 			"title": {
 				"type": "string",
@@ -2167,9 +2167,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "19668179d516c69"
+			"_id": "13c1d151c117ea9"
 		},
-		"132aa19baa13315": {
+		"1e5731b3621214b": {
 			"_name": "ModelType",
 			"title": {
 				"type": "string",
@@ -2198,7 +2198,7 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "132aa19baa13315"
+			"_id": "1e5731b3621214b"
 		},
 		"135c71078810af2": {
 			"_id": "135c71078810af2",
@@ -2617,12 +2617,12 @@
 				]
 			}
 		},
-		"1aa901e3e01a2f1": {
+		"1b22d183ba1879e": {
 			"_name": "Search",
 			"search": {},
-			"_id": "1aa901e3e01a2f1"
+			"_id": "1b22d183ba1879e"
 		},
-		"1306513c83150d9": {
+		"10ed81185714497": {
 			"_name": "Server",
 			"designer": {
 				"type": "@Designer",
@@ -2631,9 +2631,9 @@
 				"default": {}
 			},
 			"start": {},
-			"_id": "1306513c83150d9"
+			"_id": "10ed81185714497"
 		},
-		"1c03d103ec1ae9d": {
+		"11cad141dd19d5d": {
 			"_name": "SpaceItem",
 			"name": {
 				"type": "string",
@@ -2648,9 +2648,9 @@
 				"default": ""
 			},
 			"click": {},
-			"_id": "1c03d103ec1ae9d"
+			"_id": "11cad141dd19d5d"
 		},
-		"1d0b01d3461842a": {
+		"1a87d108971fb40": {
 			"_name": "Spaces",
 			"designer": {
 				"type": "@Designer",
@@ -2668,9 +2668,9 @@
 			},
 			"clear": {},
 			"render": {},
-			"_id": "1d0b01d3461842a"
+			"_id": "1a87d108971fb40"
 		},
-		"18f7513ec41cda9": {
+		"18a481777a150b8": {
 			"_name": "Store",
 			"uuid": {
 				"type": "string",
@@ -2696,9 +2696,9 @@
 				"mandatory": false,
 				"default": {}
 			},
-			"_id": "18f7513ec41cda9"
+			"_id": "18a481777a150b8"
 		},
-		"14ce71465518802": {
+		"1b7ab1b06d1c6ec": {
 			"_name": "System",
 			"name": {
 				"type": "string",
@@ -2760,9 +2760,9 @@
 				"mandatory": false,
 				"default": {}
 			},
-			"_id": "14ce71465518802"
+			"_id": "1b7ab1b06d1c6ec"
 		},
-		"1a3071ac321de30": {
+		"1d4b2135c812701": {
 			"_name": "ToolBar",
 			"designer": {
 				"type": "@Designer",
@@ -2779,9 +2779,9 @@
 				"default": []
 			},
 			"render": {},
-			"_id": "1a3071ac321de30"
+			"_id": "1d4b2135c812701"
 		},
-		"193711a6b219e50": {
+		"12f311879511342": {
 			"_name": "ToolBarItem",
 			"html": {
 				"type": "@HTML",
@@ -2805,9 +2805,9 @@
 			"show": {},
 			"render": {},
 			"click": {},
-			"_id": "193711a6b219e50"
+			"_id": "12f311879511342"
 		},
-		"1ec191b7be18b12": {
+		"1c07015ab2163ed": {
 			"_name": "Workspace",
 			"designer": {
 				"type": "@Designer",
@@ -2820,7 +2820,7 @@
 			"clear": {},
 			"refresh": {},
 			"render": {},
-			"_id": "1ec191b7be18b12"
+			"_id": "1c07015ab2163ed"
 		}
 	},
 	"types": {
