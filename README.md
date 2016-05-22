@@ -1,6 +1,5 @@
 # System Designer
 
-[![npm version](https://badge.fury.io/js/system-designer.svg)](http://badge.fury.io/js/system-designer)
 [![Build Status](https://travis-ci.org/system-sdk/system-designer.svg?branch=master)](https://travis-ci.org/system-sdk/system-designer)
 [![devDependency Status](https://david-dm.org/system-sdk/system-designer/dev-status.svg)](https://david-dm.org/system-sdk/system-designer#info=devDependencies)
 
