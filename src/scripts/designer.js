@@ -932,7 +932,7 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-           this.require('designer').open('system.html#' + that.uuid() + '#description');
+            this.require('designer').open('system.html#' + that.uuid() + '#description');
         }.bind(this));
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
@@ -3683,6 +3683,50 @@ runtime.on('ready', function () {
                 $db.RuntimeMessage.insert(data);
             }
         }.bind(channel), false);
+
+        // TODO SERVER
+        /*
+        channel.on('sync', function () {
+            var self = this;
+            $.getJSON("http://127.0.0.1:8888/sync", function (data) {
+
+                var Dialog = null,
+                    dialog = null;
+
+                Dialog = self.require('Dialog');
+                dialog = new Dialog({
+                    'title': 'A system has been found',
+                    'message': 'Do you wan to import it ?',
+                    'data': data
+                })
+                dialog.show();
+
+                dialog.on('ok', function () {
+                    var System = this.require('System'),
+                        sys = null,
+                        designer = this.require('designer'),
+                        message = this.require('message');
+
+                    if (designer.system()) {
+                        designer.system().destroy();
+                    }
+                    sys = new System(this.data());
+                    designer.system(sys);
+                    designer.save();
+                    designer.workspace().refresh();
+
+                    this.hide();
+
+                    message.success('Capture of the system is done.');
+                });
+            });
+        });
+
+        channel.on('updateComponent', function (id, collection, component) {
+            $.post("http://localhost:8888/updateComponent", component);
+        });*/
+
+        //
 
         this.require('storage').on('changed', function (obj) {
             if (typeof obj['system-designer-message'] !== 'undefined') {
