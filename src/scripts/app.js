@@ -52,30 +52,65 @@ runtime.on('ready', function () {
             }, true);
 
             channel.on('updateSchema', function updateSchema(id, schema) {
-                this.require('metamodel').type(schema);
+                this.require('metamodel').schema(schema);
                 this.require('metamodel').create();
             }, true);
 
             channel.on('deleteSchema', function deleteSchema(id) {
-                $db.Runtime.remove({ '_id': id });
-                this.require('metamodel').create();
+                var search = $db.RuntimeSchema.find({ '_id': id }),
+                    modelName = '',
+                    modelId = '';
+
+                if (search.length) {
+                    modelName = search[0]._name;
+                    $db.RuntimeSchema.remove({ '_id': id });
+
+                    search = $db.RuntimeModel.find({ '_name': modelName });
+                    if (search.length) {
+                        modelId = search[0]._id;
+                        $db.RuntimeModel.remove({ '_id': modelId });
+                        $component.removeFromMemory(modelName);
+                    }
+
+                    search = $db.RuntimeGeneratedModel.find({ '_name': modelName });
+                    if (search.length) {
+                        modelId = search[0]._id;
+                        $db.RuntimeGeneratedModel.remove({ '_id': modelId });
+                        $component.removeFromMemory(modelName);
+                    }
+                    this.require('metamodel').create();
+                }
             }, true);
 
             // model change events
             channel.on('createModel', function createModel(id, model) {
-                this.require('metamodel').schema(model);
+                this.require('metamodel').model(model);
                 this.require('metamodel').create();
             }, true);
 
             channel.on('updateModel', function updateModel(id, model) {
-                this.require('metamodel').type(model);
+                this.require('metamodel').model(model);
                 this.require('metamodel').create();
             }, true);
 
             channel.on('deleteModel', function deleteModel(id) {
-                $db.Runtime.remove({ '_id': id });
+                var search = $db.RuntimeModel.find({ '_id': id }),
+                    modelName = '',
+                    modelId = '';
+
+                if (search.length) {
+                    modelName = search[0]._name;
+                    $db.RuntimeModel.remove({ '_id': id });
+                    $component.removeFromMemory(modelName);
+                }
+
+                search = $db.RuntimeGeneratedModel.find({ '_name': modelName });
+                if (search.length) {
+                    modelId = search[0]._id;
+                    $db.RuntimeGeneratedModel.remove({ '_id': modelId });
+                    $component.removeFromMemory(modelName);
+                }
                 this.require('metamodel').create();
-                $component.removeFromMemory(id);
             }, true);
 
             // type change events
@@ -90,7 +125,7 @@ runtime.on('ready', function () {
             }, true);
 
             channel.on('deleteType', function deleteType(id) {
-                $db.RuntimeType.remove({ '_id': id });
+                $db.RuntimeType.remove({ 'name': id });
                 this.require('metamodel').create();
             }, true);
 
