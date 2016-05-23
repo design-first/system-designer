@@ -268,7 +268,14 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
+            var config = this.require('storage').get('system-designer-config');
+            
             this.require('storage').set('system-designer-message', message);
+            
+            // message for server debug
+            if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
+                $.post(config.urlServer + ':8888/' + message.event, encodeURI(JSON.stringify(message.data)));
+            }
         });
 
         id = document.location.href.split('#')[1];
@@ -283,7 +290,7 @@ runtime.on('ready', function () {
 
         editor.setValue(behavior.action);
 
-        editor.gotoLine(1);
+        editor.gotoLine(2);
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
 

@@ -258,15 +258,22 @@ runtime.on('ready', function () {
             '_id': 'channel'
         });
 
-       channel.on('send', function (message) {
+        channel.on('send', function (message) {
+            var config = this.require('storage').get('system-designer-config');
+
             this.require('storage').set('system-designer-message', message);
+
+            // message for server debug
+            if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
+                $.post(config.urlServer + ':8888/' + message.event, encodeURI(JSON.stringify(message.data)));
+            }
         });
 
         id = document.location.href.split('#')[1];
         systemId = document.location.href.split('#')[2];
-        
+
         schema = this.require('storage').get(systemId).schemas[id];
-        
+
         designer.store().uuid(id);
         designer.store().data(schema);
 

@@ -19,88 +19,55 @@
  */
 
 runtime.on('ready', function () {
+    var system = runtime.system('app');
 
-    runtime.on('ready', function () {
-        var system = runtime.system('app');
-        system.on('main', function () {
-            var RuntimeChannel = null,
-                channel = null,
-                sysid = '',
-                system = '',
-                messages = [];
+    system.on('main', function () {
+        var RuntimeChannel = null,
+            channel = null,
+            sysid = '',
+            system = '',
+            messages = [];
 
-            // get system
-            sysid = document.location.href.split('#')[1];
-            system = this.require('storage').get(sysid);
-            delete system.classInfo;
+        // get system
+        sysid = document.location.href.split('#')[1];
+        system = this.require('storage').get(sysid);
+        delete system.classInfo;
 
-            // create channel              
-            RuntimeChannel = this.require('RuntimeChannel');
-            channel = new RuntimeChannel({
-                '_id': 'channel',
-                '_core': true
-            });
+        // create channel              
+        RuntimeChannel = this.require('RuntimeChannel');
+        channel = new RuntimeChannel({
+            '_id': 'channel',
+            '_core': true
+        });
 
-            channel.on('send', function send(message) {
-                this.require('storage').set('system-designer-message', message);
-            });
+        channel.on('send', function send(message) {
+            this.require('storage').set('system-designer-message', message);
+        }, true, true);
 
-            // schema change events
-            channel.on('createSchema', function createSchema(id, schema) {
-                this.require('metamodel').schema(schema);
-                this.require('metamodel').create();
-            }, true);
+        // schema change events
+        channel.on('createSchema', function createSchema(id, schema) {
+            this.require('metamodel').schema(schema);
+            this.require('metamodel').create();
+        }, true, true);
 
-            channel.on('updateSchema', function updateSchema(id, schema) {
-                this.require('metamodel').schema(schema);
-                this.require('metamodel').create();
-            }, true);
+        channel.on('updateSchema', function updateSchema(id, schema) {
+            this.require('metamodel').schema(schema);
+            this.require('metamodel').create();
+        }, true, true);
 
-            channel.on('deleteSchema', function deleteSchema(id) {
-                var search = $db.RuntimeSchema.find({ '_id': id }),
-                    modelName = '',
-                    modelId = '';
+        channel.on('deleteSchema', function deleteSchema(id) {
+            var search = $db.RuntimeSchema.find({ '_id': id }),
+                modelName = '',
+                modelId = '';
 
+            if (search.length) {
+                modelName = search[0]._name;
+                $db.RuntimeSchema.remove({ '_id': id });
+
+                search = $db.RuntimeModel.find({ '_name': modelName });
                 if (search.length) {
-                    modelName = search[0]._name;
-                    $db.RuntimeSchema.remove({ '_id': id });
-
-                    search = $db.RuntimeModel.find({ '_name': modelName });
-                    if (search.length) {
-                        modelId = search[0]._id;
-                        $db.RuntimeModel.remove({ '_id': modelId });
-                        $component.removeFromMemory(modelName);
-                    }
-
-                    search = $db.RuntimeGeneratedModel.find({ '_name': modelName });
-                    if (search.length) {
-                        modelId = search[0]._id;
-                        $db.RuntimeGeneratedModel.remove({ '_id': modelId });
-                        $component.removeFromMemory(modelName);
-                    }
-                    this.require('metamodel').create();
-                }
-            }, true);
-
-            // model change events
-            channel.on('createModel', function createModel(id, model) {
-                this.require('metamodel').model(model);
-                this.require('metamodel').create();
-            }, true);
-
-            channel.on('updateModel', function updateModel(id, model) {
-                this.require('metamodel').model(model);
-                this.require('metamodel').create();
-            }, true);
-
-            channel.on('deleteModel', function deleteModel(id) {
-                var search = $db.RuntimeModel.find({ '_id': id }),
-                    modelName = '',
-                    modelId = '';
-
-                if (search.length) {
-                    modelName = search[0]._name;
-                    $db.RuntimeModel.remove({ '_id': id });
+                    modelId = search[0]._id;
+                    $db.RuntimeModel.remove({ '_id': modelId });
                     $component.removeFromMemory(modelName);
                 }
 
@@ -111,101 +78,136 @@ runtime.on('ready', function () {
                     $component.removeFromMemory(modelName);
                 }
                 this.require('metamodel').create();
-            }, true);
+            }
+        }, true, true);
 
-            // type change events
-            channel.on('createType', function createType(id, type) {
-                this.require('metamodel').type(type);
-                this.require('metamodel').create();
-            }, true);
+        // model change events
+        channel.on('createModel', function createModel(id, model) {
+            this.require('metamodel').model(model);
+            this.require('metamodel').create();
+        }, true, true);
 
-            channel.on('updateType', function updateType(id, type) {
-                this.require('metamodel').type(type);
-                this.require('metamodel').create();
-            }, true);
+        channel.on('updateModel', function updateModel(id, model) {
+            this.require('metamodel').model(model);
+            this.require('metamodel').create();
+        }, true, true);
 
-            channel.on('deleteType', function deleteType(id) {
-                $db.RuntimeType.remove({ 'name': id });
-                this.require('metamodel').create();
-            }, true);
+        channel.on('deleteModel', function deleteModel(id) {
+            var search = $db.RuntimeModel.find({ '_id': id }),
+                modelName = '',
+                modelId = '';
 
-            // component change events
-            channel.on('createComponent', function createComponent(model, component) {
-                $db[model].insert(component);
-            }, true);
+            if (search.length) {
+                modelName = search[0]._name;
+                $db.RuntimeModel.remove({ '_id': id });
+                $component.removeFromMemory(modelName);
+            }
 
-            channel.on('updateComponent', function updateComponent(id, collection, component) {
-                $db[collection].update({ '_id': id }, component);
-            }, true);
+            search = $db.RuntimeGeneratedModel.find({ '_name': modelName });
+            if (search.length) {
+                modelId = search[0]._id;
+                $db.RuntimeGeneratedModel.remove({ '_id': modelId });
+                $component.removeFromMemory(modelName);
+            }
+            this.require('metamodel').create();
+        }, true, true);
 
-            channel.on('deleteComponent', function deleteComponent(id, collection) {
-                $db[collection].remove({ '_id': id });
-            }, true);
+        // type change events
+        channel.on('createType', function createType(id, type) {
+            this.require('metamodel').type(type);
+            this.require('metamodel').create();
+        }, true, true);
 
-            // behavior change events
-            channel.on('createBehavior', function createBehavior(component) {
-                $db.RuntimeBehavior.insert(component);
-            }, true);
-            channel.on('updateBehavior', function updateBehavior(id, behavior) {
-                this.require(id).action(behavior.action);
-            });
-            channel.on('deleteBehavior', function deleteBehavior(id) {
-                $db.RuntimeBehavior.remove({ '_id': id });
-            }, true);
+        channel.on('updateType', function updateType(id, type) {
+            this.require('metamodel').type(type);
+            this.require('metamodel').create();
+        }, true, true);
 
-            // System Designer event
-            channel.on('sync', function sync() {
-                this.loadSystem(JSON.parse(this.require('db').system()));
-            });
+        channel.on('deleteType', function deleteType(id) {
+            $db.RuntimeType.remove({ 'name': id });
+            this.require('metamodel').create();
+        }, true, true);
 
-            this.require('storage').on('changed', function (obj) {
-                if (typeof obj['system-designer-message'] !== 'undefined') {
-                    $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
-                }
-            }, true);
+        // component change events
+        channel.on('createComponent', function createComponent(model, component) {
+            $db[model].insert(component);
+        }, true, true);
 
-            // logger events
-            this.require('logger').on('warn', function (message) {
-                var date = new Date(),
-                    time = date.toLocaleTimeString();
+        channel.on('updateComponent', function updateComponent(id, collection, component) {
+            $db[collection].update({ '_id': id }, component, {'upsert': true});
+        }, true, true);
 
-                this.require('channel').logWarn('[' + time + '] ' + message);
-            });
+        channel.on('deleteComponent', function deleteComponent(id, collection) {
+            $db[collection].remove({ '_id': id });
+        }, true, true);
 
-            this.require('logger').on('error', function (message) {
-                var date = new Date(),
-                    time = date.toLocaleTimeString();
+        // behavior change events
+        channel.on('createBehavior', function createBehavior(component) {
+            $db.RuntimeBehavior.insert(component);
+        }, true, true);
 
-                this.require('channel').logError('[' + time + '] ' + message);
-            });
+        channel.on('updateBehavior', function updateBehavior(id, behavior) {
+            this.require(id).action(behavior.action);
+            if (behavior.state === 'main') {
+                this.require(behavior.component).main();
+            }
+        }, true, true);
 
-            this.require('logger').info('loading the system...');
-            var systemID = this.require('db').system(system);
-            this.require('logger').info('the system is loaded');
+        channel.on('deleteBehavior', function deleteBehavior(id) {
+            $db.RuntimeBehavior.remove({ '_id': id });
+        }, true, true);
 
-            document.title = system.name;
+        // System Designer event
+        channel.on('sync', function sync() {
+            this.loadSystem(JSON.parse(this.require('db').system()));
+        }, true, true);
 
-            // logger events
-            this.require('logger').on('debug', function (message) {
-                var date = new Date(),
-                    time = date.toLocaleTimeString();
+        this.require('storage').on('changed', function (obj) {
+            if (typeof obj['system-designer-message'] !== 'undefined') {
+                $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);
+            }
+        }, true, true);
 
-                this.require('channel').logDebug('[' + time + '] ' + message);
-            });
+        // logger events
+        this.require('logger').on('warn', function (message) {
+            var date = new Date(),
+                time = date.toLocaleTimeString();
 
-            this.require('logger').on('info', function (message) {
-                var date = new Date(),
-                    time = date.toLocaleTimeString();
+            this.require('channel').logWarn('[' + time + '] ' + message);
+        }, true, true);
 
-                this.require('channel').logInfo('[' + time + '] ' + message);
-            });
+        this.require('logger').on('error', function (message) {
+            var date = new Date(),
+                time = date.toLocaleTimeString();
 
-            this.require('logger').level('debug');
-            this.require(systemID).main();
+            this.require('channel').logError('[' + time + '] ' + message);
+        }, true, true);
 
-        }, true);
+        this.require('logger').info('loading the system...');
+        var systemID = this.require('db').system(system);
+        this.require('logger').info('the system is loaded');
 
-        system.main();
-    });
+        document.title = system.name;
 
-});
+        // logger events
+        this.require('logger').on('debug', function (message) {
+            var date = new Date(),
+                time = date.toLocaleTimeString();
+
+            this.require('channel').logDebug('[' + time + '] ' + message);
+        }, true, true);
+
+        this.require('logger').on('info', function (message) {
+            var date = new Date(),
+                time = date.toLocaleTimeString();
+
+            this.require('channel').logInfo('[' + time + '] ' + message);
+        }, true, true);
+
+        this.require('logger').level('debug');
+        this.require(systemID).main();
+
+    }, true, true);
+
+    system.main();
+}, true, true);

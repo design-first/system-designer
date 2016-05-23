@@ -7,9 +7,25 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Type of debugging:</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <div class="radio">
+                                <label><input type="radio" name="debug-type" id="designer-dialog-config-radio-client" value="client">Client-side</label>
+                            </div>
+                            <div class="radio"><label><input type="radio" name="debug-type" id="designer-dialog-config-radio-server" value="server">Server-side</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="designer-dialog-config-client-form">
                         <label class="col-xs-offset-0 col-xs-3 control-label">Url of the page to debug</label>
                         <div class="col-xs-offset-0 col-xs-8">
-                            <input type="text" class="form-control" placeholder="http://server-name/page-name" id="designer-dialog-config-server-name">
+                            <input type="text" class="form-control" placeholder="http://server-name/page-name" id="designer-dialog-config-url-client">
+                        </div>
+                    </div>
+                    <div class="form-group" id="designer-dialog-config-server-form">
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Url of the server to debug</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <input type="text" class="form-control" placeholder="http://localhost" id="designer-dialog-config-url-server">
                         </div>
                     </div>
                 </form>

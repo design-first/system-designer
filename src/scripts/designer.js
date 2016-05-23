@@ -241,19 +241,80 @@ runtime.on('ready', function () {
                 .replace(/{{title}}/gi, this.title())
         );
 
-        // default server name value
+        // default config value
         storeConfig = this.require('storage').get('system-designer-config');
-        if (storeConfig.serverName) {
-            $('#designer-dialog-config-server-name')[0].value = storeConfig.serverName;
+
+        if (!storeConfig) {
+            storeConfig = {};
+        }
+
+        if (typeof storeConfig.debugType === 'undefined') {
+            storeConfig.debugType = 'client';
+            this.require('storage').set('system-designer-config', storeConfig);
+        }
+        if (storeConfig.debugType === 'client') {
+            $('#designer-dialog-config-radio-client').attr('checked', true);
+            $('#designer-dialog-config-server-form').hide();
+        } else {
+            $('#designer-dialog-config-radio-server').attr('checked', true);
+            $('#designer-dialog-config-client-form').hide();
+        }
+        if (storeConfig.urlClient) {
+            $('#designer-dialog-config-url-client')[0].value = storeConfig.urlClient;
+        }
+        if (storeConfig.urlServer) {
+            $('#designer-dialog-config-url-server')[0].value = storeConfig.urlServer;
         }
 
         // events
-        dom = document.getElementById('designer-dialog-config-server-name');
+        dom = document.getElementById('designer-dialog-config-radio-client');
+        dom.addEventListener('click', function (event) {
+            var config = this.require('storage').get('system-designer-config');
+
+            if (!config) {
+                config = {};
+            }
+
+            config.debugType = 'client';
+            this.require('storage').set('system-designer-config', config);
+
+            $('#designer-dialog-config-client-form').show();
+            $('#designer-dialog-config-server-form').hide();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-config-radio-server');
+        dom.addEventListener('click', function (event) {
+            var config = this.require('storage').get('system-designer-config');
+
+            if (!config) {
+                config = {};
+            }
+
+            config.debugType = 'server';
+            this.require('storage').set('system-designer-config', config);
+
+            $('#designer-dialog-config-client-form').hide();
+            $('#designer-dialog-config-server-form').show();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-config-url-client');
         dom.addEventListener('keydown', function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
-                if ($('#designer-dialog-config-server-name').val()) {
+                if ($('#designer-dialog-config-url-client').val()) {
+                    this.ok();
+                }
+                return false;
+            }
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-config-url-server');
+        dom.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                if ($('#designer-dialog-config-url-server').val()) {
                     this.ok();
                 }
                 return false;
@@ -285,7 +346,10 @@ runtime.on('ready', function () {
         if (!config) {
             config = {};
         }
-        config.serverName = $('#designer-dialog-config-server-name')[0].value;
+
+        config.urlClient = $('#designer-dialog-config-url-client')[0].value;
+        config.urlServer = $('#designer-dialog-config-url-server')[0].value;
+
         this.require('storage').set('system-designer-config', config);
     });
 
@@ -2369,7 +2433,7 @@ runtime.on('ready', function () {
                             "_id": mainUuid,
                             "component": uuid,
                             "state": "main",
-                            "action": "function main() { \n}",
+                            "action": "function main() { \n\t\n}",
                             "useCoreAPI": false,
                             "core": false
                         };
@@ -2644,7 +2708,7 @@ runtime.on('ready', function () {
                             methodDef = null,
                             behavior = {},
                             result = '',
-                            body = '',
+                            body = '\t\n',
                             ModelBehavior = null,
                             modelBehavior = null,
                             model = '',
@@ -3003,7 +3067,8 @@ runtime.on('ready', function () {
                                                         "type": "boolean",
                                                         "mandatory": false
                                                     }
-                                                ]
+                                                ],
+                                                "result": "string"
                                             },
                                             "off": {
                                                 "params": [{
@@ -3021,8 +3086,8 @@ runtime.on('ready', function () {
                                                 "params": [{
                                                     "name": "id",
                                                     "type": "string"
-                                                }
-                                                ]
+                                                }],
+                                                "result": "RuntimeComponent"
                                             },
                                             "destroy": {
                                                 "params": []
@@ -3200,10 +3265,19 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
+            var config = this.require('storage').get('system-designer-config');
+
+            // message for other windows
             this.require('storage').set('system-designer-message', message);
 
+            // message for client debug
             if (this.require('designer').debugWindow()) {
                 this.require('designer').debugWindow().postMessage(JSON.stringify(message), '*');
+            }
+
+            // message for server debug
+            if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
+                $.post(config.urlServer + ':8888/' + message.event, encodeURI(JSON.stringify(message.data)));
             }
         });
 
@@ -3683,50 +3757,6 @@ runtime.on('ready', function () {
                 $db.RuntimeMessage.insert(data);
             }
         }.bind(channel), false);
-
-        // TODO SERVER
-        /*
-        channel.on('sync', function () {
-            var self = this;
-            $.getJSON("http://127.0.0.1:8888/sync", function (data) {
-
-                var Dialog = null,
-                    dialog = null;
-
-                Dialog = self.require('Dialog');
-                dialog = new Dialog({
-                    'title': 'A system has been found',
-                    'message': 'Do you wan to import it ?',
-                    'data': data
-                })
-                dialog.show();
-
-                dialog.on('ok', function () {
-                    var System = this.require('System'),
-                        sys = null,
-                        designer = this.require('designer'),
-                        message = this.require('message');
-
-                    if (designer.system()) {
-                        designer.system().destroy();
-                    }
-                    sys = new System(this.data());
-                    designer.system(sys);
-                    designer.save();
-                    designer.workspace().refresh();
-
-                    this.hide();
-
-                    message.success('Capture of the system is done.');
-                });
-            });
-        });
-
-        channel.on('updateComponent', function (id, collection, component) {
-            $.post("http://localhost:8888/updateComponent", component);
-        });*/
-
-        //
 
         this.require('storage').on('changed', function (obj) {
             if (typeof obj['system-designer-message'] !== 'undefined') {
