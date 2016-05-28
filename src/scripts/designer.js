@@ -4563,14 +4563,13 @@ runtime.on('ready', function () {
                     }
 
                     header = 'function ' + propName + '(' + params + ') ';
-
+                    
                     for (behaviorId in behaviors) {
                         behavior = behaviors[behaviorId];
                         if (behavior.component === model._name && behavior.state === propName) {
-                            action = behavior.action.split('{ ');
+                            action = behavior.action.split('{');
                             action[0] = header;
                             behaviors[behaviorId].action = action.join('{');
-
                             this.system().behaviors(behaviors);
                             this.save();
                         }
