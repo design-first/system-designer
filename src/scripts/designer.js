@@ -4424,46 +4424,54 @@ runtime.on('ready', function () {
 
                         break;
                     case schema[propName] === 'method':
-                        model[propName] = {
-                            "params": [
-                                {
-                                    "name": "param",
-                                    "type": "string",
-                                    "mandatory": false,
-                                    "default": ""
-                                }
-                            ],
-                            "result": "string"
-                        };
+                        if (typeof model[propName] === 'undefined' || (typeof model[propName] !== 'undefined' && typeof model[propName].type !== 'undefined')) {
+                            model[propName] = {
+                                "params": [
+                                    {
+                                        "name": "param",
+                                        "type": "string",
+                                        "mandatory": false,
+                                        "default": ""
+                                    }
+                                ],
+                                "result": "string"
+                            };
 
-                        for (component in components[name]) {
-                            components[name][component][propName] = model[propName].default;
-                            this.system().components(components);
+                            for (component in components[name]) {
+                                components[name][component][propName] = model[propName].default;
+                                this.system().components(components);
+                            }
+
+                            // create behavior
+                            this.createBehavior(models[id]._name, propName, model[propName]);
                         }
-
-                        // create behavior
-                        this.createBehavior(models[id]._name, propName, model[propName]);
 
                         break;
                     case schema[propName] === 'event':
-                        model[propName] = {
-                            "params": [
-                                {
-                                    "name": "param",
-                                    "type": "string",
-                                    "mandatory": false,
-                                    "default": ""
-                                }
-                            ]
-                        };
+                        if (typeof model[propName] === 'undefined' || (typeof model[propName] !== 'undefined' && typeof model[propName].type !== 'undefined')) {
+                            model[propName] = {
+                                "params": [
+                                    {
+                                        "name": "param",
+                                        "type": "string",
+                                        "mandatory": false,
+                                        "default": ""
+                                    }
+                                ]
+                            };
 
-                        for (component in components[name]) {
-                            components[name][component][propName] = model[propName].default;
-                            this.system().components(components);
+                            for (component in components[name]) {
+                                components[name][component][propName] = model[propName].default;
+                                this.system().components(components);
+                            }
+
+                            // create behavior
+                            this.createBehavior(models[id]._name, propName, model[propName]);
+                        } else {
+                            if (typeof model[propName].result !== 'undefined') {
+                                delete model[propName].result;
+                            }
                         }
-
-                        // create behavior
-                        this.createBehavior(models[id]._name, propName, model[propName]);
 
                         break;
                     case schema[propName] === 'collection':
@@ -4550,6 +4558,33 @@ runtime.on('ready', function () {
 
                     // params
                     def = model[propName];
+
+                    if (typeof def === 'undefined') {
+                        if (schema[propName] === 'method') {
+                            def = {
+                                "params": [
+                                    {
+                                        "name": "param",
+                                        "type": "string",
+                                        "mandatory": false,
+                                        "default": ""
+                                    }
+                                ],
+                                "result": "string"
+                            };
+                        } else {
+                            def = {
+                                "params": [
+                                    {
+                                        "name": "param",
+                                        "type": "string",
+                                        "mandatory": false,
+                                        "default": ""
+                                    }
+                                ]
+                            };
+                        }
+                    }
                     methodDef = def.params;
                     if (methodDef && methodDef.length) {
                         length = methodDef.length;
@@ -4563,7 +4598,7 @@ runtime.on('ready', function () {
                     }
 
                     header = 'function ' + propName + '(' + params + ') ';
-                    
+
                     for (behaviorId in behaviors) {
                         behavior = behaviors[behaviorId];
                         if (behavior.component === model._name && behavior.state === propName) {

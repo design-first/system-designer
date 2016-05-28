@@ -178,13 +178,50 @@ runtime.on('ready', function () {
     });
 
     // Menu items 
+    this.require('1f1781882618115').on('click', function () {
+        var editor = this.require('editor').editor(),
+            designer = this.require('designer');
+
+        if (editor.getValue().indexOf('{') === 0) {
+            designer.store().data(JSON.parse(editor.getValue()));
+        }
+
+        editor.getSession().setMode('ace/mode/text');
+        editor.setValue(designer.store().data().name);
+
+        editor.gotoLine(1);
+
+        editor.getSession().$undoManager.reset();
+        editor.getSession().setUndoManager(new ace.UndoManager());
+    });
+
     this.require('1f1781882618114').on('click', function () {
         var editor = this.require('editor').editor(),
             designer = this.require('designer');
 
-        designer.store().data(JSON.parse(editor.getValue()));
+        if (editor.getValue().indexOf('{') === 0) {
+            designer.store().data(JSON.parse(editor.getValue()));
+        }
+
         editor.getSession().setMode('ace/mode/text');
         editor.setValue(designer.store().data().description);
+
+        editor.gotoLine(1);
+
+        editor.getSession().$undoManager.reset();
+        editor.getSession().setUndoManager(new ace.UndoManager());
+    });
+
+    this.require('1f1781882618116').on('click', function () {
+        var editor = this.require('editor').editor(),
+            designer = this.require('designer');
+
+        if (editor.getValue().indexOf('{') === 0) {
+            designer.store().data(JSON.parse(editor.getValue()));
+        }
+
+        editor.getSession().setMode('ace/mode/text');
+        editor.setValue(designer.store().data().version);
 
         editor.gotoLine(1);
 
@@ -196,9 +233,6 @@ runtime.on('ready', function () {
         var editor = this.require('editor').editor(),
             designer = this.require('designer');
 
-        if (editor.getValue().indexOf('{') !== 0) {
-            designer.store().data().description = editor.getValue();
-        }
         editor.getSession().setMode('ace/mode/json');
         editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
 
@@ -315,7 +349,7 @@ runtime.on('ready', function () {
 
         document.title = system.name + ' | system designer';
 
-        editor.setValue(designer.store().data().description);
+        editor.setValue(designer.store().data().name);
         editor.gotoLine(1);
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
@@ -432,11 +466,26 @@ runtime.on('ready', function () {
             designer = this.require('designer'),
             store = designer.store().data();
 
-        if (designer.context() === 'description') {
-            store.description = val;
-        } else {
-            store = JSON.parse(val);
-            document.title = store.name + ' | system designer';
+        switch (designer.context()) {
+            case 'name':
+                val = val.trim();
+                val = val.replace(/ /gi, '-');
+                this.require('editor').editor().setValue(val);
+                store.name = val;
+                document.title = store.name + ' | system designer';
+                break;
+            case 'description':
+                store.description = val;
+                break;
+            case 'version':
+                store.version = val;
+                break;
+            case 'json':
+                store = JSON.parse(val);
+                document.title = store.name + ' | system designer';
+                break;
+            default:
+                break;
         }
 
         designer.store().data(store);

@@ -756,7 +756,11 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/html/type.html',
                         dest: 'dist/designer/type.html'
-                    },
+                    }
+                ]
+            },
+            'appcache-web': {
+                files: [
                     {
                         src: 'src/target/web/manifest/system-designer.appcache',
                         dest: 'dist/designer/system-designer.appcache'
@@ -990,6 +994,7 @@ module.exports = function (grunt) {
         'copy:lib',
         'copy:css',
         'copy:html-web',
+        'copy:appcache-web',
         'copy:components-web',
         'system-json',
         'merge-json',
