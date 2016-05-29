@@ -2422,6 +2422,7 @@ runtime.on('ready', function () {
                             "version": "0.0.1",
                             "description": "",
                             "schemas": {},
+                            "models": {},
                             "behaviors": {},
                             "types": {},
                             "components": {},
@@ -3753,7 +3754,10 @@ runtime.on('ready', function () {
                 config = {};
             }
             data = JSON.parse(event.data);
-            if (data) {
+            if (data &&
+                typeof data.event !== 'undefined' &&
+                typeof data.from !== 'undefined' &&
+                typeof data.data !== 'undefined') {
                 $db.RuntimeMessage.insert(data);
             }
         }.bind(channel), false);
