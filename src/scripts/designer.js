@@ -589,6 +589,8 @@ runtime.on('ready', function () {
 
         designer.save();
         designer.workspace().refresh();
+        
+        designer.updateRouter();
 
         this.hide();
         message.success('merge of the system is done.');
@@ -616,6 +618,8 @@ runtime.on('ready', function () {
         designer.space(sys.name());
         designer.spaces().render();
         designer.workspace().refresh();
+        
+        designer.updateRouter();
 
         this.hide();
         designer.save();

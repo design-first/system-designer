@@ -469,8 +469,10 @@ runtime.on('ready', function () {
         switch (designer.context()) {
             case 'name':
                 val = val.trim();
-                val = val.replace(/ /gi, '-');
-                this.require('editor').editor().setValue(val);
+                if (val.indexOf(' ') !== -1) {
+                    val = val.replace(/ /gi, '-');
+                    this.require('editor').editor().setValue(val);
+                    }
                 store.name = val;
                 document.title = store.name + ' | system designer';
                 break;
