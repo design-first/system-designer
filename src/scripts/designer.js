@@ -527,6 +527,32 @@ runtime.on('ready', function () {
 
         sys = this.data();
 
+        function _getModelId(name) {
+            var result = '',
+                id = '';
+
+            for (id in designer.system().models()) {
+                if (designer.system().models()[id]._name === name) {
+                    result = id;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _getSchemaId(name) {
+            var result = '',
+                id = '';
+
+            for (id in designer.system().schemas()) {
+                if (designer.system().schemas()[id]._name === name) {
+                    result = id;
+                    break;
+                }
+            }
+            return result;
+        }
+
         if (Object.keys(sys).length) {
             // schemas
             for (name in sys.schemas) {
@@ -535,7 +561,15 @@ runtime.on('ready', function () {
                         schemas[name][propName] = sys.schemas[name][propName];
                     }
                 } else {
-                    schemas[name] = sys.schemas[name];
+                    if (!_getSchemaId(sys.schemas[name]._name)) {
+                        schemas[name] = sys.schemas[name];
+                    } else {
+                        for (propName in sys.schemas[name]) {
+                            if (propName.indexOf('_') !== 0) {
+                                schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];
+                            }
+                        }
+                    }
                 }
             }
             // models
@@ -545,7 +579,15 @@ runtime.on('ready', function () {
                         models[name][propName] = sys.models[name][propName];
                     }
                 } else {
-                    models[name] = sys.models[name];
+                    if (!_getModelId(sys.models[name]._name)) {
+                        models[name] = sys.models[name];
+                    } else {
+                        for (propName in sys.models[name]) {
+                            if (propName.indexOf('_') !== 0) {
+                                models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];
+                            }
+                        }
+                    }
                 }
             }
             // types
@@ -588,8 +630,10 @@ runtime.on('ready', function () {
         designer.system().components(components);
 
         designer.save();
-        designer.workspace().refresh();
         
+        designer.spaces().render();
+        designer.workspace().refresh();
+
         designer.updateRouter();
 
         this.hide();
@@ -618,7 +662,7 @@ runtime.on('ready', function () {
         designer.space(sys.name());
         designer.spaces().render();
         designer.workspace().refresh();
-        
+
         designer.updateRouter();
 
         this.hide();
@@ -2179,14 +2223,6 @@ runtime.on('ready', function () {
                         this.items().pop();
                     }.bind(this));
 
-                    if (this.require('storage').get('system-designer-systems') && this.require('storage').get('system-designer-systems').systems.length) {
-                        spaceItem = new SpaceItem({
-                            'name': this.require('designer').system().name(),
-                            'uuid': this.require('designer').system().id()
-                        });
-                        this.items().push(spaceItem);
-                    }
-
                     // items
                     for (name in system.models()) {
                         spaceItem = new SpaceItem({
@@ -2202,14 +2238,24 @@ runtime.on('ready', function () {
                             b = runtime.require(idB);
 
                         var result = 0;
-                        if (a.name() > b.name()) {
+                        if (a.name() < b.name()) {
                             result = 1;
                         }
-                        if (a.name() < b.name()) {
+                        if (a.name() > b.name()) {
                             result = -1;
                         }
                         return result;
                     });
+
+                    if (this.require('storage').get('system-designer-systems') && this.require('storage').get('system-designer-systems').systems.length) {
+                        spaceItem = new SpaceItem({
+                            'name': this.require('designer').system().name(),
+                            'uuid': this.require('designer').system().id()
+                        });
+                        this.items().push(spaceItem);
+                    }
+
+                    this.items().reverse();
 
                     this.items().forEach(function (item) {
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#behaviors#' + item.name() + '">' + item.name() + '</a></li>');
