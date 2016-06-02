@@ -516,12 +516,14 @@ runtime.on('ready', function () {
             modelName = '',
             propName = '',
             compId = '',
+            modelId = '',
+            schemaId = '',
             designer = this.require('designer'),
-            schemas = designer.system().schemas(),
-            models = designer.system().models(),
-            types = designer.system().types(),
-            components = designer.system().components(),
-            behaviors = designer.system().behaviors(),
+            schemas = {},
+            models = {},
+            types = {},
+            components = {},
+            behaviors = {},
             system = designer.system(),
             message = this.require('message');
 
@@ -555,6 +557,7 @@ runtime.on('ready', function () {
 
         if (Object.keys(sys).length) {
             // schemas
+            schemas = JSON.parse(JSON.stringify(designer.system().schemas()));
             for (name in sys.schemas) {
                 if (schemas[name]) {
                     for (propName in sys.schemas[name]) {
@@ -572,7 +575,13 @@ runtime.on('ready', function () {
                     }
                 }
             }
+            // sync models
+            for (schemaId in schemas) {
+                designer.syncModel(schemas[schemaId]);
+            }
+
             // models
+            models = JSON.parse(JSON.stringify(designer.system().models()));
             for (name in sys.models) {
                 if (models[name]) {
                     for (propName in sys.models[name]) {
@@ -590,7 +599,13 @@ runtime.on('ready', function () {
                     }
                 }
             }
+            // sync behaviors and components
+            for (modelId in models) {
+                designer.syncBehavior(models[modelId]);
+            }
+
             // types
+            types = JSON.parse(JSON.stringify(designer.system().types()));
             for (name in sys.types) {
                 if (types[name]) {
                     for (propName in sys.types[name]) {
@@ -600,13 +615,17 @@ runtime.on('ready', function () {
                     types[name] = sys.types[name];
                 }
             }
+
             // behaviors
+            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));
             for (name in sys.behaviors) {
                 if (name !== sys._id) {
                     behaviors[name] = sys.behaviors[name];
                 }
             }
+
             // components
+            components = JSON.parse(JSON.stringify(designer.system().components()));
             for (modelName in sys.components) {
                 if (!components[modelName]) {
                     components[modelName] = {};
@@ -621,23 +640,26 @@ runtime.on('ready', function () {
                     }
                 }
             }
+
+
+            designer.system().schemas(schemas);
+            designer.system().models(models);
+            designer.system().types(types);
+            designer.system().behaviors(behaviors);
+            designer.system().components(components);
+
+            designer.save();
+
+            designer.spaces().render();
+            designer.workspace().refresh();
+
+            designer.updateRouter();
+
+            this.hide();
+            message.success('merge of the system is done.');
+        } else {
+            message.danger('the system you try to import is invalid.');
         }
-
-        designer.system().schemas(schemas);
-        designer.system().models(models);
-        designer.system().types(types);
-        designer.system().behaviors(behaviors);
-        designer.system().components(components);
-
-        designer.save();
-        
-        designer.spaces().render();
-        designer.workspace().refresh();
-
-        designer.updateRouter();
-
-        this.hide();
-        message.success('merge of the system is done.');
     });
 
     DialogDropFile.on('importSystem', function () {
@@ -716,6 +738,10 @@ runtime.on('ready', function () {
             this.ok();
         }.bind(this));
 
+        // focus
+        $('#designer-dialog-type-creation-modal').on('shown.bs.modal', function () {
+            $('#designer-dialog-type-creation-name').focus();
+        });
     });
 
     dialogTypeCreation.on('show', function () {
@@ -798,6 +824,10 @@ runtime.on('ready', function () {
             this.ok();
         }.bind(this));
 
+        // focus
+        $('#designer-dialog-schema-creation-modal').on('shown.bs.modal', function () {
+            $('#designer-dialog-schema-creation-name').focus();
+        });
     });
 
     dialogSchemaCreation.on('show', function () {
@@ -845,6 +875,10 @@ runtime.on('ready', function () {
             this.ok();
         }.bind(this));
 
+        // focus
+        $('#designer-dialog-system-creation-modal').on('shown.bs.modal', function () {
+            $('#designer-dialog-system-creation-name').focus();
+        });
     });
 
     dialogSystemCreation.on('show', function () {

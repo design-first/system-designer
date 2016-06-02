@@ -290,6 +290,46 @@ runtime.on('ready', function () {
     var Editor = this.require('Editor');
     Editor.on('render', function () {
         this.editor().getSession().setMode('ace/mode/json');
+
+        var langTools = ace.require('ace/ext/language_tools');
+        var completer = {
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                var systemId = '',
+                    result = [],
+                    schemas = {};
+
+                result = [
+                    { name: "any", value: "any", meta: "natif type" },
+                    { name: "string", value: "string", meta: "natif type" },
+                    { name: "number", value: "number", meta: "natif type" },
+                    { name: "boolean", value: "boolean", meta: "natif type" },
+                    { name: "date", value: "date", meta: "natif type" },
+                    { name: "object", value: "object", meta: "natif type" },
+                    { name: "json", value: "json", meta: "alias" },
+                    { name: "html", value: "html", meta: "alias" },
+                    { name: "css", value: "css", meta: "alias" },
+                    { name: "javascript", value: "javascript", meta: "alias" },
+                    { name: "@RuntimeComponent", value: "@RuntimeComponent", meta: "model" }
+                ];
+
+                systemId = document.location.href.split('#')[2];
+                system = this.require('storage').get(systemId);
+
+                if (system) {
+                    schemas = system.schemas;
+                    for (var name in schemas) {
+                        result.push({ name: '@' + schemas[name]._name, value: '@' + schemas[name]._name, meta: "model" });
+                    }
+                }
+
+                callback(null, result);
+            }.bind(this)
+        };
+
+        this.editor().setOptions({
+            enableBasicAutocompletion: [completer]
+        });
+
         this.editor().setShowPrintMargin(false);
         this.editor().setReadOnly(false);
         this.editor().$blockScrolling = Infinity;

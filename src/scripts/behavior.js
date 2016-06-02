@@ -269,9 +269,9 @@ runtime.on('ready', function () {
 
         channel.on('send', function (message) {
             var config = this.require('storage').get('system-designer-config');
-            
+
             this.require('storage').set('system-designer-message', message);
-            
+
             // message for server debug
             if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
                 $.post(config.urlServer + ':8888/' + message.event, encodeURI(JSON.stringify(message.data)));
@@ -338,6 +338,91 @@ runtime.on('ready', function () {
     var Editor = this.require('Editor');
     Editor.on('render', function () {
         this.editor().getSession().setMode('ace/mode/javascript');
+        var completer = {
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                var systemId = '',
+                    result = [],
+                    behavior = {},
+                    schemaName = '',
+                    schemas = {},
+                    schema = {},
+                    parents = {},
+                    i = 0;
+
+                function _getSchema(schemas, name) {
+                    var result = '',
+                        id = '';
+
+                    for (id in schemas) {
+                        if (schemas[id]._name === name) {
+                            result = schemas[id];
+                            break;
+                        }
+                    }
+                    return result;
+                }
+
+                id = document.location.href.split('#')[1];
+                systemId = document.location.href.split('#')[2];
+
+                system = this.require('storage').get(systemId);
+                if (system) {
+                    schemaName = system.behaviors[id].component;
+                    schemas = system.schemas;
+
+                    schema = _getSchema(schemas, schemaName);
+
+                    for (var name in schema) {
+                        if (name.indexOf('_') !== 0) {
+                            result.push({ name: name + '()', value: name + '()', meta: schema[name] });
+                        }
+                    }
+
+                    // case of system
+                    if (system.behaviors[id].component === systemId) {
+                        result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });
+                        result.push({ name: 'on()', value: 'on()', meta: 'method' });
+                        result.push({ name: 'off()', value: 'off()', meta: 'method' });
+                        result.push({ name: 'require()', value: 'require()', meta: 'method' });
+                        result.push({ name: 'destroy()', value: 'destroy()', meta: 'method' });
+                        result.push({ name: 'init()', value: 'init()', meta: 'method' });
+                        result.push({ name: 'error()', value: 'error()', meta: 'event' });
+                    }
+
+                    // inherited
+                    parents = schema._inherit;
+                    if (parents) {
+                        length = parents.length;
+
+                        for (i = 0; i < length; i++) {
+                            if (parents[i].indexOf('RuntimeComponent') !== -1) {
+                                result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
+                                result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
+                                result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
+                                result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
+                                result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });
+                                result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });
+                                result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });
+                            } else {
+                                schema = _getSchema(schemas, parents[i]);
+
+                                for (var prop in schema) {
+                                    if (prop.indexOf('_') !== 0) {
+                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                callback(null, result);
+            }.bind(this)
+        };
+
+        this.editor().setOptions({
+            enableBasicAutocompletion: [completer]
+        });
         this.editor().setShowPrintMargin(false);
         this.editor().setReadOnly(false);
         this.editor().$blockScrolling = Infinity;
@@ -356,8 +441,99 @@ runtime.on('ready', function () {
         var editor = this.require('editor').editor(),
             designer = this.require('designer');
 
-        designer.store().data(JSON.parse(editor.getValue()));
+        try {
+            designer.store().data(JSON.parse(editor.getValue()));
+        } catch (e) {
+            // TODO message ?
+        }
+
         editor.getSession().setMode('ace/mode/javascript');
+
+        var completer = {
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                var systemId = '',
+                    result = [],
+                    behavior = {},
+                    schemaName = '',
+                    schemas = {},
+                    schema = {},
+                    parents = {},
+                    i = 0;
+
+                function _getSchema(schemas, name) {
+                    var result = '',
+                        id = '';
+
+                    for (id in schemas) {
+                        if (schemas[id]._name === name) {
+                            result = schemas[id];
+                            break;
+                        }
+                    }
+                    return result;
+                }
+
+                id = document.location.href.split('#')[1];
+                systemId = document.location.href.split('#')[2];
+
+                system = this.require('storage').get(systemId);
+                if (system) {
+                    schemaName = system.behaviors[id].component;
+                    schemas = system.schemas;
+
+                    schema = _getSchema(schemas, schemaName);
+
+                    for (var name in schema) {
+                        if (name.indexOf('_') !== 0) {
+                            result.push({ name: name + '()', value: name + '()', meta: schema[name] });
+                        }
+                    }
+
+                    // case of system
+                    if (system.behaviors[id].component === systemId) {
+                        result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });
+                        result.push({ name: 'on()', value: 'on()', meta: 'method' });
+                        result.push({ name: 'off()', value: 'off()', meta: 'method' });
+                        result.push({ name: 'require()', value: 'require()', meta: 'method' });
+                        result.push({ name: 'destroy()', value: 'destroy()', meta: 'method' });
+                        result.push({ name: 'init()', value: 'init()', meta: 'method' });
+                        result.push({ name: 'error()', value: 'error()', meta: 'event' });
+                    }
+
+                    // inherited
+                    parents = schema._inherit;
+                    if (parents) {
+                        length = parents.length;
+
+                        for (i = 0; i < length; i++) {
+                            if (parents[i].indexOf('RuntimeComponent') !== -1) {
+                                result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
+                                result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
+                                result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
+                                result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
+                                result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });
+                                result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });
+                                result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });
+                            } else {
+                                schema = _getSchema(schemas, parents[i]);
+
+                                for (var prop in schema) {
+                                    if (prop.indexOf('_') !== 0) {
+                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                callback(null, result);
+            }.bind(this)
+        };
+
+        this.editor().setOptions({
+            enableBasicAutocompletion: [completer]
+        });
         editor.setValue(designer.store().data().action);
 
         editor.gotoLine(1);

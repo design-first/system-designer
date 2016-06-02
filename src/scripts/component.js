@@ -352,6 +352,9 @@ runtime.on('ready', function () {
 
                     editor = self.require('editor').editor();
                     editor.getSession().setMode('ace/mode/' + props[propName]);
+                    editor.setOptions({
+                        enableBasicAutocompletion: true,
+                    });
 
                     designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
 

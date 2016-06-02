@@ -472,7 +472,7 @@ runtime.on('ready', function () {
                 if (val.indexOf(' ') !== -1) {
                     val = val.replace(/ /gi, '-');
                     this.require('editor').editor().setValue(val);
-                    }
+                }
                 store.name = val;
                 document.title = store.name + ' | system designer';
                 break;

@@ -290,6 +290,23 @@ runtime.on('ready', function () {
     var Editor = this.require('Editor');
     Editor.on('render', function () {
         this.editor().getSession().setMode('ace/mode/json');
+
+        var langTools = ace.require('ace/ext/language_tools');
+        var completer = {
+            getCompletions: function (editor, session, pos, prefix, callback) {
+                callback(null, [
+                    { name: "property", value: "property", meta: "type" },
+                    { name: "link", value: "link", meta: "type" },
+                    { name: "collection", value: "collection", meta: "type" },
+                    { name: "method", value: "method", meta: "type" },
+                    { name: "event", value: "event", meta: "type" }
+                ]);
+            }
+        };
+
+        this.editor().setOptions({
+            enableBasicAutocompletion: [completer]
+        });
         this.editor().setShowPrintMargin(false);
         this.editor().setReadOnly(false);
         this.editor().$blockScrolling = Infinity;
