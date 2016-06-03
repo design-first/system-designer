@@ -656,7 +656,7 @@ runtime.on('ready', function () {
             designer.updateRouter();
 
             this.hide();
-            message.success('merge of the system is done.');
+            message.success('composition of the system is done.');
         } else {
             message.danger('the system you try to import is invalid.');
         }
@@ -1086,6 +1086,15 @@ runtime.on('ready', function () {
         html.addEventListener('click', function (event) {
             this.require('designer').open('system.html#' + that.uuid() + '#description');
         }.bind(this));
+        
+        html = document.getElementById('designer-system-' + this.uuid() + '-export');
+
+        html.addEventListener('click', function (event) {
+            var name = this.document().name;
+            var document = JSON.parse(JSON.stringify(this.document()));
+            delete document.classInfo;
+            this.require('designer').saveAs(document, this.document().name + '.json');
+        }.bind(this));
 
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
 
@@ -1191,6 +1200,32 @@ runtime.on('ready', function () {
             this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
         }.bind(this));
 
+        html = document.getElementById('designer-type-' + this.uuid() + '-export');
+
+        html.addEventListener('click', function (event) {
+            var document = {
+                "name": "type " + this.document().name,
+                "master": false,
+                "subsystem": false,
+                "version": "0.0.1",
+                "description": "Type " + this.document().name,
+                "schemas": {},
+                "models": {},
+                "behaviors": {},
+                "types": {},
+                "components": {}
+            };
+
+            // clean
+            document.name = document.name.trim();
+            document.name = document.name.replace(/ /gi, '-');
+            document.name = document.name.toLocaleLowerCase();
+
+            document.types[this.document().name] = this.document();
+
+            this.require('designer').saveAs(document, this.document().name.replace(/ /gi, '-').toLowerCase() + '.json');
+        }.bind(this));
+
         html = document.getElementById('designer-type-' + this.uuid() + '-delete');
 
         html.addEventListener('click', function (event) {
@@ -1267,6 +1302,32 @@ runtime.on('ready', function () {
 
             html.addEventListener('click', function (event) {
                 this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
+            }.bind(this));
+
+            html = document.getElementById('designer-schema-' + htmlId + '-export');
+
+            html.addEventListener('click', function (event) {
+                var document = {
+                    "name": "schema " + this.document()._name,
+                    "master": false,
+                    "subsystem": false,
+                    "version": "0.0.1",
+                    "description": "Schema " + this.document()._name,
+                    "schemas": {},
+                    "models": {},
+                    "behaviors": {},
+                    "types": {},
+                    "components": {}
+                };
+
+                // clean
+                document.name = document.name.trim();
+                document.name = document.name.replace(/ /gi, '-');
+                document.name = document.name.toLocaleLowerCase();
+
+                document.schemas[this.document()._id] = this.document();
+
+                this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
             }.bind(this));
 
             html = document.getElementById('designer-schema-' + htmlId + '-delete');
@@ -1481,6 +1542,32 @@ runtime.on('ready', function () {
                 this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
             }.bind(this));
 
+            html = document.getElementById('designer-model-' + htmlId + '-export');
+
+            html.addEventListener('click', function (event) {
+                var document = {
+                    "name": "model " + this.document()._name,
+                    "master": false,
+                    "subsystem": false,
+                    "version": "0.0.1",
+                    "description": "Model " + this.document()._name,
+                    "schemas": {},
+                    "models": {},
+                    "behaviors": {},
+                    "types": {},
+                    "components": {}
+                };
+
+                // clean
+                document.name = document.name.trim();
+                document.name = document.name.replace(/ /gi, '-');
+                document.name = document.name.toLocaleLowerCase();
+
+                document.models[this.document()._id] = this.document();
+
+                this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
+            }.bind(this));
+
             html = document.getElementById('designer-model-' + htmlId + '-edit');
 
             html.addEventListener('click', function (event) {
@@ -1531,6 +1618,33 @@ runtime.on('ready', function () {
 
         html.addEventListener('click', function (event) {
             this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
+        }.bind(this));
+
+        html = document.getElementById('designer-behavior-' + this.uuid() + '-export');
+
+        html.addEventListener('click', function (event) {
+            var name = this.document().state;
+            var document = {
+                "name": "behavior " + name,
+                "master": false,
+                "subsystem": false,
+                "version": "0.0.1",
+                "description": "Behavior " + name,
+                "schemas": {},
+                "models": {},
+                "behaviors": {},
+                "types": {},
+                "components": {}
+            };
+
+            // clean
+            document.name = document.name.trim();
+            document.name = document.name.replace(/ /gi, '-');
+            document.name = document.name.toLocaleLowerCase();
+
+            document.behaviors[this.document()._id] = this.document();
+
+            this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
         }.bind(this));
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
@@ -1612,6 +1726,37 @@ runtime.on('ready', function () {
 
         html.addEventListener('click', function (event) {
             this.require('designer').open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
+        }.bind(this));
+
+        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-export');
+
+        html.addEventListener('click', function (event) {
+            var name = this.document()._id;
+            var document = {
+                "name": "component " + name,
+                "master": false,
+                "subsystem": false,
+                "version": "0.0.1",
+                "description": "Component " + name,
+                "schemas": {},
+                "models": {},
+                "behaviors": {},
+                "types": {},
+                "components": {}
+            };
+
+            // clean
+            document.name = document.name.trim();
+            document.name = document.name.replace(/ /gi, '-');
+            document.name = document.name.toLocaleLowerCase();
+
+            if (typeof document.models[this.model()]) {
+                document.components[this.model()] = {};
+            }
+
+            document.components[this.model()][this.document()._id] = this.document();
+
+            this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
         }.bind(this));
 
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-delete');
@@ -2923,6 +3068,7 @@ runtime.on('ready', function () {
                             });
 
                             modelBehavior.title(state);
+                            modelBehavior.document(behavior);
                             modelBehavior.content(JSON.parse(JSON.stringify(behavior.action)));
 
                             this.hide();
@@ -3291,6 +3437,7 @@ runtime.on('ready', function () {
                                         'uuid': system.behaviors()[id]._id
                                     });
                                     behavior.title(system.behaviors()[id].state);
+                                    behavior.document(system.behaviors()[id]);
                                     behavior.content(JSON.parse(JSON.stringify(system.behaviors()[id].action)));
                                     behavior.render();
                                 }
@@ -3305,6 +3452,7 @@ runtime.on('ready', function () {
                                         'uuid': system.behaviors()[id]._id
                                     });
                                     behavior.title(system.behaviors()[id].state);
+                                    behavior.document(system.behaviors()[id]);
                                     behavior.content(JSON.parse(JSON.stringify(system.behaviors()[id].action)));
                                     behavior.render();
                                 }
@@ -4455,7 +4603,8 @@ runtime.on('ready', function () {
             component = null,
             behavior = null,
             model = null,
-            oldSchema = null;
+            oldSchema = null,
+            createModel = false;
 
         function generateId() {
             function gen() {
@@ -4473,15 +4622,24 @@ runtime.on('ready', function () {
             }
         }
 
+        // case of no model
+        if (!model) {
+            createModel = true;
+            model = {
+                "_id": generateId(),
+                "_name": name
+            };
+        }
+
         // previous schema
         oldSchema = schemas[schema._id];
-
         for (propName in schema) {
-            if (schema.hasOwnProperty(propName) && (
-                typeof oldSchema[propName] === 'undefined' ||
-                oldSchema[propName] !== schema[propName]
-            )) {
-
+            if ((schema.hasOwnProperty(propName) &&
+                oldSchema &&
+                (typeof oldSchema[propName] === 'undefined' ||
+                    oldSchema[propName] !== schema[propName])) ||
+                createModel
+            ) {
                 switch (true) {
                     case schema[propName] === 'property':
                         model[propName] = {
@@ -4531,7 +4689,7 @@ runtime.on('ready', function () {
                             }
 
                             // create behavior
-                            this.createBehavior(models[id]._name, propName, model[propName]);
+                            this.createBehavior(model._name, propName, model[propName]);
                         }
 
                         break;
@@ -4554,7 +4712,7 @@ runtime.on('ready', function () {
                             }
 
                             // create behavior
-                            this.createBehavior(models[id]._name, propName, model[propName]);
+                            this.createBehavior(model._name, propName, model[propName]);
                         } else {
                             if (typeof model[propName].result !== 'undefined') {
                                 delete model[propName].result;
@@ -4587,18 +4745,20 @@ runtime.on('ready', function () {
             }
         }
 
-        for (propName in oldSchema) {
-            if (propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
-                delete model[propName];
+        if (oldSchema) {
+            for (propName in oldSchema) {
+                if (propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {
+                    delete model[propName];
 
-                for (component in components[name]) {
-                    delete components[name][component][propName];
-                    this.system().components(components);
-                }
-                for (behavior in behaviors) {
-                    if (model && behaviors[behavior].component === model._name && behaviors[behavior].state === propName) {
-                        delete behaviors[behavior];
-                        this.system().behaviors(behaviors);
+                    for (component in components[name]) {
+                        delete components[name][component][propName];
+                        this.system().components(components);
+                    }
+                    for (behavior in behaviors) {
+                        if (model && behaviors[behavior].component === model._name && behaviors[behavior].state === propName) {
+                            delete behaviors[behavior];
+                            this.system().behaviors(behaviors);
+                        }
                     }
                 }
             }
@@ -4750,7 +4910,7 @@ runtime.on('ready', function () {
     });
 
     // main
-    system.on('main', function () {
+    system.on('main', function main() {
         var designer = null;
 
         designer = this.require('designer');

@@ -294,7 +294,9 @@ runtime.on('ready', function () {
         var completer = {
             getCompletions: function (editor, session, pos, prefix, callback) {
                 var systemId = '',
+                    typeName = '',
                     result = [],
+                    types = {},
                     schemas = {};
 
                 result = [
@@ -307,14 +309,18 @@ runtime.on('ready', function () {
                     { name: "json", value: "json", meta: "alias" },
                     { name: "html", value: "html", meta: "alias" },
                     { name: "css", value: "css", meta: "alias" },
-                    { name: "javascript", value: "javascript", meta: "alias" },
-                    { name: "@RuntimeComponent", value: "@RuntimeComponent", meta: "model" }
+                    { name: "javascript", value: "javascript", meta: "alias" }
                 ];
 
                 systemId = document.location.href.split('#')[2];
                 system = this.require('storage').get(systemId);
 
                 if (system) {
+                    types = system.types;
+                    for (typeName in types) {
+                        result.push({ name: types[typeName].name, value: types[typeName].name, meta: "custom type" });
+                    }
+                    result.push({ name: "@RuntimeComponent", value: "@RuntimeComponent", meta: "model" });
                     schemas = system.schemas;
                     for (var name in schemas) {
                         result.push({ name: '@' + schemas[name]._name, value: '@' + schemas[name]._name, meta: "model" });

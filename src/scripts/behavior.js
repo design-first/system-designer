@@ -381,6 +381,7 @@ runtime.on('ready', function () {
                     // case of system
                     if (system.behaviors[id].component === systemId) {
                         result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });
+                        result.push({ name: 'id()', value: 'id()', meta: 'property' });
                         result.push({ name: 'on()', value: 'on()', meta: 'method' });
                         result.push({ name: 'off()', value: 'off()', meta: 'method' });
                         result.push({ name: 'require()', value: 'require()', meta: 'method' });
@@ -397,6 +398,7 @@ runtime.on('ready', function () {
                         for (i = 0; i < length; i++) {
                             if (parents[i].indexOf('RuntimeComponent') !== -1) {
                                 result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
+                                result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });
                                 result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
                                 result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
                                 result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
@@ -492,6 +494,7 @@ runtime.on('ready', function () {
                     // case of system
                     if (system.behaviors[id].component === systemId) {
                         result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });
+                        result.push({ name: 'id()', value: 'id()', meta: 'property' });
                         result.push({ name: 'on()', value: 'on()', meta: 'method' });
                         result.push({ name: 'off()', value: 'off()', meta: 'method' });
                         result.push({ name: 'require()', value: 'require()', meta: 'method' });
@@ -508,6 +511,7 @@ runtime.on('ready', function () {
                         for (i = 0; i < length; i++) {
                             if (parents[i].indexOf('RuntimeComponent') !== -1) {
                                 result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
+                                result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });
                                 result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
                                 result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
                                 result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
@@ -531,7 +535,7 @@ runtime.on('ready', function () {
             }.bind(this)
         };
 
-        this.editor().setOptions({
+        editor.setOptions({
             enableBasicAutocompletion: [completer]
         });
         editor.setValue(designer.store().data().action);
