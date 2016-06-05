@@ -274,7 +274,7 @@ runtime.on('ready', function () {
 
             // message for server debug
             if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
-                $.post(config.urlServer + ':8888/' + message.event, encodeURI(JSON.stringify(message.data)));
+                $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
             }
         });
 

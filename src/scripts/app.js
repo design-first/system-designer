@@ -166,9 +166,11 @@ runtime.on('ready', function () {
         }, true, true);
 
         channel.on('updateBehavior', function updateBehavior(id, behavior) {
-            this.require(id).action(behavior.action);
-            if (behavior.state === 'main') {
-                this.require(behavior.component).main();
+            if (this.require(id)) {
+                this.require(id).action(behavior.action);
+                if (behavior.state === 'main') {
+                    this.require(behavior.component).main();
+                }
             }
         }, true, true);
 
@@ -189,10 +191,10 @@ runtime.on('ready', function () {
 
         // logger events
         this.require('logger').on('warn', function (message) {
-            if (this.level()  === 'info' || this.level()  === 'warn' || this.level()  === 'debug') {
+            if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {
                 var date = new Date(),
                     time = date.toTimeString();
-                    time = time.split(' ')[0].trim();
+                time = time.split(' ')[0].trim();
 
                 this.require('channel').logWarn('[' + time + '] ' + message);
             }
@@ -201,7 +203,7 @@ runtime.on('ready', function () {
         this.require('logger').on('error', function (message) {
             var date = new Date(),
                 time = date.toTimeString();
-                time = time.split(' ')[0].trim();
+            time = time.split(' ')[0].trim();
 
             this.require('channel').logError('[' + time + '] ' + message);
         }, true, true);
@@ -217,7 +219,7 @@ runtime.on('ready', function () {
             if (this.level() === 'debug') {
                 var date = new Date(),
                     time = date.toTimeString();
-                    time = time.split(' ')[0].trim();
+                time = time.split(' ')[0].trim();
 
                 this.require('channel').logDebug('[' + time + '] ' + message);
             }
@@ -227,7 +229,7 @@ runtime.on('ready', function () {
             if (this.level() === 'info' || this.level() === 'debug') {
                 var date = new Date(),
                     time = date.toTimeString();
-                    time = time.split(' ')[0].trim();
+                time = time.split(' ')[0].trim();
 
                 this.require('channel').logInfo('[' + time + '] ' + message);
             }

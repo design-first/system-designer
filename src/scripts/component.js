@@ -299,11 +299,11 @@ runtime.on('ready', function () {
 
             // message for server debug
             if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
-                $.post(config.urlServer + ':8888/' + message.event, encodeURI(JSON.stringify(message.data)));
+                $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
             }
         });
 
-        id = decodeURI(document.location.href.split('#')[1]);
+        id = decodeURIComponent(document.location.href.split('#')[1]);
         collection = document.location.href.split('#')[2];
         systemId = document.location.href.split('#')[3];
 
@@ -530,7 +530,7 @@ runtime.on('ready', function () {
             systemId = '',
             href = '';
 
-        id = decodeURI(document.location.href.split('#')[1]);
+        id = decodeURIComponent(document.location.href.split('#')[1]);
         collection = document.location.href.split('#')[2];
         systemId = document.location.href.split('#')[3];
 

@@ -116,7 +116,7 @@ module.exports = function (grunt) {
                             fileName = filepath.split('js/')[1];
                             fileName = fileName.split('/')[0];
 
-                            src = encodeURI(src);
+                            src = encodeURIComponent(src);
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
                                 '"source":"' + src.trim() + '"},';
@@ -179,7 +179,7 @@ module.exports = function (grunt) {
                             fileName = filepath.split('json/')[1];
                             fileName = fileName.split('/')[0];
 
-                            src = encodeURI(src);
+                            src = encodeURIComponent(src);
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
                                 '"source":"' + src.trim() + '"},';

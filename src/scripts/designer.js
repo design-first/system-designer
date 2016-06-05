@@ -169,7 +169,7 @@ runtime.on('ready', function () {
         document.querySelector('#designer-dialog-share').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{message}}/gi, window.location.toString().split('#')[0] + '?system=' + encodeURI(JSON.stringify(sys)))
+                .replace(/{{message}}/gi, window.location.toString().split('#')[0] + '?system=' + encodeURIComponent(JSON.stringify(sys)))
         );
 
         // events
@@ -373,8 +373,8 @@ runtime.on('ready', function () {
             library = this.require(libraries[i]._id);
 
             list = list + '<a class="list-group-item" id="designer-dialog-import-file-modal-library-' + library.id() + '">' +
-                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURI(library.source())).name + '</h4>' +
-                '<p class="list-group-item-text">' + JSON.parse(decodeURI(library.source())).description + '</p>' +
+                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURIComponent(library.source())).name + '</h4>' +
+                '<p class="list-group-item-text">' + JSON.parse(decodeURIComponent(library.source())).description + '</p>' +
                 '</a>';
         }
 
@@ -398,7 +398,7 @@ runtime.on('ready', function () {
             } else {
                 id = this.getAttribute('id').replace('designer-dialog-import-file-modal-library-', '');
 
-                that.data(JSON.parse(decodeURI(that.require(id).source())));
+                that.data(JSON.parse(decodeURIComponent(that.require(id).source())));
 
                 // remove old active
                 libraries = document.getElementById('designer-dialog-import-file-modal-library');
@@ -1737,13 +1737,13 @@ runtime.on('ready', function () {
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-')).children[0].children[1];
 
         html.addEventListener('click', function (event) {
-            this.require('designer').open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
+            this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
         }.bind(this));
 
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-edit');
 
         html.addEventListener('click', function (event) {
-            this.require('designer').open('component.html#' + encodeURI(that.title()) + '#' + encodeURI(that.model()) + '#' + systemId);
+            this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
         }.bind(this));
 
         html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-export');
@@ -3565,7 +3565,7 @@ runtime.on('ready', function () {
 
             // message for server debug
             if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
-                $.post(config.urlServer + ':8888/' + message.event, encodeURI(JSON.stringify(message.data)));
+                $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
             }
         });
 
@@ -4206,7 +4206,7 @@ runtime.on('ready', function () {
         // case of url
         switch (true) {
             case typeof document.location.search.split('?')[1] === 'string':
-                var systemParam = JSON.parse(decodeURI(document.location.search.split('?')[1].split('system=')[1]));
+                var systemParam = JSON.parse(decodeURIComponent(document.location.search.split('?')[1].split('system=')[1]));
                 var sys = null;
 
                 sys = new System(systemParam);
@@ -4481,6 +4481,8 @@ runtime.on('ready', function () {
 
         this.system().behaviors(behaviors);
         this.save();
+        
+        this.require('channel').createBehavior(behavior);
     });
 
     Designer.on('deleteSchema', function (id) {
@@ -4570,6 +4572,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -4583,6 +4586,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -4601,6 +4605,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -4618,6 +4623,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -4631,6 +4637,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -4643,6 +4650,7 @@ runtime.on('ready', function () {
         models[id] = model;
 
         this.system().models(models);
+        this.require('channel').createModel(model._id, model);
         this.system().components(components);
         this.save();
     });
@@ -4706,6 +4714,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
 
@@ -4720,6 +4729,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
 
@@ -4740,6 +4750,7 @@ runtime.on('ready', function () {
 
                             for (component in components[name]) {
                                 components[name][component][propName] = model[propName].default;
+                                this.require('channel').updateComponent(component, name, components[name][component]);
                                 this.system().components(components);
                             }
 
@@ -4763,6 +4774,7 @@ runtime.on('ready', function () {
 
                             for (component in components[name]) {
                                 components[name][component][propName] = model[propName].default;
+                                this.require('channel').updateComponent(component, name, components[name][component]);
                                 this.system().components(components);
                             }
 
@@ -4807,11 +4819,13 @@ runtime.on('ready', function () {
 
                     for (component in components[name]) {
                         delete components[name][component][propName];
+                        this.require('channel').deleteComponent(component, name);
                         this.system().components(components);
                     }
                     for (behavior in behaviors) {
                         if (model && behaviors[behavior].component === model._name && behaviors[behavior].state === propName) {
                             delete behaviors[behavior];
+                            this.require('channel').deleteBehavior(behavior);
                             this.system().behaviors(behaviors);
                         }
                     }
@@ -4821,6 +4835,7 @@ runtime.on('ready', function () {
 
         models[model._id] = model;
         this.system().models(models);
+        this.require('channel').updateModel(model._id, model);
         this.save();
     });
 
@@ -4909,6 +4924,7 @@ runtime.on('ready', function () {
                             action[0] = header;
                             behaviors[behaviorId].action = action.join('{');
                             this.system().behaviors(behaviors);
+                            this.require('channel').updateBehavior(behavior._id, behavior);
                             this.save();
                         }
                     }
