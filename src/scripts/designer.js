@@ -3311,7 +3311,7 @@ runtime.on('ready', function () {
                                 // parents are search from the schema
                                 schemaId = _getSchemaId(system.models()[id]._name);
                                 parentsId = [];
-                                if (system.schemas()[schemaId]._inherit) {
+                                if (schemaId && system.schemas()[schemaId]._inherit) {
                                     parents = system.schemas()[schemaId]._inherit.slice();
                                     parents.reverse();
                                 }
