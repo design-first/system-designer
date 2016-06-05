@@ -19,7 +19,7 @@
  */
 
 runtime.on('ready', function () {
-    var system = runtime.system('app');
+    var system = runtime.system('app-designer-testing');
 
     system.on('main', function () {
         var RuntimeChannel = null,

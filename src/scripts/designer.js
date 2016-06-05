@@ -28,6 +28,7 @@ runtime.on('ready', function () {
         var html = '',
             dom = null;
 
+        $('.modal-backdrop').remove();
         $('#designer-dialog-import').empty();
 
         html = this.require('dialog-modal-import.html');
@@ -3061,7 +3062,7 @@ runtime.on('ready', function () {
                                         canCreate = false;
                                     }
                                 }
-                                
+
                                 if (state === 'destroy') {
                                     if (_existBehavior(state, model)) {
                                         canCreate = false;
@@ -3995,42 +3996,45 @@ runtime.on('ready', function () {
             var Dialog = null,
                 dialog = null;
 
-            Dialog = this.require('DialogImport');
-            dialog = new Dialog({
-                'title': 'A system has been found',
-                'message': 'Do you want to import the system ?',
-                'data': system
-            });
-            dialog.show();
+            if (system.name !== 'app-designer-testing') {
 
-            dialog.on('ok', function () {
-                var System = this.require('System'),
-                    sys = null,
-                    designer = this.require('designer'),
-                    message = this.require('message');
+                Dialog = this.require('DialogImport');
+                dialog = new Dialog({
+                    'title': 'A system has been found',
+                    'message': 'Do you want to import the system ?',
+                    'data': system
+                });
+                dialog.show();
 
-                if (designer.system()) {
-                    designer.system().destroy();
-                }
-                sys = new System(this.data());
-                designer.system(sys);
+                dialog.on('ok', function () {
+                    var System = this.require('System'),
+                        sys = null,
+                        designer = this.require('designer'),
+                        message = this.require('message');
 
-                // empty log
-                designer.logs().forEach(function (item) {
-                    this.logs().pop();
-                }.bind(designer));
+                    if (designer.system()) {
+                        designer.system().destroy();
+                    }
+                    sys = new System(this.data());
+                    designer.system(sys);
 
-                designer.save();
+                    // empty log
+                    designer.logs().forEach(function (item) {
+                        this.logs().pop();
+                    }.bind(designer));
 
-               	designer.space(sys.name());
-                designer.spaces().render();
-                designer.workspace().refresh();
+                    designer.save();
 
-                this.hide();
-                designer.save();
+                    designer.space(sys.name());
+                    designer.spaces().render();
+                    designer.workspace().refresh();
 
-                message.success('importation of the system is done.');
-            });
+                    this.hide();
+                    designer.save();
+
+                    message.success('importation of the system is done.');
+                });
+            }
         });
 
         window.addEventListener('message', function (event) {
@@ -4481,7 +4485,7 @@ runtime.on('ready', function () {
 
         this.system().behaviors(behaviors);
         this.save();
-        
+
         this.require('channel').createBehavior(behavior);
     });
 
