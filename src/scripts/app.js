@@ -46,16 +46,21 @@ runtime.on('ready', function () {
 
         // schema change events
         channel.on('createSchema', function createSchema(id, schema) {
+            this.require('logger').level('warn');
             this.require('metamodel').schema(schema);
             this.require('metamodel').create();
+            this.require('logger').level('debug');
         }, true, true);
 
         channel.on('updateSchema', function updateSchema(id, schema) {
+            this.require('logger').level('warn');
             this.require('metamodel').schema(schema);
             this.require('metamodel').create();
+            this.require('logger').level('debug');
         }, true, true);
 
         channel.on('deleteSchema', function deleteSchema(id) {
+            this.require('logger').level('warn');
             var search = $db.RuntimeSchema.find({ '_id': id }),
                 modelName = '',
                 modelId = '';
@@ -79,20 +84,26 @@ runtime.on('ready', function () {
                 }
                 this.require('metamodel').create();
             }
+            this.require('logger').level('debug');
         }, true, true);
 
         // model change events
         channel.on('createModel', function createModel(id, model) {
+            this.require('logger').level('warn');
             this.require('metamodel').model(model);
             this.require('metamodel').create();
+            this.require('logger').level('debug');
         }, true, true);
 
         channel.on('updateModel', function updateModel(id, model) {
+            this.require('logger').level('warn');
             this.require('metamodel').model(model);
             this.require('metamodel').create();
+            this.require('logger').level('debug');
         }, true, true);
 
         channel.on('deleteModel', function deleteModel(id) {
+            this.require('logger').level('warn');
             var search = $db.RuntimeModel.find({ '_id': id }),
                 modelName = '',
                 modelId = '';
@@ -110,22 +121,30 @@ runtime.on('ready', function () {
                 $component.removeFromMemory(modelName);
             }
             this.require('metamodel').create();
+            this.require('logger').level('debug');
         }, true, true);
 
         // type change events
         channel.on('createType', function createType(id, type) {
+            this.require('logger').level('warn');
             this.require('metamodel').type(type);
             this.require('metamodel').create();
+            this.require('logger').level('debug');
         }, true, true);
 
         channel.on('updateType', function updateType(id, type) {
+            this.require('logger').level('warn');
             this.require('metamodel').type(type);
             this.require('metamodel').create();
+            this.require('logger').level('debug');
+
         }, true, true);
 
         channel.on('deleteType', function deleteType(id) {
+            this.require('logger').level('warn');
             $db.RuntimeType.remove({ 'name': id });
             this.require('metamodel').create();
+            this.require('logger').level('debug');
         }, true, true);
 
         // component change events
@@ -134,7 +153,7 @@ runtime.on('ready', function () {
         }, true, true);
 
         channel.on('updateComponent', function updateComponent(id, collection, component) {
-            $db[collection].update({ '_id': id }, component, {'upsert': true});
+            $db[collection].update({ '_id': id }, component, { 'upsert': true });
         }, true, true);
 
         channel.on('deleteComponent', function deleteComponent(id, collection) {
@@ -170,10 +189,12 @@ runtime.on('ready', function () {
 
         // logger events
         this.require('logger').on('warn', function (message) {
-            var date = new Date(),
-                time = date.toLocaleTimeString();
+            if (this.level()  === 'info' || this.level()  === 'warn' || this.level()  === 'debug') {
+                var date = new Date(),
+                    time = date.toLocaleTimeString();
 
-            this.require('channel').logWarn('[' + time + '] ' + message);
+                this.require('channel').logWarn('[' + time + '] ' + message);
+            }
         }, true, true);
 
         this.require('logger').on('error', function (message) {
@@ -191,17 +212,21 @@ runtime.on('ready', function () {
 
         // logger events
         this.require('logger').on('debug', function (message) {
-            var date = new Date(),
-                time = date.toLocaleTimeString();
+            if (this.level() === 'debug') {
+                var date = new Date(),
+                    time = date.toLocaleTimeString();
 
-            this.require('channel').logDebug('[' + time + '] ' + message);
+                this.require('channel').logDebug('[' + time + '] ' + message);
+            }
         }, true, true);
 
         this.require('logger').on('info', function (message) {
-            var date = new Date(),
-                time = date.toLocaleTimeString();
+            if (this.level() === 'info' || this.level() === 'debug') {
+                var date = new Date(),
+                    time = date.toLocaleTimeString();
 
-            this.require('channel').logInfo('[' + time + '] ' + message);
+                this.require('channel').logInfo('[' + time + '] ' + message);
+            }
         }, true, true);
 
         this.require('logger').level('debug');

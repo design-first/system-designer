@@ -338,6 +338,7 @@ runtime.on('ready', function () {
     var Editor = this.require('Editor');
     Editor.on('render', function () {
         this.editor().getSession().setMode('ace/mode/javascript');
+        this.editor().getSession().setTabSize(2);
         var completer = {
             getCompletions: function (editor, session, pos, prefix, callback) {
                 var systemId = '',
@@ -348,6 +349,40 @@ runtime.on('ready', function () {
                     schema = {},
                     parents = {},
                     i = 0;
+
+
+                function _searchApis(parents) {
+                    var length = 0,
+                        i = 0;
+
+                    if (parents) {
+                        length = parents.length;
+                        for (i = 0; i < length; i++) {
+                            if (parents[i].indexOf('RuntimeComponent') !== -1) {
+                                result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
+                                result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });
+                                result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
+                                result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
+                                result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
+                                result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });
+                                result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });
+                                result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });
+                            } else {
+                                schema = _getSchema(schemas, parents[i]);
+
+                                for (var prop in schema) {
+                                    if (prop.indexOf('_') !== 0) {
+                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });
+                                    }
+                                }
+
+                                if (typeof schema._inherit !== 'undefined') {
+                                    _searchApis(schema._inherit);
+                                }
+                            }
+                        }
+                    }
+                }
 
                 function _getSchema(schemas, name) {
                     var result = '',
@@ -410,8 +445,11 @@ runtime.on('ready', function () {
 
                                 for (var prop in schema) {
                                     if (prop.indexOf('_') !== 0) {
-                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] });
+                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });
                                     }
+                                }
+                                if (typeof schema._inherit !== 'undefined') {
+                                    _searchApis(schema._inherit);
                                 }
                             }
                         }
@@ -436,6 +474,7 @@ runtime.on('ready', function () {
                 runtime.require('designer').save();
             }
         });
+        this.editor().focus();
     });
 
     // Menu items 
@@ -450,6 +489,7 @@ runtime.on('ready', function () {
         }
 
         editor.getSession().setMode('ace/mode/javascript');
+        editor.getSession().setTabSize(2);
 
         var completer = {
             getCompletions: function (editor, session, pos, prefix, callback) {
@@ -523,7 +563,7 @@ runtime.on('ready', function () {
 
                                 for (var prop in schema) {
                                     if (prop.indexOf('_') !== 0) {
-                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] });
+                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });
                                     }
                                 }
                             }
@@ -540,10 +580,11 @@ runtime.on('ready', function () {
         });
         editor.setValue(designer.store().data().action);
 
-        editor.gotoLine(1);
+        editor.gotoLine(2);
 
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
+        editor.focus();
     });
 
     this.require('1f1781882618111').on('click', function () {
@@ -556,10 +597,11 @@ runtime.on('ready', function () {
         editor.getSession().setMode('ace/mode/json');
         editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
 
-        editor.gotoLine(1);
+        editor.gotoLine(2);
 
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
+        editor.focus();
     });
 
     // Designer

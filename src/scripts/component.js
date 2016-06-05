@@ -139,7 +139,6 @@ runtime.on('ready', function () {
         // header
         domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());
 
-        // items
         this.items().forEach(function (item) {
             domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');
         });
@@ -260,10 +259,11 @@ runtime.on('ready', function () {
 
         editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
 
-        editor.gotoLine(1);
+        editor.gotoLine(2);
 
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
+        editor.focus();
     });
 
     // Server
@@ -278,6 +278,7 @@ runtime.on('ready', function () {
             designer = this.require('designer'),
             result = {},
             property = '',
+            propName = '',
             editor = null;
 
         this.require('storage').on('changed', function (obj) {
@@ -342,6 +343,20 @@ runtime.on('ready', function () {
                     });
                     self.require('designer').menubar().items().push(self.require(arrId[0]));
                 }
+
+                // items
+                var toto = self.require('designer').menubar().items().sort(function (itemA, itemB) {
+                    var compA = runtime.require(itemA),
+                        compB = runtime.require(itemB);
+
+                    if (compA.position() > compB.position()) {
+                        return 1;
+                    }
+                    if (compA.position() < compB.position()) {
+                        return -1;
+                    }
+                    return 0;
+                });
                 // render
                 self.require('designer').menubar().render();
 
@@ -352,6 +367,11 @@ runtime.on('ready', function () {
 
                     editor = self.require('editor').editor();
                     editor.getSession().setMode('ace/mode/' + props[propName]);
+
+                    if (props[propName] === 'javascript') {
+                        editor.getSession().setTabSize(2);
+                    }
+
                     editor.setOptions({
                         enableBasicAutocompletion: true,
                     });
@@ -401,17 +421,33 @@ runtime.on('ready', function () {
         document.title = id + ' | system designer';
 
         editor = this.require('editor').editor();
-        editor.setValue(JSON.stringify(component, null, '\t'));
-        editor.gotoLine(1);
+        if (Object.keys(result).length === 0) {
+            editor.getSession().setMode('ace/mode/json');
+            editor.setValue(JSON.stringify(component, null, '\t'));
+            editor.gotoLine(2);
+        } else {
+            propName = Object.keys(result)[0];
+            editor.getSession().setMode('ace/mode/' + result[propName]);
+
+            if (result[propName] === 'javascript') {
+                editor.getSession().setTabSize(2);
+            }
+
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+            });
+            editor.setValue(component[propName]);
+            editor.gotoLine(1);
+        }
+
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
-
+        editor.focus();
     }, true);
 
     // Editor
     var Editor = this.require('Editor');
     Editor.on('render', function () {
-        this.editor().getSession().setMode('ace/mode/json');
         this.editor().setShowPrintMargin(false);
         this.editor().setReadOnly(false);
         this.editor().$blockScrolling = Infinity;

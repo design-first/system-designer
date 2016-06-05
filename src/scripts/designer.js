@@ -951,10 +951,11 @@ runtime.on('ready', function () {
 
             schema = _getSchemaId(space);
 
-            if (designer.system().schemas()[schema]._inherit && designer.system().schemas()[schema]._inherit.indexOf('RuntimeComponent') !== -1) {
-                states.push('init');
-                states.push('destroy');
-            }
+            // TODO look for all parents instead
+            //if (designer.system().schemas()[schema]._inherit && designer.system().schemas()[schema]._inherit.indexOf('RuntimeComponent') !== -1) {
+            states.push('init');
+            states.push('destroy');
+            //}
             for (name in designer.system().schemas()[schema]) {
                 switch (designer.system().schemas()[schema][name]) {
                     case 'property':
@@ -986,6 +987,18 @@ runtime.on('ready', function () {
         );
 
         //events
+        dom = document.getElementById('designer-dialog-behavior-creation-state');
+        dom.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                if ($('#designer-dialog-behavior-creation-state').val()) {
+                    this.ok();
+                }
+                return false;
+            }
+        }.bind(this));
+
         dom = document.getElementById('designer-dialog-behavior-creation-modal-cancel');
         dom.addEventListener('click', function (event) {
             this.cancel();
@@ -995,6 +1008,11 @@ runtime.on('ready', function () {
         dom.addEventListener('click', function (event) {
             this.ok();
         }.bind(this));
+
+        // focus
+        $('#designer-dialog-behavior-creation-modal').on('shown.bs.modal', function () {
+            $('#designer-dialog-behavior-creation-state')[0].focus();
+        });
     });
 
     dialogBehaviorCreation.on('show', function () {
@@ -1086,7 +1104,7 @@ runtime.on('ready', function () {
         html.addEventListener('click', function (event) {
             this.require('designer').open('system.html#' + that.uuid() + '#description');
         }.bind(this));
-        
+
         html = document.getElementById('designer-system-' + this.uuid() + '-export');
 
         html.addEventListener('click', function (event) {
@@ -2933,6 +2951,7 @@ runtime.on('ready', function () {
                             schemas = designer.system().schemas(),
                             models = designer.system().models(),
                             behaviors = designer.system().behaviors(),
+                            message = this.require('message'),
                             schemaId = '',
                             modelId = '',
                             methodDef = null,
@@ -2945,6 +2964,7 @@ runtime.on('ready', function () {
                             state = '',
                             uuid = '',
                             params = '',
+                            canCreate = true,
                             i = 0,
                             length = 0;
 
@@ -2975,6 +2995,18 @@ runtime.on('ready', function () {
                             for (id in designer.system().models()) {
                                 if (designer.system().models()[id]._name === name) {
                                     result = id;
+                                    break;
+                                }
+                            }
+                            return result;
+                        }
+
+                        function _existBehavior(state, component) {
+                            var result = false;
+
+                            for (id in designer.system().behaviors()) {
+                                if (designer.system().behaviors()[id].state === state && designer.system().behaviors()[id].component === component) {
+                                    result = true;
                                     break;
                                 }
                             }
@@ -3017,8 +3049,23 @@ runtime.on('ready', function () {
                                     params = 'size, value, event';
                                 }
 
+                                if (schemas[schemaId][state] === 'method') {
+                                    if (_existBehavior(state, model)) {
+                                        canCreate = false;
+                                    }
+                                }
+
                                 if (state === 'init') {
                                     params = 'conf';
+                                    if (_existBehavior(state, model)) {
+                                        canCreate = false;
+                                    }
+                                }
+                                
+                                if (state === 'destroy') {
+                                    if (_existBehavior(state, model)) {
+                                        canCreate = false;
+                                    }
                                 }
 
                                 // body
@@ -3046,43 +3093,51 @@ runtime.on('ready', function () {
                                 }
                             } else {
                                 model = designer.system().id();
+                                if (_existBehavior(state, model)) {
+                                    canCreate = false;
+                                }
                             }
 
-                            // set model
-                            behavior = {
-                                "_id": uuid,
-                                "component": model,
-                                "state": state,
-                                "action": "function " + state + "(" + params + ") { \n" + body + "}",
-                                "useCoreAPI": false,
-                                "core": false
-                            };
+                            if (canCreate) {
+                                // set model
+                                behavior = {
+                                    "_id": uuid,
+                                    "component": model,
+                                    "state": state,
+                                    "action": "function " + state + "(" + params + ") { \n" + body + "}",
+                                    "useCoreAPI": false,
+                                    "core": false
+                                };
 
-                            behaviors[uuid] = behavior;
-                            designer.system().behaviors(behaviors);
+                                behaviors[uuid] = behavior;
+                                designer.system().behaviors(behaviors);
 
-                            ModelBehavior = this.require('ModelBehavior');
+                                ModelBehavior = this.require('ModelBehavior');
 
-                            modelBehavior = new ModelBehavior({
-                                'uuid': uuid
-                            });
+                                modelBehavior = new ModelBehavior({
+                                    'uuid': uuid
+                                });
 
-                            modelBehavior.title(state);
-                            modelBehavior.document(behavior);
-                            modelBehavior.content(JSON.parse(JSON.stringify(behavior.action)));
+                                modelBehavior.title(state);
+                                modelBehavior.document(behavior);
+                                modelBehavior.content(JSON.parse(JSON.stringify(behavior.action)));
 
-                            this.hide();
-                            modelBehavior.render();
+                                this.hide();
+                                modelBehavior.render();
 
-                            Prism.highlightAll();
+                                Prism.highlightAll();
 
-                            // little effect
-                            $('#designer-behavior-' + uuid.toString()).hide();
-                            $('#designer-behavior-' + uuid.toString()).fadeIn(1000);
+                                // little effect
+                                $('#designer-behavior-' + uuid.toString()).hide();
+                                $('#designer-behavior-' + uuid.toString()).fadeIn(1000);
 
-                            designer.save();
+                                designer.save();
 
-                            this.require('channel').createBehavior(behavior);
+                                this.require('channel').createBehavior(behavior);
+                            } else {
+                                this.hide();
+                                message.warning('Can not create two behaviors for a method.');
+                            }
                         }
                     });
                 }

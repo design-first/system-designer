@@ -280,7 +280,7 @@ runtime.on('ready', function () {
         document.title = model._name + ' | system designer';
 
         editor.setValue(JSON.stringify(model, null, '\t'));
-        editor.gotoLine(1);
+        editor.gotoLine(2);
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
 
@@ -345,6 +345,7 @@ runtime.on('ready', function () {
                 runtime.require('designer').save();
             }
         });
+        this.editor().focus();
 
         $(function () {
             $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });

@@ -35,30 +35,6 @@ You can run your application directly from System Designer and then export it to
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
 
-## Installation
-
-#### Node.js
-
-```sh
-$ npm install system-designer --save
-```
-
-Then:
-
-* copy `/node_modules/system-designer/dist/designer` on your web project
-* open `/designer/index.html`.
-
-#### Bower
-
-```sh
-$ bower install system-designer --save
-```
-
-Then:
-
-* copy `/bower_components/system-designer/dist/designer` on your web project
-* open `/designer/index.html`.
-
 ## Build
 
 #### Installation
@@ -75,7 +51,6 @@ $ bower install
 #### Grunt tasks
 
 Here are the different tasks you can use to automate tasks:
-
 
 ```sh
 # clean

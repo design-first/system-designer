@@ -280,7 +280,7 @@ runtime.on('ready', function () {
         document.title = schema._name + ' | system designer';
 
         editor.setValue(JSON.stringify(schema, null, '\t'));
-        editor.gotoLine(1);
+        editor.gotoLine(2);
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
 
@@ -318,6 +318,7 @@ runtime.on('ready', function () {
                 runtime.require('designer').save();
             }
         });
+        this.editor().focus();
     });
 
     // Designer

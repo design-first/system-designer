@@ -193,6 +193,7 @@ runtime.on('ready', function () {
 
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
+        editor.focus();
     });
 
     this.require('1f1781882618114').on('click', function () {
@@ -210,6 +211,7 @@ runtime.on('ready', function () {
 
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
+        editor.focus();
     });
 
     this.require('1f1781882618116').on('click', function () {
@@ -227,6 +229,7 @@ runtime.on('ready', function () {
 
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
+        editor.focus();
     });
 
     this.require('1f1781882618102').on('click', function () {
@@ -236,10 +239,11 @@ runtime.on('ready', function () {
         editor.getSession().setMode('ace/mode/json');
         editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
 
-        editor.gotoLine(1);
+        editor.gotoLine(2);
 
         editor.getSession().$undoManager.reset();
         editor.getSession().setUndoManager(new ace.UndoManager());
+        editor.focus();
     });
 
     // ToolBar
@@ -364,6 +368,7 @@ runtime.on('ready', function () {
         this.editor().setReadOnly(false);
         this.editor().$blockScrolling = Infinity;
         this.editor().setValue('');
+        this.editor().focus();
         this.editor().commands.addCommand({
             name: 'myCommand',
             bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
