@@ -191,7 +191,8 @@ runtime.on('ready', function () {
         this.require('logger').on('warn', function (message) {
             if (this.level()  === 'info' || this.level()  === 'warn' || this.level()  === 'debug') {
                 var date = new Date(),
-                    time = date.toLocaleTimeString();
+                    time = date.toTimeString();
+                    time = time.split(' ')[0].trim();
 
                 this.require('channel').logWarn('[' + time + '] ' + message);
             }
@@ -199,7 +200,8 @@ runtime.on('ready', function () {
 
         this.require('logger').on('error', function (message) {
             var date = new Date(),
-                time = date.toLocaleTimeString();
+                time = date.toTimeString();
+                time = time.split(' ')[0].trim();
 
             this.require('channel').logError('[' + time + '] ' + message);
         }, true, true);
@@ -214,7 +216,8 @@ runtime.on('ready', function () {
         this.require('logger').on('debug', function (message) {
             if (this.level() === 'debug') {
                 var date = new Date(),
-                    time = date.toLocaleTimeString();
+                    time = date.toTimeString();
+                    time = time.split(' ')[0].trim();
 
                 this.require('channel').logDebug('[' + time + '] ' + message);
             }
@@ -223,7 +226,8 @@ runtime.on('ready', function () {
         this.require('logger').on('info', function (message) {
             if (this.level() === 'info' || this.level() === 'debug') {
                 var date = new Date(),
-                    time = date.toLocaleTimeString();
+                    time = date.toTimeString();
+                    time = time.split(' ')[0].trim();
 
                 this.require('channel').logInfo('[' + time + '] ' + message);
             }
