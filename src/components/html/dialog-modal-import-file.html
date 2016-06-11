@@ -6,6 +6,34 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Type of import</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <div class="radio">
+                                <label><input type="radio" name="import-type" id="designer-dialog-import-modal-from-file" value="file" checked>from a file</label>
+                            </div>
+                            <div class="radio"><label><input type="radio" name="import-type" id="designer-dialog-import-modal-from-library" value="library">from the library</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="designer-dialog-import-modal-from-file-form">
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Select a file</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <input type="file" id="designer-dialog-import-file-modal-file">
+                        </div>
+                    </div>
+                    <div class="form-group" id="designer-dialog-import-modal-from-library-form">
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Select a system</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <div class="well" style="padding:0px;" id="designer-dialog-import-file-modal-well">
+                                <div class="list-group designer-library" id="designer-dialog-import-file-modal-library">
+                                    {{library}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- <form class="form-horizontal" role="form">
                     <div class="form-group" id="sel1">
                         <div class="col-xs-offset-2 col-xs-3">
                             <div class="radio">
@@ -18,15 +46,10 @@
                             </div>
                         </div>
                         <div class="col-xs-offset-0 col-xs-6">
-                            <input type="file" id="designer-dialog-import-file-modal-file">
-                            <div class="well" style="padding:0px;display:none" id="designer-dialog-import-file-modal-well">
-                                <div class="list-group designer-library" id="designer-dialog-import-file-modal-library">
-                                    {{library}}
-                                </div>
-                            </div>
+
                         </div>
                     </div>
-                </form>
+                </form>-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="designer-dialog-import-file-modal-cancel">Cancel</button>

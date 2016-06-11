@@ -374,8 +374,8 @@ runtime.on('ready', function () {
             library = this.require(libraries[i]._id);
 
             list = list + '<a class="list-group-item" id="designer-dialog-import-file-modal-library-' + library.id() + '">' +
-                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURIComponent(library.source())).name + '</h4>' +
-                '<p class="list-group-item-text">' + JSON.parse(decodeURIComponent(library.source())).description + '</p>' +
+                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURIComponent(library.source())).description + '</h4>' +
+                '<p class="list-group-item-text">v' + JSON.parse(decodeURIComponent(library.source())).version + '</p>' +
                 '</a>';
         }
 
@@ -385,6 +385,10 @@ runtime.on('ready', function () {
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{library}}/gi, list)
         );
+
+
+        // hide library
+        $('#designer-dialog-import-modal-from-library-form').hide();
 
         //events  
         var callbackEvent = function (event) {
@@ -422,14 +426,14 @@ runtime.on('ready', function () {
 
         dom = document.getElementById('designer-dialog-import-modal-from-file');
         dom.addEventListener('click', function (event) {
-            $('#designer-dialog-import-file-modal-file').show();
-            $('#designer-dialog-import-file-modal-well').hide();
+            $('#designer-dialog-import-modal-from-file-form').show();
+            $('#designer-dialog-import-modal-from-library-form').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-from-library');
         dom.addEventListener('click', function (event) {
-            $('#designer-dialog-import-file-modal-well').show();
-            $('#designer-dialog-import-file-modal-file').hide();
+            $('#designer-dialog-import-modal-from-library-form').show();
+            $('#designer-dialog-import-modal-from-file-form').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-cancel');
@@ -2655,7 +2659,7 @@ runtime.on('ready', function () {
 
                     // clean
                     name = name.trim();
-                    name = name.replace(/ /gi, '_');
+                    name = name.replace(/ /gi, '-');
 
                     if (name) {
 
