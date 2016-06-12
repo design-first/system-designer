@@ -805,7 +805,8 @@ runtime.on('ready', function () {
     var DialogExport = this.require('DialogExport');
     DialogExport.on('init', function (config) {
         var html = '',
-            dom = null;
+            dom = null,
+            system = this.require('designer').system();
 
         $('#designer-dialog-export').empty();
 
@@ -814,6 +815,13 @@ runtime.on('ready', function () {
             html.source()
                 .replace(/{{title}}/gi, this.title())
         );
+
+        // default value
+        if (system.master() === true) {
+            $('#designer-dialog-export-isSystem').attr('checked', true);
+        } else {
+            $('#designer-dialog-export-isSubSystem').attr('checked', true);
+        }
 
         //events
         dom = document.getElementById('designer-dialog-export-modal-cancel');

@@ -1,3 +1,4 @@
+global.require = require;
 var runtime = require('system-runtime');
 
 // import the system

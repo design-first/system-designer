@@ -18,6 +18,10 @@
  * limitations under the License.
  */
 
+if (typeof global !== 'undefined') {
+    global.require = require;
+}
+
 runtime.on('ready', function () {
     var system = runtime.system('app-designer-testing');
 
