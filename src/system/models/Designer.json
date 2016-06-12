@@ -123,6 +123,16 @@
             }
         ]
     },
+    "syncComponent": {
+        "params": [
+            {
+                "name": "model",
+                "type": "object",
+                "mandatory": false,
+                "default": {}
+            }
+        ]
+    },
     "createModel": {
         "params": [
             {
@@ -135,6 +145,12 @@
     },
     "createBehavior": {
         "params": [
+            {
+                "name": "type",
+                "type": "string",
+                "mandatory": false,
+                "default": "method"
+            },
             {
                 "name": "model",
                 "type": "string",

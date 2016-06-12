@@ -560,7 +560,54 @@ runtime.on('ready', function () {
             return result;
         }
 
+        function _existBehavior(component, state, behaviors) {
+            var behavior = {},
+                id = '',
+                result = false;
+
+            for (id in behaviors) {
+                behavior = behaviors[id];
+                if (behavior.component === component && behavior.state === state) {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        function _canMerge(sysId, schemas, behaviors, behavior) {
+            var def = {},
+                id = '',
+                result = true;
+
+            id = _getSchemaId(behavior.component);
+            def = schemas[id];
+
+            if (def && def[behavior.state] === 'method') {
+                result = !_existBehavior(behavior.component, behavior.state, behaviors);
+            }
+
+            if (behavior.state === 'main' && behavior.component === sysId) {
+                result = false;
+            }
+
+            return result;
+        }
+
         if (Object.keys(sys).length) {
+
+            // behaviors
+            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));
+            schemas = JSON.parse(JSON.stringify(designer.system().schemas()));
+
+            for (name in sys.behaviors) {
+                if (name !== sys._id && _canMerge(sys._id, schemas, behaviors, sys.behaviors[name])) {
+                    behaviors[name] = sys.behaviors[name];
+                }
+            }
+            designer.system().behaviors(behaviors);
+
             // schemas
             schemas = JSON.parse(JSON.stringify(designer.system().schemas()));
             for (name in sys.schemas) {
@@ -621,14 +668,6 @@ runtime.on('ready', function () {
                 }
             }
 
-            // behaviors
-            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));
-            for (name in sys.behaviors) {
-                if (name !== sys._id) {
-                    behaviors[name] = sys.behaviors[name];
-                }
-            }
-
             // components
             components = JSON.parse(JSON.stringify(designer.system().components()));
             for (modelName in sys.components) {
@@ -645,7 +684,12 @@ runtime.on('ready', function () {
                     }
                 }
             }
+            designer.system().components(components);
 
+            // sync components
+            for (modelId in models) {
+                designer.syncComponent(models[modelId]);
+            }
 
             designer.system().schemas(schemas);
             designer.system().models(models);
@@ -780,6 +824,21 @@ runtime.on('ready', function () {
         dom = document.getElementById('designer-dialog-export-modal-ok');
         dom.addEventListener('click', function (event) {
             this.ok();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-export-json');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-export-type').show();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-export-html');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-export-type').hide();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-export-node');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-export-type').hide();
         }.bind(this));
 
     });
@@ -4427,9 +4486,30 @@ runtime.on('ready', function () {
         */
     });
 
-    Designer.on('createBehavior', function (model, state, def) {
+    Designer.on('createBehavior', function createBehavior(type, model, state, def) {
         var body = '',
             behaviors = this.system().behaviors();
+
+        function _canCreate(type, component, state, behaviors) {
+            var behavior = {},
+                id = '',
+                exist = false,
+                result = true;
+
+            if (type === 'method') {
+                for (id in behaviors) {
+                    behavior = behaviors[id];
+                    if (behavior.component === component && behavior.state === state) {
+                        exist = true;
+                        break;
+                    }
+                }
+                if (exist) {
+                    result = false;
+                }
+            }
+            return result;
+        }
 
         function generateId() {
             function gen() {
@@ -4438,59 +4518,61 @@ runtime.on('ready', function () {
             return gen() + gen() + gen();
         }
 
-        uuid = generateId();
+        if (_canCreate(type, model, state, behaviors)) {
+            uuid = generateId();
 
-        // params
-        methodDef = def.params;
-        if (methodDef && methodDef.length) {
-            length = methodDef.length;
-            for (i = 0; i < length; i++) {
-                if (i === 0) {
-                    params = methodDef[i].name;
-                } else {
-                    params = params + ', ' + methodDef[i].name;
+            // params
+            methodDef = def.params;
+            if (methodDef && methodDef.length) {
+                length = methodDef.length;
+                for (i = 0; i < length; i++) {
+                    if (i === 0) {
+                        params = methodDef[i].name;
+                    } else {
+                        params = params + ', ' + methodDef[i].name;
+                    }
                 }
             }
-        }
 
-        // body
-        result = def.result;
-        if (result) {
-            switch (result) {
-                case 'string':
-                    body = "\tvar result = '';\n\treturn result;\n";
-                    break;
-                case 'array':
-                    body = "\tvar result = [];\n\treturn result;\n";
-                    break;
-                case 'number':
-                    body = "\tvar result = 0;\n\treturn result;\n";
-                    break;
-                case 'object':
-                    body = "\tvar result = {};\n\treturn result;\n";
-                    break;
-                default:
-                    body = "\tvar result = {};\n\treturn result;\n";
-                    break;
+            // body
+            result = def.result;
+            if (result) {
+                switch (result) {
+                    case 'string':
+                        body = "\tvar result = '';\n\treturn result;\n";
+                        break;
+                    case 'array':
+                        body = "\tvar result = [];\n\treturn result;\n";
+                        break;
+                    case 'number':
+                        body = "\tvar result = 0;\n\treturn result;\n";
+                        break;
+                    case 'object':
+                        body = "\tvar result = {};\n\treturn result;\n";
+                        break;
+                    default:
+                        body = "\tvar result = {};\n\treturn result;\n";
+                        break;
+                }
             }
+
+            // set behavior
+            behavior = {
+                "_id": uuid,
+                "component": model,
+                "state": state,
+                "action": "function " + state + "(" + params + ") { \n" + body + "}",
+                "useCoreAPI": false,
+                "core": false
+            };
+
+            behaviors[uuid] = behavior;
+
+            this.system().behaviors(behaviors);
+            this.save();
+
+            this.require('channel').createBehavior(behavior);
         }
-
-        // set behavior
-        behavior = {
-            "_id": uuid,
-            "component": model,
-            "state": state,
-            "action": "function " + state + "(" + params + ") { \n" + body + "}",
-            "useCoreAPI": false,
-            "core": false
-        };
-
-        behaviors[uuid] = behavior;
-
-        this.system().behaviors(behaviors);
-        this.save();
-
-        this.require('channel').createBehavior(behavior);
     });
 
     Designer.on('deleteSchema', function (id) {
@@ -4663,6 +4745,68 @@ runtime.on('ready', function () {
         this.save();
     });
 
+    Designer.on('syncComponent', function (model) {
+        var schemas = this.system().schemas(),
+            components = this.system().components(),
+            name = '',
+            id = '',
+            propName = '',
+            component = null,
+            createModel = false;
+
+        function _getSchema(name, schemas) {
+            var result = '',
+                id = '';
+
+            for (id in schemas) {
+                if (schemas[id]._name === name) {
+                    result = schemas[id];
+                    break;
+                }
+            }
+            return result;
+        }
+
+        name = model._name;
+        schema = _getSchema(name, schemas);
+
+        for (propName in schema) {
+            switch (true) {
+                case schema[propName] === 'property':
+                    for (component in components[name]) {
+                        if (typeof components[name][component][propName] === 'undefined') {
+                            components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.system().components(components);
+                        }
+                    }
+                    break;
+                case schema[propName] === 'link':
+                    for (component in components[name]) {
+                        if (typeof components[name][component][propName] === 'undefined') {
+                            components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.system().components(components);
+                        }
+                    }
+                    break;
+                case schema[propName] === 'collection':
+                    for (component in components[name]) {
+                        if (typeof components[name][component][propName] === 'undefined') {
+                            components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.system().components(components);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        this.save();
+    });
+
     Designer.on('syncModel', function (schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
@@ -4756,14 +4900,8 @@ runtime.on('ready', function () {
                                 "result": "string"
                             };
 
-                            for (component in components[name]) {
-                                components[name][component][propName] = model[propName].default;
-                                this.require('channel').updateComponent(component, name, components[name][component]);
-                                this.system().components(components);
-                            }
-
                             // create behavior
-                            this.createBehavior(model._name, propName, model[propName]);
+                            this.createBehavior('method', model._name, propName, model[propName]);
                         }
 
                         break;
@@ -4780,14 +4918,8 @@ runtime.on('ready', function () {
                                 ]
                             };
 
-                            for (component in components[name]) {
-                                components[name][component][propName] = model[propName].default;
-                                this.require('channel').updateComponent(component, name, components[name][component]);
-                                this.system().components(components);
-                            }
-
                             // create behavior
-                            this.createBehavior(model._name, propName, model[propName]);
+                            this.createBehavior('event', model._name, propName, model[propName]);
                         } else {
                             if (typeof model[propName].result !== 'undefined') {
                                 delete model[propName].result;
@@ -4805,6 +4937,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
+                            this.require('channel').updateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
 

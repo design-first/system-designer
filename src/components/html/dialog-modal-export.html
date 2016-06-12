@@ -6,9 +6,9 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
-                    <label for="sel1">Select the format:</label>
-                    <div class="form-group" id="sel1">
-                        <div class="col-sm-offset-4 col-sm-8">
+                    <div class="form-group">
+                        <label class="col-xs-offset-2 col-sm-3 control-label">Format</label>
+                        <div class="col-xs-offset-0 col-sm-6">
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="optradio" id="designer-dialog-export-json" checked>JSON</label>
@@ -19,7 +19,20 @@
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optradio" id="designer-dialog-export-node">JS (Node.js)</label>
+                                    <input type="radio" name="optradio" id="designer-dialog-export-node">Node.js</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="designer-dialog-export-type">
+                        <label class="col-xs-offset-2 col-sm-3 control-label">Type</label>
+                        <div class="col-xs-offset-0 col-sm-6">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optsystem" id="designer-dialog-export-isSystem" checked>System</label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optsystem" id="designer-dialog-export-isSubSystem">Subsystem</label>
                             </div>
                         </div>
                     </div>

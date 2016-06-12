@@ -63,11 +63,11 @@
 			},
 			"dialog-modal-export.html": {
 				"_id": "dialog-modal-export.html",
-				"source": "<div class=\"modal fade\" id=\"designer-dialog-export-modal\" tabindex=\"-1\" role=\"dialog\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <label for=\"sel1\">Select the format:</label>                     <div class=\"form-group\" id=\"sel1\">                         <div class=\"col-sm-offset-4 col-sm-8\">                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-export-json\" checked>JSON</label>                             </div>                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-export-html\">HTML</label>                             </div>                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-export-node\">JS (Node.js)</label>                             </div>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-export-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-export-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
+				"source": "<div class=\"modal fade\" id=\"designer-dialog-export-modal\" tabindex=\"-1\" role=\"dialog\">     <div class=\"modal-dialog modal-sm\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label class=\"col-xs-offset-2 col-sm-3 control-label\">Format</label>                         <div class=\"col-xs-offset-0 col-sm-6\">                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-export-json\" checked>JSON</label>                             </div>                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-export-html\">HTML</label>                             </div>                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-export-node\">Node.js</label>                             </div>                         </div>                     </div>                     <div class=\"form-group\" id=\"designer-dialog-export-type\">                         <label class=\"col-xs-offset-2 col-sm-3 control-label\">Type</label>                         <div class=\"col-xs-offset-0 col-sm-6\">                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optsystem\" id=\"designer-dialog-export-isSystem\" checked>System</label>                             </div>                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optsystem\" id=\"designer-dialog-export-isSubSystem\">Subsystem</label>                             </div>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-export-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-export-modal-ok\">OK</button>             </div>         </div>     </div> </div>"
 			},
 			"dialog-modal-import-file.html": {
 				"_id": "dialog-modal-import-file.html",
-				"source": "<div class=\"modal fade\" id=\"designer-dialog-import-file-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-lg\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label class=\"col-xs-offset-0 col-xs-3 control-label\">Type of import</label>                         <div class=\"col-xs-offset-0 col-xs-8\">                             <div class=\"radio\">                                 <label><input type=\"radio\" name=\"import-type\" id=\"designer-dialog-import-modal-from-file\" value=\"file\" checked>from a file</label>                             </div>                             <div class=\"radio\"><label><input type=\"radio\" name=\"import-type\" id=\"designer-dialog-import-modal-from-library\" value=\"library\">from the library</label>                             </div>                         </div>                     </div>                     <div class=\"form-group\" id=\"designer-dialog-import-modal-from-file-form\">                         <label class=\"col-xs-offset-0 col-xs-3 control-label\">Select a file</label>                         <div class=\"col-xs-offset-0 col-xs-8\">                             <input type=\"file\" id=\"designer-dialog-import-file-modal-file\">                         </div>                     </div>                     <div class=\"form-group\" id=\"designer-dialog-import-modal-from-library-form\">                         <label class=\"col-xs-offset-0 col-xs-3 control-label\">Select a system</label>                         <div class=\"col-xs-offset-0 col-xs-8\">                             <div class=\"well\" style=\"padding:0px;\" id=\"designer-dialog-import-file-modal-well\">                                 <div class=\"list-group designer-library\" id=\"designer-dialog-import-file-modal-library\">                                     {{library}}                                 </div>                             </div>                         </div>                     </div>                 </form>                 <!-- <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\" id=\"sel1\">                         <div class=\"col-xs-offset-2 col-xs-3\">                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-import-modal-from-file\" checked>from a file</label>                             </div>                             <div class=\"radio\">                                 <label>                                     <input type=\"radio\" name=\"optradio\" id=\"designer-dialog-import-modal-from-library\">from the library</label>                             </div>                         </div>                         <div class=\"col-xs-offset-0 col-xs-6\">                          </div>                     </div>                 </form>-->             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-import-file-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-default\" id=\"designer-dialog-import-file-modal-merge\">Compose</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-import-file-modal-import\">Import</button>             </div>         </div>     </div> </div>"
+				"source": "<div class=\"modal fade\" id=\"designer-dialog-import-file-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">     <div class=\"modal-dialog modal-lg\" role=\"document\">         <div class=\"modal-content\">             <div class=\"modal-header\">                 <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>             </div>             <div class=\"modal-body\">                 <form class=\"form-horizontal\" role=\"form\">                     <div class=\"form-group\">                         <label class=\"col-xs-offset-0 col-xs-3 control-label\">Type of import</label>                         <div class=\"col-xs-offset-0 col-xs-8\">                             <div class=\"radio\">                                 <label><input type=\"radio\" name=\"import-type\" id=\"designer-dialog-import-modal-from-file\" value=\"file\" checked>from a file</label>                             </div>                             <div class=\"radio\"><label><input type=\"radio\" name=\"import-type\" id=\"designer-dialog-import-modal-from-library\" value=\"library\">from the library</label>                             </div>                         </div>                     </div>                     <div class=\"form-group\" id=\"designer-dialog-import-modal-from-file-form\">                         <label class=\"col-xs-offset-0 col-xs-3 control-label\">Select a file</label>                         <div class=\"col-xs-offset-0 col-xs-8\">                             <div class=\"checkbox\">                                 <input type=\"file\" id=\"designer-dialog-import-file-modal-file\">                             </div>                         </div>                     </div>                     <div class=\"form-group\" id=\"designer-dialog-import-modal-from-library-form\">                         <label class=\"col-xs-offset-0 col-xs-3 control-label\">Select a system</label>                         <div class=\"col-xs-offset-0 col-xs-8\">                             <div class=\"well\" style=\"padding:0px;\" id=\"designer-dialog-import-file-modal-well\">                                 <div class=\"list-group designer-library\" id=\"designer-dialog-import-file-modal-library\">                                     {{library}}                                 </div>                             </div>                         </div>                     </div>                 </form>             </div>             <div class=\"modal-footer\">                 <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" id=\"designer-dialog-import-file-modal-cancel\">Cancel</button>                 <button type=\"button\" class=\"btn btn-default\" id=\"designer-dialog-import-file-modal-merge\">Compose</button>                 <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-import-file-modal-import\">Import</button>             </div>         </div>     </div> </div>"
 			},
 			"dialog-modal-import.html": {
 				"_id": "dialog-modal-import.html",
@@ -575,7 +575,7 @@
 				"_id": "1f1781882618114",
 				"name": "description",
 				"html": "menu-item-description.html",
-				"position": 20,
+				"position": 30,
 				"type": "system"
 			},
 			"1f1781882618115": {
@@ -589,7 +589,7 @@
 				"_id": "1f1781882618116",
 				"name": "version",
 				"html": "menu-item-version.html",
-				"position": 30,
+				"position": 20,
 				"type": "system"
 			},
 			"1fd911618e18ea9": {
@@ -815,259 +815,259 @@
 		}
 	},
 	"behaviors": {
-		"1412a1a3181c9e4": {
-			"_id": "1412a1a3181c9e4",
+		"168271652a199c7": {
+			"_id": "168271652a199c7",
 			"component": "10bcb1a0511e09f",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-create').tooltip('hide');\n        var message = this.require('message'),\n    designer = this.require('designer');\n    \n    if (!designer.system() && designer.context() !== 'system') {\n        message.warning('you have no system: create first a system to continue.');\n    } else {\n        designer.workspace().create();\n    }\n}"
 		},
-		"143621afb21404c": {
-			"_id": "143621afb21404c",
+		"147811a94913635": {
+			"_id": "147811a94913635",
 			"component": "13a291c27f16310",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"16216158281c44b": {
-			"_id": "16216158281c44b",
+		"144551badf1de6a": {
+			"_id": "144551badf1de6a",
 			"component": "13a291c27f16311",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"109171c0221b1e6": {
-			"_id": "109171c0221b1e6",
+		"1ebd91b9f11ea60": {
+			"_id": "1ebd91b9f11ea60",
 			"component": "13a291c27f16313",
 			"state": "click",
 			"action": "function click() {\n    var DialogShare = this.require('DialogShare'),\n    system = this.require('designer').system();\n    \n    if (system && Object.keys(system).length) {\n        DialogShare = new DialogShare({\n            'title': 'Copy the link to the system'\n        });\n        DialogShare.show();\n        DialogShare.on('ok', function () {\n            this.hide();\n        });\n    }    \n}"
 		},
-		"107eb15d3e1a03b": {
-			"_id": "107eb15d3e1a03b",
+		"14b4313cf918bc0": {
+			"_id": "14b4313cf918bc0",
 			"component": "13a291c27f16314",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/quick-start', '_blank', true); \n}"
 		},
-		"12a2d125ca158bc": {
-			"_id": "12a2d125ca158bc",
+		"1701a154d812367": {
+			"_id": "1701a154d812367",
 			"component": "13f70137b61b19b",
 			"state": "click",
 			"action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n    \n    if (designer.system()) {\n        $('#designer-toolbar-item-publish').tooltip('hide');\n        if (runWidow && !runWidow.closed) {\n            runWidow.close();\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n            message.success('running the system...');\n            \n            /*if (typeof require === 'undefined') {\n                runWidow.document.location.reload();\n                message.success('running the system...');\n            } else {\n                // TODO \n                // to reload when implemented in electron\n                message.info('<b>info</b>: to run again the system, click the widow where your system is running and go to the menu \\'View > Refresh\\’.');\n            }*/\n        } else {\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n            message.success('running the system...');\n        }\n    } else {\n        message.warning('you have no system to run.');\n    }\n}"
 		},
-		"1f68c1fb341c1c0": {
-			"_id": "1f68c1fb341c1c0",
+		"188001e57c169fd": {
+			"_id": "188001e57c169fd",
 			"component": "163a01b7ca1935c",
 			"state": "click",
 			"action": "function click() {\n    var debugWindow = this.require('designer').debugWindow(),\n        config = this.require('storage').get('system-designer-config'),\n        message = this.require('message');\n\n    $('#designer-toolbar-item-refresh').tooltip('hide');\n    if (config) {\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'client') {\n            if (config.urlClient) {\n                if (debugWindow && !debugWindow.closed) {\n                    message.success('searching for a system...');\n                    this.require('channel').sync();\n                } else {\n                    this.require('designer').debugWindow(this.require('designer').open(config.urlClient, 'debug'));\n                }\n            } else {\n                message.warning('no url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'server') {\n            if (config.urlServer) {\n                message.success('searching for a server...');\n                var self = this;\n                $.getJSON(config.urlServer + ':8888/sync', function (system) {\n                    var Dialog = null,\n                        dialog = null;\n    \n                    Dialog = self.require('DialogImport');\n                    dialog = new Dialog({\n                        'title': 'A system has been found',\n                        'message': 'Do you wan to import it ?',\n                        'data': system\n                    });\n                    dialog.show();\n    \n                    dialog.on('ok', function () {\n                        var System = this.require('System'),\n                            sys = null,\n                            designer = this.require('designer'),\n                            message = this.require('message');\n    \n                        if (designer.system()) {\n                            designer.system().destroy();\n                        }\n                        sys = new System(this.data());\n                        designer.system(sys);\n    \n                        // empty log\n                        designer.logs().forEach(function (item) {\n                            this.logs().pop();\n                        }.bind(designer));\n    \n                        designer.save();\n    \n                        designer.space(sys.name());\n                        designer.spaces().render();\n                        designer.workspace().refresh();\n    \n                        this.hide();\n                        designer.save();\n    \n                        message.success('importation of the system is done.');\n                    });\n                });\n            } else {\n                message.warning('no url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType === 'undefined') {\n            message.warning('no url set. Please set the url in the configuration panel.');\n        }\n    } else {\n        message.warning('no url set. Please set the url in the configuration panel.');\n    }\n}"
 		},
-		"154b616ded18ed5": {
-			"_id": "154b616ded18ed5",
+		"1e8d5193391a994": {
+			"_id": "1e8d5193391a994",
 			"component": "163a01b7ca1935d",
 			"state": "click",
-			"action": "function click() {\n    $('#designer-toolbar-item-import').tooltip('hide');\n        var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Import a system'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name = '',\n            propName = '',\n            modelName = '',\n            compId = '',\n            modelId = '',\n            schemaId = '',\n            designer = this.require('designer'),\n            schemas = {},\n            models = {},\n            types = {},\n            components = {},\n            behaviors = {},\n            system = designer.system(),\n            message = this.require('message');\n            \n        function _getModelId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().models()) {\n                if (designer.system().models()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n\n        function _getSchemaId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().schemas()) {\n                if (designer.system().schemas()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n\n        sys = this.data();\n        if (Object.keys(sys).length) {\n            \n            // schemas\n            schemas = JSON.parse(JSON.stringify(designer.system().schemas()));\n            for (name in sys.schemas) {\n                if (schemas[name]) {\n                    for (propName in sys.schemas[name]) {\n                        schemas[name][propName] = sys.schemas[name][propName];\n                    }\n                } else {\n                    if (!_getSchemaId(sys.schemas[name]._name)) {\n                        schemas[name] = sys.schemas[name];\n                    } else {\n                        for (propName in sys.schemas[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n                            }\n                        }\n                    }\n                }\n            }\n            // sync models\n            for (schemaId in schemas) {\n                designer.syncModel(schemas[schemaId]);    \n            } \n            \n            // models\n            models = JSON.parse(JSON.stringify(designer.system().models()))\n            for (name in sys.models) {\n                if (models[name]) {\n                    for (propName in sys.models[name]) {\n                        models[name][propName] = sys.models[name][propName];\n                    }\n                } else {\n                     if (!_getModelId(sys.models[name]._name)) {\n                        models[name] = sys.models[name];\n                     } else {\n                        for (propName in sys.models[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n                            }\n                        }\n                     }\n                }\n            }\n            // sync behaviors and components\n            for (modelId in models) {\n                designer.syncBehavior(models[modelId]);    \n            } \n            \n            // types\n            types = JSON.parse(JSON.stringify(designer.system().types()))\n            for (name in sys.types) {\n                if (types[name]) {\n                    for (propName in sys.types[name]) {\n                        types[name][propName] = sys.types[name][propName];\n                    }\n                } else {\n                    types[name] = sys.types[name];\n                }\n            }\n            \n            // behaviors\n            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()))\n            for (name in sys.behaviors) {\n                if (name !== sys._id) {\n                    behaviors[name] = sys.behaviors[name];\n                }\n            }\n            \n            // components\n            components = JSON.parse(JSON.stringify(designer.system().components()))\n            for (modelName in sys.components) {\n                if (!components[modelName]) {\n                    components[modelName] = {};\n                }\n                for (compId in sys.components[modelName]) {\n                    if (components[modelName][compId]) {\n                        for (propName in sys.components[modelName][compId]) {\n                            components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n                        }\n                    } else {\n                        components[modelName][compId] = sys.components[modelName][compId];\n                    }\n                }\n            }\n            \n            designer.system().schemas(schemas);\n            designer.system().models(models);\n            designer.system().types(types);\n            designer.system().behaviors(behaviors);\n            designer.system().components(components);\n            \n            designer.save();\n            \n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n            message.success('composition of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid.');\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            \n            // empty log\n            designer.logs().forEach(function (item) {\n                this.logs().pop();\n            }.bind(designer));\n            \n            designer.save();\n            \n            designer.space(sys.name());\n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n\n            message.success('importation of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid');\n        }\n    });\n}"
+			"action": "function click() {\n    $('#designer-toolbar-item-import').tooltip('hide');\n        var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Import a system'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name = '',\n            propName = '',\n            modelName = '',\n            compId = '',\n            modelId = '',\n            schemaId = '',\n            designer = this.require('designer'),\n            schemas = {},\n            models = {},\n            types = {},\n            components = {},\n            behaviors = {},\n            system = designer.system(),\n            message = this.require('message');\n            \n        function _getModelId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().models()) {\n                if (designer.system().models()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n\n        function _getSchemaId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().schemas()) {\n                if (designer.system().schemas()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n        \n        function _existBehavior(component, state, behaviors) {\n            var behavior = {},\n                id = '',\n                result = false;\n\n              for (id in behaviors) {\n                  behavior = behaviors[id];\n                  if (behavior.component === component && behavior.state === state) {\n                      result = true;\n                      break;\n                  }\n              }\n            \n            return result;\n        }\n        \n        function _canMerge(sysId, schemas, behaviors, behavior) {\n            var def = {},\n                id = '',\n                result = true;\n            \n            id = _getSchemaId(behavior.component);\n            def = schemas[id];\n            \n            if (def && def[behavior.state] === 'method') {\n                result = !_existBehavior(behavior.component, behavior.state, behaviors);\n            }\n            \n            if (behavior.state === 'main' && behavior.component === sysId) {\n              result = false;  \n            }\n            \n            return result;\n        }\n\n        sys = this.data();\n        if (Object.keys(sys).length) {\n          \n            // behaviors\n            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));\n            schemas = JSON.parse(JSON.stringify(designer.system().schemas()));\n            \n            for (name in sys.behaviors) {\n                if (name !== sys._id && _canMerge(sys._id, schemas, behaviors, sys.behaviors[name])) {\n                    behaviors[name] = sys.behaviors[name];\n                }\n            }\n            designer.system().behaviors(behaviors);\n\n            // schemas\n            for (name in sys.schemas) {\n                if (schemas[name]) {\n                    for (propName in sys.schemas[name]) {\n                        schemas[name][propName] = sys.schemas[name][propName];\n                    }\n                } else {\n                    if (!_getSchemaId(sys.schemas[name]._name)) {\n                        schemas[name] = sys.schemas[name];\n                    } else {\n                        for (propName in sys.schemas[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n                            }\n                        }\n                    }\n                }\n            }\n            // sync models\n            for (schemaId in schemas) {\n                designer.syncModel(schemas[schemaId]);    \n            } \n            \n            // models\n            models = JSON.parse(JSON.stringify(designer.system().models()))\n            for (name in sys.models) {\n                if (models[name]) {\n                    for (propName in sys.models[name]) {\n                        models[name][propName] = sys.models[name][propName];\n                    }\n                } else {\n                     if (!_getModelId(sys.models[name]._name)) {\n                        models[name] = sys.models[name];\n                     } else {\n                        for (propName in sys.models[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n                            }\n                        }\n                     }\n                }\n            }\n            // sync behaviors and components\n            for (modelId in models) {\n                designer.syncBehavior(models[modelId]);    \n            } \n            \n            // types\n            types = JSON.parse(JSON.stringify(designer.system().types()));\n            for (name in sys.types) {\n                if (types[name]) {\n                    for (propName in sys.types[name]) {\n                        types[name][propName] = sys.types[name][propName];\n                    }\n                } else {\n                    types[name] = sys.types[name];\n                }\n            }\n            \n            // components\n            components = JSON.parse(JSON.stringify(designer.system().components()));\n            for (modelName in sys.components) {\n                if (!components[modelName]) {\n                    components[modelName] = {};\n                }\n                for (compId in sys.components[modelName]) {\n                    if (components[modelName][compId]) {\n                        for (propName in sys.components[modelName][compId]) {\n                            components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n                        }\n                    } else {\n                        components[modelName][compId] = sys.components[modelName][compId];\n                    }\n                }\n            }\n            designer.system().components(components);\n            \n             // sync components\n            for (modelId in models) {\n                designer.syncComponent(models[modelId]);    \n            }\n            \n            designer.system().schemas(schemas);\n            designer.system().models(models);\n            designer.system().types(types);\n            designer.system().behaviors(behaviors);\n            designer.system().components(components);\n            \n            designer.save();\n            \n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n            message.success('composition of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid.');\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            \n            // empty log\n            designer.logs().forEach(function (item) {\n                this.logs().pop();\n            }.bind(designer));\n            \n            designer.save();\n            \n            designer.space(sys.name());\n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n\n            message.success('importation of the system is done.');\n        } else {\n            message.danger('the system you try to import is invalid');\n        }\n    });\n}"
 		},
-		"1913f1f5ee169e5": {
-			"_id": "1913f1f5ee169e5",
+		"1f44a1879f1b910": {
+			"_id": "1f44a1879f1b910",
 			"component": "163a01b7ca1935e",
 			"state": "click",
-			"action": "function click() {\n    $('#designer-toolbar-item-export').tooltip('hide');\n        var Dialog = this.require('DialogExport');\n    var dialog = new Dialog({\n        'title': 'Export the current system',\n    });\n    dialog.show();\n    \n    dialog.on('ok', function () {\n        var message = this.require('message');\n        // code inspired from the blog post\n        // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n        if (this.require('designer').system()) {\n            var system = null,\n            textToWrite = null,\n            textFileAsBlob = null,\n            fileNameToSaveAs = null,\n            downloadLink = null,\n            js = '';\n            source = '',\n            DialogShare = this.require('DialogShare');\n            \n            system = this.require('db').collections().System.find({\n                '_id': this.require('designer').system().id()\n            })[0];\n            system = JSON.parse(JSON.stringify(system));\n            delete system.classInfo;\n            \n            if ($('#designer-dialog-export-url').prop(\"checked\")) {\n                this.hide();\n\n                DialogShare = new DialogShare({\n                    'title': 'Copy the link to the system'\n                });\n                DialogShare.show();\n                DialogShare.on('ok', function () {\n                    this.hide();\n                });\n                \n            } else {\n            \n                if ($('#designer-dialog-export-json').prop(\"checked\")) {\n                    textToWrite = JSON.stringify(system);\n                    fileNameToSaveAs = this.require('designer').system().name() + '.json';\n                }\n                \n                if ($('#designer-dialog-export-html').prop(\"checked\")) {\n                    js = decodeURIComponent(this.require('system-runtime.min.js').source());\n                    source = this.require('export-app.html').source();\n                    source = source\n                                .replace(/{{library}}/g, js)\n                                .replace(/{{library}}/g, function() {return '\\$&'})\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.html';\n                }\n                \n                if ($('#designer-dialog-export-node').prop(\"checked\")) {\n                    source = decodeURIComponent(this.require('app.js').source());\n                    source = source\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                }\n                \n            \ttextFileAsBlob = new Blob([textToWrite], {\n            \t    type:'text/plain'\n            \t});\n            \tdownloadLink = document.createElement('a');\n            \t\n            \tdownloadLink.download = fileNameToSaveAs;\n            \tdownloadLink.innerHTML = 'Download File';\n            \tif (window.webkitURL != null) {\n            \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n            \t} else {\n            \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n            \t\tdownloadLink.onclick = function (event) {\n            \t\t    document.body.removeChild(event.target)\n            \t\t};\n            \t\tdownloadLink.style.display = 'none';\n            \t\tdocument.body.appendChild(downloadLink);\n            \t}\n            \n            \tdownloadLink.click();\n            \tthis.hide();\n            }\n        \t\n        } else {\n            message.warning('you have no system to export.')\n        }\n    });\n}"
+			"action": "function click() {\n    $('#designer-toolbar-item-export').tooltip('hide');\n        var Dialog = this.require('DialogExport');\n    var dialog = new Dialog({\n        'title': 'Export the current system',\n    });\n    dialog.show();\n    \n    dialog.on('ok', function () {\n        var message = this.require('message');\n        // code inspired from the blog post\n        // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n        if (this.require('designer').system()) {\n            var system = null,\n            textToWrite = null,\n            textFileAsBlob = null,\n            fileNameToSaveAs = null,\n            downloadLink = null,\n            js = '';\n            source = '',\n            DialogShare = this.require('DialogShare');\n            \n            system = this.require('db').collections().System.find({\n                '_id': this.require('designer').system().id()\n            })[0];\n            system = JSON.parse(JSON.stringify(system));\n            delete system.classInfo;\n            \n            if ($('#designer-dialog-export-url').prop(\"checked\")) {\n                this.hide();\n\n                DialogShare = new DialogShare({\n                    'title': 'Copy the link to the system'\n                });\n                DialogShare.show();\n                DialogShare.on('ok', function () {\n                    this.hide();\n                });\n                \n            } else {\n            \n                if ($('#designer-dialog-export-json').prop(\"checked\")) {\n                    if ($('#designer-dialog-export-isSubSystem').prop(\"checked\")) {\n                      system.master = false;\n                      system.subsystem = true;\n                    }\n                    textToWrite = JSON.stringify(system);\n                    fileNameToSaveAs = this.require('designer').system().name() + '.json';\n                }\n                \n                if ($('#designer-dialog-export-html').prop(\"checked\")) {\n                    js = decodeURIComponent(this.require('system-runtime.min.js').source());\n                    source = this.require('export-app.html').source();\n                    source = source\n                                .replace(/{{library}}/g, js)\n                                .replace(/{{library}}/g, function() {return '\\$&'})\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.html';\n                }\n                \n                if ($('#designer-dialog-export-node').prop(\"checked\")) {\n                    source = decodeURIComponent(this.require('app.js').source());\n                    source = source\n                                .replace(/{{name}}/g, this.require('designer').system().name())\n                                .replace(/{{system}}/g, JSON.stringify(system));\n                    textToWrite = source;\n                    fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                }\n                \n            \ttextFileAsBlob = new Blob([textToWrite], {\n            \t    type:'text/plain'\n            \t});\n            \tdownloadLink = document.createElement('a');\n            \t\n            \tdownloadLink.download = fileNameToSaveAs;\n            \tdownloadLink.innerHTML = 'Download File';\n            \tif (window.webkitURL != null) {\n            \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n            \t} else {\n            \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n            \t\tdownloadLink.onclick = function (event) {\n            \t\t    document.body.removeChild(event.target)\n            \t\t};\n            \t\tdownloadLink.style.display = 'none';\n            \t\tdocument.body.appendChild(downloadLink);\n            \t}\n            \n            \tdownloadLink.click();\n            \tthis.hide();\n            }\n        \t\n        } else {\n            message.warning('you have no system to export.')\n        }\n    });\n}"
 		},
-		"16c2610ea517eca": {
-			"_id": "16c2610ea517eca",
+		"13816109c5194d7": {
+			"_id": "13816109c5194d7",
 			"component": "16a55136141d9ac",
 			"state": "click",
 			"action": "function click() {\n  this.require('designer').clear(); }"
 		},
-		"1b91f15f7316407": {
-			"_id": "1b91f15f7316407",
+		"1ad7b153b91d4ec": {
+			"_id": "1ad7b153b91d4ec",
 			"component": "1dbc51200e11510",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true); \n}"
 		},
-		"132b31cd051df3a": {
-			"_id": "132b31cd051df3a",
+		"166c819d8a194d0": {
+			"_id": "166c819d8a194d0",
 			"component": "1dbc51200e11610",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"103fb1c2b71c7f4": {
-			"_id": "103fb1c2b71c7f4",
+		"13985147ea12f38": {
+			"_id": "13985147ea12f38",
 			"component": "1dbc51200e11611",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
 		},
-		"121101510d15f2c": {
-			"_id": "121101510d15f2c",
+		"13867110491b5c9": {
+			"_id": "13867110491b5c9",
 			"component": "1dbc51200e11612",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1cedf12dff103e9": {
-			"_id": "1cedf12dff103e9",
+		"1b57d17bed1d71c": {
+			"_id": "1b57d17bed1d71c",
 			"component": "1dbc51200e11613",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
 		},
-		"15d6a12e941be32": {
-			"_id": "15d6a12e941be32",
+		"1568e1ec7c1d9c3": {
+			"_id": "1568e1ec7c1d9c3",
 			"component": "1dbc51200e11614",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1a21c1100a164cd": {
-			"_id": "1a21c1100a164cd",
+		"1c96312ac01f374": {
+			"_id": "1c96312ac01f374",
 			"component": "1dbc51200e11615",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/edit-a-model', '_blank', true); \n}"
 		},
-		"1158912f19196e3": {
-			"_id": "1158912f19196e3",
+		"1dd951256214666": {
+			"_id": "1dd951256214666",
 			"component": "1dbc51200e11616",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n}"
 		},
-		"1ac731bc691004e": {
-			"_id": "1ac731bc691004e",
+		"1ec241a8981499e": {
+			"_id": "1ec241a8981499e",
 			"component": "1dbc51200e11617",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true);\n}"
 		},
-		"1185b11aef1e03d": {
-			"_id": "1185b11aef1e03d",
+		"160da1b51412a02": {
+			"_id": "160da1b51412a02",
 			"component": "1dbc51200e116e10",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-type', '_blank', true); \n}"
 		},
-		"14bce111d317ffc": {
-			"_id": "14bce111d317ffc",
+		"158cc1a04d1e620": {
+			"_id": "158cc1a04d1e620",
 			"component": "1dbc51200e116e3",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-config').tooltip('hide');\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        var message = this.require('message');\n        \n        this.hide();\n        message.success('configuration saved.');\n    });\n}"
 		},
-		"1ff141d90319d71": {
-			"_id": "1ff141d90319d71",
+		"196041cde9182b3": {
+			"_id": "196041cde9182b3",
 			"component": "1dbc51200e116e4",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
 		},
-		"199f41b70c1f2de": {
-			"_id": "199f41b70c1f2de",
+		"1b8d31fe3d1c404": {
+			"_id": "1b8d31fe3d1c404",
 			"component": "1dbc51200e116e5",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
 		},
-		"177e410fa81e48b": {
-			"_id": "177e410fa81e48b",
+		"1df871cf0119cbe": {
+			"_id": "1df871cf0119cbe",
 			"component": "1dbc51200e116e6",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1a1e51521919f9d": {
-			"_id": "1a1e51521919f9d",
+		"159bb13d0d14b1e": {
+			"_id": "159bb13d0d14b1e",
 			"component": "1dbc51200e116e7",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
 		},
-		"1825018fe01b538": {
-			"_id": "1825018fe01b538",
+		"1d079146de146bd": {
+			"_id": "1d079146de146bd",
 			"component": "1dbc51200e116e8",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1efaa10e4314567": {
-			"_id": "1efaa10e4314567",
+		"111771dfe715d8d": {
+			"_id": "111771dfe715d8d",
 			"component": "1dbc51200e116e9",
 			"state": "click",
 			"action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
 		},
-		"171a61934c1ec54": {
-			"_id": "171a61934c1ec54",
+		"1b7fb1e6251f989": {
+			"_id": "1b7fb1e6251f989",
 			"component": "1dbc51200e11z10",
 			"state": "click",
 			"action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n}"
 		},
-		"145a21b912150af": {
-			"_id": "145a21b912150af",
+		"125de1114c1bfc0": {
+			"_id": "125de1114c1bfc0",
 			"component": "1dbc51220e116e1",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
 		},
-		"1dfcc1485910507": {
-			"_id": "1dfcc1485910507",
+		"195bf1274b1b479": {
+			"_id": "195bf1274b1b479",
 			"component": "1dbc51300e11z11",
 			"state": "click",
 			"action": "function click() {\n    var data = this.require('designer').store().data();\n    \n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var name = data.name;\n    var doc = JSON.parse(JSON.stringify(data));\n    delete doc.classInfo;\n    this.require('designer').saveAs(doc, data.name + '.json');\n}"
 		},
-		"13d041e2d316e95": {
-			"_id": "13d041e2d316e95",
+		"1c7d81dbd81fdf0": {
+			"_id": "1c7d81dbd81fdf0",
 			"component": "1dbc51300e11z12",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"schema \" + data._name,\n        \"master\": false,\n        \"subsystem\": false,\n        \"version\": \"0.0.1\",\n        \"description\": \"Schema \" + data._name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n    \n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n    \n    doc.schemas[data._id] = data;\n    \n    this.require('designer').saveAs(doc, data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
 		},
-		"1eeb214d0e18e3a": {
-			"_id": "1eeb214d0e18e3a",
+		"128831cc2e185b1": {
+			"_id": "128831cc2e185b1",
 			"component": "1dbc51300e11z13",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"model \" + data._name,\n        \"master\": false,\n        \"subsystem\": false,\n        \"version\": \"0.0.1\",\n        \"description\": \"Model \" + data._name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n    \n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n    \n    doc.models[data._id] = data;\n    \n    this.require('designer').saveAs(doc, data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
 		},
-		"1b86f126b0197d9": {
-			"_id": "1b86f126b0197d9",
+		"1b3a310a311f24c": {
+			"_id": "1b3a310a311f24c",
 			"component": "1dbc51300e11z14",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"type \" + data.name,\n        \"master\": false,\n        \"subsystem\": false,\n        \"version\": \"0.0.1\",\n        \"description\": \"Type \" + data.name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.types[data.name] = data;\n\n    this.require('designer').saveAs(doc, data.name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
 		},
-		"14cc91940611526": {
-			"_id": "14cc91940611526",
+		"119ba1fd5f176c2": {
+			"_id": "119ba1fd5f176c2",
 			"component": "1dbc51300e11z15",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var name = data.state;\n    var doc = {\n        \"name\": \"behavior \" + name,\n        \"master\": false,\n        \"subsystem\": false,\n        \"version\": \"0.0.1\",\n        \"description\": \"Behavior \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.behaviors[data._id] = data;\n\n    this.require('designer').saveAs(doc, name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
 		},
-		"19eba14d6f11a39": {
-			"_id": "19eba14d6f11a39",
+		"1400614c2c1d8ef": {
+			"_id": "1400614c2c1d8ef",
 			"component": "1dbc51300e11z16",
 			"state": "click",
 			"action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var name = data._id;\n    var model = this.require('designer').store().collection();\n    var doc = {\n        \"name\": \"component \" + name,\n        \"master\": false,\n        \"subsystem\": false,\n        \"version\": \"0.0.1\",\n        \"description\": \"Component \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    if (typeof doc.models[model]) {\n        doc.components[model] = {};\n    }\n\n    doc.components[model][data._id] = data;\n\n    this.require('designer').saveAs(doc, name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
 		},
-		"1b66a1b7961c043": {
-			"_id": "1b66a1b7961c043",
+		"1835e1b43319928": {
+			"_id": "1835e1b43319928",
 			"component": "Designer",
 			"state": "open",
 			"action": "function open(url, target, isExt) {\n    var ref = null;\n    \n    if (typeof require === 'undefined') {\n        ref = window.open(url, target);\n    } else {\n        if (isExt) {\n            ref = require('electron').shell.openExternal(url ,target);  \n        } else {\n            ref = window.open(url, target);\n        }\n    }\n    return ref;\n}"
 		},
-		"155c6155cb13f29": {
-			"_id": "155c6155cb13f29",
+		"11d11166721035f": {
+			"_id": "11d11166721035f",
 			"component": "Designer",
 			"state": "saveAs",
 			"action": "function saveAs(data, fileName) {\n    var textToWrite = null,\n        textFileAsBlob = null,\n        fileNameToSaveAs = null,\n        downloadLink = null,\n        message = this.require('message');\n\n    textToWrite = JSON.stringify(data);\n    fileNameToSaveAs = fileName;\n\n    textFileAsBlob = new Blob([textToWrite], {\n        type: 'text/plain'\n    });\n    downloadLink = document.createElement('a');\n\n    downloadLink.download = fileNameToSaveAs;\n    downloadLink.innerHTML = 'Download File';\n    if (window.webkitURL != null) {\n        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n    } else {\n        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n        downloadLink.onclick = function (event) {\n            document.body.removeChild(event.target)\n        };\n        downloadLink.style.display = 'none';\n        document.body.appendChild(downloadLink);\n    }\n\n    downloadLink.click();\n    if (typeof require === 'undefined') {\n        message.success('exportation is done.');\n    }\n}"
 		},
-		"1bb11183e31976a": {
-			"_id": "1bb11183e31976a",
+		"177ea1c2e5191c5": {
+			"_id": "177ea1c2e5191c5",
 			"component": "Message",
 			"state": "danger",
 			"action": "function danger(message) {var html = this.require('message-alert-danger.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>error:</strong> ' + message));$('.designer-message-danger').fadeIn(500);setTimeout(function () {$('.designer-message-danger').fadeOut(1000);}, 4000);}"
 		},
-		"14734126511eb94": {
-			"_id": "14734126511eb94",
+		"1ab9718c63181e5": {
+			"_id": "1ab9718c63181e5",
 			"component": "Message",
 			"state": "info",
 			"action": "function info(message) {var html = this.require('message-alert-info.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-info').fadeIn(500);setTimeout(function () {$('.designer-message-info').fadeOut(1000);}, 4000);}"
 		},
-		"15e4d1faef16a37": {
-			"_id": "15e4d1faef16a37",
+		"186ec1940a12874": {
+			"_id": "186ec1940a12874",
 			"component": "Message",
 			"state": "success",
 			"action": "function success(message) {var html = this.require('message-alert-success.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, message));$('.designer-message-success').fadeIn(500);setTimeout(function () {$('.designer-message-success').fadeOut(1000);}, 4000);}"
 		},
-		"1bb7b127341b2da": {
-			"_id": "1bb7b127341b2da",
+		"148a31e895104c4": {
+			"_id": "148a31e895104c4",
 			"component": "Message",
 			"state": "warning",
 			"action": "function warning(message) {var html = this.require('message-alert-warning.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>warning:</strong> ' + message));$('.designer-message-warning').fadeIn(500);setTimeout(function () {$('.designer-message-warning').fadeOut(1000);}, 4000);}"
 		}
 	},
 	"schemas": {
-		"12c1613613174b8": {
+		"1c4f3199fd1559e": {
 			"_name": "CSS",
 			"source": "property"
 		},
-		"1975f137ff16614": {
+		"1512211f22137cb": {
 			"_name": "Designer",
 			"version": "property",
 			"menubar": "property",
@@ -1089,6 +1089,7 @@
 			"updateRouter": "method",
 			"syncModel": "method",
 			"syncBehavior": "method",
+			"syncComponent": "method",
 			"createModel": "method",
 			"createBehavior": "method",
 			"deleteSchema": "method",
@@ -1103,7 +1104,7 @@
 			"render": "event",
 			"logs": "collection"
 		},
-		"1e59f1b6ca18673": {
+		"13b7816c7712c0b": {
 			"_name": "DesignerState",
 			"system": "property",
 			"type": "property",
@@ -1111,7 +1112,7 @@
 			"component": "property",
 			"clear": "method"
 		},
-		"1d116104a719723": {
+		"1acad10a5a1a16c": {
 			"_name": "Dialog",
 			"title": "property",
 			"message": "property",
@@ -1121,37 +1122,37 @@
 			"show": "method",
 			"hide": "method"
 		},
-		"1ac8119e681b5e0": {
+		"1f7f913d491b46e": {
 			"_name": "DialogBehaviorCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1fa5710c0510382": {
+		"157e01c7c9151a2": {
 			"_name": "DialogCheck",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1c2a51ab4a130de": {
+		"16c141dd311954c": {
 			"_name": "DialogComponentCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"15f561ee46140a1": {
+		"1d6611f60311c9c": {
 			"_name": "DialogConfig",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"106821a474164ac": {
+		"14c401b61c11976": {
 			"_name": "DialogCopyright",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"11dc011305164d7": {
+		"1b139172a91c403": {
 			"_name": "DialogDropFile",
 			"_inherit": [
 				"Dialog"
@@ -1159,19 +1160,19 @@
 			"mergeSystem": "event",
 			"importSystem": "event"
 		},
-		"1ad0a1d89a104f3": {
+		"1601d1e53114aa6": {
 			"_name": "DialogExport",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1068d1a0d711c30": {
+		"18601174401b912": {
 			"_name": "DialogImport",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1f6c11239a1496e": {
+		"1fdc51b0ed1b4c2": {
 			"_name": "DialogImportFile",
 			"_inherit": [
 				"Dialog"
@@ -1179,78 +1180,78 @@
 			"mergeSystem": "event",
 			"importSystem": "event"
 		},
-		"1e1c611dba19db8": {
+		"11255157dc10091": {
 			"_name": "DialogModelCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"17a9512c4a1abd4": {
+		"1eaf31c0a51d056": {
 			"_name": "DialogSchemaCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"10d001e5db154c9": {
+		"19242163fd182e7": {
 			"_name": "DialogShare",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1df211ff5013c4a": {
+		"111461f8e411d33": {
 			"_name": "DialogSync",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"158891e9c81aa90": {
+		"187ff1180218f48": {
 			"_name": "DialogSystemCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1ca311488518281": {
+		"11159193e419ece": {
 			"_name": "DialogTypeCreation",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"117ea1c65d19188": {
+		"1c23f1b34512959": {
 			"_name": "DialogWelcome",
 			"_inherit": [
 				"Dialog"
 			]
 		},
-		"1a51f1d42f1b6b5": {
+		"1668114e36175ef": {
 			"_name": "Editor",
 			"editor": "property",
 			"render": "method"
 		},
-		"1dc5e174c41e455": {
+		"18d791b1bf19b81": {
 			"_name": "HTML",
 			"source": "property"
 		},
-		"187111e50519bdb": {
+		"185f11a817114bf": {
 			"_name": "JS",
 			"source": "property"
 		},
-		"1d41d1809713523": {
+		"13cf118ca21d35c": {
 			"_name": "JSON",
 			"source": "property"
 		},
-		"1aac71753c1be20": {
+		"1ee1f1d29d1ee22": {
 			"_name": "Log",
 			"type": "property",
 			"log": "property"
 		},
-		"161d81a18f1d345": {
+		"18d2b1d74d1c8b9": {
 			"_name": "Menu",
 			"items": "collection",
 			"hide": "method",
 			"show": "method",
 			"render": "method"
 		},
-		"130861a4f716942": {
+		"1e37f1d0a81397d": {
 			"_name": "MenuAction",
 			"html": "property",
 			"position": "property",
@@ -1259,7 +1260,7 @@
 			"show": "method",
 			"render": "method"
 		},
-		"1ab2d1d0ab1ca8e": {
+		"125d6108781c7a4": {
 			"_name": "MenuBar",
 			"designer": "property",
 			"logo": "property",
@@ -1269,7 +1270,7 @@
 			"render": "method",
 			"clear": "method"
 		},
-		"165cb1dcfc12d09": {
+		"101cd18163130dd": {
 			"_name": "MenuHeader",
 			"html": "property",
 			"type": "property",
@@ -1277,7 +1278,7 @@
 			"show": "method",
 			"render": "method"
 		},
-		"137f61b1ee12f3a": {
+		"1f13418d91109af": {
 			"_name": "MenuItem",
 			"html": "property",
 			"position": "property",
@@ -1288,27 +1289,27 @@
 			"render": "method",
 			"click": "event"
 		},
-		"183911536516ad8": {
+		"18a051165d1e661": {
 			"_name": "MenuLogo",
 			"html": "property",
 			"hide": "method",
 			"show": "method",
 			"render": "method"
 		},
-		"1996810e8d16b7f": {
+		"1caac173b915246": {
 			"_name": "MenuSearch",
 			"_inherit": [
 				"MenuAction"
 			]
 		},
-		"1ed351939217b3d": {
+		"169a5116291818b": {
 			"_name": "Message",
 			"success": "method",
 			"info": "method",
 			"warning": "method",
 			"danger": "method"
 		},
-		"18a2913cbb12b7f": {
+		"118341138017a17": {
 			"_name": "ModelBehavior",
 			"uuid": "property",
 			"title": "property",
@@ -1318,7 +1319,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"15c441b50812775": {
+		"18a2f1f5f912d56": {
 			"_name": "ModelClass",
 			"title": "property",
 			"uuid": "property",
@@ -1329,7 +1330,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"114fe19a9913acd": {
+		"1e1641d4cd1443b": {
 			"_name": "ModelComponent",
 			"title": "property",
 			"uuid": "property",
@@ -1340,7 +1341,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1567f1ef59181d9": {
+		"15fab1af571c59e": {
 			"_name": "ModelLog",
 			"title": "property",
 			"uuid": "property",
@@ -1350,7 +1351,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1a00110ab213f80": {
+		"14f951de77165b8": {
 			"_name": "ModelSchema",
 			"title": "property",
 			"uuid": "property",
@@ -1361,7 +1362,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"187261350c1809f": {
+		"1a1981653a198fa": {
 			"_name": "ModelSystem",
 			"title": "property",
 			"uuid": "property",
@@ -1371,7 +1372,7 @@
 			"hide": "method",
 			"show": "method"
 		},
-		"1f40219c2b1670a": {
+		"1755215ae01d5d0": {
 			"_name": "ModelType",
 			"title": "property",
 			"uuid": "property",
@@ -1425,36 +1426,36 @@
 			"logWarn": "event",
 			"logError": "event"
 		},
-		"1f3ec1096a14fec": {
+		"1fbbb15e8e1ff9e": {
 			"_name": "Search",
 			"search": "method"
 		},
-		"120ef1f8001d859": {
+		"18432104ab1bf7a": {
 			"_name": "Server",
 			"designer": "property",
 			"start": "method"
 		},
-		"16d1a1e732186f8": {
+		"128ac131fb1cdd6": {
 			"_name": "SpaceItem",
 			"name": "property",
 			"uuid": "property",
 			"click": "event"
 		},
-		"1e1841a0b61f38e": {
+		"1f902137f11a49f": {
 			"_name": "Spaces",
 			"designer": "property",
 			"items": "collection",
 			"render": "method",
 			"clear": "method"
 		},
-		"1f6431c6481b850": {
+		"1a6c71ec0b1277b": {
 			"_name": "Store",
 			"uuid": "property",
 			"collection": "property",
 			"data": "property",
 			"extra": "property"
 		},
-		"14b0f117c413173": {
+		"1828a111551e523": {
 			"_name": "System",
 			"name": "property",
 			"master": "property",
@@ -1467,13 +1468,13 @@
 			"types": "property",
 			"components": "property"
 		},
-		"1bad61223e1d2bb": {
+		"1d72c117f710bd4": {
 			"_name": "ToolBar",
 			"designer": "property",
 			"items": "collection",
 			"render": "method"
 		},
-		"136e6178a41ad41": {
+		"1e22d175421ce3e": {
 			"_name": "ToolBarItem",
 			"html": "property",
 			"position": "property",
@@ -1483,7 +1484,7 @@
 			"render": "method",
 			"click": "event"
 		},
-		"1b838144ab1502a": {
+		"1480e1808710077": {
 			"_name": "Workspace",
 			"designer": "property",
 			"create": "method",
@@ -1494,7 +1495,7 @@
 		}
 	},
 	"models": {
-		"1b1f8157f81fe4d": {
+		"1c18a153be19401": {
 			"_name": "CSS",
 			"source": {
 				"type": "css",
@@ -1502,9 +1503,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "1b1f8157f81fe4d"
+			"_id": "1c18a153be19401"
 		},
-		"1fd4d1514d13d74": {
+		"146951986411caa": {
 			"_name": "Designer",
 			"version": {
 				"type": "string",
@@ -1629,6 +1630,16 @@
 					}
 				]
 			},
+			"syncComponent": {
+				"params": [
+					{
+						"name": "model",
+						"type": "object",
+						"mandatory": false,
+						"default": {}
+					}
+				]
+			},
 			"createModel": {
 				"params": [
 					{
@@ -1641,6 +1652,12 @@
 			},
 			"createBehavior": {
 				"params": [
+					{
+						"name": "type",
+						"type": "string",
+						"mandatory": false,
+						"default": "method"
+					},
 					{
 						"name": "model",
 						"type": "string",
@@ -1739,9 +1756,9 @@
 					}
 				]
 			},
-			"_id": "1fd4d1514d13d74"
+			"_id": "146951986411caa"
 		},
-		"16e8d1fab711b89": {
+		"1ebbe1d3a0141eb": {
 			"_name": "DesignerState",
 			"system": {
 				"type": "string",
@@ -1768,9 +1785,9 @@
 				"default": ""
 			},
 			"clear": {},
-			"_id": "16e8d1fab711b89"
+			"_id": "1ebbe1d3a0141eb"
 		},
-		"1853a1ac7418781": {
+		"1acba112991f75f": {
 			"_name": "Dialog",
 			"title": {
 				"type": "string",
@@ -1794,77 +1811,77 @@
 			"hide": {},
 			"cancel": {},
 			"ok": {},
-			"_id": "1853a1ac7418781"
+			"_id": "1acba112991f75f"
 		},
-		"149971f4961d40e": {
+		"174d01078719067": {
 			"_name": "DialogBehaviorCreation",
-			"_id": "149971f4961d40e"
+			"_id": "174d01078719067"
 		},
-		"1ad041e98c19c80": {
+		"1e96c159081db6d": {
 			"_name": "DialogCheck",
-			"_id": "1ad041e98c19c80"
+			"_id": "1e96c159081db6d"
 		},
-		"1cf7a127df1b44e": {
+		"1515b1c2ea13ddc": {
 			"_name": "DialogComponentCreation",
-			"_id": "1cf7a127df1b44e"
+			"_id": "1515b1c2ea13ddc"
 		},
-		"1998d1a8201eaa7": {
+		"19e5b111e91bcfa": {
 			"_name": "DialogConfig",
-			"_id": "1998d1a8201eaa7"
+			"_id": "19e5b111e91bcfa"
 		},
-		"131841a7121f884": {
+		"1ae4312fe115a96": {
 			"_name": "DialogCopyright",
-			"_id": "131841a7121f884"
+			"_id": "1ae4312fe115a96"
 		},
-		"1e1a2119831ca85": {
+		"10317112341b333": {
 			"_name": "DialogDropFile",
 			"mergeSystem": {},
 			"importSystem": {},
-			"_id": "1e1a2119831ca85"
+			"_id": "10317112341b333"
 		},
-		"138381b03011cfd": {
+		"177701f02f15f70": {
 			"_name": "DialogExport",
-			"_id": "138381b03011cfd"
+			"_id": "177701f02f15f70"
 		},
-		"1550e1bf701c10d": {
+		"1dada1f1e6189d4": {
 			"_name": "DialogImport",
-			"_id": "1550e1bf701c10d"
+			"_id": "1dada1f1e6189d4"
 		},
-		"1a4741fcda1fa80": {
+		"12cf21c39611d4e": {
 			"_name": "DialogImportFile",
 			"mergeSystem": {},
 			"importSystem": {},
-			"_id": "1a4741fcda1fa80"
+			"_id": "12cf21c39611d4e"
 		},
-		"1f494189ab1df7a": {
+		"164181d37e101de": {
 			"_name": "DialogModelCreation",
-			"_id": "1f494189ab1df7a"
+			"_id": "164181d37e101de"
 		},
-		"1804b166d71a443": {
+		"17cc8113611367f": {
 			"_name": "DialogSchemaCreation",
-			"_id": "1804b166d71a443"
+			"_id": "17cc8113611367f"
 		},
-		"1c0b511f011bcec": {
+		"111d51ef44161cd": {
 			"_name": "DialogShare",
-			"_id": "1c0b511f011bcec"
+			"_id": "111d51ef44161cd"
 		},
-		"1b7d21df40150a2": {
+		"16efd128d116348": {
 			"_name": "DialogSync",
-			"_id": "1b7d21df40150a2"
+			"_id": "16efd128d116348"
 		},
-		"1a1d21bf231ac93": {
+		"128b7130e5107d9": {
 			"_name": "DialogSystemCreation",
-			"_id": "1a1d21bf231ac93"
+			"_id": "128b7130e5107d9"
 		},
-		"13eed15e5416bee": {
+		"1836a175f2176d5": {
 			"_name": "DialogTypeCreation",
-			"_id": "13eed15e5416bee"
+			"_id": "1836a175f2176d5"
 		},
-		"1e25f12a441cf9d": {
+		"1053c11e0514d7c": {
 			"_name": "DialogWelcome",
-			"_id": "1e25f12a441cf9d"
+			"_id": "1053c11e0514d7c"
 		},
-		"1158f1efe71f94c": {
+		"158d51d45f198d9": {
 			"_name": "Editor",
 			"editor": {
 				"type": "ace",
@@ -1873,9 +1890,9 @@
 				"default": {}
 			},
 			"render": {},
-			"_id": "1158f1efe71f94c"
+			"_id": "158d51d45f198d9"
 		},
-		"130b311fbf1abb0": {
+		"10c77118301e656": {
 			"_name": "HTML",
 			"source": {
 				"type": "html",
@@ -1883,9 +1900,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "130b311fbf1abb0"
+			"_id": "10c77118301e656"
 		},
-		"1857d1b35317967": {
+		"1d2e51280d1aa7c": {
 			"_name": "JS",
 			"source": {
 				"type": "javascript",
@@ -1893,9 +1910,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "1857d1b35317967"
+			"_id": "1d2e51280d1aa7c"
 		},
-		"1ed631c6541eb1c": {
+		"156d1134c81e63a": {
 			"_name": "JSON",
 			"source": {
 				"type": "string",
@@ -1903,9 +1920,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "1ed631c6541eb1c"
+			"_id": "156d1134c81e63a"
 		},
-		"1b6cd1e6b01d846": {
+		"1f8c61235c119dd": {
 			"_name": "Log",
 			"type": {
 				"type": "string",
@@ -1919,9 +1936,9 @@
 				"mandatory": true,
 				"default": ""
 			},
-			"_id": "1b6cd1e6b01d846"
+			"_id": "1f8c61235c119dd"
 		},
-		"179ee1a6a413d44": {
+		"19ebf1f1a915bec": {
 			"_name": "Menu",
 			"items": {
 				"type": [
@@ -1934,9 +1951,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "179ee1a6a413d44"
+			"_id": "19ebf1f1a915bec"
 		},
-		"1641a1619b1b582": {
+		"1ee001cba11b1d5": {
 			"_name": "MenuAction",
 			"html": {
 				"type": "@HTML",
@@ -1959,9 +1976,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1641a1619b1b582"
+			"_id": "1ee001cba11b1d5"
 		},
-		"1f99b1bd4d118d9": {
+		"179ea16e8a1678b": {
 			"_name": "MenuBar",
 			"designer": {
 				"type": "@Designer",
@@ -1999,9 +2016,9 @@
 			},
 			"clear": {},
 			"render": {},
-			"_id": "1f99b1bd4d118d9"
+			"_id": "179ea16e8a1678b"
 		},
-		"1a87b136f116371": {
+		"1b5c41b7a51b678": {
 			"_name": "MenuHeader",
 			"html": {
 				"type": "@HTML",
@@ -2018,9 +2035,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1a87b136f116371"
+			"_id": "1b5c41b7a51b678"
 		},
-		"1980a151eb1898f": {
+		"11e7611fda1b914": {
 			"_name": "MenuItem",
 			"html": {
 				"type": "@HTML",
@@ -2050,9 +2067,9 @@
 			"show": {},
 			"render": {},
 			"click": {},
-			"_id": "1980a151eb1898f"
+			"_id": "11e7611fda1b914"
 		},
-		"142211a68010ba4": {
+		"135e21993a13066": {
 			"_name": "MenuLogo",
 			"html": {
 				"type": "@HTML",
@@ -2063,13 +2080,13 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "142211a68010ba4"
+			"_id": "135e21993a13066"
 		},
-		"1e769106271410b": {
+		"1217810f7a13263": {
 			"_name": "MenuSearch",
-			"_id": "1e769106271410b"
+			"_id": "1217810f7a13263"
 		},
-		"1a57b1fe1116d43": {
+		"1a2fb1b96117d62": {
 			"_name": "Message",
 			"success": {
 				"params": [
@@ -2103,9 +2120,9 @@
 					}
 				]
 			},
-			"_id": "1a57b1fe1116d43"
+			"_id": "1a2fb1b96117d62"
 		},
-		"150e91bf6b19b66": {
+		"1b169134681e557": {
 			"_name": "ModelBehavior",
 			"uuid": {
 				"type": "string",
@@ -2134,9 +2151,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "150e91bf6b19b66"
+			"_id": "1b169134681e557"
 		},
-		"1f9221789b112a0": {
+		"149c814faa12006": {
 			"_name": "ModelClass",
 			"title": {
 				"type": "string",
@@ -2171,9 +2188,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1f9221789b112a0"
+			"_id": "149c814faa12006"
 		},
-		"195e81af9117f89": {
+		"1b492114a819dd4": {
 			"_name": "ModelComponent",
 			"title": {
 				"type": "string",
@@ -2208,9 +2225,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "195e81af9117f89"
+			"_id": "1b492114a819dd4"
 		},
-		"15a9e173c91fe6c": {
+		"1d09019fb71151b": {
 			"_name": "ModelLog",
 			"title": {
 				"type": "string",
@@ -2239,9 +2256,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "15a9e173c91fe6c"
+			"_id": "1d09019fb71151b"
 		},
-		"1c96913d7f19fdc": {
+		"1612210fe218de7": {
 			"_name": "ModelSchema",
 			"title": {
 				"type": "string",
@@ -2276,9 +2293,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1c96913d7f19fdc"
+			"_id": "1612210fe218de7"
 		},
-		"12d1c1278f117d2": {
+		"1ea4510e05109d5": {
 			"_name": "ModelSystem",
 			"title": {
 				"type": "string",
@@ -2307,9 +2324,9 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "12d1c1278f117d2"
+			"_id": "1ea4510e05109d5"
 		},
-		"1d18b100b91a8d4": {
+		"13e0c1e8e01f889": {
 			"_name": "ModelType",
 			"title": {
 				"type": "string",
@@ -2338,7 +2355,7 @@
 			"hide": {},
 			"show": {},
 			"render": {},
-			"_id": "1d18b100b91a8d4"
+			"_id": "13e0c1e8e01f889"
 		},
 		"135c71078810af2": {
 			"_id": "135c71078810af2",
@@ -2757,12 +2774,12 @@
 				]
 			}
 		},
-		"1e19f158901d9fd": {
+		"16d4a186c21d73b": {
 			"_name": "Search",
 			"search": {},
-			"_id": "1e19f158901d9fd"
+			"_id": "16d4a186c21d73b"
 		},
-		"15a091c1d11ef2e": {
+		"1143619cc217603": {
 			"_name": "Server",
 			"designer": {
 				"type": "@Designer",
@@ -2771,9 +2788,9 @@
 				"default": {}
 			},
 			"start": {},
-			"_id": "15a091c1d11ef2e"
+			"_id": "1143619cc217603"
 		},
-		"19970182721dd3c": {
+		"19eb91841816dbb": {
 			"_name": "SpaceItem",
 			"name": {
 				"type": "string",
@@ -2788,9 +2805,9 @@
 				"default": ""
 			},
 			"click": {},
-			"_id": "19970182721dd3c"
+			"_id": "19eb91841816dbb"
 		},
-		"1fee610fc51990a": {
+		"1179519ff61c667": {
 			"_name": "Spaces",
 			"designer": {
 				"type": "@Designer",
@@ -2808,9 +2825,9 @@
 			},
 			"clear": {},
 			"render": {},
-			"_id": "1fee610fc51990a"
+			"_id": "1179519ff61c667"
 		},
-		"19add19f0418642": {
+		"17bab14d6616fff": {
 			"_name": "Store",
 			"uuid": {
 				"type": "string",
@@ -2836,9 +2853,9 @@
 				"mandatory": false,
 				"default": {}
 			},
-			"_id": "19add19f0418642"
+			"_id": "17bab14d6616fff"
 		},
-		"191931c8d0100a1": {
+		"10ee412e2014b0e": {
 			"_name": "System",
 			"name": {
 				"type": "string",
@@ -2900,9 +2917,9 @@
 				"mandatory": false,
 				"default": {}
 			},
-			"_id": "191931c8d0100a1"
+			"_id": "10ee412e2014b0e"
 		},
-		"1aa8c1094d12b85": {
+		"165e0121c610c97": {
 			"_name": "ToolBar",
 			"designer": {
 				"type": "@Designer",
@@ -2919,9 +2936,9 @@
 				"default": []
 			},
 			"render": {},
-			"_id": "1aa8c1094d12b85"
+			"_id": "165e0121c610c97"
 		},
-		"1ba591fcf91f97f": {
+		"1d66a19c6a12d6b": {
 			"_name": "ToolBarItem",
 			"html": {
 				"type": "@HTML",
@@ -2945,9 +2962,9 @@
 			"show": {},
 			"render": {},
 			"click": {},
-			"_id": "1ba591fcf91f97f"
+			"_id": "1d66a19c6a12d6b"
 		},
-		"1c5d91b02019d79": {
+		"11e6f19b5a1e528": {
 			"_name": "Workspace",
 			"designer": {
 				"type": "@Designer",
@@ -2960,7 +2977,7 @@
 			"clear": {},
 			"refresh": {},
 			"render": {},
-			"_id": "1c5d91b02019d79"
+			"_id": "11e6f19b5a1e528"
 		}
 	},
 	"types": {
