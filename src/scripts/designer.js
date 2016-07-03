@@ -3286,6 +3286,9 @@ runtime.on('ready', function () {
             parentId = '',
             parentsId = [],
             parents = null,
+            systems = null,
+            systemIds = [],
+            i = 0;
             length = 0;
 
         function _getSchemaId(name) {
@@ -3318,9 +3321,7 @@ runtime.on('ready', function () {
             this.clear();
             switch (this.designer().context()) {
                 case 'system':
-                    var systems = this.require('storage').get('system-designer-systems'),
-                        systemIds = [],
-                        i = 0;
+                    systems = this.require('storage').get('system-designer-systems');
 
                     if (systems) {
                         systemIds = systems.systems;
