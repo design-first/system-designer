@@ -3652,6 +3652,7 @@ runtime.on('ready', function () {
             });
 
             this.require('designer').logs().push(log);
+            this.require('message').info(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
         channel.on('logInfo', function (message) {
@@ -3665,6 +3666,7 @@ runtime.on('ready', function () {
             });
 
             this.require('designer').logs().push(log);
+            this.require('message').info(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
         channel.on('logWarn', function (message) {
@@ -3678,6 +3680,7 @@ runtime.on('ready', function () {
             });
 
             this.require('designer').logs().push(log);
+            this.require('message').warning(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
         channel.on('logError', function (message) {
@@ -3691,6 +3694,7 @@ runtime.on('ready', function () {
             });
 
             this.require('designer').logs().push(log);
+            this.require('message').danger(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
         channel.on('getSystem', function (id) {
@@ -5105,6 +5109,13 @@ runtime.on('ready', function () {
                     endpoint: 'Blank'
                 });
         });
+    });
+
+    Designer.on('generateId', function generateId() {
+        function gen() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+        }
+        return gen() + gen() + gen();
     });
 
     Designer.on('save', function () {

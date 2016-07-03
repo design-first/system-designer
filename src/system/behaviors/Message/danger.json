@@ -1,5 +1,5 @@
 {
-    "component": "Message",
-    "state": "danger",
-    "action": "function danger(message) {var html = this.require('message-alert-danger.html').source();$('#designer-message').empty();document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', html.replace(/{{message}}/gi, '<strong>error:</strong> ' + message));$('.designer-message-danger').fadeIn(500);setTimeout(function () {$('.designer-message-danger').fadeOut(1000);}, 4000);}"
+	"component": "Message",
+	"state": "danger",
+	"action": "function danger(message) {\n  var html = this.require('message-alert-danger.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-danger-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"
 }
