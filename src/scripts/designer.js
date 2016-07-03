@@ -849,6 +849,15 @@ runtime.on('ready', function () {
             $('#designer-dialog-export-type').hide();
         }.bind(this));
 
+        dom = document.getElementById('designer-dialog-export-modal');
+        dom.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                this.ok();
+                return false;
+            }
+        }.bind(this));
     });
 
     DialogExport.on('show', function () {
@@ -2721,6 +2730,28 @@ runtime.on('ready', function () {
                         return gen() + gen() + gen();
                     }
 
+                    function canCreate(name) {
+                        var systems = runtime.require('storage').get('system-designer-systems'),
+                            systemIds = [],
+                            i = 0,
+                            result = true;
+
+                        if (systems) {
+                            systemIds = systems.systems;
+                        }
+                        length = systemIds.length;
+
+                        for (i = 0; i < length; i++) {
+                            system = runtime.require('storage').get(systemIds[i]);
+                            if (system.name === name) {
+                                result = false;
+                                break;
+                            }
+                        }
+
+                        return result;
+                    }
+
                     // get value
                     name = $('#designer-dialog-system-creation-name').val();
 
@@ -2728,7 +2759,7 @@ runtime.on('ready', function () {
                     name = name.trim();
                     name = name.replace(/ /gi, '-');
 
-                    if (name) {
+                    if (name && canCreate(name)) {
 
                         uuid = generateId();
                         mainUuid = generateId();
@@ -2807,6 +2838,19 @@ runtime.on('ready', function () {
                             return gen() + gen() + gen();
                         }
 
+                        function canCreate(name) {
+                            var result = true,
+                                id = '';
+
+                            for (id in runtime.require('designer').system().schemas()) {
+                                if (runtime.require('designer').system().schemas()[id]._name === name) {
+                                    result = false;
+                                    break;
+                                }
+                            }
+                            return result;
+                        }
+
                         // get value
                         name = $('#designer-dialog-schema-creation-name').val();
 
@@ -2814,7 +2858,7 @@ runtime.on('ready', function () {
                         name = name.trim();
                         name = name.replace(/ /gi, '_');
 
-                        if (name) {
+                        if (name && canCreate(name)) {
 
                             id = generateId().toString();
 
@@ -3296,6 +3340,11 @@ runtime.on('ready', function () {
                             sys.render();
                         }
                     }
+
+                    if (space === '' && length > 0) {
+                        this.require('message').warning('system not found.');
+                    }
+
                     break;
                 case 'schemas':
                     if (space) {
@@ -3602,6 +3651,11 @@ runtime.on('ready', function () {
             // TODO IMPROVE REFRESH
             if (this.designer().filter()) {
                 this.designer().filter(this.designer().filter());
+            }
+        } else {
+            systems = this.require('storage').get('system-designer-systems');
+            if (systems && systems.systems && systems.systems.length) {
+                this.require('message').warning('system not found.');
             }
         }
     });
