@@ -1784,18 +1784,52 @@ runtime.on('ready', function () {
             propName = '',
             propVal = '',
             value = '',
-            systemId = '';
+            systemId = '',
+            schema = null;
+
+        function _getSchema(name) {
+            var result = '',
+                id = '';
+
+            for (id in that.require('designer').system().schemas()) {
+                if (that.require('designer').system().schemas()[id]._name === name) {
+                    result = that.require('designer').system().schemas()[id];
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _getModel(name) {
+            var result = '',
+                id = '';
+
+            for (id in that.require('designer').system().models()) {
+                if (that.require('designer').system().models()[id]._name === name) {
+                    result = that.require('designer').system().models()[id];
+                    break;
+                }
+            }
+            return result;
+        }
 
         systemId = this.require('designer').system().id();
+        schema = _getSchema(this.model());
+        model = _getModel(this.model());
 
         for (propName in this.document()) {
             if (this.document().hasOwnProperty(propName) && propName !== '_id') {
                 propVal = this.document()[propName];
                 value = JSON.stringify(propVal);
-                if (value.length < 25) {
-                    doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';
+
+                if (schema[propName] === 'link' && typeof propVal === 'string') {
+                    doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal +  '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(propVal) + '</a></td></tr>';
                 } else {
-                    doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal).substring(0, 25) + ' ..."</td></tr>';
+                    if (value.length < 25) {
+                        doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';
+                    } else {
+                        doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal).substring(0, 25) + ' ..."</td></tr>';
+                    }
                 }
             }
         }
@@ -3289,7 +3323,7 @@ runtime.on('ready', function () {
             systems = null,
             systemIds = [],
             i = 0;
-            length = 0;
+        length = 0;
 
         function _getSchemaId(name) {
             var result = '',

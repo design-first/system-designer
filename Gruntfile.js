@@ -427,6 +427,7 @@ module.exports = function (grunt) {
                             }
                             schemas = grunt.option('schemas');
                             schemas[uuid] = JSON.parse(src);
+                            schemas[uuid]._id = uuid;
                         }
                         return result;
                     }
