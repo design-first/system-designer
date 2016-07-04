@@ -5200,13 +5200,6 @@ runtime.on('ready', function () {
         });
     });
 
-    Designer.on('generateId', function generateId() {
-        function gen() {
-            return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-        }
-        return gen() + gen() + gen();
-    });
-
     Designer.on('save', function () {
         var systems = this.require('storage').get('system-designer-systems'),
             designer = this.require('designer'),
