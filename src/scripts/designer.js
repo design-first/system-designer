@@ -1826,6 +1826,7 @@ runtime.on('ready', function () {
             propVal = '',
             value = '',
             systemId = '',
+            links = '',
             schema = null;
 
         function _getSchema(name) {
@@ -1854,6 +1855,10 @@ runtime.on('ready', function () {
             return result;
         }
 
+        function _createLink(id) {
+            links = links + '<a href="#' + runtime.require('designer').system().id() + '#components#' + model[propName].type[0].replace('@', '') + '#' + id + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(id) + '</a>,<br>';
+        }
+
         systemId = this.require('designer').system().id();
         schema = _getSchema(this.model());
         model = _getModel(this.model());
@@ -1863,14 +1868,22 @@ runtime.on('ready', function () {
                 propVal = this.document()[propName];
                 value = JSON.stringify(propVal);
 
-                if (schema[propName] === 'link' && typeof propVal === 'string') {
-                    doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(propVal) + '</a></td></tr>';
-                } else {
-                    if (value.length < 25) {
-                        doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';
-                    } else {
-                        doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal).substring(0, 25) + ' ..."</td></tr>';
-                    }
+                switch (true) {
+                    case schema[propName] === 'link' && typeof propVal === 'string':
+                        doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(propVal) + '</a></td></tr>';
+                        break;
+                    case schema[propName] === 'collection' && Array.isArray(propVal) && model[propName].type[0].indexOf('@') !== -1:
+                        propVal.forEach(_createLink);
+                        doc = doc + '<tr><td>' + propName + '</td><td>[' + links + ']</td></tr>';
+                        doc = doc.replace(',<br>]', ']');
+                        break;
+                    default:
+                        if (value.length < 25) {
+                            doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';
+                        } else {
+                            doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal).substring(0, 25) + ' ..."</td></tr>';
+                        }
+                        break;
                 }
             }
         }

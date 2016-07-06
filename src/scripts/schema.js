@@ -398,7 +398,7 @@ runtime.on('ready', function () {
             schema = JSON.parse(val),
             property = '',
             propVal = '';
-
+         
         for (property in schema) {
             if (schema.hasOwnProperty(property) && property.indexOf('_') !== 0) {
                 propVal = schema[property];
