@@ -1,5 +1,9 @@
+
+
+
+
 <div class="modal fade" id="designer-dialog-sync-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">{{title}}</h4>
@@ -7,16 +11,27 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <div class="col-sm-offset-1 col-sm-10">
-                            <p style="text-align:justify">System Designer will search for a running application.</p>
-                            <p style="text-align:justify">If System Designer finds one, it will import its system and you will be able to update its models, components and behaviors.</p>
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Command</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <div class="radio">
+                                <label><input type="radio" name="sync-type" id="designer-dialog-sync-commit" value="commit" checked>Push</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="sync-type" id="designer-dialog-sync-refresh" value="refresh">Synchronize</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="designer-dialog-sync-comments-area">
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Comments</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <textarea class="form-control" placeholder="comments" rows="3" id="designer-dialog-sync-comments"></textarea>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="designer-dialog-sync-modal-cancel">Cancel</button>
-                <button type="button" class="btn btn-primary" id="designer-dialog-sync-modal-ok">OK</button>
+                <button type="button" class="btn btn-primary" id="designer-dialog-sync-modal-ok"">OK</button>
             </div>
         </div>
     </div>

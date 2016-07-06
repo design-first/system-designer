@@ -143,6 +143,16 @@ runtime.on('ready', function () {
             this.ok();
         }.bind(this));
 
+        dom = document.getElementById('designer-dialog-sync-commit');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-sync-comments-area').show();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-sync-refresh');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-sync-comments-area').hide();
+        }.bind(this));
+
     });
 
     DialogSync.on('show', function () {
@@ -266,6 +276,12 @@ runtime.on('ready', function () {
         if (storeConfig.urlServer) {
             $('#designer-dialog-config-url-server')[0].value = storeConfig.urlServer;
         }
+        if (storeConfig.githubToken) {
+            $('#designer-dialog-config-github-token')[0].value = atob(storeConfig.githubToken);
+        }
+        if (storeConfig.githubRepository) {
+            $('#designer-dialog-config-github-repository')[0].value = storeConfig.githubRepository;
+        }
 
         // events
         dom = document.getElementById('designer-dialog-config-radio-client');
@@ -304,6 +320,30 @@ runtime.on('ready', function () {
                 event.stopPropagation();
                 event.preventDefault();
                 if ($('#designer-dialog-config-url-client').val()) {
+                    this.ok();
+                }
+                return false;
+            }
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-config-github-token');
+        dom.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                if ($('#designer-dialog-config-github-token').val()) {
+                    this.ok();
+                }
+                return false;
+            }
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-config-github-repository');
+        dom.addEventListener('keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                if ($('#designer-dialog-config-github-repository').val()) {
                     this.ok();
                 }
                 return false;
@@ -350,6 +390,8 @@ runtime.on('ready', function () {
 
         config.urlClient = $('#designer-dialog-config-url-client')[0].value;
         config.urlServer = $('#designer-dialog-config-url-server')[0].value;
+        config.githubToken = btoa($('#designer-dialog-config-github-token')[0].value);
+        config.githubRepository = $('#designer-dialog-config-github-repository')[0].value;
 
         this.require('storage').set('system-designer-config', config);
     });
@@ -385,7 +427,6 @@ runtime.on('ready', function () {
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{library}}/gi, list)
         );
-
 
         // hide library
         $('#designer-dialog-import-modal-from-library-form').hide();
@@ -1823,7 +1864,7 @@ runtime.on('ready', function () {
                 value = JSON.stringify(propVal);
 
                 if (schema[propName] === 'link' && typeof propVal === 'string') {
-                    doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal +  '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(propVal) + '</a></td></tr>';
+                    doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(propVal) + '</a></td></tr>';
                 } else {
                     if (value.length < 25) {
                         doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';

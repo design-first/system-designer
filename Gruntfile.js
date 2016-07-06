@@ -65,6 +65,7 @@ module.exports = function (grunt) {
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
             'dist/designer/lib/system-runtime/**',
+            'dist/designer/lib/github-api/**',
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
             'dist/designer/styles/*.css'
@@ -647,7 +648,11 @@ module.exports = function (grunt) {
         },
         "merge-json": {
             runtime: {
-                src: ["build/js/js.json", "build/json/json.json", "build/html/html.json", "build/css/css.json", "src/addons/*.json", "build/system/design.json"],
+                src: ["build/js/js.json", "build/json/json.json", "build/html/html.json", "build/css/css.json", "build/system/design.json"],
+                dest: "build/system/design.json"
+            },
+            addons: {
+                src: ["src/addons/*.json", "build/system/design.json"],
                 dest: "build/system/design.json"
             }
         },
@@ -899,6 +904,10 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/lib/jquery/jquery.min.js'
                     },
                     {
+                        src: 'node_modules/github-api/dist/GitHub.bundle.min.js',
+                        dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js'
+                    },
+                    {
                         src: 'bower_components/system-runtime/dist/system-runtime.min.js',
                         dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
                     },
@@ -984,7 +993,8 @@ module.exports = function (grunt) {
         'copy:html-web',
         'copy:components-web',
         'system-json',
-        'merge-json',
+        'merge-json:runtime',
+        'merge-json:addons',
         'copy:system',
         'jsbeautifier',
         'copy:debug-web'
@@ -998,7 +1008,8 @@ module.exports = function (grunt) {
         'copy:appcache-web',
         'copy:components-web',
         'system-json',
-        'merge-json',
+        'merge-json:runtime',
+        'merge-json:addons',
         'copy:system',
         'jsbeautifier',
         'jshint',
@@ -1012,7 +1023,8 @@ module.exports = function (grunt) {
         'copy:html-electron',
         'copy:components-electron',
         'system-json',
-        'merge-json',
+        'merge-json:runtime',
+        'merge-json:addons',
         'copy:system',
         'jsbeautifier',
         'jshint',
