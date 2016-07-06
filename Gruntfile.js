@@ -53,14 +53,6 @@ module.exports = function (grunt) {
             'build/*.json',
             'build/*/*.json',
             'src/components/html/dialog-modal-welcome.html',
-            'src/system/components/ToolBarItem/1dbc51200e116e6.json',
-            'src/system/components/ToolBarItem/1dbc51200e116e8.json',
-            'src/system/components/ToolBarItem/1dbc51200e11610.json',
-            'src/system/components/ToolBarItem/1dbc51200e11612.json',
-            'src/system/components/ToolBarItem/1dbc51200e11614.json',
-            'src/system/components/ToolBarItem/1dbc51220e116e1.json',
-            'src/system/components/ToolBarItem/13a291c27f16310.json',
-            'src/system/components/ToolBarItem/13a291c27f16311.json',
             'dist/designer/*.html',
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
@@ -778,42 +770,6 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/components/html/dialog-modal-welcome.html',
                         dest: 'src/components/html/dialog-modal-welcome.html'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51200e116e6.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e6.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51200e116e8.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e8.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51200e11610.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e11610.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51200e11612.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e11612.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51200e11614.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e11614.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51220e116e1.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51220e116e1.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/13a291c27f16310.json',
-                        dest: 'src/system/components/ToolBarItem/13a291c27f16310.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/13a291c27f16311.json',
-                        dest: 'src/system/components/ToolBarItem/13a291c27f16311.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51200e116e3.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51200e116e3.json'
                     }
                 ]
             },
