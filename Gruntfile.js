@@ -822,7 +822,7 @@ module.exports = function (grunt) {
                     },
                     {
                         src: 'src/target/electron/components/html/copyright.html',
-                        dest: 'src/components/html/copyright..html'
+                        dest: 'src/components/html/copyright.html'
                     }
                 ]
             },
