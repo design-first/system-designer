@@ -1,5 +1,5 @@
 {
-    "component": "1dbc51200e11614",
-    "state": "click",
-    "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n        var DialogCopyright = this.require('DialogCopyright');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': 'Version ' + this.require('designer').version() + '<br>Copyright © 2016 - <a href=\"https://twitter.com/ecarriou\" target=\"_blank\">Erwan Carriou</a><br><br>System Designer is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://system-runtime.github.io\" target=\"_blank\">System Runtime</a>.<br><br>For comments or questions you can send an email to <a href=\"mailto:erwan.carriou@mac.com\">erwan.carriou@mac.com</a>.<br>If you find a bug, please report it on <a href=\"https://github.com/system-sdk/system-designer/issues/new\">this page</a>.'\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
-}  
+	"component": "1dbc51200e11614",
+	"state": "click",
+	"action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+}

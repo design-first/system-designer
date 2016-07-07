@@ -859,9 +859,10 @@ runtime.on('ready', function () {
 
         // default value
         if (system.master() === true) {
-            $('#designer-dialog-export-isSystem').attr('checked', true);
-        } else {
-            $('#designer-dialog-export-isSubSystem').attr('checked', true);
+            $('#designer-dialog-export-isMaster').attr('checked', true);
+        }
+        if (system.subsystem() === true) {
+            $('#designer-dialog-export-isSubsystem').attr('checked', true);
         }
 
         //events
@@ -877,17 +878,17 @@ runtime.on('ready', function () {
 
         dom = document.getElementById('designer-dialog-export-json');
         dom.addEventListener('click', function (event) {
-            $('#designer-dialog-export-type').show();
+            $('#designer-dialog-export-options').show();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-html');
         dom.addEventListener('click', function (event) {
-            $('#designer-dialog-export-type').hide();
+            $('#designer-dialog-export-options').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-node');
         dom.addEventListener('click', function (event) {
-            $('#designer-dialog-export-type').hide();
+            $('#designer-dialog-export-options').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-modal');

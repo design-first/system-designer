@@ -53,6 +53,7 @@ module.exports = function (grunt) {
             'build/*.json',
             'build/*/*.json',
             'src/components/html/dialog-modal-welcome.html',
+            'src/components/html/copyright.html',
             'dist/designer/*.html',
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
@@ -770,6 +771,10 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/components/html/dialog-modal-welcome.html',
                         dest: 'src/components/html/dialog-modal-welcome.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/copyright.html',
+                        dest: 'src/components/html/copyright.html'
                     }
                 ]
             },
@@ -814,6 +819,10 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/electron/components/html/dialog-modal-welcome.html',
                         dest: 'src/components/html/dialog-modal-welcome.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/copyright.html',
+                        dest: 'src/components/html/copyright..html'
                     }
                 ]
             },
