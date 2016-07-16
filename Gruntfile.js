@@ -54,6 +54,23 @@ module.exports = function (grunt) {
             'build/*/*.json',
             'src/components/html/dialog-modal-welcome.html',
             'src/components/html/copyright.html',
+            'src/components/html/menu-action-version.html',
+            'src/components/html/menu-header-behavior.html',
+            'src/components/html/menu-header-component.html',
+            'src/components/html/menu-header-documentation.html',
+            'src/components/html/menu-header-model.html',
+            'src/components/html/menu-header-schema.html',
+            'src/components/html/menu-header-system.html',
+            'src/components/html/menu-header-type.html',
+            'src/system/components/ToolBarItem/163a01b7ca1935c.json',
+            'src/system/components/ToolBarItem/163a01b7ca1935e.json',
+            'src/system/components/ToolBarItem/1dbc51300e11z11.json',
+            'src/system/components/ToolBarItem/1dbc51300e11z12.json',
+            'src/system/components/ToolBarItem/1dbc51300e11z13.json',
+            'src/system/components/ToolBarItem/1dbc51300e11z14.json',
+            'src/system/components/ToolBarItem/1dbc51300e11z15.json',
+            'src/system/components/ToolBarItem/1dbc51300e11z16.json',
+            'src/system/components/MenuItem/14f481302c106e7.json',
             'dist/designer/*.html',
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
@@ -637,6 +654,102 @@ module.exports = function (grunt) {
                 files: {
                     'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
                 }
+            },
+            'phonegap-app': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/app.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
+                }
+            },
+            'phonegap-behavior': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/behavior.min.js': ['dist/designer/scripts/behavior.min.js']
+                }
+            },
+            'phonegap-component': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/component.min.js': ['dist/designer/scripts/component.min.js']
+                }
+            },
+            'phonegap-designer': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
+                }
+            },
+            'phonegap-model': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/model.min.js': ['dist/designer/scripts/model.min.js']
+                }
+            },
+            'phonegap-schema': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/schema.min.js': ['dist/designer/scripts/schema.min.js']
+                }
+            },
+            'phonegap-system': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/system.min.js': ['dist/designer/scripts/system.min.js']
+                }
+            },
+            'phonegap-type': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
+                }
             }
         },
         "merge-json": {
@@ -675,6 +788,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'dist/designer/scripts/behavior.min.js': ['src/scripts/behavior.js'],
+                    'dist/designer/scripts/phonegap.min.js': ['src/scripts/phonegap.js'],
                     'dist/designer/scripts/component.min.js': ['src/scripts/component.js'],
                     'dist/designer/scripts/designer.min.js': ['src/scripts/designer.js'],
                     'dist/designer/scripts/model.min.js': ['src/scripts/model.js'],
@@ -719,6 +833,10 @@ module.exports = function (grunt) {
                     {
                         src: 'src/styles/type.css',
                         dest: 'dist/designer/styles/type.css'
+                    },
+                    {
+                        src: 'src/styles/phonegap.css',
+                        dest: 'dist/designer/styles/phonegap.css'
                     }
                 ]
             },
@@ -775,6 +893,74 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/components/html/copyright.html',
                         dest: 'src/components/html/copyright.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-action-version.html',
+                        dest: 'src/components/html/menu-action-version.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-header-behavior.html',
+                        dest: 'src/components/html/menu-header-behavior.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-header-component.html',
+                        dest: 'src/components/html/menu-header-component.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-header-documentation.html',
+                        dest: 'src/components/html/menu-header-documentation.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-header-model.html',
+                        dest: 'src/components/html/menu-header-model.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-header-schema.html',
+                        dest: 'src/components/html/menu-header-schema.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-header-system.html',
+                        dest: 'src/components/html/menu-header-system.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/menu-header-type.html',
+                        dest: 'src/components/html/menu-header-type.html'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/163a01b7ca1935c.json',
+                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/163a01b7ca1935e.json',
+                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935e.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z11.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z11.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z12.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z12.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z13.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z13.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z14.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z14.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z15.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z15.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z16.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z16.json'
+                    },
+                    {
+                        src: 'src/target/web/components/MenuItem/14f481302c106e7.json',
+                        dest: 'src/system/components/MenuItem/14f481302c106e7.json'
                     }
                 ]
             },
@@ -814,6 +1000,42 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            'html-phonegap': {
+                files: [
+                    {
+                        src: 'src/target/phonegap/html/app.html',
+                        dest: 'dist/designer/app.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/html/behavior.html',
+                        dest: 'dist/designer/behavior.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/html/component.html',
+                        dest: 'dist/designer/component.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/html/index.html',
+                        dest: 'dist/designer/index.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/html/model.html',
+                        dest: 'dist/designer/model.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/html/schema.html',
+                        dest: 'dist/designer/schema.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/html/system.html',
+                        dest: 'dist/designer/system.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/html/type.html',
+                        dest: 'dist/designer/type.html'
+                    }
+                ]
+            },
             'components-electron': {
                 files: [
                     {
@@ -821,8 +1043,136 @@ module.exports = function (grunt) {
                         dest: 'src/components/html/dialog-modal-welcome.html'
                     },
                     {
+                        src: 'src/target/electron/components/html/menu-action-version.html',
+                        dest: 'src/components/html/menu-action-version.html'
+                    },
+                    {
                         src: 'src/target/electron/components/html/copyright.html',
                         dest: 'src/components/html/copyright.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/menu-header-behavior.html',
+                        dest: 'src/components/html/menu-header-behavior.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/menu-header-component.html',
+                        dest: 'src/components/html/menu-header-component.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/menu-header-documentation.html',
+                        dest: 'src/components/html/menu-header-documentation.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/menu-header-model.html',
+                        dest: 'src/components/html/menu-header-model.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/menu-header-schema.html',
+                        dest: 'src/components/html/menu-header-schema.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/menu-header-system.html',
+                        dest: 'src/components/html/menu-header-system.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/menu-header-type.html',
+                        dest: 'src/components/html/menu-header-type.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/163a01b7ca1935c.json',
+                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/163a01b7ca1935e.json',
+                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935e.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z11.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z11.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z12.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z12.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z13.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z13.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z14.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z14.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z15.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z15.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z16.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z16.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/MenuItem/14f481302c106e7.json',
+                        dest: 'src/system/components/MenuItem/14f481302c106e7.json'
+                    }
+                ]
+            },
+            'components-phonegap': {
+                files: [
+                    {
+                        src: 'src/target/phonegap/components/html/dialog-modal-welcome.html',
+                        dest: 'src/components/html/dialog-modal-welcome.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/copyright.html',
+                        dest: 'src/components/html/copyright.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-action-version.html',
+                        dest: 'src/components/html/menu-action-version.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-header-behavior.html',
+                        dest: 'src/components/html/menu-header-behavior.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-header-component.html',
+                        dest: 'src/components/html/menu-header-component.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-header-documentation.html',
+                        dest: 'src/components/html/menu-header-documentation.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-header-model.html',
+                        dest: 'src/components/html/menu-header-model.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-header-schema.html',
+                        dest: 'src/components/html/menu-header-schema.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-header-system.html',
+                        dest: 'src/components/html/menu-header-system.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/menu-header-type.html',
+                        dest: 'src/components/html/menu-header-type.html'
+                    }
+                ]
+            },
+            'scripts-phonegap': {
+                files: [
+                    {
+                        src: 'src/target/phonegap/scripts/phonegap.js',
+                        dest: 'src/scripts/phonegap.js'
+                    }
+                ]
+            },
+            'styles-phonegap': {
+                files: [
+                    {
+                        src: 'src/target/phonegap/styles/phonegap.css',
+                        dest: 'src/styles/phonegap.css'
                     }
                 ]
             },
@@ -1002,6 +1352,31 @@ module.exports = function (grunt) {
         'concat:electron-schema',
         'concat:electron-system',
         'concat:electron-type'
+    ]);
+
+    // build for phonegap
+    grunt.registerTask('build-phonegap', [
+        'copy:lib',
+        'copy:css',
+        'copy:html-phonegap',
+        'copy:components-phonegap',
+        'copy:scripts-phonegap',
+        'copy:styles-phonegap',
+        'system-json',
+        'merge-json:runtime',
+        'merge-json:addons',
+        'copy:system',
+        'jsbeautifier',
+        'jshint',
+        'uglify',
+        'concat:phonegap-app',
+        'concat:phonegap-behavior',
+        'concat:phonegap-component',
+        'concat:phonegap-designer',
+        'concat:phonegap-model',
+        'concat:phonegap-schema',
+        'concat:phonegap-system',
+        'concat:phonegap-type'
     ]);
 
     // default test

@@ -1,5 +1,5 @@
 {
 	"component": "Designer",
 	"state": "open",
-	"action": "function open(url, target, isExt) {\n    var ref = null;\n    \n    if (typeof require === 'undefined') {\n        ref = window.open(url, target);\n    } else {\n        if (isExt) {\n            ref = require('electron').shell.openExternal(url ,target);  \n        } else {\n            ref = window.open(url, target);\n        }\n    }\n    return ref;\n}"
+	"action": "function open(url, target, isExt) {\n    var ref = null;\n    \n    function _getRelativePath() {\n      var result = '',\n          paths = [];\n      \n      paths = window.location.href.split('/');\n      result = paths[paths.length - 1];\n      \n      return result;\n    }\n    \n    switch(true) {\n      case typeof require !== 'undefined':\n        if (isExt) {\n            ref = require('electron').shell.openExternal(url ,target);  \n        } else {\n            ref = window.open(url, target);\n        }\n        break;\n      case typeof cordova !== 'undefined':\n        if (isExt) {\n          window.open(url, '_system');\n        } else { \n          document.location.href = url;\n        }\n        break;\n      default:\n        ref = window.open(url, target);\n        break;\n    }\n    \n    this.require('storage').set('system-designer-last-context', _getRelativePath());\n    \n    return ref;\n}"
 }
