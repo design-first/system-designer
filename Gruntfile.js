@@ -62,6 +62,14 @@ module.exports = function (grunt) {
             'src/components/html/menu-header-schema.html',
             'src/components/html/menu-header-system.html',
             'src/components/html/menu-header-type.html',
+            'src/components/html/model-class.html',
+            'src/components/html/model-component.html',
+            'src/components/html/model-schema.html',
+            'src/components/html/model-system.html',
+            'src/components/html/model-type.html',
+            'src/components/html/model-behavior.html',
+            'src/components/json/example-node.json',
+            'src/components/json/example-quick-start.json',
             'src/system/components/ToolBarItem/163a01b7ca1935c.json',
             'src/system/components/ToolBarItem/163a01b7ca1935e.json',
             'src/system/components/ToolBarItem/1dbc51300e11z11.json',
@@ -876,6 +884,14 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            'json-web': {
+                files: [
+                    {
+                        src: 'src/target/web/components/json/example-quick-start.json',
+                        dest: 'src/components/json/example-quick-start.json'
+                    }
+                ]
+            },
             'appcache-web': {
                 files: [
                     {
@@ -921,6 +937,26 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/components/html/menu-header-system.html',
                         dest: 'src/components/html/menu-header-system.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/model-classhtml',
+                        dest: 'src/components/html/model-class.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/model-component.html',
+                        dest: 'src/components/html/model-component.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/model-schema.html',
+                        dest: 'src/components/html/model-schema.html'
+                    },
+                    {
+                        src: 'src/target/web/components/html/model-system.html',
+                        dest: 'src/components/html/model-system.html'
+                    },
+                                      {
+                        src: 'src/target/web/components/html/model-behavior.html',
+                        dest: 'src/components/html/model-behavior.html'
                     },
                     {
                         src: 'src/target/web/components/html/menu-header-type.html',
@@ -997,6 +1033,18 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/electron/html/type.html',
                         dest: 'dist/designer/type.html'
+                    }
+                ]
+            },
+            'json-electron': {
+                files: [
+                    {
+                        src: 'src/target/electron/components/json/example-node.json',
+                        dest: 'src/components/json/example-node.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/json/example-quick-start.json',
+                        dest: 'src/components/json/example-quick-start.json'
                     }
                 ]
             },
@@ -1079,6 +1127,30 @@ module.exports = function (grunt) {
                         dest: 'src/components/html/menu-header-type.html'
                     },
                     {
+                        src: 'src/target/electron/components/html/model-class.html',
+                        dest: 'src/components/html/model-class.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/model-component.html',
+                        dest: 'src/components/html/model-component.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/model-schema.html',
+                        dest: 'src/components/html/model-schema.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/model-system.html',
+                        dest: 'src/components/html/model-system.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/model-type.html',
+                        dest: 'src/components/html/model-type.html'
+                    },
+                    {
+                        src: 'src/target/electron/components/html/model-behavior.html',
+                        dest: 'src/components/html/model-behavior.html'
+                    },
+                    {
                         src: 'src/target/electron/components/ToolBarItem/163a01b7ca1935c.json',
                         dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json'
                     },
@@ -1157,6 +1229,30 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/phonegap/components/html/menu-header-type.html',
                         dest: 'src/components/html/menu-header-type.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/model-class.html',
+                        dest: 'src/components/html/model-class.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/model-component.html',
+                        dest: 'src/components/html/model-component.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/model-schema.html',
+                        dest: 'src/components/html/model-schema.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/model-system.html',
+                        dest: 'src/components/html/model-system.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/model-type.html',
+                        dest: 'src/components/html/model-type.html'
+                    },
+                    {
+                        src: 'src/target/phonegap/components/html/model-behavior.html',
+                        dest: 'src/components/html/model-behavior.html'
                     }
                 ]
             },
@@ -1305,6 +1401,7 @@ module.exports = function (grunt) {
     grunt.registerTask('debug-web', [
         'copy:lib',
         'copy:css',
+        'copy:json-web',
         'copy:html-web',
         'copy:components-web',
         'system-json',
@@ -1319,6 +1416,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build-web', [
         'copy:lib',
         'copy:css',
+        'copy:json-web',
         'copy:html-web',
         'copy:appcache-web',
         'copy:components-web',
@@ -1336,6 +1434,7 @@ module.exports = function (grunt) {
         'copy:lib',
         'copy:css',
         'copy:html-electron',
+        'copy:json-electron',
         'copy:components-electron',
         'system-json',
         'merge-json:runtime',

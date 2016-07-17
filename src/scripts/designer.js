@@ -428,9 +428,6 @@ runtime.on('ready', function () {
                 .replace(/{{library}}/gi, list)
         );
 
-        // hide library
-        $('#designer-dialog-import-modal-from-library-form').hide();
-
         //events  
         var callbackEvent = function (event) {
             var id = '',
@@ -1217,60 +1214,64 @@ runtime.on('ready', function () {
 
         // events
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
-
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('system.html#' + that.uuid() + '#description');
-        }.bind(this));
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('system.html#' + that.uuid() + '#description');
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
-
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('system.html#' + that.uuid() + '#description');
-        }.bind(this));
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('system.html#' + that.uuid() + '#description');
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-system-' + this.uuid() + '-export');
-
-        html.addEventListener('click', function (event) {
-            var name = this.document().name;
-            var document = JSON.parse(JSON.stringify(this.document()));
-            delete document.classInfo;
-            this.require('designer').saveAs(document, this.document().name + '.json');
-        }.bind(this));
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var name = this.document().name;
+                var document = JSON.parse(JSON.stringify(this.document()));
+                delete document.classInfo;
+                this.require('designer').saveAs(document, this.document().name + '.json');
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var systems = this.require('storage').get('system-designer-systems'),
+                    designer = this.require('designer'),
+                    System = this.require('System'),
+                    systemId = this.uuid();
 
-        html.addEventListener('click', function (event) {
-            var systems = this.require('storage').get('system-designer-systems'),
-                designer = this.require('designer'),
-                System = this.require('System'),
-                systemId = this.uuid();
+                // remove from storage
+                this.require('storage').remove(systemId);
+                systems.systems.splice(systems.systems.indexOf(systemId), 1);
+                this.require('storage').set('system-designer-systems', systems);
 
-            // remove from storage
-            this.require('storage').remove(systemId);
-            systems.systems.splice(systems.systems.indexOf(systemId), 1);
-            this.require('storage').set('system-designer-systems', systems);
+                designer.system().destroy();
 
-            designer.system().destroy();
+                // remove log
+                designer.logs().forEach(function (item) {
+                    this.logs().pop();
+                }.bind(designer));
 
-            // remove log
-            designer.logs().forEach(function (item) {
-                this.logs().pop();
-            }.bind(designer));
+                // set default system
+                if (systems.systems.length) {
+                    designer.system(new System(this.require('storage').get(systems.systems[0])));
+                }
 
-            // set default system
-            if (systems.systems.length) {
-                designer.system(new System(this.require('storage').get(systems.systems[0])));
-            }
+                $('#designer-system-' + this.uuid()).remove();
+                this.destroy();
 
-            $('#designer-system-' + this.uuid()).remove();
-            this.destroy();
+                //designer.save();
 
-            //designer.save();
-
-            designer.space('');
-            designer.spaces().render();
-            designer.workspace().refresh();
-        }.bind(this));
+                designer.space('');
+                designer.spaces().render();
+                designer.workspace().refresh();
+            }.bind(this));
+        }
     });
 
     ModelSystem.on('hide', function () {
@@ -1330,64 +1331,68 @@ runtime.on('ready', function () {
 
         // events
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
-
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
-        }.bind(this));
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-type-' + this.uuid() + '-edit');
-
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
-        }.bind(this));
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-type-' + this.uuid() + '-export');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var document = {
+                    "name": "type " + this.document().name,
+                    "master": false,
+                    "subsystem": false,
+                    "version": "0.0.1",
+                    "description": "Type " + this.document().name,
+                    "schemas": {},
+                    "models": {},
+                    "behaviors": {},
+                    "types": {},
+                    "components": {}
+                };
 
-        html.addEventListener('click', function (event) {
-            var document = {
-                "name": "type " + this.document().name,
-                "master": false,
-                "subsystem": false,
-                "version": "0.0.1",
-                "description": "Type " + this.document().name,
-                "schemas": {},
-                "models": {},
-                "behaviors": {},
-                "types": {},
-                "components": {}
-            };
+                // clean
+                document.name = document.name.trim();
+                document.name = document.name.replace(/ /gi, '-');
+                document.name = document.name.toLocaleLowerCase();
 
-            // clean
-            document.name = document.name.trim();
-            document.name = document.name.replace(/ /gi, '-');
-            document.name = document.name.toLocaleLowerCase();
+                document.types[this.document().name] = this.document();
 
-            document.types[this.document().name] = this.document();
-
-            this.require('designer').saveAs(document, this.document().name.replace(/ /gi, '-').toLowerCase() + '.json');
-        }.bind(this));
+                this.require('designer').saveAs(document, this.document().name.replace(/ /gi, '-').toLowerCase() + '.json');
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-type-' + this.uuid() + '-delete');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var designer = this.require('designer');
+                types = designer.system().types();
 
-        html.addEventListener('click', function (event) {
-            var designer = this.require('designer');
-            types = designer.system().types();
 
+                delete types[this.title()];
+                designer.system().types(types);
 
-            delete types[this.title()];
-            designer.system().types(types);
+                $('#designer-type-' + this.title()).remove();
 
-            $('#designer-type-' + this.title()).remove();
+                this.require('channel').deleteType(this.uuid());
 
-            this.require('channel').deleteType(this.uuid());
+                this.destroy();
+                designer.save();
 
-            this.destroy();
-            designer.save();
-
-            designer.space('');
-            designer.spaces().render();
-            designer.workspace().refresh();
-        }.bind(this));
+                designer.space('');
+                designer.spaces().render();
+                designer.workspace().refresh();
+            }.bind(this));
+        }
     });
 
     ModelType.on('hide', function () {
@@ -1435,63 +1440,68 @@ runtime.on('ready', function () {
         if (this.editable()) {
             html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
 
-            html.addEventListener('click', function (event) {
-                this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
-            }.bind(this));
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
+                }.bind(this));
+            }
 
             html = document.getElementById('designer-schema-' + htmlId + '-edit');
-
-            html.addEventListener('click', function (event) {
-                this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
-            }.bind(this));
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
+                }.bind(this));
+            }
 
             html = document.getElementById('designer-schema-' + htmlId + '-export');
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    var document = {
+                        "name": "schema " + this.document()._name,
+                        "master": false,
+                        "subsystem": false,
+                        "version": "0.0.1",
+                        "description": "Schema " + this.document()._name,
+                        "schemas": {},
+                        "models": {},
+                        "behaviors": {},
+                        "types": {},
+                        "components": {}
+                    };
 
-            html.addEventListener('click', function (event) {
-                var document = {
-                    "name": "schema " + this.document()._name,
-                    "master": false,
-                    "subsystem": false,
-                    "version": "0.0.1",
-                    "description": "Schema " + this.document()._name,
-                    "schemas": {},
-                    "models": {},
-                    "behaviors": {},
-                    "types": {},
-                    "components": {}
-                };
+                    // clean
+                    document.name = document.name.trim();
+                    document.name = document.name.replace(/ /gi, '-');
+                    document.name = document.name.toLocaleLowerCase();
 
-                // clean
-                document.name = document.name.trim();
-                document.name = document.name.replace(/ /gi, '-');
-                document.name = document.name.toLocaleLowerCase();
+                    document.schemas[this.document()._id] = this.document();
 
-                document.schemas[this.document()._id] = this.document();
-
-                this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
-            }.bind(this));
+                    this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
+                }.bind(this));
+            }
 
             html = document.getElementById('designer-schema-' + htmlId + '-delete');
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    var designer = this.require('designer');
 
-            html.addEventListener('click', function (event) {
-                var designer = this.require('designer');
+                    designer.deleteSchema(this.uuid());
 
-                designer.deleteSchema(this.uuid());
+                    $('#designer-schema-' + this.uuid()).remove();
 
-                $('#designer-schema-' + this.uuid()).remove();
+                    this.require('channel').deleteSchema(this.uuid());
 
-                this.require('channel').deleteSchema(this.uuid());
+                    this.destroy();
 
-                this.destroy();
+                    jsPlumb.deleteEveryEndpoint();
 
-                jsPlumb.deleteEveryEndpoint();
+                    designer.save();
 
-                designer.save();
-
-                designer.space('');
-                designer.spaces().render();
-                designer.workspace().refresh();
-            }.bind(this));
+                    designer.space('');
+                    designer.spaces().render();
+                    designer.workspace().refresh();
+                }.bind(this));
+            }
         } else {
             $('#designer-model-panel-' + htmlId + ' > div div').hide();
             $('#designer-schema-' + htmlId + ' > div > .panel-body').attr('style', 'cursor: inherit');
@@ -1678,42 +1688,45 @@ runtime.on('ready', function () {
         // events
         if (this.editable()) {
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
-
-            html.addEventListener('click', function (event) {
-                this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
-            }.bind(this));
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
+                }.bind(this));
+            }
 
             html = document.getElementById('designer-model-' + htmlId + '-export');
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    var document = {
+                        "name": "model " + this.document()._name,
+                        "master": false,
+                        "subsystem": false,
+                        "version": "0.0.1",
+                        "description": "Model " + this.document()._name,
+                        "schemas": {},
+                        "models": {},
+                        "behaviors": {},
+                        "types": {},
+                        "components": {}
+                    };
 
-            html.addEventListener('click', function (event) {
-                var document = {
-                    "name": "model " + this.document()._name,
-                    "master": false,
-                    "subsystem": false,
-                    "version": "0.0.1",
-                    "description": "Model " + this.document()._name,
-                    "schemas": {},
-                    "models": {},
-                    "behaviors": {},
-                    "types": {},
-                    "components": {}
-                };
+                    // clean
+                    document.name = document.name.trim();
+                    document.name = document.name.replace(/ /gi, '-');
+                    document.name = document.name.toLocaleLowerCase();
 
-                // clean
-                document.name = document.name.trim();
-                document.name = document.name.replace(/ /gi, '-');
-                document.name = document.name.toLocaleLowerCase();
+                    document.models[this.document()._id] = this.document();
 
-                document.models[this.document()._id] = this.document();
-
-                this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
-            }.bind(this));
+                    this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
+                }.bind(this));
+            }
 
             html = document.getElementById('designer-model-' + htmlId + '-edit');
-
-            html.addEventListener('click', function (event) {
-                this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
-            }.bind(this));
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
+                }.bind(this));
+            }
         } else {
             $('#designer-model-' + htmlId + ' > div > div > div > button').hide();
             $('#designer-model-' + htmlId + ' > div > .panel-body').attr('style', 'cursor: inherit');
@@ -1750,62 +1763,66 @@ runtime.on('ready', function () {
 
         //events
         html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
-
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
-        }.bind(this));
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
-
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
-        }.bind(this));
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-export');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var name = this.document().state;
+                var document = {
+                    "name": "behavior " + name,
+                    "master": false,
+                    "subsystem": false,
+                    "version": "0.0.1",
+                    "description": "Behavior " + name,
+                    "schemas": {},
+                    "models": {},
+                    "behaviors": {},
+                    "types": {},
+                    "components": {}
+                };
 
-        html.addEventListener('click', function (event) {
-            var name = this.document().state;
-            var document = {
-                "name": "behavior " + name,
-                "master": false,
-                "subsystem": false,
-                "version": "0.0.1",
-                "description": "Behavior " + name,
-                "schemas": {},
-                "models": {},
-                "behaviors": {},
-                "types": {},
-                "components": {}
-            };
+                // clean
+                document.name = document.name.trim();
+                document.name = document.name.replace(/ /gi, '-');
+                document.name = document.name.toLocaleLowerCase();
 
-            // clean
-            document.name = document.name.trim();
-            document.name = document.name.replace(/ /gi, '-');
-            document.name = document.name.toLocaleLowerCase();
+                document.behaviors[this.document()._id] = this.document();
 
-            document.behaviors[this.document()._id] = this.document();
-
-            this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
-        }.bind(this));
+                this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
+            }.bind(this));
+        }
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var designer = this.require('designer');
+                behaviors = designer.system().behaviors();
 
-        html.addEventListener('click', function (event) {
-            var designer = this.require('designer');
-            behaviors = designer.system().behaviors();
+                delete behaviors[this.uuid()];
+                designer.system().behaviors(behaviors);
 
-            delete behaviors[this.uuid()];
-            designer.system().behaviors(behaviors);
+                $('#designer-behavior-' + this.uuid()).fadeOut(400, function () {
+                    $(this).remove();
+                });
 
-            $('#designer-behavior-' + this.uuid()).fadeOut(400, function () {
-                $(this).remove();
-            });
+                this.require('channel').deleteBehavior(this.uuid());
 
-            this.require('channel').deleteBehavior(this.uuid());
-
-            this.destroy();
-            designer.save();
-        }.bind(this));
+                this.destroy();
+                designer.save();
+            }.bind(this));
+        }
     });
 
     ModelBehavior.on('hide', function () {
@@ -1899,73 +1916,77 @@ runtime.on('ready', function () {
         document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',
             htmlComp.source()
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{_id}}/gi, this.uuid().replace('.', '-'))
+                .replace(/{{_id}}/gi, this.uuid().replace(/\./g, '-'))
                 .replace(/{{content}}/gi, doc)
         );
 
         // events
-        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-')).children[0].children[1];
+        html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-')).children[0].children[1];
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
+            }.bind(this));
+        }
 
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
-        }.bind(this));
+        html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-') + '-edit');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
+            }.bind(this));
+        }
 
-        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-edit');
+        html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-') + '-export');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var name = this.document()._id;
+                var document = {
+                    "name": "component " + name,
+                    "master": false,
+                    "subsystem": false,
+                    "version": "0.0.1",
+                    "description": "Component " + name,
+                    "schemas": {},
+                    "models": {},
+                    "behaviors": {},
+                    "types": {},
+                    "components": {}
+                };
 
-        html.addEventListener('click', function (event) {
-            this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
-        }.bind(this));
+                // clean
+                document.name = document.name.trim();
+                document.name = document.name.replace(/ /gi, '-');
+                document.name = document.name.toLocaleLowerCase();
 
-        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-export');
+                if (typeof document.models[this.model()]) {
+                    document.components[this.model()] = {};
+                }
 
-        html.addEventListener('click', function (event) {
-            var name = this.document()._id;
-            var document = {
-                "name": "component " + name,
-                "master": false,
-                "subsystem": false,
-                "version": "0.0.1",
-                "description": "Component " + name,
-                "schemas": {},
-                "models": {},
-                "behaviors": {},
-                "types": {},
-                "components": {}
-            };
+                document.components[this.model()][this.document()._id] = this.document();
 
-            // clean
-            document.name = document.name.trim();
-            document.name = document.name.replace(/ /gi, '-');
-            document.name = document.name.toLocaleLowerCase();
+                this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
+            }.bind(this));
+        }
 
-            if (typeof document.models[this.model()]) {
-                document.components[this.model()] = {};
-            }
+        html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-') + '-delete');
+        if (html) {
+            html.addEventListener('click', function (event) {
+                var designer = this.require('designer'),
+                    components = designer.system().components();
 
-            document.components[this.model()][this.document()._id] = this.document();
+                delete components[this.model()][this.uuid()];
+                designer.system().components(components);
 
-            this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
-        }.bind(this));
+                $('#designer-component-' + this.uuid().replace(/\./g, '-')).fadeOut(400, function () {
+                    $(this).remove();
+                });
 
-        html = document.getElementById('designer-component-' + this.uuid().replace('.', '-') + '-delete');
+                this.require('channel').deleteComponent(this.uuid(), this.model());
 
-        html.addEventListener('click', function (event) {
-            var designer = this.require('designer'),
-                components = designer.system().components();
+                this.destroy();
+                designer.save();
 
-            delete components[this.model()][this.uuid()];
-            designer.system().components(components);
-
-            $('#designer-component-' + this.uuid().replace('.', '-')).fadeOut(400, function () {
-                $(this).remove();
-            });
-
-            this.require('channel').deleteComponent(this.uuid(), this.model());
-
-            this.destroy();
-            designer.save();
-
-        }.bind(this));
+            }.bind(this));
+        }
     });
 
     ModelComponent.on('hide', function () {
