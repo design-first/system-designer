@@ -268,7 +268,15 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            var config = this.require('storage').get('system-designer-config');
+            var config = this.require('storage').get('system-designer-config'),
+                designer = this.require('designer'),
+                messages = [];
+
+            if (designer.isPhoneGap()) {
+                messages = designer.messages();
+                messages.push(message);
+                designer.messages(messages);
+            }
 
             this.require('storage').set('system-designer-message', message);
 
@@ -278,8 +286,8 @@ runtime.on('ready', function () {
             }
         });
 
-        id = document.location.href.split('#')[1];
-        systemId = document.location.href.split('#')[2];
+        id = document.location.href.split('#')[1].split('?')[0];
+        systemId = document.location.href.split('#')[2].split('?')[0];
 
         behavior = this.require('storage').get(systemId).behaviors[id];
 
@@ -655,6 +663,9 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
+        if (this.isPhoneGap()) {
+            this.updateSystem();
+        }
         this.menubar().render();
         this.toolbar().render();
         this.workspace().render();

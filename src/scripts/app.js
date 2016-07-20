@@ -22,6 +22,8 @@ if (typeof global !== 'undefined') {
     global.require = require;
 }
 
+var messages = []; // TODO find better way
+
 runtime.on('ready', function () {
     var system = runtime.system('app-designer-testing');
 
@@ -30,10 +32,21 @@ runtime.on('ready', function () {
             channel = null,
             sysid = '',
             system = '',
-            messages = [];
+            params = '';
+
+        // case of cordova    
+        if (typeof cordova !== 'undefined') {
+            params = window.location.href.split('?system=');
+            system = null;
+
+            if (params[1]) {
+                system = JSON.parse(decodeURIComponent(params[1].split('&')[0]));
+                this.require('storage').set(system._id, system);
+            }
+        }
 
         // get system
-        sysid = document.location.href.split('#')[1];
+        sysid = document.location.href.split('#')[1].split('?')[0];
         system = this.require('storage').get(sysid);
         delete system.classInfo;
 
@@ -45,6 +58,11 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function send(message) {
+            var designer = this.require('designer');
+
+            if (typeof cordova !== 'undefined') {
+                messages.push(message);
+            }
             this.require('storage').set('system-designer-message', message);
         }, true, true);
 

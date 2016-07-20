@@ -334,7 +334,15 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            var config = this.require('storage').get('system-designer-config');
+            var config = this.require('storage').get('system-designer-config'),
+                designer = this.require('designer'),
+                messages = [];
+
+            if (designer.isPhoneGap()) {
+                messages = designer.messages();
+                messages.push(message);
+                designer.messages(messages);
+            }
 
             this.require('storage').set('system-designer-message', message);
 
@@ -345,7 +353,7 @@ runtime.on('ready', function () {
         });
 
         // get system
-        id = document.location.href.split('#')[1];
+        id = document.location.href.split('#')[1].split('?')[0];
         system = this.require('storage').get(id);
 
         designer.store().uuid(id);
@@ -429,6 +437,9 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
+        if (this.isPhoneGap()) {
+            this.updateSystem();
+        }
         this.menubar().render();
         this.toolbar().render();
         this.workspace().render();
@@ -452,7 +463,7 @@ runtime.on('ready', function () {
         length = menubar.length;
         for (i = 0; i < length; i++) {
             href = menubar[i].href;
-            context = href.split('#')[href.split('#').length - 1];
+            context = href.split('#')[href.split('#').length - 1].split('?')[0];
             menubar[i].href = '#' + this.store().uuid() + '#' + context;
         }
     });

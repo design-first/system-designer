@@ -2126,6 +2126,8 @@ runtime.on('ready', function () {
             domAction = document.getElementById('designer-menubar-actions'),
             self = this,
             arr = window.location.href.split('#'),
+            params = window.location.href.split('?messages='),
+            messages = [],
             context = 'system',
             space = '',
             designer = this.require('designer');
@@ -2173,12 +2175,14 @@ runtime.on('ready', function () {
         // or restore the context
         if (arr.length > 2 && arr[2].length !== 0) {
             context = arr[2];
+            context = context.split('?')[0];
         }
         if (arr.length > 3) {
             space = arr[3];
+            space = space.split('?')[0];
         }
         if (arr.length > 4) {
-            designer.state().component(arr[4]);
+            designer.state().component(arr[4].split('?')[0]);
         }
 
         for (i = 0; i < length; i++) {
@@ -2199,6 +2203,12 @@ runtime.on('ready', function () {
         });
 
         designer.updateRouter();
+
+        // run messages
+        if (params[1]) {
+            messages = JSON.parse(decodeURIComponent(params[1]));
+            designer.messages(messages);
+        }
     });
 
     // ToolBar
@@ -4146,7 +4156,7 @@ runtime.on('ready', function () {
 
         channel.on('updateBehavior', function (id, behavior) {
             var designer = this.require('designer'),
-                behaviors = designer.system().behaviors();
+                behaviors = designer.system().behaviors(); 
 
             behaviors[id] = behavior;
             designer.system().behaviors(behaviors);
@@ -4449,6 +4459,8 @@ runtime.on('ready', function () {
 
         // case of url
         switch (true) {
+
+            /* TODO check if need to remove
             case typeof document.location.search.split('?')[1] === 'string':
                 var systemParam = JSON.parse(decodeURIComponent(document.location.search.split('?')[1].split('system=')[1]));
                 var sys = null;
@@ -4459,6 +4471,7 @@ runtime.on('ready', function () {
                 this.refresh();
                 this.require('message').success('the system \'' + systemParam.name + '\' was imported');
                 break;
+            */
 
             case window.location.href.split('#').length > 1 && window.location.href.split('#')[1].length > 0:
                 systemId = window.location.href.split('#')[1];
@@ -4492,18 +4505,21 @@ runtime.on('ready', function () {
 
             if (arr.length > 1) {
                 system = arr[1];
+                system = system.split('?')[0];
             }
 
             if (arr.length > 2) {
                 collection = arr[2];
+                collection = collection.split('?')[0];
             }
 
             if (arr.length > 3) {
                 component = arr[3];
+                component = component.split('?')[0];
             }
 
             if (arr.length > 4) {
-                that.state().component(arr[4]);
+                that.state().component(arr[4].split('?')[0]);
             } else {
                 that.state().component('');
             }
@@ -4550,6 +4566,10 @@ runtime.on('ready', function () {
         });
 
         this.server().start();
+
+        // run messages if any
+        this.runMessages(this.messages());
+        this.messages([]);
     });
 
     Designer.on('filter', function (val) {
@@ -4638,6 +4658,7 @@ runtime.on('ready', function () {
             for (i = 0; i < length; i++) {
                 href = menubar[i].href;
                 collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
+                collection = collection.split('?')[0];
                 menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
             }
         } else {
@@ -4646,6 +4667,7 @@ runtime.on('ready', function () {
             for (i = 0; i < length; i++) {
                 href = menubar[i].href;
                 collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
+                collection = collection.split('?')[0];
                 menubar[i].href = '##' + collection;
             }
         }
@@ -5297,6 +5319,13 @@ runtime.on('ready', function () {
         }
         this.require('storage').set('system-designer-systems', systems);
     });
+
+    Designer.on('runMessages', function runMessages(messages) {   
+        messages.forEach(function (message) {
+            console.log(message);
+            $db.RuntimeMessage.insert(message);
+        });
+    }, true);
 
     // main
     system.on('main', function main() {

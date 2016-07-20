@@ -259,7 +259,15 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            var config = this.require('storage').get('system-designer-config');
+            var config = this.require('storage').get('system-designer-config'),
+                designer = this.require('designer'),
+                messages = [];
+
+            if (designer.isPhoneGap()) {
+                messages = designer.messages();
+                messages.push(message);
+                designer.messages(messages);
+            }
 
             this.require('storage').set('system-designer-message', message);
 
@@ -269,8 +277,8 @@ runtime.on('ready', function () {
             }
         });
 
-        id = document.location.href.split('#')[1];
-        systemId = document.location.href.split('#')[2];
+        id = document.location.href.split('#')[1].split('?')[0];
+        systemId = document.location.href.split('#')[2].split('?')[0];
 
         model = this.require('storage').get(systemId).models[id];
 
@@ -312,7 +320,7 @@ runtime.on('ready', function () {
                     { name: "javascript", value: "javascript", meta: "alias" }
                 ];
 
-                systemId = document.location.href.split('#')[2];
+                systemId = document.location.href.split('#')[2].split('?')[0];
                 system = this.require('storage').get(systemId);
 
                 if (system) {
@@ -367,7 +375,7 @@ runtime.on('ready', function () {
             server = null;
 
         // type
-        this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);
+        this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1].split('?')[0]);
 
         // store
         Store = this.require('Store');
@@ -403,6 +411,9 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
+        if (this.isPhoneGap()) {
+            this.updateSystem();
+        }
         this.menubar().render();
         this.toolbar().render();
         this.workspace().render();

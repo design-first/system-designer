@@ -102,6 +102,12 @@
         "mandatory": false,
         "default": null
     },
+    "messages": {
+        "type": "array",
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+    },
     "updateRouter": {},
     "syncModel": {
         "params": [
@@ -207,6 +213,7 @@
     },
     "refresh": {},
     "save": {},
+    "savePhonegap": {},
     "check": {},
     "welcome": {},
     "generateId": {
@@ -251,5 +258,18 @@
                 "default": ""
             }
         ]
-    }
+    },
+    "isPhoneGap": {
+        "result": "boolean"
+    },
+    "runMessages": {
+        "params": [
+            {
+                "name": "messages",
+                "type": "array",
+                "mandatory": true,
+                "default": []
+        }]
+    },
+    "updateSystem": {}
 }

@@ -293,19 +293,28 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            var config = this.require('storage').get('system-designer-config');
+            var storage = this.require('storage'),
+                config = storage.get('system-designer-config'),
+                designer = this.require('designer'),
+                messages = [];
 
-            this.require('storage').set('system-designer-message', message);
-
+            storage.set('system-designer-message', message);
+            
+            if (designer.isPhoneGap()) {
+                messages = designer.messages();
+                messages.push(message);
+                designer.messages(messages);
+            }
+            
             // message for server debug
             if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
                 $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
             }
         });
 
-        id = decodeURIComponent(document.location.href.split('#')[1]);
-        collection = document.location.href.split('#')[2];
-        systemId = document.location.href.split('#')[3];
+        id = decodeURIComponent(document.location.href.split('#')[1].split('?')[0]);
+        collection = document.location.href.split('#')[2].split('?')[0];
+        systemId = document.location.href.split('#')[3].split('?')[0];
 
         component = this.require('storage').get(systemId).components[collection][id];
         model = _findModel(collection, this.require('storage').get(systemId));
@@ -512,6 +521,9 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
+        if (this.isPhoneGap()) {
+            this.updateSystem();
+        }
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
