@@ -1,5 +1,0 @@
-{
-	"component": "Designer",
-	"state": "updateSystem",
-	"action": "function updateSystem() {\n  var params = window.location.href.split('?system='),\n      system = null;\n      \n  if (params[1]) {\n    system = JSON.parse(decodeURIComponent(params[1]));\n    this.require('storage').set(system._id, system);\n  }\n}"
-}

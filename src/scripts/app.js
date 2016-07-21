@@ -23,6 +23,7 @@ if (typeof global !== 'undefined') {
 }
 
 var messages = []; // TODO find better way
+var lastPage = 'index.html'; // TODO find better way
 
 runtime.on('ready', function () {
     var system = runtime.system('app-designer-testing');
@@ -34,14 +35,39 @@ runtime.on('ready', function () {
             system = '',
             params = '';
 
+        function _getParams() {
+            var result = {},
+                urlParams = [],
+                system = null;
+
+            urlParams = document.location.href.split('?');
+
+            if (urlParams.length > 1) {
+                urlParams = urlParams[1].split('&');
+                urlParams.forEach(function (urlParam) {
+                    var name = '',
+                        value = '';
+
+                    name = urlParam.split('=')[0].trim();
+                    value = urlParam.split('=')[1].trim();
+
+                    result[name] = decodeURIComponent(value);
+                });
+            }
+            return result;
+        }
+
         // case of cordova    
         if (typeof cordova !== 'undefined') {
-            params = window.location.href.split('?system=');
+
+            params = _getParams();
             system = null;
 
-            if (params[1]) {
-                system = JSON.parse(decodeURIComponent(params[1].split('&')[0]));
+            if (Object.keys(params).length) {
+                system = JSON.parse(params.system);
                 this.require('storage').set(system._id, system);
+                
+                lastPage = params.ref;
             }
         }
 

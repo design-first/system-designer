@@ -664,7 +664,7 @@ runtime.on('ready', function () {
 
     Designer.on('render', function () {
         if (this.isPhoneGap()) {
-            this.updateSystem();
+            this.updatePhoneGapContext();
         }
         this.menubar().render();
         this.toolbar().render();

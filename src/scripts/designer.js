@@ -4658,7 +4658,6 @@ runtime.on('ready', function () {
             for (i = 0; i < length; i++) {
                 href = menubar[i].href;
                 collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
-                collection = collection.split('?')[0];
                 menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
             }
         } else {
@@ -4667,7 +4666,6 @@ runtime.on('ready', function () {
             for (i = 0; i < length; i++) {
                 href = menubar[i].href;
                 collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
-                collection = collection.split('?')[0];
                 menubar[i].href = '##' + collection;
             }
         }
