@@ -1,8 +1,5 @@
-var cordova = {}; // TOODO remove
-
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
-    StatusBar.overlaysWebView(true); // TODO check right value
     StatusBar.styleDefault();
     //navigator.splashscreen.hide();
 }

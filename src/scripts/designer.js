@@ -2853,6 +2853,7 @@ runtime.on('ready', function () {
                     function canCreate(name) {
                         var systems = runtime.require('storage').get('system-designer-systems'),
                             systemIds = [],
+                            regExp = /[\&\(\)\[\]\'\"\*\,\;\:\%]/i,
                             i = 0,
                             result = true;
 
@@ -2868,6 +2869,8 @@ runtime.on('ready', function () {
                                 break;
                             }
                         }
+
+                        result = result && (name.match(regExp) === null);
 
                         return result;
                     }
@@ -3118,7 +3121,7 @@ runtime.on('ready', function () {
                     modelName = designer.space();
                     schemaDef = _getSchemaDef(modelName);
 
-                    if (Object.keys(schemaDef)) {
+                    if (Object.keys(schemaDef).length) {
 
                         uuid = generateId();
 
@@ -3172,6 +3175,8 @@ runtime.on('ready', function () {
                         designer.save();
 
                         this.require('channel').createComponent(modelName, component);
+                    } else {
+                        this.require('message').warning('there is no schema. Create a schema before creating a component.');
                     }
                 }
                 break;
@@ -3965,7 +3970,7 @@ runtime.on('ready', function () {
 
         channel.on('deleteType', function (id) {
             var designer = this.require('designer'),
-                types = designer.system().types,
+                types = designer.system().types(),
                 dbTypes = [],
                 type = null;
 
