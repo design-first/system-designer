@@ -1,5 +1,5 @@
 {
 	"component": "Designer",
-	"state": "updatePhoneGapContext",
-	"action": "function updatePhoneGapContext() {\n  var params = {},\n      urlParams = [],\n      system = null;\n      \n  urlParams = document.location.href.split('?');\n\n  if (urlParams.length > 1) {\n      urlParams = urlParams[1].split('&');\n      urlParams.forEach(function (urlParam) {\n          var name = '',\n              value = '';\n\n          name = urlParam.split('=')[0].trim();\n          value = urlParam.split('=')[1].trim();\n\n          params[name] = decodeURIComponent(value);\n      });    \n  }\n      \n      \n  if (params.system) {\n    system = JSON.parse(params.system);\n    this.require('storage').set(system._id, system);\n  }\n  \n  if (params.ref) {\n    this.lastPage(params.ref);\n  }\n}"
+	"state": "updateCordovaContext",
+	"action": "function updateCordovaContext() {\n  var params = {},\n      urlParams = [],\n      system = null;\n      \n  urlParams = document.location.href.split('?');\n\n  if (urlParams.length > 1) {\n      urlParams = urlParams[1].split('&');\n      urlParams.forEach(function (urlParam) {\n          var name = '',\n              value = '';\n\n          name = urlParam.split('=')[0].trim();\n          value = urlParam.split('=')[1].trim();\n\n          params[name] = decodeURIComponent(value);\n      });    \n  }\n      \n      \n  if (params.system) {\n    system = JSON.parse(params.system);\n    this.require('storage').set(system._id, system);\n  }\n  \n  if (params.ref) {\n    this.lastPage(params.ref);\n  }\n}"
 }

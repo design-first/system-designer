@@ -263,7 +263,7 @@ runtime.on('ready', function () {
                 designer = this.require('designer'),
                 messages = [];
 
-            if (designer.isPhoneGap()) {
+            if (designer.isCordova()) {
                 messages = designer.messages();
                 messages.push(message);
                 designer.messages(messages);
@@ -380,8 +380,8 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
-        if (this.isPhoneGap()) {
-            this.updatePhoneGapContext();
+        if (this.isCordova()) {
+            this.updateCordovaContext();
         }
         this.menubar().render();
         this.toolbar().render();

@@ -662,7 +662,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
                 }
             },
-            'phonegap-app': {
+            'cordova-app': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -674,7 +674,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
                 }
             },
-            'phonegap-behavior': {
+            'cordova-behavior': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -686,7 +686,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/behavior.min.js': ['dist/designer/scripts/behavior.min.js']
                 }
             },
-            'phonegap-component': {
+            'cordova-component': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -698,7 +698,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/component.min.js': ['dist/designer/scripts/component.min.js']
                 }
             },
-            'phonegap-designer': {
+            'cordova-designer': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -710,7 +710,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
                 }
             },
-            'phonegap-model': {
+            'cordova-model': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -722,7 +722,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/model.min.js': ['dist/designer/scripts/model.min.js']
                 }
             },
-            'phonegap-schema': {
+            'cordova-schema': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -734,7 +734,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/schema.min.js': ['dist/designer/scripts/schema.min.js']
                 }
             },
-            'phonegap-system': {
+            'cordova-system': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -746,7 +746,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/system.min.js': ['dist/designer/scripts/system.min.js']
                 }
             },
-            'phonegap-type': {
+            'cordova-type': {
                 options: {
                     process: function (src, filepath) {
                         var result;
@@ -795,7 +795,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'dist/designer/scripts/behavior.min.js': ['src/scripts/behavior.js'],
-                    'dist/designer/scripts/phonegap.min.js': ['src/scripts/phonegap.js'],
+                    'dist/designer/scripts/cordova-ios.min.js': ['src/scripts/cordova-ios.js'],
                     'dist/designer/scripts/component.min.js': ['src/scripts/component.js'],
                     'dist/designer/scripts/designer.min.js': ['src/scripts/designer.js'],
                     'dist/designer/scripts/model.min.js': ['src/scripts/model.js'],
@@ -842,8 +842,8 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/styles/type.css'
                     },
                     {
-                        src: 'src/styles/phonegap.css',
-                        dest: 'dist/designer/styles/phonegap.css'
+                        src: 'src/styles/cordova-ios.css',
+                        dest: 'dist/designer/styles/cordova-ios.css'
                     }
                 ]
             },
@@ -1039,38 +1039,38 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            'html-phonegap': {
+            'html-cordova': {
                 files: [
                     {
-                        src: 'src/target/phonegap/html/app.html',
+                        src: 'src/target/cordova/html/app.html',
                         dest: 'dist/designer/app.html'
                     },
                     {
-                        src: 'src/target/phonegap/html/behavior.html',
+                        src: 'src/target/cordova/html/behavior.html',
                         dest: 'dist/designer/behavior.html'
                     },
                     {
-                        src: 'src/target/phonegap/html/component.html',
+                        src: 'src/target/cordova/html/component.html',
                         dest: 'dist/designer/component.html'
                     },
                     {
-                        src: 'src/target/phonegap/html/index.html',
+                        src: 'src/target/cordova/html/index.html',
                         dest: 'dist/designer/index.html'
                     },
                     {
-                        src: 'src/target/phonegap/html/model.html',
+                        src: 'src/target/cordova/html/model.html',
                         dest: 'dist/designer/model.html'
                     },
                     {
-                        src: 'src/target/phonegap/html/schema.html',
+                        src: 'src/target/cordova/html/schema.html',
                         dest: 'dist/designer/schema.html'
                     },
                     {
-                        src: 'src/target/phonegap/html/system.html',
+                        src: 'src/target/cordova/html/system.html',
                         dest: 'dist/designer/system.html'
                     },
                     {
-                        src: 'src/target/phonegap/html/type.html',
+                        src: 'src/target/cordova/html/type.html',
                         dest: 'dist/designer/type.html'
                     }
                 ]
@@ -1179,91 +1179,91 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            'components-phonegap': {
+            'components-cordova': {
                 files: [
                     {
-                        src: 'src/target/phonegap/components/html/dialog-modal-welcome.html',
+                        src: 'src/target/cordova/components/html/dialog-modal-welcome.html',
                         dest: 'src/components/html/dialog-modal-welcome.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/copyright.html',
+                        src: 'src/target/cordova/components/html/copyright.html',
                         dest: 'src/components/html/copyright.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-action-version.html',
+                        src: 'src/target/cordova/components/html/menu-action-version.html',
                         dest: 'src/components/html/menu-action-version.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-header-behavior.html',
+                        src: 'src/target/cordova/components/html/menu-header-behavior.html',
                         dest: 'src/components/html/menu-header-behavior.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-header-component.html',
+                        src: 'src/target/cordova/components/html/menu-header-component.html',
                         dest: 'src/components/html/menu-header-component.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-header-documentation.html',
+                        src: 'src/target/cordova/components/html/menu-header-documentation.html',
                         dest: 'src/components/html/menu-header-documentation.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-header-model.html',
+                        src: 'src/target/cordova/components/html/menu-header-model.html',
                         dest: 'src/components/html/menu-header-model.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-header-schema.html',
+                        src: 'src/target/cordova/components/html/menu-header-schema.html',
                         dest: 'src/components/html/menu-header-schema.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-header-system.html',
+                        src: 'src/target/cordova/components/html/menu-header-system.html',
                         dest: 'src/components/html/menu-header-system.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/menu-header-type.html',
+                        src: 'src/target/cordova/components/html/menu-header-type.html',
                         dest: 'src/components/html/menu-header-type.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/model-log.html',
+                        src: 'src/target/cordova/components/html/model-log.html',
                         dest: 'src/components/html/model-log.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/model-class.html',
+                        src: 'src/target/cordova/components/html/model-class.html',
                         dest: 'src/components/html/model-class.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/model-component.html',
+                        src: 'src/target/cordova/components/html/model-component.html',
                         dest: 'src/components/html/model-component.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/model-schema.html',
+                        src: 'src/target/cordova/components/html/model-schema.html',
                         dest: 'src/components/html/model-schema.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/model-system.html',
+                        src: 'src/target/cordova/components/html/model-system.html',
                         dest: 'src/components/html/model-system.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/model-type.html',
+                        src: 'src/target/cordova/components/html/model-type.html',
                         dest: 'src/components/html/model-type.html'
                     },
                     {
-                        src: 'src/target/phonegap/components/html/model-behavior.html',
+                        src: 'src/target/cordova/components/html/model-behavior.html',
                         dest: 'src/components/html/model-behavior.html'
                     }
                 ]
             },
-            'scripts-phonegap': {
+            'scripts-cordova': {
                 files: [
                     {
-                        src: 'src/target/phonegap/scripts/phonegap.js',
-                        dest: 'src/scripts/phonegap.js'
+                        src: 'src/target/cordova/scripts/cordova-ios.js',
+                        dest: 'src/scripts/cordova-ios.js'
                     }
                 ]
             },
-            'styles-phonegap': {
+            'styles-cordova': {
                 files: [
                     {
-                        src: 'src/target/phonegap/styles/phonegap.css',
-                        dest: 'src/styles/phonegap.css'
+                        src: 'src/target/cordova/styles/cordova-ios.css',
+                        dest: 'src/styles/cordova-ios.css'
                     }
                 ]
             },
@@ -1446,14 +1446,14 @@ module.exports = function (grunt) {
         'concat:electron-type'
     ]);
 
-    // build for phonegap
-    grunt.registerTask('build-phonegap', [
+    // build for cordova
+    grunt.registerTask('build-cordova', [
         'copy:lib',
         'copy:css',
-        'copy:html-phonegap',
-        'copy:components-phonegap',
-        'copy:scripts-phonegap',
-        'copy:styles-phonegap',
+        'copy:html-cordova',
+        'copy:components-cordova',
+        'copy:scripts-cordova',
+        'copy:styles-cordova',
         'system-json',
         'merge-json:runtime',
         'merge-json:addons',
@@ -1461,14 +1461,14 @@ module.exports = function (grunt) {
         'jsbeautifier',
         'jshint',
         'uglify',
-        'concat:phonegap-app',
-        'concat:phonegap-behavior',
-        'concat:phonegap-component',
-        'concat:phonegap-designer',
-        'concat:phonegap-model',
-        'concat:phonegap-schema',
-        'concat:phonegap-system',
-        'concat:phonegap-type'
+        'concat:cordova-app',
+        'concat:cordova-behavior',
+        'concat:cordova-component',
+        'concat:cordova-designer',
+        'concat:cordova-model',
+        'concat:cordova-schema',
+        'concat:cordova-system',
+        'concat:cordova-type'
     ]);
 
     // default test

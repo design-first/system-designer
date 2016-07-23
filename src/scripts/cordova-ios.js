@@ -1,7 +1,6 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
     StatusBar.styleDefault();
-    //navigator.splashscreen.hide();
 }
 
 /**  back **/
