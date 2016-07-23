@@ -31,11 +31,13 @@
   "main": "dist/designer/index.html",
   "scripts": {
     "test": "grunt test",
-    "watch": "grunt watch:system",
+    "watch": "grunt watch",
     "clean": "grunt clean",
     "debug": "grunt debug",
-    "start": "grunt connect:server",
-    "startDebug": "grunt connect:serverDebug"
+    "build": "grunt build",
+    "build-electron": "grunt build-electron",
+    "build-cordova": "grunt build-cordova",
+    "start": "grunt start"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
