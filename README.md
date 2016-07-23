@@ -54,13 +54,13 @@ Here are the different tasks you can use to automate tasks:
 
 ```sh
 # clean
-$ grunt clean
+$ npm run clean
 # build
-$ grunt build
+$ npm run build
 # watch
-$ grunt watch
+$ npm run watch
 # start web server
-$ grunt start
+$ npm run start
 ```
 
 Once server started, go to [http://localhost:9001/](http://localhost:9001/).
