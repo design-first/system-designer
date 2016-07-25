@@ -48,7 +48,7 @@ $ npm install
 $ bower install
 ```	 	
 
-#### Build
+#### Build for web
 
 Here are the different tasks you can use to build and start System Designer:
 
@@ -66,7 +66,7 @@ $ npm run start
 Once server started, go to [http://localhost:9001/](http://localhost:9001/).
 
 
-#### Build for other platforms
+#### Build for Electron and Cordova
 
 To build for [Electron](http://electron.atom.io):
 
@@ -74,7 +74,7 @@ To build for [Electron](http://electron.atom.io):
 $ npm run build-electron
 ```
 
-To build an [Cordova](http://cordova.apache.org):
+To build for [Cordova](http://cordova.apache.org):
 
 ```sh
 $ npm run build-cordova
