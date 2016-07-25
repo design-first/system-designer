@@ -48,9 +48,9 @@ $ npm install
 $ bower install
 ```	 	
 
-#### Grunt tasks
+#### Build
 
-Here are the different tasks you can use to automate tasks:
+Here are the different tasks you can use to build and start System Designer:
 
 ```sh
 # clean
@@ -64,6 +64,21 @@ $ npm run start
 ```
 
 Once server started, go to [http://localhost:9001/](http://localhost:9001/).
+
+
+#### Build for other platforms
+
+To build for [Electron](http://electron.atom.io):
+
+```sh
+$ npm run build-electron
+```
+
+To build an [Cordova](http://cordova.apache.org):
+
+```sh
+$ npm run build-cordova
+```
 
 ## Documentation
 
