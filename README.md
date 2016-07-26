@@ -31,7 +31,7 @@ In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your 
 
 #### Run your application
 
-You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module.
+You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module. You can also push your application on your Github repository with System Designer.
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
 
