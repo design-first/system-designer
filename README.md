@@ -53,12 +53,8 @@ $ bower install
 Here are the different tasks you can use to build and start System Designer:
 
 ```sh
-# clean
-$ npm run clean
 # build
 $ npm run build
-# watch
-$ npm run watch
 # start web server
 $ npm run start
 ```
