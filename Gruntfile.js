@@ -795,7 +795,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'dist/designer/scripts/behavior.min.js': ['src/scripts/behavior.js'],
-                    'dist/designer/scripts/cordova-ios.min.js': ['src/scripts/cordova-ios.js'],
+                    'dist/designer/scripts/cordova-tablet.min.js': ['src/scripts/cordova-tablet.js'],
                     'dist/designer/scripts/component.min.js': ['src/scripts/component.js'],
                     'dist/designer/scripts/designer.min.js': ['src/scripts/designer.js'],
                     'dist/designer/scripts/model.min.js': ['src/scripts/model.js'],
@@ -842,8 +842,8 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/styles/type.css'
                     },
                     {
-                        src: 'src/styles/cordova-ios.css',
-                        dest: 'dist/designer/styles/cordova-ios.css'
+                        src: 'src/styles/cordova-tablet.css',
+                        dest: 'dist/designer/styles/cordova-tablet.css'
                     }
                 ]
             },
@@ -1254,16 +1254,16 @@ module.exports = function (grunt) {
             'scripts-cordova': {
                 files: [
                     {
-                        src: 'src/target/cordova/scripts/cordova-ios.js',
-                        dest: 'src/scripts/cordova-ios.js'
+                        src: 'src/target/cordova/scripts/cordova-tablet.js',
+                        dest: 'src/scripts/cordova-tablet.js'
                     }
                 ]
             },
             'styles-cordova': {
                 files: [
                     {
-                        src: 'src/target/cordova/styles/cordova-ios.css',
-                        dest: 'src/styles/cordova-ios.css'
+                        src: 'src/target/cordova/styles/cordova-tablet.css',
+                        dest: 'src/styles/cordova-tablet.css'
                     }
                 ]
             },
