@@ -434,9 +434,21 @@ runtime.on('ready', function () {
 
     Designer.on('save', function () {
         var val = this.require('editor').editor().getValue(),
-            designer = this.require('designer');
+            type = JSON.parse(val),
+            designer = this.require('designer'),
+            message = this.require('message');
 
-        designer.store().data(JSON.parse(val));
+        if (!type.name) {
+            message.danger('The property \'name\' is missing.');
+            return;
+        }
+
+        if (!type.type) {
+            message.danger('The property \'type\' is missing.');
+            return;
+        }
+
+        designer.store().data(type);
 
         // check if ID change
         if (designer.store().uuid() !== designer.store().data().name) {
@@ -448,7 +460,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').updateType(designer.store().uuid(), designer.store().data());
-        this.require('message').success('type saved.');
+        message.success('type saved.');
     });
 
     // main
