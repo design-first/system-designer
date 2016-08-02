@@ -1186,6 +1186,36 @@ runtime.on('ready', function () {
         $('#designer-dialog-component-creation-modal').modal('hide');
     });
 
+    // DIALOG RUNTIMECOMPONENT INFO
+    var DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');
+    DialogRuntimeComponentInfo.on('init', function (config) {
+        var html = '',
+            dom = null;
+
+        $('#designer-dialog-runtimecomponent-info').empty();
+
+        html = this.require('dialog-modal-runtimecomponent-info.html');
+        document.querySelector('#designer-dialog-runtimecomponent-info').insertAdjacentHTML('afterbegin',
+            html.source()
+                .replace(/{{title}}/gi, this.title())
+        );
+
+        // events
+        dom = document.getElementById('designer-dialog-runtimecomponent-info-modal-ok');
+        dom.addEventListener('click', function (event) {
+            this.hide();
+        }.bind(this));
+
+    });
+
+    DialogRuntimeComponentInfo.on('show', function () {
+        $('#designer-dialog-runtimecomponent-info-modal').modal('show');
+    });
+
+    DialogRuntimeComponentInfo.on('hide', function () {
+        $('#designer-dialog-runtimecomponent-info-modal').modal('hide');
+    });
+
     // MODELSYSTEM
     var ModelSystem = this.require('ModelSystem');
     ModelSystem.on('render', function () {
@@ -1503,8 +1533,28 @@ runtime.on('ready', function () {
                 }.bind(this));
             }
         } else {
-            $('#designer-model-panel-' + htmlId + ' > div div').hide();
-            $('#designer-schema-' + htmlId + ' > div > .panel-body').attr('style', 'cursor: inherit');
+            $('#designer-schema-' + htmlId + ' > div > div > div > button').hide();
+
+            html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    var DialogRuntimeComponentInfo = null;
+
+                    if (this.title() !== 'RuntimeComponent') {
+                        if (this.require('designer').system().schemas()[that.uuid()]) {
+                            this.require('designer').open('index.html#' + this.require('designer').system().id() + '#schemas#' + that.uuid(), '_self');
+                        } else {
+                            this.require('message').warning('Your schema \‘' + that.title() + '\’ has not been yet created.');
+                        }
+                    } else {
+                        DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');
+                        DialogRuntimeComponentInfo = new DialogRuntimeComponentInfo({
+                            'title': 'RuntimeComponent schema'
+                        });
+                        DialogRuntimeComponentInfo.show();
+                    }
+                }.bind(this));
+            }
         }
     });
 
@@ -1729,7 +1779,27 @@ runtime.on('ready', function () {
             }
         } else {
             $('#designer-model-' + htmlId + ' > div > div > div > button').hide();
-            $('#designer-model-' + htmlId + ' > div > .panel-body').attr('style', 'cursor: inherit');
+
+            html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
+            if (html) {
+                html.addEventListener('click', function (event) {
+                    var DialogRuntimeComponentInfo = null;
+
+                    if (this.title() !== 'RuntimeComponent') {
+                        if (this.require('designer').system().models()[that.uuid()]) {
+                            this.require('designer').open('index.html#' + this.require('designer').system().id() + '#models#' + that.uuid(), '_self');
+                        } else {
+                            this.require('message').warning('Your schema \‘' + that.title() + '\’ has not been yet created.');
+                        }
+                    } else {
+                        DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');
+                        DialogRuntimeComponentInfo = new DialogRuntimeComponentInfo({
+                            'title': 'RuntimeComponent model'
+                        });
+                        DialogRuntimeComponentInfo.show();
+                    }
+                }.bind(this));
+            }
         }
     });
 
@@ -4161,7 +4231,7 @@ runtime.on('ready', function () {
 
         channel.on('updateBehavior', function (id, behavior) {
             var designer = this.require('designer'),
-                behaviors = designer.system().behaviors(); 
+                behaviors = designer.system().behaviors();
 
             behaviors[id] = behavior;
             designer.system().behaviors(behaviors);
@@ -4469,7 +4539,7 @@ runtime.on('ready', function () {
             case typeof document.location.search.split('?')[1] === 'string':
                 var systemParam = JSON.parse(decodeURIComponent(document.location.search.split('?')[1].split('system=')[1]));
                 var sys = null;
-
+    
                 sys = new System(systemParam);
                 this.system(sys);
                 this.save();
@@ -5323,7 +5393,7 @@ runtime.on('ready', function () {
         this.require('storage').set('system-designer-systems', systems);
     });
 
-    Designer.on('runMessages', function runMessages(messages) {   
+    Designer.on('runMessages', function runMessages(messages) {
         messages.forEach(function (message) {
             console.log(message);
             $db.RuntimeMessage.insert(message);

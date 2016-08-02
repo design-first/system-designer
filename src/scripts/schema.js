@@ -420,6 +420,16 @@ runtime.on('ready', function () {
             }
         }
 
+        if (!schema._name) {
+            message.danger('The property \'_name\' is missing.');
+            return;
+        }
+
+        if (!schema._id) {
+            message.danger('The property \'_id\' is missing.');      
+            return;     
+        }
+
         // check if name change
         if (designer.store().data()._name !== schema._name) {
             this.require('channel').updateSchemaName(schema._name, designer.store().uuid());

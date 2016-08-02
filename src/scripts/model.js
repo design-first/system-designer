@@ -435,6 +435,16 @@ runtime.on('ready', function () {
             message = this.require('message'),
             model = JSON.parse(val);
 
+        if (!model._name) {
+            message.danger('The property \'_name\' is missing.');
+            return;
+        }
+
+        if (!model._id) {
+            message.danger('The property \'_id\' is missing.');      
+            return;     
+        }
+
         if (designer.store().data()._name === model._name) {
             designer.store().data(model);
 
