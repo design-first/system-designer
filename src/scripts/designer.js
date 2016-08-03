@@ -1324,6 +1324,56 @@ runtime.on('ready', function () {
 
         systemId = this.require('designer').system().id();
 
+
+        function _getModelId(name) {
+            var result = '',
+                id = '';
+
+            for (id in that.require('designer').system().models()) {
+                if (that.require('designer').system().models()[id]._name === name) {
+                    result = id;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _getLink(propName, val) {
+            var result = '';
+
+            if (!Array.isArray(val)) {
+                if (val.indexOf('@') !== -1) {
+                    if (val !== '@RuntimeComponent') {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + '<a href="#' + that.require('designer').system().id() + '#models#' + _getModelId(val.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + val.replace('@', '') + '</a></div>';
+                    } else {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + val.replace('@', '') + '</div>';
+                    }
+                } else {
+                    if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(val) === -1) {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + '<a href="#' + that.require('designer').system().id() + '#types#' + val + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + val + '</a></div>';
+                    } else {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + val + '</div>';
+                    }
+                }
+            } else {
+                if (val[0].indexOf('@') !== -1) {
+                    if (val[0] !== '@RuntimeComponent') {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + '<a href="#' + that.require('designer').system().id() + '#models#' + _getModelId(val[0].replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + val[0].replace('@', '') + '</a> [ ]</div>';
+                    } else {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + val[0].replace('@', '') + ' [ ]</div>';
+                    }
+                } else {
+                    if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(val[0]) === -1) {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + '<a href="#' + that.require('designer').system().id() + '#types#' + val[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + val[0].replace('@', '') + '</a> [ ]</div>';
+                    } else {
+                        result = '<div class="list-group-item" style="text-align: left">' + propName + val[0] + ' [ ]</div>';
+                    }
+                }
+            }
+
+            return result;
+        }
+
         // html 
         html = this.require('model-type.html');
 
@@ -1331,21 +1381,21 @@ runtime.on('ready', function () {
             for (propName in this.document().schema) {
                 if (this.document().schema.hasOwnProperty(propName)) {
                     propVal = this.document().schema[propName].type;
-                    doc = doc + '<a class="list-group-item" style="text-align: left">' + propName + ' : ' + propVal + '</a>';
+                    doc = doc + _getLink(propName + ' : ', propVal);
                 }
             }
         }
 
         if (this.document().value) {
             this.document().value.forEach(function (val) {
-                doc = doc + '<a class="list-group-item" style="text-align: left">' + val + '</a>';
+                doc = doc + '<div class="list-group-item" style="text-align: left">' + val + '</div>';
             });
         }
 
 
         if (!this.document().schema && !this.document().value) {
             propVal = this.document().type;
-            doc = doc + '<a class="list-group-item" style="text-align: left"><i>alias</i> : ' + propVal + '</a>';
+            doc = doc + '<div class="list-group-item" style="text-align: left"><i>alias</i> : ' + propVal + '</div>';
         }
 
         if (doc === '') {
@@ -1639,7 +1689,7 @@ runtime.on('ready', function () {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
                                 }
                             } else {
-                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
+                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type[0]) === -1) {
                                     if (htmlId !== '123751cb591de26') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                     } else {
@@ -3134,13 +3184,21 @@ runtime.on('ready', function () {
                                 type = {
                                     "name": name,
                                     "type": "string",
-                                    "value": [""]
+                                    "value": ["value1", "value2"]
                                 };
                             } else {
                                 type = {
-                                    'name': name,
-                                    'type': 'object',
-                                    'schema': {
+                                    "name": name,
+                                    "type": "object",
+                                    "schema": {
+                                        "property1": {
+                                            "type": "string",
+                                            "mandatory": true
+                                        },
+                                        "property2": {
+                                            "type": "string",
+                                            "mandatory": true
+                                        }
                                     }
                                 };
                             }
