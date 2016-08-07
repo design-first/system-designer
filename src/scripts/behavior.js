@@ -722,13 +722,13 @@ runtime.on('ready', function () {
 
         // check if ID change
         if (designer.store().uuid() !== designer.store().data()._id) {
-            this.require('channel').deleteBehavior(designer.store().uuid());
+            this.require('channel').$editorDeleteBehavior(designer.store().uuid());
             designer.store().uuid(designer.store().data()._id);
         }
 
         document.title = designer.store().data().state + ' | system designer';
 
-        this.require('channel').updateBehavior(designer.store().uuid(), designer.store().data());
+        this.require('channel').$editorUpdateBehavior(designer.store().uuid(), designer.store().data());
         this.require('message').success('behavior saved.');
     });
 

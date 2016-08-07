@@ -432,7 +432,7 @@ runtime.on('ready', function () {
 
         // check if name change
         if (designer.store().data()._name !== schema._name) {
-            this.require('channel').updateSchemaName(schema._name, designer.store().uuid());
+            this.require('channel').$editorUpdateSchemaName(schema._name, designer.store().uuid());
             document.title = schema._name + ' | system designer';
         }
 
@@ -440,11 +440,11 @@ runtime.on('ready', function () {
 
         // check if ID change
         if (designer.store().uuid() !== designer.store().data()._id) {
-            this.require('channel').updateSchemaId(designer.store().uuid(), designer.store().data()._id);
+            this.require('channel').$editorUpdateSchemaId(designer.store().uuid(), designer.store().data()._id);
             designer.store().uuid(designer.store().data()._id);
         }
 
-        this.require('channel').updateSchema(designer.store().uuid(), designer.store().data());
+        this.require('channel').$editorUpdateSchema(designer.store().uuid(), designer.store().data());
         message.success('schema saved.');
     });
 

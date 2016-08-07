@@ -452,14 +452,14 @@ runtime.on('ready', function () {
 
         // check if ID change
         if (designer.store().uuid() !== designer.store().data().name) {
-            this.require('channel').deleteType(designer.store().uuid());
+            this.require('channel').$editorDeleteType(designer.store().uuid());
             designer.store().uuid(designer.store().data().name);
 
             // update title
             document.title = designer.store().uuid() + ' | system designer';
         }
 
-        this.require('channel').updateType(designer.store().uuid(), designer.store().data());
+        this.require('channel').$editorUpdateType(designer.store().uuid(), designer.store().data());
         message.success('type saved.');
     });
 

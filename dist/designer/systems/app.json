@@ -9,12 +9,10 @@
             "_id": "104ad1f48518376",
             "_name": "RuntimeChannel",
             "_core": true,
-            "getInitSystem": "event",
-            "setInitSystem": "event",
-            "logDebug": "event",
-            "logInfo": "event",
-            "logWarn": "event",
-            "logError": "event"
+            "$appLogDebug": "event",
+            "$appLogInfo": "event",
+            "$appLogWarn": "event",
+            "$appLogError": "event"
         }
     },
     "behaviors": {},
@@ -27,27 +25,7 @@
             "_name": "RuntimeChannel",
             "_schema": "RuntimeChannel",
             "_core": true,
-            "getInitSystem": {
-                "params": [
-                    {
-                        "name": "id",
-                        "type": "string"
-                    }
-                ]
-            },
-            "setInitSystem": {
-                "params": [
-                    {
-                        "name": "id",
-                        "type": "string"
-                    },
-                    {
-                        "name": "system",
-                        "type": "object"
-                    }
-                ]
-            },
-            "logDebug": {
+            "$appLogDebug": {
                 "params": [
                     {
                         "name": "message",
@@ -55,7 +33,7 @@
                     }
                 ]
             },
-            "logInfo": {
+            "$appLogInfo": {
                 "params": [
                     {
                         "name": "message",
@@ -63,7 +41,7 @@
                     }
                 ]
             },
-            "logWarn": {
+            "$appLogWarn": {
                 "params": [
                     {
                         "name": "message",
@@ -71,7 +49,7 @@
                     }
                 ]
             },
-            "logError": {
+            "$appLogError": {
                 "params": [
                     {
                         "name": "message",

@@ -450,11 +450,11 @@ runtime.on('ready', function () {
 
             // check if ID change
             if (designer.store().uuid() !== designer.store().data()._id) {
-                this.require('channel').updateModelId(designer.store().uuid(), designer.store().data()._id);
+                this.require('channel').$editorUpdateModelId(designer.store().uuid(), designer.store().data()._id);
                 designer.store().uuid(designer.store().data()._id);
             }
 
-            this.require('channel').updateModel(designer.store().uuid(), designer.store().data());
+            this.require('channel').$editorUpdateModel(designer.store().uuid(), designer.store().data());
             message.success('model saved.');
         } else {
             message.danger('you can not modify the name of a model.');

@@ -66,7 +66,7 @@ runtime.on('ready', function () {
             if (Object.keys(params).length) {
                 system = JSON.parse(params.system);
                 this.require('storage').set(system._id, system);
-                
+
                 lastPage = params.ref;
             }
         }
@@ -93,21 +93,21 @@ runtime.on('ready', function () {
         }, true, true);
 
         // schema change events
-        channel.on('createSchema', function createSchema(id, schema) {
+        channel.on('$designerCreateSchema', function $designerCreateSchema(id, schema) {
             this.require('logger').level('warn');
             this.require('metamodel').schema(schema);
             this.require('metamodel').create();
             this.require('logger').level('debug');
         }, true, true);
 
-        channel.on('updateSchema', function updateSchema(id, schema) {
+        channel.on('$editorUpdateSchema', function $editorUpdateSchema(id, schema) {
             this.require('logger').level('warn');
             this.require('metamodel').schema(schema);
             this.require('metamodel').create();
             this.require('logger').level('debug');
         }, true, true);
 
-        channel.on('deleteSchema', function deleteSchema(id) {
+        channel.on('$designerDeleteSchema', function $designerDeleteSchema(id) {
             this.require('logger').level('warn');
             var search = $db.RuntimeSchema.find({ '_id': id }),
                 modelName = '',
@@ -136,21 +136,28 @@ runtime.on('ready', function () {
         }, true, true);
 
         // model change events
-        channel.on('createModel', function createModel(id, model) {
+        channel.on('$designerCreateModel', function $designerCreateModel(id, model) {
             this.require('logger').level('warn');
             this.require('metamodel').model(model);
             this.require('metamodel').create();
             this.require('logger').level('debug');
         }, true, true);
 
-        channel.on('updateModel', function updateModel(id, model) {
+        channel.on('$editorUpdateModel', function $editorUpdateModel(id, model) {
             this.require('logger').level('warn');
             this.require('metamodel').model(model);
             this.require('metamodel').create();
             this.require('logger').level('debug');
         }, true, true);
 
-        channel.on('deleteModel', function deleteModel(id) {
+        channel.on('$designerUpdateModel', function $designerUpdateModel(id, model) {
+            this.require('logger').level('warn');
+            this.require('metamodel').model(model);
+            this.require('metamodel').create();
+            this.require('logger').level('debug');
+        }, true, true);
+
+        channel.on('$designerDeleteModel', function $designerDeleteModel(id) {
             this.require('logger').level('warn');
             var search = $db.RuntimeModel.find({ '_id': id }),
                 modelName = '',
@@ -173,14 +180,14 @@ runtime.on('ready', function () {
         }, true, true);
 
         // type change events
-        channel.on('createType', function createType(id, type) {
+        channel.on('$designerCreateType', function $designerCreateType(id, type) {
             this.require('logger').level('warn');
             this.require('metamodel').type(type);
             this.require('metamodel').create();
             this.require('logger').level('debug');
         }, true, true);
 
-        channel.on('updateType', function updateType(id, type) {
+        channel.on('$editorUpdateType', function $editorUpdateType(id, type) {
             this.require('logger').level('warn');
             this.require('metamodel').type(type);
             this.require('metamodel').create();
@@ -188,7 +195,14 @@ runtime.on('ready', function () {
 
         }, true, true);
 
-        channel.on('deleteType', function deleteType(id) {
+        channel.on('$editorDeleteType', function $editorDeleteType(id) {
+            this.require('logger').level('warn');
+            $db.RuntimeType.remove({ 'name': id });
+            this.require('metamodel').create();
+            this.require('logger').level('debug');
+        }, true, true);
+
+        channel.on('$designerDeleteType', function $designerDeleteType(id) {
             this.require('logger').level('warn');
             $db.RuntimeType.remove({ 'name': id });
             this.require('metamodel').create();
@@ -196,24 +210,32 @@ runtime.on('ready', function () {
         }, true, true);
 
         // component change events
-        channel.on('createComponent', function createComponent(model, component) {
+        channel.on('$designerCreateComponent', function $designerCreateComponent(model, component) {
             $db[model].insert(component);
         }, true, true);
 
-        channel.on('updateComponent', function updateComponent(id, collection, component) {
+        channel.on('$editorUpdateComponent', function $editorUpdateComponent(id, collection, component) {
             $db[collection].update({ '_id': id }, component, { 'upsert': true });
         }, true, true);
 
-        channel.on('deleteComponent', function deleteComponent(id, collection) {
+        channel.on('$designerUpdateComponent', function $editorUpdateComponent(id, collection, component) {
+            $db[collection].update({ '_id': id }, component, { 'upsert': true });
+        }, true, true);
+
+        channel.on('$editorDeleteComponent', function $editorDeleteComponent(id, collection) {
+            $db[collection].remove({ '_id': id });
+        }, true, true);
+
+        channel.on('$designerDeleteComponent', function $designerDeleteComponent(id, collection) {
             $db[collection].remove({ '_id': id });
         }, true, true);
 
         // behavior change events
-        channel.on('createBehavior', function createBehavior(component) {
+        channel.on('$designerCreateBehavior', function createBehavior(component) {
             $db.RuntimeBehavior.insert(component);
         }, true, true);
 
-        channel.on('updateBehavior', function updateBehavior(id, behavior) {
+        channel.on('$editorUpdateBehavior', function $editorUpdateBehavior(id, behavior) {
             if (this.require(id)) {
                 this.require(id).action(behavior.action);
                 if (behavior.state === 'main') {
@@ -222,13 +244,26 @@ runtime.on('ready', function () {
             }
         }, true, true);
 
-        channel.on('deleteBehavior', function deleteBehavior(id) {
+        channel.on('$designerUpdateBehavior', function $designerUpdateBehavior(id, behavior) {
+            if (this.require(id)) {
+                this.require(id).action(behavior.action);
+                if (behavior.state === 'main') {
+                    this.require(behavior.component).main();
+                }
+            }
+        }, true, true);
+
+        channel.on('$editorDeleteBehavior', function $editorDeleteBehavior(id) {
+            $db.RuntimeBehavior.remove({ '_id': id });
+        }, true, true);
+
+        channel.on('$designerDeleteBehavior', function $editorDeleteBehavior(id) {
             $db.RuntimeBehavior.remove({ '_id': id });
         }, true, true);
 
         // System Designer event
-        channel.on('sync', function sync() {
-            this.loadSystem(JSON.parse(this.require('db').system()));
+        channel.on('$designerSync', function $designerSync() {
+            this.$appLoadSystem(JSON.parse(this.require('db').system()));
         }, true, true);
 
         this.require('storage').on('changed', function (obj) {
@@ -244,7 +279,7 @@ runtime.on('ready', function () {
                     time = date.toTimeString();
                 time = time.split(' ')[0].trim();
 
-                this.require('channel').logWarn('[' + time + '] ' + message);
+                this.require('channel').$appLogWarn('[' + time + '] ' + message);
             }
         }, true, true);
 
@@ -253,7 +288,7 @@ runtime.on('ready', function () {
                 time = date.toTimeString();
             time = time.split(' ')[0].trim();
 
-            this.require('channel').logError('[' + time + '] ' + message);
+            this.require('channel').$appLogError('[' + time + '] ' + message);
         }, true, true);
 
         this.require('logger').info('loading the system...');
@@ -269,7 +304,7 @@ runtime.on('ready', function () {
                     time = date.toTimeString();
                 time = time.split(' ')[0].trim();
 
-                this.require('channel').logDebug('[' + time + '] ' + message);
+                this.require('channel').$appLogDebug('[' + time + '] ' + message);
             }
         }, true, true);
 
@@ -279,7 +314,7 @@ runtime.on('ready', function () {
                     time = date.toTimeString();
                 time = time.split(' ')[0].trim();
 
-                this.require('channel').logInfo('[' + time + '] ' + message);
+                this.require('channel').$appLogInfo('[' + time + '] ' + message);
             }
         }, true, true);
 

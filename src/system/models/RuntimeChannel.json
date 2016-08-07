@@ -1,87 +1,7 @@
 {
     "_id": "135c71078810af2",
     "_name": "RuntimeChannel",
-    "getSystem": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            }
-        ]
-    },
-    "setSystem": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "system",
-                "type": "object"
-            }
-        ]
-    },
-    "getInitSystem": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            }
-        ]
-    },
-    "setInitSystem": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "system",
-                "type": "object"
-            }
-        ]
-    },
-    "getType": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            }
-        ]
-    },
-    "setType": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "type",
-                "type": "object"
-            }
-        ]
-    },
-    "getSchema": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            }
-        ]
-    },
-    "setSchema": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "schema",
-                "type": "object"
-            }
-        ]
-    },
-    "updateSchemaName": {
+    "$editorUpdateSchemaName": {
         "params": [
             {
                 "name": "name",
@@ -93,80 +13,8 @@
             }
         ]
     },
-    "getModel": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            }
-        ]
-    },
-    "setModel": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "model",
-                "type": "object"
-            }
-        ]
-    },
-    "getBehavior": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            }
-        ]
-    },
-    "setBehavior": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "behavior",
-                "type": "object"
-            }
-        ]
-    },
-    "getComponent": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "collection",
-                "type": "string"
-            }
-        ]
-    },
-    "setComponent": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "collection",
-                "type": "string"
-            },
-            {
-                "name": "model",
-                "type": "object"
-            },
-            {
-                "name": "component",
-                "type": "object"
-            }
-        ]
-    },
-    "sync": {},
-    "loadSystem": {
+    "$designerSync": {},
+    "$appLoadSystem": {
         "params": [
             {
                 "name": "system",
@@ -174,7 +22,7 @@
             }
         ]
     },
-    "createBehavior": {
+    "$designerCreateBehavior": {
         "params": [
             {
                 "name": "behavior",
@@ -182,7 +30,7 @@
             }
         ]
     },
-    "updateBehavior": {
+    "$editorUpdateBehavior": {
         "params": [
             {
                 "name": "id",
@@ -194,7 +42,19 @@
             }
         ]
     },
-    "deleteBehavior": {
+    "$designerUpdateBehavior": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "behavior",
+                "type": "object"
+            }
+        ]
+    },
+    "$editorDeleteBehavior": {
         "params": [
             {
                 "name": "id",
@@ -202,7 +62,15 @@
             }
         ]
     },
-    "createComponent": {
+    "$designerDeleteBehavior": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            }
+        ]
+    },
+    "$designerCreateComponent": {
         "params": [
             {
                 "name": "collection",
@@ -214,7 +82,7 @@
             }
         ]
     },
-    "updateComponent": {
+    "$editorUpdateComponent": {
         "params": [
             {
                 "name": "id",
@@ -230,7 +98,23 @@
             }
         ]
     },
-    "deleteComponent": {
+    "$designerUpdateComponent": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "collection",
+                "type": "string"
+            },
+            {
+                "name": "component",
+                "type": "object"
+            }
+        ]
+    },
+    "$editorDeleteComponent": {
         "params": [
             {
                 "name": "id",
@@ -242,15 +126,19 @@
             }
         ]
     },
-    "publish": {
+    "$designerDeleteComponent": {
         "params": [
             {
-                "name": "system",
-                "type": "object"
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "collection",
+                "type": "string"
             }
         ]
     },
-    "createType": {
+    "$designerCreateType": {
         "params": [
             {
                 "name": "id",
@@ -262,7 +150,7 @@
             }
         ]
     },
-    "updateType": {
+    "$editorUpdateType": {
         "params": [
             {
                 "name": "id",
@@ -274,7 +162,7 @@
             }
         ]
     },
-    "deleteType": {
+    "$editorDeleteType": {
         "params": [
             {
                 "name": "id",
@@ -282,19 +170,15 @@
             }
         ]
     },
-    "createSchema": {
+    "$editorDeleteType": {
         "params": [
             {
                 "name": "id",
                 "type": "string"
-            },
-            {
-                "name": "schema",
-                "type": "object"
             }
         ]
     },
-    "updateSchema": {
+    "$designerCreateSchema": {
         "params": [
             {
                 "name": "id",
@@ -306,7 +190,19 @@
             }
         ]
     },
-    "updateSchemaId": {
+    "$editorUpdateSchema": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "schema",
+                "type": "object"
+            }
+        ]
+    },
+    "$editorUpdateSchemaId": {
         "params": [
             {
                 "name": "oldId",
@@ -318,7 +214,7 @@
             }
         ]
     },
-    "deleteSchema": {
+    "$designerDeleteSchema": {
         "params": [
             {
                 "name": "id",
@@ -326,19 +222,7 @@
             }
         ]
     },
-    "createModel": {
-        "params": [
-            {
-                "name": "id",
-                "type": "string"
-            },
-            {
-                "name": "model",
-                "type": "object"
-            }
-        ]
-    },
-    "updateModel": {
+    "$designerCreateModel": {
         "params": [
             {
                 "name": "id",
@@ -350,7 +234,31 @@
             }
         ]
     },
-    "updateModelId": {
+    "$editorUpdateModel": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "model",
+                "type": "object"
+            }
+        ]
+    },
+    "$designerUpdateModel": {
+        "params": [
+            {
+                "name": "id",
+                "type": "string"
+            },
+            {
+                "name": "model",
+                "type": "object"
+            }
+        ]
+    },
+    "$editorUpdateModelId": {
         "params": [
             {
                 "name": "oldId",
@@ -362,7 +270,7 @@
             }
         ]
     },
-    "deleteModel": {
+    "$designerDeleteModel": {
         "params": [
             {
                 "name": "id",
@@ -370,7 +278,7 @@
             }
         ]
     },
-    "updateSystem": {
+    "$editorUpdateSystem": {
         "params": [
             {
                 "name": "id",
@@ -382,7 +290,7 @@
             }
         ]
     },
-    "logDebug": {
+    "$appLogDebug": {
         "params": [
             {
                 "name": "message",
@@ -390,7 +298,7 @@
             }
         ]
     },
-    "logInfo": {
+    "$appLogInfo": {
         "params": [
             {
                 "name": "message",
@@ -398,7 +306,7 @@
             }
         ]
     },
-    "logWarn": {
+    "$appLogWarn": {
         "params": [
             {
                 "name": "message",
@@ -406,7 +314,7 @@
             }
         ]
     },
-    "logError": {
+    "$appLogError": {
         "params": [
             {
                 "name": "message",

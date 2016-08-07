@@ -579,14 +579,14 @@ runtime.on('ready', function () {
 
         // check if ID change
         if (designer.store().uuid() !== designer.store().data()._id) {
-            this.require('channel').deleteComponent(designer.store().uuid(), designer.store().collection());
+            this.require('channel').$editorDeleteComponent(designer.store().uuid(), designer.store().collection());
             designer.store().uuid(designer.store().data()._id);
 
             // update title
             document.title = designer.store().uuid() + ' | system designer';
         }
 
-        this.require('channel').updateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());
+        this.require('channel').$editorUpdateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());
         this.require('message').success('component saved.');
     });
 

@@ -1075,6 +1075,7 @@ runtime.on('ready', function () {
             //if (designer.system().schemas()[schema]._inherit && designer.system().schemas()[schema]._inherit.indexOf('RuntimeComponent') !== -1) {
             states.push('init');
             states.push('destroy');
+            states.push('error');
             //}
             for (name in designer.system().schemas()[schema]) {
                 switch (designer.system().schemas()[schema][name]) {
@@ -1463,7 +1464,7 @@ runtime.on('ready', function () {
 
                 $('#designer-type-' + this.title()).remove();
 
-                this.require('channel').deleteType(this.uuid());
+                this.require('channel').$designerDeleteType(this.uuid());
 
                 this.destroy();
                 designer.save();
@@ -1569,7 +1570,7 @@ runtime.on('ready', function () {
 
                     $('#designer-schema-' + this.uuid()).remove();
 
-                    this.require('channel').deleteSchema(this.uuid());
+                    this.require('channel').$designerDeleteSchema(this.uuid());
 
                     this.destroy();
 
@@ -1937,7 +1938,7 @@ runtime.on('ready', function () {
                     $(this).remove();
                 });
 
-                this.require('channel').deleteBehavior(this.uuid());
+                this.require('channel').$designerDeleteBehavior(this.uuid());
 
                 this.destroy();
                 designer.save();
@@ -2100,7 +2101,7 @@ runtime.on('ready', function () {
                     $(this).remove();
                 });
 
-                this.require('channel').deleteComponent(this.uuid(), this.model());
+                this.require('channel').$designerDeleteComponent(this.uuid(), this.model());
 
                 this.destroy();
                 designer.save();
@@ -3129,7 +3130,7 @@ runtime.on('ready', function () {
 
                             designer.createModel(schema);
 
-                            this.require('channel').createSchema(name, schema);
+                            this.require('channel').$designerCreateSchema(name, schema);
 
                             this.hide();
 
@@ -3216,7 +3217,7 @@ runtime.on('ready', function () {
 
                             designer.save();
 
-                            this.require('channel').createType(name, type);
+                            this.require('channel').$designerCreateType(name, type);
 
                             this.hide();
 
@@ -3302,7 +3303,7 @@ runtime.on('ready', function () {
 
                         designer.save();
 
-                        this.require('channel').createComponent(modelName, component);
+                        this.require('channel').$designerCreateComponent(modelName, component);
                     } else {
                         this.require('message').warning('there is no schema. Create a schema before creating a component.');
                     }
@@ -3437,6 +3438,13 @@ runtime.on('ready', function () {
                                     }
                                 }
 
+                                if (state === 'error') {
+                                    params = 'data';
+                                    if (_existBehavior(state, model)) {
+                                        canCreate = false;
+                                    }
+                                }
+
                                 // body
                                 if (models[modelId][state]) {
                                     result = models[modelId][state].result;
@@ -3502,7 +3510,7 @@ runtime.on('ready', function () {
 
                                 designer.save();
 
-                                this.require('channel').createBehavior(behavior);
+                                this.require('channel').$designerCreateBehavior(behavior);
                             } else {
                                 this.hide();
                                 message.warning('Can not create two behaviors for a method.');
@@ -3949,7 +3957,7 @@ runtime.on('ready', function () {
             }
         });
 
-        channel.on('logDebug', function (message) {
+        channel.on('$appLogDebug', function (message) {
             var log = '',
                 Log = null;
 
@@ -3963,7 +3971,7 @@ runtime.on('ready', function () {
             this.require('message').info(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('logInfo', function (message) {
+        channel.on('$appLogInfo', function (message) {
             var log = '',
                 Log = null;
 
@@ -3977,7 +3985,7 @@ runtime.on('ready', function () {
             this.require('message').info(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('logWarn', function (message) {
+        channel.on('$appLogWarn', function (message) {
             var log = '',
                 Log = null;
 
@@ -3991,7 +3999,7 @@ runtime.on('ready', function () {
             this.require('message').warning(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('logError', function (message) {
+        channel.on('$appLogError', function (message) {
             var log = '',
                 Log = null;
 
@@ -4005,84 +4013,7 @@ runtime.on('ready', function () {
             this.require('message').danger(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('getSystem', function (id) {
-            var system = null;
-            if (id === this.require('designer').system().id()) {
-                system = this.require('db').collections().System.find({
-                    '_id': id
-                })[0];
-                system = JSON.parse(JSON.stringify(system));
-                delete system.classInfo;
-                this.setSystem(id, system);
-            } else {
-                this.setSystem(id, this.require('storage').get(id));
-            }
-        });
-
-        channel.on('getInitSystem', function (id) {
-            var system = null;
-            if (id === this.require('designer').system().id()) {
-                system = this.require('db').collections().System.find({
-                    '_id': id
-                })[0];
-                system = JSON.parse(JSON.stringify(system));
-                delete system.classInfo;
-                this.setInitSystem(id, system);
-            } else {
-                this.setInitSystem(id, this.require('storage').get(id));
-            }
-        });
-
-        channel.on('getType', function (id) {
-            this.setType(id, this.require('db').collections().System.find({
-                '_id': this.require('designer').system().id()
-            })[0].types[id]);
-        });
-
-        channel.on('getSchema', function (id) {
-            this.setSchema(id, this.require('db').collections().System.find({
-                '_id': this.require('designer').system().id()
-            })[0].schemas[id]);
-        });
-
-        channel.on('getModel', function (id) {
-            this.setModel(id, this.require('db').collections().System.find({
-                '_id': this.require('designer').system().id()
-            })[0].models[id]);
-        });
-
-        channel.on('getBehavior', function (id) {
-            this.setBehavior(id, this.require('db').collections().System.find({
-                '_id': this.require('designer').system().id()
-            })[0].behaviors[id]);
-        });
-
-        channel.on('getComponent', function (id, collection) {
-            var modelId = '',
-                designer = this.require('designer');
-
-            function _getModelId(name) {
-                var result = '',
-                    id = '';
-
-                for (id in designer.system().models()) {
-                    if (designer.system().models()[id]._name === name) {
-                        result = id;
-                        break;
-                    }
-                }
-                return result;
-            }
-            modelId = _getModelId(collection);
-
-            this.setComponent(id, collection, this.require('db').collections().System.find({
-                '_id': this.require('designer').system().id()
-            })[0].components[collection][id], this.require('db').collections().System.find({
-                '_id': this.require('designer').system().id()
-            })[0].models[modelId]);
-        });
-
-        channel.on('updateType', function (id, type) {
+        channel.on('$editorUpdateType', function (id, type) {
             var designer = this.require('designer'),
                 types = designer.system().types();
 
@@ -4096,7 +4027,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteType', function (id) {
+        channel.on('$editorDeleteType', function (id) {
             var designer = this.require('designer'),
                 types = designer.system().types(),
                 dbTypes = [],
@@ -4120,7 +4051,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('updateSchemaName', function (name, id) {
+        channel.on('$editorUpdateSchemaName', function $editorUpdateSchemaName(name, id) {
             var designer = this.require('designer'),
                 oldName = designer.system().schemas()[id]._name,
                 models = designer.system().models(),
@@ -4169,7 +4100,7 @@ runtime.on('ready', function () {
             designer.save();
         });
 
-        channel.on('updateSchema', function (id, schema) {
+        channel.on('$editorUpdateSchema', function $editorUpdateSchema(id, schema) {
             var designer = this.require('designer'),
                 schemas = designer.system().schemas();
 
@@ -4185,7 +4116,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteSchema', function deleteSchema(id) {
+        channel.on('$designerDeleteSchema', function $designerDeleteSchema(id) {
             var designer = this.require('designer'),
                 schemas = designer.system().schemas(),
                 dbSchemas = [],
@@ -4209,7 +4140,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('updateSchemaId', function updateSchemaId(oldId, newId) {
+        channel.on('$editorUpdateSchemaId', function $editorUpdateSchemaId(oldId, newId) {
             var designer = this.require('designer'),
                 schemas = designer.system().schemas(),
                 dbSchemas = [],
@@ -4227,7 +4158,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('updateModel', function (id, model) {
+        channel.on('$editorUpdateModel', function (id, model) {
             var designer = this.require('designer'),
                 models = designer.system().models();
 
@@ -4245,31 +4176,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteModel', function (id) {
-            var designer = this.require('designer'),
-                models = designer.system().models(),
-                dbModels = [],
-                model = null;
-
-            dbModels = this.require('db').collections().ModelClass.find({
-                'uuid': id
-            });
-            if (dbModels.length) {
-                model = this.require(dbModels[0]._id);
-                if (model) {
-                    model.hide();
-                    model.destroy();
-                }
-            }
-
-            delete models[id];
-            designer.system().models(models);
-
-            designer.save();
-            designer.workspace().refresh();
-        });
-
-        channel.on('updateModelId', function (oldId, newId) {
+        channel.on('$editorUpdateModelId', function (oldId, newId) {
             var designer = this.require('designer'),
                 models = designer.system().models(),
                 model = null;
@@ -4287,7 +4194,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('updateBehavior', function (id, behavior) {
+        channel.on('$editorUpdateBehavior', function (id, behavior) {
             var designer = this.require('designer'),
                 behaviors = designer.system().behaviors();
 
@@ -4298,7 +4205,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteBehavior', function (id) {
+        channel.on('$editorDeleteBehavior', function (id) {
             var designer = this.require('designer'),
                 behaviors = designer.system().behaviors(),
                 dbBehaviors = [],
@@ -4322,7 +4229,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('updateComponent', function (id, collection, component) {
+        channel.on('$editorUpdateComponent', function (id, collection, component) {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
@@ -4334,7 +4241,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('deleteComponent', function (id, collection) {
+        channel.on('$editorDeleteComponent', function (id, collection) {
             var designer = this.require('designer'),
                 components = designer.system().components(),
                 models = [],
@@ -4358,7 +4265,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('updateSystem', function (id, system) {
+        channel.on('$editorUpdateSystem', function (id, system) {
             var System = this.require('System'),
                 sys = null,
                 designer = this.require('designer');
@@ -4375,7 +4282,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('loadSystem', function (system) {
+        channel.on('$appLoadSystem', function (system) {
             var Dialog = null,
                 dialog = null;
 
@@ -4826,18 +4733,17 @@ runtime.on('ready', function () {
                 exist = false,
                 result = true;
 
-            if (type === 'method') {
-                for (id in behaviors) {
-                    behavior = behaviors[id];
-                    if (behavior.component === component && behavior.state === state) {
-                        exist = true;
-                        break;
-                    }
-                }
-                if (exist) {
-                    result = false;
+            for (id in behaviors) {
+                behavior = behaviors[id];
+                if (behavior.component === component && behavior.state === state) {
+                    exist = true;
+                    break;
                 }
             }
+            if (exist) {
+                result = false;
+            }
+
             return result;
         }
 
@@ -4901,7 +4807,7 @@ runtime.on('ready', function () {
             this.system().behaviors(behaviors);
             this.save();
 
-            this.require('channel').createBehavior(behavior);
+            this.require('channel').$designerCreateBehavior(behavior);
         }
     });
 
@@ -4992,7 +4898,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -5006,7 +4912,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -5025,7 +4931,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -5043,7 +4949,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -5057,7 +4963,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                         }
 
                         break;
@@ -5070,7 +4976,7 @@ runtime.on('ready', function () {
         models[id] = model;
 
         this.system().models(models);
-        this.require('channel').createModel(model._id, model);
+        this.require('channel').$designerCreateModel(model._id, model);
         this.system().components(components);
         this.save();
     });
@@ -5106,7 +5012,7 @@ runtime.on('ready', function () {
                     for (component in components[name]) {
                         if (typeof components[name][component][propName] === 'undefined') {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
                     }
@@ -5115,7 +5021,7 @@ runtime.on('ready', function () {
                     for (component in components[name]) {
                         if (typeof components[name][component][propName] === 'undefined') {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
                     }
@@ -5124,7 +5030,7 @@ runtime.on('ready', function () {
                     for (component in components[name]) {
                         if (typeof components[name][component][propName] === 'undefined') {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
                     }
@@ -5196,7 +5102,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
 
@@ -5211,7 +5117,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
 
@@ -5267,7 +5173,7 @@ runtime.on('ready', function () {
 
                         for (component in components[name]) {
                             components[name][component][propName] = model[propName].default;
-                            this.require('channel').updateComponent(component, name, components[name][component]);
+                            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
 
@@ -5290,13 +5196,13 @@ runtime.on('ready', function () {
 
                     for (component in components[name]) {
                         delete components[name][component][propName];
-                        this.require('channel').deleteComponent(component, name);
+                        this.require('channel').$designerDeleteComponent(component, name);
                         this.system().components(components);
                     }
                     for (behavior in behaviors) {
                         if (model && behaviors[behavior].component === model._name && behaviors[behavior].state === propName) {
                             delete behaviors[behavior];
-                            this.require('channel').deleteBehavior(behavior);
+                            this.require('channel').$designerDeleteBehavior(behavior);
                             this.system().behaviors(behaviors);
                         }
                     }
@@ -5306,7 +5212,7 @@ runtime.on('ready', function () {
 
         models[model._id] = model;
         this.system().models(models);
-        this.require('channel').updateModel(model._id, model);
+        this.require('channel').$designerUpdateModel(model._id, model);
         this.save();
     });
 
@@ -5344,11 +5250,10 @@ runtime.on('ready', function () {
             switch (true) {
                 case schema[propName] === 'method':
                 case schema[propName] === 'event':
-
                     // params
                     def = model[propName];
 
-                    if (typeof def === 'undefined') {
+                    if (typeof model[propName] !== 'object') {
                         if (schema[propName] === 'method') {
                             def = {
                                 "params": [
@@ -5375,6 +5280,7 @@ runtime.on('ready', function () {
                         }
                     }
                     methodDef = def.params;
+                    params = '';
                     if (methodDef && methodDef.length) {
                         length = methodDef.length;
                         for (i = 0; i < length; i++) {
@@ -5395,7 +5301,7 @@ runtime.on('ready', function () {
                             action[0] = header;
                             behaviors[behaviorId].action = action.join('{');
                             this.system().behaviors(behaviors);
-                            this.require('channel').updateBehavior(behavior._id, behavior);
+                            this.require('channel').$designerUpdateBehavior(behavior._id, behavior);
                             this.save();
                         }
                     }
