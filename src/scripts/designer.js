@@ -1068,28 +1068,7 @@ runtime.on('ready', function () {
         $('#designer-dialog-behavior-creation').empty();
 
         if (space !== designer.system().name()) {
-
-            schema = _getSchemaId(space);
-
-            // TODO look for all parents instead
-            //if (designer.system().schemas()[schema]._inherit && designer.system().schemas()[schema]._inherit.indexOf('RuntimeComponent') !== -1) {
-            states.push('init');
-            states.push('destroy');
-            states.push('error');
-            //}
-            for (name in designer.system().schemas()[schema]) {
-                switch (designer.system().schemas()[schema][name]) {
-                    case 'property':
-                    case 'link':
-                    case 'collection':
-                    case 'event':
-                    case 'method':
-                        states.push(name);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            states = this.require('designer').getGeneratedSchema(space);
         } else {
             states.push('main');
         }
@@ -1641,7 +1620,11 @@ runtime.on('ready', function () {
             if (param.type.indexOf('@') !== -1) {
                 params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(param.type.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
             } else {
-                params = params + param.name + ' : ' + param.type + ', ';
+                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam'].indexOf(param.type) === -1) {
+                    params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
+                } else {
+                    params = params + param.name + ' : ' + param.type + ', ';
+                }
             }
         };
 
@@ -3398,7 +3381,7 @@ runtime.on('ready', function () {
 
                                 // params
                                 if (models[modelId][state]) {
-                                    methodDef = models[modelId][state].params;
+                                    methodDef = this.require('designer').getGeneratedModel(model)[state].params;
                                 }
                                 if (methodDef && methodDef.length) {
                                     length = methodDef.length;
@@ -5363,6 +5346,162 @@ runtime.on('ready', function () {
             $db.RuntimeMessage.insert(message);
         });
     }, true);
+
+    Designer.on('getGeneratedSchema', function getGeneratedSchema(schema) {
+        var schemaDef = null,
+            result = {},
+            i = 0,
+            length = 0,
+            propName = '';
+
+        function _getSchemaDef(name, schemas) {
+            var result = '',
+                id = '';
+
+            for (id in schemas) {
+                if (schemas[id]._name === name) {
+                    result = schemas[id];
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _searchParents(parents, states, schemas) {
+            var parent = '',
+                schemaDef = null,
+                i = 0,
+                length = 0;
+
+            length = parents.length;
+            for (i = 0; i < length; i++) {
+                parent = parents[i];
+                if (parent === 'RuntimeComponent') {
+                    result.init = 'init';
+                    result.destoy = 'destoy';
+                    result.error = 'error';
+                } else {
+                    schemaDef = _getSchemaDef(parent, schemas);
+
+                    for (propName in schemaDef) {
+                        if (propName.indexOf('_') !== 0) {
+                            result[propName] = propName;
+                        }
+                    }
+
+                    if (schemaDef._inherit) {
+                        _searchParents(schemaDef._inherit, result, schemas);
+                    }
+                }
+            }
+        }
+
+        schemaDef = _getSchemaDef(schema, this.system().schemas());
+
+        for (propName in schemaDef) {
+            if (propName.indexOf('_') !== 0) {
+                result[propName] = propName;
+            }
+        }
+
+        if (schemaDef._inherit) {
+            _searchParents(schemaDef._inherit, result, this.system().schemas());
+        }
+
+        return Object.keys(result);
+    });
+
+    Designer.on('getGeneratedModel', function getGeneratedModel(model) {
+        var modelDef = null,
+            result = {},
+            i = 0,
+            length = 0,
+            propName = '';
+
+        function _getInherit(name, schemas) {
+            var result = '',
+                id = '';
+
+            for (id in schemas) {
+                if (schemas[id]._name === name) {
+                    result = schemas[id]._inherit;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _getModelDef(name, models) {
+            var result = '',
+                id = '';
+
+            for (id in models) {
+                if (models[id]._name === name) {
+                    result = models[id];
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _searchParents(parents, states, models, schemas) {
+            var parent = '',
+                modelDef = null,
+                i = 0,
+                length = 0;
+
+            length = parents.length;
+            for (i = 0; i < length; i++) {
+                parent = parents[i];
+                if (parent === 'RuntimeComponent') {
+                    result.init = {
+                        "params": [{
+                            "name": "conf",
+                            "type": "object"
+                        }]
+                    };
+
+                    result.destoy = {
+                        "params": []
+                    };
+
+                    result.error = {
+                        "params": [{
+                            "name": "data",
+                            "type": "errorParam"
+                        }]
+                    };
+
+                } else {
+                    modelDef = _getModelDef(parent, models);
+
+                    for (propName in modelDef) {
+                        if (propName.indexOf('_') !== 0 && typeof result[propName] === 'undefined') {
+                            result[propName] = modelDef[propName];
+                        }
+                    }
+
+                    if (_getInherit(parent, schemas)) {
+                        _searchParents(_getInherit(parent, schemas), result, models, schemas);
+                    }
+                }
+            }
+        }
+
+        modelDef = _getModelDef(model, this.system().models());
+
+        for (propName in modelDef) {
+            if (propName.indexOf('_') !== 0) {
+                result[propName] = modelDef[propName];
+            }
+        }
+
+        if (_getInherit(model, this.system().schemas())) {
+            _searchParents(_getInherit(model, this.system().schemas()), result, this.system().models(), this.system().schemas());
+        }
+
+        return result;
+    });
 
     // main
     system.on('main', function main() {

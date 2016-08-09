@@ -275,7 +275,30 @@
                 "type": "array",
                 "mandatory": true,
                 "default": []
-        }]
+            }
+        ]
     },
-    "updateCordovaContext": {}
+    "updateCordovaContext": {},
+    "getGeneratedSchema": {
+        "params": [
+            {
+                "name": "schema",
+                "type": "string",
+                "mandatory": true,
+                "default": ""
+            }
+        ],
+        "result": "object"
+    },
+    "getGeneratedModel": {
+        "params": [
+            {
+                "name": "model",
+                "type": "string",
+                "mandatory": true,
+                "default": ""
+            }
+        ],
+        "result": "object"
+    }
 }
