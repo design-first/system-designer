@@ -5378,7 +5378,7 @@ runtime.on('ready', function () {
                 parent = parents[i];
                 if (parent === 'RuntimeComponent') {
                     result.init = 'init';
-                    result.destoy = 'destoy';
+                    result.destroy = 'destroy';
                     result.error = 'error';
                 } else {
                     schemaDef = _getSchemaDef(parent, schemas);
@@ -5461,7 +5461,7 @@ runtime.on('ready', function () {
                         }]
                     };
 
-                    result.destoy = {
+                    result.destroy = {
                         "params": []
                     };
 
