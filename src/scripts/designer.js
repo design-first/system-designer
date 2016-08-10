@@ -1068,7 +1068,7 @@ runtime.on('ready', function () {
         $('#designer-dialog-behavior-creation').empty();
 
         if (space !== designer.system().name()) {
-            states = this.require('designer').getGeneratedSchema(space);
+            states = Object.keys(this.require('designer').getGeneratedSchema(space));
         } else {
             states.push('main');
         }
@@ -3231,7 +3231,7 @@ runtime.on('ready', function () {
                     // get value
                     modelId = _getModelId(designer.space());
                     modelName = designer.space();
-                    schemaDef = _getSchemaDef(modelName);
+                    schemaDef = designer.getGeneratedSchema(modelName);
 
                     if (Object.keys(schemaDef).length) {
 
@@ -3258,7 +3258,7 @@ runtime.on('ready', function () {
                         propertyNames.sort();
                         length = propertyNames.length;
                         for (var i = 0; i < length; i++) {
-                            component[propertyNames[i]] = models[modelId][propertyNames[i]].default;
+                            component[propertyNames[i]] = designer.getGeneratedModel(modelName)[propertyNames[i]].default;
                         }
 
                         if (!components[modelName]) {
@@ -5385,7 +5385,7 @@ runtime.on('ready', function () {
 
                     for (propName in schemaDef) {
                         if (propName.indexOf('_') !== 0) {
-                            result[propName] = propName;
+                            result[propName] = schemaDef[propName];
                         }
                     }
 
@@ -5400,7 +5400,7 @@ runtime.on('ready', function () {
 
         for (propName in schemaDef) {
             if (propName.indexOf('_') !== 0) {
-                result[propName] = propName;
+                result[propName] = schemaDef[propName];
             }
         }
 
@@ -5408,7 +5408,7 @@ runtime.on('ready', function () {
             _searchParents(schemaDef._inherit, result, this.system().schemas());
         }
 
-        return Object.keys(result);
+        return result;
     });
 
     Designer.on('getGeneratedModel', function getGeneratedModel(model) {
