@@ -1621,7 +1621,7 @@ runtime.on('ready', function () {
                 params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(param.type.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
             } else {
                 if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam'].indexOf(param.type) === -1) {
-                    params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
+                    params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#types#' + param.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
                 } else {
                     params = params + param.name + ' : ' + param.type + ', ';
                 }
@@ -1640,7 +1640,7 @@ runtime.on('ready', function () {
             }
             return result;
         }
-
+        
         for (propName in this.document()) {
             if (this.document().hasOwnProperty(propName)) {
                 propVal = this.document()[propName];
