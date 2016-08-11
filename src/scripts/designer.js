@@ -1640,7 +1640,7 @@ runtime.on('ready', function () {
             }
             return result;
         }
-        
+
         for (propName in this.document()) {
             if (this.document().hasOwnProperty(propName)) {
                 propVal = this.document()[propName];
@@ -4965,30 +4965,16 @@ runtime.on('ready', function () {
     });
 
     Designer.on('syncComponent', function (model) {
-        var schemas = this.system().schemas(),
-            components = this.system().components(),
+        var components = this.system().components(),
             name = '',
-            id = '',
+            componentId = '',
             propName = '',
             component = null,
             createModel = false;
-
-        function _getSchema(name, schemas) {
-            var result = '',
-                id = '';
-
-            for (id in schemas) {
-                if (schemas[id]._name === name) {
-                    result = schemas[id];
-                    break;
-                }
-            }
-            return result;
-        }
-
+  
         name = model._name;
-        schema = _getSchema(name, schemas);
-
+        schema = this.getGeneratedSchema(name);
+      
         for (propName in schema) {
             switch (true) {
                 case schema[propName] === 'property':
@@ -5022,6 +5008,17 @@ runtime.on('ready', function () {
                     break;
             }
         }
+
+        /*
+        for (propName in schema) {
+            for (componentId in components[name]) {
+                if (typeof components[name][componentId][propName] === 'undefined') {
+                    delete components[name][componentId][propName];
+                    this.require('channel').$designerDeleteComponent(componentId, name);
+                    this.system().components(components);
+                }
+            }
+        }*/
 
         this.save();
     });
