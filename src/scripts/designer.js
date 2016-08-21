@@ -146,11 +146,13 @@ runtime.on('ready', function () {
         dom = document.getElementById('designer-dialog-sync-commit');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-sync-comments-area').show();
+            $('#designer-dialog-sync-options-area').show();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-sync-refresh');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-sync-comments-area').hide();
+            $('#designer-dialog-sync-options-area').hide();
         }.bind(this));
 
     });
