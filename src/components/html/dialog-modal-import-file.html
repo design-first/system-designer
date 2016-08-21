@@ -7,12 +7,16 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group" id="designer-dialog-import-modal-type-import">
-                        <label class="col-xs-offset-0 col-xs-3 control-label">Type of import</label>
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Import</label>
                         <div class="col-xs-offset-0 col-xs-8">
                             <div class="radio">
                                 <label><input type="radio" name="import-type" id="designer-dialog-import-modal-from-file" value="file" checked>from a file</label>
                             </div>
-                            <div class="radio"><label><input type="radio" name="import-type" id="designer-dialog-import-modal-from-library" value="library">from the library</label>
+                            <div class="radio">
+                                <label><input type="radio" name="import-type" id="designer-dialog-import-modal-from-library" value="library">from the library</label>
+                            </div>
+                            <div class="radio" id="designer-dialog-import-modal-from-systems-input">
+                                <label><input type="radio" name="import-type" id="designer-dialog-import-modal-from-systems" value="library">from your systems</label>
                             </div>
                         </div>
                     </div>
@@ -34,11 +38,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group" id="designer-dialog-import-modal-from-systems-form">
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Select a system</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <div class="well" style="padding:0px;" id="designer-dialog-import-file-modal-well">
+                                <div class="list-group designer-library" id="designer-dialog-import-file-modal-systems">
+                                    {{systems}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="designer-dialog-import-file-modal-cancel">Cancel</button>
-                <button type="button" class="btn btn-default" id="designer-dialog-import-file-modal-merge">Compose</button>
+                <button type="button" class="btn btn-primary" id="designer-dialog-import-file-modal-merge">Compose</button>
                 <button type="button" class="btn btn-primary" id="designer-dialog-import-file-modal-import">Import</button>
             </div>
         </div>

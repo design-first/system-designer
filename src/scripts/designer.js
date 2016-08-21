@@ -404,6 +404,10 @@ runtime.on('ready', function () {
             that = this,
             libraries = [],
             library = '',
+            systems = [],
+            system = '',
+            sys = '',
+            systemIds = '',
             length = 0,
             i = 0,
             list = '';
@@ -421,14 +425,74 @@ runtime.on('ready', function () {
                 '</a>';
         }
 
+        systems = this.require('storage').get('system-designer-systems');
+
+        if (systems) {
+            systemIds = systems.systems;
+        }
+        length = systemIds.length;
+
+        for (i = 0; i < length; i++) {
+            system = this.require('storage').get(systemIds[i]);
+
+            if (this.require('designer').system() && this.require('designer').system().id() === system._id) {
+            } else {
+                sys = sys + '<a class="list-group-item" id="designer-dialog-import-file-modal-systems-' + system._id + '">' +
+                    '<h4 class="list-group-item-heading">' + system.name + '</h4>' +
+                    '<p class="list-group-item-text">v' + system.version + '</p>' +
+                    '</a>';
+            }
+        }
+
         html = this.require('dialog-modal-import-file.html');
         document.querySelector('#designer-dialog-import-file').insertAdjacentHTML('afterbegin',
             html.source()
                 .replace(/{{title}}/gi, this.title())
                 .replace(/{{library}}/gi, list)
+                .replace(/{{systems}}/gi, sys)
         );
 
-        //events  
+        if (sys === '') {
+            $('#designer-dialog-import-modal-from-systems-input').hide();
+        }
+
+        // systems events  
+        var callbackSystemEvent = function (event) {
+            var id = '',
+                systems = null,
+                length = 0,
+                i = 0;
+
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+                that.data(null);
+            } else {
+                id = this.getAttribute('id').replace('designer-dialog-import-file-modal-systems-', '');
+
+                that.data(that.require('storage').get(id));
+
+                // remove old active
+                systems = document.getElementById('designer-dialog-import-file-modal-systems');
+
+                length = systems.children.length;
+                for (i = 0; i < length; i++) {
+                    $(systems.children[i]).removeClass('active');
+                }
+
+                // add current active
+                $(this).addClass('active');
+            }
+        };
+        for (i = 0; i < length; i++) {
+            system = that.require('storage').get(systems.systems[i]);
+            if (this.require('designer').system() && this.require('designer').system().id() === system._id) {
+            } else {
+                dom = document.getElementById('designer-dialog-import-file-modal-systems-' + system._id);
+                dom.addEventListener('click', callbackSystemEvent);
+            }
+        }
+
+        // library events  
         var callbackEvent = function (event) {
             var id = '',
                 libraries = null,
@@ -465,13 +529,27 @@ runtime.on('ready', function () {
         dom = document.getElementById('designer-dialog-import-modal-from-file');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-import-modal-from-file-form').show();
+            $('#designer-dialog-import-modal-from-systems-form').hide();
             $('#designer-dialog-import-modal-from-library-form').hide();
+            $('#designer-dialog-import-file-modal-import').show();
+
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-from-library');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-import-modal-from-library-form').show();
+            $('#designer-dialog-import-modal-from-systems-form').hide();
             $('#designer-dialog-import-modal-from-file-form').hide();
+            $('#designer-dialog-import-file-modal-import').show();
+
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-import-modal-from-systems');
+        dom.addEventListener('click', function (event) {
+            $('#designer-dialog-import-modal-from-library-form').hide();
+            $('#designer-dialog-import-modal-from-systems-form').show();
+            $('#designer-dialog-import-modal-from-file-form').hide();
+            $('#designer-dialog-import-file-modal-import').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-cancel');
@@ -4971,10 +5049,10 @@ runtime.on('ready', function () {
             propName = '',
             component = null,
             createModel = false;
-  
+
         name = model._name;
         schema = this.getGeneratedSchema(name);
-      
+
         for (propName in schema) {
             switch (true) {
                 case schema[propName] === 'property':

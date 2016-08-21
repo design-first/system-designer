@@ -85,7 +85,8 @@ module.exports = function (grunt) {
             'dist/designer/lib/github-api/**',
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
-            'dist/designer/styles/*.css'
+            'dist/designer/styles/*.css',
+            'src/styles/cordova-tablet.css'
         ],
         jshint: {
             files: [
