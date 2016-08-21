@@ -483,6 +483,8 @@ runtime.on('ready', function () {
                 $(this).addClass('active');
             }
         };
+
+        length = systemIds.length;
         for (i = 0; i < length; i++) {
             system = that.require('storage').get(systems.systems[i]);
             if (this.require('designer').system() && this.require('designer').system().id() === system._id) {
@@ -519,6 +521,8 @@ runtime.on('ready', function () {
                 $(this).addClass('active');
             }
         };
+
+        length = libraries.length;
         for (i = 0; i < length; i++) {
             library = this.require(libraries[i]._id);
             dom = document.getElementById('designer-dialog-import-file-modal-library-' + library.id());
@@ -4379,6 +4383,8 @@ runtime.on('ready', function () {
                     designer.space(sys.name());
                     designer.spaces().render();
                     designer.workspace().refresh();
+
+                    designer.updateRouter();
 
                     this.hide();
                     designer.save();
