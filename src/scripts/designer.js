@@ -454,8 +454,22 @@ runtime.on('ready', function () {
                 .replace(/{{systems}}/gi, sys)
         );
 
+        // init
         if (sys === '') {
             $('#designer-dialog-import-modal-from-systems-input').hide();
+            if (this.require('designer').isCordova()) {
+                $('#designer-dialog-import-modal-from-library-form').show();
+                $('#designer-dialog-import-modal-type-import').hide();
+            }
+        } else {
+            if (this.require('designer').isCordova()) {
+                $('#designer-dialog-import-modal-from-library-form').show();
+                $('#designer-dialog-import-modal-type-import').show();
+            }
+        }
+        if (this.require('designer').isCordova()) {
+            $('#designer-dialog-import-modal-from-file').attr('checked', false);
+            $('#designer-dialog-import-modal-from-library').attr('checked', true);
         }
 
         // systems events  
@@ -706,7 +720,7 @@ runtime.on('ready', function () {
             id = _getSchemaId(behavior.component);
             def = schemas[id];
 
-            if (def && def[behavior.state] === 'method') {
+            if (def && (def[behavior.state] === 'method' || def[behavior.state] === 'event')) {
                 result = !_existBehavior(behavior.component, behavior.state, behaviors);
             }
 

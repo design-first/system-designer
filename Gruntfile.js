@@ -1426,10 +1426,10 @@ module.exports = function (grunt) {
     // build for electron
     grunt.registerTask('build-electron', [
         'copy:lib',
-        'copy:css',
         'copy:html-electron',
         'copy:json-electron',
         'copy:components-electron',
+        'copy:css',
         'system-json',
         'merge-json:runtime',
         'merge-json:addons',
@@ -1450,11 +1450,11 @@ module.exports = function (grunt) {
     // build for cordova
     grunt.registerTask('build-cordova', [
         'copy:lib',
-        'copy:css',
         'copy:html-cordova',
         'copy:components-cordova',
         'copy:scripts-cordova',
         'copy:styles-cordova',
+        'copy:css',
         'system-json',
         'merge-json:runtime',
         'merge-json:addons',
