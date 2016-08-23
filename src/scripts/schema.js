@@ -448,8 +448,8 @@ runtime.on('ready', function () {
         message.success('schema saved.');
     });
 
-    // main
-    system.on('main', function () {
+    // start
+    system.on('start', function () {
         var Designer = null,
             designer = null;
 
@@ -460,5 +460,5 @@ runtime.on('ready', function () {
         designer.render();
     });
 
-    system.main();
+    system.start();
 });

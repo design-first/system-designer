@@ -590,8 +590,8 @@ runtime.on('ready', function () {
         this.require('message').success('component saved.');
     });
 
-    // main
-    system.on('main', function () {
+    // start
+    system.on('start', function start() {
         var Designer = null,
             designer = null;
 
@@ -602,5 +602,5 @@ runtime.on('ready', function () {
         designer.render();
     });
 
-    system.main();
+    system.start();
 });

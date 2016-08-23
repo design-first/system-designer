@@ -724,7 +724,7 @@ runtime.on('ready', function () {
                 result = !_existBehavior(behavior.component, behavior.state, behaviors);
             }
 
-            if (behavior.state === 'main' && behavior.component === sysId) {
+            if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {
                 result = false;
             }
 
@@ -1168,7 +1168,8 @@ runtime.on('ready', function () {
         if (space !== designer.system().name()) {
             states = Object.keys(this.require('designer').getGeneratedSchema(space));
         } else {
-            states.push('main');
+            states.push('start');
+            states.push('stop');
         }
 
         states.sort();
@@ -3108,8 +3109,8 @@ runtime.on('ready', function () {
                         system.behaviors[mainUuid] = {
                             "_id": mainUuid,
                             "component": uuid,
-                            "state": "main",
-                            "action": "function main() { \n\t\n}",
+                            "state": "start",
+                            "action": "function start() { \n\t\n}",
                             "useCoreAPI": false,
                             "core": false
                         };
@@ -5600,13 +5601,13 @@ runtime.on('ready', function () {
         return result;
     });
 
-    // main
-    system.on('main', function main() {
+    // start
+    system.on('start', function start() {
         var designer = null;
 
         designer = this.require('designer');
         designer.render();
     });
 
-    system.main();
+    system.start();
 });

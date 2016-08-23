@@ -461,8 +461,8 @@ runtime.on('ready', function () {
         }
     });
 
-    // main
-    system.on('main', function () {
+    // start
+    system.on('start', function () {
         var Designer = null,
             designer = null;
 
@@ -473,5 +473,5 @@ runtime.on('ready', function () {
         designer.render();
     });
 
-    system.main();
+    system.start();
 });

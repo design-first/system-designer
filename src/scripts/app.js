@@ -28,7 +28,7 @@ var lastPage = 'index.html'; // TODO find better way
 runtime.on('ready', function () {
     var system = runtime.system('app-designer-testing');
 
-    system.on('main', function () {
+    system.on('start', function () {
         var RuntimeChannel = null,
             channel = null,
             sysid = '',
@@ -241,6 +241,9 @@ runtime.on('ready', function () {
                 if (behavior.state === 'main') {
                     this.require(behavior.component).main();
                 }
+                if (behavior.state === 'start') {
+                    this.require(behavior.component).start();
+                }
             }
         }, true, true);
 
@@ -249,6 +252,9 @@ runtime.on('ready', function () {
                 this.require(id).action(behavior.action);
                 if (behavior.state === 'main') {
                     this.require(behavior.component).main();
+                }
+                if (behavior.state === 'start') {
+                    this.require(behavior.component).start();
                 }
             }
         }, true, true);
@@ -319,9 +325,14 @@ runtime.on('ready', function () {
         }, true, true);
 
         this.require('logger').level('debug');
-        this.require(systemID).main();
+        if (this.require(systemID).main) {
+            this.require(systemID).main();
+        }
+        if (this.require(systemID).start) {
+            this.require(systemID).start();
+        }
 
     }, true, true);
 
-    system.main();
+    system.start();
 }, true, true);
