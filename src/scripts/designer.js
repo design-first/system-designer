@@ -1509,7 +1509,7 @@ runtime.on('ready', function () {
                 var document = {
                     "name": "type " + this.document().name,
                     "master": false,
-                    "subsystem": false,
+                    "subsystem": true,
                     "version": "0.0.1",
                     "description": "Type " + this.document().name,
                     "schemas": {},
@@ -1618,7 +1618,7 @@ runtime.on('ready', function () {
                     var document = {
                         "name": "schema " + this.document()._name,
                         "master": false,
-                        "subsystem": false,
+                        "subsystem": true,
                         "version": "0.0.1",
                         "description": "Schema " + this.document()._name,
                         "schemas": {},
@@ -1883,7 +1883,7 @@ runtime.on('ready', function () {
                     var document = {
                         "name": "model " + this.document()._name,
                         "master": false,
-                        "subsystem": false,
+                        "subsystem": true,
                         "version": "0.0.1",
                         "description": "Model " + this.document()._name,
                         "schemas": {},
@@ -1986,7 +1986,7 @@ runtime.on('ready', function () {
                 var document = {
                     "name": "behavior " + name,
                     "master": false,
-                    "subsystem": false,
+                    "subsystem": true,
                     "version": "0.0.1",
                     "description": "Behavior " + name,
                     "schemas": {},
@@ -2145,7 +2145,7 @@ runtime.on('ready', function () {
                 var document = {
                     "name": "component " + name,
                     "master": false,
-                    "subsystem": false,
+                    "subsystem": true,
                     "version": "0.0.1",
                     "description": "Component " + name,
                     "schemas": {},
