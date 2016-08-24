@@ -5424,6 +5424,10 @@ runtime.on('ready', function () {
             })[0],
             systemId = system._id;
 
+        // delete classInfo
+        system = JSON.parse(JSON.stringify(system));
+        delete system.classInfo;
+
         // save system
         this.require('storage').set(systemId, system);
 
