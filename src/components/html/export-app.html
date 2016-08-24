@@ -15,15 +15,13 @@
     <!-- system -->
     <script>
     runtime.on('ready', function () {
-        var systemId = runtime.require('db').system({{system}}); 
-        var system = runtime.require(systemId);
+        var systemId = this.install({{system}}, false);
+            system = this.require(systemId) ;
+        
         this.require('logger').level('debug');
-        if (system.main) {
-          system.main();    
-        }
-        if (system.start) {
-          system.start();    
-        }
+
+        system.main();
+        system.start();
     }, false, true);
     </script>
 </body>
