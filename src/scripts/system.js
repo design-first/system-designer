@@ -334,21 +334,23 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            var config = this.require('storage').get('system-designer-config'),
-                designer = this.require('designer'),
-                messages = [];
+            if (message.event.indexOf('$system') !== 0) {
+                var config = this.require('storage').get('system-designer-config'),
+                    designer = this.require('designer'),
+                    messages = [];
 
-            if (designer.isCordova()) {
-                messages = designer.messages();
-                messages.push(message);
-                designer.messages(messages);
-            }
+                if (designer.isCordova()) {
+                    messages = designer.messages();
+                    messages.push(message);
+                    designer.messages(messages);
+                }
 
-            this.require('storage').set('system-designer-message', message);
+                this.require('storage').set('system-designer-message', message);
 
-            // message for server debug
-            if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
-                $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
+                // message for server debug
+                if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
+                    $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
+                }
             }
         });
 

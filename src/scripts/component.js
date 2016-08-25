@@ -293,22 +293,24 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            var storage = this.require('storage'),
-                config = storage.get('system-designer-config'),
-                designer = this.require('designer'),
-                messages = [];
+            if (message.event.indexOf('$system') !== 0) {
+                var storage = this.require('storage'),
+                    config = storage.get('system-designer-config'),
+                    designer = this.require('designer'),
+                    messages = [];
 
-            storage.set('system-designer-message', message);
-            
-            if (designer.isCordova()) {
-                messages = designer.messages();
-                messages.push(message);
-                designer.messages(messages);
-            }
-            
-            // message for server debug
-            if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
-                $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
+                storage.set('system-designer-message', message);
+
+                if (designer.isCordova()) {
+                    messages = designer.messages();
+                    messages.push(message);
+                    designer.messages(messages);
+                }
+
+                // message for server debug
+                if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
+                    $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
+                }
             }
         });
 

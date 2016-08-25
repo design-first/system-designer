@@ -145,7 +145,7 @@ runtime.on('ready', function () {
 
         dom = document.getElementById('designer-dialog-type-creation-hasHTML');
         dom.addEventListener('click', function (event) {
-            if ($('#designer-dialog-type-creation-hasHTML')[0].checked ) {
+            if ($('#designer-dialog-type-creation-hasHTML')[0].checked) {
                 $('#designer-dialog-sync-options-log-level').show();
             } else {
                 $('#designer-dialog-sync-options-log-level').hide();
@@ -154,7 +154,7 @@ runtime.on('ready', function () {
 
         dom = document.getElementById('designer-dialog-type-creation-hasNode');
         dom.addEventListener('click', function (event) {
-            if ($('#designer-dialog-type-creation-hasNode')[0].checked ) {
+            if ($('#designer-dialog-type-creation-hasNode')[0].checked) {
                 $('#designer-dialog-sync-options-log-level').show();
             } else {
                 $('#designer-dialog-sync-options-log-level').hide();
@@ -4044,19 +4044,20 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function (message) {
-            var config = this.require('storage').get('system-designer-config');
+            if (message.event.indexOf('$system') !== 0) {
+                var config = this.require('storage').get('system-designer-config');
+                // message for other windows
+                this.require('storage').set('system-designer-message', message);
 
-            // message for other windows
-            this.require('storage').set('system-designer-message', message);
+                // message for client debug
+                if (this.require('designer').debugWindow()) {
+                    this.require('designer').debugWindow().postMessage(JSON.stringify(message), '*');
+                }
 
-            // message for client debug
-            if (this.require('designer').debugWindow()) {
-                this.require('designer').debugWindow().postMessage(JSON.stringify(message), '*');
-            }
-
-            // message for server debug
-            if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
-                $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
+                // message for server debug
+                if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {
+                    $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));
+                }
             }
         });
 
