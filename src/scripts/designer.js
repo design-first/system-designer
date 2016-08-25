@@ -143,6 +143,24 @@ runtime.on('ready', function () {
             this.ok();
         }.bind(this));
 
+        dom = document.getElementById('designer-dialog-type-creation-hasHTML');
+        dom.addEventListener('click', function (event) {
+            if ($('#designer-dialog-type-creation-hasHTML')[0].checked ) {
+                $('#designer-dialog-sync-options-log-level').show();
+            } else {
+                $('#designer-dialog-sync-options-log-level').hide();
+            }
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-type-creation-hasNode');
+        dom.addEventListener('click', function (event) {
+            if ($('#designer-dialog-type-creation-hasNode')[0].checked ) {
+                $('#designer-dialog-sync-options-log-level').show();
+            } else {
+                $('#designer-dialog-sync-options-log-level').hide();
+            }
+        }.bind(this));
+
         dom = document.getElementById('designer-dialog-sync-commit');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-sync-comments-area').show();
@@ -974,16 +992,19 @@ runtime.on('ready', function () {
         dom = document.getElementById('designer-dialog-export-json');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-export-options').show();
+            $('#designer-dialog-export-options-log-level').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-html');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-export-options').hide();
+            $('#designer-dialog-export-options-log-level').show();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-node');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-export-options').hide();
+            $('#designer-dialog-export-options-log-level').show();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-modal');

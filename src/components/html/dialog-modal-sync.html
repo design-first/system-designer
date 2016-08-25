@@ -24,16 +24,33 @@
                         </div>
                     </div>
                     <div class="form-group" id="designer-dialog-sync-options-area">
-                        <label class="col-xs-offset-0 col-xs-3 control-label">Options</label>
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Add files</label>
                         <div class="col-xs-offset-0 col-xs-8">
                             <label class="checkbox-inline">
-                                <input type="checkbox" value="htmlPages" id="designer-dialog-type-creation-hasHTML">Create related <i>HTML</i> file
+                                <input type="checkbox" value="htmlPages" id="designer-dialog-type-creation-hasHTML">Add <i>HTML</i> file
                             </label>
                         </div>
                         <label class="col-xs-offset-0 col-xs-3 control-label"></label>
                         <div class="col-xs-offset-0 col-xs-8">
                             <label class="checkbox-inline">
-                                <input type="checkbox" value="htmlPages" id="designer-dialog-type-creation-hasPackage">Create related <i>package.json</i> file
+                                <input type="checkbox" value="htmlPages" id="designer-dialog-type-creation-hasNode">Add <i>Node.js</i> file
+                            </label>
+                        </div>
+                        <div id="designer-dialog-sync-options-log-level">
+                            <label class="col-xs-offset-0 col-xs-3 control-label">Logs</label>
+                            <div class="col-xs-offset-0 col-xs-8">
+                                <select id="designer-dialog-sync-options-log-level-select" name="log-level" class="form-control">
+                                <option value="debug">debug level</option>
+                                <option value="info">info level</option>
+                                <option value="warn">warning level</option>
+                                <option value="error">error level</option>
+                        </select>
+                            </div>
+                        </div>
+                        <label class="col-xs-offset-0 col-xs-3 control-label">Add description</label>
+                        <div class="col-xs-offset-0 col-xs-8">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" value="htmlPages" id="designer-dialog-type-creation-hasPackage">Add <i>package.json</i> file
                             </label>
                         </div>
                     </div>
