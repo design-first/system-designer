@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-if (typeof global !== 'undefined') {
+if (typeof global !== 'undefined' && typeof window === 'undefined') {
     global.require = require;
 }
 
