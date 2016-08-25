@@ -1314,6 +1314,10 @@ module.exports = function (grunt) {
                         src: 'node_modules/github-api/dist/GitHub.bundle.min.js',
                         dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js'
                     },
+                                        {
+                        src: 'node_modules/github-api/dist/GitHub.bundle.min.js.map',
+                        dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js.map'
+                    },
                     {
                         src: 'bower_components/system-runtime/dist/system-runtime.min.js',
                         dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
