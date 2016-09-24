@@ -1,5 +1,7 @@
 # System Designer
 
+[![Join the chat at https://gitter.im/system-sdk/system-designer](https://badges.gitter.im/system-sdk/system-designer.svg)](https://gitter.im/system-sdk/system-designer?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/system-sdk/system-designer.svg?branch=master)](https://travis-ci.org/system-sdk/system-designer)
 [![devDependency Status](https://david-dm.org/system-sdk/system-designer/dev-status.svg)](https://david-dm.org/system-sdk/system-designer#info=devDependencies)
 
