@@ -180,11 +180,24 @@ runtime.on('ready', function () {
     // Menu items 
     this.require('1f1781882618115').on('click', function () {
         var editor = this.require('editor').editor(),
-            designer = this.require('designer');
+            designer = this.require('designer'),
+            extra = {},
+            data = {};
 
         if (editor.getValue().indexOf('{') === 0) {
             designer.store().data(JSON.parse(editor.getValue()));
+        } else {
+            extra = designer.store().extra();
+            if (extra && extra.context) {
+                data = designer.store().data();
+                data[extra.context] = editor.getValue();
+                designer.store().data(data);
+            }
         }
+
+        extra = {};
+        extra.context = 'name';
+        designer.store().extra(extra);
 
         editor.getSession().setMode('ace/mode/text');
         editor.setValue(designer.store().data().name);
@@ -198,11 +211,24 @@ runtime.on('ready', function () {
 
     this.require('1f1781882618114').on('click', function () {
         var editor = this.require('editor').editor(),
-            designer = this.require('designer');
+            designer = this.require('designer'),
+            extra = {},
+            data = {};
 
         if (editor.getValue().indexOf('{') === 0) {
             designer.store().data(JSON.parse(editor.getValue()));
+        } else {
+            extra = designer.store().extra();
+            if (extra && extra.context) {
+                data = designer.store().data();
+                data[extra.context] = editor.getValue();
+                designer.store().data(data);
+            }
         }
+
+        extra = {};
+        extra.context = 'description';
+        designer.store().extra(extra);
 
         editor.getSession().setMode('ace/mode/text');
         editor.setValue(designer.store().data().description);
@@ -216,11 +242,24 @@ runtime.on('ready', function () {
 
     this.require('1f1781882618116').on('click', function () {
         var editor = this.require('editor').editor(),
-            designer = this.require('designer');
+            designer = this.require('designer'),
+            extra = {},
+            data = {};
 
         if (editor.getValue().indexOf('{') === 0) {
             designer.store().data(JSON.parse(editor.getValue()));
+        } else {
+            extra = designer.store().extra();
+            if (extra && extra.context) {
+                data = designer.store().data();
+                data[extra.context] = editor.getValue();
+                designer.store().data(data);
+            }
         }
+
+        extra = {};
+        extra.context = 'version';
+        designer.store().extra(extra);
 
         editor.getSession().setMode('ace/mode/text');
         editor.setValue(designer.store().data().version);
@@ -319,6 +358,7 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null,
             id = '',
+            extra = {},
             editor = this.require('editor').editor(),
             designer = this.require('designer');
 
@@ -362,6 +402,9 @@ runtime.on('ready', function () {
         designer.store().data(system);
 
         document.title = system.name + ' | system designer';
+
+        extra.context = 'name';
+        designer.store().extra(extra);
 
         editor.setValue(designer.store().data().name);
         editor.gotoLine(1);
