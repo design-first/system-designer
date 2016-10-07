@@ -2098,7 +2098,7 @@ runtime.on('ready', function () {
         }
 
         function _createLink(id) {
-            links = links + '<a href="#' + runtime.require('designer').system().id() + '#components#' + model[propName].type[0].replace('@', '') + '#' + id + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(id) + '</a>,<br>';
+            links = links + '<a href="#' + runtime.require('designer').system().id() + '#components#' + model[propName].type[0].replace('@', '') + '#' + id + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + id + '</a>,<br>';
         }
 
         systemId = this.require('designer').system().id();
@@ -2111,8 +2111,12 @@ runtime.on('ready', function () {
                 value = JSON.stringify(propVal);
 
                 switch (true) {
-                    case schema[propName] === 'link' && typeof propVal === 'string':
-                        doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + JSON.stringify(propVal) + '</a></td></tr>';
+                    case schema[propName] === 'link':
+                        if (typeof propVal === 'string') {
+                            doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal + '</a></td></tr>';
+                        } else {
+                            doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';
+                        }
                         break;
                     case schema[propName] === 'collection' && Array.isArray(propVal) && model[propName].type[0].indexOf('@') !== -1:
                         propVal.forEach(_createLink);
@@ -2121,9 +2125,18 @@ runtime.on('ready', function () {
                         break;
                     default:
                         if (value.length < 25) {
-                            doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal) + '</td></tr>';
+                            if (typeof propVal === 'string') {
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>';
+                            } else {
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';
+                            }
                         } else {
-                            doc = doc + '<tr><td>' + propName + '</td><td>' + JSON.stringify(propVal).substring(0, 25) + ' ..."</td></tr>';
+                            if (typeof propVal === 'string') {
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.substring(0, 25) + ' ...</td></tr>';
+                            } else {
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 25) + ' ...</td></tr>';
+
+                            }
                         }
                         break;
                 }
