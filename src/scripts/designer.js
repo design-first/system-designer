@@ -3208,6 +3208,10 @@ runtime.on('ready', function () {
                                     break;
                                 }
                             }
+                            
+                            if (runtime.require('designer').system().name() === name) {
+                                result = false;
+                            }
                             return result;
                         }
 
