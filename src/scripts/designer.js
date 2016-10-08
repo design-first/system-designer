@@ -2069,6 +2069,7 @@ runtime.on('ready', function () {
             value = '',
             systemId = '',
             links = '',
+            modelName = '',
             schema = null;
 
         function _getSchema(name) {
@@ -2097,8 +2098,31 @@ runtime.on('ready', function () {
             return result;
         }
 
+        function _getModelFromComponent(id) {
+            var result = '',
+                modelName = '',
+                componentId = '';
+
+            for (modelName in that.require('designer').system().components()) {
+                for (componentId in that.require('designer').system().components()[modelName]) {
+                    if (componentId === id) {
+                        result = modelName;
+                        break;
+                    }
+                }
+            }
+            return result;
+        }
+
         function _createLink(id) {
-            links = links + '<a href="#' + runtime.require('designer').system().id() + '#components#' + model[propName].type[0].replace('@', '') + '#' + id + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + id + '</a>,<br>';
+            var modelName = model[propName].type[0].replace('@', ''),
+                components = that.require('designer').system().components();
+
+            if (modelName === 'RuntimeComponent') {
+                modelName = _getModelFromComponent(id);
+            }
+
+            links = links + '<a href="#' + runtime.require('designer').system().id() + '#components#' + modelName + '#' + id + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + id + '</a>,<br>';
         }
 
         systemId = this.require('designer').system().id();
@@ -2113,15 +2137,28 @@ runtime.on('ready', function () {
                 switch (true) {
                     case schema[propName] === 'link':
                         if (typeof propVal === 'string') {
-                            doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + model[propName].type.replace('@', '') + '#' + propVal + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal + '</a></td></tr>';
+                            modelName = model[propName].type.replace('@', '');
+                            if (modelName === 'RuntimeComponent') {
+                                modelName = _getModelFromComponent(propVal);
+                            }
+
+                            doc = doc + '<tr><td>' + propName + '</td><td><a href="#' + this.require('designer').system().id() + '#components#' + modelName + '#' + propVal + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal + '</a></td></tr>';
                         } else {
                             doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';
                         }
                         break;
-                    case schema[propName] === 'collection' && Array.isArray(propVal) && model[propName].type[0].indexOf('@') !== -1:
-                        propVal.forEach(_createLink);
-                        doc = doc + '<tr><td>' + propName + '</td><td>[' + links + ']</td></tr>';
-                        doc = doc.replace(',<br>]', ']');
+                    case schema[propName] === 'collection':
+                        if (Array.isArray(propVal) && model[propName].type[0].indexOf('@') !== -1) {
+                            propVal.forEach(_createLink);
+                            doc = doc + '<tr><td>' + propName + '</td><td>[' + links + ']</td></tr>';
+                            doc = doc.replace(',<br>]', ']');
+                        } else {
+                            if (value.length < 25) {
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';
+                            } else {
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 25) + ' ...</td></tr>';
+                            }
+                        }
                         break;
                     default:
                         if (value.length < 25) {
@@ -2135,7 +2172,6 @@ runtime.on('ready', function () {
                                 doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.substring(0, 25) + ' ...</td></tr>';
                             } else {
                                 doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 25) + ' ...</td></tr>';
-
                             }
                         }
                         break;
@@ -3208,7 +3244,7 @@ runtime.on('ready', function () {
                                     break;
                                 }
                             }
-                            
+
                             if (runtime.require('designer').system().name() === name) {
                                 result = false;
                             }
