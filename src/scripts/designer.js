@@ -4848,25 +4848,239 @@ runtime.on('ready', function () {
             i = 0,
             length = 0,
             collection = '',
-            href = '';
+            href = '',
+            context = '',
+            space = '',
+            schemaName = '',
+            schemaId = '',
+            modelName = '',
+            modelId = '';
 
-        // update menubar
-        if (this.require('designer').system()) {
-            menubar = $('#designer-menubar-items > li > a');
-            length = menubar.length;
-            for (i = 0; i < length; i++) {
-                href = menubar[i].href;
-                collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
-                menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
+        function _getModelId(name, models) {
+            var result = '',
+                id = '';
+
+            for (id in models) {
+                if (models[id]._name === name) {
+                    result = id;
+                    break;
+                }
             }
-        } else {
-            menubar = $('#designer-menubar-items > li > a');
-            length = menubar.length;
-            for (i = 0; i < length; i++) {
-                href = menubar[i].href;
-                collection = href.split('#')[href.split('#').length - 1]; // TODO check cas if no #
-                menubar[i].href = '##' + collection;
+            return result;
+        }
+
+        function _getSchemaId(name, schemas) {
+            var result = '',
+                id = '';
+
+            for (id in schemas) {
+                if (schemas[id]._name === name) {
+                    result = id;
+                    break;
+                }
             }
+            return result;
+        }
+
+        function _getModelName(id, models) {
+            var result = '',
+                modelId = '';
+
+            for (modelId in models) {
+                if (modelId === id) {
+                    result = models[id]._name;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _getSchemaName(id, schemas) {
+            var result = '',
+                schemaId = '';
+
+            for (schemaId in schemas) {
+                if (schemaId === id) {
+                    result = schemas[id]._name;
+                    break;
+                }
+            }
+            return result;
+        }
+
+        function _getCollection(href) {
+            var result = '';
+
+            if (href.split('#').length === 2) {
+                result = href.split('#')[1];
+            }
+            if (href.split('#').length > 2) {
+                result = href.split('#')[2];
+            }
+
+            result = result.split('#')[0];
+            result = result.trim();
+
+            return result;
+        }
+
+        context = this.require('designer').context();
+        space = this.require('designer').space();
+
+        switch (context) {
+            case 'schemas':
+                if (space) {
+                    schemaName = _getSchemaName(space, this.require('designer').system().schemas());
+                    modelId = _getModelId(schemaName, this.require('designer').system().models());
+                }
+                if (this.require('designer').system() && space) {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
+
+                        if (collection === 'models' && modelId) {
+                            menubar[i].href = menubar[i].href + '#' + modelId;
+                        }
+                        if (collection === 'components' && schemaName) {
+                            menubar[i].href = menubar[i].href + '#' + schemaName;
+                        }
+                        if (collection === 'behaviors' && schemaName) {
+                            menubar[i].href = menubar[i].href + '#' + schemaName;
+                        }
+                    }
+                } else {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '##' + collection;
+                    }
+                }
+                break;
+            case 'models':
+                if (space) {
+                    modelName = _getModelName(space, this.require('designer').system().models());
+                    schemaId = _getSchemaId(modelName, this.require('designer').system().schemas());
+                }
+                if (this.require('designer').system() && space) {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
+
+                        if (collection === 'schemas' && schemaId) {
+                            menubar[i].href = menubar[i].href + '#' + schemaId;
+                        }
+                        if (collection === 'components' && modelName) {
+                            menubar[i].href = menubar[i].href + '#' + modelName;
+                        }
+                        if (collection === 'behaviors' && modelName) {
+                            menubar[i].href = menubar[i].href + '#' + modelName;
+                        }
+                    }
+                } else {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '##' + collection;
+                    }
+                }
+                break;
+            case 'behaviors':
+                if (space) {
+                    modelId = _getModelId(space, this.require('designer').system().models());
+                    schemaId = _getSchemaId(space, this.require('designer').system().schemas());
+                    schemaName = _getSchemaName(schemaId, this.require('designer').system().schemas());
+                }
+                if (this.require('designer').system() && space) {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
+
+                        if (collection === 'schemas' && schemaId) {
+                            menubar[i].href = menubar[i].href + '#' + schemaId;
+                        }
+                        if (collection === 'models' && modelId) {
+                            menubar[i].href = menubar[i].href + '#' + modelId;
+                        }
+                        if (collection === 'components' && modelId) {
+                            menubar[i].href = menubar[i].href + '#' + schemaName;
+                        }
+                    }
+                } else {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '##' + collection;
+                    }
+                }
+                break;
+            case 'components':
+                if (space) {
+                    modelId = _getModelId(space, this.require('designer').system().models());
+                    schemaId = _getSchemaId(space, this.require('designer').system().schemas());
+                    schemaName = _getSchemaName(schemaId, this.require('designer').system().schemas());
+                }
+                if (this.require('designer').system() && space) {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
+
+                        if (collection === 'schemas' && schemaId) {
+                            menubar[i].href = menubar[i].href + '#' + schemaId;
+                        }
+                        if (collection === 'models' && modelId) {
+                            menubar[i].href = menubar[i].href + '#' + modelId;
+                        }
+                        if (collection === 'behaviors' && modelId) {
+                            menubar[i].href = menubar[i].href + '#' + schemaName;
+                        }
+                    }
+                } else {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '##' + collection;
+                    }
+                }
+                break;
+            default:
+                if (this.require('designer').system()) {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '#' + this.require('designer').system().id() + '#' + collection;
+                    }
+                } else {
+                    menubar = $('#designer-menubar-items > li > a');
+                    length = menubar.length;
+                    for (i = 0; i < length; i++) {
+                        href = menubar[i].href;
+                        collection = _getCollection(href);
+                        menubar[i].href = '##' + collection;
+                    }
+                }
+                break;
         }
 
         // update spaces
