@@ -86,7 +86,8 @@ module.exports = function (grunt) {
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
             'dist/designer/styles/*.css',
-            'src/styles/cordova-tablet.css'
+            'src/styles/cordova-tablet.css',
+            'dist/designer/video/*.mp4',
         ],
         jshint: {
             files: [
@@ -812,6 +813,10 @@ module.exports = function (grunt) {
                 src: 'build/system/design.json',
                 dest: 'dist/designer/systems/design.json'
             },
+            video: {
+                src: 'src/video/systemdesigner.mp4',
+                dest: 'dist/designer/video/systemdesigner.mp4',
+            },
             css: {
                 files: [
                     {
@@ -1314,7 +1319,7 @@ module.exports = function (grunt) {
                         src: 'node_modules/github-api/dist/GitHub.bundle.min.js',
                         dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js'
                     },
-                                        {
+                    {
                         src: 'node_modules/github-api/dist/GitHub.bundle.min.js.map',
                         dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js.map'
                     },
@@ -1407,6 +1412,7 @@ module.exports = function (grunt) {
         'merge-json:runtime',
         'merge-json:addons',
         'copy:system',
+        'copy:video',
         'jsbeautifier',
         'copy:debug-web'
     ]);
@@ -1422,6 +1428,7 @@ module.exports = function (grunt) {
         'merge-json:runtime',
         'merge-json:addons',
         'copy:system',
+        'copy:video',
         'jsbeautifier',
         'jshint',
         'uglify'
@@ -1438,6 +1445,7 @@ module.exports = function (grunt) {
         'merge-json:runtime',
         'merge-json:addons',
         'copy:system',
+        'copy:video',
         'jsbeautifier',
         'jshint',
         'uglify',
