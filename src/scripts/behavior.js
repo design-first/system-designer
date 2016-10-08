@@ -59,7 +59,15 @@ runtime.on('ready', function () {
             menuItems = [],
             menuActions = [],
             menuSearch = [],
-            self = this;
+            self = this,
+            config = null,
+            isModeAdvanced = false;
+
+        // get mode    
+        config = this.require('storage').get('system-designer-config');
+        if (config && config.advancedMode) {
+            isModeAdvanced = true;
+        }
 
         // menu header
         menuHeader = this.require('db').collections().MenuHeader.find({
@@ -84,7 +92,15 @@ runtime.on('ready', function () {
 
         menuItems.forEach(function (menuItem) {
             var id = menuItem._id;
-            self.items().push(self.require(id));
+            var name = menuItem.name;
+
+            if (name === 'json') {
+                if (isModeAdvanced) {
+                    self.items().push(self.require(id));
+                }
+            } else {
+                self.items().push(self.require(id));
+            }
         });
 
         // menu actions

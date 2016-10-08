@@ -302,6 +302,9 @@ runtime.on('ready', function () {
         if (storeConfig.githubRepository) {
             $('#designer-dialog-config-github-repository')[0].value = storeConfig.githubRepository;
         }
+        if (storeConfig.advancedMode) {
+            $('#designer-dialog-config-advanced-mode-isAdvanced').attr('checked', true);
+        }
 
         // events
         dom = document.getElementById('designer-dialog-config-radio-client');
@@ -380,6 +383,18 @@ runtime.on('ready', function () {
                 }
                 return false;
             }
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-config-advanced-mode-isAdvanced');
+        dom.addEventListener('click', function (event) {
+            var config = this.require('storage').get('system-designer-config');
+
+            if (!config) {
+                config = {};
+            }
+
+            config.advancedMode = $('#designer-dialog-config-advanced-mode-isAdvanced').prop('checked');
+            this.require('storage').set('system-designer-config', config);
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-modal-cancel');
