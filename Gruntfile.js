@@ -266,9 +266,9 @@ module.exports = function (grunt) {
                             src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
 
                             // clean
-                            src = src.replace(/\n/g, ' ');
-                            src = src.replace(/\r/g, ' ');
-                            src = src.replace(/\t/g, ' ');
+                            src = src.replace(/\n/g, '\\n');
+                            src = src.replace(/\r/g, '\\r');
+                            src = src.replace(/\t/g, '\\t');
                             src = src.replace(/"/g, '\\"');
 
                             result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
