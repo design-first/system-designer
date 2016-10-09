@@ -776,8 +776,8 @@ module.exports = function (grunt) {
                 banner:
                 '/*\n' +
                 '* System Designer\n' +
+                '*\n' +
                 '* https://system-designer.github.io\n' +
-                '* @ecarriou\n' +
                 '*\n' +
                 '* Copyright 2016 Erwan Carriou\n' +
                 '*\n' +
