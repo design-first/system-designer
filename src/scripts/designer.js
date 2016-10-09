@@ -3309,6 +3309,8 @@ runtime.on('ready', function () {
                             designer.spaces().render();
                             designer.workspace().refresh();
 
+                            designer.updateRouter();
+
                             this.require('message').success('schema created. A model has been also generated.');
                         }
                     });
@@ -4944,11 +4946,12 @@ runtime.on('ready', function () {
 
         switch (context) {
             case 'schemas':
-                if (space) {
-                    schemaName = _getSchemaName(space, this.require('designer').system().schemas());
-                    modelId = _getModelId(schemaName, this.require('designer').system().models());
-                }
-                if (this.require('designer').system() && space) {
+                if (this.require('designer').system()) {
+                    if (space) {
+                        schemaName = _getSchemaName(space, this.require('designer').system().schemas());
+                        modelId = _getModelId(schemaName, this.require('designer').system().models());
+                    }
+
                     menubar = $('#designer-menubar-items > li > a');
                     length = menubar.length;
                     for (i = 0; i < length; i++) {
@@ -4977,11 +4980,12 @@ runtime.on('ready', function () {
                 }
                 break;
             case 'models':
-                if (space) {
-                    modelName = _getModelName(space, this.require('designer').system().models());
-                    schemaId = _getSchemaId(modelName, this.require('designer').system().schemas());
-                }
-                if (this.require('designer').system() && space) {
+                if (this.require('designer').system()) {
+                    if (space) {
+                        modelName = _getModelName(space, this.require('designer').system().models());
+                        schemaId = _getSchemaId(modelName, this.require('designer').system().schemas());
+                    }
+
                     menubar = $('#designer-menubar-items > li > a');
                     length = menubar.length;
                     for (i = 0; i < length; i++) {
@@ -5010,12 +5014,13 @@ runtime.on('ready', function () {
                 }
                 break;
             case 'behaviors':
-                if (space) {
-                    modelId = _getModelId(space, this.require('designer').system().models());
-                    schemaId = _getSchemaId(space, this.require('designer').system().schemas());
-                    schemaName = _getSchemaName(schemaId, this.require('designer').system().schemas());
-                }
-                if (this.require('designer').system() && space) {
+                if (this.require('designer').system()) {
+                    if (space) {
+                        modelId = _getModelId(space, this.require('designer').system().models());
+                        schemaId = _getSchemaId(space, this.require('designer').system().schemas());
+                        schemaName = _getSchemaName(schemaId, this.require('designer').system().schemas());
+                    }
+
                     menubar = $('#designer-menubar-items > li > a');
                     length = menubar.length;
                     for (i = 0; i < length; i++) {
@@ -5044,12 +5049,13 @@ runtime.on('ready', function () {
                 }
                 break;
             case 'components':
-                if (space) {
-                    modelId = _getModelId(space, this.require('designer').system().models());
-                    schemaId = _getSchemaId(space, this.require('designer').system().schemas());
-                    schemaName = _getSchemaName(schemaId, this.require('designer').system().schemas());
-                }
-                if (this.require('designer').system() && space) {
+                if (this.require('designer').system()) {
+                    if (space) {
+                        modelId = _getModelId(space, this.require('designer').system().models());
+                        schemaId = _getSchemaId(space, this.require('designer').system().schemas());
+                        schemaName = _getSchemaName(schemaId, this.require('designer').system().schemas());
+                    }
+
                     menubar = $('#designer-menubar-items > li > a');
                     length = menubar.length;
                     for (i = 0; i < length; i++) {
