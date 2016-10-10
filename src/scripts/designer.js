@@ -1346,6 +1346,7 @@ runtime.on('ready', function () {
         for (propName in this.document()) {
             if (['name', 'description', 'version'].indexOf(propName) !== -1) {
                 propVal = this.document()[propName];
+                propVal = propVal.replace(/\n/g, '<br>');
                 doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>';
             }
         }
@@ -2565,6 +2566,7 @@ runtime.on('ready', function () {
             SpaceItem = this.require('SpaceItem'),
             spaceItem = null,
             domItems = document.getElementById('designer-spaces-items'),
+            systemdomItems = document.getElementById('designer-spaces-system-items'),
             self = this,
             name = '',
             callback = null;
@@ -2586,36 +2588,44 @@ runtime.on('ready', function () {
         // update header and help
         switch (this.designer().context()) {
             case 'system':
+                $('#designer-spaces-spaces-system').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Systems';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-system.html').source());
                 break;
             case 'schemas':
+                $('#designer-spaces-spaces-system').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Schemas';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-schemas.html').source());
                 break;
             case 'models':
+                $('#designer-spaces-spaces-system').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Models';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-models.html').source());
                 break;
             case 'types':
+                $('#designer-spaces-spaces-system').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Types';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-types.html').source());
                 break;
             case 'behaviors':
-                document.getElementById('designer-spaces-type').innerHTML = 'Behaviors';
+                $('#designer-spaces-spaces-system').show();
+                document.getElementById('designer-spaces-type').innerHTML = 'Models';
+                document.getElementById('designer-spaces-system-header').innerHTML = 'System';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-behaviors.html').source());
                 break;
             case 'components':
-                document.getElementById('designer-spaces-type').innerHTML = 'Components';
+                $('#designer-spaces-spaces-system').hide();
+                document.getElementById('designer-spaces-type').innerHTML = 'Models';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-components.html').source());
                 break;
             case 'logs':
+                $('#designer-spaces-spaces-system').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Logs';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-logs.html').source());
@@ -2627,6 +2637,7 @@ runtime.on('ready', function () {
         // update spaces
         // clear
         $('#designer-spaces-items').empty();
+        $('#designer-spaces-system-items').empty();
         if (system) {
             switch (this.designer().context()) {
 
@@ -2722,6 +2733,10 @@ runtime.on('ready', function () {
                             }
                         }
                     }
+
+                    // components
+
+
                     break;
 
                 case 'schemas':
@@ -2933,14 +2948,6 @@ runtime.on('ready', function () {
                         return result;
                     });
 
-                    if (this.require('storage').get('system-designer-systems') && this.require('storage').get('system-designer-systems').systems.length) {
-                        spaceItem = new SpaceItem({
-                            'name': this.require('designer').system().name(),
-                            'uuid': this.require('designer').system().id()
-                        });
-                        this.items().push(spaceItem);
-                    }
-
                     this.items().reverse();
 
                     this.items().forEach(function (item) {
@@ -2960,14 +2967,63 @@ runtime.on('ready', function () {
                             this.click();
                         }.bind(self.items(i)));
                     }
+
+                    // systems
+                    this.systems().forEach(function (item) {
+                        this.systems().pop();
+                    }.bind(this));
+
+                    // sort
+                    this.systems().sort(function (idA, idB) {
+                        var a = runtime.require(idA),
+                            b = runtime.require(idB);
+
+                        var result = 0;
+                        if (a.name() < b.name()) {
+                            result = 1;
+                        }
+                        if (a.name() > b.name()) {
+                            result = -1;
+                        }
+                        return result;
+                    });
+
+                    if (this.require('storage').get('system-designer-systems') && this.require('storage').get('system-designer-systems').systems.length) {
+                        spaceItem = new SpaceItem({
+                            'name': this.require('designer').system().name(),
+                            'uuid': this.require('designer').system().id()
+                        });
+                        this.systems().push(spaceItem);
+                    }
+
+                    this.systems().reverse();
+
+                    this.systems().forEach(function (item) {
+                        systemdomItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#behaviors#' + item.name() + '">' + item.name() + '</a></li>');
+                    });
+
+                    // events
+                    callback = function () {
+                        _removeActive();
+                        $(this).addClass('active');
+                    };
+                    length = systemdomItems.children.length;
+                    for (i = 0; i < length; i++) {
+                        item = systemdomItems.children[i];
+                        item.addEventListener('click', callback);
+                        item.addEventListener('click', function () {
+                            this.click();
+                        }.bind(self.systems(i)));
+                    }
+
                     // focus
                     if (length > 0) {
                         if ($('#designer-space-' + this.require('designer').space()).length) {
                             $('#designer-space-' + this.require('designer').space()).addClass('active');
                         } else {
-                            item = domItems.children[0];
+                            item = systemdomItems.children[0];
                             $(item).addClass('active');
-                            this.require('designer').space(this.items(0).name());
+                            this.require('designer').space(this.systems(0).name());
                         }
                     }
                     break;
