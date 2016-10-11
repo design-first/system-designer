@@ -5357,7 +5357,7 @@ runtime.on('ready', function () {
                             "type": "@RuntimeComponent",
                             "readOnly": false,
                             "mandatory": false,
-                            "default": {}
+                            "default": ""
                         };
 
                         for (component in components[name]) {
@@ -5544,7 +5544,7 @@ runtime.on('ready', function () {
                             "type": "any",
                             "readOnly": false,
                             "mandatory": false,
-                            "default": null
+                            "default": ""
                         };
 
                         for (component in components[name]) {
@@ -5559,7 +5559,7 @@ runtime.on('ready', function () {
                             "type": "@RuntimeComponent",
                             "readOnly": false,
                             "mandatory": false,
-                            "default": {}
+                            "default": ""
                         };
 
                         for (component in components[name]) {
