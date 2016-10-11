@@ -1186,6 +1186,19 @@ runtime.on('ready', function () {
             schema = '',
             name = '';
 
+        function _findSchemaId(compId) {
+            var result = compId,
+                modelName = '';
+
+            for (modelName in designer.system().components()) {
+                if (typeof designer.system().components()[modelName][compId] !== 'undefined') {
+                    result = modelName;
+                    break;
+                }
+            }
+            return result;
+        }
+
         function _getSchemaId(name) {
             var result = '',
                 id = '';
@@ -1202,7 +1215,7 @@ runtime.on('ready', function () {
         $('#designer-dialog-behavior-creation').empty();
 
         if (space !== designer.system().name()) {
-            states = Object.keys(this.require('designer').getGeneratedSchema(space));
+            states = Object.keys(this.require('designer').getGeneratedSchema(_findSchemaId(space)));
         } else {
             states.push('start');
             states.push('stop');
@@ -2565,11 +2578,18 @@ runtime.on('ready', function () {
             system = this.designer().system(),
             SpaceItem = this.require('SpaceItem'),
             spaceItem = null,
+            space = '',
+            id = '',
             domItems = document.getElementById('designer-spaces-items'),
             systemdomItems = document.getElementById('designer-spaces-system-items'),
+            componentdomItems = document.getElementById('designer-spaces-components-items'),
             self = this,
             name = '',
-            callback = null;
+            callback = null,
+            modelsName = [],
+            showComponents = false,
+            modelName = '',
+            componentId = '';
 
         function _removeActive() {
             var length = 0,
@@ -2583,49 +2603,70 @@ runtime.on('ready', function () {
             }
         }
 
+        function _findModel(compId, components) {
+            var result = '',
+                modelName = '';
+
+            for (modelName in components) {
+                if (typeof components[modelName][compId] !== 'undefined') {
+                    result = modelName;
+                    break;
+                }
+            }
+            return result;
+        }
+
         $('#designer-spaces-help').empty();
 
         // update header and help
         switch (this.designer().context()) {
             case 'system':
                 $('#designer-spaces-spaces-system').hide();
+                $('#designer-spaces-spaces-components').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Systems';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-system.html').source());
                 break;
             case 'schemas':
                 $('#designer-spaces-spaces-system').hide();
+                $('#designer-spaces-spaces-components').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Schemas';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-schemas.html').source());
                 break;
             case 'models':
                 $('#designer-spaces-spaces-system').hide();
+                $('#designer-spaces-spaces-components').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Models';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-models.html').source());
                 break;
             case 'types':
                 $('#designer-spaces-spaces-system').hide();
+                $('#designer-spaces-spaces-components').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Types';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-types.html').source());
                 break;
             case 'behaviors':
                 $('#designer-spaces-spaces-system').show();
+                $('#designer-spaces-spaces-components').show();
                 document.getElementById('designer-spaces-type').innerHTML = 'Models';
                 document.getElementById('designer-spaces-system-header').innerHTML = 'System';
+                document.getElementById('designer-spaces-components-header').innerHTML = 'Components';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-behaviors.html').source());
                 break;
             case 'components':
                 $('#designer-spaces-spaces-system').hide();
+                $('#designer-spaces-spaces-components').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Models';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-components.html').source());
                 break;
             case 'logs':
                 $('#designer-spaces-spaces-system').hide();
+                $('#designer-spaces-spaces-components').hide();
                 document.getElementById('designer-spaces-type').innerHTML = 'Logs';
                 // help
                 document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-logs.html').source());
@@ -2638,6 +2679,7 @@ runtime.on('ready', function () {
         // clear
         $('#designer-spaces-items').empty();
         $('#designer-spaces-system-items').empty();
+        $('#designer-spaces-components-items').empty();
         if (system) {
             switch (this.designer().context()) {
 
@@ -2919,6 +2961,8 @@ runtime.on('ready', function () {
                     break;
 
                 case 'behaviors':
+                    // models
+
                     // TODO find better way
                     this.items().forEach(function (item) {
                         this.items().pop();
@@ -2951,6 +2995,7 @@ runtime.on('ready', function () {
                     this.items().reverse();
 
                     this.items().forEach(function (item) {
+                        modelsName.push(item.name());
                         domItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name() + '" class=""><a href="#' + system.id() + '#behaviors#' + item.name() + '">' + item.name() + '</a></li>');
                     });
 
@@ -2969,6 +3014,7 @@ runtime.on('ready', function () {
                     }
 
                     // systems
+
                     this.systems().forEach(function (item) {
                         this.systems().pop();
                     }.bind(this));
@@ -3016,16 +3062,85 @@ runtime.on('ready', function () {
                         }.bind(self.systems(i)));
                     }
 
+                    space = this.designer().space();
+                    if (modelsName.indexOf(space) !== -1) {
+                        showComponents = true;
+                        modelName = space;
+                    } else {
+                        modelName = _findModel(space, this.designer().system().components());
+                        if (modelName) {
+                            showComponents = true;
+                        }
+                    }
+
+                    if (showComponents) {
+
+                        // components
+                        this.components().forEach(function (item) {
+                            this.components().pop();
+                        }.bind(this));
+
+                        // components
+                        for (id in system.components()[modelName]) {
+                            spaceItem = new SpaceItem({
+                                'name': id,
+                                'uuid': id
+                            });
+                            this.components().push(spaceItem);
+                        }
+
+                        // sort
+                        this.components().sort(function (idA, idB) {
+                            var a = runtime.require(idA),
+                                b = runtime.require(idB);
+
+                            var result = 0;
+                            if (a.name() < b.name()) {
+                                result = 1;
+                            }
+                            if (a.name() > b.name()) {
+                                result = -1;
+                            }
+                            return result;
+                        });
+
+                        this.components().reverse();
+
+                        this.components().forEach(function (item) {
+                            modelsName.push(item.name());
+                            componentdomItems.insertAdjacentHTML('beforeend', '<li id="designer-space-' + item.name().replace(/\./g, '-') + '" class=""><a href="#' + system.id() + '#behaviors#' + item.name() + '">' + item.name() + '</a></li>');
+                        });
+
+                        // events
+                        callback = function () {
+                            _removeActive();
+                            $(this).addClass('active');
+                        };
+                        length = componentdomItems.children.length;
+                        for (i = 0; i < length; i++) {
+                            item = componentdomItems.children[i];
+                            item.addEventListener('click', callback);
+                            item.addEventListener('click', function () {
+                                this.click();
+                            }.bind(self.components(i)));
+                        }
+                    }
+
                     // focus
-                    if (length > 0) {
-                        if ($('#designer-space-' + this.require('designer').space()).length) {
-                            $('#designer-space-' + this.require('designer').space()).addClass('active');
+                    if (this.items().length > 0) {
+                        if ($('#designer-space-' + this.require('designer').space().replace(/\./g, '-')).length) {
+                            $('#designer-space-' + this.require('designer').space().replace(/\./g, '-')).addClass('active');
                         } else {
                             item = systemdomItems.children[0];
                             $(item).addClass('active');
                             this.require('designer').space(this.systems(0).name());
                         }
+                    } else {
+                        item = systemdomItems.children[0];
+                        $(item).addClass('active');
+                        this.require('designer').space(this.systems(0).name());
                     }
+
                     break;
 
                 case 'components':
@@ -3600,20 +3715,52 @@ runtime.on('ready', function () {
                             return result;
                         }
 
-                        function _existBehavior(state, component) {
+                        function _existBehavior(state, space, model) {
                             var result = false;
 
-                            for (id in designer.system().behaviors()) {
-                                if (designer.system().behaviors()[id].state === state && designer.system().behaviors()[id].component === component) {
-                                    result = true;
+                            if (_isModel(space)) {
+                                for (id in designer.system().behaviors()) {
+                                    if (designer.system().behaviors()[id].state === state && designer.system().behaviors()[id].component === model) {
+                                        result = true;
+                                        break;
+                                    }
+                                }
+                            } else {
+                                for (id in designer.system().behaviors()) {
+                                    if (designer.system().behaviors()[id].state === state && designer.system().behaviors()[id].component === space) {
+                                        result = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            return result;
+                        }
+
+                        function _findSchemaId(compId) {
+                            var result = compId,
+                                modelName = '';
+
+                            for (modelName in designer.system().components()) {
+                                if (typeof designer.system().components()[modelName][compId] !== 'undefined') {
+                                    result = modelName;
                                     break;
                                 }
                             }
                             return result;
                         }
 
+                        function _isModel(name) {
+                            var result = false;
+
+                            if (Object.keys(designer.system().components()).indexOf(name) !== -1) {
+                                result = true;
+                            }
+
+                            return result;
+                        }
+
                         // get value
-                        model = designer.space();
+                        model = _findSchemaId(designer.space());
                         state = $('#designer-dialog-behavior-creation-state').val();
 
                         if (model && state) {
@@ -3649,27 +3796,27 @@ runtime.on('ready', function () {
                                 }
 
                                 if (schemas[schemaId][state] === 'method') {
-                                    if (_existBehavior(state, model)) {
+                                    if (_existBehavior(state, designer.space(), model)) {
                                         canCreate = false;
                                     }
                                 }
 
                                 if (state === 'init') {
                                     params = 'conf';
-                                    if (_existBehavior(state, model)) {
+                                    if (_existBehavior(state, designer.space(), model)) {
                                         canCreate = false;
                                     }
                                 }
 
                                 if (state === 'destroy') {
-                                    if (_existBehavior(state, model)) {
+                                    if (_existBehavior(state, designer.space(), model)) {
                                         canCreate = false;
                                     }
                                 }
 
                                 if (state === 'error') {
                                     params = 'data';
-                                    if (_existBehavior(state, model)) {
+                                    if (_existBehavior(state, designer.space(), model)) {
                                         canCreate = false;
                                     }
                                 }
@@ -3699,7 +3846,7 @@ runtime.on('ready', function () {
                                 }
                             } else {
                                 model = designer.system().id();
-                                if (_existBehavior(state, model)) {
+                                if (_existBehavior(state, designer.space(), model)) {
                                     canCreate = false;
                                 }
                             }
@@ -3708,7 +3855,7 @@ runtime.on('ready', function () {
                                 // set model
                                 behavior = {
                                     "_id": uuid,
-                                    "component": model,
+                                    "component": designer.space(),
                                     "state": state,
                                     "action": "function " + state + "(" + params + ") { \n" + body + "}",
                                     "useCoreAPI": false,
@@ -3951,20 +4098,20 @@ runtime.on('ready', function () {
                                                     "name": "state",
                                                     "type": "string"
                                                 },
-                                                    {
-                                                        "name": "handler",
-                                                        "type": "function"
-                                                    },
-                                                    {
-                                                        "name": "useCoreAPI",
-                                                        "type": "boolean",
-                                                        "mandatory": false
-                                                    },
-                                                    {
-                                                        "name": "isCore",
-                                                        "type": "boolean",
-                                                        "mandatory": false
-                                                    }
+                                                {
+                                                    "name": "handler",
+                                                    "type": "function"
+                                                },
+                                                {
+                                                    "name": "useCoreAPI",
+                                                    "type": "boolean",
+                                                    "mandatory": false
+                                                },
+                                                {
+                                                    "name": "isCore",
+                                                    "type": "boolean",
+                                                    "mandatory": false
+                                                }
                                                 ],
                                                 "result": "string"
                                             },
@@ -3973,11 +4120,11 @@ runtime.on('ready', function () {
                                                     "name": "state",
                                                     "type": "string"
                                                 },
-                                                    {
-                                                        "name": "behaviorId",
-                                                        "type": "string",
-                                                        "mandatory": false
-                                                    }
+                                                {
+                                                    "name": "behaviorId",
+                                                    "type": "string",
+                                                    "mandatory": false
+                                                }
                                                 ]
                                             },
                                             "require": {
