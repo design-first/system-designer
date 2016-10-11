@@ -253,7 +253,7 @@ runtime.on('ready', function () {
         editor.getSession().setMode('ace/mode/json');
 
         // old context
-        if (oldContext) {
+        if (oldContext && oldContext !== 'component') {
             designer.store().data()[oldContext] = editor.getValue();
         }
 
@@ -387,7 +387,11 @@ runtime.on('ready', function () {
                         enableBasicAutocompletion: true,
                     });
 
-                    designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
+                    try {
+                        designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
+                    } catch (e) {
+
+                    }
 
                     component = self.require('designer').store().data();
 
@@ -572,7 +576,7 @@ runtime.on('ready', function () {
             designer = this.require('designer'),
             store = designer.store().data();
 
-        if (designer.context() === 'json') {
+        if (designer.context() === 'component') {
             store = JSON.parse(val);
         } else {
             store[designer.context()] = val;

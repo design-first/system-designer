@@ -420,6 +420,28 @@ runtime.on('ready', function () {
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
+
+        this.updateRouter();
+    });
+
+    Designer.on('updateRouter', function () {
+        var menubar = [],
+            i = 0,
+            length = 0,
+            id = '',
+            href = '';
+
+        id = decodeURIComponent(document.location.href.split('#')[1]);
+        collection = document.location.href.split('#')[2];
+
+        // update menubar
+        menubar = $('#designer-menubar-items > li > a');
+        length = menubar.length;
+        for (i = 0; i < length; i++) {
+            href = menubar[i].href;
+            context = href.split('#')[href.split('#').length - 1];
+            menubar[i].href = '#' + id + '#' + collection + '#' + context;
+        }
     });
 
     Designer.on('clear', function () {
