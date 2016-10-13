@@ -3312,7 +3312,7 @@ runtime.on('ready', function () {
                     function canCreate(name) {
                         var systems = runtime.require('storage').get('system-designer-systems'),
                             systemIds = [],
-                            regExp = /[\&\(\)\[\]\'\"\*\,\;\:\%]/i,
+                            regExp = /[\#\&\(\)\[\]\'\"\*\,\;\:\%]/i,
                             i = 0,
                             result = true;
 
@@ -3422,6 +3422,7 @@ runtime.on('ready', function () {
 
                         function canCreate(name) {
                             var result = true,
+                                regExp = /[\#\&\(\)\[\]\'\"\*\,\;\:\%]/i,
                                 id = '';
 
                             for (id in runtime.require('designer').system().schemas()) {
@@ -3434,6 +3435,9 @@ runtime.on('ready', function () {
                             if (runtime.require('designer').system().name() === name) {
                                 result = false;
                             }
+
+                            result = result && (name.match(regExp) === null);
+
                             return result;
                         }
 

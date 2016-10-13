@@ -32,9 +32,21 @@ In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your 
 
 #### Run your application
 
-You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module. You can also push your application on your Github repository with System Designer.
+You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module (* macOS and Chrome Web App version only).
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
+
+#### Run your application
+
+System Designer can load the model of any application that runs on the browser or on Node.js. You can see the schemas, models, components and methods of the running application and you can edit them.
+
+All modifications to the model done inside System Designer will be send to the running application. There is no need to reload to see your modifications.
+
+#### Design on the go
+
+System Designer can be used on macOS, iPad, Android or any browsers. You can also install it in your project: System Designer requires no backend to work, it is a full web application.
+
+System Designer has a Github module to synchronize your work between all these apps. You can begin your design on your Mac and then continue it on your iPad.
 
 ## Build
 

@@ -10,13 +10,13 @@
 <body>
     <!-- runtime -->
     <script>
-    {{library}}
+{{library}}
     </script>
     <!-- system -->
     <script>
     runtime.on('ready', function () {
         var systemId = this.install({{system}}, false);
-            system = this.require(systemId) ;
+        var system = this.require(systemId);
         
         this.require('logger').level('{{logLevel}}');
 
