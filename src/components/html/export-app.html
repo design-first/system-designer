@@ -15,12 +15,10 @@
     <!-- system -->
     <script>
     runtime.on('ready', function () {
-        var systemId = this.install({{system}}, false);
-        var system = this.require(systemId);
-        
+        // set the level of log
         this.require('logger').level('{{logLevel}}');
-
-        this.start(systemId);
+        // install and start the system
+        this.install({{system}}, true);
     }, false, true);
     </script>
 </body>

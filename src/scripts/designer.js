@@ -3686,7 +3686,8 @@ runtime.on('ready', function () {
                             params = '',
                             canCreate = true,
                             i = 0,
-                            length = 0;
+                            length = 0,
+                            componentId = '';
 
                         function generateId() {
                             function gen() {
@@ -3768,6 +3769,7 @@ runtime.on('ready', function () {
                         // get value
                         model = _findSchemaId(designer.space());
                         state = $('#designer-dialog-behavior-creation-state').val();
+                        componentId = designer.space();                        
 
                         if (model && state) {
 
@@ -3851,7 +3853,7 @@ runtime.on('ready', function () {
                                     }
                                 }
                             } else {
-                                model = designer.system().id();
+                                componentId = designer.system().id();
                                 if (_existBehavior(state, designer.space(), model)) {
                                     canCreate = false;
                                 }
@@ -3861,7 +3863,7 @@ runtime.on('ready', function () {
                                 // set model
                                 behavior = {
                                     "_id": uuid,
-                                    "component": designer.space(),
+                                    "component": componentId,
                                     "state": state,
                                     "action": "function " + state + "(" + params + ") { \n" + body + "}",
                                     "useCoreAPI": false,
