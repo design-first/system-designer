@@ -817,6 +817,10 @@ module.exports = function (grunt) {
                 src: 'src/video/systemdesigner.mp4',
                 dest: 'dist/designer/video/systemdesigner.mp4',
             },
+            'video-web': {
+                src: 'src/video/systemdesigner-web.mp4',
+                dest: 'dist/designer/video/systemdesigner.mp4',
+            },
             css: {
                 files: [
                     {
@@ -1412,7 +1416,7 @@ module.exports = function (grunt) {
         'merge-json:runtime',
         'merge-json:addons',
         'copy:system',
-        'copy:video',
+        'copy:video-web',
         'jsbeautifier',
         'copy:debug-web'
     ]);
@@ -1428,7 +1432,7 @@ module.exports = function (grunt) {
         'merge-json:runtime',
         'merge-json:addons',
         'copy:system',
-        'copy:video',
+        'copy:video-web',
         'jsbeautifier',
         'jshint',
         'uglify'

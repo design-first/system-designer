@@ -2557,8 +2557,10 @@ runtime.on('ready', function () {
         length = domItems.children.length;
         for (i = 0; i < length; i++) {
             item = domItems.children[i];
-            item.addEventListener('click', function () {
-                this.click();
+            item.addEventListener('click', function (e) {
+                if (e.detail !== 2) {
+                    this.click();
+                }
             }.bind(self.items(i)));
         }
     });

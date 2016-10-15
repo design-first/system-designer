@@ -36,7 +36,7 @@ You can run your application directly from System Designer and then export it to
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
 
-#### Run your application
+#### Debug your application
 
 System Designer can load the model of any application that runs on the browser or on Node.js. You can see the schemas, models, components and methods of the running application and you can edit them.
 
