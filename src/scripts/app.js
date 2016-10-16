@@ -71,6 +71,13 @@ runtime.on('ready', function () {
             }
         }
 
+        // case of electron
+        if (typeof global !== 'undefined' && typeof window !== 'undefined') {
+            /*jshint -W051 */
+            delete module; // for jquery compatibility
+            /*jshint +W051 */
+        }
+
         // get system
         sysid = document.location.href.split('#')[1].split('?')[0];
         system = this.require('storage').get(sysid);
