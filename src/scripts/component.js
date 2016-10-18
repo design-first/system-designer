@@ -433,7 +433,7 @@ runtime.on('ready', function () {
         designer.store().extra(result);
         _init(result);
 
-        document.title = id + ' | system designer';
+        document.title = id + ' | System Designer';
 
         editor = this.require('editor').editor();
         if (Object.keys(result).length === 0) {
@@ -589,7 +589,7 @@ runtime.on('ready', function () {
             designer.store().uuid(designer.store().data()._id);
 
             // update title
-            document.title = designer.store().uuid() + ' | system designer';
+            document.title = designer.store().uuid() + ' | System Designer';
         }
 
         this.require('channel').$editorUpdateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());

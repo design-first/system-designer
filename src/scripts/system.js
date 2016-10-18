@@ -417,7 +417,7 @@ runtime.on('ready', function () {
         designer.store().uuid(id);
         designer.store().data(system);
 
-        document.title = system.name + ' | system designer';
+        document.title = system.name + ' | System Designer';
 
         extra.context = 'name';
         designer.store().extra(extra);
@@ -551,7 +551,7 @@ runtime.on('ready', function () {
                     this.require('editor').editor().setValue(val);
                 }
                 store.name = val;
-                document.title = store.name + ' | system designer';
+                document.title = store.name + ' | System Designer';
                 break;
             case 'description':
                 store.description = val;
@@ -561,7 +561,7 @@ runtime.on('ready', function () {
                 break;
             case 'json':
                 store = JSON.parse(val);
-                document.title = store.name + ' | system designer';
+                document.title = store.name + ' | System Designer';
                 break;
             default:
                 break;

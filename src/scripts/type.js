@@ -287,7 +287,7 @@ runtime.on('ready', function () {
         designer.store().uuid(id);
         designer.store().data(type);
 
-        document.title = id + ' | system designer';
+        document.title = id + ' | System Designer';
 
         editor.setValue(JSON.stringify(type, null, '\t'));
         editor.gotoLine(2);
@@ -480,7 +480,7 @@ runtime.on('ready', function () {
             designer.store().uuid(designer.store().data().name);
 
             // update title
-            document.title = designer.store().uuid() + ' | system designer';
+            document.title = designer.store().uuid() + ' | System Designer';
         }
 
         this.require('channel').$editorUpdateType(designer.store().uuid(), designer.store().data());

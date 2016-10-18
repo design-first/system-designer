@@ -262,7 +262,8 @@ runtime.on('ready', function () {
             if (message.event.indexOf('$system') !== 0) {
                 var config = this.require('storage').get('system-designer-config'),
                     designer = this.require('designer'),
-                    messages = [];
+                    messages = [],
+                    system = {};
 
                 if (designer.isCordova()) {
                     messages = designer.messages();
@@ -282,12 +283,13 @@ runtime.on('ready', function () {
         id = document.location.href.split('#')[1].split('?')[0];
         systemId = document.location.href.split('#')[2].split('?')[0];
 
-        schema = this.require('storage').get(systemId).schemas[id];
+        system = this.require('storage').get(systemId);
+        schema = system.schemas[id];
 
         designer.store().uuid(id);
         designer.store().data(schema);
 
-        document.title = schema._name + ' | system designer';
+        document.title = schema._name + ' | System Designer';
 
         editor.setValue(JSON.stringify(schema, null, '\t'));
         editor.gotoLine(2);
@@ -457,7 +459,7 @@ runtime.on('ready', function () {
         // check if name change
         if (designer.store().data()._name !== schema._name) {
             this.require('channel').$editorUpdateSchemaName(schema._name, designer.store().uuid());
-            document.title = schema._name + ' | system designer';
+            document.title = schema._name + ' | System Designer';
         }
 
         designer.store().data(schema);

@@ -287,7 +287,7 @@ runtime.on('ready', function () {
         designer.store().uuid(id);
         designer.store().data(model);
 
-        document.title = model._name + ' | system designer';
+        document.title = model._name + ' | System Designer';
 
         editor.setValue(JSON.stringify(model, null, '\t'));
         editor.gotoLine(2);

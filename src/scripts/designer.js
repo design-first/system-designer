@@ -2778,9 +2778,6 @@ runtime.on('ready', function () {
                         }
                     }
 
-                    // components
-
-
                     break;
 
                 case 'schemas':
@@ -3769,7 +3766,7 @@ runtime.on('ready', function () {
                         // get value
                         model = _findSchemaId(designer.space());
                         state = $('#designer-dialog-behavior-creation-state').val();
-                        componentId = designer.space();                        
+                        componentId = designer.space();
 
                         if (model && state) {
 
@@ -3964,6 +3961,9 @@ runtime.on('ready', function () {
 
         if (system) {
             this.clear();
+
+            document.title = system.name() + ' | System Designer';
+
             switch (this.designer().context()) {
                 case 'system':
                     systems = this.require('storage').get('system-designer-systems');
@@ -4299,6 +4299,9 @@ runtime.on('ready', function () {
                 this.designer().filter(this.designer().filter());
             }
         } else {
+
+            document.title = 'System Designer';
+
             systems = this.require('storage').get('system-designer-systems');
             if (systems && systems.systems && systems.systems.length) {
                 this.require('message').warning('system not found.');
