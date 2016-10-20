@@ -4025,12 +4025,12 @@ runtime.on('ready', function () {
                                             "_name": "RuntimeComponent",
                                             "_core": true,
                                             "classInfo": "property",
-                                            "on": "method",
-                                            "off": "method",
-                                            "require": "method",
                                             "destroy": "method",
+                                            "error": "event",
                                             "init": "method",
-                                            "error": "event"
+                                            "off": "method",
+                                            "on": "method",
+                                            "require": "method"
                                         };
 
                                         modelSchema.document(schemaRuntime);
@@ -4101,6 +4101,41 @@ runtime.on('ready', function () {
                                         var modelRuntime = {
                                             "_name": "RuntimeComponent",
                                             "_core": true,
+                                            "classInfo": {
+                                                "type": "@RuntimeClassInfo",
+                                                "readOnly": false,
+                                                "mandatory": false,
+                                                "default": {}
+                                            },
+                                            "destroy": {
+                                                "params": []
+                                            },
+                                            "error": {
+                                                "params": [{
+                                                    "name": "data",
+                                                    "type": "errorParam"
+                                                }
+                                                ]
+                                            },
+                                            "init": {
+                                                "params": [{
+                                                    "name": "conf",
+                                                    "type": "object"
+                                                }
+                                                ]
+                                            },
+                                            "off": {
+                                                "params": [{
+                                                    "name": "state",
+                                                    "type": "string"
+                                                },
+                                                {
+                                                    "name": "behaviorId",
+                                                    "type": "string",
+                                                    "mandatory": false
+                                                }
+                                                ]
+                                            },
                                             "on": {
                                                 "params": [{
                                                     "name": "state",
@@ -4123,47 +4158,12 @@ runtime.on('ready', function () {
                                                 ],
                                                 "result": "string"
                                             },
-                                            "off": {
-                                                "params": [{
-                                                    "name": "state",
-                                                    "type": "string"
-                                                },
-                                                {
-                                                    "name": "behaviorId",
-                                                    "type": "string",
-                                                    "mandatory": false
-                                                }
-                                                ]
-                                            },
                                             "require": {
                                                 "params": [{
                                                     "name": "id",
                                                     "type": "string"
                                                 }],
                                                 "result": "RuntimeComponent"
-                                            },
-                                            "destroy": {
-                                                "params": []
-                                            },
-                                            "classInfo": {
-                                                "type": "@RuntimeClassInfo",
-                                                "readOnly": false,
-                                                "mandatory": false,
-                                                "default": {}
-                                            },
-                                            "init": {
-                                                "params": [{
-                                                    "name": "conf",
-                                                    "type": "object"
-                                                }
-                                                ]
-                                            },
-                                            "error": {
-                                                "params": [{
-                                                    "name": "data",
-                                                    "type": "errorParam"
-                                                }
-                                                ]
                                             }
                                         };
 
@@ -4894,7 +4894,7 @@ runtime.on('ready', function () {
             case typeof document.location.search.split('?')[1] === 'string':
                 var systemParam = JSON.parse(decodeURIComponent(document.location.search.split('?')[1].split('system=')[1]));
                 var sys = null;
-    
+     
                 sys = new System(systemParam);
                 this.system(sys);
                 this.save();
