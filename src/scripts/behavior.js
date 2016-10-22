@@ -312,7 +312,7 @@ runtime.on('ready', function () {
         designer.store().uuid(id);
         designer.store().data(behavior);
 
-        document.title = behavior.state + ' | System Designer';
+        document.title = 'behavior ' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;
 
         editor.setValue(behavior.action);
 
@@ -744,7 +744,7 @@ runtime.on('ready', function () {
             designer.store().uuid(designer.store().data()._id);
         }
 
-        document.title = designer.store().data().state + ' | System Designer';
+        document.title = 'behavior ' + designer.store().data().state + ' · system ' + document.title.split('·')[1].trim();
 
         this.require('channel').$editorUpdateBehavior(designer.store().uuid(), designer.store().data());
         this.require('message').success('behavior saved.');

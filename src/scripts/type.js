@@ -244,6 +244,7 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null,
             id = '',
+            system = null,
             designer = this.require('designer'),
             editor = this.require('editor').editor();
 
@@ -282,12 +283,13 @@ runtime.on('ready', function () {
         id = document.location.href.split('#')[1].split('?')[0];
         systemId = document.location.href.split('#')[2].split('?')[0];
 
-        type = this.require('storage').get(systemId).types[id];
+        system = this.require('storage').get(systemId);
+        type = system.types[id];
 
         designer.store().uuid(id);
         designer.store().data(type);
 
-        document.title = id + ' | System Designer';
+        document.title = 'type ' + id + ' · system ' + system.name;
 
         editor.setValue(JSON.stringify(type, null, '\t'));
         editor.gotoLine(2);
@@ -480,7 +482,7 @@ runtime.on('ready', function () {
             designer.store().uuid(designer.store().data().name);
 
             // update title
-            document.title = designer.store().uuid() + ' | System Designer';
+            document.title = 'type ' + designer.store().uuid() + ' · ' + document.title.split('·')[1].trim();
         }
 
         this.require('channel').$editorUpdateType(designer.store().uuid(), designer.store().data());

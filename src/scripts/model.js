@@ -244,6 +244,7 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null,
             id = '',
+            system = null,
             editor = this.require('editor').editor(),
             designer = this.require('designer');
 
@@ -282,12 +283,13 @@ runtime.on('ready', function () {
         id = document.location.href.split('#')[1].split('?')[0];
         systemId = document.location.href.split('#')[2].split('?')[0];
 
-        model = this.require('storage').get(systemId).models[id];
+        system = this.require('storage').get(systemId);
+        model = system.models[id];
 
         designer.store().uuid(id);
         designer.store().data(model);
 
-        document.title = model._name + ' | System Designer';
+        document.title = 'model ' + model._name + ' · system ' + system.name;
 
         editor.setValue(JSON.stringify(model, null, '\t'));
         editor.gotoLine(2);

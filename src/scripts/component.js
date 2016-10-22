@@ -272,6 +272,7 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null,
             id = '',
+            system = '',
             title = '',
             collection = '',
             self = this,
@@ -318,7 +319,8 @@ runtime.on('ready', function () {
         collection = document.location.href.split('#')[2].split('?')[0];
         systemId = document.location.href.split('#')[3].split('?')[0];
 
-        component = this.require('storage').get(systemId).components[collection][id];
+        system = this.require('storage').get(systemId);
+        component = system.components[collection][id];
         model = _findModel(collection, this.require('storage').get(systemId));
 
         function _findModel(name, system) {
@@ -433,7 +435,7 @@ runtime.on('ready', function () {
         designer.store().extra(result);
         _init(result);
 
-        document.title = id + ' | System Designer';
+        document.title = 'component ' + id + ' · system ' + system.name;
 
         editor = this.require('editor').editor();
         if (Object.keys(result).length === 0) {
@@ -589,7 +591,7 @@ runtime.on('ready', function () {
             designer.store().uuid(designer.store().data()._id);
 
             // update title
-            document.title = designer.store().uuid() + ' | System Designer';
+            document.title = 'component ' + designer.store().uuid() + ' · ' + document.title.split('·')[1].trim();
         }
 
         this.require('channel').$editorUpdateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());

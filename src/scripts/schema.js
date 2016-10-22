@@ -289,7 +289,7 @@ runtime.on('ready', function () {
         designer.store().uuid(id);
         designer.store().data(schema);
 
-        document.title = schema._name + ' | System Designer';
+        document.title = 'schema ' + schema._name + ' · system ' + system.name;
 
         editor.setValue(JSON.stringify(schema, null, '\t'));
         editor.gotoLine(2);
@@ -459,7 +459,7 @@ runtime.on('ready', function () {
         // check if name change
         if (designer.store().data()._name !== schema._name) {
             this.require('channel').$editorUpdateSchemaName(schema._name, designer.store().uuid());
-            document.title = schema._name + ' | System Designer';
+            document.title = 'schema ' + schema._name + ' · ' + document.title.split('·')[1].trim();
         }
 
         designer.store().data(schema);

@@ -3930,8 +3930,9 @@ runtime.on('ready', function () {
             parents = null,
             systems = null,
             systemIds = [],
-            i = 0;
-        length = 0;
+            i = 0,
+            length = 0,
+            title = 0;
 
         function _getSchemaId(name) {
             var result = '',
@@ -3962,7 +3963,10 @@ runtime.on('ready', function () {
         if (system) {
             this.clear();
 
-            document.title = system.name() + ' | System Designer';
+            title = 'system ' + system.name();
+            if (title !== document.title) {
+                document.title = title;
+            }
 
             switch (this.designer().context()) {
                 case 'system':
