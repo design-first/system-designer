@@ -157,13 +157,16 @@ runtime.on('ready', function () {
             $('#designer-dialog-sync-comments-area').show();
             $('#designer-dialog-sync-options-area').show();
             $('#designer-dialog-sync-options-node').show();
+            if ($('#designer-dialog-type-creation-hasHTML')[0].checked) {
+                $('#designer-dialog-sync-options-log-level').show();
+            }
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-sync-refresh');
         dom.addEventListener('click', function (event) {
             $('#designer-dialog-sync-comments-area').hide();
             $('#designer-dialog-sync-options-area').hide();
-            $('#designer-dialog-sync-options-area').hide();
+            $('#designer-dialog-sync-options-log-level').hide();
             $('#designer-dialog-sync-options-node').hide();
         }.bind(this));
 
