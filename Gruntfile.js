@@ -83,6 +83,7 @@ module.exports = function (grunt) {
             'dist/designer/lib/jquery/**',
             'dist/designer/lib/system-runtime/**',
             'dist/designer/lib/github-api/**',
+            'dist/designer/lib/codemirror/**',
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
             'dist/designer/styles/*.css',
@@ -1326,7 +1327,19 @@ module.exports = function (grunt) {
                     {
                         src: 'node_modules/github-api/dist/GitHub.bundle.min.js.map',
                         dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js.map'
+                    }/*,
+                    {
+                        src: 'node_modules/codemirror/lib/codemirror.js',
+                        dest: 'dist/designer/lib/codemirror/codemirror.js'
                     },
+                    {
+                        src: 'node_modules/codemirror/lib/codemirror.css',
+                        dest: 'dist/designer/lib/codemirror/codemirror.css'
+                    },
+                    {
+                        src: 'node_modules/codemirror/addon/selection/active-line.js',
+                        dest: 'dist/designer/lib/codemirror/active-line.js'
+                    }*/,
                     {
                         src: 'bower_components/system-runtime/dist/system-runtime.min.js',
                         dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'

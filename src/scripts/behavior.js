@@ -744,7 +744,7 @@ runtime.on('ready', function () {
             designer.store().uuid(designer.store().data()._id);
         }
 
-        document.title = 'behavior ' + designer.store().data().state + ' · system ' + document.title.split('·')[1].trim();
+        document.title = 'behavior ' + designer.store().data().state + ' · ' + document.title.split('·')[1].trim();
 
         this.require('channel').$editorUpdateBehavior(designer.store().uuid(), designer.store().data());
         this.require('message').success('behavior saved.');
