@@ -195,7 +195,7 @@ runtime.on('ready', function () {
 
     // Menu items 
     this.require('1f1781882618115').on('click', function () {
-        var editor = this.require('editor').editor(),
+        var editor = this.require('editor'),
             designer = this.require('designer'),
             extra = {},
             data = {};
@@ -215,18 +215,11 @@ runtime.on('ready', function () {
         extra.context = 'name';
         designer.store().extra(extra);
 
-        editor.getSession().setMode('ace/mode/text');
-        editor.setValue(designer.store().data().name);
-
-        editor.gotoLine(1);
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
+        editor.setEditor('text', designer.store().data().name, 1);
     });
 
     this.require('1f1781882618114').on('click', function () {
-        var editor = this.require('editor').editor(),
+        var editor = this.require('editor'),
             designer = this.require('designer'),
             extra = {},
             data = {};
@@ -246,18 +239,11 @@ runtime.on('ready', function () {
         extra.context = 'description';
         designer.store().extra(extra);
 
-        editor.getSession().setMode('ace/mode/text');
-        editor.setValue(designer.store().data().description);
-
-        editor.gotoLine(1);
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
+        editor.setEditor('text', designer.store().data().description, 1);
     });
 
     this.require('1f1781882618116').on('click', function () {
-        var editor = this.require('editor').editor(),
+        var editor = this.require('editor'),
             designer = this.require('designer'),
             extra = {},
             data = {};
@@ -277,28 +263,14 @@ runtime.on('ready', function () {
         extra.context = 'version';
         designer.store().extra(extra);
 
-        editor.getSession().setMode('ace/mode/text');
-        editor.setValue(designer.store().data().version);
-
-        editor.gotoLine(1);
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
+        editor.setEditor('text', designer.store().data().version, 1);
     });
 
     this.require('1f1781882618102').on('click', function () {
-        var editor = this.require('editor').editor(),
+        var editor = this.require('editor'),
             designer = this.require('designer');
 
-        editor.getSession().setMode('ace/mode/json');
-        editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
-
-        editor.gotoLine(2);
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
+        editor.setEditor('json', JSON.stringify(designer.store().data(), null, '\t'), 2);
     });
 
     // ToolBar
@@ -360,6 +332,8 @@ runtime.on('ready', function () {
         Editor = this.require('Editor');
         editor = new Editor({
             '_id': 'editor',
+            'type': 'ace',
+            'context': 'system',
             'editor': ace.edit('designer-editor')
         });
     });
@@ -375,7 +349,7 @@ runtime.on('ready', function () {
             channel = null,
             id = '',
             extra = {},
-            editor = this.require('editor').editor(),
+            editor = this.require('editor'),
             designer = this.require('designer');
 
         this.require('storage').on('changed', function (obj) {
@@ -422,30 +396,8 @@ runtime.on('ready', function () {
         extra.context = 'name';
         designer.store().extra(extra);
 
-        editor.setValue(designer.store().data().name);
-        editor.gotoLine(1);
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-
+        editor.initValue(designer.store().data().name, 1);
     }, true);
-
-    // Editor
-    var Editor = this.require('Editor');
-    Editor.on('render', function () {
-        this.editor().getSession().setMode('ace/mode/text');
-        this.editor().setShowPrintMargin(false);
-        this.editor().setReadOnly(false);
-        this.editor().$blockScrolling = Infinity;
-        this.editor().setValue('');
-        this.editor().focus();
-        this.editor().commands.addCommand({
-            name: 'myCommand',
-            bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
-            exec: function (editor) {
-                runtime.require('designer').save();
-            }
-        });
-    });
 
     // Designer
     var Designer = this.require('Designer');
@@ -539,7 +491,7 @@ runtime.on('ready', function () {
     });
 
     Designer.on('save', function () {
-        var val = this.require('editor').editor().getValue(),
+        var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             store = designer.store().data();
 
@@ -548,7 +500,7 @@ runtime.on('ready', function () {
                 val = val.trim();
                 if (val.indexOf(' ') !== -1) {
                     val = val.replace(/ /gi, '-');
-                    this.require('editor').editor().setValue(val);
+                    this.require('editor').setValue(val);
                 }
                 store.name = val;
                 document.title = 'system ' + store.name;

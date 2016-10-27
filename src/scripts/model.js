@@ -230,6 +230,8 @@ runtime.on('ready', function () {
         Editor = this.require('Editor');
         editor = new Editor({
             '_id': 'editor',
+            'type': 'ace',
+            'context': 'model',
             'editor': ace.edit('designer-editor')
         });
     });
@@ -245,7 +247,7 @@ runtime.on('ready', function () {
             channel = null,
             id = '',
             system = null,
-            editor = this.require('editor').editor(),
+            editor = this.require('editor'),
             designer = this.require('designer');
 
         this.require('storage').on('changed', function (obj) {
@@ -291,78 +293,8 @@ runtime.on('ready', function () {
 
         document.title = 'model ' + model._name + ' · system ' + system.name;
 
-        editor.setValue(JSON.stringify(model, null, '\t'));
-        editor.gotoLine(2);
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-
+        editor.initValue(JSON.stringify(model, null, '\t'), 2);
     }, true);
-
-    // Editor
-    var Editor = this.require('Editor');
-    Editor.on('render', function () {
-        this.editor().getSession().setMode('ace/mode/json');
-
-        var completer = {
-            getCompletions: function (editor, session, pos, prefix, callback) {
-                var systemId = '',
-                    typeName = '',
-                    result = [],
-                    types = {},
-                    schemas = {};
-
-                result = [
-                    { name: "any", value: "any", meta: "natif type" },
-                    { name: "string", value: "string", meta: "natif type" },
-                    { name: "number", value: "number", meta: "natif type" },
-                    { name: "boolean", value: "boolean", meta: "natif type" },
-                    { name: "date", value: "date", meta: "natif type" },
-                    { name: "object", value: "object", meta: "natif type" },
-                    { name: "json", value: "json", meta: "alias" },
-                    { name: "html", value: "html", meta: "alias" },
-                    { name: "css", value: "css", meta: "alias" },
-                    { name: "javascript", value: "javascript", meta: "alias" }
-                ];
-
-                systemId = document.location.href.split('#')[2].split('?')[0];
-                system = this.require('storage').get(systemId);
-
-                if (system) {
-                    types = system.types;
-                    for (typeName in types) {
-                        result.push({ name: types[typeName].name, value: types[typeName].name, meta: "custom type" });
-                    }
-                    result.push({ name: "@RuntimeComponent", value: "@RuntimeComponent", meta: "model" });
-                    schemas = system.schemas;
-                    for (var name in schemas) {
-                        result.push({ name: '@' + schemas[name]._name, value: '@' + schemas[name]._name, meta: "model" });
-                    }
-                }
-
-                callback(null, result);
-            }.bind(this)
-        };
-
-        this.editor().setOptions({
-            enableBasicAutocompletion: [completer]
-        });
-        this.editor().setShowPrintMargin(false);
-        this.editor().setReadOnly(false);
-        this.editor().$blockScrolling = Infinity;
-        this.editor().setValue('');
-        this.editor().commands.addCommand({
-            name: 'myCommand',
-            bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
-            exec: function (editor) {
-                runtime.require('designer').save();
-            }
-        });
-        this.editor().focus();
-
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip({ 'container': 'body', delay: { "show": 1000, "hide": 100 } });
-        });
-    });
 
     // Designer
     var Designer = this.require('Designer');
@@ -456,7 +388,7 @@ runtime.on('ready', function () {
     });
 
     Designer.on('save', function () {
-        var val = this.require('editor').editor().getValue(),
+        var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             message = this.require('message'),
             model = JSON.parse(val);

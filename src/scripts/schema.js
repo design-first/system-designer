@@ -230,6 +230,8 @@ runtime.on('ready', function () {
         Editor = this.require('Editor');
         editor = new Editor({
             '_id': 'editor',
+            'type': 'ace',
+            'context': 'schema',
             'editor': ace.edit('designer-editor')
         });
     });
@@ -244,7 +246,7 @@ runtime.on('ready', function () {
         var RuntimeChannel = null,
             channel = null,
             id = '',
-            editor = this.require('editor').editor(),
+            editor = this.require('editor'),
             designer = this.require('designer');
 
         this.require('storage').on('changed', function (obj) {
@@ -291,47 +293,8 @@ runtime.on('ready', function () {
 
         document.title = 'schema ' + schema._name + ' · system ' + system.name;
 
-        editor.setValue(JSON.stringify(schema, null, '\t'));
-        editor.gotoLine(2);
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-
+        editor.initValue(JSON.stringify(schema, null, '\t'), 2);
     }, true);
-
-    // Editor
-    var Editor = this.require('Editor');
-    Editor.on('render', function () {
-        this.editor().getSession().setMode('ace/mode/json');
-
-        var langTools = ace.require('ace/ext/language_tools');
-        var completer = {
-            getCompletions: function (editor, session, pos, prefix, callback) {
-                callback(null, [
-                    { name: "property", value: "property", meta: "type" },
-                    { name: "link", value: "link", meta: "type" },
-                    { name: "collection", value: "collection", meta: "type" },
-                    { name: "method", value: "method", meta: "type" },
-                    { name: "event", value: "event", meta: "type" }
-                ]);
-            }
-        };
-
-        this.editor().setOptions({
-            enableBasicAutocompletion: [completer]
-        });
-        this.editor().setShowPrintMargin(false);
-        this.editor().setReadOnly(false);
-        this.editor().$blockScrolling = Infinity;
-        this.editor().setValue('');
-        this.editor().commands.addCommand({
-            name: 'myCommand',
-            bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
-            exec: function (editor) {
-                runtime.require('designer').save();
-            }
-        });
-        this.editor().focus();
-    });
 
     // Designer
     var Designer = this.require('Designer');
@@ -429,7 +392,7 @@ runtime.on('ready', function () {
     });
 
     Designer.on('save', function () {
-        var val = this.require('editor').editor().getValue(),
+        var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             message = this.require('message'),
             schema = JSON.parse(val),

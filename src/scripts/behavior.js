@@ -253,6 +253,8 @@ runtime.on('ready', function () {
         Editor = this.require('Editor');
         editor = new Editor({
             '_id': 'editor',
+            'type': 'ace',
+            'context': 'behavior',
             'editor': ace.edit('designer-editor')
         });
     });
@@ -268,7 +270,7 @@ runtime.on('ready', function () {
             channel = null,
             id = '',
             designer = this.require('designer'),
-            editor = this.require('editor').editor(),
+            editor = this.require('editor'),
             Range = null,
             endLine = null;
 
@@ -314,198 +316,12 @@ runtime.on('ready', function () {
 
         document.title = 'behavior ' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;
 
-        editor.setValue(behavior.action);
-
-        editor.gotoLine(2);
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-
-        Range = ace.require("ace/range").Range;
-        endLine = behavior.action.indexOf('{') + 1;
-
-        editor.session.addMarker(new Range(0, 0, 0, endLine), "readonly");
-
-        // readonly
-        editor.keyBinding.addKeyboardHandler({
-            handleKeyboard: function (data, hash, keyString, keyCode, event) {
-                var result = null;
-                switch (true) {
-                    case (hash === -1 || (keyCode <= 40 && keyCode >= 37)):
-                        result = false;
-                        break;
-                    case intersects(new Range(0, 0, 0, endLine)):
-                        result = {
-                            command: 'null',
-                            passEvent: false
-                        };
-                        runtime.require('message').warning('you can not modify the header of the behavior.');
-                        break;
-                    default:
-                        break;
-                }
-
-                if (result) {
-                    return result;
-                }
-            }
-        });
-
-        function intersects(range) {
-            var result = false,
-                selection = editor.getSelectionRange();
-
-            result = (selection.end.row === 0 && selection.end.column < endLine + 1) && selection.intersects(range);
-            return result;
-        }
-
+        editor.initValue(behavior.action, 2);
     }, true);
-
-    // Editor
-    var Editor = this.require('Editor');
-    Editor.on('render', function () {
-        this.editor().getSession().setMode('ace/mode/javascript');
-        this.editor().getSession().setTabSize(2);
-        var completer = {
-            getCompletions: function (editor, session, pos, prefix, callback) {
-                var systemId = '',
-                    result = [],
-                    behavior = {},
-                    schemaName = '',
-                    schemas = {},
-                    schema = {},
-                    parents = {},
-                    i = 0;
-
-
-                function _searchApis(parents) {
-                    var length = 0,
-                        i = 0;
-
-                    if (parents) {
-                        length = parents.length;
-                        for (i = 0; i < length; i++) {
-                            if (parents[i].indexOf('RuntimeComponent') !== -1) {
-                                result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
-                                result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });
-                                result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
-                                result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
-                                result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
-                                result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });
-                                result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });
-                                result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });
-                            } else {
-                                schema = _getSchema(schemas, parents[i]);
-
-                                for (var prop in schema) {
-                                    if (prop.indexOf('_') !== 0) {
-                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });
-                                    }
-                                }
-
-                                if (typeof schema._inherit !== 'undefined') {
-                                    _searchApis(schema._inherit);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                function _getSchema(schemas, name) {
-                    var result = '',
-                        id = '';
-
-                    for (id in schemas) {
-                        if (schemas[id]._name === name) {
-                            result = schemas[id];
-                            break;
-                        }
-                    }
-                    return result;
-                }
-
-                id = document.location.href.split('#')[1];
-                systemId = document.location.href.split('#')[2];
-
-                system = this.require('storage').get(systemId);
-                if (system) {
-                    schemaName = system.behaviors[id].component;
-                    schemas = system.schemas;
-
-                    schema = _getSchema(schemas, schemaName);
-
-                    for (var name in schema) {
-                        if (name.indexOf('_') !== 0) {
-                            result.push({ name: name + '()', value: name + '()', meta: schema[name] });
-                        }
-                    }
-
-                    // case of system
-                    if (system.behaviors[id].component === systemId) {
-                        result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });
-                        result.push({ name: 'id()', value: 'id()', meta: 'property' });
-                        result.push({ name: 'on()', value: 'on()', meta: 'method' });
-                        result.push({ name: 'off()', value: 'off()', meta: 'method' });
-                        result.push({ name: 'require()', value: 'require()', meta: 'method' });
-                        result.push({ name: 'destroy()', value: 'destroy()', meta: 'method' });
-                        result.push({ name: 'init()', value: 'init()', meta: 'method' });
-                        result.push({ name: 'error()', value: 'error()', meta: 'event' });
-                    }
-
-                    // inherited
-                    parents = schema._inherit;
-                    if (parents) {
-                        length = parents.length;
-
-                        for (i = 0; i < length; i++) {
-                            if (parents[i].indexOf('RuntimeComponent') !== -1) {
-                                result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
-                                result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });
-                                result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
-                                result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
-                                result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
-                                result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });
-                                result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });
-                                result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });
-                            } else {
-                                schema = _getSchema(schemas, parents[i]);
-
-                                for (var prop in schema) {
-                                    if (prop.indexOf('_') !== 0) {
-                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });
-                                    }
-                                }
-                                if (typeof schema._inherit !== 'undefined') {
-                                    _searchApis(schema._inherit);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                callback(null, result);
-            }.bind(this)
-        };
-
-        this.editor().setOptions({
-            enableBasicAutocompletion: [completer]
-        });
-        this.editor().setShowPrintMargin(false);
-        this.editor().setReadOnly(false);
-        this.editor().$blockScrolling = Infinity;
-        this.editor().setValue('');
-        this.editor().commands.addCommand({
-            name: 'myCommand',
-            bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
-            exec: function (editor) {
-                runtime.require('designer').save();
-            }
-        });
-        this.editor().focus();
-    });
 
     // Menu items 
     this.require('1f1781882618110').on('click', function () {
-        var editor = this.require('editor').editor(),
+        var editor = this.require('editor'),
             designer = this.require('designer');
 
         try {
@@ -514,120 +330,18 @@ runtime.on('ready', function () {
             // TODO message ?
         }
 
-        editor.getSession().setMode('ace/mode/javascript');
-        editor.getSession().setTabSize(2);
-
-        var completer = {
-            getCompletions: function (editor, session, pos, prefix, callback) {
-                var systemId = '',
-                    result = [],
-                    behavior = {},
-                    schemaName = '',
-                    schemas = {},
-                    schema = {},
-                    parents = {},
-                    i = 0;
-
-                function _getSchema(schemas, name) {
-                    var result = '',
-                        id = '';
-
-                    for (id in schemas) {
-                        if (schemas[id]._name === name) {
-                            result = schemas[id];
-                            break;
-                        }
-                    }
-                    return result;
-                }
-
-                id = document.location.href.split('#')[1];
-                systemId = document.location.href.split('#')[2];
-
-                system = this.require('storage').get(systemId);
-                if (system) {
-                    schemaName = system.behaviors[id].component;
-                    schemas = system.schemas;
-
-                    schema = _getSchema(schemas, schemaName);
-
-                    for (var name in schema) {
-                        if (name.indexOf('_') !== 0) {
-                            result.push({ name: name + '()', value: name + '()', meta: schema[name] });
-                        }
-                    }
-
-                    // case of system
-                    if (system.behaviors[id].component === systemId) {
-                        result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });
-                        result.push({ name: 'id()', value: 'id()', meta: 'property' });
-                        result.push({ name: 'on()', value: 'on()', meta: 'method' });
-                        result.push({ name: 'off()', value: 'off()', meta: 'method' });
-                        result.push({ name: 'require()', value: 'require()', meta: 'method' });
-                        result.push({ name: 'destroy()', value: 'destroy()', meta: 'method' });
-                        result.push({ name: 'init()', value: 'init()', meta: 'method' });
-                        result.push({ name: 'error()', value: 'error()', meta: 'event' });
-                    }
-
-                    // inherited
-                    parents = schema._inherit;
-                    if (parents) {
-                        length = parents.length;
-
-                        for (i = 0; i < length; i++) {
-                            if (parents[i].indexOf('RuntimeComponent') !== -1) {
-                                result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });
-                                result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });
-                                result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });
-                                result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });
-                                result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });
-                                result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });
-                                result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });
-                                result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });
-                            } else {
-                                schema = _getSchema(schemas, parents[i]);
-
-                                for (var prop in schema) {
-                                    if (prop.indexOf('_') !== 0) {
-                                        result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                callback(null, result);
-            }.bind(this)
-        };
-
-        editor.setOptions({
-            enableBasicAutocompletion: [completer]
-        });
-        editor.setValue(designer.store().data().action);
-
-        editor.gotoLine(2);
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
+        editor.setEditor('javascript', designer.store().data().action, 2);
     });
 
     this.require('1f1781882618111').on('click', function () {
-        var editor = this.require('editor').editor(),
+        var editor = this.require('editor'),
             designer = this.require('designer');
 
         if (editor.getValue().indexOf('{') !== 0) {
             designer.store().data().action = editor.getValue();
         }
-        editor.getSession().setMode('ace/mode/json');
-        editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
 
-        editor.gotoLine(2);
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
+        editor.setEditor('json', JSON.stringify(designer.store().data(), null, '\t'), 2);
     });
 
     // Designer
@@ -727,7 +441,7 @@ runtime.on('ready', function () {
     });
 
     Designer.on('save', function () {
-        var val = this.require('editor').editor().getValue(),
+        var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             store = designer.store().data();
 

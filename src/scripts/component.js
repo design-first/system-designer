@@ -236,6 +236,8 @@ runtime.on('ready', function () {
         Editor = this.require('Editor');
         editor = new Editor({
             '_id': 'editor',
+            'type': 'ace',
+            'context': 'component',
             'editor': ace.edit('designer-editor')
         });
     });
@@ -246,24 +248,16 @@ runtime.on('ready', function () {
 
     // Menu items
     this.require('1f1781882618113').on('click', function () {
-        var editor = this.require('editor').editor(),
+        var editor = this.require('editor'),
             designer = this.require('designer'),
             oldContext = designer.oldContext();
-
-        editor.getSession().setMode('ace/mode/json');
 
         // old context
         if (oldContext && oldContext !== 'component') {
             designer.store().data()[oldContext] = editor.getValue();
         }
 
-        editor.setValue(JSON.stringify(designer.store().data(), null, '\t'));
-
-        editor.gotoLine(2);
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
+        editor.setEditor('json', JSON.stringify(designer.store().data(), null, '\t'), 2);
     });
 
     // Server
@@ -378,16 +372,7 @@ runtime.on('ready', function () {
                     var editor = null,
                         component = null;
 
-                    editor = self.require('editor').editor();
-                    editor.getSession().setMode('ace/mode/' + props[propName]);
-
-                    if (props[propName] === 'javascript') {
-                        editor.getSession().setTabSize(2);
-                    }
-
-                    editor.setOptions({
-                        enableBasicAutocompletion: true,
-                    });
+                    editor = self.require('editor');
 
                     try {
                         designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
@@ -397,11 +382,7 @@ runtime.on('ready', function () {
 
                     component = self.require('designer').store().data();
 
-                    editor.setValue(component[propName]);
-                    editor.gotoLine(1);
-
-                    editor.getSession().$undoManager.reset();
-                    editor.getSession().setUndoManager(new ace.UndoManager());
+                    editor.setEditor(props[propName], component[propName], 1, true);
                 };
                 for (propName in props) {
                     menuitem = document.getElementById('designer-menu-item-property-' + propName);
@@ -437,46 +418,14 @@ runtime.on('ready', function () {
 
         document.title = 'component ' + id + ' · system ' + system.name;
 
-        editor = this.require('editor').editor();
+        editor = this.require('editor');
         if (Object.keys(result).length === 0) {
-            editor.getSession().setMode('ace/mode/json');
-            editor.setValue(JSON.stringify(component, null, '\t'));
-            editor.gotoLine(2);
+            editor.setEditor('json', JSON.stringify(component, null, '\t'), 2);
         } else {
             propName = Object.keys(result)[0];
-            editor.getSession().setMode('ace/mode/' + result[propName]);
-
-            if (result[propName] === 'javascript') {
-                editor.getSession().setTabSize(2);
-            }
-
-            editor.setOptions({
-                enableBasicAutocompletion: true,
-            });
-            editor.setValue(component[propName]);
-            editor.gotoLine(1);
+            editor.setEditor(result[propName], component[propName], 1, true);
         }
-
-        editor.getSession().$undoManager.reset();
-        editor.getSession().setUndoManager(new ace.UndoManager());
-        editor.focus();
     }, true);
-
-    // Editor
-    var Editor = this.require('Editor');
-    Editor.on('render', function () {
-        this.editor().setShowPrintMargin(false);
-        this.editor().setReadOnly(false);
-        this.editor().$blockScrolling = Infinity;
-        this.editor().setValue('');
-        this.editor().commands.addCommand({
-            name: 'myCommand',
-            bindKey: { win: 'Ctrl-S', mac: 'Command-S' },
-            exec: function (editor) {
-                runtime.require('designer').save();
-            }
-        });
-    });
 
     // Designer
     var Designer = this.require('Designer');
@@ -574,7 +523,7 @@ runtime.on('ready', function () {
     });
 
     Designer.on('save', function () {
-        var val = this.require('editor').editor().getValue(),
+        var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             store = designer.store().data();
 
