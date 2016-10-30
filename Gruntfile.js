@@ -1327,19 +1327,7 @@ module.exports = function (grunt) {
                     {
                         src: 'node_modules/github-api/dist/GitHub.bundle.min.js.map',
                         dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js.map'
-                    }/*,
-                    {
-                        src: 'node_modules/codemirror/lib/codemirror.js',
-                        dest: 'dist/designer/lib/codemirror/codemirror.js'
                     },
-                    {
-                        src: 'node_modules/codemirror/lib/codemirror.css',
-                        dest: 'dist/designer/lib/codemirror/codemirror.css'
-                    },
-                    {
-                        src: 'node_modules/codemirror/addon/selection/active-line.js',
-                        dest: 'dist/designer/lib/codemirror/active-line.js'
-                    }*/,
                     {
                         src: 'bower_components/system-runtime/dist/system-runtime.min.js',
                         dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
@@ -1358,6 +1346,48 @@ module.exports = function (grunt) {
                         return result;
                     }
                 }
+            },
+            'cordova-lib': {
+                files: [{
+                    src: 'node_modules/codemirror/lib/codemirror.js',
+                    dest: 'dist/designer/lib/codemirror/codemirror.js'
+                },
+                {
+                    src: 'node_modules/codemirror/lib/codemirror.css',
+                    dest: 'dist/designer/lib/codemirror/codemirror.css'
+                },
+                {
+                    src: 'node_modules/codemirror/addon/selection/active-line.js',
+                    dest: 'dist/designer/lib/codemirror/active-line.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/javascript/javascript.js',
+                    dest: 'dist/designer/lib/codemirror/javascript.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/textile/textile.js',
+                    dest: 'dist/designer/lib/codemirror/textile.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/css/css.js',
+                    dest: 'dist/designer/lib/codemirror/css.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/htmlmixed/htmlmixed.js',
+                    dest: 'dist/designer/lib/codemirror/htmlmixed.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/xml/xml.js',
+                    dest: 'dist/designer/lib/codemirror/xml.js'
+                },
+                {
+                    src: 'node_modules/codemirror/theme/eclipse.css',
+                    dest: 'dist/designer/lib/codemirror/eclipse.css'
+                },
+                {
+                    src: 'node_modules/codemirror/addon/edit/closebrackets.js',
+                    dest: 'dist/designer/lib/codemirror/closebrackets.js'
+                }]
             }
         },
         connect: {
@@ -1479,6 +1509,7 @@ module.exports = function (grunt) {
     // build for cordova
     grunt.registerTask('build-cordova', [
         'copy:lib',
+        'copy:cordova-lib',
         'copy:html-cordova',
         'copy:components-cordova',
         'copy:scripts-cordova',

@@ -2,63 +2,70 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="An IDE for designing applications driven by the model">
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <link rel="icon" href="img/favicon.ico">
-    <title>system</title>
-    <!-- bootstrap -->
-    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- designer -->
-    <link href="styles/system.css" rel="stylesheet">
-    <!-- cordova -->
-    <link href="styles/cordova-tablet.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="An IDE for designing applications driven by the model">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<link rel="icon" href="img/favicon.ico">
+	<title>system</title>
+	<!-- bootstrap -->
+	<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- designer -->
+	<link href="styles/system.css" rel="stylesheet">
+	<!-- codemirror -->
+	<link href="lib/codemirror/codemirror.css" rel="stylesheet">
+	<link href="lib/codemirror/eclipse.css" rel="stylesheet">
+	<!-- cordova -->
+	<link href="styles/cordova-tablet.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Menubar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <!-- Menu header -->
-            <div id="designer-menubar-header" class="navbar-header"></div>
-            <div>
-                <!-- Menu items -->
-                <ul id="designer-menubar-items" class="nav navbar-nav"></ul>
-                <!-- Menu actions -->
-                <ul id="designer-menubar-actions" class="nav navbar-nav navbar-right"></ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- Toobar -->
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <ul id="designer-toolbar-items" class="nav nav-sidebar"></ul>
-                </div>
-            </div>
-        </div>
-        <!-- Dialog -->
-        <div id="designer-dialog-copyright"></div>
-        <!-- Message -->
-        <div id="designer-message"></div>
-        <!-- Editor -->
-        <div id="designer-editor"></div>
-    </div>
-    <!-- cordova -->
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="scripts/cordova-tablet.min.js"></script>
-    <!-- jquery -->
-    <script src="lib/jquery/jquery.min.js"></script>
-    <!-- bootstrap -->
-    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- ace -->
-    <script type="text/javascript" charset="utf-8" src="lib/ace/ace.js"></script>
-    <!-- system runtime -->
-    <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
-    <!-- designer -->
-    <script type="text/javascript" src="scripts/system.min.js"></script>
+	<!-- Menubar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<!-- Menu header -->
+			<div id="designer-menubar-header" class="navbar-header"></div>
+			<div>
+				<!-- Menu items -->
+				<ul id="designer-menubar-items" class="nav navbar-nav"></ul>
+				<!-- Menu actions -->
+				<ul id="designer-menubar-actions" class="nav navbar-nav navbar-right"></ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Toobar -->
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul id="designer-toolbar-items" class="nav nav-sidebar"></ul>
+				</div>
+			</div>
+		</div>
+		<!-- Dialog -->
+		<div id="designer-dialog-copyright"></div>
+		<!-- Message -->
+		<div id="designer-message"></div>
+		<!-- Editor -->
+		<div id="designer-editor"></div>
+	</div>
+	<!-- cordova -->
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="scripts/cordova-tablet.min.js"></script>
+	<!-- jquery -->
+	<script src="lib/jquery/jquery.min.js"></script>
+	<!-- bootstrap -->
+	<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- codemirror -->
+	<script type="text/javascript" charset="utf-8" src="lib/codemirror/codemirror.js"></script>
+	<script type="text/javascript" charset="utf-8" src="lib/codemirror/active-line.js"></script>
+	<script type="text/javascript" charset="utf-8" src="lib/codemirror/javascript.js"></script>
+	<script type="text/javascript" charset="utf-8" src="lib/codemirror/textile.js"></script>
+	<script type="text/javascript" charset="utf-8" src="lib/codemirror/closebrackets.js"></script>
+	<!-- system runtime -->
+	<script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
+	<!-- designer -->
+	<script type="text/javascript" src="scripts/system.min.js"></script>
 </body>
 
 </html>

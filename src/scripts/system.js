@@ -327,15 +327,34 @@ runtime.on('ready', function () {
     var Workspace = this.require('Workspace');
     Workspace.on('init', function (conf) {
         var Editor = null,
-            editor = null;
+            editor = null,
+            designer = null;
 
         Editor = this.require('Editor');
-        editor = new Editor({
-            '_id': 'editor',
-            'type': 'ace',
-            'context': 'system',
-            'editor': ace.edit('designer-editor')
-        });
+        designer = this.require('designer');
+
+        if (designer.isCordova()) {
+            editor = new Editor({
+                '_id': 'editor',
+                'type': 'codemirror',
+                'context': 'system',
+                'editor': CodeMirror($('#designer-editor')[0], {
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    'mode': 'text/x-textile',
+                    'theme': 'eclipse',
+                    'tabSize': 2,
+                    'autoCloseBrackets': true
+                })
+            });
+        } else {
+            editor = new Editor({
+                '_id': 'editor',
+                'type': 'ace',
+                'context': 'system',
+                'editor': ace.edit('designer-editor')
+            });
+        }
     });
 
     Workspace.on('render', function () {

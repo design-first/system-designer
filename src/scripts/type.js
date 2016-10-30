@@ -228,12 +228,28 @@ runtime.on('ready', function () {
             editor = null;
 
         Editor = this.require('Editor');
-        editor = new Editor({
-            '_id': 'editor',
-            'type': 'ace',
-            'context': 'type',
-            'editor': ace.edit('designer-editor')
-        });
+        
+        if (designer.isCordova()) {
+            editor = new Editor({
+                '_id': 'editor',
+                'type': 'codemirror',
+                'context': 'type',
+                'editor': CodeMirror($('#designer-editor')[0], {
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    'mode': 'application/json',
+                    'theme': 'eclipse',
+                    'tabSize': 2,
+                    'autoCloseBrackets': true
+                })
+            });
+            editor = new Editor({
+                '_id': 'editor',
+                'type': 'ace',
+                'context': 'type',
+                'editor': ace.edit('designer-editor')
+            });
+        }
     });
 
     Workspace.on('render', function () {

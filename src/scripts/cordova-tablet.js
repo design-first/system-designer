@@ -1,6 +1,6 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
-    StatusBar.styleDefault();
+    StatusBar.hide();
 }
 
 /**  android **/
