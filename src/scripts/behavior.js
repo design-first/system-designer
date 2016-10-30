@@ -248,9 +248,11 @@ runtime.on('ready', function () {
     var Workspace = this.require('Workspace');
     Workspace.on('init', function (conf) {
         var Editor = null,
+            designer = null,
             editor = null;
 
         Editor = this.require('Editor');
+        designer = this.require('designer');
 
         if (designer.isCordova()) {
             editor = new Editor({
@@ -266,6 +268,7 @@ runtime.on('ready', function () {
                     'autoCloseBrackets': true
                 })
             });
+        } else {
             editor = new Editor({
                 '_id': 'editor',
                 'type': 'ace',
