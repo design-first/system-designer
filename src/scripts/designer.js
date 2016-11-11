@@ -582,7 +582,8 @@ runtime.on('ready', function () {
             $('#designer-dialog-import-modal-from-systems-form').hide();
             $('#designer-dialog-import-modal-from-library-form').hide();
             $('#designer-dialog-import-file-modal-import').show();
-
+            $('#designer-dialog-import-file-modal-merge').removeClass('btn-primary');
+            $('#designer-dialog-import-file-modal-merge').addClass('btn-default');
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-from-library');
@@ -591,7 +592,8 @@ runtime.on('ready', function () {
             $('#designer-dialog-import-modal-from-systems-form').hide();
             $('#designer-dialog-import-modal-from-file-form').hide();
             $('#designer-dialog-import-file-modal-import').show();
-
+            $('#designer-dialog-import-file-modal-merge').removeClass('btn-primary');
+            $('#designer-dialog-import-file-modal-merge').addClass('btn-default');
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-from-systems');
@@ -600,6 +602,8 @@ runtime.on('ready', function () {
             $('#designer-dialog-import-modal-from-systems-form').show();
             $('#designer-dialog-import-modal-from-file-form').hide();
             $('#designer-dialog-import-file-modal-import').hide();
+            $('#designer-dialog-import-file-modal-merge').removeClass('btn-default');
+            $('#designer-dialog-import-file-modal-merge').addClass('btn-primary');
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-cancel');

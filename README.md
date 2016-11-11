@@ -46,7 +46,7 @@ All modifications to the model done inside System Designer will be send to the r
 
 System Designer can be used on macOS, iPad, Android or any browsers. You can also install it in your project: System Designer requires no backend to work, it is a full web application.
 
-System Designer has a Github module to synchronize your work between all these apps. You can begin your design on your Mac and then continue it on your iPad.
+System Designer has a GitHub module to synchronize your work between all these apps. You can begin your design on your Mac and then continue it on your iPad.
 
 ## Build
 
