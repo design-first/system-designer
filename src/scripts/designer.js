@@ -746,7 +746,7 @@ runtime.on('ready', function () {
             return result;
         }
 
-        function _canMerge(sysId, schemas, behaviors, behavior) {
+        function _canOverride(sysId, schemas, behaviors, behavior) {
             var def = {},
                 id = '',
                 result = true;
@@ -772,8 +772,13 @@ runtime.on('ready', function () {
             schemas = JSON.parse(JSON.stringify(designer.system().schemas()));
 
             for (name in sys.behaviors) {
-                if (name !== sys._id && _canMerge(sys._id, schemas, behaviors, sys.behaviors[name])) {
+                if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {
                     behaviors[name] = sys.behaviors[name];
+                } else {
+                    // merge main / start / stop
+                    if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {
+                        designer.mergeBehavior(behaviors, sys.behaviors[name], designer.system().id(), sys.name);
+                    }
                 }
             }
             designer.system().behaviors(behaviors);
