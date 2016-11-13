@@ -69,6 +69,37 @@ runtime.on('ready', function () {
 
                 lastPage = params.ref;
             }
+
+            // add back button
+            setTimeout(function () {
+                if (!document.getElementById('system-designer-back')) {
+                    var docFragment = null,
+                        div = null,
+                        a = null,
+                        span = null;
+
+                    docFragment = document.createDocumentFragment();
+                    div = document.createElement('div');
+                    div.setAttribute('id', 'system-designer-back');
+                    div.setAttribute('style', 'top:5px;left:10px;position:absolute;');
+
+                    a = document.createElement('a');
+                    /* jshint -W107 */
+                    a.setAttribute('href', 'javascript:systemDesignerBack()');
+                    /* jshint +W107 */
+                    a.setAttribute('style', 'text-decoration:none; color:#337AB7;');
+
+                    span = document.createElement('span');
+                    span.setAttribute('style', "font-family: 'Helvetica Neue';");
+                    span.textContent = ' < System Designer';
+
+                    a.appendChild(span);
+                    div.appendChild(a);
+                    docFragment.appendChild(div);
+
+                    document.body.appendChild(docFragment);
+                }
+            }, 2000);
         }
 
         // case of electron

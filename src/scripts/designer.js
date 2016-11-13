@@ -3969,6 +3969,8 @@ runtime.on('ready', function () {
         if (system) {
             this.clear();
 
+            window.scrollTo(0, 0);
+
             title = 'system ' + system.name();
             if (title !== document.title) {
                 document.title = title;
@@ -4035,6 +4037,7 @@ runtime.on('ready', function () {
                                             "_name": "RuntimeComponent",
                                             "_core": true,
                                             "classInfo": "property",
+                                            "id": "property",
                                             "destroy": "method",
                                             "error": "event",
                                             "init": "method",
@@ -4116,6 +4119,12 @@ runtime.on('ready', function () {
                                                 "readOnly": false,
                                                 "mandatory": false,
                                                 "default": {}
+                                            },
+                                            "id": {
+                                                "type": "string",
+                                                "readOnly": true,
+                                                "mandatory": false,
+                                                "default": ""
                                             },
                                             "destroy": {
                                                 "params": []

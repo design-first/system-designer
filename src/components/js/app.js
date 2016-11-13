@@ -12,4 +12,4 @@ var runtime = require('system-runtime');
 runtime.require('logger').level('{{logLevel}}');
 
 // install and start the system
-runtime.install({{system}}, true);
+runtime.install({{system}});
