@@ -3727,7 +3727,7 @@ runtime.on('ready', function () {
 
                         function _existBehavior(state, space, model) {
                             var result = false;
-
+                         
                             if (_isModel(space)) {
                                 for (id in designer.system().behaviors()) {
                                     if (designer.system().behaviors()[id].state === state && designer.system().behaviors()[id].component === model) {
@@ -3857,7 +3857,7 @@ runtime.on('ready', function () {
                                 }
                             } else {
                                 componentId = designer.system().id();
-                                if (_existBehavior(state, designer.space(), model)) {
+                                if (_existBehavior(state, componentId, model)) {
                                     canCreate = false;
                                 }
                             }
@@ -4352,7 +4352,7 @@ runtime.on('ready', function () {
                 // message for other windows
                 this.require('storage').set('system-designer-message', message);
 
-                // message for client debug
+                // message for client uggug
                 if (this.require('designer').debugWindow()) {
                     this.require('designer').debugWindow().postMessage(JSON.stringify(message), '*');
                 }
