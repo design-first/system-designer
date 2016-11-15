@@ -1265,7 +1265,7 @@ runtime.on('ready', function () {
 
         // focus
         $('#designer-dialog-behavior-creation-modal').on('shown.bs.modal', function () {
-            $('#designer-dialog-behavior-creation-state')[0].focus();
+            $('#designer-dialog-behavior-creation-state').focus();
         });
     });
 
