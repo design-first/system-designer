@@ -239,10 +239,10 @@ runtime.on('ready', function () {
                 'editor': CodeMirror($('#designer-editor')[0], {
                     lineNumbers: true,
                     styleActiveLine: true,
-                        'mode': 'application/json',
-                        'theme': 'eclipse',
-                        'tabSize': 2,
-                        'autoCloseBrackets': true
+                    'mode': 'application/json',
+                    'theme': 'eclipse',
+                    'tabSize': 2,
+                    'autoCloseBrackets': true
                 })
             });
         } else {
@@ -426,6 +426,18 @@ runtime.on('ready', function () {
                     message.danger('invalid value for the property \'' + property + '\’.<br>Authorized values are: \'property\', \'link\', \'collection\', \'event\' and \'method\'.');
                     return;
                 }
+            }
+        }
+
+        for (property in schema) {
+            if (property.indexOf(' ') !== -1) {
+                message.danger('invalid property name \'' + property + '\’. <br>Space is not authorized in the name of a property.');
+                return;
+            }
+            propVal = schema[property];
+            if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) !== -1 && property.indexOf('_') === 0) {
+                message.danger('invalid property name \'' + property + '\’. <br>A property name can not start with \'_\'.');
+                return;
             }
         }
 
