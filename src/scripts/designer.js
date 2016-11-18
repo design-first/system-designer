@@ -501,6 +501,9 @@ runtime.on('ready', function () {
             $('#designer-dialog-import-modal-from-file').attr('checked', false);
             $('#designer-dialog-import-modal-from-library').attr('checked', true);
         }
+        if (!this.require('designer').system()) {
+            $('#designer-dialog-import-file-modal-merge').hide();
+        }
 
         // systems events  
         var callbackSystemEvent = function (event) {
