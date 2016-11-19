@@ -3550,11 +3550,13 @@ runtime.on('ready', function () {
                                     "schema": {
                                         "property1": {
                                             "type": "string",
-                                            "mandatory": true
+                                            "mandatory": false,
+                                            "default": ""
                                         },
                                         "property2": {
                                             "type": "string",
-                                            "mandatory": true
+                                            "mandatory": false,
+                                            "default": ""
                                         }
                                     }
                                 };
@@ -3730,7 +3732,7 @@ runtime.on('ready', function () {
 
                         function _existBehavior(state, space, model) {
                             var result = false;
-                         
+
                             if (_isModel(space)) {
                                 for (id in designer.system().behaviors()) {
                                     if (designer.system().behaviors()[id].state === state && designer.system().behaviors()[id].component === model) {
