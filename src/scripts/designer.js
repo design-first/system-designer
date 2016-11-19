@@ -1487,7 +1487,7 @@ runtime.on('ready', function () {
                         result = '<div class="list-group-item" style="text-align: left">' + propName + val.replace('@', '') + '</div>';
                     }
                 } else {
-                    if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(val) === -1) {
+                    if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'date'].indexOf(val) === -1) {
                         result = '<div class="list-group-item" style="text-align: left">' + propName + '<a href="#' + that.require('designer').system().id() + '#types#' + val + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + val + '</a></div>';
                     } else {
                         result = '<div class="list-group-item" style="text-align: left">' + propName + val + '</div>';
@@ -1501,7 +1501,7 @@ runtime.on('ready', function () {
                         result = '<div class="list-group-item" style="text-align: left">' + propName + val[0].replace('@', '') + ' [ ]</div>';
                     }
                 } else {
-                    if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(val[0]) === -1) {
+                    if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'date'].indexOf(val[0]) === -1) {
                         result = '<div class="list-group-item" style="text-align: left">' + propName + '<a href="#' + that.require('designer').system().id() + '#types#' + val[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + val[0].replace('@', '') + '</a> [ ]</div>';
                     } else {
                         result = '<div class="list-group-item" style="text-align: left">' + propName + val[0] + ' [ ]</div>';
@@ -1778,7 +1778,7 @@ runtime.on('ready', function () {
             if (param.type.indexOf('@') !== -1) {
                 params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(param.type.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
             } else {
-                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam'].indexOf(param.type) === -1) {
+                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'date'].indexOf(param.type) === -1) {
                     params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#types#' + param.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
                 } else {
                     params = params + param.name + ' : ' + param.type + ', ';
@@ -1813,7 +1813,7 @@ runtime.on('ready', function () {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';
                                 }
                             } else {
-                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type) === -1) {
+                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'date'].indexOf(propVal.type) === -1) {
                                     if (htmlId !== '123751cb591de26') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type + '</a></div>';
                                     } else {
@@ -1831,7 +1831,7 @@ runtime.on('ready', function () {
                                     attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';
                                 }
                             } else {
-                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css'].indexOf(propVal.type[0]) === -1) {
+                                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'date'].indexOf(propVal.type[0]) === -1) {
                                     if (htmlId !== '123751cb591de26') {
                                         attributes = attributes + '<div class="list-group-item" style="text-align: left">+ ' + propName + ' : <a href="#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';
                                     } else {
