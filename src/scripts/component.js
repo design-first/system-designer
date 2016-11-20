@@ -173,8 +173,44 @@ runtime.on('ready', function () {
     // MenuItem
     var MenuItem = this.require('MenuItem');
     MenuItem.on('click', function () {
-        this.require('designer').oldContext(this.require('designer').context());
-        this.require('designer').context(this.name());
+        var designer = this.require('designer'),
+            editor = this.require('editor'),
+            extra = null,
+            oldContext = '',
+            context = '',
+            val = '';
+
+        designer.oldContext(designer.context());
+        designer.context(this.name());
+
+        extra = designer.store().extra();
+        oldContext = designer.oldContext();
+        context = designer.context();
+        val = editor.getValue();
+
+        if (oldContext) {
+            if (oldContext !== 'component') {
+                if (extra[oldContext] === 'json') {
+                    designer.store().data()[oldContext] = JSON.parse(editor.getValue());
+                } else {
+                    designer.store().data()[oldContext] = editor.getValue();
+                }
+            } else {
+                designer.store().data(JSON.parse(editor.getValue()));
+            }
+        }
+
+        component = designer.store().data();
+
+        if (context !== 'component') {
+            if (extra[context] === 'json') {
+                editor.setEditor(extra[context], JSON.stringify(component[context], null, '\t'), 2);
+            } else {
+                editor.setEditor(extra[context], component[context], 1, true);
+            }
+        } else {
+            editor.setEditor('json', JSON.stringify(designer.store().data(), null, '\t'), 2);
+        }
     });
 
     // ToolBar
@@ -263,20 +299,6 @@ runtime.on('ready', function () {
 
     Workspace.on('render', function () {
         this.require('editor').render();
-    });
-
-    // Menu items
-    this.require('1f1781882618113').on('click', function () {
-        var editor = this.require('editor'),
-            designer = this.require('designer'),
-            oldContext = designer.oldContext();
-
-        // old context
-        if (oldContext && oldContext !== 'component') {
-            designer.store().data()[oldContext] = editor.getValue();
-        }
-
-        editor.setEditor('json', JSON.stringify(designer.store().data(), null, '\t'), 2);
     });
 
     // Server
@@ -385,28 +407,6 @@ runtime.on('ready', function () {
                 });
                 // render
                 self.require('designer').menubar().render();
-
-                // add events
-                var callback = function (event) {
-                    var editor = null,
-                        component = null;
-
-                    editor = self.require('editor');
-
-                    try {
-                        designer.store().data()[propName] = JSON.parse(editor.getValue())[propName];
-                    } catch (e) {
-
-                    }
-
-                    component = self.require('designer').store().data();
-
-                    editor.setEditor(props[propName], component[propName], 1, true);
-                };
-                for (propName in props) {
-                    menuitem = document.getElementById('designer-menu-item-property-' + propName);
-                    menuitem.addEventListener('click', callback);
-                }
             }
         }
 
@@ -426,6 +426,9 @@ runtime.on('ready', function () {
                     case 'css':
                         result[property] = 'css';
                         break;
+                    case 'json':
+                        result[property] = 'json';
+                        break;
                     default:
                         break;
                 }
@@ -442,7 +445,11 @@ runtime.on('ready', function () {
             editor.setEditor('json', JSON.stringify(component, null, '\t'), 2);
         } else {
             propName = Object.keys(result)[0];
-            editor.setEditor(result[propName], component[propName], 1, true);
+            if (result[propName] === 'json') {
+                editor.setEditor(result[propName], JSON.stringify(component[propName], null, '\t'), 2);
+            } else {
+                editor.setEditor(result[propName], component[propName], 1, true);
+            }
         }
     }, true);
 
@@ -544,12 +551,17 @@ runtime.on('ready', function () {
     Designer.on('save', function () {
         var val = this.require('editor').getValue(),
             designer = this.require('designer'),
-            store = designer.store().data();
+            store = designer.store().data(),
+            extra = designer.store().extra();
 
         if (designer.context() === 'component') {
             store = JSON.parse(val);
         } else {
-            store[designer.context()] = val;
+            if (extra[designer.context()] === 'json') {
+                store[designer.context()] = JSON.parse(val);
+            } else {
+                store[designer.context()] = val;
+            }
         }
         designer.store().data(store);
 
