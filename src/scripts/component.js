@@ -308,6 +308,7 @@ runtime.on('ready', function () {
             channel = null,
             id = '',
             system = '',
+            types = null,
             title = '',
             collection = '',
             self = this,
@@ -429,7 +430,19 @@ runtime.on('ready', function () {
                     case 'json':
                         result[property] = 'json';
                         break;
+                    case 'object':
+                        result[property] = 'json';
+                        break;
                     default:
+                        // case of object / json type
+                        types = system.types;
+                        if (
+                            types &&
+                            typeof types[model[property].type] !== 'undefined' &&
+                            (types[model[property].type].type === 'object' || types[model[property].type].type === 'json')
+                        ) {
+                            result[property] = 'json';
+                        }
                         break;
                 }
             }
@@ -504,9 +517,22 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
+        var systemId = '',
+            System = null,
+            system = null,
+            sys = null;
+
         if (this.isCordova()) {
             this.updateCordovaContext();
         }
+
+        // set system
+        systemId = document.location.href.split('#')[3];
+        system = this.require('storage').get(systemId);
+        System = this.require('System');
+        sys = new System(system);
+        this.system(sys);
+
         this.toolbar().render();
         this.workspace().render();
         this.server().start();
