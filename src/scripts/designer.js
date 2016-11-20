@@ -686,6 +686,10 @@ runtime.on('ready', function () {
         dom.addEventListener('click', function (event) {
             this.importSystem();
         }.bind(this));
+
+        if (!this.require('designer').system()) {
+            $('#designer-dialog-drop-file-modal-merge').hide();
+        }
     });
 
     DialogDropFile.on('mergeSystem', function () {
@@ -3242,10 +3246,18 @@ runtime.on('ready', function () {
 
                     var DialogDropFile = that.require('DialogDropFile');
 
-                    DialogDropFile = new DialogDropFile({
-                        'title': 'A system has been found',
-                        'message': 'What do you want to do ?'
-                    });
+                    if (!that.require('designer').system()) {
+                        DialogDropFile = new DialogDropFile({
+                            'title': 'A system has been found',
+                            'message': 'You can import the system.'
+                        });
+                    } else {
+                        DialogDropFile = new DialogDropFile({
+                            'title': 'A system has been found',
+                            'message': 'You can import the system or compose it with the current system.'
+                        });
+                    }
+
                     DialogDropFile.data(sys);
                     DialogDropFile.show();
                 };
