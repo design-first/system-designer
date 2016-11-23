@@ -413,9 +413,16 @@ runtime.on('ready', function () {
 
     Designer.on('save', function () {
         var val = this.require('editor').getValue(),
-            type = JSON.parse(val),
+            type = null,
             designer = this.require('designer'),
             message = this.require('message');
+
+        try {
+            type = JSON.parse(val);
+        } catch (e) {
+            message.danger('Can not save your type: your type has an invalid structure.');
+            return;
+        }
 
         if (!type.name) {
             message.danger('The property \'name\' is missing.');

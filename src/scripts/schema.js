@@ -415,9 +415,16 @@ runtime.on('ready', function () {
         var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             message = this.require('message'),
-            schema = JSON.parse(val),
+            schema = null,
             property = '',
             propVal = '';
+
+        try {
+            schema = JSON.parse(val);
+        } catch (e) {
+            message.danger('Can not save your schema: your schema has an invalid structure.');
+            return;
+        }
 
         for (property in schema) {
             if (schema.hasOwnProperty(property) && property.indexOf('_') !== 0) {

@@ -585,7 +585,12 @@ runtime.on('ready', function () {
             extra = designer.store().extra();
 
         if (designer.context() === 'component') {
-            store = JSON.parse(val);
+            try {
+                store = JSON.parse(val);
+            } catch (e) {
+                message.danger('Can not save your component: your component has an invalid structure.');
+                return;
+            }
 
             if (!store._id) {
                 message.danger('The property \'_id\' is missing.');

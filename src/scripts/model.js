@@ -410,8 +410,15 @@ runtime.on('ready', function () {
         var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             message = this.require('message'),
-            model = JSON.parse(val),
+            model = null,
             property = '';
+
+        try {
+            model = JSON.parse(val);
+        } catch (e) {
+            message.danger('Can not save your model: your model has an invalid structure.');
+            return;
+        }
 
         if (!model._name) {
             message.danger('The property \'_name\' is missing.');
