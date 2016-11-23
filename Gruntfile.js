@@ -773,29 +773,29 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            options: {
-                banner:
-                '/*\n' +
-                '* System Designer\n' +
-                '*\n' +
-                '* https://system-designer.github.io\n' +
-                '*\n' +
-                '* Copyright 2016 Erwan Carriou\n' +
-                '*\n' +
-                '* Licensed under the Apache License, Version 2.0 (the "License");\n' +
-                '* you may not use this file except in compliance with the License.\n' +
-                '* You may obtain a copy of the License at\n' +
-                '*\n' +
-                '*    http://www.apache.org/licenses/LICENSE-2.0\n' +
-                '*\n' +
-                '* Unless required by applicable law or agreed to in writing, software\n' +
-                '* distributed under the License is distributed on an "AS IS" BASIS,\n' +
-                '* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n' +
-                '* See the License for the specific language governing permissions and\n' +
-                '* limitations under the License.\n' +
-                '*/\n'
-            },
-            dist: {
+            web: {
+                options: {
+                    banner:
+                    '/*\n' +
+                    '* System Designer\n' +
+                    '*\n' +
+                    '* https://system-designer.github.io\n' +
+                    '*\n' +
+                    '* Copyright 2016 Erwan Carriou\n' +
+                    '*\n' +
+                    '* Licensed under the Apache License, Version 2.0 (the "License");\n' +
+                    '* you may not use this file except in compliance with the License.\n' +
+                    '* You may obtain a copy of the License at\n' +
+                    '*\n' +
+                    '*    http://www.apache.org/licenses/LICENSE-2.0\n' +
+                    '*\n' +
+                    '* Unless required by applicable law or agreed to in writing, software\n' +
+                    '* distributed under the License is distributed on an "AS IS" BASIS,\n' +
+                    '* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n' +
+                    '* See the License for the specific language governing permissions and\n' +
+                    '* limitations under the License.\n' +
+                    '*/\n'
+                },
                 files: {
                     'dist/designer/scripts/behavior.min.js': ['src/scripts/behavior.js'],
                     'dist/designer/scripts/cordova-tablet.min.js': ['src/scripts/cordova-tablet.js'],
@@ -806,6 +806,18 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/system.min.js': ['src/scripts/system.js'],
                     'dist/designer/scripts/type.min.js': ['src/scripts/type.js'],
                     'dist/designer/scripts/app.min.js': ['src/scripts/app.js']
+                }
+            },
+            cordova: {
+                files: {
+                    'dist/designer/lib/codemirror/codemirror.min.js': ['node_modules/codemirror/lib/codemirror.js'],
+                    'dist/designer/lib/codemirror/active-line.min.js': ['node_modules/codemirror/addon/selection/active-line.js'],
+                    'dist/designer/lib/codemirror/javascript.min.js': ['node_modules/codemirror/mode/javascript/javascript.js'],
+                    'dist/designer/lib/codemirror/textile.min.js': ['node_modules/codemirror/mode/textile/textile.js'],
+                    'dist/designer/lib/codemirror/css.min.js': ['node_modules/codemirror/mode/css/css.js'],
+                    'dist/designer/lib/codemirror/htmlmixed.min.js': ['node_modules/codemirror/mode/htmlmixed/htmlmixed.js'],
+                    'dist/designer/lib/codemirror/xml.min.js': ['node_modules/codemirror/mode/xml/xml.js'],
+                    'dist/designer/lib/codemirror/closebrackets.min.js': ['node_modules/codemirror/addon/edit/closebrackets.js']
                 }
             }
         },
@@ -1349,44 +1361,12 @@ module.exports = function (grunt) {
             },
             'cordova-lib': {
                 files: [{
-                    src: 'node_modules/codemirror/lib/codemirror.js',
-                    dest: 'dist/designer/lib/codemirror/codemirror.js'
-                },
-                {
                     src: 'node_modules/codemirror/lib/codemirror.css',
                     dest: 'dist/designer/lib/codemirror/codemirror.css'
                 },
                 {
-                    src: 'node_modules/codemirror/addon/selection/active-line.js',
-                    dest: 'dist/designer/lib/codemirror/active-line.js'
-                },
-                {
-                    src: 'node_modules/codemirror/mode/javascript/javascript.js',
-                    dest: 'dist/designer/lib/codemirror/javascript.js'
-                },
-                {
-                    src: 'node_modules/codemirror/mode/textile/textile.js',
-                    dest: 'dist/designer/lib/codemirror/textile.js'
-                },
-                {
-                    src: 'node_modules/codemirror/mode/css/css.js',
-                    dest: 'dist/designer/lib/codemirror/css.js'
-                },
-                {
-                    src: 'node_modules/codemirror/mode/htmlmixed/htmlmixed.js',
-                    dest: 'dist/designer/lib/codemirror/htmlmixed.js'
-                },
-                {
-                    src: 'node_modules/codemirror/mode/xml/xml.js',
-                    dest: 'dist/designer/lib/codemirror/xml.js'
-                },
-                {
                     src: 'node_modules/codemirror/theme/eclipse.css',
                     dest: 'dist/designer/lib/codemirror/eclipse.css'
-                },
-                {
-                    src: 'node_modules/codemirror/addon/edit/closebrackets.js',
-                    dest: 'dist/designer/lib/codemirror/closebrackets.js'
                 }]
             }
         },
@@ -1478,7 +1458,7 @@ module.exports = function (grunt) {
         'copy:video-web',
         'jsbeautifier',
         'jshint',
-        'uglify'
+        'uglify:web'
     ]);
 
     // build for electron
@@ -1495,7 +1475,7 @@ module.exports = function (grunt) {
         'copy:video',
         'jsbeautifier',
         'jshint',
-        'uglify',
+        'uglify:web',
         'concat:electron-app',
         'concat:electron-behavior',
         'concat:electron-component',
@@ -1521,7 +1501,8 @@ module.exports = function (grunt) {
         'copy:system',
         'jsbeautifier',
         'jshint',
-        'uglify',
+        'uglify:web',
+        'uglify:cordova',
         'concat:cordova-app',
         'concat:cordova-behavior',
         'concat:cordova-component',

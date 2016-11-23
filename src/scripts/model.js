@@ -410,7 +410,8 @@ runtime.on('ready', function () {
         var val = this.require('editor').getValue(),
             designer = this.require('designer'),
             message = this.require('message'),
-            model = JSON.parse(val);
+            model = JSON.parse(val),
+            property = '';
 
         if (!model._name) {
             message.danger('The property \'_name\' is missing.');
@@ -420,6 +421,18 @@ runtime.on('ready', function () {
         if (!model._id) {
             message.danger('The property \'_id\' is missing.');
             return;
+        }
+
+        for (property in model) {
+            if (property.indexOf(' ') !== -1) {
+                message.danger('Invalid property name \'' + property + '\’. <br>Space is not authorized in the name of a property.');
+                return;
+            }
+            propVal = model[property];
+            if (typeof propVal === 'object' && !Array.isArray(propVal) && property.indexOf('_') === 0) {
+                message.danger('Invalid property name \'' + property + '\’. <br>A property name can not start with \'_\'.');
+                return;
+            }
         }
 
         if (designer.store().data()._name === model._name) {
@@ -432,9 +445,9 @@ runtime.on('ready', function () {
             }
 
             this.require('channel').$editorUpdateModel(designer.store().uuid(), designer.store().data());
-            message.success('model saved.');
+            message.success('Model saved.');
         } else {
-            message.danger('you can not modify the name of a model.');
+            message.danger('You can not modify the name of a model.');
         }
     });
 

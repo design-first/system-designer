@@ -423,7 +423,7 @@ runtime.on('ready', function () {
             if (schema.hasOwnProperty(property) && property.indexOf('_') !== 0) {
                 propVal = schema[property];
                 if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) === -1) {
-                    message.danger('invalid value for the property \'' + property + '\’.<br>Authorized values are: \'property\', \'link\', \'collection\', \'event\' and \'method\'.');
+                    message.danger('Invalid value for the property \'' + property + '\’.<br>Authorized values are: \'property\', \'link\', \'collection\', \'event\' and \'method\'.');
                     return;
                 }
             }
@@ -431,12 +431,12 @@ runtime.on('ready', function () {
 
         for (property in schema) {
             if (property.indexOf(' ') !== -1) {
-                message.danger('invalid property name \'' + property + '\’. <br>Space is not authorized in the name of a property.');
+                message.danger('Invalid property name \'' + property + '\’. <br>Space is not authorized in the name of a property.');
                 return;
             }
             propVal = schema[property];
             if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) !== -1 && property.indexOf('_') === 0) {
-                message.danger('invalid property name \'' + property + '\’. <br>A property name can not start with \'_\'.');
+                message.danger('Invalid property name \'' + property + '\’. <br>A property name can not start with \'_\'.');
                 return;
             }
         }
@@ -466,7 +466,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').$editorUpdateSchema(designer.store().uuid(), designer.store().data());
-        message.success('schema saved.');
+        message.success('Schema saved.');
     });
 
     // start

@@ -439,7 +439,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').$editorUpdateType(designer.store().uuid(), designer.store().data());
-        message.success('type saved.');
+        message.success('Type saved.');
     });
 
     // start

@@ -433,6 +433,9 @@ runtime.on('ready', function () {
                     case 'object':
                         result[property] = 'json';
                         break;
+                    case 'text':
+                        result[property] = 'text';
+                        break;
                     default:
                         // case of object / json type
                         types = system.types;
@@ -577,11 +580,21 @@ runtime.on('ready', function () {
     Designer.on('save', function () {
         var val = this.require('editor').getValue(),
             designer = this.require('designer'),
+            message = this.require('message'),
             store = designer.store().data(),
             extra = designer.store().extra();
 
         if (designer.context() === 'component') {
             store = JSON.parse(val);
+
+            if (!store._id) {
+                message.danger('The property \'_id\' is missing.');
+                return;
+            }
+            if (store._id && store._id.indexOf(' ') !== -1) {
+                message.danger('Invalid \'_id\'. <br>Space is not authorized in the value of \'_id\'.');
+                return;
+            }
         } else {
             if (extra[designer.context()] === 'json') {
                 store[designer.context()] = JSON.parse(val);
@@ -601,7 +614,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').$editorUpdateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());
-        this.require('message').success('component saved.');
+        this.require('message').success('Component saved.');
     });
 
     // start

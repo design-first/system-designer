@@ -887,9 +887,9 @@ runtime.on('ready', function () {
             designer.updateRouter();
 
             this.hide();
-            message.success('composition of the system is done.');
+            message.success('Composition of the system is done.');
         } else {
-            message.danger('the system you try to import is invalid.');
+            message.danger('The system you try to import is invalid.');
         }
     });
 
@@ -921,7 +921,7 @@ runtime.on('ready', function () {
         this.hide();
         designer.save();
 
-        message.success('importation of the system is done.');
+        message.success('Importation of the system is done.');
     });
 
     DialogDropFile.on('show', function () {
@@ -3414,7 +3414,7 @@ runtime.on('ready', function () {
                         designer.spaces().render();
                         designer.workspace().refresh();
 
-                        this.require('message').success('system created. You can now begin to create schemas.');
+                        this.require('message').success('System created. You can now begin to create schemas.');
                     }
                 });
                 break;
@@ -3506,7 +3506,7 @@ runtime.on('ready', function () {
 
                             designer.updateRouter();
 
-                            this.require('message').success('schema created. A model has been also generated.');
+                            this.require('message').success('Schema created. A model has been also generated.');
                         }
                     });
                 }
@@ -3595,7 +3595,7 @@ runtime.on('ready', function () {
                             designer.spaces().render();
                             designer.workspace().refresh();
 
-                            this.require('message').success('type created. You can use it in your model.');
+                            this.require('message').success('Type created. You can use it in your model.');
                         }
                     });
                 }
@@ -3675,7 +3675,7 @@ runtime.on('ready', function () {
 
                         this.require('channel').$designerCreateComponent(modelName, component);
                     } else {
-                        this.require('message').warning('there is no schema. Create a schema before creating a component.');
+                        this.require('message').warning('There is no schema. Create a schema before creating a component.');
                     }
                 }
                 break;
@@ -4017,7 +4017,7 @@ runtime.on('ready', function () {
                     }
 
                     if (space === '' && length > 0) {
-                        this.require('message').warning('system not found.');
+                        this.require('message').warning('System not found.');
                     }
 
                     break;
@@ -4340,7 +4340,7 @@ runtime.on('ready', function () {
 
             systems = this.require('storage').get('system-designer-systems');
             if (systems && systems.systems && systems.systems.length) {
-                this.require('message').warning('system not found.');
+                this.require('message').warning('System not found.');
             }
         }
     });
@@ -4748,7 +4748,7 @@ runtime.on('ready', function () {
                     this.hide();
                     designer.save();
 
-                    message.success('importation of the system is done.');
+                    message.success('Importation of the system is done.');
                 });
             }
         });
