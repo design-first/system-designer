@@ -3537,7 +3537,15 @@ runtime.on('ready', function () {
                             type = {},
                             types = designer.system().types(),
                             ModelType = null,
-                            modelType = null;
+                            modelType = null,
+                            id = '';
+
+                        function generateId() {
+                            function gen() {
+                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
+                            }
+                            return gen() + gen() + gen();
+                        }
 
                         // get value
                         name = $('#designer-dialog-type-creation-name').val();
@@ -3548,15 +3556,20 @@ runtime.on('ready', function () {
                         name = name.replace(/ /gi, '_');
 
                         if (name) {
+
+                            id = generateId().toString();
+
                             // set system
                             if (isEnum) {
                                 type = {
+                                    "_id": id,
                                     "name": name,
                                     "type": "string",
                                     "value": ["value1", "value2"]
                                 };
                             } else {
                                 type = {
+                                    "_id": id,
                                     "name": name,
                                     "type": "object",
                                     "schema": {
