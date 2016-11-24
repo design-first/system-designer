@@ -434,6 +434,11 @@ runtime.on('ready', function () {
             return;
         }
 
+        if (type._id && type._id.indexOf(' ') !== -1) {
+            message.danger('Invalid \'_id\'. <br>Space is not authorized in the value of \'_id\'.');
+            return;
+        }
+
         designer.store().data(type);
 
         // check if ID change
