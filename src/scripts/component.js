@@ -414,28 +414,31 @@ runtime.on('ready', function () {
         designer.store().uuid(id);
         designer.store().collection(collection);
         designer.store().data(component);
-
+        
         for (property in component) {
             if (model[property] && model[property].type) {
-                switch (model[property].type) {
-                    case 'html':
+                switch (true) {
+                    case model[property].type === 'html':
                         result[property] = 'html';
                         break;
-                    case 'javascript':
+                    case model[property].type === 'javascript':
                         result[property] = 'javascript';
                         break;
-                    case 'css':
+                    case model[property].type === 'css':
                         result[property] = 'css';
                         break;
-                    case 'json':
+                    case model[property].type === 'json':
                         result[property] = 'json';
                         break;
-                    case 'object':
+                    case model[property].type === 'object':
                         result[property] = 'json';
                         break;
-                    case 'text':
+                    case model[property].type === 'text':
                         result[property] = 'text';
                         break;
+                    //case Array.isArray(model[property].type):
+                    //result[property] = 'array';
+                    //break;
                     default:
                         // case of object / json type
                         types = system.types;

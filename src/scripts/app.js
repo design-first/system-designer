@@ -320,8 +320,14 @@ runtime.on('ready', function () {
         this.require('logger').on('warn', function (message) {
             if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {
                 var date = new Date(),
-                    time = date.toTimeString();
+                    time = date.toTimeString(),
+                    ms = date.getMilliseconds();
+
                 time = time.split(' ')[0].trim();
+                time = time.replace(':', 'h');
+                time = time.replace(':', 'm');
+                time = time.split('m')[0].trim();
+                time = time + ':' + ms;
 
                 this.require('channel').$appLogWarn('[' + time + '] ' + message);
             }
@@ -329,8 +335,14 @@ runtime.on('ready', function () {
 
         this.require('logger').on('error', function (message) {
             var date = new Date(),
-                time = date.toTimeString();
+                time = date.toTimeString(),
+                ms = date.getMilliseconds();
+
             time = time.split(' ')[0].trim();
+            time = time.replace(':', 'h');
+            time = time.replace(':', 'm');
+            time = time.split('m')[0].trim();
+            time = time + ':' + ms;
 
             this.require('channel').$appLogError('[' + time + '] ' + message);
         }, true, true);
@@ -345,8 +357,14 @@ runtime.on('ready', function () {
         this.require('logger').on('debug', function (message) {
             if (this.level() === 'debug') {
                 var date = new Date(),
-                    time = date.toTimeString();
+                    time = date.toTimeString(),
+                    ms = date.getMilliseconds();
+
                 time = time.split(' ')[0].trim();
+                time = time.replace(':', 'h');
+                time = time.replace(':', 'm');
+                time = time.split('m')[0].trim();
+                time = time + ':' + ms;
 
                 this.require('channel').$appLogDebug('[' + time + '] ' + message);
             }
@@ -355,8 +373,14 @@ runtime.on('ready', function () {
         this.require('logger').on('info', function (message) {
             if (this.level() === 'info' || this.level() === 'debug') {
                 var date = new Date(),
-                    time = date.toTimeString();
+                    time = date.toTimeString(),
+                    ms = date.getMilliseconds();
+
                 time = time.split(' ')[0].trim();
+                time = time.replace(':', 'h');
+                time = time.replace(':', 'm');
+                time = time.split('m')[0].trim();
+                time = time + ':' + ms;
 
                 this.require('channel').$appLogInfo('[' + time + '] ' + message);
             }

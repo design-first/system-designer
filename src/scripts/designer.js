@@ -3833,7 +3833,7 @@ runtime.on('ready', function () {
                                 }
 
                                 if (schemas[schemaId][state] === 'collection') {
-                                    params = 'size, value, event';
+                                    params = 'value, type';
                                 }
 
                                 if (schemas[schemaId][state] === 'method') {
@@ -4401,7 +4401,7 @@ runtime.on('ready', function () {
             Log = this.require('Log');
             log = new Log({
                 'type': 'debug',
-                'log': message.replace('runtime:', '')
+                'log': message.replace('runtime:', '').replace(/\[[^\]]+\]/, '<strong>debug:</strong> ')
             });
 
             this.require('designer').logs().push(log);
@@ -4415,7 +4415,7 @@ runtime.on('ready', function () {
             Log = this.require('Log');
             log = new Log({
                 'type': 'info',
-                'log': message.replace('runtime:', '')
+                'log': message.replace('runtime:', '').replace(/\[[^\]]+\]/, '<strong>info:</strong> ')
             });
 
             this.require('designer').logs().push(log);
@@ -4429,7 +4429,7 @@ runtime.on('ready', function () {
             Log = this.require('Log');
             log = new Log({
                 'type': 'warn',
-                'log': message.replace('runtime:', '')
+                'log': message.replace('runtime:', '').replace(/\[[^\]]+\]/, '<strong>warning:</strong> ')
             });
 
             this.require('designer').logs().push(log);
@@ -4443,7 +4443,7 @@ runtime.on('ready', function () {
             Log = this.require('Log');
             log = new Log({
                 'type': 'error',
-                'log': message.replace('runtime:', '')
+                'log': message.replace('runtime:', '').replace(/\[[^\]]+\]/, '<strong>error:</strong> ')
             });
 
             this.require('designer').logs().push(log);
@@ -4810,7 +4810,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Designer.on('logs', function (index, id, action) {
+    Designer.on('logs', function logs(id, action) {
         var log = null,
             html = '';
 
