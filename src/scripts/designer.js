@@ -452,7 +452,7 @@ runtime.on('ready', function () {
             library = this.require(libraries[i]._id);
 
             list = list + '<a class="list-group-item" id="designer-dialog-import-file-modal-library-' + library.id() + '">' +
-                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURIComponent(library.source())).description + '</h4>' +
+                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURIComponent(library.source())).description.substr(0, 50) + '</h4>' +
                 '<p class="list-group-item-text">v' + JSON.parse(decodeURIComponent(library.source())).version + '</p>' +
                 '</a>';
         }
@@ -3703,6 +3703,7 @@ runtime.on('ready', function () {
                         var designer = this.require('designer'),
                             schemas = designer.system().schemas(),
                             models = designer.system().models(),
+                            modelDef = null,
                             behaviors = designer.system().behaviors(),
                             message = this.require('message'),
                             schemaId = '',
@@ -3803,7 +3804,7 @@ runtime.on('ready', function () {
                         model = _findSchemaId(designer.space());
                         state = $('#designer-dialog-behavior-creation-state').val();
                         componentId = designer.space();
-
+                        
                         if (model && state) {
 
                             uuid = generateId();
@@ -3812,10 +3813,11 @@ runtime.on('ready', function () {
 
                                 schemaId = _getSchemaId(model);
                                 modelId = _getModelId(model);
+                                modelDef = designer.getGeneratedModel(model);
 
                                 // params
-                                if (models[modelId][state]) {
-                                    methodDef = this.require('designer').getGeneratedModel(model)[state].params;
+                                if (modelDef[state]) {
+                                    methodDef = modelDef[state].params;
                                 }
                                 if (methodDef && methodDef.length) {
                                     length = methodDef.length;
@@ -3863,8 +3865,8 @@ runtime.on('ready', function () {
                                 }
 
                                 // body
-                                if (models[modelId][state]) {
-                                    result = models[modelId][state].result;
+                                if (modelDef[state]) {
+                                    result = modelDef[state].result;
                                 }
                                 if (result) {
                                     switch (result) {
@@ -6021,162 +6023,6 @@ runtime.on('ready', function () {
             $db.RuntimeMessage.insert(message);
         });
     }, true);
-
-    Designer.on('getGeneratedSchema', function getGeneratedSchema(schema) {
-        var schemaDef = null,
-            result = {},
-            i = 0,
-            length = 0,
-            propName = '';
-
-        function _getSchemaDef(name, schemas) {
-            var result = '',
-                id = '';
-
-            for (id in schemas) {
-                if (schemas[id]._name === name) {
-                    result = schemas[id];
-                    break;
-                }
-            }
-            return result;
-        }
-
-        function _searchParents(parents, states, schemas) {
-            var parent = '',
-                schemaDef = null,
-                i = 0,
-                length = 0;
-
-            length = parents.length;
-            for (i = 0; i < length; i++) {
-                parent = parents[i];
-                if (parent === 'RuntimeComponent') {
-                    result.init = 'init';
-                    result.destroy = 'destroy';
-                    result.error = 'error';
-                } else {
-                    schemaDef = _getSchemaDef(parent, schemas);
-
-                    for (propName in schemaDef) {
-                        if (propName.indexOf('_') !== 0) {
-                            result[propName] = schemaDef[propName];
-                        }
-                    }
-
-                    if (schemaDef._inherit) {
-                        _searchParents(schemaDef._inherit, result, schemas);
-                    }
-                }
-            }
-        }
-
-        schemaDef = _getSchemaDef(schema, this.system().schemas());
-
-        for (propName in schemaDef) {
-            if (propName.indexOf('_') !== 0) {
-                result[propName] = schemaDef[propName];
-            }
-        }
-
-        if (schemaDef._inherit) {
-            _searchParents(schemaDef._inherit, result, this.system().schemas());
-        }
-
-        return result;
-    });
-
-    Designer.on('getGeneratedModel', function getGeneratedModel(model) {
-        var modelDef = null,
-            result = {},
-            i = 0,
-            length = 0,
-            propName = '';
-
-        function _getInherit(name, schemas) {
-            var result = '',
-                id = '';
-
-            for (id in schemas) {
-                if (schemas[id]._name === name) {
-                    result = schemas[id]._inherit;
-                    break;
-                }
-            }
-            return result;
-        }
-
-        function _getModelDef(name, models) {
-            var result = '',
-                id = '';
-
-            for (id in models) {
-                if (models[id]._name === name) {
-                    result = models[id];
-                    break;
-                }
-            }
-            return result;
-        }
-
-        function _searchParents(parents, states, models, schemas) {
-            var parent = '',
-                modelDef = null,
-                i = 0,
-                length = 0;
-
-            length = parents.length;
-            for (i = 0; i < length; i++) {
-                parent = parents[i];
-                if (parent === 'RuntimeComponent') {
-                    result.init = {
-                        "params": [{
-                            "name": "conf",
-                            "type": "object"
-                        }]
-                    };
-
-                    result.destroy = {
-                        "params": []
-                    };
-
-                    result.error = {
-                        "params": [{
-                            "name": "data",
-                            "type": "errorParam"
-                        }]
-                    };
-
-                } else {
-                    modelDef = _getModelDef(parent, models);
-
-                    for (propName in modelDef) {
-                        if (propName.indexOf('_') !== 0 && typeof result[propName] === 'undefined') {
-                            result[propName] = modelDef[propName];
-                        }
-                    }
-
-                    if (_getInherit(parent, schemas)) {
-                        _searchParents(_getInherit(parent, schemas), result, models, schemas);
-                    }
-                }
-            }
-        }
-
-        modelDef = _getModelDef(model, this.system().models());
-
-        for (propName in modelDef) {
-            if (propName.indexOf('_') !== 0) {
-                result[propName] = modelDef[propName];
-            }
-        }
-
-        if (_getInherit(model, this.system().schemas())) {
-            _searchParents(_getInherit(model, this.system().schemas()), result, this.system().models(), this.system().schemas());
-        }
-
-        return result;
-    });
 
     // start
     system.on('start', function start() {

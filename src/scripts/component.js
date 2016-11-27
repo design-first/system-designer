@@ -189,7 +189,7 @@ runtime.on('ready', function () {
         val = editor.getValue();
 
         if (oldContext) {
-            if (oldContext !== 'component') {
+            if (oldContext !== 'runtimeComponent') {
                 if (extra[oldContext] === 'json') {
                     designer.store().data()[oldContext] = JSON.parse(editor.getValue());
                 } else {
@@ -202,7 +202,7 @@ runtime.on('ready', function () {
 
         component = designer.store().data();
 
-        if (context !== 'component') {
+        if (context !== 'runtimeComponent') {
             if (extra[context] === 'json') {
                 editor.setEditor(extra[context], JSON.stringify(component[context], null, '\t'), 2);
             } else {
@@ -357,19 +357,7 @@ runtime.on('ready', function () {
 
         system = this.require('storage').get(systemId);
         component = system.components[collection][id];
-        model = _findModel(collection, this.require('storage').get(systemId));
-
-        function _findModel(name, system) {
-            var result = {},
-                modelId = '';
-
-            for (modelId in system.models) {
-                if (system.models[modelId]._name === name) {
-                    result = system.models[modelId];
-                }
-            }
-            return result;
-        }
+        model = designer.getGeneratedModel(collection);
 
         function _init(props) {
             var propName = '',
@@ -587,7 +575,7 @@ runtime.on('ready', function () {
             store = designer.store().data(),
             extra = designer.store().extra();
 
-        if (designer.context() === 'component') {
+        if (designer.context() === 'runtimeComponent') {
             try {
                 store = JSON.parse(val);
             } catch (e) {
