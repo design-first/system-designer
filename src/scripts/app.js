@@ -110,7 +110,7 @@ runtime.on('ready', function () {
         }
 
         // get system
-        sysid = document.location.href.split('#')[1].split('?')[0];
+        sysid = document.location.href.split('#')[1].split('?')[0].split('/')[0];
         system = this.require('storage').get(sysid);
         delete system.classInfo;
 

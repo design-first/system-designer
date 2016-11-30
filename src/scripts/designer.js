@@ -3564,7 +3564,7 @@ runtime.on('ready', function () {
                                 type = {
                                     "_id": id,
                                     "name": name,
-                                    "type": "string",
+                                    "type": "any",
                                     "value": ["value1", "value2"]
                                 };
                             } else {
@@ -3574,12 +3574,12 @@ runtime.on('ready', function () {
                                     "type": "object",
                                     "schema": {
                                         "property1": {
-                                            "type": "string",
+                                            "type": "any",
                                             "mandatory": false,
                                             "default": ""
                                         },
                                         "property2": {
-                                            "type": "string",
+                                            "type": "any",
                                             "mandatory": false,
                                             "default": ""
                                         }
@@ -3626,6 +3626,7 @@ runtime.on('ready', function () {
                         modelName = '',
                         schemaName = '',
                         uuid = '',
+                        modelDef = null,
                         schemaDef = null;
 
                     // get value
@@ -3656,9 +3657,13 @@ runtime.on('ready', function () {
                             }
                         }
                         propertyNames.sort();
+                        modelDef = designer.getGeneratedModel(modelName);
+
                         length = propertyNames.length;
                         for (var i = 0; i < length; i++) {
-                            component[propertyNames[i]] = designer.getGeneratedModel(modelName)[propertyNames[i]].default;
+                            if (modelDef && modelDef[propertyNames[i]]) {
+                                component[propertyNames[i]] = modelDef[propertyNames[i]].default;
+                            }
                         }
 
                         if (!components[modelName]) {
@@ -3804,7 +3809,7 @@ runtime.on('ready', function () {
                         model = _findSchemaId(designer.space());
                         state = $('#designer-dialog-behavior-creation-state').val();
                         componentId = designer.space();
-                        
+
                         if (model && state) {
 
                             uuid = generateId();
@@ -3896,14 +3901,25 @@ runtime.on('ready', function () {
 
                             if (canCreate) {
                                 // set model
-                                behavior = {
-                                    "_id": uuid,
-                                    "component": componentId,
-                                    "state": state,
-                                    "action": "function " + state + "(" + params + ") { \n" + body + "}",
-                                    "useCoreAPI": false,
-                                    "core": false
-                                };
+                                if (state !== 'destroy') {
+                                    behavior = {
+                                        "_id": uuid,
+                                        "component": componentId,
+                                        "state": state,
+                                        "action": "function " + state + "(" + params + ") { \n" + body + "}",
+                                        "useCoreAPI": false,
+                                        "core": false
+                                    };
+                                } else {
+                                    behavior = {
+                                        "_id": uuid,
+                                        "component": componentId,
+                                        "state": "destroy",
+                                        "action": "function destroy() { \n\n  // destroy the component\n  $component.destroy(this.id());\n}",
+                                        "useCoreAPI": true,
+                                        "core": false
+                                    };
+                                }
 
                                 behaviors[uuid] = behavior;
                                 designer.system().behaviors(behaviors);
@@ -5549,7 +5565,7 @@ runtime.on('ready', function () {
                 switch (true) {
                     case schema[propName] === 'property':
                         model[propName] = {
-                            "type": "string",
+                            "type": "any",
                             "readOnly": false,
                             "mandatory": false,
                             "default": ""
@@ -5580,12 +5596,12 @@ runtime.on('ready', function () {
                             "params": [
                                 {
                                     "name": "param",
-                                    "type": "string",
+                                    "type": "any",
                                     "mandatory": false,
-                                    "default": ""
+                                    "default": null
                                 }
                             ],
-                            "result": "string"
+                            "result": "any"
                         };
 
                         for (component in components[name]) {
@@ -5599,9 +5615,9 @@ runtime.on('ready', function () {
                             "params": [
                                 {
                                     "name": "param",
-                                    "type": "string",
+                                    "type": "any",
                                     "mandatory": false,
-                                    "default": ""
+                                    "default": null
                                 }
                             ]
                         };
@@ -5614,7 +5630,7 @@ runtime.on('ready', function () {
                         break;
                     case schema[propName] === 'collection':
                         model[propName] = {
-                            "type": ["string"],
+                            "type": ["any"],
                             "readOnly": false,
                             "mandatory": false,
                             "default": []
@@ -5784,12 +5800,12 @@ runtime.on('ready', function () {
                                 "params": [
                                     {
                                         "name": "param",
-                                        "type": "string",
+                                        "type": "any",
                                         "mandatory": false,
-                                        "default": ""
+                                        "default": null
                                     }
                                 ],
-                                "result": "string"
+                                "result": "any"
                             };
 
                             // create behavior
@@ -5803,9 +5819,9 @@ runtime.on('ready', function () {
                                 "params": [
                                     {
                                         "name": "param",
-                                        "type": "string",
+                                        "type": "any",
                                         "mandatory": false,
-                                        "default": ""
+                                        "default": null
                                     }
                                 ]
                             };
