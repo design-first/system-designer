@@ -333,7 +333,11 @@ runtime.on('ready', function () {
         designer.store().uuid(id);
         designer.store().data(behavior);
 
-        document.title = 'behavior ' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;
+        if (behavior.state === 'start' && systemId === behavior.component) {
+            document.title = 'behavior ' + designer.system().name() + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;
+        } else {
+            document.title = 'behavior ' + behavior.component + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;
+        }
 
         editor.initValue(behavior.action, 2);
     }, true);
@@ -414,9 +418,22 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
+        var systemId = '',
+            System = null,
+            system = null,
+            sys = null;
+
         if (this.isCordova()) {
             this.updateCordovaContext();
         }
+
+        // set system
+        systemId = document.location.href.split('#')[2];
+        system = this.require('storage').get(systemId);
+        System = this.require('System');
+        sys = new System(system);
+        this.system(sys);
+
         this.menubar().render();
         this.toolbar().render();
         this.workspace().render();
@@ -477,7 +494,11 @@ runtime.on('ready', function () {
             designer.store().uuid(designer.store().data()._id);
         }
 
-        document.title = 'behavior ' + designer.store().data().state + ' · ' + document.title.split('·')[1].trim();
+        if (behavior.state === 'start' && designer.system().id() === behavior.component) {
+            document.title = 'behavior ' + designer.system().name() + ' · ' + document.title.split('·')[1].trim();
+        } else {
+            document.title = 'behavior ' + designer.store().data().component + '.' + designer.store().data().state + ' · ' + document.title.split('·')[1].trim();
+        }
 
         this.require('channel').$editorUpdateBehavior(designer.store().uuid(), designer.store().data());
         this.require('message').success('Behavior saved.');

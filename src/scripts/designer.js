@@ -452,7 +452,7 @@ runtime.on('ready', function () {
             library = this.require(libraries[i]._id);
 
             list = list + '<a class="list-group-item" id="designer-dialog-import-file-modal-library-' + library.id() + '">' +
-                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURIComponent(library.source())).description.substr(0, 50) + '</h4>' +
+                '<h4 class="list-group-item-heading">' + JSON.parse(decodeURIComponent(library.source())).description.substr(0, 40).split('\n')[0].split('.')[0] + '</h4>' +
                 '<p class="list-group-item-text">v' + JSON.parse(decodeURIComponent(library.source())).version + '</p>' +
                 '</a>';
         }
@@ -1589,7 +1589,7 @@ runtime.on('ready', function () {
 
                 document.types[this.document().name] = this.document();
 
-                this.require('designer').saveAs(document, this.document().name.replace(/ /gi, '-').toLowerCase() + '.json');
+                this.require('designer').saveAs(document, 'type.' + this.document().name.replace(/ /gi, '-').toLowerCase() + '.json');
             }.bind(this));
         }
 
@@ -1698,7 +1698,7 @@ runtime.on('ready', function () {
 
                     document.schemas[this.document()._id] = this.document();
 
-                    this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
+                    this.require('designer').saveAs(document, 'schema.' + this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
                 }.bind(this));
             }
 
@@ -1963,7 +1963,7 @@ runtime.on('ready', function () {
 
                     document.models[this.document()._id] = this.document();
 
-                    this.require('designer').saveAs(document, this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
+                    this.require('designer').saveAs(document, 'model.' + this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');
                 }.bind(this));
             }
 
@@ -2046,6 +2046,7 @@ runtime.on('ready', function () {
         if (html) {
             html.addEventListener('click', function (event) {
                 var name = this.document().state;
+                var exportName = '';
                 var document = {
                     "name": "behavior " + name,
                     "master": false,
@@ -2066,7 +2067,13 @@ runtime.on('ready', function () {
 
                 document.behaviors[this.document()._id] = this.document();
 
-                this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
+                if (this.document().component === this.require('designer').system().id()) {
+                    exportName = 'behavior.' + this.require('designer').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';
+                } else {
+                    exportName = 'behavior.' + this.document().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';
+                }
+
+                this.require('designer').saveAs(document, exportName);
             }.bind(this));
         }
 
@@ -2278,7 +2285,7 @@ runtime.on('ready', function () {
 
                 document.components[this.model()][this.document()._id] = this.document();
 
-                this.require('designer').saveAs(document, name.replace(/ /gi, '-').toLowerCase() + '.json');
+                this.require('designer').saveAs(document, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');
             }.bind(this));
         }
 
@@ -4781,6 +4788,56 @@ runtime.on('ready', function () {
 
                     message.success('Importation of the system is done.');
                 });
+            }
+        });
+
+        channel.on('$runtimeCreateComponent', function (collection, document) {
+            var designer = this.require('designer'),
+                components = designer.system().components();
+
+            if (typeof components[collection] !== 'undefined') {
+                delete document.classInfo;
+
+                components[collection][document._id] = document;
+                designer.system().components(components);
+
+                designer.save();
+
+                if (designer.context() === 'components') {
+                    designer.workspace().refresh();
+                }
+            }
+        });
+
+        channel.on('$runtimeDeleteComponent', function (id, collection) {
+            var designer = this.require('designer'),
+                components = designer.system().components();
+
+            if (typeof components[collection] !== 'undefined') {
+                delete components[collection][id];
+                designer.system().components(components);
+
+                designer.save();
+
+                if (designer.context() === 'components') {
+                    designer.workspace().refresh();
+                }
+            }
+        });
+
+        channel.on('$runtimeUpdateComponent', function (id, collection, field, value) {
+            var designer = this.require('designer'),
+                components = designer.system().components();
+
+            if (typeof components[collection] !== 'undefined' && components[collection][id] !== 'undefined') {
+                components[collection][id][field] = value;
+                designer.system().components(components);
+
+                designer.save();
+
+                if (designer.context() === 'components') {
+                    designer.workspace().refresh();
+                }
             }
         });
 

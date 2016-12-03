@@ -31,6 +31,7 @@ runtime.on('ready', function () {
     system.on('start', function () {
         var RuntimeChannel = null,
             channel = null,
+            db = null,
             sysid = '',
             system = '',
             params = '';
@@ -113,6 +114,9 @@ runtime.on('ready', function () {
         sysid = document.location.href.split('#')[1].split('?')[0].split('/')[0];
         system = this.require('storage').get(sysid);
         delete system.classInfo;
+
+        // get Database
+        db = this.require('db');
 
         // create channel              
         RuntimeChannel = this.require('RuntimeChannel');
@@ -385,6 +389,27 @@ runtime.on('ready', function () {
                 this.require('channel').$appLogInfo('[' + time + '] ' + message);
             }
         }, true, true);
+
+        // Database insert event
+        db.on('insert', function insert(event) {
+            if (event.collection.indexOf('Runtime') !== 0) {
+                this.require('channel').$runtimeCreateComponent(event.collection, event.document);
+            }
+        });
+
+        // Database remove event
+        db.on('remove', function remove(event) {
+            if (event.collection.indexOf('Runtime') !== 0) {
+                this.require('channel').$runtimeDeleteComponent(event.id, event.collection);
+            }
+        });
+
+        // Database update event
+        db.on('update', function update(event) {
+            if (event.collection.indexOf('Runtime') !== 0) {
+                this.require('channel').$runtimeUpdateComponent(event.id, event.collection, event.field, event.value);
+            }
+        });
 
         this.require('logger').level('debug');
         if (this.require(systemID).main) {
