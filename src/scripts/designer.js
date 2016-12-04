@@ -5456,7 +5456,7 @@ runtime.on('ready', function () {
     });
 
     Designer.on('createBehavior', function createBehavior(type, model, state, def) {
-        var body = '',
+        var body = '\t\n',
             behaviors = this.system().behaviors();
 
         function _canCreate(type, component, state, behaviors) {
