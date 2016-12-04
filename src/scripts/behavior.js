@@ -428,7 +428,7 @@ runtime.on('ready', function () {
         }
 
         // set system
-        systemId = document.location.href.split('#')[2];
+        systemId = document.location.href.split('#')[2].split('?')[0];
         system = this.require('storage').get(systemId);
         System = this.require('System');
         sys = new System(system);
@@ -455,7 +455,7 @@ runtime.on('ready', function () {
             href = '';
 
         id = document.location.href.split('#')[1];
-        systemId = document.location.href.split('#')[2];
+        systemId = document.location.href.split('#')[2].split('?')[0];
 
         // update menubar
         menubar = $('#designer-menubar-items > li > a');

@@ -521,7 +521,7 @@ runtime.on('ready', function () {
         }
 
         // set system
-        systemId = document.location.href.split('#')[3];
+        systemId = document.location.href.split('#')[3].split('?')[0];
         system = this.require('storage').get(systemId);
         System = this.require('System');
         sys = new System(system);
@@ -547,7 +547,7 @@ runtime.on('ready', function () {
 
         id = decodeURIComponent(document.location.href.split('#')[1]);
         collection = document.location.href.split('#')[2];
-        systemId = document.location.href.split('#')[3];
+        systemId = document.location.href.split('#')[3].split('?')[0];
 
         // update menubar
         menubar = $('#designer-menubar-items > li > a');
