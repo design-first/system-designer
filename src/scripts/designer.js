@@ -4564,7 +4564,10 @@ runtime.on('ready', function () {
 
         channel.on('$editorUpdateSchema', function $editorUpdateSchema(id, schema) {
             var designer = this.require('designer'),
-                schemas = designer.system().schemas();
+                schemas = designer.system().schemas(),
+                models = null,
+                model = null,
+                modelId = '';
 
             jsPlumb.deleteEveryEndpoint();
 
@@ -4572,6 +4575,15 @@ runtime.on('ready', function () {
             schemas[id] = schema;
             designer.system().schemas(schemas);
             designer.save();
+
+            // sync other components
+            models = designer.system().models();
+            for (modelId in models) {
+                if (models[modelId]._name !== schema._name) {
+                    model = models[modelId];
+                    designer.syncComponent(model, true);
+                }
+            }
 
             designer.space(id);
             designer.spaces().render();
@@ -5713,23 +5725,26 @@ runtime.on('ready', function () {
         this.save();
     });
 
-    Designer.on('syncComponent', function (model) {
+    Designer.on('syncComponent', function syncComponent(model, forceDelete) {
         var components = this.system().components(),
             name = '',
             componentId = '',
             propName = '',
+            modelDef = null,
             component = null,
             createModel = false;
 
         name = model._name;
+
         schema = this.getGeneratedSchema(name);
+        modelDef = this.getGeneratedModel(name);
 
         for (propName in schema) {
             switch (true) {
                 case schema[propName] === 'property':
                     for (component in components[name]) {
                         if (typeof components[name][component][propName] === 'undefined') {
-                            components[name][component][propName] = model[propName].default;
+                            components[name][component][propName] = modelDef[propName].default;
                             this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
@@ -5738,7 +5753,7 @@ runtime.on('ready', function () {
                 case schema[propName] === 'link':
                     for (component in components[name]) {
                         if (typeof components[name][component][propName] === 'undefined') {
-                            components[name][component][propName] = model[propName].default;
+                            components[name][component][propName] = modelDef[propName].default;
                             this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
@@ -5747,7 +5762,7 @@ runtime.on('ready', function () {
                 case schema[propName] === 'collection':
                     for (component in components[name]) {
                         if (typeof components[name][component][propName] === 'undefined') {
-                            components[name][component][propName] = model[propName].default;
+                            components[name][component][propName] = modelDef[propName].default;
                             this.require('channel').$designerUpdateComponent(component, name, components[name][component]);
                             this.system().components(components);
                         }
@@ -5758,16 +5773,17 @@ runtime.on('ready', function () {
             }
         }
 
-        /*
-        for (propName in schema) {
+        if (forceDelete) {
             for (componentId in components[name]) {
-                if (typeof components[name][componentId][propName] === 'undefined') {
-                    delete components[name][componentId][propName];
-                    this.require('channel').$designerDeleteComponent(componentId, name);
-                    this.system().components(components);
+                for (propName in components[name][componentId]) {
+                    if (typeof modelDef[propName] === 'undefined' && propName.indexOf('_') !== 0) {
+                        delete components[name][componentId][propName];
+                        this.require('channel').$designerDeleteComponent(componentId, name);
+                        this.system().components(components);
+                    }
                 }
             }
-        }*/
+        }
 
         this.save();
     });
