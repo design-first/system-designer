@@ -1,9 +1,9 @@
 /* 
  * System Designer
- * https://system-designer.github.io
+ * https://designfirst.io/systemdesigner/
  * @ecarriou
  *
- * Copyright 2016 Erwan Carriou
+ * Copyright 2017 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -779,9 +779,9 @@ module.exports = function (grunt) {
                     '/*\n' +
                     '* System Designer\n' +
                     '*\n' +
-                    '* https://system-designer.github.io\n' +
+                    '* https://designfirst.io/systemdesigner/\n' +
                     '*\n' +
-                    '* Copyright 2016 Erwan Carriou\n' +
+                    '* Copyright 2017 Erwan Carriou\n' +
                     '*\n' +
                     '* Licensed under the Apache License, Version 2.0 (the "License");\n' +
                     '* you may not use this file except in compliance with the License.\n' +

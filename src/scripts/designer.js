@@ -1,9 +1,9 @@
 /* 
  * System Designer
  * 
- * https://system-designer.github.io
+ * https://designfirst.io/systemdesigner/
  *
- * Copyright 2016 Erwan Carriou
+ * Copyright 2017 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 
-runtime.on('ready', function () {
+runtime.on('ready', function ready() {
 
     var system = this.system('design');
 
     // DIALOG IMPORT
     var DialogImport = this.require('DialogImport');
-    DialogImport.on('init', function (config) {
+    DialogImport.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -40,28 +40,28 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-import-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogImport.on('show', function () {
+    DialogImport.on('show', function show() {
         $('#designer-dialog-import-modal').modal('show');
     });
 
-    DialogImport.on('hide', function () {
+    DialogImport.on('hide', function hide() {
         $('#designer-dialog-import-modal').modal('hide');
     });
 
     // DIALOG CHECK
     var DialogCheck = this.require('DialogCheck');
-    DialogCheck.on('init', function (config) {
+    DialogCheck.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -75,27 +75,27 @@ runtime.on('ready', function () {
         );
 
         dom = document.getElementById('designer-dialog-check-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogCheck.on('show', function () {
+    DialogCheck.on('show', function show() {
         $('#designer-dialog-check-modal').modal('show');
     });
 
-    DialogCheck.on('hide', function () {
+    DialogCheck.on('hide', function hide() {
         $('#designer-dialog-check-modal').modal('hide');
     });
 
-    DialogCheck.on('ok', function () {
+    DialogCheck.on('ok', function ok() {
         this.hide();
     });
 
     // DIALOG WELCOME
     var DialogWelcome = this.require('DialogWelcome');
-    DialogWelcome.on('init', function (config) {
+    DialogWelcome.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -109,23 +109,23 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-welcome-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogWelcome.on('show', function () {
+    DialogWelcome.on('show', function show() {
         $('#designer-dialog-welcome-modal').modal('show');
     });
 
-    DialogWelcome.on('hide', function () {
+    DialogWelcome.on('hide', function hide() {
         $('#designer-dialog-welcome-modal').modal('hide');
     });
 
     // DIALOG SYNC
     var DialogSync = this.require('DialogSync');
-    DialogSync.on('init', function (config) {
+    DialogSync.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -139,12 +139,12 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-sync-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-type-creation-hasHTML');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             if ($('#designer-dialog-type-creation-hasHTML')[0].checked) {
                 $('#designer-dialog-sync-options-log-level').show();
             } else {
@@ -153,7 +153,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-sync-commit');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-sync-comments-area').show();
             $('#designer-dialog-sync-options-area').show();
             $('#designer-dialog-sync-options-node').show();
@@ -163,7 +163,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-sync-refresh');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-sync-comments-area').hide();
             $('#designer-dialog-sync-options-area').hide();
             $('#designer-dialog-sync-options-log-level').hide();
@@ -172,17 +172,17 @@ runtime.on('ready', function () {
 
     });
 
-    DialogSync.on('show', function () {
+    DialogSync.on('show', function show() {
         $('#designer-dialog-sync-modal').modal('show');
     });
 
-    DialogSync.on('hide', function () {
+    DialogSync.on('hide', function hide() {
         $('#designer-dialog-sync-modal').modal('hide');
     });
 
     // DIALOG SHARE
     var DialogShare = this.require('DialogShare');
-    DialogShare.on('init', function (config) {
+    DialogShare.on('init', function init(config) {
         var html = null,
             dom = null,
             sys = '';
@@ -202,28 +202,28 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-share-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-share-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogShare.on('show', function () {
+    DialogShare.on('show', function show() {
         $('#designer-dialog-share-modal').modal('show');
     });
 
-    DialogShare.on('hide', function () {
+    DialogShare.on('hide', function hide() {
         $('#designer-dialog-share-modal').modal('hide');
     });
 
     // DIALOG COPYRIGHT
     var DialogCopyright = this.require('DialogCopyright');
-    DialogCopyright.on('init', function (config) {
+    DialogCopyright.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -238,23 +238,23 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-copyright-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
     });
 
-    DialogCopyright.on('show', function () {
+    DialogCopyright.on('show', function show() {
         $('#designer-dialog-copyright-modal').modal('show');
     });
 
-    DialogCopyright.on('hide', function () {
+    DialogCopyright.on('hide', function hide() {
         $('#designer-dialog-copyright-modal').modal('hide');
     });
 
     // DIALOG CONFIG
     var DialogConfig = this.require('DialogConfig');
-    DialogConfig.on('init', function (config) {
+    DialogConfig.on('init', function init(config) {
         var html = '',
             dom = null,
             that = this,
@@ -305,7 +305,7 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-config-radio-client');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             var config = this.require('storage').get('system-designer-config');
 
             if (!config) {
@@ -320,7 +320,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-radio-server');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             var config = this.require('storage').get('system-designer-config');
 
             if (!config) {
@@ -335,7 +335,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-url-client');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -347,7 +347,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-github-token');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -359,7 +359,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-github-repository');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -371,7 +371,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-url-server');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -383,7 +383,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-advanced-mode-isAdvanced');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             var config = this.require('storage').get('system-designer-config');
 
             if (!config) {
@@ -395,25 +395,25 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-config-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
     });
 
-    DialogConfig.on('show', function () {
+    DialogConfig.on('show', function show() {
         $('#designer-dialog-config-modal').modal('show');
     });
 
-    DialogConfig.on('hide', function () {
+    DialogConfig.on('hide', function hide() {
         $('#designer-dialog-config-modal').modal('hide');
     });
 
-    DialogConfig.on('ok', function () {
+    DialogConfig.on('ok', function ok() {
         var config = this.require('storage').get('system-designer-config');
 
         if (!config) {
@@ -430,7 +430,7 @@ runtime.on('ready', function () {
 
     // DIALOG IMPORT FILE
     var DialogImportFile = this.require('DialogImportFile');
-    DialogImportFile.on('init', function (config) {
+    DialogImportFile.on('init', function init(config) {
         var html = '',
             dom = null,
             that = this,
@@ -506,7 +506,7 @@ runtime.on('ready', function () {
         }
 
         // systems events  
-        var callbackSystemEvent = function (event) {
+        var callbackSystemEvent = function cbSystemEvent(event) {
             var id = '',
                 systems = null,
                 length = 0,
@@ -544,7 +544,7 @@ runtime.on('ready', function () {
         }
 
         // library events  
-        var callbackEvent = function (event) {
+        var callbackEvent = function cbEvent(event) {
             var id = '',
                 libraries = null,
                 length = 0,
@@ -580,7 +580,7 @@ runtime.on('ready', function () {
         }
 
         dom = document.getElementById('designer-dialog-import-modal-from-file');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-import-modal-from-file-form').show();
             $('#designer-dialog-import-modal-from-systems-form').hide();
             $('#designer-dialog-import-modal-from-library-form').hide();
@@ -590,7 +590,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-from-library');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-import-modal-from-library-form').show();
             $('#designer-dialog-import-modal-from-systems-form').hide();
             $('#designer-dialog-import-modal-from-file-form').hide();
@@ -600,7 +600,7 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-modal-from-systems');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-import-modal-from-library-form').hide();
             $('#designer-dialog-import-modal-from-systems-form').show();
             $('#designer-dialog-import-modal-from-file-form').hide();
@@ -610,22 +610,22 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-merge');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.mergeSystem();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-import');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.importSystem();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-import-file-modal-file');
-        dom.addEventListener('change', function (e) {
+        dom.addEventListener('change', function click(e) {
             e.stopPropagation();
             e.preventDefault();
 
@@ -634,10 +634,10 @@ runtime.on('ready', function () {
                 json = '',
                 that = this;
 
-            reader.onload = function (event) {
+            reader.onload = function onload(event) {
                 json = json + event.target.result;
             };
-            reader.onloadend = function () {
+            reader.onloadend = function onloadend() {
                 try {
                     that.data(JSON.parse(json));
                 } catch (e) {
@@ -648,17 +648,17 @@ runtime.on('ready', function () {
         }.bind(this));
     });
 
-    DialogImportFile.on('show', function () {
+    DialogImportFile.on('show', function show() {
         $('#designer-dialog-import-file-modal').modal('show');
     });
 
-    DialogImportFile.on('hide', function () {
+    DialogImportFile.on('hide', function hide() {
         $('#designer-dialog-import-file-modal').modal('hide');
     });
 
     // DIALOG DROP FILE
     var DialogDropFile = this.require('DialogDropFile');
-    DialogDropFile.on('init', function (config) {
+    DialogDropFile.on('init', function init(config) {
         var html = null,
             dom = null;
 
@@ -673,17 +673,17 @@ runtime.on('ready', function () {
 
         //events
         dom = document.getElementById('designer-dialog-drop-file-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-drop-file-modal-merge');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.mergeSystem();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-drop-file-modal-import');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.importSystem();
         }.bind(this));
 
@@ -692,7 +692,7 @@ runtime.on('ready', function () {
         }
     });
 
-    DialogDropFile.on('mergeSystem', function () {
+    DialogDropFile.on('mergeSystem', function mergeSystem() {
         var sys = null,
             name = '',
             modelName = '',
@@ -893,7 +893,7 @@ runtime.on('ready', function () {
         }
     });
 
-    DialogDropFile.on('importSystem', function () {
+    DialogDropFile.on('importSystem', function importSystem() {
         var System = this.require('System'),
             sys = null,
             designer = this.require('designer'),
@@ -924,17 +924,17 @@ runtime.on('ready', function () {
         message.success('Importation of the system is done.');
     });
 
-    DialogDropFile.on('show', function () {
+    DialogDropFile.on('show', function show() {
         $('#designer-dialog-drop-file-modal').modal('show');
     });
 
-    DialogDropFile.on('hide', function () {
+    DialogDropFile.on('hide', function hide() {
         $('#designer-dialog-drop-file-modal').modal('hide');
     });
 
     // DIALOG TYPE CREATION
     var dialogTypeCreation = this.require('DialogTypeCreation');
-    dialogTypeCreation.on('init', function (config) {
+    dialogTypeCreation.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -948,7 +948,7 @@ runtime.on('ready', function () {
 
         //events
         dom = document.getElementById('designer-dialog-type-creation-name');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -960,32 +960,32 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-type-creation-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-type-creation-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
         // focus
-        $('#designer-dialog-type-creation-modal').on('shown.bs.modal', function () {
+        $('#designer-dialog-type-creation-modal').on('shown.bs.modal', function modal() {
             $('#designer-dialog-type-creation-name').focus();
         });
     });
 
-    dialogTypeCreation.on('show', function () {
+    dialogTypeCreation.on('show', function show() {
         $('#designer-dialog-type-creation-modal').modal('show');
     });
 
-    dialogTypeCreation.on('hide', function () {
+    dialogTypeCreation.on('hide', function hide() {
         $('#designer-dialog-type-creation-modal').modal('hide');
     });
 
     // DIALOG EXPORT
     var DialogExport = this.require('DialogExport');
-    DialogExport.on('init', function (config) {
+    DialogExport.on('init', function init(config) {
         var html = '',
             dom = null,
             system = this.require('designer').system();
@@ -1008,35 +1008,35 @@ runtime.on('ready', function () {
 
         //events
         dom = document.getElementById('designer-dialog-export-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-json');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-export-options').show();
             $('#designer-dialog-export-options-log-level').hide();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-html');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-export-options').hide();
             $('#designer-dialog-export-options-log-level').show();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-node');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             $('#designer-dialog-export-options').hide();
             $('#designer-dialog-export-options-log-level').show();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-export-modal');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -1046,17 +1046,17 @@ runtime.on('ready', function () {
         }.bind(this));
     });
 
-    DialogExport.on('show', function () {
+    DialogExport.on('show', function show() {
         $('#designer-dialog-export-modal').modal('show');
     });
 
-    DialogExport.on('hide', function () {
+    DialogExport.on('hide', function hide() {
         $('#designer-dialog-export-modal').modal('hide');
     });
 
     // DIALOG SCHEMA CREATION
     var dialogSchemaCreation = this.require('DialogSchemaCreation');
-    dialogSchemaCreation.on('init', function (config) {
+    dialogSchemaCreation.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -1070,7 +1070,7 @@ runtime.on('ready', function () {
 
         //events
         dom = document.getElementById('designer-dialog-schema-creation-name');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -1082,32 +1082,32 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-schema-creation-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-schema-creation-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
         // focus
-        $('#designer-dialog-schema-creation-modal').on('shown.bs.modal', function () {
+        $('#designer-dialog-schema-creation-modal').on('shown.bs.modal', function modal() {
             $('#designer-dialog-schema-creation-name').focus();
         });
     });
 
-    dialogSchemaCreation.on('show', function () {
+    dialogSchemaCreation.on('show', function show() {
         $('#designer-dialog-schema-creation-modal').modal('show');
     });
 
-    dialogSchemaCreation.on('hide', function () {
+    dialogSchemaCreation.on('hide', function hide() {
         $('#designer-dialog-schema-creation-modal').modal('hide');
     });
 
     // DIALOG SYSTEM CREATION
     var dialogSystemCreation = this.require('DialogSystemCreation');
-    dialogSystemCreation.on('init', function (config) {
+    dialogSystemCreation.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -1121,7 +1121,7 @@ runtime.on('ready', function () {
 
         //events
         dom = document.getElementById('designer-dialog-system-creation-name');
-        dom.addEventListener('keydown', function (event) {
+        dom.addEventListener('keydown', function keydown(event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -1133,32 +1133,32 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-system-creation-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-system-creation-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
         // focus
-        $('#designer-dialog-system-creation-modal').on('shown.bs.modal', function () {
+        $('#designer-dialog-system-creation-modal').on('shown.bs.modal', function modal() {
             $('#designer-dialog-system-creation-name').focus();
         });
     });
 
-    dialogSystemCreation.on('show', function () {
+    dialogSystemCreation.on('show', function show() {
         $('#designer-dialog-system-creation-modal').modal('show');
     });
 
-    dialogSystemCreation.on('hide', function () {
+    dialogSystemCreation.on('hide', function hide() {
         $('#designer-dialog-system-creation-modal').modal('hide');
     });
 
     // DIALOG MODEL CREATION
     var dialogModelCreation = this.require('DialogModelCreation');
-    dialogModelCreation.on('init', function (config) {
+    dialogModelCreation.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -1171,23 +1171,23 @@ runtime.on('ready', function () {
         );
 
         dom = document.getElementById('designer-dialog-model-creation-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
     });
 
-    dialogModelCreation.on('show', function () {
+    dialogModelCreation.on('show', function show() {
         $('#designer-dialog-model-creation-modal').modal('show');
     });
 
-    dialogModelCreation.on('hide', function () {
+    dialogModelCreation.on('hide', function hide() {
         $('#designer-dialog-model-creation-modal').modal('hide');
     });
 
     // DIALOG BEHAVIOR CREATION
     var dialogBehaviorCreation = this.require('DialogBehaviorCreation');
-    dialogBehaviorCreation.on('init', function (config) {
+    dialogBehaviorCreation.on('init', function init(config) {
         var html = '',
             dom = null,
             selectStates = '',
@@ -1261,32 +1261,32 @@ runtime.on('ready', function () {
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-behavior-creation-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-behavior-creation-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
 
         // focus
-        $('#designer-dialog-behavior-creation-modal').on('shown.bs.modal', function () {
+        $('#designer-dialog-behavior-creation-modal').on('shown.bs.modal', function modal() {
             $('#designer-dialog-behavior-creation-state').focus();
         });
     });
 
-    dialogBehaviorCreation.on('show', function () {
+    dialogBehaviorCreation.on('show', function show() {
         $('#designer-dialog-behavior-creation-modal').modal('show');
     });
 
-    dialogBehaviorCreation.on('hide', function () {
+    dialogBehaviorCreation.on('hide', function hide() {
         $('#designer-dialog-behavior-creation-modal').modal('hide');
     });
 
     // DIALOG COMPONENT CREATION
     var dialogComponentCreation = this.require('DialogComponentCreation');
-    dialogComponentCreation.on('init', function (config) {
+    dialogComponentCreation.on('init', function init(config) {
         var html = '',
             name = '',
             dom = null,
@@ -1309,27 +1309,27 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-component-creation-modal-cancel');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.cancel();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-component-creation-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.ok();
         }.bind(this));
     });
 
-    dialogComponentCreation.on('show', function () {
+    dialogComponentCreation.on('show', function show() {
         $('#designer-dialog-component-creation-modal').modal('show');
     });
 
-    dialogComponentCreation.on('hide', function () {
+    dialogComponentCreation.on('hide', function hide() {
         $('#designer-dialog-component-creation-modal').modal('hide');
     });
 
     // DIALOG RUNTIMECOMPONENT INFO
     var DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');
-    DialogRuntimeComponentInfo.on('init', function (config) {
+    DialogRuntimeComponentInfo.on('init', function init(config) {
         var html = '',
             dom = null;
 
@@ -1343,7 +1343,7 @@ runtime.on('ready', function () {
 
         // events
         dom = document.getElementById('designer-dialog-runtimecomponent-info-modal-ok');
-        dom.addEventListener('click', function (event) {
+        dom.addEventListener('click', function click(event) {
             this.hide();
         }.bind(this));
 
@@ -1353,19 +1353,19 @@ runtime.on('ready', function () {
         $('#designer-dialog-runtimecomponent-info-modal').modal('show');
     });
 
-    DialogRuntimeComponentInfo.on('hide', function () {
+    DialogRuntimeComponentInfo.on('hide', function show() {
         $('#designer-dialog-runtimecomponent-info-modal').modal('hide');
     });
 
     // MODELSYSTEM
     var ModelSystem = this.require('ModelSystem');
-    ModelSystem.on('render', function () {
+    ModelSystem.on('render', function render() {
         var html = null,
             that = this,
             doc = '',
             propName = '',
             propVal = '';
-
+            
         // html 
         html = this.require('model-system.html');
 
@@ -1387,21 +1387,21 @@ runtime.on('ready', function () {
         // events
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('system.html#' + that.uuid() + '#description');
             }.bind(this));
         }
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('system.html#' + that.uuid() + '#description');
             }.bind(this));
         }
 
         html = document.getElementById('designer-system-' + this.uuid() + '-export');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var name = this.document().name;
                 var document = JSON.parse(JSON.stringify(this.document()));
                 delete document.classInfo;
@@ -1411,7 +1411,7 @@ runtime.on('ready', function () {
 
         html = document.getElementById('designer-system-' + this.uuid() + '-delete');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var systems = this.require('storage').get('system-designer-systems'),
                     designer = this.require('designer'),
                     System = this.require('System'),
@@ -1446,17 +1446,17 @@ runtime.on('ready', function () {
         }
     });
 
-    ModelSystem.on('hide', function () {
+    ModelSystem.on('hide', function hide() {
         $('#designer-system-' + this.uuid()).hide();
     });
 
-    ModelSystem.on('show', function () {
+    ModelSystem.on('show', function show() {
         $('#designer-system-' + this.uuid()).show();
     });
 
     // MODELTYPE
     var ModelType = this.require('ModelType');
-    ModelType.on('render', function () {
+    ModelType.on('render', function render() {
         var html = null,
             that = this,
             doc = '',
@@ -1554,21 +1554,21 @@ runtime.on('ready', function () {
         // events
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
             }.bind(this));
         }
 
         html = document.getElementById('designer-type-' + this.uuid() + '-edit');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
             }.bind(this));
         }
 
         html = document.getElementById('designer-type-' + this.uuid() + '-export');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var document = {
                     "name": "type " + this.document().name,
                     "master": false,
@@ -1595,7 +1595,7 @@ runtime.on('ready', function () {
 
         html = document.getElementById('designer-type-' + this.uuid() + '-delete');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var designer = this.require('designer');
                 types = designer.system().types();
 
@@ -1617,17 +1617,17 @@ runtime.on('ready', function () {
         }
     });
 
-    ModelType.on('hide', function () {
+    ModelType.on('hide', function hide() {
         $('#designer-type-' + this.title()).hide();
     });
 
-    ModelType.on('show', function () {
+    ModelType.on('show', function show() {
         $('#designer-type-' + this.title()).show();
     });
 
     // MODELSCHEMA
     var ModelSchema = this.require('ModelSchema');
-    ModelSchema.on('render', function () {
+    ModelSchema.on('render', function rebnder() {
         var html = null,
             doc = '',
             that = this,
@@ -1663,21 +1663,21 @@ runtime.on('ready', function () {
             html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
 
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
                 }.bind(this));
             }
 
             html = document.getElementById('designer-schema-' + htmlId + '-edit');
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
                 }.bind(this));
             }
 
             html = document.getElementById('designer-schema-' + htmlId + '-export');
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     var document = {
                         "name": "schema " + this.document()._name,
                         "master": false,
@@ -1704,7 +1704,7 @@ runtime.on('ready', function () {
 
             html = document.getElementById('designer-schema-' + htmlId + '-delete');
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     var designer = this.require('designer');
 
                     designer.deleteSchema(this.uuid());
@@ -1729,7 +1729,7 @@ runtime.on('ready', function () {
 
             html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     var DialogRuntimeComponentInfo = null;
 
                     if (this.title() !== 'RuntimeComponent') {
@@ -1750,17 +1750,17 @@ runtime.on('ready', function () {
         }
     });
 
-    ModelSchema.on('hide', function () {
+    ModelSchema.on('hide', function hide() {
         $('#designer-schema-' + this.uuid()).hide();
     });
 
-    ModelSchema.on('show', function () {
+    ModelSchema.on('show', function show() {
         $('#designer-schema-' + this.uuid()).show();
     });
 
     // MODELCLASS
     var ModelClass = this.require('ModelClass');
-    ModelClass.on('render', function () {
+    ModelClass.on('render', function render() {
         var html = null,
             that = this,
             propName = '',
@@ -1935,14 +1935,14 @@ runtime.on('ready', function () {
         if (this.editable()) {
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
                 }.bind(this));
             }
 
             html = document.getElementById('designer-model-' + htmlId + '-export');
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     var document = {
                         "name": "model " + this.document()._name,
                         "master": false,
@@ -1969,7 +1969,7 @@ runtime.on('ready', function () {
 
             html = document.getElementById('designer-model-' + htmlId + '-edit');
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
                 }.bind(this));
             }
@@ -1978,7 +1978,7 @@ runtime.on('ready', function () {
 
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
             if (html) {
-                html.addEventListener('click', function (event) {
+                html.addEventListener('click', function click(event) {
                     var DialogRuntimeComponentInfo = null;
 
                     if (this.title() !== 'RuntimeComponent') {
@@ -1999,17 +1999,17 @@ runtime.on('ready', function () {
         }
     });
 
-    ModelClass.on('hide', function () {
+    ModelClass.on('hide', function hide() {
         $('#designer-class-' + this.uuid()).hide();
     });
 
-    ModelClass.on('show', function () {
+    ModelClass.on('show', function show() {
         $('#designer-class-' + this.uuid()).show();
     });
 
     // MODELBEHAVIOR
     var ModelBehavior = this.require('ModelBehavior');
-    ModelBehavior.on('render', function () {
+    ModelBehavior.on('render', function render() {
         var template = '',
             html = null,
             that = this,
@@ -2030,21 +2030,21 @@ runtime.on('ready', function () {
         //events
         html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
             }.bind(this));
         }
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
             }.bind(this));
         }
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-export');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var name = this.document().state;
                 var exportName = '';
                 var document = {
@@ -2079,14 +2079,14 @@ runtime.on('ready', function () {
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var designer = this.require('designer');
                 behaviors = designer.system().behaviors();
 
                 delete behaviors[this.uuid()];
                 designer.system().behaviors(behaviors);
 
-                $('#designer-behavior-' + this.uuid()).fadeOut(400, function () {
+                $('#designer-behavior-' + this.uuid()).fadeOut(400, function fadeout() {
                     $(this).remove();
                 });
 
@@ -2098,17 +2098,17 @@ runtime.on('ready', function () {
         }
     });
 
-    ModelBehavior.on('hide', function () {
+    ModelBehavior.on('hide', function hide() {
         $('#designer-behavior-' + this.uuid()).hide();
     });
 
-    ModelBehavior.on('show', function () {
+    ModelBehavior.on('show', function show() {
         $('#designer-behavior-' + this.uuid()).show();
     });
 
     // MODELCOMPONENT
     var ModelComponent = this.require('ModelComponent');
-    ModelComponent.on('render', function () {
+    ModelComponent.on('render', function render() {
         var htmlComp = null,
             html = null,
             doc = '',
@@ -2245,21 +2245,21 @@ runtime.on('ready', function () {
         // events
         html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-')).children[0].children[1];
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
             }.bind(this));
         }
 
         html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-') + '-edit');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
             }.bind(this));
         }
 
         html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-') + '-export');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var name = this.document()._id;
                 var document = {
                     "name": "component " + name,
@@ -2291,14 +2291,14 @@ runtime.on('ready', function () {
 
         html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-') + '-delete');
         if (html) {
-            html.addEventListener('click', function (event) {
+            html.addEventListener('click', function click(event) {
                 var designer = this.require('designer'),
                     components = designer.system().components();
 
                 delete components[this.model()][this.uuid()];
                 designer.system().components(components);
 
-                $('#designer-component-' + this.uuid().replace(/\./g, '-')).fadeOut(400, function () {
+                $('#designer-component-' + this.uuid().replace(/\./g, '-')).fadeOut(400, function fadeOut() {
                     $(this).remove();
                 });
 
@@ -2311,17 +2311,17 @@ runtime.on('ready', function () {
         }
     });
 
-    ModelComponent.on('hide', function () {
+    ModelComponent.on('hide', function hide() {
         $('#designer-component-' + this.uuid()).hide();
     });
 
-    ModelComponent.on('show', function () {
+    ModelComponent.on('show', function show() {
         $('#designer-component-' + this.uuid()).show();
     });
 
     // MODELLOG
     var ModelLog = this.require('ModelLog');
-    ModelLog.on('render', function () {
+    ModelLog.on('render', function render() {
         var html = null,
             that = this,
             doc = '',
@@ -2360,7 +2360,7 @@ runtime.on('ready', function () {
         // events       
         html = document.getElementById('designer-log-clean');
 
-        html.addEventListener('click', function (event) {
+        html.addEventListener('click', function click(event) {
             this.require('designer').logs().forEach(function (item) {
                 this.logs().pop();
             }.bind(this.require('designer')));
@@ -2368,17 +2368,17 @@ runtime.on('ready', function () {
         }.bind(this));
     });
 
-    ModelLog.on('hide', function () {
+    ModelLog.on('hide', function hide() {
         $('#designer-log').hide();
     });
 
-    ModelLog.on('show', function () {
+    ModelLog.on('show', function show() {
         $('#designer-log').show();
     });
 
     // MenuBar
     var MenuBar = this.require('MenuBar');
-    MenuBar.on('init', function (conf) {
+    MenuBar.on('init', function init(conf) {
         var menuHeader = [],
             menuItems = [],
             menuActions = [],
@@ -2439,7 +2439,7 @@ runtime.on('ready', function () {
 
     });
 
-    MenuBar.on('render', function () {
+    MenuBar.on('render', function render() {
         var length = 0,
             i = 0,
             item = null,
@@ -2483,7 +2483,7 @@ runtime.on('ready', function () {
         for (i = 0; i < length; i++) {
             item = domItems.children[i];
             item.addEventListener('click', callback);
-            item.addEventListener('click', function () {
+            item.addEventListener('click', function click() {
                 this.click();
             }.bind(self.items(i)));
         }
@@ -2519,7 +2519,7 @@ runtime.on('ready', function () {
         designer.context(context);
 
         var that = this;
-        $('#designer-menu-action-search').on('keyup', function (event) {
+        $('#designer-menu-action-search').on('keyup', function keyup(event) {
             var value = $('#designer-menu-action-search').val();
             that.designer().filter(value);
         });
@@ -2535,7 +2535,7 @@ runtime.on('ready', function () {
 
     // ToolBar
     var ToolBar = this.require('ToolBar');
-    ToolBar.on('init', function (conf) {
+    ToolBar.on('init', function init(conf) {
         var toolBarItems = [],
             self = this;
 
@@ -2561,7 +2561,7 @@ runtime.on('ready', function () {
         });
     });
 
-    ToolBar.on('render', function () {
+    ToolBar.on('render', function render() {
         var domItems = document.getElementById('designer-toolbar-items'),
             i = 0,
             length = 0,
@@ -2587,15 +2587,15 @@ runtime.on('ready', function () {
 
     // Spaces
     var Spaces = this.require('Spaces');
-    Spaces.on('init', function (conf) {
+    Spaces.on('init', function init(conf) {
     });
 
-    Spaces.on('clear', function () {
+    Spaces.on('clear', function clear() {
         this.require('designer').space('');
         $('#designer-spaces-items').empty();
     });
 
-    Spaces.on('render', function () {
+    Spaces.on('render', function render() {
         var item = null,
             system = this.designer().system(),
             SpaceItem = this.require('SpaceItem'),
@@ -3233,7 +3233,7 @@ runtime.on('ready', function () {
 
     // Workspace
     var Workspace = this.require('Workspace');
-    Workspace.on('init', function (conf) {
+    Workspace.on('init', function init(conf) {
         var that = this;
 
         $('html')
@@ -3273,7 +3273,7 @@ runtime.on('ready', function () {
             });
     });
 
-    Workspace.on('create', function () {
+    Workspace.on('create', function create() {
         var id = '',
             Dialog = null,
             dialog = null,
@@ -4383,7 +4383,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Workspace.on('clear', function () {
+    Workspace.on('clear', function clear() {
         $('#designer-workspace').empty();
         jsPlumb.ready(function () {
             jsPlumb.deleteEveryEndpoint();
@@ -4392,7 +4392,7 @@ runtime.on('ready', function () {
 
     // Server
     var Server = this.require('Server');
-    Server.on('start', function () {
+    Server.on('start', function start() {
         var RuntimeChannel = null,
             channel = null;
 
@@ -4401,7 +4401,7 @@ runtime.on('ready', function () {
             '_id': 'channel'
         });
 
-        channel.on('send', function (message) {
+        channel.on('send', function send(message) {
             if (message.event.indexOf('$system') !== 0) {
                 var config = this.require('storage').get('system-designer-config');
                 // message for other windows
@@ -4419,7 +4419,7 @@ runtime.on('ready', function () {
             }
         });
 
-        channel.on('$appLogDebug', function (message) {
+        channel.on('$appLogDebug', function $appLogDebug(message) {
             var log = '',
                 Log = null;
 
@@ -4433,7 +4433,7 @@ runtime.on('ready', function () {
             this.require('message').info(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('$appLogInfo', function (message) {
+        channel.on('$appLogInfo', function $appLogInfo(message) {
             var log = '',
                 Log = null;
 
@@ -4447,7 +4447,7 @@ runtime.on('ready', function () {
             this.require('message').info(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('$appLogWarn', function (message) {
+        channel.on('$appLogWarn', function $appLogWarn(message) {
             var log = '',
                 Log = null;
 
@@ -4461,7 +4461,7 @@ runtime.on('ready', function () {
             this.require('message').warning(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('$appLogError', function (message) {
+        channel.on('$appLogError', function $appLogError(message) {
             var log = '',
                 Log = null;
 
@@ -4475,7 +4475,7 @@ runtime.on('ready', function () {
             this.require('message').danger(message.replace(/\[[^\]]+\]/, '<strong>runtime:</strong> '));
         });
 
-        channel.on('$editorUpdateType', function (id, type) {
+        channel.on('$editorUpdateType', function $editorUpdateType(id, type) {
             var designer = this.require('designer'),
                 types = designer.system().types();
 
@@ -4489,7 +4489,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorDeleteType', function (id) {
+        channel.on('$editorDeleteType', function $editorDeleteType(id) {
             var designer = this.require('designer'),
                 types = designer.system().types(),
                 dbTypes = [],
@@ -4632,7 +4632,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorUpdateModel', function (id, model) {
+        channel.on('$editorUpdateModel', function $editorUpdateModel(id, model) {
             var designer = this.require('designer'),
                 models = designer.system().models();
 
@@ -4650,7 +4650,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorUpdateModelId', function (oldId, newId) {
+        channel.on('$editorUpdateModelId', function $editorUpdateModelId(oldId, newId) {
             var designer = this.require('designer'),
                 models = designer.system().models(),
                 model = null;
@@ -4668,7 +4668,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorUpdateBehavior', function (id, behavior) {
+        channel.on('$editorUpdateBehavior', function $editorUpdateBehavior(id, behavior) {
             var designer = this.require('designer'),
                 behaviors = designer.system().behaviors();
 
@@ -4679,7 +4679,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorDeleteBehavior', function (id) {
+        channel.on('$editorDeleteBehavior', function $editorDeleteBehavior(id) {
             var designer = this.require('designer'),
                 behaviors = designer.system().behaviors(),
                 dbBehaviors = [],
@@ -4703,7 +4703,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorUpdateComponent', function (id, collection, component) {
+        channel.on('$editorUpdateComponent', function $editorUpdateComponent(id, collection, component) {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
@@ -4715,7 +4715,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorDeleteComponent', function (id, collection) {
+        channel.on('$editorDeleteComponent', function $editorDeleteComponent(id, collection) {
             var designer = this.require('designer'),
                 components = designer.system().components(),
                 models = [],
@@ -4739,7 +4739,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$editorUpdateSystem', function (id, system) {
+        channel.on('$editorUpdateSystem', function $editorUpdateSystem(id, system) {
             var System = this.require('System'),
                 sys = null,
                 designer = this.require('designer');
@@ -4756,7 +4756,7 @@ runtime.on('ready', function () {
             designer.workspace().refresh();
         });
 
-        channel.on('$appLoadSystem', function (system) {
+        channel.on('$appLoadSystem', function $appLoadSystem(system) {
             var Dialog = null,
                 dialog = null;
 
@@ -4803,7 +4803,7 @@ runtime.on('ready', function () {
             }
         });
 
-        channel.on('$runtimeCreateComponent', function (collection, document) {
+        channel.on('$runtimeCreateComponent', function $runtimeCreateComponent(collection, document) {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
@@ -4821,7 +4821,7 @@ runtime.on('ready', function () {
             }
         });
 
-        channel.on('$runtimeDeleteComponent', function (id, collection) {
+        channel.on('$runtimeDeleteComponent', function $runtimeDeleteComponent(id, collection) {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
@@ -4837,7 +4837,7 @@ runtime.on('ready', function () {
             }
         });
 
-        channel.on('$runtimeUpdateComponent', function (id, collection, field, value) {
+        channel.on('$runtimeUpdateComponent', function $runtimeUpdateComponent(id, collection, field, value) {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
@@ -4853,7 +4853,7 @@ runtime.on('ready', function () {
             }
         });
 
-        window.addEventListener('message', function (event) {
+        window.addEventListener('message', function message(event) {
             var data = null,
                 config = this.require('storage').get('system-designer-config');
 
@@ -4869,7 +4869,7 @@ runtime.on('ready', function () {
             }
         }.bind(channel), false);
 
-        this.require('storage').on('changed', function (obj) {
+        this.require('storage').on('changed', function changed(obj) {
             if (typeof obj['system-designer-message'] !== 'undefined') {
                 if (this.require('designer').debugWindow()) {
                     this.require('designer').debugWindow().postMessage(JSON.stringify(obj['system-designer-message'].newValue), '*');
@@ -4883,7 +4883,7 @@ runtime.on('ready', function () {
     // Designer
     var Designer = this.require('Designer');
 
-    Designer.on('check', function () {
+    Designer.on('check', function check() {
         var Dialog = null,
             dialog = null;
 
@@ -4927,7 +4927,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Designer.on('welcome', function () {
+    Designer.on('welcome', function welcome() {
         var Dialog = null,
             dialog = null,
             config = null;
@@ -4943,7 +4943,7 @@ runtime.on('ready', function () {
                 'title': 'Welcome to System Designer'
             });
             dialog.show();
-            dialog.on('ok', function () {
+            dialog.on('ok', function ok() {
                 var config = this.require('storage').get('system-designer-config');
                 if (!config) {
                     config = {};
@@ -4955,7 +4955,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Designer.on('render', function () {
+    Designer.on('render', function render() {
         var MenuBar = null,
             menubar = null,
             ToolBar = null,
@@ -5006,10 +5006,10 @@ runtime.on('ready', function () {
         this.server(server);
 
         // message
-        this.require('logger').on('warn', function (message) {
+        this.require('logger').on('warn', function warn(message) {
             this.require('message').warning(message);
         });
-        this.require('logger').on('error', function (message) {
+        this.require('logger').on('error', function error(message) {
             this.require('message').danger(message);
         });
 
@@ -5138,7 +5138,7 @@ runtime.on('ready', function () {
         this.messages([]);
     });
 
-    Designer.on('filter', function (val) {
+    Designer.on('filter', function filter(val) {
         var result = [],
             collectionName = '';
 
@@ -5193,7 +5193,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Designer.on('context', function (val) {
+    Designer.on('context', function context(val) {
         jsPlumb.ready(function () {
             jsPlumb.deleteEveryEndpoint();
         });
@@ -5202,7 +5202,7 @@ runtime.on('ready', function () {
         this.workspace().refresh();
     });
 
-    Designer.on('space', function (val) {
+    Designer.on('space', function space(val) {
         //jsPlumb.deleteEveryEndpoint();
         //this.workspace().refresh();
         if (this.context() === 'system') {
@@ -5210,7 +5210,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Designer.on('updateRouter', function () {
+    Designer.on('updateRouter', function updateRouter() {
         var menubar = [],
             i = 0,
             length = 0,
@@ -5555,7 +5555,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Designer.on('deleteSchema', function (id) {
+    Designer.on('deleteSchema', function deleteSchema(id) {
         var behaviorId = '',
             modelId = '',
             behavior = null,
@@ -5603,7 +5603,7 @@ runtime.on('ready', function () {
         this.system().schemas(schemas);
     });
 
-    Designer.on('createModel', function (schema) {
+    Designer.on('createModel', function createModel(schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
             components = this.system().components(),
@@ -5788,7 +5788,7 @@ runtime.on('ready', function () {
         this.save();
     });
 
-    Designer.on('syncModel', function (schema) {
+    Designer.on('syncModel', function syncModel(schema) {
         var schemas = this.system().schemas(),
             models = this.system().models(),
             components = this.system().components(),
@@ -5961,7 +5961,7 @@ runtime.on('ready', function () {
         this.save();
     });
 
-    Designer.on('syncBehavior', function (model) {
+    Designer.on('syncBehavior', function syncBehavior(model) {
         var behaviors = this.system().behaviors(),
             schema = null,
             propName = '',
@@ -6058,7 +6058,7 @@ runtime.on('ready', function () {
         }
     });
 
-    Designer.on('linkModel', function (source, target) {
+    Designer.on('linkModel', function linkModel(source, target) {
         jsPlumb.ready(function () {
             jsPlumb.setContainer('body');
 
@@ -6080,7 +6080,7 @@ runtime.on('ready', function () {
         });
     });
 
-    Designer.on('save', function () {
+    Designer.on('save', function save() {
         var systems = this.require('storage').get('system-designer-systems'),
             designer = this.require('designer'),
             system = this.require('db').collections().System.find({
