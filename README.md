@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/design-first/system-designer.svg?branch=master)](https://travis-ci.org/design-first/system-designer)
 [![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
+[![Join the chat at https://gitter.im/design-first/Lobby](https://badges.gitter.im/design-first/Lobby.svg)](https://gitter.im/design-first/Lobby)
 
 ![Image Alt](https://designfirst.io/systemdesigner/img/v2/system-designer.png)
 
