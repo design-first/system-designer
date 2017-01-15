@@ -1,9 +1,11 @@
 # System Designer
 
-[![Build Status](https://travis-ci.org/system-sdk/system-designer.svg?branch=master)](https://travis-ci.org/system-sdk/system-designer)
-[![devDependency Status](https://david-dm.org/system-sdk/system-designer/dev-status.svg)](https://david-dm.org/system-sdk/system-designer#info=devDependencies)
+[![Join the chat at https://gitter.im/system-designer-html5/Lobby](https://badges.gitter.im/system-designer-html5/Lobby.svg)](https://gitter.im/system-designer-html5/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-![Image Alt](https://system-designer.github.io/img/v2/system-designer.png)
+[![Build Status](https://travis-ci.org/design-first/system-designer.svg?branch=master)](https://travis-ci.org/design-first/system-designer)
+[![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
+
+![Image Alt](https://designfirst.io/systemdesigner/img/v2/system-designer.png)
 
 ## What is System Designer ?
 
@@ -31,9 +33,21 @@ In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your 
 
 #### Run your application
 
-You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module. You can also push your application on your Github repository with System Designer.
+You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module (* macOS and Chrome Web App version only).
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
+
+#### Debug your application
+
+System Designer can load the model of any application that runs on the browser or on Node.js. You can see the schemas, models, components and methods of the running application and you can edit them.
+
+All modifications to the model done inside System Designer will be send to the running application. There is no need to reload to see your modifications.
+
+#### Design on the go
+
+System Designer can be used on macOS, iPad, iPhone, Android or any browsers. You can also install it in your project: System Designer requires no backend to work, it is a full web application.
+
+System Designer has a GitHub module to synchronize your work between all these apps. You can begin your design on your Mac and then continue it on your iPad.
 
 ## Build
 
@@ -53,6 +67,8 @@ $ bower install
 Here are the different tasks you can use to build and start System Designer:
 
 ```sh
+# clean
+$ npm run clean
 # build
 $ npm run build
 # start web server
@@ -67,12 +83,14 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/).
 To build for [Electron](http://electron.atom.io):
 
 ```sh
+$ npm run clean
 $ npm run build-electron
 ```
 
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
+$ npm run clean
 $ npm run build-cordova
 ```
 
@@ -84,7 +102,7 @@ $ npm run build-cordova
 
 ## Licence
 
-Copyright © 2016 Erwan Carriou
+Copyright © 2017 Erwan Carriou
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
