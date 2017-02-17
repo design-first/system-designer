@@ -1,5 +1,5 @@
 {
 	"component": "Designer",
 	"state": "generateId",
-	"action": "function generateId() {\n  function gen() {\n      return Math.floor((1 + Math.random()) * 0x10000).toString(16);\n  }\n  return gen() + gen() + gen();\n}"
+	"action": "function generateId() {\n    function gen() {\n        return Math.floor((1 + Math.random()) * 0x10000).toString(16);\n    }\n    function getPrefix() {\n        var validPrefix = 'abcdefghijklmnopqrstuvwxyz';\n        return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));\n    }\n    \n    return getPrefix() + gen() + gen() + gen();\n}"
 }

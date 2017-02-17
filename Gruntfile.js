@@ -116,7 +116,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
@@ -179,7 +184,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
@@ -242,7 +252,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
@@ -312,7 +327,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
@@ -378,7 +398,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         // ID & version
@@ -403,7 +428,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         if (filepath.indexOf('build') !== -1) {
@@ -436,7 +466,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         if (filepath.indexOf('build') !== -1) {
@@ -469,7 +504,12 @@ module.exports = function (grunt) {
                             function gen() {
                                 return Math.floor((1 + Math.random()) * 0x10000).toString(16);
                             }
-                            return gen() + gen() + gen();
+                            function getPrefix() {
+                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
+                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
+                            }
+
+                            return getPrefix() + gen() + gen() + gen();
                         }
 
                         if (filepath.indexOf('build') !== -1) {

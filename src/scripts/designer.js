@@ -3305,13 +3305,6 @@ runtime.on('ready', function ready() {
             return result;
         }
 
-        function generateId() {
-            function gen() {
-                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-            }
-            return gen() + gen() + gen();
-        }
-
         switch (this.designer().context()) {
             case 'system':
                 Dialog = this.require('DialogSystemCreation');
@@ -3328,13 +3321,6 @@ runtime.on('ready', function ready() {
                         System = this.require('System'),
                         ModelSystem = null,
                         modelSystem = null;
-
-                    function generateId() {
-                        function gen() {
-                            return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                        }
-                        return gen() + gen() + gen();
-                    }
 
                     function canCreate(name) {
                         var systems = runtime.require('storage').get('system-designer-systems'),
@@ -3370,8 +3356,8 @@ runtime.on('ready', function ready() {
 
                     if (name && canCreate(name)) {
 
-                        uuid = generateId();
-                        mainUuid = generateId();
+                        uuid = this.designer().generateId();
+                        mainUuid = this.designer().generateId();
 
                         // set system
                         system = {
@@ -3440,13 +3426,6 @@ runtime.on('ready', function ready() {
                             ModelSchema = null,
                             modelSchema = null;
 
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
                         function canCreate(name) {
                             var result = true,
                                 regExp = /[\#\&\(\)\[\]\'\"\*\,\;\:\%]/i,
@@ -3477,7 +3456,7 @@ runtime.on('ready', function ready() {
 
                         if (name && canCreate(name)) {
 
-                            id = generateId().toString();
+                            id = designer.generateId().toString();
 
                             // set schema
                             schema = {
@@ -3547,13 +3526,6 @@ runtime.on('ready', function ready() {
                             modelType = null,
                             id = '';
 
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
                         // get value
                         name = $('#designer-dialog-type-creation-name').val();
                         isEnum = $('#designer-dialog-type-creation-isEnum')[0].checked;
@@ -3564,7 +3536,7 @@ runtime.on('ready', function ready() {
 
                         if (name) {
 
-                            id = generateId().toString();
+                            id = designer.generateId().toString();
 
                             // set system
                             if (isEnum) {
@@ -3643,7 +3615,7 @@ runtime.on('ready', function ready() {
 
                     if (Object.keys(schemaDef).length) {
 
-                        uuid = generateId();
+                        uuid = designer.generateId();
 
                         // set component
                         component = {
@@ -3735,13 +3707,6 @@ runtime.on('ready', function ready() {
                             length = 0,
                             componentId = '';
 
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            return gen() + gen() + gen();
-                        }
-
                         function _getSchemaId(name) {
                             var result = '',
                                 id = '';
@@ -3819,7 +3784,7 @@ runtime.on('ready', function ready() {
 
                         if (model && state) {
 
-                            uuid = generateId();
+                            uuid = designer.generateId();
 
                             if (model !== designer.system().name()) {
 
@@ -5491,15 +5456,8 @@ runtime.on('ready', function ready() {
             return result;
         }
 
-        function generateId() {
-            function gen() {
-                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-            }
-            return gen() + gen() + gen();
-        }
-
         if (_canCreate(type, model, state, behaviors)) {
-            uuid = generateId();
+            uuid = this.generateId();
 
             // params
             methodDef = def.params;
@@ -5615,14 +5573,7 @@ runtime.on('ready', function ready() {
             model = null,
             oldSchema = null;
 
-        function generateId() {
-            function gen() {
-                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-            }
-            return gen() + gen() + gen();
-        }
-
-        id = generateId();
+        id = this.generateId();
 
         model = {
             "_id": id,
@@ -5802,13 +5753,6 @@ runtime.on('ready', function ready() {
             oldSchema = null,
             createModel = false;
 
-        function generateId() {
-            function gen() {
-                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-            }
-            return gen() + gen() + gen();
-        }
-
         name = schema._name;
 
         // search
@@ -5822,7 +5766,7 @@ runtime.on('ready', function ready() {
         if (!model) {
             createModel = true;
             model = {
-                "_id": generateId(),
+                "_id": this.generateId(),
                 "_name": name
             };
         }
