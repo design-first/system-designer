@@ -69,8 +69,8 @@ module.exports = function (grunt) {
             'src/components/html/model-system.html',
             'src/components/html/model-type.html',
             'src/components/html/model-behavior.html',
-            'src/components/json/example-04-node.json',
-            'src/components/json/example-05-rest-mock-server.json',
+            'src/components/json/example-05-node.json',
+            'src/components/json/example-06-rest-mock-server.json',
             'src/system/components/ToolBarItem/163a01b7ca1935c.json',
             'src/system/components/ToolBarItem/163a01b7ca1935e.json',
             'src/system/components/ToolBarItem/1dbc51300e11z11.json',
@@ -1098,12 +1098,12 @@ module.exports = function (grunt) {
             'json-electron': {
                 files: [
                     {
-                        src: 'src/target/electron/components/json/example-04-node.json',
-                        dest: 'src/components/json/example-04-node.json'
+                        src: 'src/target/electron/components/json/example-05-node.json',
+                        dest: 'src/components/json/example-05-node.json'
                     },
                     {
-                        src: 'src/target/electron/components/json/example-05-rest-mock-server.json',
-                        dest: 'src/components/json/example-05-rest-mock-server.json'
+                        src: 'src/target/electron/components/json/example-06-rest-mock-server.json',
+                        dest: 'src/components/json/example-06-rest-mock-server.json'
                     }
                 ]
             },
