@@ -3356,8 +3356,8 @@ runtime.on('ready', function ready() {
 
                     if (name && canCreate(name)) {
 
-                        uuid = this.designer().generateId();
-                        mainUuid = this.designer().generateId();
+                        uuid = designer.generateId();
+                        mainUuid = designer.generateId();
 
                         // set system
                         system = {
