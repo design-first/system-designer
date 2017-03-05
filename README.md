@@ -2,7 +2,6 @@
 
 [![Build Status](https://travis-ci.org/design-first/system-designer.svg?branch=master)](https://travis-ci.org/design-first/system-designer)
 [![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
-[![Join the chat at https://gitter.im/designfirst-projects/system-designer](https://badges.gitter.im/designfirst-projects/system-designer.svg)](https://gitter.im/designfirst-projects/system-designer)
 
 ![Image Alt](https://designfirst.io/systemdesigner/img/v2/system-designer.png)
 
@@ -76,8 +75,7 @@ $ npm run start
 
 Once server started, go to [http://localhost:9001/](http://localhost:9001/).
 
-
-#### Build for Electron and Cordova
+#### Build for Electron
 
 To build for [Electron](http://electron.atom.io):
 
@@ -86,12 +84,20 @@ $ npm run clean
 $ npm run build-electron
 ```
 
+Copy then `/dist/designer` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
+
+#### Build for Cordova
+
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
 $ npm run clean
 $ npm run build-cordova
 ```
+
+Copy then the content of `/dist/designer` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
+
+
 
 ## Documentation
 

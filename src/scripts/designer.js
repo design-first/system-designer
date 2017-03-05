@@ -1365,7 +1365,7 @@ runtime.on('ready', function ready() {
             doc = '',
             propName = '',
             propVal = '';
-            
+
         // html 
         html = this.require('model-system.html');
 
@@ -4772,17 +4772,19 @@ runtime.on('ready', function ready() {
             var designer = this.require('designer'),
                 components = designer.system().components();
 
-            if (typeof components[collection] !== 'undefined') {
-                delete document.classInfo;
+            if (typeof components[collection] === 'undefined') {
+                components[collection] = {};
+            }
 
-                components[collection][document._id] = document;
-                designer.system().components(components);
+            delete document.classInfo;
 
-                designer.save();
+            components[collection][document._id] = document;
+            designer.system().components(components);
 
-                if (designer.context() === 'components') {
-                    designer.workspace().refresh();
-                }
+            designer.save();
+
+            if (designer.context() === 'components') {
+                designer.workspace().refresh();
             }
         });
 
