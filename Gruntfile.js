@@ -88,7 +88,7 @@ module.exports = function (grunt) {
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
             'dist/designer/styles/*.css',
-            'src/styles/cordova-tablet.css',
+            'src/styles/cordova.css',
             'dist/designer/video/*.mp4',
         ],
         jshint: {
@@ -106,6 +106,17 @@ module.exports = function (grunt) {
             ]
         },
         concat: {
+            style: {
+                files: {
+                    'dist/designer/styles/behavior.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/behavior.min.css'],
+                    'dist/designer/styles/component.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/component.min.css'],
+                    'dist/designer/styles/designer.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/designer.min.css'],
+                    'dist/designer/styles/model.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/model.min.css'],
+                    'dist/designer/styles/schema.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/schema.min.css'],
+                    'dist/designer/styles/system.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/system.min.css'],
+                    'dist/designer/styles/type.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/type.min.css']
+                }
+            },
             jsComponent: {
                 options: {
                     process: function (src, filepath) {
@@ -839,7 +850,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'dist/designer/scripts/behavior.min.js': ['src/scripts/behavior.js'],
-                    'dist/designer/scripts/cordova-tablet.min.js': ['src/scripts/cordova-tablet.js'],
+                    'dist/designer/scripts/cordova.min.js': ['src/scripts/cordova.js'],
                     'dist/designer/scripts/component.min.js': ['src/scripts/component.js'],
                     'dist/designer/scripts/designer.min.js': ['src/scripts/designer.js'],
                     'dist/designer/scripts/model.min.js': ['src/scripts/model.js'],
@@ -874,42 +885,6 @@ module.exports = function (grunt) {
             'video-web': {
                 src: 'src/video/systemdesigner-web.mp4',
                 dest: 'dist/designer/video/systemdesigner.mp4',
-            },
-            css: {
-                files: [
-                    {
-                        src: 'src/styles/behavior.css',
-                        dest: 'dist/designer/styles/behavior.css'
-                    },
-                    {
-                        src: 'src/styles/component.css',
-                        dest: 'dist/designer/styles/component.css'
-                    },
-                    {
-                        src: 'src/styles/designer.css',
-                        dest: 'dist/designer/styles/designer.css'
-                    },
-                    {
-                        src: 'src/styles/model.css',
-                        dest: 'dist/designer/styles/model.css'
-                    },
-                    {
-                        src: 'src/styles/schema.css',
-                        dest: 'dist/designer/styles/schema.css'
-                    },
-                    {
-                        src: 'src/styles/system.css',
-                        dest: 'dist/designer/styles/system.css'
-                    },
-                    {
-                        src: 'src/styles/type.css',
-                        dest: 'dist/designer/styles/type.css'
-                    },
-                    {
-                        src: 'src/styles/cordova-tablet.css',
-                        dest: 'dist/designer/styles/cordova-tablet.css'
-                    }
-                ]
             },
             'html-web': {
                 files: [
@@ -1322,16 +1297,16 @@ module.exports = function (grunt) {
             'scripts-cordova': {
                 files: [
                     {
-                        src: 'src/target/cordova/scripts/cordova-tablet.js',
-                        dest: 'src/scripts/cordova-tablet.js'
+                        src: 'src/target/cordova/scripts/cordova.js',
+                        dest: 'src/scripts/cordova.js'
                     }
                 ]
             },
             'styles-cordova': {
                 files: [
                     {
-                        src: 'src/target/cordova/styles/cordova-tablet.css',
-                        dest: 'src/styles/cordova-tablet.css'
+                        src: 'src/target/cordova/styles/cordova.css',
+                        dest: 'src/styles/cordova.css'
                     }
                 ]
             },
@@ -1415,6 +1390,17 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        cssmin: {
+            web: {
+                files: [{
+                    expand: true,
+                    cwd: 'src/styles',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'dist/designer/styles',
+                    ext: '.min.css'
+                }]
+            }
+        },
         connect: {
             server: {
                 options: {
@@ -1443,6 +1429,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-merge-json');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // system JSON task
     grunt.registerTask('system-json', [
@@ -1477,7 +1464,6 @@ module.exports = function (grunt) {
     // debug for web
     grunt.registerTask('debug-web', [
         'copy:lib',
-        'copy:css',
         'copy:html-web',
         'copy:components-web',
         'system-json',
@@ -1486,13 +1472,14 @@ module.exports = function (grunt) {
         'copy:system',
         'copy:video-web',
         'jsbeautifier',
-        'copy:debug-web'
+        'copy:debug-web',
+        'cssmin:web',
+        'concat:style'
     ]);
 
     // build for web
     grunt.registerTask('build-web', [
         'copy:lib',
-        'copy:css',
         'copy:html-web',
         'copy:appcache-web',
         'copy:components-web',
@@ -1503,7 +1490,9 @@ module.exports = function (grunt) {
         'copy:video-web',
         'jsbeautifier',
         'jshint',
-        'uglify:web'
+        'uglify:web',
+        'cssmin:web',
+        'concat:style'
     ]);
 
     // build for electron
@@ -1512,7 +1501,6 @@ module.exports = function (grunt) {
         'copy:html-electron',
         'copy:json-electron',
         'copy:components-electron',
-        'copy:css',
         'system-json',
         'merge-json:runtime',
         'merge-json:addons',
@@ -1528,7 +1516,9 @@ module.exports = function (grunt) {
         'concat:electron-model',
         'concat:electron-schema',
         'concat:electron-system',
-        'concat:electron-type'
+        'concat:electron-type',
+        'cssmin:web',
+        'concat:style'
     ]);
 
     // build for cordova
@@ -1539,7 +1529,6 @@ module.exports = function (grunt) {
         'copy:components-cordova',
         'copy:scripts-cordova',
         'copy:styles-cordova',
-        'copy:css',
         'system-json',
         'merge-json:runtime',
         'merge-json:addons',
@@ -1555,7 +1544,9 @@ module.exports = function (grunt) {
         'concat:cordova-model',
         'concat:cordova-schema',
         'concat:cordova-system',
-        'concat:cordova-type'
+        'concat:cordova-type',
+        'cssmin:web',
+        'concat:style'
     ]);
 
     // default test
