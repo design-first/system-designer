@@ -1779,16 +1779,31 @@ runtime.on('ready', function ready() {
         systemId = this.require('designer').system().id();
 
         callbackProp = function (param) {
-            if (param.type.indexOf('@') !== -1) {
+            if (param.type.indexOf('@') !== -1 && param.type !== '@RuntimeComponent') {
                 params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(param.type.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
             } else {
-                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'text', 'date'].indexOf(param.type) === -1) {
+                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'text', 'date'].indexOf(param.type) === -1 && param.type !== '@RuntimeComponent') {
                     params = params + param.name + ' : <a href="#' + this.require('designer').system().id() + '#types#' + param.type + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + param.type.replace('@', '') + '</a>' + ', ';
                 } else {
-                    params = params + param.name + ' : ' + param.type + ', ';
+                    params = params + param.name + ' : ' + param.type.replace('@', '') + ', ';
                 }
             }
         };
+
+        function _getReturnType(returnType) {
+            var result = '';
+       
+            if (returnType.indexOf('@') !== -1 && returnType.replace('@', '') !== 'RuntimeComponent') {
+                result = '<a href="#' + that.require('designer').system().id() + '#models#' + _getModelId(returnType.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + returnType.replace('@', '') + '</a>';
+            } else {
+                if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'text', 'date'].indexOf(returnType) === -1 && returnType.replace('@', '') !== 'RuntimeComponent') {
+                    result = '<a href="#' + that.require('designer').system().id() + '#types#' + returnType + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + returnType.replace('@', '') + '</a>';
+                } else {
+                    result = returnType.replace('@', '');
+                }
+            }
+            return result;
+        }
 
         function _getModelId(name) {
             var result = '',
@@ -1855,20 +1870,14 @@ runtime.on('ready', function ready() {
                         params = params.replace(', )', ')');
 
                         if (typeof propVal.result !== 'undefined') {
-                            result = propVal.result;
+                            result = _getReturnType(propVal.result);
                             if (htmlId !== '123751cb591de26') {
-                                if (result.indexOf('@') !== -1) {
-                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
-                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + ' : ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + ' : ' + result + '</div>';
                             }
                         } else {
                             if (htmlId !== '123751cb591de26') {
-                                if (result.indexOf('@') !== -1) {
-                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
-                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>' + params + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + params + '</div>';
@@ -1885,21 +1894,15 @@ runtime.on('ready', function ready() {
                     default:
                         result = 'undefined';
                         if (typeof propVal.result !== 'undefined') {
-                            result = propVal.result;
+                            result = _getReturnType(propVal.result);
 
                             if (htmlId !== '123751cb591de26') {
-                                if (result.indexOf('@') !== -1) {
-                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
-                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>() : ' + result + '</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '() : ' + result + '</div>';
                             }
                         } else {
                             if (htmlId !== '123751cb591de26') {
-                                if (result.indexOf('@') !== -1) {
-                                    result = '<a href="#' + this.require('designer').system().id() + '#models#' + _getModelId(result.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + result.replace('@', '') + '</a>';
-                                }
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ <a href="#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + propName + '</a>()</div>';
                             } else {
                                 methods = methods + '<div class="list-group-item" style="text-align: left">+ ' + propName + '()</div>';
