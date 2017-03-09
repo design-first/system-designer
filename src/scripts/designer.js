@@ -1357,6 +1357,52 @@ runtime.on('ready', function ready() {
         $('#designer-dialog-runtimecomponent-info-modal').modal('hide');
     });
 
+    // DIALOG SEARCH
+    var DialogSearch = this.require('DialogSearch');
+    DialogSearch.on('init', function init(config) {
+        var html = '',
+            dom = null,
+            system = this.require('designer').system();
+
+        $('#designer-dialog-search').empty();
+
+        html = this.require('dialog-modal-search.html');
+        document.querySelector('#designer-dialog-search').insertAdjacentHTML('afterbegin',
+            html.source()
+                .replace(/{{title}}/gi, this.title())
+        );
+
+        //events
+        dom = document.getElementById('designer-dialog-search-modal-cancel');
+        dom.addEventListener('click', function click(event) {
+            this.cancel();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-search-result');
+        dom.addEventListener('click', function click(event) {
+            this.hide();
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-checkbox-search');
+        dom.addEventListener('click', function click(event) {
+            this.inContent(!this.inContent());
+            this.filter(this.filter());
+        }.bind(this));
+
+        // focus
+        $('#designer-dialog-search-modal').on('shown.bs.modal', function modal() {
+            $('#designer-dialog-input-search').focus();
+        });
+    });
+
+    DialogSearch.on('show', function show() {
+        $('#designer-dialog-search-modal').modal('show');
+    });
+
+    DialogSearch.on('hide', function hide() {
+        $('#designer-dialog-search-modal').modal('hide');
+    });
+
     // MODELSYSTEM
     var ModelSystem = this.require('ModelSystem');
     ModelSystem.on('render', function render() {
@@ -1792,7 +1838,7 @@ runtime.on('ready', function ready() {
 
         function _getReturnType(returnType) {
             var result = '';
-       
+
             if (returnType.indexOf('@') !== -1 && returnType.replace('@', '') !== 'RuntimeComponent') {
                 result = '<a href="#' + that.require('designer').system().id() + '#models#' + _getModelId(returnType.replace('@', '')) + '" onclick="(function (e) {e.stopPropagation();})(arguments[0])">' + returnType.replace('@', '') + '</a>';
             } else {

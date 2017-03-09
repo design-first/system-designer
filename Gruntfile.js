@@ -79,6 +79,7 @@ module.exports = function (grunt) {
             'src/system/components/ToolBarItem/1dbc51300e11z14.json',
             'src/system/components/ToolBarItem/1dbc51300e11z15.json',
             'src/system/components/ToolBarItem/1dbc51300e11z16.json',
+            'src/system/components/ToolBarItem/1dbc51300e11z17.json',
             'dist/designer/*.html',
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
@@ -1031,6 +1032,10 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/web/components/ToolBarItem/1dbc51300e11z16.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51300e11z16.json'
+                    },
+                    {
+                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z17.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z17.json'
                     }
                 ]
             },
@@ -1219,6 +1224,10 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z16.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51300e11z16.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z17.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z17.json'
                     }
                 ]
             },
