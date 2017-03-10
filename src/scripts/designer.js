@@ -1373,9 +1373,9 @@ runtime.on('ready', function ready() {
         );
 
         //events
-        dom = document.getElementById('designer-dialog-search-modal-cancel');
+        dom = document.getElementById('designer-dialog-search-modal-ok');
         dom.addEventListener('click', function click(event) {
-            this.cancel();
+            this.ok();
         }.bind(this));
 
         dom = document.getElementById('designer-dialog-search-result');
@@ -1383,8 +1383,20 @@ runtime.on('ready', function ready() {
             this.hide();
         }.bind(this));
 
-        dom = document.getElementById('designer-dialog-checkbox-search');
+        dom = document.getElementById('designer-dialog-input-search');
+        dom.addEventListener('keyup', function keyup(event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            } else {
+                this.filter(event.target.value);
+            }
+        }.bind(this));
+
+        dom = document.getElementById('designer-dialog-option');
         dom.addEventListener('click', function click(event) {
+            $('#designer-dialog-checkbox-search')[0].checked = !this.inContent();
             this.inContent(!this.inContent());
             this.filter(this.filter());
         }.bind(this));
