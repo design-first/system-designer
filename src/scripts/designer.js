@@ -1394,6 +1394,14 @@ runtime.on('ready', function ready() {
             }
         }.bind(this));
 
+        dom.addEventListener('keydown', function keydown(event) {
+            if (event.keyCode === 13) {
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            }
+        }.bind(this));
+
         dom = document.getElementById('designer-dialog-option');
         dom.addEventListener('click', function click(event) {
             $('#designer-dialog-checkbox-search')[0].checked = !this.inContent();
