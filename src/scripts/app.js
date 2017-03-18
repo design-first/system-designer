@@ -126,12 +126,19 @@ runtime.on('ready', function () {
         });
 
         channel.on('send', function send(message) {
-            var designer = this.require('designer');
+            var designer = this.require('designer'),
+                checkStringify = null;
 
             if (typeof cordova !== 'undefined') {
                 messages.push(message);
             }
-            this.require('storage').set('system-designer-message', message);
+            try {
+                // test
+                checkStringify = JSON.stringify(message);
+                
+                this.require('storage').set('system-designer-message', message);
+            } catch (e) {
+            }
         }, true, true);
 
         // schema change events
