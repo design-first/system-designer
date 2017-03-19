@@ -1454,14 +1454,14 @@ runtime.on('ready', function ready() {
         html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('system.html#' + that.uuid() + '#description');
+                this.require('designer').open('system.html#' + that.uuid() + '#description', that.uuid());
             }.bind(this));
         }
 
         html = document.getElementById('designer-system-' + this.uuid() + '-edit');
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('system.html#' + that.uuid() + '#description');
+                this.require('designer').open('system.html#' + that.uuid() + '#description', that.uuid());
             }.bind(this));
         }
 
@@ -1621,14 +1621,14 @@ runtime.on('ready', function ready() {
         html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
+                this.require('designer').open('type.html#' + that.uuid() + '#' + systemId, that.uuid());
             }.bind(this));
         }
 
         html = document.getElementById('designer-type-' + this.uuid() + '-edit');
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('type.html#' + that.uuid() + '#' + systemId);
+                this.require('designer').open('type.html#' + that.uuid() + '#' + systemId, that.uuid());
             }.bind(this));
         }
 
@@ -1730,14 +1730,14 @@ runtime.on('ready', function ready() {
 
             if (html) {
                 html.addEventListener('click', function click(event) {
-                    this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
+                    this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId, that.uuid());
                 }.bind(this));
             }
 
             html = document.getElementById('designer-schema-' + htmlId + '-edit');
             if (html) {
                 html.addEventListener('click', function click(event) {
-                    this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId);
+                    this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId, that.uuid());
                 }.bind(this));
             }
 
@@ -2005,7 +2005,7 @@ runtime.on('ready', function ready() {
             html = document.getElementById('designer-model-' + htmlId).children[0].children[1];
             if (html) {
                 html.addEventListener('click', function click(event) {
-                    this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
+                    this.require('designer').open('model.html#' + that.uuid() + '#' + systemId, that.uuid());
                 }.bind(this));
             }
 
@@ -2039,7 +2039,7 @@ runtime.on('ready', function ready() {
             html = document.getElementById('designer-model-' + htmlId + '-edit');
             if (html) {
                 html.addEventListener('click', function click(event) {
-                    this.require('designer').open('model.html#' + that.uuid() + '#' + systemId);
+                    this.require('designer').open('model.html#' + that.uuid() + '#' + systemId, that.uuid());
                 }.bind(this));
             }
         } else {
@@ -2100,14 +2100,14 @@ runtime.on('ready', function ready() {
         html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
+                this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action', that.uuid());
             }.bind(this));
         }
 
         html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action');
+                this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action', that.uuid());
             }.bind(this));
         }
 
@@ -2315,14 +2315,14 @@ runtime.on('ready', function ready() {
         html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-')).children[0].children[1];
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
+                this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId, that.uuid());
             }.bind(this));
         }
 
         html = document.getElementById('designer-component-' + this.uuid().replace(/\./g, '-') + '-edit');
         if (html) {
             html.addEventListener('click', function click(event) {
-                this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId);
+                this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId, that.uuid());
             }.bind(this));
         }
 
@@ -5085,6 +5085,20 @@ runtime.on('ready', function ready() {
 
             default:
                 if (systems && systems.systems && systems.systems.length && systems.systems[0].length) {
+                    systems.systems.sort(function (sysA, sysB) {
+                        var a = this.require('storage').get(sysA),
+                            b = this.require('storage').get(sysB),
+                            result = 0;
+
+                        if (a.name > b.name) {
+                            result = 1;
+                        }
+                        if (a.name < b.name) {
+                            result = -1;
+                        }
+                        return result;
+                    }.bind(this));
+
                     this.system(new System(this.require('storage').get(systems.systems[0])));
                 }
                 this.refresh();
