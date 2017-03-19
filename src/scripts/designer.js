@@ -1023,6 +1023,12 @@ runtime.on('ready', function ready() {
             $('#designer-dialog-export-options-log-level').hide();
         }.bind(this));
 
+        dom = document.getElementById('designer-dialog-export-javascript');
+        dom.addEventListener('click', function click(event) {
+            $('#designer-dialog-export-options').hide();
+            $('#designer-dialog-export-options-log-level').show();
+        }.bind(this));
+
         dom = document.getElementById('designer-dialog-export-html');
         dom.addEventListener('click', function click(event) {
             $('#designer-dialog-export-options').hide();
