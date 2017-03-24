@@ -452,6 +452,7 @@ runtime.on('ready', function () {
             }
 
             this.require('channel').$editorUpdateModel(designer.store().uuid(), designer.store().data());
+            message.clean();
             message.success('Model saved.');
         } else {
             message.danger('You can not modify the name of a model.');

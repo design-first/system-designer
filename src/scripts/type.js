@@ -451,6 +451,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').$editorUpdateType(designer.store().uuid(), designer.store().data());
+        message.clean();
         message.success('Type saved.');
     });
 

@@ -610,6 +610,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').$editorUpdateComponent(designer.store().uuid(), designer.store().collection(), designer.store().data());
+        this.require('message').clean();
         this.require('message').success('Component saved.');
     });
 

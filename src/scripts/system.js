@@ -541,6 +541,7 @@ runtime.on('ready', function () {
         designer.store().data(store);
 
         this.require('channel').$editorUpdateSystem(designer.store().uuid(), designer.store().data());
+        this.require('message').clean();
         this.require('message').success('System saved.');
     });
 

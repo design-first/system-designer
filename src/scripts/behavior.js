@@ -501,6 +501,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').$editorUpdateBehavior(designer.store().uuid(), designer.store().data());
+        this.require('message').clean();
         this.require('message').success('Behavior saved.');
     });
 

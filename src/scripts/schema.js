@@ -473,6 +473,7 @@ runtime.on('ready', function () {
         }
 
         this.require('channel').$editorUpdateSchema(designer.store().uuid(), designer.store().data());
+        message.clean();
         message.success('Schema saved.');
     });
 
