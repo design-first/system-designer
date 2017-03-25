@@ -9,7 +9,7 @@
  * 
  */
 
-// uncomment the line if running the script on node.js
+// uncomment this line if running the script on node.js
 // const runtime = require('system-runtime');
 
 runtime.require('logger').level('{{logLevel}}');
