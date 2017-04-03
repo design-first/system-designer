@@ -267,7 +267,9 @@ runtime.on('ready', function () {
             id = '',
             system = null,
             editor = this.require('editor'),
-            designer = this.require('designer');
+            designer = this.require('designer'),
+            modelName = '',
+            modelGen = null;
 
         this.require('storage').on('changed', function (obj) {
             if (typeof obj['system-designer-message'] !== 'undefined') {
@@ -309,6 +311,10 @@ runtime.on('ready', function () {
 
         designer.store().uuid(id);
         designer.store().data(model);
+
+        modelName = system.models[id]._name;
+        modelGen = designer.getGeneratedModel(modelName);
+        designer.store().extra(modelGen);
 
         document.title = 'model ' + model._name + ' · system ' + system.name;
 
@@ -366,9 +372,22 @@ runtime.on('ready', function () {
     });
 
     Designer.on('render', function () {
+        var systemId = '',
+            System = null,
+            system = null,
+            sys = null;
+
         if (this.isCordova()) {
             this.updateCordovaContext();
         }
+
+        // set system
+        systemId = document.location.href.split('#')[2].split('?')[0];
+        system = this.require('storage').get(systemId);
+        System = this.require('System');
+        sys = new System(system);
+        this.system(sys);
+
         this.menubar().render();
         this.toolbar().render();
         this.workspace().render();
@@ -411,7 +430,8 @@ runtime.on('ready', function () {
             designer = this.require('designer'),
             message = this.require('message'),
             model = null,
-            property = '';
+            property = '',
+            modelGen = null;
 
         try {
             model = JSON.parse(val);
@@ -438,6 +458,14 @@ runtime.on('ready', function () {
             propVal = model[property];
             if (typeof propVal === 'object' && !Array.isArray(propVal) && property.indexOf('_') === 0) {
                 message.danger('Invalid property name \'' + property + '\’. <br>A property name can not start with \'_\'.');
+                return;
+            }
+        }
+
+        modelGen = designer.store().extra();
+        for (property in model) {
+            if (property.indexOf('_') !== 0 && typeof modelGen[property] === 'undefined') {
+                message.danger('Invalid property name \'' + property + '\’. <br>\'' + property + '\’ must be defined in the schema.');
                 return;
             }
         }

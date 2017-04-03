@@ -101,7 +101,7 @@ Copy then the content of `/dist/designer` directory into your [System Designer f
 
 ## Documentation
 
-* [Quick Overview](https://system-designer.readme.io/docs/quick-overview)
+* [Quick Overview](https://system-designer.readme.io/docs/quick-start-in-videos)
 * [Quick Start](https://system-designer.readme.io/docs/quick-start)
 * [Documentation](https://system-designer.readme.io/)
 
