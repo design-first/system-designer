@@ -14,12 +14,12 @@
     </script>
     <!-- system -->
     <script>
-    runtime.on('ready', function () {
+    runtime.on('ready', function ready() {
         // set the level of log
         this.require('logger').level('{{logLevel}}');
         // install and start the system
         this.install({{system}});
-    }, false, true);
+    });
     </script>
 </body>
 
