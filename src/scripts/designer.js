@@ -3688,7 +3688,7 @@ runtime.on('ready', function ready() {
                     modelName = designer.space();
                     schemaDef = designer.getGeneratedSchema(modelName);
 
-                    if (Object.keys(schemaDef).length) {
+                    if (typeof models[modelName] === 'undefined') {
 
                         uuid = designer.generateId();
 
