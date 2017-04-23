@@ -4939,13 +4939,10 @@ runtime.on('ready', function ready() {
         }
     });
 
-    Designer.on('logs', function logs(id, action) {
-        var log = null,
-            html = '';
-
+    Designer.on('logs', function logs(log, action) {
+        var html = '';
+ 
         if (action === 'add' && this.context() === 'logs') {
-            log = this.require(id);
-
             switch (log.type()) {
                 case 'debug':
                     html = html + '<p class="text-muted">' + log.log() + '</p>';
