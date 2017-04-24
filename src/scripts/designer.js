@@ -761,9 +761,11 @@ runtime.on('ready', function ready() {
             id = _getSchemaId(behavior.component);
             def = schemas[id];
 
-            //if (def && (def[behavior.state] === 'method' || def[behavior.state] === 'event')) {
-            //    result = !_existBehavior(behavior.component, behavior.state, behaviors);
-            //}
+            if (def && (def[behavior.state] === 'method' || def[behavior.state] === 'event')) {
+                //result = !_existBehavior(behavior.component, behavior.state, behaviors);
+            } else {
+                result = false;
+            }
 
             if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {
                 result = false;
