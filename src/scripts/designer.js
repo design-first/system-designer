@@ -737,15 +737,15 @@ runtime.on('ready', function ready() {
             return result;
         }
 
-        function _existBehavior(component, state, behaviors) {
+        function _canOverrideBehavior(id, component, state, behaviors) {
             var behavior = {},
-                id = '',
-                result = false;
+                behaviorId = '',
+                result = true;
 
-            for (id in behaviors) {
-                behavior = behaviors[id];
-                if (behavior.component === component && behavior.state === state) {
-                    result = true;
+            for (behaviorId in behaviors) {
+                behavior = behaviors[behaviorId];
+                if (behavior.component === component && behavior.state === state && behavior._id !== id) {
+                    result = false;
                     break;
                 }
             }
@@ -762,9 +762,7 @@ runtime.on('ready', function ready() {
             def = schemas[id];
 
             if (def && (def[behavior.state] === 'method' || def[behavior.state] === 'event')) {
-                //result = !_existBehavior(behavior.component, behavior.state, behaviors);
-            } else {
-                result = false;
+                result = _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);
             }
 
             if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {
@@ -880,6 +878,9 @@ runtime.on('ready', function ready() {
             designer.system().types(types);
             designer.system().behaviors(behaviors);
             designer.system().components(components);
+
+            designer.system().version(sys.version);
+            designer.system().description(sys.description);
 
             designer.save();
 
@@ -4943,7 +4944,7 @@ runtime.on('ready', function ready() {
 
     Designer.on('logs', function logs(log, action) {
         var html = '';
- 
+
         if (action === 'add' && this.context() === 'logs') {
             switch (log.type()) {
                 case 'debug':
