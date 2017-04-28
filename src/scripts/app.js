@@ -402,21 +402,21 @@ runtime.on('ready', function () {
             if (event.collection.indexOf('Runtime') !== 0) {
                 this.require('channel').$runtimeCreateComponent(event.collection, event.document);
             }
-        });
+        }, false, true);
 
         // Database remove event
         db.on('remove', function remove(event) {
             if (event.collection.indexOf('Runtime') !== 0) {
                 this.require('channel').$runtimeDeleteComponent(event.id, event.collection);
             }
-        });
+        }, false, true);
 
         // Database update event
         db.on('update', function update(event) {
             if (event.collection.indexOf('Runtime') !== 0) {
                 this.require('channel').$runtimeUpdateComponent(event.id, event.collection, event.field, event.value);
             }
-        });
+        }, false, true);
 
         this.require('logger').level('debug');
         if (this.require(systemID).main) {
