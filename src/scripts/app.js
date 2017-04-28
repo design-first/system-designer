@@ -82,7 +82,7 @@ runtime.on('ready', function () {
                     docFragment = document.createDocumentFragment();
                     div = document.createElement('div');
                     div.setAttribute('id', 'system-designer-back');
-                    div.setAttribute('style', 'top:5px;left:10px;position:absolute;z-index:999999;');
+                    div.setAttribute('style', 'top:5px;left:10px;position:absolute;font-size:18px;font-family:Helvetica,Arial,sans-serif;z-index:999999;background-color:white;');
 
                     a = document.createElement('a');
                     /* jshint -W107 */
