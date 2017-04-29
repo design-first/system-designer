@@ -100,7 +100,7 @@ runtime.on('ready', function () {
 
                     document.body.appendChild(docFragment);
                 }
-            }, 2000);
+            }, 1000);
         }
 
         // case of electron
