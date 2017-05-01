@@ -739,18 +739,15 @@ runtime.on('ready', function ready() {
 
         function _canOverrideBehavior(id, component, state, behaviors) {
             var behavior = {},
-                behaviorId = '',
-                result = true;
+                behaviorId = '';
 
             for (behaviorId in behaviors) {
                 behavior = behaviors[behaviorId];
                 if (behavior.component === component && behavior.state === state && behavior._id !== id) {
-                    result = false;
+                    delete behaviors[behavior._id];
                     break;
                 }
             }
-
-            return result;
         }
 
         function _canOverride(sysId, schemas, behaviors, behavior) {
@@ -761,8 +758,12 @@ runtime.on('ready', function ready() {
             id = _getSchemaId(behavior.component);
             def = schemas[id];
 
-            if (def && (def[behavior.state] === 'method' || def[behavior.state] === 'event')) {
-                result = _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);
+            if (def && def[behavior.state]) {
+                if (def[behavior.state] === 'method') {
+                    _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);
+                }
+            } else {
+                result = false;
             }
 
             if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {
@@ -773,22 +774,6 @@ runtime.on('ready', function ready() {
         }
 
         if (Object.keys(sys).length) {
-
-            // behaviors
-            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));
-            schemas = JSON.parse(JSON.stringify(designer.system().schemas()));
-
-            for (name in sys.behaviors) {
-                if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {
-                    behaviors[name] = sys.behaviors[name];
-                } else {
-                    // merge main / start / stop
-                    if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {
-                        designer.mergeBehavior(behaviors, sys.behaviors[name], designer.system().id(), sys.name);
-                    }
-                }
-            }
-            designer.system().behaviors(behaviors);
 
             // schemas
             schemas = JSON.parse(JSON.stringify(designer.system().schemas()));
@@ -809,6 +794,22 @@ runtime.on('ready', function ready() {
                     }
                 }
             }
+            designer.system().schemas(schemas);
+
+            // behaviors
+            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));
+            for (name in sys.behaviors) {
+                if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {
+                    behaviors[name] = sys.behaviors[name];
+                } else {
+                    // merge main / start / stop
+                    if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {
+                        designer.mergeBehavior(behaviors, sys.behaviors[name], designer.system().id(), sys.name);
+                    }
+                }
+            }
+            designer.system().behaviors(behaviors);
+
             // sync models
             for (schemaId in schemas) {
                 designer.syncModel(schemas[schemaId]);
@@ -833,6 +834,8 @@ runtime.on('ready', function ready() {
                     }
                 }
             }
+            designer.system().models(models);
+
             // sync behaviors and components
             for (modelId in models) {
                 designer.syncBehavior(models[modelId]);
@@ -849,6 +852,7 @@ runtime.on('ready', function ready() {
                     types[name] = sys.types[name];
                 }
             }
+            designer.system().types(types);
 
             // components
             components = JSON.parse(JSON.stringify(designer.system().components()));
