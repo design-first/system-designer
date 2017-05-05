@@ -883,8 +883,10 @@ runtime.on('ready', function ready() {
             designer.system().behaviors(behaviors);
             designer.system().components(components);
 
-            designer.system().version(sys.version);
-            designer.system().description(sys.description);
+            if (designer.system().id() === sys._id) {
+                designer.system().version(sys.version);
+                designer.system().description(sys.description);
+            }
 
             designer.save();
 
