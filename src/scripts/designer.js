@@ -2108,7 +2108,7 @@ runtime.on('ready', function ready() {
             template.source()
                 .replace(/{{_id}}/gi, this.uuid())
                 .replace(/{{title}}/gi, this.title())
-                .replace(/{{content}}/gi, this.content())
+                .replace(/{{content}}/gi, this.content().replace(/</g, '&lt;'))
         );
 
         //events
@@ -2296,15 +2296,15 @@ runtime.on('ready', function ready() {
                     default:
                         if (value.length < 25) {
                             if (typeof propVal === 'string') {
-                                doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>';
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.replace(/</g, '&lt;') + '</td></tr>';
                             } else {
-                                doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + value.replace(/</g, '&lt;') + '</td></tr>';
                             }
                         } else {
                             if (typeof propVal === 'string') {
-                                doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.substring(0, 25) + ' ...</td></tr>';
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.substring(0, 23).replace(/</g, '&lt;') + ' ...</td></tr>';
                             } else {
-                                doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 25) + ' ...</td></tr>';
+                                doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 23).replace(/</g, '&lt;') + ' ...</td></tr>';
                             }
                         }
                         break;
