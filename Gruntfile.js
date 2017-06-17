@@ -1440,20 +1440,32 @@ module.exports = function (grunt) {
                     },
                     {
                         expand: true,
-                        cwd: 'node_modules/bootstrap/dist/',
-                        src: ['**'],
-                        dest: 'dist/designer/lib/bootstrap/dist/'
+                        cwd: 'node_modules/bootstrap/dist/css',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/dist/css'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/fonts',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/dist/fonts'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/js',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/dist/js'
                     },
                     {
                         expand: true,
                         cwd: 'node_modules/bootstrap/fonts/',
-                        src: ['**'],
+                        src: ['*'],
                         dest: 'dist/designer/lib/bootstrap/fonts/'
                     },
                     {
                         expand: true,
-                        cwd: 'node_modules/bootstrap/js/',
-                        src: ['**'],
+                        cwd: 'node_modules/bootstrap/dist/js/',
+                        src: ['*'],
                         dest: 'dist/designer/lib/bootstrap/js/'
                     },
                     {
@@ -1464,16 +1476,7 @@ module.exports = function (grunt) {
                         src: 'node_modules/prismjs/themes/prism.css',
                         dest: 'dist/designer/lib/prism/prism.css'
                     }
-                ],
-                options: {
-                    process: function (content, srcpath) {
-                        var result = content;
-                        if (srcpath.indexOf('jquery') != -1) {
-                            result = content.replace('//# sourceMappingURL=jquery.min.map', '')
-                        }
-                        return result;
-                    }
-                }
+                ]
             },
             'cordova-lib': {
                 files: [{
