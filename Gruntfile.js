@@ -87,6 +87,10 @@ module.exports = function (grunt) {
             'dist/designer/lib/system-runtime/**',
             'dist/designer/lib/github-api/**',
             'dist/designer/lib/codemirror/**',
+            'dist/designer/lib/jsplumb/**',
+            'dist/designer/lib/ace/**',
+            'dist/designer/lib/bootstrap/**',
+            'dist/designer/lib/prism/**',
             'dist/designer/systems/design.json',
             'dist/designer/scripts/*.js',
             'dist/designer/styles/*.css',
@@ -1363,7 +1367,7 @@ module.exports = function (grunt) {
             lib: {
                 files: [
                     {
-                        src: 'bower_components/jquery/dist/jquery.min.js',
+                        src: 'node_modules/jquery/dist/jquery.min.js',
                         dest: 'dist/designer/lib/jquery/jquery.min.js'
                     },
                     {
@@ -1375,12 +1379,90 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js.map'
                     },
                     {
-                        src: 'bower_components/system-runtime/dist/system-runtime.min.js',
+                        src: 'node_modules/jsplumb/dist/js/jsplumb.min.js',
+                        dest: 'dist/designer/lib/jsplumb/jsplumb.min.js'
+                    },
+                    {
+                        src: 'node_modules/system-runtime/dist/system-runtime.min.js',
                         dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
                     },
                     {
-                        src: 'bower_components/system-runtime/dist/system-runtime.min.js',
+                        src: 'node_modules/system-runtime/dist/system-runtime.min.js',
                         dest: 'src/components/js/system-runtime.min.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ace.js',
+                        dest: 'dist/designer/lib/ace/ace.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ext-language_tools.js',
+                        dest: 'dist/designer/lib/ace/ext-language_tools.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ext-searchbox.js',
+                        dest: 'dist/designer/lib/ace/ext-searchbox.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-css.js',
+                        dest: 'dist/designer/lib/ace/mode-css.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-html.js',
+                        dest: 'dist/designer/lib/ace/mode-html.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-javascript.js',
+                        dest: 'dist/designer/lib/ace/mode-javascript.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-json.js',
+                        dest: 'dist/designer/lib/ace/mode-json.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-text.js',
+                        dest: 'dist/designer/lib/ace/mode-text.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-css.js',
+                        dest: 'dist/designer/lib/ace/worker-css.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-html.js',
+                        dest: 'dist/designer/lib/ace/worker-html.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-javascript.js',
+                        dest: 'dist/designer/lib/ace/worker-javascript.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-json.js',
+                        dest: 'dist/designer/lib/ace/worker-json.js'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/',
+                        src: ['**'],
+                        dest: 'dist/designer/lib/bootstrap/dist/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/fonts/',
+                        src: ['**'],
+                        dest: 'dist/designer/lib/bootstrap/fonts/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/js/',
+                        src: ['**'],
+                        dest: 'dist/designer/lib/bootstrap/js/'
+                    },
+                    {
+                        src: 'node_modules/prismjs/prism.js',
+                        dest: 'dist/designer/lib/prism/prism.js'
+                    },
+                    {
+                        src: 'node_modules/prismjs/themes/prism.css',
+                        dest: 'dist/designer/lib/prism/prism.css'
                     }
                 ],
                 options: {
