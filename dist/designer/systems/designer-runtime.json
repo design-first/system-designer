@@ -1,0 +1,62 @@
+{
+    "name": "app",
+    "master": false,
+    "subsystem": false,
+    "version": "0.0.1",
+    "description": "",
+    "schemas": {
+        "104ad1f48518376": {
+            "_id": "104ad1f48518376",
+            "_name": "RuntimeChannel",
+            "_core": true,
+            "$appLogDebug": "event",
+            "$appLogInfo": "event",
+            "$appLogWarn": "event",
+            "$appLogError": "event"
+        }
+    },
+    "behaviors": {},
+    "types": {},
+    "components": {},
+    "_id": "16d0e138c8170b2",
+    "models": {
+        "135c71078810af2": {
+            "_id": "135c71078810af2",
+            "_name": "RuntimeChannel",
+            "_schema": "RuntimeChannel",
+            "_core": true,
+            "$appLogDebug": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            },
+            "$appLogInfo": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            },
+            "$appLogWarn": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            },
+            "$appLogError": {
+                "params": [
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -83,6 +83,8 @@ module.exports = function (grunt) {
             'src/system/components/ToolBarItem/1dbc51300e11z16.json',
             'src/system/components/ToolBarItem/1dbc51300e11z17.json',
             'dist/designer/*.html',
+            'dist/designer/img/**',
+            'dist/designer/systems/*.json',
             'dist/designer/system-designer.appcache',
             'dist/designer/lib/jquery/**',
             'dist/designer/lib/system-runtime/**',
@@ -632,12 +634,12 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/app.json')) + ');\n\n' + src;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/designer-runtime.json')) + ');\n\n' + src;
                         return result;
                     }
                 },
                 files: {
-                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
+                    'dist/designer/scripts/designer-runtime.min.js': ['dist/designer/scripts/designer-runtime.min.js']
                 }
             },
             'electron-behavior': {
@@ -728,12 +730,12 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/app.json')) + ');\n\n' + src;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/designer-runtime.json')) + ');\n\n' + src;
                         return result;
                     }
                 },
                 files: {
-                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
+                    'dist/designer/scripts/designer-runtime.min.js': ['dist/designer/scripts/designer-runtime.min.js']
                 }
             },
             'cordova-behavior': {
@@ -864,7 +866,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/schema.min.js': ['src/scripts/schema.js'],
                     'dist/designer/scripts/system.min.js': ['src/scripts/system.js'],
                     'dist/designer/scripts/type.min.js': ['src/scripts/type.js'],
-                    'dist/designer/scripts/app.min.js': ['src/scripts/app.js']
+                    'dist/designer/scripts/designer-runtime.js': ['src/scripts/designer-runtime.js']
                 }
             },
             cordova: {
@@ -884,6 +886,20 @@ module.exports = function (grunt) {
             system: {
                 src: 'build/system/design.json',
                 dest: 'dist/designer/systems/design.json'
+            },
+            resources: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/img',
+                        src: ['*'],
+                        dest: 'dist/designer/img'
+                    },
+                    {
+                        src: 'src/designer-runtime/designer-runtime.json',
+                        dest: 'dist/designer/systems/designer-runtime.json',
+                    }
+                ]
             },
             video: {
                 src: 'src/video/systemdesigner.mp4',
@@ -1360,8 +1376,8 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/scripts/type.min.js'
                     },
                     {
-                        src: 'src/scripts/app.js',
-                        dest: 'dist/designer/scripts/app.min.js'
+                        src: 'src/scripts/designer-runtime.js',
+                        dest: 'dist/designer/scripts/designer-runtime.min.js'
                     }
                 ]
             },
@@ -1563,6 +1579,7 @@ module.exports = function (grunt) {
 
     // debug for web
     grunt.registerTask('debug-web', [
+        'copy:resources',
         'copy:lib',
         'copy:html-web',
         'copy:components-web',
@@ -1579,6 +1596,7 @@ module.exports = function (grunt) {
 
     // build for web
     grunt.registerTask('build-web', [
+        'copy:resources',
         'copy:lib',
         'copy:html-web',
         'copy:appcache-web',
@@ -1597,6 +1615,7 @@ module.exports = function (grunt) {
 
     // build for electron
     grunt.registerTask('build-electron', [
+        'copy:resources',
         'copy:lib',
         'copy:html-electron',
         'copy:json-electron',
@@ -1623,6 +1642,7 @@ module.exports = function (grunt) {
 
     // build for cordova
     grunt.registerTask('build-cordova', [
+        'copy:resources',
         'copy:lib',
         'copy:cordova-lib',
         'copy:html-cordova',
