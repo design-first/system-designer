@@ -31,6 +31,7 @@ module.exports = function (grunt) {
                     'src/system/*/*/*.json',
                     'src/styles/*.css',
                     'src/scripts/*.js',
+                    'src/addons/*.json'
                 ],
                 tasks: [
                     'debug'
