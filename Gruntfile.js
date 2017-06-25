@@ -82,6 +82,18 @@ module.exports = function (grunt) {
             'src/system/components/ToolBarItem/1dbc51300e11z15.json',
             'src/system/components/ToolBarItem/1dbc51300e11z16.json',
             'src/system/components/ToolBarItem/1dbc51300e11z17.json',
+            'src/system/components/ToolBarItem/1dbc513e0e11z15.json',
+            'src/system/components/ToolBarItem/1dbc513e0e11z16.json',
+            'src/system/components/ToolBarItem/sdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/sdbc51200e11z04.json',
+            'src/system/components/ToolBarItem/tdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/tdbc51200e11z04.json',
+            'src/system/components/ToolBarItem/udbc51200e11z03.json',
+            'src/system/components/ToolBarItem/udbc51200e11z04.json',
+            'src/system/components/ToolBarItem/vdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/vdbc51200e11z04.json',
+            'src/system/components/ToolBarItem/wdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/wdbc51200e11z04.json',
             'dist/designer/*.html',
             'dist/designer/img/**',
             'dist/designer/systems/*.json',
@@ -1254,6 +1266,54 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z17.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51300e11z17.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc513e0e11z15.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc513e0e11z15.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc513e0e11z16.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc513e0e11z16.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/sdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/sdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/sdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/sdbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/tdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/tdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/tdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/tdbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/udbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/udbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/udbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/udbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/vdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/vdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/vdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/vdbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/wdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/wdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/wdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/wdbc51200e11z04.json'
                     }
                 ]
             },
