@@ -878,7 +878,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/schema.min.js': ['src/scripts/schema.js'],
                     'dist/designer/scripts/system.min.js': ['src/scripts/system.js'],
                     'dist/designer/scripts/type.min.js': ['src/scripts/type.js'],
-                    'dist/designer/scripts/designer-runtime.js': ['src/scripts/designer-runtime.js']
+                    'dist/designer/scripts/designer-runtime.min.js': ['src/scripts/designer-runtime.js']
                 }
             },
             cordova: {
