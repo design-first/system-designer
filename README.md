@@ -103,9 +103,10 @@ Copy then the content of `/dist/designer` directory into your [System Designer f
 * [Quick Start](https://system-designer.readme.io/docs/quick-start)
 * [Documentation](https://system-designer.readme.io/)
 
-## Code of Conduct
+## Community
 
 * [Code of Conduct](CODE_OF_CONDUCT.md)
+* [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Licence
 
