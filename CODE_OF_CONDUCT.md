@@ -60,4 +60,4 @@ If you experience or witness unacceptable behaviorâ€”or have any other concernsâ
 
 After filing a report, a representative will contact you personally, review the incident, follow up with any additional questions, and make a decision as to how to respond. If the person who is harassing you is part of the response team, they will recuse themselves from handling your incident. If the complaint originates from a member of the response team, it will be handled by a different member of the response team. We will respect confidentiality requests for the purpose of protecting victims of abuse.
 
-note: This code of conduct is based on the [template](http://todogroup.org/opencodeofconduct/) established by the [TODO Group](http://todogroup.org)
+note: this code of conduct is based on the [template](http://todogroup.org/opencodeofconduct/) established by the [TODO Group](http://todogroup.org)
