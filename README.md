@@ -105,7 +105,7 @@ Copy then the content of `/dist/designer` directory into your [System Designer f
 
 ## Code of Conduct
 
-* [Code of Conduct](https://system-designer.readme.io/docs/code-of-conduct)
+* [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## Licence
 
