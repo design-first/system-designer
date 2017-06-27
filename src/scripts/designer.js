@@ -6104,14 +6104,16 @@ runtime.on('ready', function ready() {
             jsPlumb.setContainer('body');
 
             jsPlumb.connect({
-                paintStyle: {
-                    strokeStyle: '#7F949D',
-                    lineWidth: 3
+                paintStyle: { 
+                    stroke: '#7F949D', 
+                    strokeWidth: 3 
                 },
                 source: 'designer-model-panel-' + source,
                 target: 'designer-model-panel-' + target,
                 overlays: [
-                    ['Arrow', { location: 1 }]
+                    ['Arrow', {
+                        location: 1
+                    }]
                 ]
             }, {
                     connector: ['Flowchart'],

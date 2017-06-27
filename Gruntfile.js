@@ -31,6 +31,7 @@ module.exports = function (grunt) {
                     'src/system/*/*/*.json',
                     'src/styles/*.css',
                     'src/scripts/*.js',
+                    'src/addons/*.json'
                 ],
                 tasks: [
                     'debug'
@@ -49,9 +50,7 @@ module.exports = function (grunt) {
             }
         },
         clean: [
-            'build/*.js',
-            'build/*.json',
-            'build/*/*.json',
+            'src/styles/cordova.css',
             'src/components/html/dialog-modal-welcome.html',
             'src/components/html/copyright.html',
             'src/components/html/menu-action-version.html',
@@ -81,17 +80,20 @@ module.exports = function (grunt) {
             'src/system/components/ToolBarItem/1dbc51300e11z15.json',
             'src/system/components/ToolBarItem/1dbc51300e11z16.json',
             'src/system/components/ToolBarItem/1dbc51300e11z17.json',
-            'dist/designer/*.html',
-            'dist/designer/system-designer.appcache',
-            'dist/designer/lib/jquery/**',
-            'dist/designer/lib/system-runtime/**',
-            'dist/designer/lib/github-api/**',
-            'dist/designer/lib/codemirror/**',
-            'dist/designer/systems/design.json',
-            'dist/designer/scripts/*.js',
-            'dist/designer/styles/*.css',
-            'src/styles/cordova.css',
-            'dist/designer/video/*.mp4',
+            'src/system/components/ToolBarItem/1dbc513e0e11z15.json',
+            'src/system/components/ToolBarItem/1dbc513e0e11z16.json',
+            'src/system/components/ToolBarItem/sdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/sdbc51200e11z04.json',
+            'src/system/components/ToolBarItem/tdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/tdbc51200e11z04.json',
+            'src/system/components/ToolBarItem/udbc51200e11z03.json',
+            'src/system/components/ToolBarItem/udbc51200e11z04.json',
+            'src/system/components/ToolBarItem/vdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/vdbc51200e11z04.json',
+            'src/system/components/ToolBarItem/wdbc51200e11z03.json',
+            'src/system/components/ToolBarItem/wdbc51200e11z04.json',
+            'dist',
+            'build'
         ],
         jshint: {
             files: [
@@ -627,12 +629,12 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/app.json')) + ');\n\n' + src;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/designer-runtime.json')) + ');\n\n' + src;
                         return result;
                     }
                 },
                 files: {
-                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
+                    'dist/designer/scripts/designer-runtime.min.js': ['dist/designer/scripts/designer-runtime.min.js']
                 }
             },
             'electron-behavior': {
@@ -723,12 +725,12 @@ module.exports = function (grunt) {
                 options: {
                     process: function (src, filepath) {
                         var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/app.json')) + ');\n\n' + src;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/designer-runtime.json')) + ');\n\n' + src;
                         return result;
                     }
                 },
                 files: {
-                    'dist/designer/scripts/app.min.js': ['dist/designer/scripts/app.min.js']
+                    'dist/designer/scripts/designer-runtime.min.js': ['dist/designer/scripts/designer-runtime.min.js']
                 }
             },
             'cordova-behavior': {
@@ -859,7 +861,7 @@ module.exports = function (grunt) {
                     'dist/designer/scripts/schema.min.js': ['src/scripts/schema.js'],
                     'dist/designer/scripts/system.min.js': ['src/scripts/system.js'],
                     'dist/designer/scripts/type.min.js': ['src/scripts/type.js'],
-                    'dist/designer/scripts/app.min.js': ['src/scripts/app.js']
+                    'dist/designer/scripts/designer-runtime.min.js': ['src/scripts/designer-runtime.js']
                 }
             },
             cordova: {
@@ -879,6 +881,20 @@ module.exports = function (grunt) {
             system: {
                 src: 'build/system/design.json',
                 dest: 'dist/designer/systems/design.json'
+            },
+            resources: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/img',
+                        src: ['*'],
+                        dest: 'dist/designer/img'
+                    },
+                    {
+                        src: 'src/designer-runtime/designer-runtime.json',
+                        dest: 'dist/designer/systems/designer-runtime.json',
+                    }
+                ]
             },
             video: {
                 src: 'src/video/systemdesigner.mp4',
@@ -1233,6 +1249,54 @@ module.exports = function (grunt) {
                     {
                         src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z17.json',
                         dest: 'src/system/components/ToolBarItem/1dbc51300e11z17.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc513e0e11z15.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc513e0e11z15.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/1dbc513e0e11z16.json',
+                        dest: 'src/system/components/ToolBarItem/1dbc513e0e11z16.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/sdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/sdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/sdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/sdbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/tdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/tdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/tdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/tdbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/udbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/udbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/udbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/udbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/vdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/vdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/vdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/vdbc51200e11z04.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/wdbc51200e11z03.json',
+                        dest: 'src/system/components/ToolBarItem/wdbc51200e11z03.json'
+                    },
+                    {
+                        src: 'src/target/electron/components/ToolBarItem/wdbc51200e11z04.json',
+                        dest: 'src/system/components/ToolBarItem/wdbc51200e11z04.json'
                     }
                 ]
             },
@@ -1355,15 +1419,15 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/scripts/type.min.js'
                     },
                     {
-                        src: 'src/scripts/app.js',
-                        dest: 'dist/designer/scripts/app.min.js'
+                        src: 'src/scripts/designer-runtime.js',
+                        dest: 'dist/designer/scripts/designer-runtime.min.js'
                     }
                 ]
             },
             lib: {
                 files: [
                     {
-                        src: 'bower_components/jquery/dist/jquery.min.js',
+                        src: 'node_modules/jquery/dist/jquery.min.js',
                         dest: 'dist/designer/lib/jquery/jquery.min.js'
                     },
                     {
@@ -1375,23 +1439,104 @@ module.exports = function (grunt) {
                         dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js.map'
                     },
                     {
-                        src: 'bower_components/system-runtime/dist/system-runtime.min.js',
+                        src: 'node_modules/jsplumb/dist/js/jsplumb.min.js',
+                        dest: 'dist/designer/lib/jsplumb/jsplumb.min.js'
+                    },
+                    {
+                        src: 'node_modules/system-runtime/dist/system-runtime.min.js',
                         dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
                     },
                     {
-                        src: 'bower_components/system-runtime/dist/system-runtime.min.js',
+                        src: 'node_modules/system-runtime/dist/system-runtime.min.js',
                         dest: 'src/components/js/system-runtime.min.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ace.js',
+                        dest: 'dist/designer/lib/ace/ace.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ext-language_tools.js',
+                        dest: 'dist/designer/lib/ace/ext-language_tools.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ext-searchbox.js',
+                        dest: 'dist/designer/lib/ace/ext-searchbox.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-css.js',
+                        dest: 'dist/designer/lib/ace/mode-css.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-html.js',
+                        dest: 'dist/designer/lib/ace/mode-html.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-javascript.js',
+                        dest: 'dist/designer/lib/ace/mode-javascript.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-json.js',
+                        dest: 'dist/designer/lib/ace/mode-json.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-text.js',
+                        dest: 'dist/designer/lib/ace/mode-text.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-css.js',
+                        dest: 'dist/designer/lib/ace/worker-css.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-html.js',
+                        dest: 'dist/designer/lib/ace/worker-html.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-javascript.js',
+                        dest: 'dist/designer/lib/ace/worker-javascript.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-json.js',
+                        dest: 'dist/designer/lib/ace/worker-json.js'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/css',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/dist/css'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/fonts',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/dist/fonts'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/js',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/dist/js'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/fonts/',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/fonts/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/js/',
+                        src: ['*'],
+                        dest: 'dist/designer/lib/bootstrap/js/'
+                    },
+                    {
+                        src: 'node_modules/prismjs/prism.js',
+                        dest: 'dist/designer/lib/prism/prism.js'
+                    },
+                    {
+                        src: 'node_modules/prismjs/themes/prism.css',
+                        dest: 'dist/designer/lib/prism/prism.css'
                     }
-                ],
-                options: {
-                    process: function (content, srcpath) {
-                        var result = content;
-                        if (srcpath.indexOf('jquery') != -1) {
-                            result = content.replace('//# sourceMappingURL=jquery.min.map', '')
-                        }
-                        return result;
-                    }
-                }
+                ]
             },
             'cordova-lib': {
                 files: [{
@@ -1477,6 +1622,7 @@ module.exports = function (grunt) {
 
     // debug for web
     grunt.registerTask('debug-web', [
+        'copy:resources',
         'copy:lib',
         'copy:html-web',
         'copy:components-web',
@@ -1493,6 +1639,7 @@ module.exports = function (grunt) {
 
     // build for web
     grunt.registerTask('build-web', [
+        'copy:resources',
         'copy:lib',
         'copy:html-web',
         'copy:appcache-web',
@@ -1511,6 +1658,7 @@ module.exports = function (grunt) {
 
     // build for electron
     grunt.registerTask('build-electron', [
+        'copy:resources',
         'copy:lib',
         'copy:html-electron',
         'copy:json-electron',
@@ -1537,6 +1685,7 @@ module.exports = function (grunt) {
 
     // build for cordova
     grunt.registerTask('build-cordova', [
+        'copy:resources',
         'copy:lib',
         'copy:cordova-lib',
         'copy:html-cordova',

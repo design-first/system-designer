@@ -97,16 +97,16 @@ $ npm run build-cordova
 
 Copy then the content of `/dist/designer` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
 
-
 ## Documentation
 
 * [Quick Start in videos](https://system-designer.readme.io/docs/quick-start-in-videos)
 * [Quick Start](https://system-designer.readme.io/docs/quick-start)
 * [Documentation](https://system-designer.readme.io/)
 
-## Code of conduct
+## Community
 
-* [Code of conduct](https://system-designer.readme.io/docs/code-of-conduct)
+* [Code of Conduct](CODE_OF_CONDUCT.md)
+* [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Licence
 
