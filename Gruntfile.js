@@ -50,9 +50,7 @@ module.exports = function (grunt) {
             }
         },
         clean: [
-            'build/*.js',
-            'build/*.json',
-            'build/*/*.json',
+            'src/styles/cordova.css',
             'src/components/html/dialog-modal-welcome.html',
             'src/components/html/copyright.html',
             'src/components/html/menu-action-version.html',
@@ -94,23 +92,8 @@ module.exports = function (grunt) {
             'src/system/components/ToolBarItem/vdbc51200e11z04.json',
             'src/system/components/ToolBarItem/wdbc51200e11z03.json',
             'src/system/components/ToolBarItem/wdbc51200e11z04.json',
-            'dist/designer/*.html',
-            'dist/designer/img/**',
-            'dist/designer/systems/*.json',
-            'dist/designer/system-designer.appcache',
-            'dist/designer/lib/jquery/**',
-            'dist/designer/lib/system-runtime/**',
-            'dist/designer/lib/github-api/**',
-            'dist/designer/lib/codemirror/**',
-            'dist/designer/lib/jsplumb/**',
-            'dist/designer/lib/ace/**',
-            'dist/designer/lib/bootstrap/**',
-            'dist/designer/lib/prism/**',
-            'dist/designer/systems/design.json',
-            'dist/designer/scripts/*.js',
-            'dist/designer/styles/*.css',
-            'src/styles/cordova.css',
-            'dist/designer/video/*.mp4',
+            'dist',
+            'build'
         ],
         jshint: {
             files: [
