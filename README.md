@@ -86,7 +86,7 @@ $ npm run clean
 $ npm run electron
 ```
 
-Copy then the content of `/dist` your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
+Copy then the content of `/dist` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
 
 #### Build for Cordova
 
