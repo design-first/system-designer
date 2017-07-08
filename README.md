@@ -80,22 +80,26 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/).
 To build for [Electron](http://electron.atom.io):
 
 ```sh
+# clean
 $ npm run clean
+# build
 $ npm run electron
 ```
 
-Copy then `/dist/designer` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
+Copy then the content of `/dist` your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
 
 #### Build for Cordova
 
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
+# clean
 $ npm run clean
+# build
 $ npm run cordova
 ```
 
-Copy then the content of `/dist/designer` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
+Copy then the content of `/dist` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
 
 ## Documentation
 
