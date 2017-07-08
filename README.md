@@ -68,7 +68,7 @@ Here are the different tasks you can use to build and start System Designer:
 # clean
 $ npm run clean
 # build
-$ npm run build
+$ npm run web
 # start web server
 $ npm run start
 ```
@@ -81,7 +81,7 @@ To build for [Electron](http://electron.atom.io):
 
 ```sh
 $ npm run clean
-$ npm run build-electron
+$ npm run electron
 ```
 
 Copy then `/dist/designer` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
@@ -92,7 +92,7 @@ To build for [Cordova](http://cordova.apache.org):
 
 ```sh
 $ npm run clean
-$ npm run build-cordova
+$ npm run cordova
 ```
 
 Copy then the content of `/dist/designer` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
