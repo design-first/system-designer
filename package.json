@@ -33,11 +33,11 @@
   "scripts": {
     "test": "grunt test",
     "watch": "grunt watch",
-    "clean": "grunt clean",
-    "debug": "grunt debug",
-    "build": "grunt build",
-    "build-electron": "grunt build-electron",
-    "build-cordova": "grunt build-cordova",
+    "clean": "grunt clean:dist",
+    "build": "grunt web",
+    "web": "grunt web",
+    "electron": "grunt electron",
+    "cordova": "grunt cordova",
     "start": "grunt start"
   },
   "dependencies": {

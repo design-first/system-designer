@@ -1,0 +1,82 @@
+{
+    "_id": "e89c617b6b15d28",
+    "name": "system-designer",
+    "description": "A Designer for Systems",
+    "version": "2.0.0-alpha.1",
+    "components": {
+        "HTML": {
+            "copyright.html": {
+                "_id": "copyright.html",
+                "source": "Version {{version}}<br>Copyright © 2017 - <a href=\"https://system-designer.readme.io/docs/who-is-behind-system-designer\" target=\"_blank\">Erwan Carriou</a><br><br>System\nDesigner is <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"_blank\">distributed under Apache License 2.0</a> and is powered by <a href=\"https://designfirst.io/systemruntime/\" target=\"_blank\">System Runtime</a>.<br><br>For comments or questions\nyou can <a href=\"https://system-designer.readme.io/discuss/\" target=\"_blank\">go to the support page</a> or <a href=\"mailto:erwan.carriou@mac.com\">send me an email</a>.<br>If you find a bug, please\nreport it on <a href=\"https://github.com/design-first/system-designer/issues\">this page</a>."
+            },
+            "dialog-modal-welcome.html": {
+                "_id": "dialog-modal-welcome.html",
+                "source": "<div class=\"modal fade\" id=\"designer-dialog-welcome-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                <form class=\"form-horizontal\" role=\"form\">\n                    System Designer will help you to create JavaScript applications driven by the model. To begin have a look on our <a href=\"https://system-designer.readme.io/docs/quick-start\" target=\"_blank\">Quick Start</a>.<br><br>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-welcome-modal-ok\">OK</button>\n            </div>\n        </div>\n    </div>\n</div>"
+            },
+            "menu-action-version.html": {
+                "_id": "menu-action-version.html",
+                "source": "<a>v2.0.0-alpha.1</a>"
+            },
+            "menu-header-behavior.html": {
+                "_id": "menu-header-behavior.html",
+                "source": "<a href=\"javascript:systemDesignerBack()\"><div class=\"navbar-brand\" style=\"padding:16px\"><span class=\"glyphicon glyphicon-menu-left\" aria-hidden=\"true\"></span></div></a>"
+            },
+            "menu-header-component.html": {
+                "_id": "menu-header-component.html",
+                "source": "<a href=\"javascript:systemDesignerBack()\"><div class=\"navbar-brand\" style=\"padding:16px\"><span class=\"glyphicon glyphicon-menu-left\" aria-hidden=\"true\"></span></div></a>"
+            },
+            "menu-header-documentation.html": {
+                "_id": "menu-header-documentation.html",
+                "source": "<a href=\"javascript:systemDesignerBack()\"><div class=\"navbar-brand\" style=\"padding:16px\"><span class=\"glyphicon glyphicon-menu-left\" aria-hidden=\"true\"></span></div></a>"
+            },
+            "menu-header-model.html": {
+                "_id": "menu-header-model.html",
+                "source": "<a href=\"javascript:systemDesignerBack()\"><div class=\"navbar-brand\" style=\"padding:16px\"><span class=\"glyphicon glyphicon-menu-left\" aria-hidden=\"true\"></span></div></a>"
+            },
+            "menu-header-schema.html": {
+                "_id": "menu-header-schema.html",
+                "source": "<a href=\"javascript:systemDesignerBack()\"><div class=\"navbar-brand\" style=\"padding:16px\"><span class=\"glyphicon glyphicon-menu-left\" aria-hidden=\"true\"></span></div></a>"
+            },
+            "menu-header-system.html": {
+                "_id": "menu-header-system.html",
+                "source": "<a href=\"javascript:systemDesignerBack()\"><div class=\"navbar-brand\" style=\"padding:16px\"><span class=\"glyphicon glyphicon-menu-left\" aria-hidden=\"true\"></span></div></a>"
+            },
+            "menu-header-type.html": {
+                "_id": "menu-header-type.html",
+                "source": "<a href=\"javascript:systemDesignerBack()\"><div class=\"navbar-brand\" style=\"padding:16px\"><span class=\"glyphicon glyphicon-menu-left\" aria-hidden=\"true\"></span></div></a>"
+            },
+            "model-behavior.html": {
+                "_id": "model-behavior.html",
+                "source": "<div id=\"designer-behavior-{{_id}}\" class=\"col-xs-offset-2 col-sm-offset-0 col-xs-8 col-sm-6 placeholder designer-behavior\">\n    <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">{{title}}</h3>\n            <div class=\"dropdown dropdown-menu-right\">\n                <button type=\"button\" id=\"designer-behavior-{{_id}}-delete\" class=\"btn btn-default\" data-placement=\"right\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </div>\n        </div>\n        <div class=\"panel-body\">\n            <pre class=\"language-javascript\"><code class=\"language-javascript\">{{content}}</code></pre>\n        </div>\n    </div>\n</div>"
+            },
+            "model-class.html": {
+                "_id": "model-class.html",
+                "source": "<div class=\"row\">\n    <div class=\"col-xs-offset-2 col-sm-offset-3 col-xs-6 col-sm-6 placeholder designer-model\" id=\"designer-model-{{_id}}\">\n        <div class=\"panel panel-default\" id=\"designer-model-panel-{{_id}}\">\n            <div class=\"panel-heading\">\n                <h3 class=\"panel-title\">{{title}}</h3>\n            </div>\n            <div class=\"panel-body\">\n                <ul class=\"list-group\">\n                    {{attributes}}\n                    <li class=\"list-group-item list-group-item-methods\" style=\"padding: 0px;height: 3px;background-color: #DDDDDD\"></li>\n                    {{methods}}\n                </ul>\n            </div>\n        </div>\n    </div>\n</div>"
+            },
+            "model-component.html": {
+                "_id": "model-component.html",
+                "source": "<div class=\"col-xs-offset-2 col-sm-offset-0 col-xs-8 col-sm-3 placeholder designer-component\" id=\"designer-component-{{_id}}\">\n    <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">{{title}}</h3>\n            <div class=\"dropdown dropdown-menu-right\">\n                <button type=\"button\" id=\"designer-component-{{_id}}-delete\" class=\"btn btn-default\" data-placement=\"right\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </div>\n        </div>\n        <div class=\"panel-body\">\n            <table class=\"table\">\n                <thead>\n                </thead>\n                <tbody>\n                    {{content}}\n                </tbody>\n            </table>\n        </div>\n    </div>\n</div>"
+            },
+            "model-log.html": {
+                "_id": "model-log.html",
+                "source": "<div class=\"col-xs-offset-2 col-sm-offset-1 col-xs-9 col-sm-10 placeholder designer-log\" id=\"designer-log\">\n    <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Logs</h3>\n            <div class=\"dropdown dropdown-menu-right\">\n                <button type=\"button\" id=\"designer-log-clean\" class=\"btn btn-default\" data-placement=\"right\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </div>\n        </div>\n        <div class=\"panel-body\">\n            <div id=\"designer-loug-output\" style=\"text-align:left;\">\n                {{logs}}\n            </div>\n        </div>\n    </div>\n</div>"
+            },
+            "model-schema.html": {
+                "_id": "model-schema.html",
+                "source": "<div class=\"row\">\n    <div class=\"col-xs-offset-2 col-sm-offset-3 col-xs-8 col-sm-6 placeholder designer-schema\" id=\"designer-schema-{{id}}\">\n        <div class=\"panel panel-default\" id=\"designer-model-panel-{{id}}\">\n            <div class=\"panel-heading\">\n                <h3 class=\"panel-title\">{{title}}</h3>\n                <div class=\"dropdown dropdown-menu-right\">\n                <button type=\"button\" id=\"designer-schema-{{id}}-delete\" class=\"btn btn-default\" data-placement=\"right\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n                </div>\n            </div>\n            <div class=\"panel-body\">\n                <table class=\"table\">\n                    <thead>\n                    </thead>\n                    <tbsody>\n                        {{content}}\n                    </tbody>\n                </table>\n            </div>\n        </div>\n    </div>\n</div>"
+            },
+            "model-system.html": {
+                "_id": "model-system.html",
+                "source": "<div class=\"col-xs-offset-2 col-sm-offset-2 col-xs-8 col-sm-8 placeholder designer-system\" id=\"designer-system-{{_id}}\">\n    <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">{{title}}</h3>\n            <div class=\"dropdown dropdown-menu-right\">\n                <button type=\"button\" id=\"designer-system-{{_id}}-delete\" class=\"btn btn-default\" data-placement=\"right\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </div>\n        </div>\n        <div class=\"panel-body\">\n            <table class=\"table\">\n                <thead>\n                </thead>\n                <tbody>\n                    {{content}}\n                </tbody>\n            </table>\n        </div>\n    </div>\n</div>"
+            },
+            "model-type.html": {
+                "_id": "model-type.html",
+                "source": "<div class=\"col-xs-offset-2 col-sm-offset-3 col-xs-8 col-sm-6 placeholder designer-type\" id=\"designer-type-{{id}}\">\n    <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">{{title}}</h3>\n            <div class=\"dropdown dropdown-menu-right\">\n                <button type=\"button\" id=\"designer-type-{{id}}-delete\" class=\"btn btn-default\" data-placement=\"right\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </div>\n        </div>\n        <div class=\"panel-body\">\n            <ul class=\"list-group\">\n                {{content}}\n            </ul>\n        </div>\n    </div>\n</div>"
+            }
+        }
+    },
+    "behaviors": {},
+    "schemas": {},
+    "models": {},
+    "types": {}
+}

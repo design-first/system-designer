@@ -1,5 +1,0 @@
-{
-	"component": "1dbc51200e116e3",
-	"state": "click",
-	"action": "function click() {\n    $('#designer-toolbar-item-config').tooltip('hide');\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        var message = this.require('message');\n        \n        this.hide();\n        message.success('Configuration saved.');\n    });\n}"
-}

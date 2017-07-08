@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="An IDE for designing JavaScript applications driven by the model">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="icon" href="img/favicon.ico">
+    <title>type · system </title>
+    <!-- bootstrap -->
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- designer style -->
+    <link href="styles/editor-type.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Menubar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Menu header -->
+            <div id="designer-menubar-header" class="navbar-header"></div>
+            <div>
+                <!-- Menu items -->
+                <ul id="designer-menubar-items" class="nav navbar-nav"></ul>
+                <!-- Menu actions -->
+                <ul id="designer-menubar-actions" class="nav navbar-nav navbar-right"></ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Toobar -->
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ul id="designer-toolbar-items" class="nav nav-sidebar"></ul>
+                </div>
+            </div>
+        </div>
+        <!-- Dialog -->
+        <div id="designer-dialog-copyright"></div>
+        <!-- Message -->
+        <div id="designer-message"></div>
+        <!-- Editor -->
+        <div id="designer-editor"></div>
+    </div>
+    <!-- jquery -->
+    <script>
+        window.$ = window.jQuery = require('./lib/jquery/jquery.min.js');
+    </script>
+    <!-- bootstrap -->
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- ace -->
+    <script type="text/javascript" charset="utf-8" src="lib/ace/ace.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/ace/ext-language_tools.js"></script>
+    <!-- system runtime -->
+    <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
+    <!-- designer -->
+    <script type="text/javascript" src="scripts/editor-type.min.js"></script>
+</body>
+
+</html>

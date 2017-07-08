@@ -20,816 +20,250 @@
 
 module.exports = function (grunt) {
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
         watch: {
-            system: {
+            designer: {
                 files: [
-                    'src/components/css/*.css',
-                    'src/components/html/*.html',
-                    'src/components/js/*.js',
-                    'src/system/*/*.json',
-                    'src/system/*/*/*.json',
-                    'src/styles/*.css',
-                    'src/scripts/*.js',
-                    'src/addons/*.json'
+                    'src/systems/*/*.json',
+                    'src/www/systems/*.json',
+                    'src/www/scripts/*.js',
+                    'src/www/styles/*.css'
                 ],
                 tasks: [
-                    'debug'
+                    'build'
                 ],
                 options: {
-                    spawn: false
-                }
-            },
-            designer: {
-                options: {
+                    spawn: false,
                     livereload: true
-                },
-                files: [
-                    'dist/designer/*.html'
-                ]
+                }
             }
         },
-        clean: [
-            'src/styles/cordova.css',
-            'src/components/html/dialog-modal-welcome.html',
-            'src/components/html/copyright.html',
-            'src/components/html/menu-action-version.html',
-            'src/components/html/menu-header-behavior.html',
-            'src/components/html/menu-header-component.html',
-            'src/components/html/menu-header-documentation.html',
-            'src/components/html/menu-header-model.html',
-            'src/components/html/menu-header-schema.html',
-            'src/components/html/menu-header-system.html',
-            'src/components/html/menu-header-type.html',
-            'src/components/html/model-log.html',
-            'src/components/html/model-class.html',
-            'src/components/html/model-component.html',
-            'src/components/html/model-schema.html',
-            'src/components/html/model-system.html',
-            'src/components/html/model-type.html',
-            'src/components/html/model-behavior.html',
-            'src/components/json/example-05-node.json',
-            'src/components/json/example-06-rest-server.json',
-            'src/components/json/example-07-rest-client.json',
-            'src/system/components/ToolBarItem/163a01b7ca1935c.json',
-            'src/system/components/ToolBarItem/163a01b7ca1935e.json',
-            'src/system/components/ToolBarItem/1dbc51300e11z11.json',
-            'src/system/components/ToolBarItem/1dbc51300e11z12.json',
-            'src/system/components/ToolBarItem/1dbc51300e11z13.json',
-            'src/system/components/ToolBarItem/1dbc51300e11z14.json',
-            'src/system/components/ToolBarItem/1dbc51300e11z15.json',
-            'src/system/components/ToolBarItem/1dbc51300e11z16.json',
-            'src/system/components/ToolBarItem/1dbc51300e11z17.json',
-            'src/system/components/ToolBarItem/1dbc513e0e11z15.json',
-            'src/system/components/ToolBarItem/1dbc513e0e11z16.json',
-            'src/system/components/ToolBarItem/sdbc51200e11z03.json',
-            'src/system/components/ToolBarItem/sdbc51200e11z04.json',
-            'src/system/components/ToolBarItem/tdbc51200e11z03.json',
-            'src/system/components/ToolBarItem/tdbc51200e11z04.json',
-            'src/system/components/ToolBarItem/udbc51200e11z03.json',
-            'src/system/components/ToolBarItem/udbc51200e11z04.json',
-            'src/system/components/ToolBarItem/vdbc51200e11z03.json',
-            'src/system/components/ToolBarItem/vdbc51200e11z04.json',
-            'src/system/components/ToolBarItem/wdbc51200e11z03.json',
-            'src/system/components/ToolBarItem/wdbc51200e11z04.json',
-            'dist',
-            'build'
-        ],
+        clean: {
+            dist: ['dist'],
+            js: ['dist/scripts/*.js', '!dist/scripts/*.min.js'],
+            css: ['dist/styles/*.css', '!dist/styles/*.min.css']
+        },
         jshint: {
-            files: [
-                'src/scripts/*.js'
+            js: [
+                'src/www/scripts/*.js'
             ],
             options: {
                 jshintrc: true
             }
         },
         jsbeautifier: {
-            files: [
-                'build/*.json',
-                'build/*/*.json'
+            json: [
+                'dist/systems/*.json'
             ]
         },
-        concat: {
-            style: {
-                files: {
-                    'dist/designer/styles/behavior.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/behavior.min.css'],
-                    'dist/designer/styles/component.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/component.min.css'],
-                    'dist/designer/styles/designer.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/designer.min.css'],
-                    'dist/designer/styles/model.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/model.min.css'],
-                    'dist/designer/styles/schema.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/schema.min.css'],
-                    'dist/designer/styles/system.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/system.min.css'],
-                    'dist/designer/styles/type.min.css': ['src/template/banner/style.txt', 'dist/designer/styles/type.min.css']
-                }
+        copy: {
+            core: {
+                expand: true,
+                cwd: 'src/www',
+                src: ['**'],
+                dest: 'dist'
             },
-            jsComponent: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            fileName = '';
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
-
-                            if (filepath.indexOf('banner') !== -1) {
-
-                                // ID & version
-                                src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                                src = src.replace('{id}', generateId());
-
-                                result = src + '\n"components" :  { "JS" : {';
-                            } else {
-                                result = src;
-                            }
-
-                        } else {
-
-                            // filename
-                            fileName = filepath.split('js/')[1];
-                            fileName = fileName.split('/')[0];
-
-                            src = encodeURIComponent(src);
-
-                            result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                                '"source":"' + src.trim() + '"},';
-                        }
-
-                        return result;
+            'lib-core': {
+                files: [
+                    {
+                        src: 'node_modules/jquery/dist/jquery.min.js',
+                        dest: 'dist/lib/jquery/jquery.min.js'
+                    },
+                    {
+                        src: 'node_modules/github-api/dist/GitHub.bundle.min.js',
+                        dest: 'dist/lib/github-api/GitHub.bundle.min.js'
+                    },
+                    {
+                        src: 'node_modules/github-api/dist/GitHub.bundle.min.js.map',
+                        dest: 'dist/lib/github-api/GitHub.bundle.min.js.map'
+                    },
+                    {
+                        src: 'node_modules/jsplumb/dist/js/jsplumb.min.js',
+                        dest: 'dist/lib/jsplumb/jsplumb.min.js'
+                    },
+                    {
+                        src: 'node_modules/system-runtime/dist/system-runtime.min.js',
+                        dest: 'dist/lib/system-runtime/system-runtime.min.js'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/css',
+                        src: ['*'],
+                        dest: 'dist/lib/bootstrap/dist/css'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/fonts',
+                        src: ['*'],
+                        dest: 'dist/lib/bootstrap/dist/fonts'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/js',
+                        src: ['*'],
+                        dest: 'dist/lib/bootstrap/dist/js'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/fonts/',
+                        src: ['*'],
+                        dest: 'dist/lib/bootstrap/fonts/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'node_modules/bootstrap/dist/js/',
+                        src: ['*'],
+                        dest: 'dist/lib/bootstrap/js/'
+                    },
+                    {
+                        src: 'node_modules/prismjs/prism.js',
+                        dest: 'dist/lib/prism/prism.js'
+                    },
+                    {
+                        src: 'node_modules/prismjs/themes/prism.css',
+                        dest: 'dist/lib/prism/prism.css'
                     }
-                },
-                files: {
-                    'build/js/js.json': ['src/template/banner/js.txt', 'src/components/js/*.js']
-                }
+                ]
             },
-            jsClean: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '';
-
-                        if (filepath.indexOf('build') !== -1 && src.indexOf('"JS": {}') === -1) {
-                            result = src.trim().substring(0, src.length - 1);
-                        } else {
-                            result = src;
-                        }
-
-                        return result;
+            'lib-ace': {
+                files: [
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ace.js',
+                        dest: 'dist/lib/ace/ace.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ext-language_tools.js',
+                        dest: 'dist/lib/ace/ext-language_tools.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/ext-searchbox.js',
+                        dest: 'dist/lib/ace/ext-searchbox.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-css.js',
+                        dest: 'dist/lib/ace/mode-css.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-html.js',
+                        dest: 'dist/lib/ace/mode-html.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-javascript.js',
+                        dest: 'dist/lib/ace/mode-javascript.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-json.js',
+                        dest: 'dist/lib/ace/mode-json.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/mode-text.js',
+                        dest: 'dist/lib/ace/mode-text.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-css.js',
+                        dest: 'dist/lib/ace/worker-css.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-html.js',
+                        dest: 'dist/lib/ace/worker-html.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-javascript.js',
+                        dest: 'dist/lib/ace/worker-javascript.js'
+                    },
+                    {
+                        src: 'bower_components/ace-builds/src-min-noconflict/worker-json.js',
+                        dest: 'dist/lib/ace/worker-json.js'
                     }
-                },
-                files: {
-                    'build/js/js.json': ['build/js/js.json', 'src/template/footer/js.txt']
-                }
+                ]
             },
-            jsonComponent: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            fileName = '';
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
-
-                            if (filepath.indexOf('banner') !== -1) {
-
-                                // ID & version
-                                src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                                src = src.replace('{id}', generateId());
-
-                                result = src + '\n"components" :  { "JSON" : {';
-                            } else {
-                                result = src;
-                            }
-
-                        } else {
-
-                            // filename
-                            fileName = filepath.split('json/')[1];
-                            fileName = fileName.split('/')[0];
-
-                            src = encodeURIComponent(src);
-
-                            result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                                '"source":"' + src.trim() + '"},';
-                        }
-
-                        return result;
-                    }
+            'lib-codemirror': {
+                files: [{
+                    src: 'node_modules/codemirror/lib/codemirror.css',
+                    dest: 'dist/lib/codemirror/codemirror.css'
                 },
-                files: {
-                    'build/json/json.json': ['src/template/banner/json.txt', 'src/components/json/*.json']
-                }
+                {
+                    src: 'node_modules/codemirror/theme/eclipse.css',
+                    dest: 'dist/lib/codemirror/theme/eclipse.css'
+                },
+                {
+                    src: 'node_modules/codemirror/lib/codemirror.js',
+                    dest: 'dist/lib/codemirror/lib/codemirror.js'
+                },
+                {
+                    src: 'node_modules/codemirror/addon/selection/active-line.js',
+                    dest: 'dist/lib/codemirror/addon/selection/active-line.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/javascript/javascript.js',
+                    dest: 'dist/lib/codemirror/mode/javascript/javascript.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/textile/textile.js',
+                    dest: 'dist/lib/codemirror/mode/textile/textile.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/css/css.js',
+                    dest: 'dist/lib/codemirror/mode/css/css.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/htmlmixed/htmlmixed.js',
+                    dest: 'dist/lib/codemirror/mode/htmlmixed/htmlmixed.js'
+                },
+                {
+                    src: 'node_modules/codemirror/mode/xml/xml.js',
+                    dest: 'dist/lib/codemirror/mode/xml/xml.js'
+                },
+                {
+                    src: 'node_modules/codemirror/addon/edit/closebrackets.js',
+                    dest: 'dist/lib/codemirror/addon/edit/closebrackets.js'
+                }]
             },
-            jsonClean: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '';
-
-                        if (filepath.indexOf('build') !== -1 && src.indexOf('"JSON": {}') === -1) {
-                            result = src.trim().substring(0, src.length - 1);
-                        } else {
-                            result = src;
-                        }
-
-                        return result;
-                    }
-                },
-                files: {
-                    'build/json/json.json': ['build/json/json.json', 'src/template/footer/json.txt']
-                }
+            web: {
+                expand: true,
+                cwd: 'src/merges/web',
+                src: ['**'],
+                dest: 'dist'
             },
-            htmlComponent: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            fileName = '';
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
-
-                            if (filepath.indexOf('banner') !== -1) {
-
-                                // ID & version
-                                src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                                src = src.replace('{id}', generateId());
-
-                                result = src + '\n"components" :  { "HTML" : {';
-                            } else {
-                                result = src;
-                            }
-
-                        } else {
-
-                            // filename
-                            fileName = filepath.split('html/')[1];
-                            fileName = fileName.split('/')[0];
-
-                            // version 
-                            src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
-
-                            // clean
-                            src = src.replace(/\n/g, '\\n');
-                            src = src.replace(/\r/g, '\\r');
-                            src = src.replace(/\t/g, '\\t');
-                            src = src.replace(/"/g, '\\"');
-
-                            result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                                '"source":"' + src.trim() + '"},';
-                        }
-
-                        return result;
-                    }
-                },
-                files: {
-                    'build/html/html.json': ['src/template/banner/html.txt', 'src/components/html/*.html']
-                }
+            cordova: {
+                expand: true,
+                cwd: 'src/merges/cordova',
+                src: ['**'],
+                dest: 'dist'
             },
-            htmlClean: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '';
-
-                        if (filepath.indexOf('build') !== -1 && src.indexOf('"HTML": {}') === -1) {
-                            result = src.trim().substring(0, src.length - 1);
-                        } else {
-                            result = src;
-                        }
-
-                        return result;
-                    }
-                },
-                files: {
-                    'build/html/html.json': ['build/html/html.json', 'src/template/footer/html.txt']
-                }
-            },
-            cssComponent: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            fileName = '';
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('banner') !== -1 || filepath.indexOf('footer') !== -1) {
-
-                            if (filepath.indexOf('banner') !== -1) {
-
-                                // ID & version
-                                src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                                src = src.replace('{id}', generateId());
-
-                                result = src + '\n"components" :  { "CSS" : {';
-                            } else {
-                                result = src;
-                            }
-
-                        } else {
-
-                            // filename
-                            fileName = filepath.split('css/')[1];
-                            fileName = fileName.split('/')[0];
-
-                            // clean
-                            src = src.replace(/\n/g, ' ');
-                            src = src.replace(/\r/g, ' ');
-                            src = src.replace(/\t/g, ' ');
-                            src = src.replace(/"/g, '\\"');
-
-                            result = '"' + fileName + '"' + ': { "_id": "' + fileName + '",' +
-                                '"source":"' + src.trim() + '"},';
-                        }
-
-                        return result;
-                    }
-                },
-                files: {
-                    'build/css/css.json': ['src/template/banner/css.txt', 'src/components/css/*.css']
-                }
-            },
-            cssClean: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '';
-
-                        if (filepath.indexOf('build') !== -1 && src.indexOf('"CSS": {}') === -1) {
-                            result = src.trim().substring(0, src.length - 1);
-                        } else {
-                            result = src;
-                        }
-
-                        return result;
-                    }
-                },
-                files: {
-                    'build/css/css.json': ['build/css/css.json', 'src/template/footer/css.txt']
-                }
-            },
-            systemInfos: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '';
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        // ID & version
-                        src = src.replace('{version}', grunt.file.readJSON('package.json').version).trim();
-                        result = src.replace('{id}', generateId());
-
-                        return result;
-                    }
-                },
-                files: {
-                    'build/system/design.json': ['src/template/banner/system.txt']
-                }
-            },
-            systemBehaviors: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            behaviors = {};
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('behaviors', {});
-                            result = src + '\n"behaviors" : {},';
-                        } else {
-                            behaviors = grunt.option('behaviors');
-                            uuid = JSON.parse(src)._id;
-                            if (typeof uuid === 'undefined') {
-                                uuid = generateId();
-                                src = src.replace('{', '{"_id":"' + uuid + '",');
-                            }
-                            behaviors[uuid] = JSON.parse(src);
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/system/design.json': ['build/system/design.json', 'src/system/behaviors/*/*.json']
-                }
-            },
-            systemSchemas: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            schemas = {};
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('schemas', {});
-                            result = src + '\n"schemas" : {},';
-                        } else {
-                            uuid = JSON.parse(src)._id;
-                            if (typeof uuid === 'undefined') {
-                                uuid = generateId();
-                            }
-                            schemas = grunt.option('schemas');
-                            schemas[uuid] = JSON.parse(src);
-                            schemas[uuid]._id = uuid;
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/system/design.json': ['build/system/design.json', 'src/system/schemas/*.json']
-                }
-            },
-            systemModels: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            models = {};
-
-                        function generateId() {
-                            function gen() {
-                                return Math.floor((1 + Math.random()) * 0x10000).toString(16);
-                            }
-                            function getPrefix() {
-                                var validPrefix = 'abcdefghijklmnopqrstuvwxyz';
-                                return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));
-                            }
-
-                            return getPrefix() + gen() + gen() + gen();
-                        }
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('models', {});
-                            result = src + '\n"models" : {},';
-                        } else {
-                            src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
-
-                            uuid = JSON.parse(src)._id;
-                            if (typeof uuid === 'undefined') {
-                                uuid = generateId();
-                            }
-                            models = grunt.option('models');
-                            models[uuid] = JSON.parse(src);
-                            models[uuid]._id = uuid;
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/system/design.json': ['build/system/design.json', 'src/system/models/*.json']
-                }
-            },
-            systemTypes: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            types = {};
-
-                        if (filepath.indexOf('build') !== -1) {
-                            grunt.option('types', {});
-                            result = src + '\n"types" : {},';
-                        } else {
-                            uuid = JSON.parse(src).name;
-                            types = grunt.option('types');
-                            types[uuid] = JSON.parse(src);
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/system/design.json': ['build/system/design.json', 'src/system/types/*.json']
-                }
-            },
-            systemComponents: {
-                options: {
-                    process: function (src, filepath) {
-                        var result = '',
-                            uuid = '',
-                            collectionName = '',
-                            components = {};
-
-                        if (filepath.indexOf('build') !== -1) {
-                            result = src + '\n"components" : {}\n}';
-                            grunt.option('components', {});
-                        } else {
-                            components = grunt.option('components');
-
-                            uuid = JSON.parse(src)._id;
-
-                            collectionName = filepath.split('components/')[1];
-                            collectionName = collectionName.split('/')[0];
-
-                            src = src.replace('{{designer-version}}', grunt.file.readJSON('package.json').version).trim();
-
-                            if (typeof components[collectionName] === 'undefined') {
-                                components[collectionName] = {};
-                            }
-
-                            components[collectionName][uuid] = JSON.parse(src);
-                        }
-                        return result;
-                    }
-                },
-                files: {
-                    'build/system/design.json': ['build/system/design.json', 'src/system/components/*/*.json']
-                }
-            },
-            systemFill: {
-                options: {
-                    process: function (src, filepath) {
-                        var system = {};
-
-                        system = JSON.parse(src);
-                        system.components = grunt.option('components');
-                        system.schemas = grunt.option('schemas');
-                        system.models = grunt.option('models');
-                        system.types = grunt.option('types');
-                        system.behaviors = grunt.option('behaviors');
-
-                        grunt.option('system', system);
-
-                        return JSON.stringify(system);
-                    }
-                },
-                files: {
-                    'build/system/design.json': ['build/system/design.json']
-                }
-            },
-            'electron-app': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/designer-runtime.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/designer-runtime.min.js': ['dist/designer/scripts/designer-runtime.min.js']
-                }
-            },
-            'electron-behavior': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/behavior.min.js': ['dist/designer/scripts/behavior.min.js']
-                }
-            },
-            'electron-component': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/component.min.js': ['dist/designer/scripts/component.min.js']
-                }
-            },
-            'electron-designer': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
-                }
-            },
-            'electron-model': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/model.min.js': ['dist/designer/scripts/model.min.js']
-                }
-            },
-            'electron-schema': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/schema.min.js': ['dist/designer/scripts/schema.min.js']
-                }
-            },
-            'electron-system': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/system.min.js': ['dist/designer/scripts/system.min.js']
-                }
-            },
-            'electron-type': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
-                }
-            },
-            'cordova-app': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/designer/systems/designer-runtime.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/designer-runtime.min.js': ['dist/designer/scripts/designer-runtime.min.js']
-                }
-            },
-            'cordova-behavior': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/behavior.min.js': ['dist/designer/scripts/behavior.min.js']
-                }
-            },
-            'cordova-component': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/component.min.js': ['dist/designer/scripts/component.min.js']
-                }
-            },
-            'cordova-designer': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/designer.min.js': ['dist/designer/scripts/designer.min.js']
-                }
-            },
-            'cordova-model': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/model.min.js': ['dist/designer/scripts/model.min.js']
-                }
-            },
-            'cordova-schema': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/schema.min.js': ['dist/designer/scripts/schema.min.js']
-                }
-            },
-            'cordova-system': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/system.min.js': ['dist/designer/scripts/system.min.js']
-                }
-            },
-            'cordova-type': {
-                options: {
-                    process: function (src, filepath) {
-                        var result;
-                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('build/system/design.json')) + ');\n\n' + src;
-                        return result;
-                    }
-                },
-                files: {
-                    'dist/designer/scripts/type.min.js': ['dist/designer/scripts/type.min.js']
-                }
+            electron: {
+                expand: true,
+                cwd: 'src/merges/electron',
+                src: ['**'],
+                dest: 'dist'
             }
         },
         "merge-json": {
-            runtime: {
-                src: ["build/js/js.json", "build/json/json.json", "build/html/html.json", "build/css/css.json", "build/system/design.json"],
-                dest: "build/system/design.json"
+            web: {
+                src: ['src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/core/system-designer.json'],
+                dest: 'dist/systems/system-designer.json'
             },
-            addons: {
-                src: ["src/addons/*.json", "build/system/design.json"],
-                dest: "build/system/design.json"
+            cordova: {
+                src: ['src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/core/system-designer.json'],
+                dest: 'dist/systems/system-designer.json'
+            },
+            electron: {
+                src: ['src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/core/system-designer.json'],
+                dest: 'dist/systems/system-designer.json'
+            }
+        },
+        cssmin: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: 'dist/styles',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'dist/styles',
+                    ext: '.min.css'
+                }]
             }
         },
         uglify: {
-            web: {
+            js: {
                 options: {
                     banner:
                     '/*\n' +
@@ -853,711 +287,221 @@ module.exports = function (grunt) {
                     '*/\n'
                 },
                 files: {
-                    'dist/designer/scripts/behavior.min.js': ['src/scripts/behavior.js'],
-                    'dist/designer/scripts/cordova.min.js': ['src/scripts/cordova.js'],
-                    'dist/designer/scripts/component.min.js': ['src/scripts/component.js'],
-                    'dist/designer/scripts/designer.min.js': ['src/scripts/designer.js'],
-                    'dist/designer/scripts/model.min.js': ['src/scripts/model.js'],
-                    'dist/designer/scripts/schema.min.js': ['src/scripts/schema.js'],
-                    'dist/designer/scripts/system.min.js': ['src/scripts/system.js'],
-                    'dist/designer/scripts/type.min.js': ['src/scripts/type.js'],
-                    'dist/designer/scripts/designer-runtime.min.js': ['src/scripts/designer-runtime.js']
-                }
-            },
-            cordova: {
-                files: {
-                    'dist/designer/lib/codemirror/codemirror.min.js': ['node_modules/codemirror/lib/codemirror.js'],
-                    'dist/designer/lib/codemirror/active-line.min.js': ['node_modules/codemirror/addon/selection/active-line.js'],
-                    'dist/designer/lib/codemirror/javascript.min.js': ['node_modules/codemirror/mode/javascript/javascript.js'],
-                    'dist/designer/lib/codemirror/textile.min.js': ['node_modules/codemirror/mode/textile/textile.js'],
-                    'dist/designer/lib/codemirror/css.min.js': ['node_modules/codemirror/mode/css/css.js'],
-                    'dist/designer/lib/codemirror/htmlmixed.min.js': ['node_modules/codemirror/mode/htmlmixed/htmlmixed.js'],
-                    'dist/designer/lib/codemirror/xml.min.js': ['node_modules/codemirror/mode/xml/xml.js'],
-                    'dist/designer/lib/codemirror/closebrackets.min.js': ['node_modules/codemirror/addon/edit/closebrackets.js']
+                    'dist/scripts/editor-behavior.min.js': ['dist/scripts/editor-behavior.js'],
+                    'dist/scripts/editor-component.min.js': ['dist/scripts/editor-component.js'],
+                    'dist/scripts/editor-model.min.js': ['dist/scripts/editor-model.js'],
+                    'dist/scripts/editor-schema.min.js': ['dist/scripts/editor-schema.js'],
+                    'dist/scripts/editor-system.min.js': ['dist/scripts/editor-system.js'],
+                    'dist/scripts/editor-type.min.js': ['dist/scripts/editor-type.js'],
+                    'dist/scripts/system-designer.min.js': ['dist/scripts/system-designer.js'],
+                    'dist/scripts/designer-runtime.min.js': ['dist/scripts/designer-runtime.js'],
+                    'dist/scripts/cordova.min.js': ['dist/scripts/cordova.js']
                 }
             }
         },
-        copy: {
-            system: {
-                src: 'build/system/design.json',
-                dest: 'dist/designer/systems/design.json'
-            },
-            resources: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'src/img',
-                        src: ['*'],
-                        dest: 'dist/designer/img'
-                    },
-                    {
-                        src: 'src/designer-runtime/designer-runtime.json',
-                        dest: 'dist/designer/systems/designer-runtime.json',
+        concat: {
+            'electron-app': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/designer-runtime.json')) + ');\n\n' + src;
+                        return result;
                     }
-                ]
-            },
-            video: {
-                src: 'src/video/systemdesigner.mp4',
-                dest: 'dist/designer/video/systemdesigner.mp4',
-            },
-            'video-web': {
-                src: 'src/video/systemdesigner-web.mp4',
-                dest: 'dist/designer/video/systemdesigner.mp4',
-            },
-            'html-web': {
-                files: [
-                    {
-                        src: 'src/target/web/html/app.html',
-                        dest: 'dist/designer/app.html'
-                    },
-                    {
-                        src: 'src/target/web/html/behavior.html',
-                        dest: 'dist/designer/behavior.html'
-                    },
-                    {
-                        src: 'src/target/web/html/component.html',
-                        dest: 'dist/designer/component.html'
-                    },
-                    {
-                        src: 'src/target/web/html/index.html',
-                        dest: 'dist/designer/index.html'
-                    },
-                    {
-                        src: 'src/target/web/html/model.html',
-                        dest: 'dist/designer/model.html'
-                    },
-                    {
-                        src: 'src/target/web/html/schema.html',
-                        dest: 'dist/designer/schema.html'
-                    },
-                    {
-                        src: 'src/target/web/html/system.html',
-                        dest: 'dist/designer/system.html'
-                    },
-                    {
-                        src: 'src/target/web/html/type.html',
-                        dest: 'dist/designer/type.html'
-                    }
-                ]
-            },
-            'appcache-web': {
-                files: [
-                    {
-                        src: 'src/target/web/manifest/system-designer.appcache',
-                        dest: 'dist/designer/system-designer.appcache'
-                    }
-                ]
-            },
-            'components-web': {
-                files: [
-                    {
-                        src: 'src/target/web/components/html/dialog-modal-welcome.html',
-                        dest: 'src/components/html/dialog-modal-welcome.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/copyright.html',
-                        dest: 'src/components/html/copyright.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-action-version.html',
-                        dest: 'src/components/html/menu-action-version.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-header-behavior.html',
-                        dest: 'src/components/html/menu-header-behavior.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-header-component.html',
-                        dest: 'src/components/html/menu-header-component.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-header-documentation.html',
-                        dest: 'src/components/html/menu-header-documentation.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-header-model.html',
-                        dest: 'src/components/html/menu-header-model.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-header-schema.html',
-                        dest: 'src/components/html/menu-header-schema.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-header-system.html',
-                        dest: 'src/components/html/menu-header-system.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/model-log.html',
-                        dest: 'src/components/html/model-log.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/model-class.html',
-                        dest: 'src/components/html/model-class.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/model-component.html',
-                        dest: 'src/components/html/model-component.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/model-schema.html',
-                        dest: 'src/components/html/model-schema.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/model-system.html',
-                        dest: 'src/components/html/model-system.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/model-type.html',
-                        dest: 'src/components/html/model-type.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/model-behavior.html',
-                        dest: 'src/components/html/model-behavior.html'
-                    },
-                    {
-                        src: 'src/target/web/components/html/menu-header-type.html',
-                        dest: 'src/components/html/menu-header-type.html'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/163a01b7ca1935c.json',
-                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/163a01b7ca1935e.json',
-                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935e.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z11.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z11.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z12.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z12.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z13.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z13.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z14.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z14.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z15.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z15.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z16.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z16.json'
-                    },
-                    {
-                        src: 'src/target/web/components/ToolBarItem/1dbc51300e11z17.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z17.json'
-                    }
-                ]
-            },
-            'html-electron': {
-                files: [
-                    {
-                        src: 'src/target/electron/html/app.html',
-                        dest: 'dist/designer/app.html'
-                    },
-                    {
-                        src: 'src/target/electron/html/behavior.html',
-                        dest: 'dist/designer/behavior.html'
-                    },
-                    {
-                        src: 'src/target/electron/html/component.html',
-                        dest: 'dist/designer/component.html'
-                    },
-                    {
-                        src: 'src/target/electron/html/index.html',
-                        dest: 'dist/designer/index.html'
-                    },
-                    {
-                        src: 'src/target/electron/html/model.html',
-                        dest: 'dist/designer/model.html'
-                    },
-                    {
-                        src: 'src/target/electron/html/schema.html',
-                        dest: 'dist/designer/schema.html'
-                    },
-                    {
-                        src: 'src/target/electron/html/system.html',
-                        dest: 'dist/designer/system.html'
-                    },
-                    {
-                        src: 'src/target/electron/html/type.html',
-                        dest: 'dist/designer/type.html'
-                    }
-                ]
-            },
-            'json-electron': {
-                files: [
-                    {
-                        src: 'src/target/electron/components/json/example-05-node.json',
-                        dest: 'src/components/json/example-05-node.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/json/example-06-rest-server.json',
-                        dest: 'src/components/json/example-06-rest-server.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/json/example-07-rest-client.json',
-                        dest: 'src/components/json/example-07-rest-client.json'
-                    }
-                ]
-            },
-            'html-cordova': {
-                files: [
-                    {
-                        src: 'src/target/cordova/html/app.html',
-                        dest: 'dist/designer/app.html'
-                    },
-                    {
-                        src: 'src/target/cordova/html/behavior.html',
-                        dest: 'dist/designer/behavior.html'
-                    },
-                    {
-                        src: 'src/target/cordova/html/component.html',
-                        dest: 'dist/designer/component.html'
-                    },
-                    {
-                        src: 'src/target/cordova/html/index.html',
-                        dest: 'dist/designer/index.html'
-                    },
-                    {
-                        src: 'src/target/cordova/html/model.html',
-                        dest: 'dist/designer/model.html'
-                    },
-                    {
-                        src: 'src/target/cordova/html/schema.html',
-                        dest: 'dist/designer/schema.html'
-                    },
-                    {
-                        src: 'src/target/cordova/html/system.html',
-                        dest: 'dist/designer/system.html'
-                    },
-                    {
-                        src: 'src/target/cordova/html/type.html',
-                        dest: 'dist/designer/type.html'
-                    }
-                ]
-            },
-            'components-electron': {
-                files: [
-                    {
-                        src: 'src/target/electron/components/html/dialog-modal-welcome.html',
-                        dest: 'src/components/html/dialog-modal-welcome.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-action-version.html',
-                        dest: 'src/components/html/menu-action-version.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/copyright.html',
-                        dest: 'src/components/html/copyright.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-header-behavior.html',
-                        dest: 'src/components/html/menu-header-behavior.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-header-component.html',
-                        dest: 'src/components/html/menu-header-component.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-header-documentation.html',
-                        dest: 'src/components/html/menu-header-documentation.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-header-model.html',
-                        dest: 'src/components/html/menu-header-model.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-header-schema.html',
-                        dest: 'src/components/html/menu-header-schema.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-header-system.html',
-                        dest: 'src/components/html/menu-header-system.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/menu-header-type.html',
-                        dest: 'src/components/html/menu-header-type.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/model-log.html',
-                        dest: 'src/components/html/model-log.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/model-class.html',
-                        dest: 'src/components/html/model-class.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/model-component.html',
-                        dest: 'src/components/html/model-component.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/model-schema.html',
-                        dest: 'src/components/html/model-schema.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/model-system.html',
-                        dest: 'src/components/html/model-system.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/model-type.html',
-                        dest: 'src/components/html/model-type.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/html/model-behavior.html',
-                        dest: 'src/components/html/model-behavior.html'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/163a01b7ca1935c.json',
-                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935c.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/163a01b7ca1935e.json',
-                        dest: 'src/system/components/ToolBarItem/163a01b7ca1935e.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z11.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z11.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z12.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z12.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z13.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z13.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z14.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z14.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z15.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z15.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z16.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z16.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc51300e11z17.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc51300e11z17.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc513e0e11z15.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc513e0e11z15.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/1dbc513e0e11z16.json',
-                        dest: 'src/system/components/ToolBarItem/1dbc513e0e11z16.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/sdbc51200e11z03.json',
-                        dest: 'src/system/components/ToolBarItem/sdbc51200e11z03.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/sdbc51200e11z04.json',
-                        dest: 'src/system/components/ToolBarItem/sdbc51200e11z04.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/tdbc51200e11z03.json',
-                        dest: 'src/system/components/ToolBarItem/tdbc51200e11z03.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/tdbc51200e11z04.json',
-                        dest: 'src/system/components/ToolBarItem/tdbc51200e11z04.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/udbc51200e11z03.json',
-                        dest: 'src/system/components/ToolBarItem/udbc51200e11z03.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/udbc51200e11z04.json',
-                        dest: 'src/system/components/ToolBarItem/udbc51200e11z04.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/vdbc51200e11z03.json',
-                        dest: 'src/system/components/ToolBarItem/vdbc51200e11z03.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/vdbc51200e11z04.json',
-                        dest: 'src/system/components/ToolBarItem/vdbc51200e11z04.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/wdbc51200e11z03.json',
-                        dest: 'src/system/components/ToolBarItem/wdbc51200e11z03.json'
-                    },
-                    {
-                        src: 'src/target/electron/components/ToolBarItem/wdbc51200e11z04.json',
-                        dest: 'src/system/components/ToolBarItem/wdbc51200e11z04.json'
-                    }
-                ]
-            },
-            'components-cordova': {
-                files: [
-                    {
-                        src: 'src/target/cordova/components/html/dialog-modal-welcome.html',
-                        dest: 'src/components/html/dialog-modal-welcome.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/copyright.html',
-                        dest: 'src/components/html/copyright.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-action-version.html',
-                        dest: 'src/components/html/menu-action-version.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-header-behavior.html',
-                        dest: 'src/components/html/menu-header-behavior.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-header-component.html',
-                        dest: 'src/components/html/menu-header-component.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-header-documentation.html',
-                        dest: 'src/components/html/menu-header-documentation.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-header-model.html',
-                        dest: 'src/components/html/menu-header-model.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-header-schema.html',
-                        dest: 'src/components/html/menu-header-schema.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-header-system.html',
-                        dest: 'src/components/html/menu-header-system.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/menu-header-type.html',
-                        dest: 'src/components/html/menu-header-type.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/model-log.html',
-                        dest: 'src/components/html/model-log.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/model-class.html',
-                        dest: 'src/components/html/model-class.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/model-component.html',
-                        dest: 'src/components/html/model-component.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/model-schema.html',
-                        dest: 'src/components/html/model-schema.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/model-system.html',
-                        dest: 'src/components/html/model-system.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/model-type.html',
-                        dest: 'src/components/html/model-type.html'
-                    },
-                    {
-                        src: 'src/target/cordova/components/html/model-behavior.html',
-                        dest: 'src/components/html/model-behavior.html'
-                    }
-                ]
-            },
-            'scripts-cordova': {
-                files: [
-                    {
-                        src: 'src/target/cordova/scripts/cordova.js',
-                        dest: 'src/scripts/cordova.js'
-                    }
-                ]
-            },
-            'styles-cordova': {
-                files: [
-                    {
-                        src: 'src/target/cordova/styles/cordova.css',
-                        dest: 'src/styles/cordova.css'
-                    }
-                ]
-            },
-            'debug-web': {
-                files: [
-                    {
-                        src: 'src/scripts/behavior.js',
-                        dest: 'dist/designer/scripts/behavior.min.js'
-                    },
-                    {
-                        src: 'src/scripts/component.js',
-                        dest: 'dist/designer/scripts/component.min.js'
-                    },
-                    {
-                        src: 'src/scripts/designer.js',
-                        dest: 'dist/designer/scripts/designer.min.js'
-                    },
-                    {
-                        src: 'src/scripts/model.js',
-                        dest: 'dist/designer/scripts/model.min.js'
-                    },
-                    {
-                        src: 'src/scripts/schema.js',
-                        dest: 'dist/designer/scripts/schema.min.js'
-                    },
-                    {
-                        src: 'src/scripts/system.js',
-                        dest: 'dist/designer/scripts/system.min.js'
-                    },
-                    {
-                        src: 'src/scripts/type.js',
-                        dest: 'dist/designer/scripts/type.min.js'
-                    },
-                    {
-                        src: 'src/scripts/designer-runtime.js',
-                        dest: 'dist/designer/scripts/designer-runtime.min.js'
-                    }
-                ]
-            },
-            lib: {
-                files: [
-                    {
-                        src: 'node_modules/jquery/dist/jquery.min.js',
-                        dest: 'dist/designer/lib/jquery/jquery.min.js'
-                    },
-                    {
-                        src: 'node_modules/github-api/dist/GitHub.bundle.min.js',
-                        dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js'
-                    },
-                    {
-                        src: 'node_modules/github-api/dist/GitHub.bundle.min.js.map',
-                        dest: 'dist/designer/lib/github-api/GitHub.bundle.min.js.map'
-                    },
-                    {
-                        src: 'node_modules/jsplumb/dist/js/jsplumb.min.js',
-                        dest: 'dist/designer/lib/jsplumb/jsplumb.min.js'
-                    },
-                    {
-                        src: 'node_modules/system-runtime/dist/system-runtime.min.js',
-                        dest: 'dist/designer/lib/system-runtime/system-runtime.min.js'
-                    },
-                    {
-                        src: 'node_modules/system-runtime/dist/system-runtime.min.js',
-                        dest: 'src/components/js/system-runtime.min.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/ace.js',
-                        dest: 'dist/designer/lib/ace/ace.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/ext-language_tools.js',
-                        dest: 'dist/designer/lib/ace/ext-language_tools.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/ext-searchbox.js',
-                        dest: 'dist/designer/lib/ace/ext-searchbox.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/mode-css.js',
-                        dest: 'dist/designer/lib/ace/mode-css.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/mode-html.js',
-                        dest: 'dist/designer/lib/ace/mode-html.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/mode-javascript.js',
-                        dest: 'dist/designer/lib/ace/mode-javascript.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/mode-json.js',
-                        dest: 'dist/designer/lib/ace/mode-json.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/mode-text.js',
-                        dest: 'dist/designer/lib/ace/mode-text.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/worker-css.js',
-                        dest: 'dist/designer/lib/ace/worker-css.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/worker-html.js',
-                        dest: 'dist/designer/lib/ace/worker-html.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/worker-javascript.js',
-                        dest: 'dist/designer/lib/ace/worker-javascript.js'
-                    },
-                    {
-                        src: 'bower_components/ace-builds/src-min-noconflict/worker-json.js',
-                        dest: 'dist/designer/lib/ace/worker-json.js'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'node_modules/bootstrap/dist/css',
-                        src: ['*'],
-                        dest: 'dist/designer/lib/bootstrap/dist/css'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'node_modules/bootstrap/dist/fonts',
-                        src: ['*'],
-                        dest: 'dist/designer/lib/bootstrap/dist/fonts'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'node_modules/bootstrap/dist/js',
-                        src: ['*'],
-                        dest: 'dist/designer/lib/bootstrap/dist/js'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'node_modules/bootstrap/fonts/',
-                        src: ['*'],
-                        dest: 'dist/designer/lib/bootstrap/fonts/'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'node_modules/bootstrap/dist/js/',
-                        src: ['*'],
-                        dest: 'dist/designer/lib/bootstrap/js/'
-                    },
-                    {
-                        src: 'node_modules/prismjs/prism.js',
-                        dest: 'dist/designer/lib/prism/prism.js'
-                    },
-                    {
-                        src: 'node_modules/prismjs/themes/prism.css',
-                        dest: 'dist/designer/lib/prism/prism.css'
-                    }
-                ]
-            },
-            'cordova-lib': {
-                files: [{
-                    src: 'node_modules/codemirror/lib/codemirror.css',
-                    dest: 'dist/designer/lib/codemirror/codemirror.css'
                 },
-                {
-                    src: 'node_modules/codemirror/theme/eclipse.css',
-                    dest: 'dist/designer/lib/codemirror/eclipse.css'
-                }]
-            }
-        },
-        cssmin: {
-            web: {
-                files: [{
-                    expand: true,
-                    cwd: 'src/styles',
-                    src: ['*.css', '!*.min.css'],
-                    dest: 'dist/designer/styles',
-                    ext: '.min.css'
-                }]
+                files: {
+                    'dist/scripts/designer-runtime.min.js': ['dist/scripts/designer-runtime.min.js']
+                }
+            },
+            'electron-behavior': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-behavior.min.js': ['dist/scripts/editor-behavior.min.js']
+                }
+            },
+            'electron-component': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-component.min.js': ['dist/scripts/editor-component.min.js']
+                }
+            },
+            'electron-designer': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/system-designer.min.js': ['dist/scripts/system-designer.min.js']
+                }
+            },
+            'electron-model': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-model.min.js': ['dist/scripts/editor-model.min.js']
+                }
+            },
+            'electron-schema': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-schema.min.js': ['dist/scripts/editor-schema.min.js']
+                }
+            },
+            'electron-system': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-system.min.js': ['dist/scripts/editor-system.min.js']
+                }
+            },
+            'electron-type': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-type.min.js': ['dist/scripts/editor-type.min.js']
+                }
+            },
+            'cordova-app': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/designer-runtime.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/designer-runtime.min.js': ['dist/scripts/designer-runtime.min.js']
+                }
+            },
+            'cordova-behavior': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-behavior.min.js': ['dist/scripts/editor-behavior.min.js']
+                }
+            },
+            'cordova-component': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-component.min.js': ['dist/scripts/editor-component.min.js']
+                }
+            },
+            'cordova-designer': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/system-designer.min.js': ['dist/scripts/system-designer.min.js']
+                }
+            },
+            'cordova-model': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-model.min.js': ['dist/scripts/editor-model.min.js']
+                }
+            },
+            'cordova-schema': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-schema.min.js': ['dist/scripts/editor-schema.min.js']
+                }
+            },
+            'cordova-system': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-system.min.js': ['dist/scripts/editor-system.min.js']
+                }
+            },
+            'cordova-type': {
+                options: {
+                    process: function (src, filepath) {
+                        var result;
+                        result = '// Designer core system \n\nruntime.require(\'db\').system(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');\n\n' + src;
+                        return result;
+                    }
+                },
+                files: {
+                    'dist/scripts/editor-type.min.js': ['dist/scripts/editor-type.min.js']
+                }
+            },
+            license: {
+                files: {
+                    'dist/styles/editor-behavior.min.css': ['src/banner/license.txt', 'dist/styles/editor-behavior.min.css'],
+                    'dist/styles/editor-component.min.css': ['src/banner/license.txt', 'dist/styles/editor-component.min.css'],
+                    'dist/styles/editor-model.min.css': ['src/banner/license.txt', 'dist/styles/editor-model.min.css'],
+                    'dist/styles/editor-schema.min.css': ['src/banner/license.txt', 'dist/styles/editor-schema.min.css'],
+                    'dist/styles/editor-system.min.css': ['src/banner/license.txt', 'dist/styles/editor-system.min.css'],
+                    'dist/styles/editor-type.min.css': ['src/banner/license.txt', 'dist/styles/editor-type.min.css'],
+                    'dist/styles/system-designer.min.css': ['src/banner/license.txt', 'dist/styles/system-designer.min.css']
+                }
             }
         },
         connect: {
@@ -1565,14 +509,7 @@ module.exports = function (grunt) {
                 options: {
                     keepalive: true,
                     port: 9001,
-                    base: 'dist/designer'
-                }
-            },
-            serverDebug: {
-                options: {
-                    livereload: true,
-                    port: 9001,
-                    base: 'dist/designer'
+                    base: 'dist/'
                 }
             }
         }
@@ -1590,87 +527,38 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-    // system JSON task
-    grunt.registerTask('system-json', [
-        'concat:jsComponent',
-        'concat:jsClean',
-        'concat:jsonComponent',
-        'concat:jsonClean',
-        'concat:htmlComponent',
-        'concat:htmlClean',
-        'concat:cssComponent',
-        'concat:cssClean',
-        'concat:systemInfos',
-        'concat:systemBehaviors',
-        'concat:systemSchemas',
-        'concat:systemModels',
-        'concat:systemTypes',
-        'concat:systemComponents',
-        'concat:systemFill'
-    ]);
-
     // start the server
     grunt.registerTask('start',
-        'connect:server'
+        'connect'
     );
 
-    // start the server in debug mode
-    grunt.registerTask('start-debug', [
-        'connect:serverDebug',
-        'watch:designer'
-    ]);
-
-    // debug for web
-    grunt.registerTask('debug-web', [
-        'copy:resources',
-        'copy:lib',
-        'copy:html-web',
-        'copy:components-web',
-        'system-json',
-        'merge-json:runtime',
-        'merge-json:addons',
-        'copy:system',
-        'copy:video-web',
-        'jsbeautifier',
-        'copy:debug-web',
-        'cssmin:web',
-        'concat:style'
-    ]);
-
-    // build for web
-    grunt.registerTask('build-web', [
-        'copy:resources',
-        'copy:lib',
-        'copy:html-web',
-        'copy:appcache-web',
-        'copy:components-web',
-        'system-json',
-        'merge-json:runtime',
-        'merge-json:addons',
-        'copy:system',
-        'copy:video-web',
+    // dist for web
+    grunt.registerTask('web', [
+        'copy:core',
+        'copy:lib-core',
+        'copy:lib-ace',
+        'copy:web',
+        'merge-json:web',
         'jsbeautifier',
         'jshint',
-        'uglify:web',
-        'cssmin:web',
-        'concat:style'
+        'uglify:js',
+        'cssmin',
+        'clean:js',
+        'clean:css',
+        'concat:license'
     ]);
 
     // build for electron
-    grunt.registerTask('build-electron', [
-        'copy:resources',
-        'copy:lib',
-        'copy:html-electron',
-        'copy:json-electron',
-        'copy:components-electron',
-        'system-json',
-        'merge-json:runtime',
-        'merge-json:addons',
-        'copy:system',
-        'copy:video',
+    grunt.registerTask('electron', [
+        'copy:core',
+        'copy:lib-core',
+        'copy:lib-ace',
+        'copy:electron',
+        'merge-json:electron',
         'jsbeautifier',
         'jshint',
-        'uglify:web',
+        'uglify:js',
+        'cssmin',
         'concat:electron-app',
         'concat:electron-behavior',
         'concat:electron-component',
@@ -1679,27 +567,22 @@ module.exports = function (grunt) {
         'concat:electron-schema',
         'concat:electron-system',
         'concat:electron-type',
-        'cssmin:web',
-        'concat:style'
+        'clean:js',
+        'clean:css',
+        'concat:license'
     ]);
 
     // build for cordova
-    grunt.registerTask('build-cordova', [
-        'copy:resources',
-        'copy:lib',
-        'copy:cordova-lib',
-        'copy:html-cordova',
-        'copy:components-cordova',
-        'copy:scripts-cordova',
-        'copy:styles-cordova',
-        'system-json',
-        'merge-json:runtime',
-        'merge-json:addons',
-        'copy:system',
+    grunt.registerTask('cordova', [
+        'copy:core',
+        'copy:lib-core',
+        'copy:lib-codemirror',
+        'copy:cordova',
+        'merge-json:cordova',
         'jsbeautifier',
         'jshint',
-        'uglify:web',
-        'uglify:cordova',
+        'uglify:js',
+        'cssmin',
         'concat:cordova-app',
         'concat:cordova-behavior',
         'concat:cordova-component',
@@ -1708,22 +591,18 @@ module.exports = function (grunt) {
         'concat:cordova-schema',
         'concat:cordova-system',
         'concat:cordova-type',
-        'cssmin:web',
-        'concat:style'
+        'clean:js',
+        'clean:css',
+        'concat:license'
     ]);
 
     // default test
     grunt.registerTask('test', [
-        'build-web'
-    ]);
-
-    // default debug
-    grunt.registerTask('debug', [
-        'debug-web'
+        'web'
     ]);
 
     // default build
     grunt.registerTask('build', [
-        'build-web'
+        'web'
     ]);
 };

@@ -1,5 +1,0 @@
-{
-	"component": "1dbc51200e116e11",
-	"state": "click",
-	"action": "function click() {\n  $('#designer-toolbar-item-sync').tooltip('hide');\n  var DialogSync = this.require('DialogSync');\n    \n  DialogSync = new DialogSync({\n      'title': 'GitHub'\n  });\n  DialogSync.show();\n  DialogSync.on('ok', function () {\n    if ($('#designer-dialog-sync-refresh').prop('checked')) {\n      this.require('github').refresh();\n    } else {\n      this.require('github').push(\n        $('#designer-dialog-sync-comments').val(), \n        $('#designer-dialog-type-creation-hasHTML').prop('checked'), \n        false, \n        $('#designer-dialog-sync-options-log-level-select').val(), \n        $('#designer-dialog-type-creation-hasPackage').prop('checked')\n      );\n    }\n    this.hide();\n  });\n}"
-}
