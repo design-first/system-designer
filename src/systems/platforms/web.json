@@ -132,7 +132,61 @@
 		}
 	},
 	"behaviors": {},
-	"schemas": {},
-	"models": {},
+	"schemas": {
+		"p181111d5c01f97b": {
+			"_name": "HTML",
+			"source": "property",
+			"_id": "p181111d5c01f97b"
+		},
+		"t19b6b11ff31158d": {
+			"_name": "ToolBarItem",
+			"html": "link",
+			"position": "property",
+			"type": "property",
+			"hide": "method",
+			"show": "method",
+			"render": "method",
+			"click": "event",
+			"_id": "t19b6b11ff31158d"
+		}
+	},
+	"models": {
+		"w1417e1d6d613a0d": {
+			"_name": "HTML",
+			"source": {
+				"type": "html",
+				"readOnly": true,
+				"mandatory": true,
+				"default": ""
+			},
+			"_id": "w1417e1d6d613a0d"
+		},
+		"u1f4c7177bb1a459": {
+			"_name": "ToolBarItem",
+			"html": {
+				"type": "@HTML",
+				"readOnly": false,
+				"mandatory": false,
+				"default": {}
+			},
+			"position": {
+				"type": "number",
+				"readOnly": false,
+				"mandatory": false,
+				"default": 0
+			},
+			"type": {
+				"type": "editorType",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "designer"
+			},
+			"hide": {},
+			"show": {},
+			"render": {},
+			"click": {},
+			"_id": "u1f4c7177bb1a459"
+		}
+	},
 	"types": {}
 }
