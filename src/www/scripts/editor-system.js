@@ -21,37 +21,6 @@
 runtime.on('ready', function () {
     var system = this.system('design');
 
-    // DIALOG COPYRIGHT
-    var DialogCopyright = this.require('DialogCopyright');
-    DialogCopyright.on('init', function (config) {
-        var html = '',
-            dom = null;
-
-        $('#designer-dialog-copyright').empty();
-
-        html = this.require('dialog-modal-copyright.html');
-        document.querySelector('#designer-dialog-copyright').insertAdjacentHTML('afterbegin',
-            html.source()
-                .replace(/{{title}}/gi, this.title())
-                .replace(/{{message}}/gi, this.message())
-        );
-
-        //events
-        dom = document.getElementById('designer-dialog-copyright-modal-ok');
-        dom.addEventListener('click', function (event) {
-            this.ok();
-        }.bind(this));
-
-    });
-
-    DialogCopyright.on('show', function () {
-        $('#designer-dialog-copyright-modal').modal('show');
-    });
-
-    DialogCopyright.on('hide', function () {
-        $('#designer-dialog-copyright-modal').modal('hide');
-    });
-
     // MenuItem
     var MenuItem = this.require('MenuItem');
     MenuItem.on('click', function () {

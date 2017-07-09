@@ -221,37 +221,6 @@ runtime.on('ready', function ready() {
         $('#designer-dialog-share-modal').modal('hide');
     });
 
-    // DIALOG COPYRIGHT
-    var DialogCopyright = this.require('DialogCopyright');
-    DialogCopyright.on('init', function init(config) {
-        var html = '',
-            dom = null;
-
-        $('#designer-dialog-copyright').empty();
-
-        html = this.require('dialog-modal-copyright.html');
-        document.querySelector('#designer-dialog-copyright').insertAdjacentHTML('afterbegin',
-            html.source()
-                .replace(/{{title}}/gi, this.title())
-                .replace(/{{message}}/gi, this.message())
-        );
-
-        // events
-        dom = document.getElementById('designer-dialog-copyright-modal-ok');
-        dom.addEventListener('click', function click(event) {
-            this.ok();
-        }.bind(this));
-
-    });
-
-    DialogCopyright.on('show', function show() {
-        $('#designer-dialog-copyright-modal').modal('show');
-    });
-
-    DialogCopyright.on('hide', function hide() {
-        $('#designer-dialog-copyright-modal').modal('hide');
-    });
-
     // DIALOG CONFIG
     var DialogConfig = this.require('DialogConfig');
     DialogConfig.on('init', function init(config) {

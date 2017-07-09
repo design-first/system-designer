@@ -239,15 +239,15 @@ module.exports = function (grunt) {
         },
         "merge-json": {
             web: {
-                src: ['src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/core/system-designer.json'],
+                src: ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/core/system-designer.json'],
                 dest: 'dist/systems/system-designer.json'
             },
             cordova: {
-                src: ['src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/core/system-designer.json'],
+                src: ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/core/system-designer.json'],
                 dest: 'dist/systems/system-designer.json'
             },
             electron: {
-                src: ['src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/core/system-designer.json'],
+                src: ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/core/system-designer.json'],
                 dest: 'dist/systems/system-designer.json'
             }
         },
