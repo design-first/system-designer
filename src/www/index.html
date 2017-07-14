@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html manifest="system-designer.appcache">
 
 <head>
   <meta charset="utf-8">
@@ -12,10 +12,10 @@
   <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- prism -->
   <link href="lib/prism/prism.css" rel="stylesheet">
+  <!-- designer system -->
+  <link href="systems/system-designer.json" type="application/json" rel="system">
   <!-- designer -->
   <link href="styles/system-designer.css" rel="stylesheet">
-  <!-- cordova -->
-  <link href="styles/cordova.css" rel="stylesheet">
 </head>
 
 <body id="body">
@@ -83,9 +83,6 @@
       </div>
     </div>
   </div>
-  <!-- cordova -->
-  <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="scripts/cordova.js"></script>
   <!-- jquery -->
   <script src="lib/jquery/jquery.min.js"></script>
   <!-- bootstrap -->
@@ -98,8 +95,6 @@
   <script src="lib/github-api/GitHub.bundle.min.js"></script>
   <!-- sytem runtime -->
   <script type="text/javascript" src="lib/system-runtime/system-runtime.min.js"></script>
-  <!-- designer -->
-  <script type="text/javascript" src="scripts/system-designer.js"></script>
 </body>
 
 </html>
