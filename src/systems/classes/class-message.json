@@ -1,1 +1,101 @@
-{"name":"class-message","master":false,"subsystem":false,"version":"1.0.0","description":"","schemas":{"t198c41630f1d37e":{"_name":"Message","success":"method","info":"method","warning":"method","danger":"method","clean":"method","_id":"t198c41630f1d37e","_inherit":["RuntimeComponent"]}},"models":{"i17fe71fd15150c9":{"_name":"Message","success":{"params":[{"name":"message","type":"string"}]},"info":{"params":[{"name":"message","type":"string"}]},"warning":{"params":[{"name":"message","type":"string"}]},"danger":{"params":[{"name":"message","type":"string"}]},"clean":{},"_id":"i17fe71fd15150c9"}},"behaviors":{"f1c1eb158101aab8":{"_id":"f1c1eb158101aab8","component":"Message","state":"clean","action":"function clean() {\n  document.querySelector('#designer-message').innerHTML = '';\n}"},"f1bf2a100901b407":{"_id":"f1bf2a100901b407","component":"Message","state":"danger","action":"function danger(message) {\n  var html = this.require('message-alert-danger.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-danger-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"},"i1b72d17c6c154ab":{"_id":"i1b72d17c6c154ab","component":"Message","state":"info","action":"function info(message) {\n  var html = this.require('message-alert-info.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-info-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"},"s1a2461e9b9155cc":{"_id":"s1a2461e9b9155cc","component":"Message","state":"success","action":"function success(message) {\n  var html = this.require('message-alert-success.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-success-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"},"k1dd3c148c011f25":{"_id":"k1dd3c148c011f25","component":"Message","state":"warning","action":"function warning(message) {\n  var html = this.require('message-alert-warning.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-warning-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"}},"types":{},"components":{"Message":{"message":{"_id":"message"}}},"_id":"t10a1a11a5c1c157"}
+{
+  "name": "class-message",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "t198c41630f1d37e": {
+      "_name": "Message",
+      "success": "method",
+      "info": "method",
+      "warning": "method",
+      "danger": "method",
+      "clean": "method",
+      "_id": "t198c41630f1d37e",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    }
+  },
+  "models": {
+    "i17fe71fd15150c9": {
+      "_name": "Message",
+      "success": {
+        "params": [
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      },
+      "info": {
+        "params": [
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      },
+      "warning": {
+        "params": [
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      },
+      "danger": {
+        "params": [
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      },
+      "clean": {},
+      "_id": "i17fe71fd15150c9"
+    }
+  },
+  "behaviors": {
+    "f1c1eb158101aab8": {
+      "_id": "f1c1eb158101aab8",
+      "component": "Message",
+      "state": "clean",
+      "action": "function clean() {\n  document.querySelector('#designer-message').innerHTML = '';\n}"
+    },
+    "f1bf2a100901b407": {
+      "_id": "f1bf2a100901b407",
+      "component": "Message",
+      "state": "danger",
+      "action": "function danger(message) {\n  var html = this.require('message-alert-danger.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-danger-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"
+    },
+    "i1b72d17c6c154ab": {
+      "_id": "i1b72d17c6c154ab",
+      "component": "Message",
+      "state": "info",
+      "action": "function info(message) {\n  var html = this.require('message-alert-info.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-info-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"
+    },
+    "s1a2461e9b9155cc": {
+      "_id": "s1a2461e9b9155cc",
+      "component": "Message",
+      "state": "success",
+      "action": "function success(message) {\n  var html = this.require('message-alert-success.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-success-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"
+    },
+    "k1dd3c148c011f25": {
+      "_id": "k1dd3c148c011f25",
+      "component": "Message",
+      "state": "warning",
+      "action": "function warning(message) {\n  var html = this.require('message-alert-warning.html').source(),\n      id = this.require('designer').generateId(),\n      domId = 'designer-message-warning-' + id;\n      \n  document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n    html.replace(/{{message}}/gi, message)\n        .replace(/{id}/gi, id)\n    );\n  $('#' + domId).fadeIn(500);\n  \n  setTimeout(function () {\n    $('#' + domId).fadeOut(1000, function() {\n      $(this).remove();\n    });\n  }, 4000);\n}"
+    }
+  },
+  "types": {},
+  "components": {
+    "Message": {
+      "message": {
+        "_id": "message"
+      }
+    }
+  },
+  "_id": "t10a1a11a5c1c157"
+}

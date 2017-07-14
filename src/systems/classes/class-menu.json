@@ -1,1 +1,489 @@
-{"name":"class-menu","master":false,"subsystem":false,"version":"1.0.0","description":"","schemas":{"x1860a187db1b3af":{"_name":"Menu","items":"collection","hide":"method","show":"method","render":"method","_id":"x1860a187db1b3af","_inherit":["RuntimeComponent"]},"p1f6f51d9f111925":{"_name":"MenuAction","html":"link","position":"property","type":"property","hide":"method","show":"method","render":"method","_id":"p1f6f51d9f111925","_inherit":["RuntimeComponent"]},"a1097d1ea0812005":{"_name":"MenuBar","designer":"property","logo":"property","header":"property","items":"collection","actions":"collection","render":"method","clear":"method","_id":"a1097d1ea0812005","_inherit":["RuntimeComponent"]},"t14a79156a81862a":{"_name":"MenuHeader","html":"link","type":"property","hide":"method","show":"method","render":"method","_id":"t14a79156a81862a","_inherit":["RuntimeComponent"]},"l1d113198721599d":{"_name":"MenuItem","html":"link","position":"property","type":"property","name":"property","hide":"method","show":"method","render":"method","click":"event","_id":"l1d113198721599d","_inherit":["RuntimeComponent"]},"h1d5181d0f31d7fc":{"_name":"MenuLogo","html":"link","hide":"method","show":"method","render":"method","_id":"h1d5181d0f31d7fc","_inherit":["RuntimeComponent"]},"v1b97319b8319d24":{"_name":"MenuSearch","_inherit":["MenuAction"],"_id":"v1b97319b8319d24"}},"models":{"z1d20e1ec9f10c0f":{"_name":"Menu","items":{"type":["@MenuItem"],"readOnly":false,"mandatory":false,"default":[]},"hide":{},"show":{},"render":{},"_id":"z1d20e1ec9f10c0f"},"w124ac16b591df57":{"_name":"MenuAction","html":{"type":"@HTML","readOnly":false,"mandatory":false,"default":{}},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"_id":"w124ac16b591df57"},"y18b1217aaa13456":{"_name":"MenuBar","designer":{"type":"@Designer","readOnly":true,"mandatory":false,"default":{}},"logo":{"type":"@MenuLogo","readOnly":false,"mandatory":false,"default":{}},"header":{"type":"@MenuHeader","readOnly":false,"mandatory":false,"default":{}},"items":{"type":["@MenuItem"],"readOnly":false,"mandatory":false,"default":[]},"actions":{"type":["@MenuAction"],"readOnly":false,"mandatory":false,"default":[]},"clear":{},"render":{},"_id":"y18b1217aaa13456"},"f13ebe1ad331b263":{"_name":"MenuHeader","html":{"type":"@HTML","readOnly":false,"mandatory":false,"default":{}},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"_id":"f13ebe1ad331b263"},"u1f9a01abe31b3bf":{"_name":"MenuItem","html":{"type":"@HTML","readOnly":false,"mandatory":false,"default":{}},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"name":{"type":"string","readOnly":false,"mandatory":false,"default":""},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"click":{},"_id":"u1f9a01abe31b3bf"},"p19358155261f3b0":{"_name":"MenuLogo","html":{"type":"@HTML","readOnly":false,"mandatory":false,"default":{}},"hide":{},"show":{},"render":{},"_id":"p19358155261f3b0"},"p1fe7c1eefd106b0":{"_name":"MenuSearch","_id":"p1fe7c1eefd106b0"}},"behaviors":{},"types":{},"components":{"MenuAction":{"1f8571164c179ba":{"_id":"1f8571164c179ba","html":"menu-action-version.html","position":10,"type":"designer"},"1f8571164c179be":{"_id":"1f8571164c179be","html":"menu-action-version.html","position":10,"type":"system"},"1f8571164c179bf":{"_id":"1f8571164c179bf","html":"menu-action-version.html","position":10,"type":"type"},"1f8571164c179bg":{"_id":"1f8571164c179bg","html":"menu-action-version.html","position":10,"type":"schema"},"1f8571164c179bh":{"_id":"1f8571164c179bh","html":"menu-action-version.html","position":10,"type":"model"},"1f8571164c179bi":{"_id":"1f8571164c179bi","html":"menu-action-version.html","position":10,"type":"behavior"},"1f8571164c179bj":{"_id":"1f8571164c179bj","html":"menu-action-version.html","position":10,"type":"component"},"1f8571164c179bk":{"_id":"1f8571164c179bk","html":"menu-action-version.html","position":10,"type":"documentation"}},"MenuHeader":{"1fb101b99813a12":{"_id":"1fb101b99813a12","html":"menu-header.html","type":"designer"},"1fb101b99813a13":{"_id":"1fb101b99813a13","html":"menu-header-system.html","type":"system"},"1fb101b99813a14":{"_id":"1fb101b99813a14","html":"menu-header-type.html","type":"type"},"1fb101b99813a15":{"_id":"1fb101b99813a15","html":"menu-header-schema.html","type":"schema"},"1fb101b99813a16":{"_id":"1fb101b99813a16","html":"menu-header-model.html","type":"model"},"1fb101b99813a17":{"_id":"1fb101b99813a17","html":"menu-header-behavior.html","type":"behavior"},"1fb101b99813a18":{"_id":"1fb101b99813a18","html":"menu-header-component.html","type":"component"},"1fb101b99813a19":{"_id":"1fb101b99813a19","html":"menu-header-documentation.html","type":"documentation"}},"MenuItem":{"14f481302c106e6":{"_id":"14f481302c106e6","name":"models","html":"menu-item-models.html","position":20,"type":"designer"},"14f481302c106e7":{"_id":"14f481302c106e7","name":"logs","html":"menu-item-logs.html","position":60,"type":"designer"},"154dd1323f1ffg0a":{"_id":"154dd1323f1ffg0a","name":"system","html":"menu-item-system.html","position":10,"type":"designer"},"154dd1323f1ffg1a":{"_id":"154dd1323f1ffg1a","name":"schemas","html":"menu-item-schemas.html","position":10,"type":"designer"},"154dd1324f1ffg00":{"_id":"154dd1324f1ffg00","name":"overview","html":"menu-item-overview.html","position":10,"type":"documentation"},"154dd1324f1ffg01":{"_id":"154dd1324f1ffg01","name":"quick-start","html":"menu-item-quick-start.html","position":20,"type":"documentation"},"154dd1324f1ffg02":{"_id":"154dd1324f1ffg02","name":"guide","html":"menu-item-guide.html","position":30,"type":"documentation"},"19ec81ce751e196":{"_id":"19ec81ce751e196","name":"components","html":"menu-item-components.html","position":50,"type":"designer"},"1eb9d188b11824c":{"_id":"1eb9d188b11824c","name":"behaviors","html":"menu-item-behaviors.html","position":40,"type":"designer"},"1f1781882618102":{"_id":"1f1781882618102","name":"json","html":"menu-item-json.html","position":50,"type":"system"},"1f1781882618104":{"_id":"1f1781882618104","name":"type","html":"menu-item-type.html","position":10,"type":"type"},"1f1781882618106":{"_id":"1f1781882618106","name":"schema","html":"menu-item-schema.html","position":10,"type":"schema"},"1f1781882618108":{"_id":"1f1781882618108","name":"model","html":"menu-item-model.html","position":10,"type":"model"},"1f1781882618110":{"_id":"1f1781882618110","name":"action","html":"menu-item-action.html","position":10,"type":"behavior"},"1f1781882618111":{"_id":"1f1781882618111","name":"json","html":"menu-item-json.html","position":20,"type":"behavior"},"1f1781882618113":{"_id":"1f1781882618113","name":"runtimeComponent","html":"menu-item-component.html","position":200,"type":"component"},"1f1781882618114":{"_id":"1f1781882618114","name":"description","html":"menu-item-description.html","position":30,"type":"system"},"1f1781882618115":{"_id":"1f1781882618115","name":"name","html":"menu-item-name.html","position":10,"type":"system"},"1f1781882618116":{"_id":"1f1781882618116","name":"version","html":"menu-item-version.html","position":20,"type":"system"},"1fd911618e18ea9":{"_id":"1fd911618e18ea9","name":"types","html":"menu-item-types.html","position":30,"type":"designer"}},"MenuSearch":{"10d07178311d4be":{"_id":"10d07178311d4be","html":"menu-action-search.html","position":10,"type":"designer"}}},"_id":"z114fb15eb1118b1"}
+{
+  "name": "class-menu",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "x1860a187db1b3af": {
+      "_name": "Menu",
+      "items": "collection",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "x1860a187db1b3af",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "p1f6f51d9f111925": {
+      "_name": "MenuAction",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "p1f6f51d9f111925",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "a1097d1ea0812005": {
+      "_name": "MenuBar",
+      "designer": "property",
+      "logo": "property",
+      "header": "property",
+      "items": "collection",
+      "actions": "collection",
+      "render": "method",
+      "clear": "method",
+      "_id": "a1097d1ea0812005",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "t14a79156a81862a": {
+      "_name": "MenuHeader",
+      "html": "link",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "t14a79156a81862a",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "l1d113198721599d": {
+      "_name": "MenuItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "l1d113198721599d",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "h1d5181d0f31d7fc": {
+      "_name": "MenuLogo",
+      "html": "link",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "h1d5181d0f31d7fc",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "v1b97319b8319d24": {
+      "_name": "MenuSearch",
+      "_inherit": [
+        "MenuAction"
+      ],
+      "_id": "v1b97319b8319d24"
+    }
+  },
+  "models": {
+    "z1d20e1ec9f10c0f": {
+      "_name": "Menu",
+      "items": {
+        "type": [
+          "@MenuItem"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "z1d20e1ec9f10c0f"
+    },
+    "w124ac16b591df57": {
+      "_name": "MenuAction",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "w124ac16b591df57"
+    },
+    "y18b1217aaa13456": {
+      "_name": "MenuBar",
+      "designer": {
+        "type": "@Designer",
+        "readOnly": true,
+        "mandatory": false,
+        "default": {}
+      },
+      "logo": {
+        "type": "@MenuLogo",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "header": {
+        "type": "@MenuHeader",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "items": {
+        "type": [
+          "@MenuItem"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "actions": {
+        "type": [
+          "@MenuAction"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "clear": {},
+      "render": {},
+      "_id": "y18b1217aaa13456"
+    },
+    "f13ebe1ad331b263": {
+      "_name": "MenuHeader",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "f13ebe1ad331b263"
+    },
+    "u1f9a01abe31b3bf": {
+      "_name": "MenuItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {},
+      "_id": "u1f9a01abe31b3bf"
+    },
+    "p19358155261f3b0": {
+      "_name": "MenuLogo",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "p19358155261f3b0"
+    },
+    "p1fe7c1eefd106b0": {
+      "_name": "MenuSearch",
+      "_id": "p1fe7c1eefd106b0"
+    }
+  },
+  "behaviors": {},
+  "types": {},
+  "components": {
+    "MenuAction": {
+      "1f8571164c179ba": {
+        "_id": "1f8571164c179ba",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "designer"
+      },
+      "1f8571164c179be": {
+        "_id": "1f8571164c179be",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "system"
+      },
+      "1f8571164c179bf": {
+        "_id": "1f8571164c179bf",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "type"
+      },
+      "1f8571164c179bg": {
+        "_id": "1f8571164c179bg",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "schema"
+      },
+      "1f8571164c179bh": {
+        "_id": "1f8571164c179bh",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "model"
+      },
+      "1f8571164c179bi": {
+        "_id": "1f8571164c179bi",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "behavior"
+      },
+      "1f8571164c179bj": {
+        "_id": "1f8571164c179bj",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "component"
+      },
+      "1f8571164c179bk": {
+        "_id": "1f8571164c179bk",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "documentation"
+      }
+    },
+    "MenuHeader": {
+      "1fb101b99813a12": {
+        "_id": "1fb101b99813a12",
+        "html": "menu-header.html",
+        "type": "designer"
+      },
+      "1fb101b99813a13": {
+        "_id": "1fb101b99813a13",
+        "html": "menu-header-system.html",
+        "type": "system"
+      },
+      "1fb101b99813a14": {
+        "_id": "1fb101b99813a14",
+        "html": "menu-header-type.html",
+        "type": "type"
+      },
+      "1fb101b99813a15": {
+        "_id": "1fb101b99813a15",
+        "html": "menu-header-schema.html",
+        "type": "schema"
+      },
+      "1fb101b99813a16": {
+        "_id": "1fb101b99813a16",
+        "html": "menu-header-model.html",
+        "type": "model"
+      },
+      "1fb101b99813a17": {
+        "_id": "1fb101b99813a17",
+        "html": "menu-header-behavior.html",
+        "type": "behavior"
+      },
+      "1fb101b99813a18": {
+        "_id": "1fb101b99813a18",
+        "html": "menu-header-component.html",
+        "type": "component"
+      },
+      "1fb101b99813a19": {
+        "_id": "1fb101b99813a19",
+        "html": "menu-header-documentation.html",
+        "type": "documentation"
+      }
+    },
+    "MenuItem": {
+      "14f481302c106e6": {
+        "_id": "14f481302c106e6",
+        "name": "models",
+        "html": "menu-item-models.html",
+        "position": 20,
+        "type": "designer"
+      },
+      "14f481302c106e7": {
+        "_id": "14f481302c106e7",
+        "name": "logs",
+        "html": "menu-item-logs.html",
+        "position": 60,
+        "type": "designer"
+      },
+      "154dd1323f1ffg0a": {
+        "_id": "154dd1323f1ffg0a",
+        "name": "system",
+        "html": "menu-item-system.html",
+        "position": 10,
+        "type": "designer"
+      },
+      "154dd1323f1ffg1a": {
+        "_id": "154dd1323f1ffg1a",
+        "name": "schemas",
+        "html": "menu-item-schemas.html",
+        "position": 10,
+        "type": "designer"
+      },
+      "154dd1324f1ffg00": {
+        "_id": "154dd1324f1ffg00",
+        "name": "overview",
+        "html": "menu-item-overview.html",
+        "position": 10,
+        "type": "documentation"
+      },
+      "154dd1324f1ffg01": {
+        "_id": "154dd1324f1ffg01",
+        "name": "quick-start",
+        "html": "menu-item-quick-start.html",
+        "position": 20,
+        "type": "documentation"
+      },
+      "154dd1324f1ffg02": {
+        "_id": "154dd1324f1ffg02",
+        "name": "guide",
+        "html": "menu-item-guide.html",
+        "position": 30,
+        "type": "documentation"
+      },
+      "19ec81ce751e196": {
+        "_id": "19ec81ce751e196",
+        "name": "components",
+        "html": "menu-item-components.html",
+        "position": 50,
+        "type": "designer"
+      },
+      "1eb9d188b11824c": {
+        "_id": "1eb9d188b11824c",
+        "name": "behaviors",
+        "html": "menu-item-behaviors.html",
+        "position": 40,
+        "type": "designer"
+      },
+      "1f1781882618102": {
+        "_id": "1f1781882618102",
+        "name": "json",
+        "html": "menu-item-json.html",
+        "position": 50,
+        "type": "system"
+      },
+      "1f1781882618104": {
+        "_id": "1f1781882618104",
+        "name": "type",
+        "html": "menu-item-type.html",
+        "position": 10,
+        "type": "type"
+      },
+      "1f1781882618106": {
+        "_id": "1f1781882618106",
+        "name": "schema",
+        "html": "menu-item-schema.html",
+        "position": 10,
+        "type": "schema"
+      },
+      "1f1781882618108": {
+        "_id": "1f1781882618108",
+        "name": "model",
+        "html": "menu-item-model.html",
+        "position": 10,
+        "type": "model"
+      },
+      "1f1781882618110": {
+        "_id": "1f1781882618110",
+        "name": "action",
+        "html": "menu-item-action.html",
+        "position": 10,
+        "type": "behavior"
+      },
+      "1f1781882618111": {
+        "_id": "1f1781882618111",
+        "name": "json",
+        "html": "menu-item-json.html",
+        "position": 20,
+        "type": "behavior"
+      },
+      "1f1781882618113": {
+        "_id": "1f1781882618113",
+        "name": "runtimeComponent",
+        "html": "menu-item-component.html",
+        "position": 200,
+        "type": "component"
+      },
+      "1f1781882618114": {
+        "_id": "1f1781882618114",
+        "name": "description",
+        "html": "menu-item-description.html",
+        "position": 30,
+        "type": "system"
+      },
+      "1f1781882618115": {
+        "_id": "1f1781882618115",
+        "name": "name",
+        "html": "menu-item-name.html",
+        "position": 10,
+        "type": "system"
+      },
+      "1f1781882618116": {
+        "_id": "1f1781882618116",
+        "name": "version",
+        "html": "menu-item-version.html",
+        "position": 20,
+        "type": "system"
+      },
+      "1fd911618e18ea9": {
+        "_id": "1fd911618e18ea9",
+        "name": "types",
+        "html": "menu-item-types.html",
+        "position": 30,
+        "type": "designer"
+      }
+    },
+    "MenuSearch": {
+      "10d07178311d4be": {
+        "_id": "10d07178311d4be",
+        "html": "menu-action-search.html",
+        "position": 10,
+        "type": "designer"
+      }
+    }
+  },
+  "_id": "z114fb15eb1118b1"
+}

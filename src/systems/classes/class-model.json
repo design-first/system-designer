@@ -1,1 +1,520 @@
-{"name":"class-model","master":false,"subsystem":false,"version":"1.0.0","description":"","schemas":{"f199ca1d9b01cdcf":{"_name":"ModelBehavior","uuid":"property","title":"property","content":"property","document":"property","render":"method","hide":"method","show":"method","_id":"f199ca1d9b01cdcf","_inherit":["RuntimeComponent"]},"o1d37f1e7c511205":{"_name":"ModelClass","title":"property","uuid":"property","content":"property","document":"property","editable":"property","render":"method","hide":"method","show":"method","_id":"o1d37f1e7c511205","_inherit":["RuntimeComponent"]},"s10e57101f91fe18":{"_name":"ModelComponent","title":"property","uuid":"property","model":"property","document":"property","content":"property","render":"method","hide":"method","show":"method","_id":"s10e57101f91fe18","_inherit":["RuntimeComponent"]},"l15c261708e1fa7f":{"_name":"ModelLog","title":"property","uuid":"property","content":"property","document":"property","render":"method","hide":"method","show":"method","_id":"l15c261708e1fa7f","_inherit":["RuntimeComponent"]},"b19a2a1904c1521c":{"_name":"ModelSchema","title":"property","uuid":"property","content":"property","document":"property","editable":"property","render":"method","hide":"method","show":"method","_id":"b19a2a1904c1521c","_inherit":["RuntimeComponent"]},"v12a9113d7e19b21":{"_name":"ModelSystem","title":"property","uuid":"property","content":"property","document":"property","render":"method","hide":"method","show":"method","_id":"v12a9113d7e19b21","_inherit":["RuntimeComponent"]},"h162301b2eb1e8f8":{"_name":"ModelType","title":"property","uuid":"property","content":"property","document":"property","render":"method","hide":"method","show":"method","_id":"h162301b2eb1e8f8","_inherit":["RuntimeComponent"]}},"models":{"l19cd5176761a073":{"_name":"ModelBehavior","uuid":{"type":"string","readOnly":false,"mandatory":false,"default":""},"title":{"type":"string","readOnly":false,"mandatory":false,"default":""},"content":{"type":"string","readOnly":false,"mandatory":false,"default":""},"document":{"type":"object","readOnly":false,"mandatory":false,"default":{}},"hide":{},"show":{},"render":{},"_id":"l19cd5176761a073"},"d19365156f61a519":{"_name":"ModelClass","title":{"type":"string","readOnly":false,"mandatory":false,"default":""},"uuid":{"type":"string","readOnly":false,"mandatory":false,"default":""},"content":{"type":"string","readOnly":false,"mandatory":false,"default":""},"document":{"type":"object","readOnly":false,"mandatory":false,"default":{}},"editable":{"type":"boolean","readOnly":false,"mandatory":false,"default":false},"hide":{},"show":{},"render":{},"_id":"d19365156f61a519"},"a14b6c1b21b13626":{"_name":"ModelComponent","title":{"type":"string","readOnly":false,"mandatory":false,"default":""},"uuid":{"type":"string","readOnly":false,"mandatory":false,"default":""},"model":{"type":"string","readOnly":false,"mandatory":false,"default":""},"document":{"type":"object","readOnly":false,"mandatory":false,"default":{}},"content":{"type":"string","readOnly":false,"mandatory":false,"default":""},"hide":{},"show":{},"render":{},"_id":"a14b6c1b21b13626"},"n1d0441c3c817fc9":{"_name":"ModelLog","title":{"type":"string","readOnly":false,"mandatory":false,"default":""},"uuid":{"type":"string","readOnly":false,"mandatory":false,"default":""},"content":{"type":"string","readOnly":false,"mandatory":false,"default":""},"document":{"type":"object","readOnly":false,"mandatory":false,"default":{}},"hide":{},"show":{},"render":{},"_id":"n1d0441c3c817fc9"},"e1081c193ea1fd07":{"_name":"ModelSchema","title":{"type":"string","readOnly":false,"mandatory":false,"default":""},"uuid":{"type":"string","readOnly":false,"mandatory":false,"default":""},"content":{"type":"string","readOnly":false,"mandatory":false,"default":""},"document":{"type":"object","readOnly":false,"mandatory":false,"default":{}},"editable":{"type":"boolean","readOnly":false,"mandatory":false,"default":false},"hide":{},"show":{},"render":{},"_id":"e1081c193ea1fd07"},"x1444a1ac6c10ce6":{"_name":"ModelSystem","title":{"type":"string","readOnly":false,"mandatory":false,"default":""},"uuid":{"type":"string","readOnly":false,"mandatory":false,"default":""},"content":{"type":"string","readOnly":false,"mandatory":false,"default":""},"document":{"type":"object","readOnly":false,"mandatory":false,"default":{}},"hide":{},"show":{},"render":{},"_id":"x1444a1ac6c10ce6"},"l1c1a91b69b1dc5b":{"_name":"ModelType","title":{"type":"string","readOnly":false,"mandatory":false,"default":""},"uuid":{"type":"string","readOnly":false,"mandatory":false,"default":""},"content":{"type":"string","readOnly":false,"mandatory":false,"default":""},"document":{"type":"object","readOnly":false,"mandatory":false,"default":{}},"hide":{},"show":{},"render":{},"_id":"l1c1a91b69b1dc5b"}},"behaviors":{"l17e9c1fb07156c0":{"_id":"l17e9c1fb07156c0","component":"ModelSystem","state":"render","action":"function render() { \n  var html = null,\n      that = this,\n      doc = '',\n      propName = '',\n      propVal = '';\n\n  // html \n  html = this.require('model-system.html');\n\n  for (propName in this.document()) {\n    if (['name', 'description', 'version'].indexOf(propName) !== -1) {\n      propVal = this.document()[propName];\n      propVal = propVal.replace(/\\n/g, '<br>');\n      doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>';\n    }\n  }\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{_id}}/gi, this.uuid())\n        .replace(/{{content}}/gi, doc)\n  );\n\n  // events\n  html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('system.html#' + that.uuid() + '#description', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-system-' + this.uuid() + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('system.html#' + that.uuid() + '#description', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-system-' + this.uuid() + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var name = this.document().name;\n      var document = JSON.parse(JSON.stringify(this.document()));\n      delete document.classInfo;\n      this.require('designer').saveAs(document, this.document().name + '.json');\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-system-' + this.uuid() + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var systems = this.require('storage').get('system-designer-systems'),\n          designer = this.require('designer'),\n          System = this.require('System'),\n          systemId = this.uuid();\n\n      // remove from storage\n      this.require('storage').remove(systemId);\n      systems.systems.splice(systems.systems.indexOf(systemId), 1);\n      this.require('storage').set('system-designer-systems', systems);\n\n      designer.system().destroy();\n\n      // remove log\n      designer.logs().forEach(function (item) {\n        this.logs().pop();\n      }.bind(designer));\n\n      // set default system\n      if (systems.systems.length) {\n        designer.system(new System(this.require('storage').get(systems.systems[0])));\n      }\n\n      $('#designer-system-' + this.uuid()).remove();\n      this.destroy();\n\n      //designer.save();\n\n      designer.space('');\n      designer.spaces().render();\n      designer.workspace().refresh();\n    }.bind(this));\n  }\n}","useCoreAPI":false,"core":false},"y1d4ef15995101f1":{"_id":"y1d4ef15995101f1","component":"ModelSystem","state":"hide","action":"function hide() { \n  $('#designer-system-' + this.uuid()).hide();\n}","useCoreAPI":false,"core":false},"s1f1d11cc651c54c":{"_id":"s1f1d11cc651c54c","component":"ModelSystem","state":"show","action":"function show() { \n  $('#designer-system-' + this.uuid()).show();\n}","useCoreAPI":false,"core":false},"h14f82133531cb01":{"_id":"h14f82133531cb01","component":"ModelType","state":"render","action":"function render() { \n  var html = null,\n      that = this,\n      doc = '',\n      propName = '',\n      propVal = '',\n      systemId = '';\n\n  systemId = this.require('designer').system().id();\n\n\n  function _getModelId(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().models()) {\n      if (that.require('designer').system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getLink(propName, val) {\n    var result = '';\n\n    if (!Array.isArray(val)) {\n      if (val.indexOf('@') !== -1) {\n        if (val !== '@RuntimeComponent') {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#models#' + _getModelId(val.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val.replace('@', '') + '</a></div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val.replace('@', '') + '</div>';\n        }\n    } else {\n        if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(val) === -1) {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#types#' + val + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val + '</a></div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val + '</div>';\n        }\n      }\n    } else {\n      if (val[0].indexOf('@') !== -1) {\n        if (val[0] !== '@RuntimeComponent') {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#models#' + _getModelId(val[0].replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val[0].replace('@', '') + '</a> [ ]</div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val[0].replace('@', '') + ' [ ]</div>';\n        }\n      } else {\n        if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(val[0]) === -1) {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#types#' + val[0] + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val[0].replace('@', '') + '</a> [ ]</div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val[0] + ' [ ]</div>';\n        }\n      }\n    }\n\n    return result;\n  }\n\n  // html \n  html = this.require('model-type.html');\n\n  if (this.document().schema) {\n    for (propName in this.document().schema) {\n      if (this.document().schema.hasOwnProperty(propName)) {\n        propVal = this.document().schema[propName].type;\n        doc = doc + _getLink(propName + ' : ', propVal);\n      }\n    }\n  }\n\n  if (this.document().value) {\n    this.document().value.forEach(function (val) {\n      doc = doc + '<div class=\"list-group-item\" style=\"text-align: left\">' + val + '</div>';\n    });\n  }\n\n\n  if (!this.document().schema && !this.document().value) {\n    propVal = this.document().type;\n    doc = doc + '<div class=\"list-group-item\" style=\"text-align: left\"><i>alias</i> : ' + propVal + '</div>';\n  }\n\n  if (doc === '') {\n    doc = doc + '<a class=\"list-group-item\" style=\"text-align: left\"><br/><br/></a>';\n  }\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{id}}/gi, this.uuid())\n        .replace(/{{content}}/gi, doc)\n  );\n\n  // events\n  html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('type.html#' + that.uuid() + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-type-' + this.uuid() + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('type.html#' + that.uuid() + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-type-' + this.uuid() + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var document = {\n          \"name\": \"type \" + this.document().name,\n          \"master\": false,\n          \"subsystem\": true,\n          \"version\": \"0.0.1\",\n          \"description\": \"Type \" + this.document().name,\n          \"schemas\": {},\n          \"models\": {},\n          \"behaviors\": {},\n          \"types\": {},\n          \"components\": {}\n      };\n\n      // clean\n      document.name = document.name.trim();\n      document.name = document.name.replace(/ /gi, '-');\n      document.name = document.name.toLocaleLowerCase();\n\n      document.types[this.document().name] = this.document();\n\n      this.require('designer').saveAs(document, 'type.' + this.document().name.replace(/ /gi, '-').toLowerCase() + '.json');\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-type-' + this.uuid() + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var designer = this.require('designer');\n      types = designer.system().types();\n\n      delete types[this.title()];\n      designer.system().types(types);\n\n      $('#designer-type-' + this.title()).remove();\n\n      this.require('channel').$designerDeleteType(this.uuid());\n\n      this.destroy();\n      designer.save();\n\n      designer.space('');\n      designer.spaces().render();\n      designer.workspace().refresh();\n    }.bind(this));\n  }\n}","useCoreAPI":false,"core":false},"y193ad1d2dd19a94":{"_id":"y193ad1d2dd19a94","component":"ModelType","state":"hide","action":"function hide() { \n  $('#designer-type-' + this.title()).hide();\n}","useCoreAPI":false,"core":false},"r1fddf1076313f2a":{"_id":"r1fddf1076313f2a","component":"ModelType","state":"show","action":"function show() { \n  $('#designer-type-' + this.title()).show();\n}","useCoreAPI":false,"core":false},"x1ef931bdf218b5c":{"_id":"x1ef931bdf218b5c","component":"ModelSchema","state":"render","action":"function render() { \n  var html = null,\n      doc = '',\n      that = this,\n      propName = '',\n      propVal = '',\n      htmlId = '';\n\n  htmlId = this.uuid() || this.title();\n  systemId = this.require('designer').system().id();\n\n  // html \n  html = this.require('model-schema.html');\n  for (propName in this.document()) {\n    if (this.document().hasOwnProperty(propName) && propName.indexOf('_') !== 0) {\n      propVal = this.document()[propName];\n      doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>';\n    }\n  }\n\n  if (doc === '') {\n    doc = doc + '<tr><td><br/><br/><br/></td><td><br/><br/><br/></td></tr>';\n  }\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{id}}/gi, htmlId)\n        .replace(/{{content}}/gi, doc)\n  );\n\n  //events\n  if (this.editable()) {\n    html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];\n\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-schema-' + htmlId + '-edit');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-schema-' + htmlId + '-export');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var document = {\n            \"name\": \"schema \" + this.document()._name,\n            \"master\": false,\n            \"subsystem\": true,\n            \"version\": \"0.0.1\",\n            \"description\": \"Schema \" + this.document()._name,\n            \"schemas\": {},\n            \"models\": {},\n            \"behaviors\": {},\n            \"types\": {},\n            \"components\": {}\n        };\n\n        // clean\n        document.name = document.name.trim();\n        document.name = document.name.replace(/ /gi, '-');\n        document.name = document.name.toLocaleLowerCase();\n\n        document.schemas[this.document()._id] = this.document();\n\n        this.require('designer').saveAs(document, 'schema.' + this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-schema-' + htmlId + '-delete');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var designer = this.require('designer');\n\n        designer.deleteSchema(this.uuid());\n\n        $('#designer-schema-' + this.uuid()).remove();\n\n        this.require('channel').$designerDeleteSchema(this.uuid());\n\n        this.destroy();\n\n        jsPlumb.deleteEveryEndpoint();\n\n        designer.save();\n\n        designer.space('');\n        designer.spaces().render();\n        designer.workspace().refresh();\n      }.bind(this));\n    }\n  } else {\n    $('#designer-schema-' + htmlId + ' > div > div > div > button').hide();\n\n    html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var DialogRuntimeComponentInfo = null;\n\n        if (this.title() !== 'RuntimeComponent') {\n          if (this.require('designer').system().schemas()[that.uuid()]) {\n            this.require('designer').open('index.html#' + this.require('designer').system().id() + '#schemas#' + that.uuid(), '_self');\n          } else {\n            this.require('message').warning('Your schema \\‘' + that.title() + '\\’ has not been yet created.');\n          }\n        } else {\n          DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');\n          DialogRuntimeComponentInfo = new DialogRuntimeComponentInfo({\n            'title': 'RuntimeComponent schema'\n          });\n          DialogRuntimeComponentInfo.show();\n        }\n      }.bind(this));\n    }\n  }\n}","useCoreAPI":false,"core":false},"s16bee11b7711ffc":{"_id":"s16bee11b7711ffc","component":"ModelSchema","state":"hide","action":"function hide() { \n  $('#designer-schema-' + this.uuid()).hide();\n}","useCoreAPI":false,"core":false},"s129cc1a59c1d6e0":{"_id":"s129cc1a59c1d6e0","component":"ModelSchema","state":"show","action":"function show() { \n  $('#designer-schema-' + this.uuid()).show();\n}","useCoreAPI":false,"core":false},"d1cc401928b148ce":{"_id":"d1cc401928b148ce","component":"ModelClass","state":"render","action":"function render() { \n  var html = null,\n      that = this,\n      propName = '',\n      attributes = '',\n      collections = '',\n      methods = '',\n      events = '',\n      propVal = '',\n      result = '',\n      callbackProp = null,\n      htmlId = '',\n      htmlComp = null,\n      systemId = '';\n\n  htmlId = this.uuid() || this.title();\n  systemId = this.require('designer').system().id();\n\n  callbackProp = function (param) {\n    if (param.type.indexOf('@') !== -1 && param.type !== '@RuntimeComponent') {\n      params = params + param.name + ' : <a href=\"#' + this.require('designer').system().id() + '#models#' + _getModelId(param.type.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + param.type.replace('@', '') + '</a>' + ', ';\n    } else {\n      if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'text', 'date'].indexOf(param.type) === -1 && param.type !== '@RuntimeComponent') {\n        params = params + param.name + ' : <a href=\"#' + this.require('designer').system().id() + '#types#' + param.type + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + param.type.replace('@', '') + '</a>' + ', ';\n      } else {\n        params = params + param.name + ' : ' + param.type.replace('@', '') + ', ';\n      }\n    }\n  };\n\n  function _getReturnType(returnType) {\n    var result = '';\n\n    if (returnType.indexOf('@') !== -1 && returnType.replace('@', '') !== 'RuntimeComponent') {\n      result = '<a href=\"#' + that.require('designer').system().id() + '#models#' + _getModelId(returnType.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + returnType.replace('@', '') + '</a>';\n    } else {\n      if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'text', 'date'].indexOf(returnType) === -1 && returnType.replace('@', '') !== 'RuntimeComponent') {\n        result = '<a href=\"#' + that.require('designer').system().id() + '#types#' + returnType + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + returnType.replace('@', '') + '</a>';\n      } else {\n        result = returnType.replace('@', '');\n      }\n    }\n    return result;\n  }\n\n  function _getModelId(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().models()) {\n      if (that.require('designer').system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  for (propName in this.document()) {\n    if (this.document().hasOwnProperty(propName)) {\n        propVal = this.document()[propName];\n\n      switch (true) {\n        case typeof propVal.type !== 'undefined':\n          if (!Array.isArray(propVal.type)) {\n            if (propVal.type.indexOf('@') !== -1) {\n              if (htmlId !== '123751cb591de26' && propVal.type !== '@RuntimeComponent') {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type.replace('@', '') + '</a></div>';\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';\n              }\n            } else {\n              if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(propVal.type) === -1) {\n                if (htmlId !== '123751cb591de26') {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#types#' + propVal.type + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type + '</a></div>';\n                } else {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type + '</div>';\n                }\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type + '</div>';\n              }\n            }\n          } else {\n            if (propVal.type[0].indexOf('@') !== -1) {\n              if (htmlId !== '123751cb591de26' && propVal.type[0] !== '@RuntimeComponent') {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type[0].replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';\n              }\n            } else {\n              if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(propVal.type[0]) === -1) {\n                if (htmlId !== '123751cb591de26') {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';\n                } else {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';\n                }\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type[0] + ' [ ]</div>';\n              }\n            }\n          }\n          break;\n        case typeof propVal.params !== 'undefined':\n          result = 'undefined';\n          var params = '(';\n          propVal.params.forEach(callbackProp.bind(this));\n          params = params + ')';\n          params = params.replace(', )', ')');\n\n          if (typeof propVal.result !== 'undefined') {\n            result = _getReturnType(propVal.result);\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>' + params + ' : ' + result + '</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + params + ' : ' + result + '</div>';\n            }\n          } else {\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>' + params + '</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + params + '</div>';\n            }\n          }\n          break;\n        case propName.indexOf('_') !== -1:\n          if (propName !== '_id' && propName !== '_name') {\n            // doc = doc + '<a href=\"#\" class=\"list-group-item\" style=\"text-align: left\">' + propName.replace('_', '') + ' ' + propVal + '</a>';\n          }\n          break;\n        default:\n          result = 'undefined';\n          if (typeof propVal.result !== 'undefined') {\n            result = _getReturnType(propVal.result);\n\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>() : ' + result + '</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + '() : ' + result + '</div>';\n            }\n          } else {\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>()</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + '()</div>';\n            }\n          }\n          break;\n        }\n    }\n  }\n\n  if (attributes === '') {\n    attributes = attributes + '<a class=\"list-group-item\" style=\"text-align: left\"><br/></a>';\n  }\n  if (methods === '') {\n    methods = methods + '<a class=\"list-group-item\" style=\"text-align: left\"><br/></a>';\n  }\n\n  // html \n  htmlComp = this.require('model-class.html');\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    htmlComp.source()\n            .replace(/{{title}}/gi, this.title())\n            .replace(/{{_id}}/gi, htmlId)\n            .replace(/{{attributes}}/gi, attributes)\n            .replace(/{{collections}}/gi, collections)\n            .replace(/{{methods}}/gi, methods)\n            .replace(/{{events}}/gi, events)\n  );\n\n  // events\n  if (this.editable()) {\n    html = document.getElementById('designer-model-' + htmlId).children[0].children[1];\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('model.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-model-' + htmlId + '-export');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var document = {\n            \"name\": \"model \" + this.document()._name,\n            \"master\": false,\n            \"subsystem\": true,\n            \"version\": \"0.0.1\",\n            \"description\": \"Model \" + this.document()._name,\n            \"schemas\": {},\n            \"models\": {},\n            \"behaviors\": {},\n            \"types\": {},\n            \"components\": {}\n        };\n\n        // clean\n        document.name = document.name.trim();\n        document.name = document.name.replace(/ /gi, '-');\n        document.name = document.name.toLocaleLowerCase();\n\n        document.models[this.document()._id] = this.document();\n\n        this.require('designer').saveAs(document, 'model.' + this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-model-' + htmlId + '-edit');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('model.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n  } else {\n    $('#designer-model-' + htmlId + ' > div > div > div > button').hide();\n\n    html = document.getElementById('designer-model-' + htmlId).children[0].children[1];\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var DialogRuntimeComponentInfo = null;\n\n        if (this.title() !== 'RuntimeComponent') {\n          if (this.require('designer').system().models()[that.uuid()]) {\n            this.require('designer').open('index.html#' + this.require('designer').system().id() + '#models#' + that.uuid(), '_self');\n          } else {\n            this.require('message').warning('Your schema \\‘' + that.title() + '\\’ has not been yet created.');\n          }\n        } else {\n          DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');\n          DialogRuntimeComponentInfo = new DialogRuntimeComponentInfo({\n            'title': 'RuntimeComponent model'\n          });\n          DialogRuntimeComponentInfo.show();\n        }\n      }.bind(this));\n    }\n  }\n}","useCoreAPI":false,"core":false},"e1b783124781eb46":{"_id":"e1b783124781eb46","component":"ModelClass","state":"hide","action":"function hide() { \n  $('#designer-class-' + this.uuid()).hide();\n}","useCoreAPI":false,"core":false},"e1860d16c061bd75":{"_id":"e1860d16c061bd75","component":"ModelClass","state":"show","action":"function show() { \n  $('#designer-class-' + this.uuid()).show();\n}","useCoreAPI":false,"core":false},"a10e171013c1a0a3":{"_id":"a10e171013c1a0a3","component":"ModelBehavior","state":"render","action":"function render() { \n  var template = '',\n      html = null,\n      that = this,\n      systemId = '';\n\n  systemId = this.require('designer').system().id();\n\n  // html \n  template = this.require('model-behavior.html');\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    template.source()\n        .replace(/{{_id}}/gi, this.uuid())\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{content}}/gi, this.content().replace(/</g, '&lt;'))\n  );\n\n  //events\n  html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-behavior-' + this.uuid() + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var name = this.document().state;\n      var exportName = '';\n      var document = {\n          \"name\": \"behavior \" + name,\n          \"master\": false,\n          \"subsystem\": true,\n          \"version\": \"0.0.1\",\n          \"description\": \"Behavior \" + name,\n          \"schemas\": {},\n          \"models\": {},\n          \"behaviors\": {},\n          \"types\": {},\n          \"components\": {}\n      };\n\n      // clean\n      document.name = document.name.trim();\n      document.name = document.name.replace(/ /gi, '-');\n      document.name = document.name.toLocaleLowerCase();\n\n      document.behaviors[this.document()._id] = this.document();\n\n      if (this.document().component === this.require('designer').system().id()) {\n        exportName = 'behavior.' + this.require('designer').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n      } else {\n        exportName = 'behavior.' + this.document().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n      }\n\n      this.require('designer').saveAs(document, exportName);\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var designer = this.require('designer');\n      behaviors = designer.system().behaviors();\n\n      delete behaviors[this.uuid()];\n      designer.system().behaviors(behaviors);\n\n      $('#designer-behavior-' + this.uuid()).fadeOut(400, function fadeout() {\n        $(this).remove();\n      });\n\n      this.require('channel').$designerDeleteBehavior(this.uuid());\n\n      this.destroy();\n      designer.save();\n    }.bind(this));\n  }\n}","useCoreAPI":false,"core":false},"a1553d131ff1af56":{"_id":"a1553d131ff1af56","component":"ModelBehavior","state":"hide","action":"function hide() { \n  $('#designer-behavior-' + this.uuid()).hide();\n}","useCoreAPI":false,"core":false},"s1870e16bf01a557":{"_id":"s1870e16bf01a557","component":"ModelBehavior","state":"show","action":"function show() { \n  $('#designer-behavior-' + this.uuid()).show();\n}","useCoreAPI":false,"core":false},"c1e7c01b4a51caf0":{"_id":"c1e7c01b4a51caf0","component":"ModelComponent","state":"render","action":"function render() { \n  var htmlComp = null,\n      html = null,\n      doc = '',\n      that = this,\n      propName = '',\n      propVal = '',\n      value = '',\n      systemId = '',\n      links = '',\n      modelName = '',\n      schema = null;\n\n  function _getSchema(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().schemas()) {\n      if (that.require('designer').system().schemas()[id]._name === name) {\n        result = that.require('designer').system().schemas()[id];\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getModel(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().models()) {\n      if (that.require('designer').system().models()[id]._name === name) {\n        result = that.require('designer').system().models()[id];\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getModelFromComponent(id) {\n    var result = '',\n        modelName = '',\n        componentId = '';\n\n    for (modelName in that.require('designer').system().components()) {\n      for (componentId in that.require('designer').system().components()[modelName]) {\n        if (componentId === id) {\n          result = modelName;\n          break;\n        }\n      }\n    }\n    return result;\n  }\n\n  function _createLink(id) {\n    var modelName = model[propName].type[0].replace('@', ''),\n        components = that.require('designer').system().components();\n\n    if (modelName === 'RuntimeComponent') {\n      modelName = _getModelFromComponent(id);\n    }\n\n    links = links + '<a href=\"#' + runtime.require('designer').system().id() + '#components#' + modelName + '#' + id + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + id + '</a>,<br>';\n  }\n\n  systemId = this.require('designer').system().id();\n  schema = _getSchema(this.model());\n  model = _getModel(this.model());\n\n  for (propName in this.document()) {\n    if (this.document().hasOwnProperty(propName) && propName !== '_id') {\n      propVal = this.document()[propName];\n      value = JSON.stringify(propVal);\n\n      switch (true) {\n        case schema[propName] === 'link':\n          if (typeof propVal === 'string') {\n            modelName = model[propName].type.replace('@', '');\n            if (modelName === 'RuntimeComponent') {\n              modelName = _getModelFromComponent(propVal);\n            }\n\n            doc = doc + '<tr><td>' + propName + '</td><td><a href=\"#' + this.require('designer').system().id() + '#components#' + modelName + '#' + propVal + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal + '</a></td></tr>';\n          } else {\n            doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';\n          }\n          break;\n        case schema[propName] === 'collection':\n          if (Array.isArray(propVal) && model[propName].type[0].indexOf('@') !== -1) {\n            propVal.forEach(_createLink);\n            doc = doc + '<tr><td>' + propName + '</td><td>[' + links + ']</td></tr>';\n            doc = doc.replace(',<br>]', ']');\n          } else {\n            if (value.length < 25) {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';\n            } else {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 25) + ' ...</td></tr>';\n            }\n          }\n          break;\n        default:\n          if (value.length < 25) {\n            if (typeof propVal === 'string') {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.replace(/</g, '&lt;') + '</td></tr>';\n            } else {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value.replace(/</g, '&lt;') + '</td></tr>';\n            }\n          } else {\n            if (typeof propVal === 'string') {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.substring(0, 23).replace(/</g, '&lt;') + ' ...</td></tr>';\n            } else {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 23).replace(/</g, '&lt;') + ' ...</td></tr>';\n            }\n          }\n          break;\n      }\n    }\n  }\n\n  if (doc === '') {\n    doc = doc + '<tr><td><br/><br/></td><td><br/><br/></td></tr>';\n  }\n\n  // html \n  htmlComp = this.require('model-component.html');\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    htmlComp.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{_id}}/gi, this.uuid().replace(/\\./g, '-'))\n        .replace(/{{content}}/gi, doc)\n  );\n\n  // events\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-')).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-') + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-') + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n        var name = this.document()._id;\n        var document = {\n            \"name\": \"component \" + name,\n            \"master\": false,\n            \"subsystem\": true,\n            \"version\": \"0.0.1\",\n            \"description\": \"Component \" + name,\n            \"schemas\": {},\n            \"models\": {},\n            \"behaviors\": {},\n            \"types\": {},\n            \"components\": {}\n        };\n\n        // clean\n        document.name = document.name.trim();\n        document.name = document.name.replace(/ /gi, '-');\n        document.name = document.name.toLocaleLowerCase();\n\n        if (typeof document.models[this.model()]) {\n          document.components[this.model()] = {};\n        }\n\n        document.components[this.model()][this.document()._id] = this.document();\n\n        this.require('designer').saveAs(document, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-') + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var designer = this.require('designer'),\n          components = designer.system().components();\n\n      delete components[this.model()][this.uuid()];\n      designer.system().components(components);\n\n      $('#designer-component-' + this.uuid().replace(/\\./g, '-')).fadeOut(400, function fadeOut() {\n        $(this).remove();\n      });\n\n      this.require('channel').$designerDeleteComponent(this.uuid(), this.model());\n\n      this.destroy();\n      designer.save();\n    }.bind(this));\n  }\n}","useCoreAPI":false,"core":false},"s1320a140a91efd8":{"_id":"s1320a140a91efd8","component":"ModelComponent","state":"hide","action":"function hide() { \n  $('#designer-component-' + this.uuid()).hide();\n}","useCoreAPI":false,"core":false},"l107d01de7f1f8b0":{"_id":"l107d01de7f1f8b0","component":"ModelComponent","state":"show","action":"function show() { \n  $('#designer-component-' + this.uuid()).show();\n}","useCoreAPI":false,"core":false},"l102fa1aac8159a8":{"_id":"l102fa1aac8159a8","component":"ModelLog","state":"render","action":"function render() { \n  var html = null,\n      that = this,\n      doc = '',\n      propName = '',\n      propVal = '',\n      logs = '';\n\n  // html \n  htmlComp = this.require('model-log.html');\n\n  // logs\n  this.require('designer').logs().forEach(function (log) {\n    switch (log.type()) {\n      case 'debug':\n        logs = logs + '<p class=\"text-muted\">' + log.log() + '</p>';\n        break;\n      case 'info':\n        logs = logs + '<p class=\"text-info\">' + log.log() + '</p>';\n        break;\n      case 'warn':\n        logs = logs + '<p class=\"text-warning\">' + log.log() + '</p>';\n        break;\n      case 'error':\n        logs = logs + '<p class=\"text-danger\">' + log.log() + '</p>';\n        break;\n      default:\n        break;\n    }\n  });\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    htmlComp.source()\n        .replace('{{logs}}', logs)\n  );\n\n  // events       \n  html = document.getElementById('designer-log-clean');\n\n  html.addEventListener('click', function click(event) {\n    this.require('designer').logs().forEach(function (item) {\n      this.logs().pop();\n    }.bind(this.require('designer')));\n    document.querySelector('#designer-loug-output').innerHTML = '';\n  }.bind(this));\n}","useCoreAPI":false,"core":false},"c19c981365a18e6f":{"_id":"c19c981365a18e6f","component":"ModelLog","state":"hide","action":"function hide() { \n  $('#designer-log').hide();\n}","useCoreAPI":false,"core":false},"f182891664d151ab":{"_id":"f182891664d151ab","component":"ModelLog","state":"show","action":"function show() { \n  $('#designer-log').show();\n}","useCoreAPI":false,"core":false}},"types":{},"components":{},"_id":"t1c2d613dbf1766c"}
+{
+  "name": "class-model",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "f199ca1d9b01cdcf": {
+      "_name": "ModelBehavior",
+      "uuid": "property",
+      "title": "property",
+      "content": "property",
+      "document": "property",
+      "render": "method",
+      "hide": "method",
+      "show": "method",
+      "_id": "f199ca1d9b01cdcf",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "o1d37f1e7c511205": {
+      "_name": "ModelClass",
+      "title": "property",
+      "uuid": "property",
+      "content": "property",
+      "document": "property",
+      "editable": "property",
+      "render": "method",
+      "hide": "method",
+      "show": "method",
+      "_id": "o1d37f1e7c511205",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "s10e57101f91fe18": {
+      "_name": "ModelComponent",
+      "title": "property",
+      "uuid": "property",
+      "model": "property",
+      "document": "property",
+      "content": "property",
+      "render": "method",
+      "hide": "method",
+      "show": "method",
+      "_id": "s10e57101f91fe18",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "l15c261708e1fa7f": {
+      "_name": "ModelLog",
+      "title": "property",
+      "uuid": "property",
+      "content": "property",
+      "document": "property",
+      "render": "method",
+      "hide": "method",
+      "show": "method",
+      "_id": "l15c261708e1fa7f",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "b19a2a1904c1521c": {
+      "_name": "ModelSchema",
+      "title": "property",
+      "uuid": "property",
+      "content": "property",
+      "document": "property",
+      "editable": "property",
+      "render": "method",
+      "hide": "method",
+      "show": "method",
+      "_id": "b19a2a1904c1521c",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "v12a9113d7e19b21": {
+      "_name": "ModelSystem",
+      "title": "property",
+      "uuid": "property",
+      "content": "property",
+      "document": "property",
+      "render": "method",
+      "hide": "method",
+      "show": "method",
+      "_id": "v12a9113d7e19b21",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "h162301b2eb1e8f8": {
+      "_name": "ModelType",
+      "title": "property",
+      "uuid": "property",
+      "content": "property",
+      "document": "property",
+      "render": "method",
+      "hide": "method",
+      "show": "method",
+      "_id": "h162301b2eb1e8f8",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    }
+  },
+  "models": {
+    "l19cd5176761a073": {
+      "_name": "ModelBehavior",
+      "uuid": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "title": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "content": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "document": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "l19cd5176761a073"
+    },
+    "d19365156f61a519": {
+      "_name": "ModelClass",
+      "title": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "uuid": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "content": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "document": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "editable": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "d19365156f61a519"
+    },
+    "a14b6c1b21b13626": {
+      "_name": "ModelComponent",
+      "title": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "uuid": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "model": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "document": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "content": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "a14b6c1b21b13626"
+    },
+    "n1d0441c3c817fc9": {
+      "_name": "ModelLog",
+      "title": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "uuid": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "content": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "document": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "n1d0441c3c817fc9"
+    },
+    "e1081c193ea1fd07": {
+      "_name": "ModelSchema",
+      "title": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "uuid": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "content": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "document": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "editable": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "e1081c193ea1fd07"
+    },
+    "x1444a1ac6c10ce6": {
+      "_name": "ModelSystem",
+      "title": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "uuid": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "content": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "document": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "x1444a1ac6c10ce6"
+    },
+    "l1c1a91b69b1dc5b": {
+      "_name": "ModelType",
+      "title": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "uuid": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "content": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "document": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "l1c1a91b69b1dc5b"
+    }
+  },
+  "behaviors": {
+    "l17e9c1fb07156c0": {
+      "_id": "l17e9c1fb07156c0",
+      "component": "ModelSystem",
+      "state": "render",
+      "action": "function render() { \n  var html = null,\n      that = this,\n      doc = '',\n      propName = '',\n      propVal = '';\n\n  // html \n  html = this.require('model-system.html');\n\n  for (propName in this.document()) {\n    if (['name', 'description', 'version'].indexOf(propName) !== -1) {\n      propVal = this.document()[propName];\n      propVal = propVal.replace(/\\n/g, '<br>');\n      doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>';\n    }\n  }\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{_id}}/gi, this.uuid())\n        .replace(/{{content}}/gi, doc)\n  );\n\n  // events\n  html = document.getElementById('designer-system-' + this.uuid()).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('system.html#' + that.uuid() + '#description', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-system-' + this.uuid() + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('system.html#' + that.uuid() + '#description', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-system-' + this.uuid() + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var name = this.document().name;\n      var document = JSON.parse(JSON.stringify(this.document()));\n      delete document.classInfo;\n      this.require('designer').saveAs(document, this.document().name + '.json');\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-system-' + this.uuid() + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var systems = this.require('storage').get('system-designer-systems'),\n          designer = this.require('designer'),\n          System = this.require('System'),\n          systemId = this.uuid();\n\n      // remove from storage\n      this.require('storage').remove(systemId);\n      systems.systems.splice(systems.systems.indexOf(systemId), 1);\n      this.require('storage').set('system-designer-systems', systems);\n\n      designer.system().destroy();\n\n      // remove log\n      designer.logs().forEach(function (item) {\n        this.logs().pop();\n      }.bind(designer));\n\n      // set default system\n      if (systems.systems.length) {\n        designer.system(new System(this.require('storage').get(systems.systems[0])));\n      }\n\n      $('#designer-system-' + this.uuid()).remove();\n      this.destroy();\n\n      //designer.save();\n\n      designer.space('');\n      designer.spaces().render();\n      designer.workspace().refresh();\n    }.bind(this));\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "y1d4ef15995101f1": {
+      "_id": "y1d4ef15995101f1",
+      "component": "ModelSystem",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-system-' + this.uuid()).hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s1f1d11cc651c54c": {
+      "_id": "s1f1d11cc651c54c",
+      "component": "ModelSystem",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-system-' + this.uuid()).show();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "h14f82133531cb01": {
+      "_id": "h14f82133531cb01",
+      "component": "ModelType",
+      "state": "render",
+      "action": "function render() { \n  var html = null,\n      that = this,\n      doc = '',\n      propName = '',\n      propVal = '',\n      systemId = '';\n\n  systemId = this.require('designer').system().id();\n\n\n  function _getModelId(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().models()) {\n      if (that.require('designer').system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getLink(propName, val) {\n    var result = '';\n\n    if (!Array.isArray(val)) {\n      if (val.indexOf('@') !== -1) {\n        if (val !== '@RuntimeComponent') {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#models#' + _getModelId(val.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val.replace('@', '') + '</a></div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val.replace('@', '') + '</div>';\n        }\n    } else {\n        if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(val) === -1) {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#types#' + val + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val + '</a></div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val + '</div>';\n        }\n      }\n    } else {\n      if (val[0].indexOf('@') !== -1) {\n        if (val[0] !== '@RuntimeComponent') {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#models#' + _getModelId(val[0].replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val[0].replace('@', '') + '</a> [ ]</div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val[0].replace('@', '') + ' [ ]</div>';\n        }\n      } else {\n        if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(val[0]) === -1) {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + '<a href=\"#' + that.require('designer').system().id() + '#types#' + val[0] + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + val[0].replace('@', '') + '</a> [ ]</div>';\n        } else {\n          result = '<div class=\"list-group-item\" style=\"text-align: left\">' + propName + val[0] + ' [ ]</div>';\n        }\n      }\n    }\n\n    return result;\n  }\n\n  // html \n  html = this.require('model-type.html');\n\n  if (this.document().schema) {\n    for (propName in this.document().schema) {\n      if (this.document().schema.hasOwnProperty(propName)) {\n        propVal = this.document().schema[propName].type;\n        doc = doc + _getLink(propName + ' : ', propVal);\n      }\n    }\n  }\n\n  if (this.document().value) {\n    this.document().value.forEach(function (val) {\n      doc = doc + '<div class=\"list-group-item\" style=\"text-align: left\">' + val + '</div>';\n    });\n  }\n\n\n  if (!this.document().schema && !this.document().value) {\n    propVal = this.document().type;\n    doc = doc + '<div class=\"list-group-item\" style=\"text-align: left\"><i>alias</i> : ' + propVal + '</div>';\n  }\n\n  if (doc === '') {\n    doc = doc + '<a class=\"list-group-item\" style=\"text-align: left\"><br/><br/></a>';\n  }\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{id}}/gi, this.uuid())\n        .replace(/{{content}}/gi, doc)\n  );\n\n  // events\n  html = document.getElementById('designer-type-' + this.uuid()).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('type.html#' + that.uuid() + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-type-' + this.uuid() + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('type.html#' + that.uuid() + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-type-' + this.uuid() + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var document = {\n          \"name\": \"type \" + this.document().name,\n          \"master\": false,\n          \"subsystem\": true,\n          \"version\": \"0.0.1\",\n          \"description\": \"Type \" + this.document().name,\n          \"schemas\": {},\n          \"models\": {},\n          \"behaviors\": {},\n          \"types\": {},\n          \"components\": {}\n      };\n\n      // clean\n      document.name = document.name.trim();\n      document.name = document.name.replace(/ /gi, '-');\n      document.name = document.name.toLocaleLowerCase();\n\n      document.types[this.document().name] = this.document();\n\n      this.require('designer').saveAs(document, 'type.' + this.document().name.replace(/ /gi, '-').toLowerCase() + '.json');\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-type-' + this.uuid() + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var designer = this.require('designer');\n      types = designer.system().types();\n\n      delete types[this.title()];\n      designer.system().types(types);\n\n      $('#designer-type-' + this.title()).remove();\n\n      this.require('channel').$designerDeleteType(this.uuid());\n\n      this.destroy();\n      designer.save();\n\n      designer.space('');\n      designer.spaces().render();\n      designer.workspace().refresh();\n    }.bind(this));\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "y193ad1d2dd19a94": {
+      "_id": "y193ad1d2dd19a94",
+      "component": "ModelType",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-type-' + this.title()).hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r1fddf1076313f2a": {
+      "_id": "r1fddf1076313f2a",
+      "component": "ModelType",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-type-' + this.title()).show();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "x1ef931bdf218b5c": {
+      "_id": "x1ef931bdf218b5c",
+      "component": "ModelSchema",
+      "state": "render",
+      "action": "function render() { \n  var html = null,\n      doc = '',\n      that = this,\n      propName = '',\n      propVal = '',\n      htmlId = '';\n\n  htmlId = this.uuid() || this.title();\n  systemId = this.require('designer').system().id();\n\n  // html \n  html = this.require('model-schema.html');\n  for (propName in this.document()) {\n    if (this.document().hasOwnProperty(propName) && propName.indexOf('_') !== 0) {\n      propVal = this.document()[propName];\n      doc = doc + '<tr><td>' + propName + '</td><td>' + propVal + '</td></tr>';\n    }\n  }\n\n  if (doc === '') {\n    doc = doc + '<tr><td><br/><br/><br/></td><td><br/><br/><br/></td></tr>';\n  }\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{id}}/gi, htmlId)\n        .replace(/{{content}}/gi, doc)\n  );\n\n  //events\n  if (this.editable()) {\n    html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];\n\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-schema-' + htmlId + '-edit');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('schema.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-schema-' + htmlId + '-export');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var document = {\n            \"name\": \"schema \" + this.document()._name,\n            \"master\": false,\n            \"subsystem\": true,\n            \"version\": \"0.0.1\",\n            \"description\": \"Schema \" + this.document()._name,\n            \"schemas\": {},\n            \"models\": {},\n            \"behaviors\": {},\n            \"types\": {},\n            \"components\": {}\n        };\n\n        // clean\n        document.name = document.name.trim();\n        document.name = document.name.replace(/ /gi, '-');\n        document.name = document.name.toLocaleLowerCase();\n\n        document.schemas[this.document()._id] = this.document();\n\n        this.require('designer').saveAs(document, 'schema.' + this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-schema-' + htmlId + '-delete');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var designer = this.require('designer');\n\n        designer.deleteSchema(this.uuid());\n\n        $('#designer-schema-' + this.uuid()).remove();\n\n        this.require('channel').$designerDeleteSchema(this.uuid());\n\n        this.destroy();\n\n        jsPlumb.deleteEveryEndpoint();\n\n        designer.save();\n\n        designer.space('');\n        designer.spaces().render();\n        designer.workspace().refresh();\n      }.bind(this));\n    }\n  } else {\n    $('#designer-schema-' + htmlId + ' > div > div > div > button').hide();\n\n    html = document.getElementById('designer-schema-' + htmlId).children[0].children[1];\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var DialogRuntimeComponentInfo = null;\n\n        if (this.title() !== 'RuntimeComponent') {\n          if (this.require('designer').system().schemas()[that.uuid()]) {\n            this.require('designer').open('index.html#' + this.require('designer').system().id() + '#schemas#' + that.uuid(), '_self');\n          } else {\n            this.require('message').warning('Your schema \\‘' + that.title() + '\\’ has not been yet created.');\n          }\n        } else {\n          DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');\n          DialogRuntimeComponentInfo = new DialogRuntimeComponentInfo({\n            'title': 'RuntimeComponent schema'\n          });\n          DialogRuntimeComponentInfo.show();\n        }\n      }.bind(this));\n    }\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s16bee11b7711ffc": {
+      "_id": "s16bee11b7711ffc",
+      "component": "ModelSchema",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-schema-' + this.uuid()).hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s129cc1a59c1d6e0": {
+      "_id": "s129cc1a59c1d6e0",
+      "component": "ModelSchema",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-schema-' + this.uuid()).show();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "d1cc401928b148ce": {
+      "_id": "d1cc401928b148ce",
+      "component": "ModelClass",
+      "state": "render",
+      "action": "function render() { \n  var html = null,\n      that = this,\n      propName = '',\n      attributes = '',\n      collections = '',\n      methods = '',\n      events = '',\n      propVal = '',\n      result = '',\n      callbackProp = null,\n      htmlId = '',\n      htmlComp = null,\n      systemId = '';\n\n  htmlId = this.uuid() || this.title();\n  systemId = this.require('designer').system().id();\n\n  callbackProp = function (param) {\n    if (param.type.indexOf('@') !== -1 && param.type !== '@RuntimeComponent') {\n      params = params + param.name + ' : <a href=\"#' + this.require('designer').system().id() + '#models#' + _getModelId(param.type.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + param.type.replace('@', '') + '</a>' + ', ';\n    } else {\n      if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'text', 'date'].indexOf(param.type) === -1 && param.type !== '@RuntimeComponent') {\n        params = params + param.name + ' : <a href=\"#' + this.require('designer').system().id() + '#types#' + param.type + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + param.type.replace('@', '') + '</a>' + ', ';\n      } else {\n        params = params + param.name + ' : ' + param.type.replace('@', '') + ', ';\n      }\n    }\n  };\n\n  function _getReturnType(returnType) {\n    var result = '';\n\n    if (returnType.indexOf('@') !== -1 && returnType.replace('@', '') !== 'RuntimeComponent') {\n      result = '<a href=\"#' + that.require('designer').system().id() + '#models#' + _getModelId(returnType.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + returnType.replace('@', '') + '</a>';\n    } else {\n      if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'errorParam', 'json', 'text', 'date'].indexOf(returnType) === -1 && returnType.replace('@', '') !== 'RuntimeComponent') {\n        result = '<a href=\"#' + that.require('designer').system().id() + '#types#' + returnType + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + returnType.replace('@', '') + '</a>';\n      } else {\n        result = returnType.replace('@', '');\n      }\n    }\n    return result;\n  }\n\n  function _getModelId(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().models()) {\n      if (that.require('designer').system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  for (propName in this.document()) {\n    if (this.document().hasOwnProperty(propName)) {\n        propVal = this.document()[propName];\n\n      switch (true) {\n        case typeof propVal.type !== 'undefined':\n          if (!Array.isArray(propVal.type)) {\n            if (propVal.type.indexOf('@') !== -1) {\n              if (htmlId !== '123751cb591de26' && propVal.type !== '@RuntimeComponent') {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type.replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type.replace('@', '') + '</a></div>';\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type.replace('@', '') + '</div>';\n              }\n            } else {\n              if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(propVal.type) === -1) {\n                if (htmlId !== '123751cb591de26') {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#types#' + propVal.type + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type + '</a></div>';\n                } else {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type + '</div>';\n                }\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type + '</div>';\n              }\n            }\n          } else {\n            if (propVal.type[0].indexOf('@') !== -1) {\n              if (htmlId !== '123751cb591de26' && propVal.type[0] !== '@RuntimeComponent') {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#models#' + _getModelId(propVal.type[0].replace('@', '')) + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';\n              }\n            } else {\n              if (['any', 'boolean', 'string', 'number', 'object', 'function', 'array', 'html', 'javascript', 'css', 'json', 'text', 'date'].indexOf(propVal.type[0]) === -1) {\n                if (htmlId !== '123751cb591de26') {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : <a href=\"#' + this.require('designer').system().id() + '#types#' + propVal.type[0] + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal.type[0].replace('@', '') + '</a> [ ]</div>';\n                } else {\n                  attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type[0].replace('@', '') + ' [ ]</div>';\n                }\n              } else {\n                attributes = attributes + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + ' : ' + propVal.type[0] + ' [ ]</div>';\n              }\n            }\n          }\n          break;\n        case typeof propVal.params !== 'undefined':\n          result = 'undefined';\n          var params = '(';\n          propVal.params.forEach(callbackProp.bind(this));\n          params = params + ')';\n          params = params.replace(', )', ')');\n\n          if (typeof propVal.result !== 'undefined') {\n            result = _getReturnType(propVal.result);\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>' + params + ' : ' + result + '</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + params + ' : ' + result + '</div>';\n            }\n          } else {\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>' + params + '</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + params + '</div>';\n            }\n          }\n          break;\n        case propName.indexOf('_') !== -1:\n          if (propName !== '_id' && propName !== '_name') {\n            // doc = doc + '<a href=\"#\" class=\"list-group-item\" style=\"text-align: left\">' + propName.replace('_', '') + ' ' + propVal + '</a>';\n          }\n          break;\n        default:\n          result = 'undefined';\n          if (typeof propVal.result !== 'undefined') {\n            result = _getReturnType(propVal.result);\n\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>() : ' + result + '</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + '() : ' + result + '</div>';\n            }\n          } else {\n            if (htmlId !== '123751cb591de26') {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ <a href=\"#' + this.require('designer').system().id() + '#behaviors#' + this.document()._name + '#' + propName + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propName + '</a>()</div>';\n            } else {\n              methods = methods + '<div class=\"list-group-item\" style=\"text-align: left\">+ ' + propName + '()</div>';\n            }\n          }\n          break;\n        }\n    }\n  }\n\n  if (attributes === '') {\n    attributes = attributes + '<a class=\"list-group-item\" style=\"text-align: left\"><br/></a>';\n  }\n  if (methods === '') {\n    methods = methods + '<a class=\"list-group-item\" style=\"text-align: left\"><br/></a>';\n  }\n\n  // html \n  htmlComp = this.require('model-class.html');\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    htmlComp.source()\n            .replace(/{{title}}/gi, this.title())\n            .replace(/{{_id}}/gi, htmlId)\n            .replace(/{{attributes}}/gi, attributes)\n            .replace(/{{collections}}/gi, collections)\n            .replace(/{{methods}}/gi, methods)\n            .replace(/{{events}}/gi, events)\n  );\n\n  // events\n  if (this.editable()) {\n    html = document.getElementById('designer-model-' + htmlId).children[0].children[1];\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('model.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-model-' + htmlId + '-export');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var document = {\n            \"name\": \"model \" + this.document()._name,\n            \"master\": false,\n            \"subsystem\": true,\n            \"version\": \"0.0.1\",\n            \"description\": \"Model \" + this.document()._name,\n            \"schemas\": {},\n            \"models\": {},\n            \"behaviors\": {},\n            \"types\": {},\n            \"components\": {}\n        };\n\n        // clean\n        document.name = document.name.trim();\n        document.name = document.name.replace(/ /gi, '-');\n        document.name = document.name.toLocaleLowerCase();\n\n        document.models[this.document()._id] = this.document();\n\n        this.require('designer').saveAs(document, 'model.' + this.document()._name.replace(/ /gi, '-').toLowerCase() + '.json');\n      }.bind(this));\n    }\n\n    html = document.getElementById('designer-model-' + htmlId + '-edit');\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        this.require('designer').open('model.html#' + that.uuid() + '#' + systemId, that.uuid());\n      }.bind(this));\n    }\n  } else {\n    $('#designer-model-' + htmlId + ' > div > div > div > button').hide();\n\n    html = document.getElementById('designer-model-' + htmlId).children[0].children[1];\n    if (html) {\n      html.addEventListener('click', function click(event) {\n        var DialogRuntimeComponentInfo = null;\n\n        if (this.title() !== 'RuntimeComponent') {\n          if (this.require('designer').system().models()[that.uuid()]) {\n            this.require('designer').open('index.html#' + this.require('designer').system().id() + '#models#' + that.uuid(), '_self');\n          } else {\n            this.require('message').warning('Your schema \\‘' + that.title() + '\\’ has not been yet created.');\n          }\n        } else {\n          DialogRuntimeComponentInfo = this.require('DialogRuntimeComponentInfo');\n          DialogRuntimeComponentInfo = new DialogRuntimeComponentInfo({\n            'title': 'RuntimeComponent model'\n          });\n          DialogRuntimeComponentInfo.show();\n        }\n      }.bind(this));\n    }\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "e1b783124781eb46": {
+      "_id": "e1b783124781eb46",
+      "component": "ModelClass",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-class-' + this.uuid()).hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "e1860d16c061bd75": {
+      "_id": "e1860d16c061bd75",
+      "component": "ModelClass",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-class-' + this.uuid()).show();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "a10e171013c1a0a3": {
+      "_id": "a10e171013c1a0a3",
+      "component": "ModelBehavior",
+      "state": "render",
+      "action": "function render() { \n  var template = '',\n      html = null,\n      that = this,\n      systemId = '';\n\n  systemId = this.require('designer').system().id();\n\n  // html \n  template = this.require('model-behavior.html');\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    template.source()\n        .replace(/{{_id}}/gi, this.uuid())\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{content}}/gi, this.content().replace(/</g, '&lt;'))\n  );\n\n  //events\n  html = document.getElementById('designer-behavior-' + this.uuid()).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-behavior-' + this.uuid() + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('behavior.html#' + that.uuid() + '#' + systemId + '#action', that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-behavior-' + this.uuid() + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var name = this.document().state;\n      var exportName = '';\n      var document = {\n          \"name\": \"behavior \" + name,\n          \"master\": false,\n          \"subsystem\": true,\n          \"version\": \"0.0.1\",\n          \"description\": \"Behavior \" + name,\n          \"schemas\": {},\n          \"models\": {},\n          \"behaviors\": {},\n          \"types\": {},\n          \"components\": {}\n      };\n\n      // clean\n      document.name = document.name.trim();\n      document.name = document.name.replace(/ /gi, '-');\n      document.name = document.name.toLocaleLowerCase();\n\n      document.behaviors[this.document()._id] = this.document();\n\n      if (this.document().component === this.require('designer').system().id()) {\n        exportName = 'behavior.' + this.require('designer').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n      } else {\n        exportName = 'behavior.' + this.document().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n      }\n\n      this.require('designer').saveAs(document, exportName);\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-behavior-' + this.uuid() + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var designer = this.require('designer');\n      behaviors = designer.system().behaviors();\n\n      delete behaviors[this.uuid()];\n      designer.system().behaviors(behaviors);\n\n      $('#designer-behavior-' + this.uuid()).fadeOut(400, function fadeout() {\n        $(this).remove();\n      });\n\n      this.require('channel').$designerDeleteBehavior(this.uuid());\n\n      this.destroy();\n      designer.save();\n    }.bind(this));\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "a1553d131ff1af56": {
+      "_id": "a1553d131ff1af56",
+      "component": "ModelBehavior",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-behavior-' + this.uuid()).hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s1870e16bf01a557": {
+      "_id": "s1870e16bf01a557",
+      "component": "ModelBehavior",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-behavior-' + this.uuid()).show();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "c1e7c01b4a51caf0": {
+      "_id": "c1e7c01b4a51caf0",
+      "component": "ModelComponent",
+      "state": "render",
+      "action": "function render() { \n  var htmlComp = null,\n      html = null,\n      doc = '',\n      that = this,\n      propName = '',\n      propVal = '',\n      value = '',\n      systemId = '',\n      links = '',\n      modelName = '',\n      schema = null;\n\n  function _getSchema(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().schemas()) {\n      if (that.require('designer').system().schemas()[id]._name === name) {\n        result = that.require('designer').system().schemas()[id];\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getModel(name) {\n    var result = '',\n        id = '';\n\n    for (id in that.require('designer').system().models()) {\n      if (that.require('designer').system().models()[id]._name === name) {\n        result = that.require('designer').system().models()[id];\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getModelFromComponent(id) {\n    var result = '',\n        modelName = '',\n        componentId = '';\n\n    for (modelName in that.require('designer').system().components()) {\n      for (componentId in that.require('designer').system().components()[modelName]) {\n        if (componentId === id) {\n          result = modelName;\n          break;\n        }\n      }\n    }\n    return result;\n  }\n\n  function _createLink(id) {\n    var modelName = model[propName].type[0].replace('@', ''),\n        components = that.require('designer').system().components();\n\n    if (modelName === 'RuntimeComponent') {\n      modelName = _getModelFromComponent(id);\n    }\n\n    links = links + '<a href=\"#' + runtime.require('designer').system().id() + '#components#' + modelName + '#' + id + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + id + '</a>,<br>';\n  }\n\n  systemId = this.require('designer').system().id();\n  schema = _getSchema(this.model());\n  model = _getModel(this.model());\n\n  for (propName in this.document()) {\n    if (this.document().hasOwnProperty(propName) && propName !== '_id') {\n      propVal = this.document()[propName];\n      value = JSON.stringify(propVal);\n\n      switch (true) {\n        case schema[propName] === 'link':\n          if (typeof propVal === 'string') {\n            modelName = model[propName].type.replace('@', '');\n            if (modelName === 'RuntimeComponent') {\n              modelName = _getModelFromComponent(propVal);\n            }\n\n            doc = doc + '<tr><td>' + propName + '</td><td><a href=\"#' + this.require('designer').system().id() + '#components#' + modelName + '#' + propVal + '\" onclick=\"(function (e) {e.stopPropagation();})(arguments[0])\">' + propVal + '</a></td></tr>';\n          } else {\n            doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';\n          }\n          break;\n        case schema[propName] === 'collection':\n          if (Array.isArray(propVal) && model[propName].type[0].indexOf('@') !== -1) {\n            propVal.forEach(_createLink);\n            doc = doc + '<tr><td>' + propName + '</td><td>[' + links + ']</td></tr>';\n            doc = doc.replace(',<br>]', ']');\n          } else {\n            if (value.length < 25) {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value + '</td></tr>';\n            } else {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 25) + ' ...</td></tr>';\n            }\n          }\n          break;\n        default:\n          if (value.length < 25) {\n            if (typeof propVal === 'string') {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.replace(/</g, '&lt;') + '</td></tr>';\n            } else {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value.replace(/</g, '&lt;') + '</td></tr>';\n            }\n          } else {\n            if (typeof propVal === 'string') {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + propVal.substring(0, 23).replace(/</g, '&lt;') + ' ...</td></tr>';\n            } else {\n              doc = doc + '<tr><td>' + propName + '</td><td>' + value.substring(0, 23).replace(/</g, '&lt;') + ' ...</td></tr>';\n            }\n          }\n          break;\n      }\n    }\n  }\n\n  if (doc === '') {\n    doc = doc + '<tr><td><br/><br/></td><td><br/><br/></td></tr>';\n  }\n\n  // html \n  htmlComp = this.require('model-component.html');\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    htmlComp.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{_id}}/gi, this.uuid().replace(/\\./g, '-'))\n        .replace(/{{content}}/gi, doc)\n  );\n\n  // events\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-')).children[0].children[1];\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-') + '-edit');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      this.require('designer').open('component.html#' + encodeURIComponent(that.title()) + '#' + encodeURIComponent(that.model()) + '#' + systemId, that.uuid());\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-') + '-export');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n        var name = this.document()._id;\n        var document = {\n            \"name\": \"component \" + name,\n            \"master\": false,\n            \"subsystem\": true,\n            \"version\": \"0.0.1\",\n            \"description\": \"Component \" + name,\n            \"schemas\": {},\n            \"models\": {},\n            \"behaviors\": {},\n            \"types\": {},\n            \"components\": {}\n        };\n\n        // clean\n        document.name = document.name.trim();\n        document.name = document.name.replace(/ /gi, '-');\n        document.name = document.name.toLocaleLowerCase();\n\n        if (typeof document.models[this.model()]) {\n          document.components[this.model()] = {};\n        }\n\n        document.components[this.model()][this.document()._id] = this.document();\n\n        this.require('designer').saveAs(document, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');\n    }.bind(this));\n  }\n\n  html = document.getElementById('designer-component-' + this.uuid().replace(/\\./g, '-') + '-delete');\n  if (html) {\n    html.addEventListener('click', function click(event) {\n      var designer = this.require('designer'),\n          components = designer.system().components();\n\n      delete components[this.model()][this.uuid()];\n      designer.system().components(components);\n\n      $('#designer-component-' + this.uuid().replace(/\\./g, '-')).fadeOut(400, function fadeOut() {\n        $(this).remove();\n      });\n\n      this.require('channel').$designerDeleteComponent(this.uuid(), this.model());\n\n      this.destroy();\n      designer.save();\n    }.bind(this));\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s1320a140a91efd8": {
+      "_id": "s1320a140a91efd8",
+      "component": "ModelComponent",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-component-' + this.uuid()).hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l107d01de7f1f8b0": {
+      "_id": "l107d01de7f1f8b0",
+      "component": "ModelComponent",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-component-' + this.uuid()).show();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l102fa1aac8159a8": {
+      "_id": "l102fa1aac8159a8",
+      "component": "ModelLog",
+      "state": "render",
+      "action": "function render() { \n  var html = null,\n      that = this,\n      doc = '',\n      propName = '',\n      propVal = '',\n      logs = '';\n\n  // html \n  htmlComp = this.require('model-log.html');\n\n  // logs\n  this.require('designer').logs().forEach(function (log) {\n    switch (log.type()) {\n      case 'debug':\n        logs = logs + '<p class=\"text-muted\">' + log.log() + '</p>';\n        break;\n      case 'info':\n        logs = logs + '<p class=\"text-info\">' + log.log() + '</p>';\n        break;\n      case 'warn':\n        logs = logs + '<p class=\"text-warning\">' + log.log() + '</p>';\n        break;\n      case 'error':\n        logs = logs + '<p class=\"text-danger\">' + log.log() + '</p>';\n        break;\n      default:\n        break;\n    }\n  });\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML('afterbegin',\n    htmlComp.source()\n        .replace('{{logs}}', logs)\n  );\n\n  // events       \n  html = document.getElementById('designer-log-clean');\n\n  html.addEventListener('click', function click(event) {\n    this.require('designer').logs().forEach(function (item) {\n      this.logs().pop();\n    }.bind(this.require('designer')));\n    document.querySelector('#designer-loug-output').innerHTML = '';\n  }.bind(this));\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "c19c981365a18e6f": {
+      "_id": "c19c981365a18e6f",
+      "component": "ModelLog",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-log').hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f182891664d151ab": {
+      "_id": "f182891664d151ab",
+      "component": "ModelLog",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-log').show();\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {},
+  "_id": "t1c2d613dbf1766c"
+}

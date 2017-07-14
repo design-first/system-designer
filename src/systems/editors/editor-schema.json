@@ -1,1 +1,655 @@
-{"name":"editor-schema","master":true,"subsystem":false,"version":"1.0.0","description":"","schemas":{"a1097d1ea0812005":{"_name":"MenuBar","designer":"property","logo":"property","header":"property","items":"collection","actions":"collection","render":"method","clear":"method","_id":"a1097d1ea0812005","_inherit":["RuntimeComponent"]},"f1257f17deb16097":{"_name":"ToolBar","designer":"property","items":"collection","render":"method","_id":"f1257f17deb16097","_inherit":["RuntimeComponent"]},"f1092816b571e03c":{"_name":"Workspace","designer":"property","create":"method","load":"method","clear":"method","refresh":"method","render":"method","_id":"f1092816b571e03c","_inherit":["RuntimeComponent"]},"k1b97018e111d0e3":{"_name":"Server","designer":"property","start":"method","_id":"k1b97018e111d0e3","_inherit":["RuntimeComponent"]},"o1ead8184af1a83e":{"_name":"Designer","_inherit":["RuntimeComponent"],"version":"property","menubar":"property","toolbar":"property","workspace":"property","spaces":"property","context":"property","oldContext":"property","space":"property","server":"property","system":"property","debug":"property","filter":"property","type":"property","store":"property","state":"property","runWindow":"property","debugWindow":"property","updateRouter":"method","syncModel":"method","syncBehavior":"method","syncComponent":"method","createModel":"method","createBehavior":"method","deleteSchema":"method","linkModel":"method","refresh":"method","save":"method","saveCordova":"method","saveAs":"method","clear":"method","check":"method","welcome":"method","generateId":"method","open":"method","render":"event","logs":"collection","isCordova":"method","isElectron":"method","updateCordovaContext":"method","messages":"property","runMessages":"method","lastPage":"property","getGeneratedSchema":"method","getGeneratedModel":"method","mergeBehavior":"method","_id":"o1ead8184af1a83e"}},"models":{"n1e59e1f0581eca7":{"_id":"n1e59e1f0581eca7","_name":"MenuBar","designer":{"type":"@Designer","readOnly":true,"mandatory":false,"default":{}},"logo":{"type":"@MenuLogo","readOnly":false,"mandatory":false,"default":{}},"header":{"type":"@MenuHeader","readOnly":false,"mandatory":false,"default":{}},"items":{"type":["@MenuItem"],"readOnly":false,"mandatory":false,"default":[]},"actions":{"type":["@MenuAction"],"readOnly":false,"mandatory":false,"default":[]},"render":{},"clear":{}},"q1a8ee19a3818e96":{"_id":"q1a8ee19a3818e96","_name":"ToolBar","designer":{"type":"@Designer","readOnly":true,"mandatory":true,"default":{}},"items":{"type":["@ToolBarItem"],"readOnly":false,"mandatory":false,"default":[]},"render":{}},"k1d3a01a31d18548":{"_id":"k1d3a01a31d18548","_name":"Workspace","designer":{"type":"@Designer","readOnly":true,"mandatory":true,"default":{}},"create":{},"load":{},"clear":{},"refresh":{},"render":{}},"u182d71b6ee120ba":{"_id":"u182d71b6ee120ba","_name":"Server","designer":{"type":"@Designer","readOnly":true,"mandatory":true,"default":{}},"start":{}},"c109be172c713ba8":{"_id":"c109be172c713ba8","_name":"Designer","version":{"type":"string","readOnly":false,"mandatory":false,"default":"2.0.0-alpha.1"},"menubar":{"type":"@MenuBar","readOnly":false,"mandatory":false,"default":{}},"toolbar":{"type":"@ToolBar","readOnly":false,"mandatory":false,"default":{}},"workspace":{"type":"@Workspace","readOnly":false,"mandatory":false,"default":{}},"spaces":{"type":"@Spaces","readOnly":false,"mandatory":false,"default":{}},"context":{"type":"string","readOnly":false,"mandatory":false,"default":""},"oldContext":{"type":"string","readOnly":false,"mandatory":false,"default":""},"space":{"type":"string","readOnly":false,"mandatory":false,"default":""},"server":{"type":"@Server","readOnly":false,"mandatory":false,"default":{}},"system":{"type":"@System","readOnly":false,"mandatory":false,"default":{}},"debug":{"type":"boolean","readOnly":false,"mandatory":false,"default":false},"filter":{"type":"string","readOnly":false,"mandatory":false,"default":""},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"store":{"type":"@Store","readOnly":false,"mandatory":false,"default":{}},"state":{"type":"@DesignerState","readOnly":false,"mandatory":false,"default":{}},"runWindow":{"type":"object","readOnly":false,"mandatory":false,"default":null},"debugWindow":{"type":"object","readOnly":false,"mandatory":false,"default":null},"updateRouter":{},"syncModel":{"params":[{"name":"schema","type":"object","mandatory":false,"default":{}}]},"syncBehavior":{"params":[{"name":"model","type":"object","mandatory":false,"default":{}}]},"syncComponent":{"params":[{"name":"model","type":"object","mandatory":false,"default":{}},{"name":"forceDelete","type":"boolean","mandatory":false,"default":true}]},"createModel":{"params":[{"name":"schema","type":"object","mandatory":false,"default":{}}]},"createBehavior":{"params":[{"name":"type","type":"string","mandatory":false,"default":"method"},{"name":"model","type":"string","mandatory":false,"default":""},{"name":"state","type":"string","mandatory":false,"default":""},{"name":"def","type":"object","mandatory":false,"default":{}}]},"deleteSchema":{"params":[{"name":"schemaId","type":"string","mandatory":false,"default":""}]},"linkModel":{"params":[{"name":"source","type":"string","mandatory":false,"default":""},{"name":"target","type":"string","mandatory":false,"default":""}]},"refresh":{},"save":{},"saveCordova":{},"saveAs":{"params":[{"name":"data","type":"object","mandatory":false,"default":{}},{"name":"fileName","type":"string","mandatory":false,"default":""}]},"clear":{},"check":{},"welcome":{},"generateId":{"result":"string"},"open":{"params":[{"name":"url","type":"string","mandatory":false,"default":""},{"name":"target","type":"string","mandatory":false,"default":""},{"name":"isExt","type":"boolean","mandatory":false,"default":false}]},"render":{},"logs":{"type":["@Log"],"readOnly":false,"mandatory":false,"default":[]},"isCordova":{"result":"boolean"},"isElectron":{"result":"boolean"},"updateCordovaContext":{},"messages":{"type":"array","readOnly":false,"mandatory":false,"default":[]},"runMessages":{"params":[{"name":"messages","type":"array","mandatory":true,"default":[]}]},"lastPage":{"type":"string","readOnly":false,"mandatory":false,"default":"index.html"},"getGeneratedSchema":{"params":[{"name":"schema","type":"string","mandatory":true,"default":""}],"result":"object"},"getGeneratedModel":{"params":[{"name":"model","type":"string","mandatory":true,"default":""}],"result":"object"},"mergeBehavior":{"params":[{"name":"behaviors","type":"object","mandatory":true,"default":{}},{"name":"behavior","type":"object","mandatory":true,"default":{}},{"name":"sysId","type":"string","mandatory":true,"default":""},{"name":"systemName","type":"string","mandatory":true,"default":""}]}}},"behaviors":{"a17dd217b9d1a281":{"_id":"a17dd217b9d1a281","component":"MenuBar","state":"init","action":"function init(conf) { \n  var menuHeader = [],\n    menuItems = [],\n    menuActions = [],\n    menuSearch = [],\n    self = this;\n\n  // menu header\n  menuHeader = this.require('db').collections().MenuHeader.find({\n    \"type\": this.designer().type()\n  });\n  this.header(this.require(menuHeader[0]._id));\n\n  // menu items\n  menuItems = this.require('db').collections().MenuItem.find({\n    \"type\": this.designer().type()\n  });\n\n  menuItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuItems.forEach(function (menuItem) {\n    var id = menuItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // menu actions\n  menuActions = this.require('db').collections().MenuAction.find({\n    \"type\": this.designer().type()\n  });\n\n  menuSearch = this.require('db').collections().MenuSearch.find({\n    \"type\": this.designer().type()\n  });\n\n  menuActions = menuActions.concat(menuSearch);\n\n  menuActions.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuActions.forEach(function (menuAction) {\n    var id = menuAction._id;\n    self.actions().push(self.require(id));\n  });\n}","useCoreAPI":false,"core":false},"k13d5d1b80817357":{"_id":"k13d5d1b80817357","component":"MenuBar","state":"render","action":"function render() { \n  var length = 0,\n    i = 0,\n    item = null,\n    domHeader = document.getElementById('designer-menubar-header'),\n    domItems = document.getElementById('designer-menubar-items'),\n    domAction = document.getElementById('designer-menubar-actions'),\n    self = this;\n\n  function _removeActive() {\n    var length = 0,\n      i = 0,\n      item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  // header\n  domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  var callback = function () {\n    _removeActive();\n    $(this).addClass('active');\n  };\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', callback);\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n\n  // actions\n  this.actions().forEach(function (action) {\n    domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');\n  });\n\n  // focus on first element\n  if (length > 0) {\n    this.designer().context(this.items(0).name());\n    item = domItems.children[0];\n    $(item).addClass('active');\n  }\n}","useCoreAPI":false,"core":false},"k1ef571a20014c82":{"_id":"k1ef571a20014c82","component":"ToolBar","state":"init","action":"function init(conf) { \n  var toolBarItems = [],\n    self = this;\n\n  // items\n  toolBarItems = this.require('db').collections().ToolBarItem.find({\n    \"type\": this.designer().type()\n  });\n\n  // sort items\n  toolBarItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  toolBarItems.forEach(function (toolBarItem) {\n    var id = toolBarItem._id;\n    self.items().push(self.require(id));\n  });\n}","useCoreAPI":false,"core":false},"m1a48e1db7d16f30":{"_id":"m1a48e1db7d16f30","component":"ToolBar","state":"render","action":"function render() { \n  var domItems = document.getElementById('designer-toolbar-items'),\n    i = 0,\n    length = 0,\n    item = null,\n    self = this;\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n}","useCoreAPI":false,"core":false},"a1c11a1251c1309b":{"_id":"a1c11a1251c1309b","component":"Workspace","state":"init","action":"function init(conf) { \n  var Editor = null,\n    designer = null,\n    editor = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'schema',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'application/json',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'schema',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n}","useCoreAPI":false,"core":false},"b18fab15f501e117":{"_id":"b18fab15f501e117","component":"Workspace","state":"render","action":"function render() { \n  this.require('editor').render();\n}","useCoreAPI":false,"core":false},"b1a27810c7910e1c":{"_id":"b1a27810c7910e1c","component":"Server","state":"start","action":"function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    editor = this.require('editor'),\n    designer = this.require('designer');\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('RuntimeChannel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [],\n        system = {};\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  system = this.require('storage').get(systemId);\n  schema = system.schemas[id];\n\n  designer.store().uuid(id);\n  designer.store().data(schema);\n\n  document.title = 'schema ' + schema._name + ' · system ' + system.name;\n\n  editor.initValue(JSON.stringify(schema, null, '\\t'), 2);\n}","useCoreAPI":true,"core":false},"b16f58188d717ef5":{"_id":"b16f58188d717ef5","component":"Designer","state":"init","action":"function init(conf) { \n  var Store = null,\n    store = null,\n    MenuBar = null,\n    menubar = null,\n    ToolBar = null,\n    toolbar = null,\n    Workspace = null,\n    workspace = null,\n    Server = null,\n    server = null;\n\n  // type\n  this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  // store\n  Store = this.require('Store');\n  store = new Store();\n\n  // menu\n  MenuBar = this.require('MenuBar');\n  menubar = new MenuBar({\n    designer: this\n  });\n  ToolBar = this.require('ToolBar');\n  toolbar = new ToolBar({\n    designer: this\n  });\n\n  // workspace\n  Workspace = this.require('Workspace');\n  workspace = new Workspace({\n    designer: this\n  });\n\n  // server\n  Server = this.require('Server');\n  server = new Server({\n    'designer': this\n  });\n\n  this.store(store);\n  this.menubar(menubar);\n  this.toolbar(toolbar);\n  this.workspace(workspace);\n  this.server(server);\n}","useCoreAPI":false,"core":false},"b105d21fac11b017":{"_id":"b105d21fac11b017","component":"Designer","state":"render","action":"function render() { \n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  this.menubar().render();\n  this.toolbar().render();\n  this.workspace().render();\n  this.server().start();\n\n  this.updateRouter();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}","useCoreAPI":false,"core":false},"c1cd1e1b3ac14518":{"_id":"c1cd1e1b3ac14518","component":"Designer","state":"updateRouter","action":"function updateRouter() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  id = decodeURIComponent(document.location.href.split('#')[1]);\n  collection = document.location.href.split('#')[2];\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + collection + '#' + context;\n  }\n}","useCoreAPI":false,"core":false},"a1e198168661bec0":{"_id":"a1e198168661bec0","component":"Designer","state":"clear","action":"function clear() { \n  this.refresh();\n}","useCoreAPI":false,"core":false},"f1c5b512cdf14566":{"_id":"f1c5b512cdf14566","component":"Designer","state":"context","action":"function context(value) { \n  this.workspace().clear();\n  this.workspace().refresh();\n}","useCoreAPI":false,"core":false},"u102ee100eb1fb61":{"_id":"u102ee100eb1fb61","component":"Designer","state":"save","action":"function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    message = this.require('message'),\n    schema = null,\n    property = '',\n    propVal = '';\n\n  try {\n    schema = JSON.parse(val);\n  } catch (e) {\n    message.danger('Can not save your schema: your schema has an invalid structure.');\n    return;\n  }\n\n  for (property in schema) {\n    if (schema.hasOwnProperty(property) && property.indexOf('_') !== 0) {\n      propVal = schema[property];\n      if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) === -1) {\n        message.danger('Invalid value for the property \\'' + property + '\\’.<br>Authorized values are: \\'property\\', \\'link\\', \\'collection\\', \\'event\\' and \\'method\\'.');\n        return;\n      }\n    }\n  }\n\n  for (property in schema) {\n    if (property.indexOf(' ') !== -1) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>Space is not authorized in the name of a property.');\n      return;\n    }\n    propVal = schema[property];\n    if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) !== -1 && property.indexOf('_') === 0) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>A property name can not start with \\'_\\'.');\n      return;\n    }\n  }\n\n  if (!schema._name) {\n    message.danger('The property \\'_name\\' is missing.');\n    return;\n  }\n\n  if (!schema._id) {\n    message.danger('The property \\'_id\\' is missing.');\n    return;\n  }\n\n  // check if name change\n  if (designer.store().data()._name !== schema._name) {\n    this.require('channel').$editorUpdateSchemaName(schema._name, designer.store().uuid());\n    document.title = 'schema ' + schema._name + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  designer.store().data(schema);\n\n  // check if ID change\n  if (designer.store().uuid() !== designer.store().data()._id) {\n    this.require('channel').$editorUpdateSchemaId(designer.store().uuid(), designer.store().data()._id);\n    designer.store().uuid(designer.store().data()._id);\n  }\n\n  this.require('channel').$editorUpdateSchema(designer.store().uuid(), designer.store().data());\n  message.clean();\n  message.success('Schema saved.');\n}","useCoreAPI":false,"core":false},"k171ad182081ca3c":{"_id":"k171ad182081ca3c","component":"l1ffcf1761317c7b","state":"start","action":"function start() { \n  var Designer = null,\n    designer = null;\n\n  Designer = this.require('Designer');\n  designer = new Designer({\n    '_id': 'designer'\n  });\n  designer.render();\n}","useCoreAPI":false,"core":false}},"types":{},"components":{"Designer":{}},"_id":"l1ffcf1761317c7b"}
+{
+  "name": "editor-schema",
+  "master": true,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "a1097d1ea0812005": {
+      "_name": "MenuBar",
+      "designer": "property",
+      "logo": "property",
+      "header": "property",
+      "items": "collection",
+      "actions": "collection",
+      "render": "method",
+      "clear": "method",
+      "_id": "a1097d1ea0812005",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "f1257f17deb16097": {
+      "_name": "ToolBar",
+      "designer": "property",
+      "items": "collection",
+      "render": "method",
+      "_id": "f1257f17deb16097",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "f1092816b571e03c": {
+      "_name": "Workspace",
+      "designer": "property",
+      "create": "method",
+      "load": "method",
+      "clear": "method",
+      "refresh": "method",
+      "render": "method",
+      "_id": "f1092816b571e03c",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "k1b97018e111d0e3": {
+      "_name": "Server",
+      "designer": "property",
+      "start": "method",
+      "_id": "k1b97018e111d0e3",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "o1ead8184af1a83e": {
+      "_name": "Designer",
+      "_inherit": [
+        "RuntimeComponent"
+      ],
+      "version": "property",
+      "menubar": "property",
+      "toolbar": "property",
+      "workspace": "property",
+      "spaces": "property",
+      "context": "property",
+      "oldContext": "property",
+      "space": "property",
+      "server": "property",
+      "system": "property",
+      "debug": "property",
+      "filter": "property",
+      "type": "property",
+      "store": "property",
+      "state": "property",
+      "runWindow": "property",
+      "debugWindow": "property",
+      "updateRouter": "method",
+      "syncModel": "method",
+      "syncBehavior": "method",
+      "syncComponent": "method",
+      "createModel": "method",
+      "createBehavior": "method",
+      "deleteSchema": "method",
+      "linkModel": "method",
+      "refresh": "method",
+      "save": "method",
+      "saveCordova": "method",
+      "saveAs": "method",
+      "clear": "method",
+      "check": "method",
+      "welcome": "method",
+      "generateId": "method",
+      "open": "method",
+      "render": "event",
+      "logs": "collection",
+      "isCordova": "method",
+      "isElectron": "method",
+      "updateCordovaContext": "method",
+      "messages": "property",
+      "runMessages": "method",
+      "lastPage": "property",
+      "getGeneratedSchema": "method",
+      "getGeneratedModel": "method",
+      "mergeBehavior": "method",
+      "_id": "o1ead8184af1a83e"
+    }
+  },
+  "models": {
+    "n1e59e1f0581eca7": {
+      "_id": "n1e59e1f0581eca7",
+      "_name": "MenuBar",
+      "designer": {
+        "type": "@Designer",
+        "readOnly": true,
+        "mandatory": false,
+        "default": {}
+      },
+      "logo": {
+        "type": "@MenuLogo",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "header": {
+        "type": "@MenuHeader",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "items": {
+        "type": [
+          "@MenuItem"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "actions": {
+        "type": [
+          "@MenuAction"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "render": {},
+      "clear": {}
+    },
+    "q1a8ee19a3818e96": {
+      "_id": "q1a8ee19a3818e96",
+      "_name": "ToolBar",
+      "designer": {
+        "type": "@Designer",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+      },
+      "items": {
+        "type": [
+          "@ToolBarItem"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "render": {}
+    },
+    "k1d3a01a31d18548": {
+      "_id": "k1d3a01a31d18548",
+      "_name": "Workspace",
+      "designer": {
+        "type": "@Designer",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+      },
+      "create": {},
+      "load": {},
+      "clear": {},
+      "refresh": {},
+      "render": {}
+    },
+    "u182d71b6ee120ba": {
+      "_id": "u182d71b6ee120ba",
+      "_name": "Server",
+      "designer": {
+        "type": "@Designer",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+      },
+      "start": {}
+    },
+    "c109be172c713ba8": {
+      "_id": "c109be172c713ba8",
+      "_name": "Designer",
+      "version": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "2.0.0-alpha.1"
+      },
+      "menubar": {
+        "type": "@MenuBar",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "toolbar": {
+        "type": "@ToolBar",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "workspace": {
+        "type": "@Workspace",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "spaces": {
+        "type": "@Spaces",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "context": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "oldContext": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "space": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "server": {
+        "type": "@Server",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "system": {
+        "type": "@System",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "debug": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+      },
+      "filter": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "store": {
+        "type": "@Store",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "state": {
+        "type": "@DesignerState",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "runWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "debugWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "updateRouter": {},
+      "syncModel": {
+        "params": [
+          {
+            "name": "schema",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
+      },
+      "syncBehavior": {
+        "params": [
+          {
+            "name": "model",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
+      },
+      "syncComponent": {
+        "params": [
+          {
+            "name": "model",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          },
+          {
+            "name": "forceDelete",
+            "type": "boolean",
+            "mandatory": false,
+            "default": true
+          }
+        ]
+      },
+      "createModel": {
+        "params": [
+          {
+            "name": "schema",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
+      },
+      "createBehavior": {
+        "params": [
+          {
+            "name": "type",
+            "type": "string",
+            "mandatory": false,
+            "default": "method"
+          },
+          {
+            "name": "model",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "def",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
+      },
+      "deleteSchema": {
+        "params": [
+          {
+            "name": "schemaId",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "linkModel": {
+        "params": [
+          {
+            "name": "source",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "target",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "refresh": {},
+      "save": {},
+      "saveCordova": {},
+      "saveAs": {
+        "params": [
+          {
+            "name": "data",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          },
+          {
+            "name": "fileName",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "clear": {},
+      "check": {},
+      "welcome": {},
+      "generateId": {
+        "result": "string"
+      },
+      "open": {
+        "params": [
+          {
+            "name": "url",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "target",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "isExt",
+            "type": "boolean",
+            "mandatory": false,
+            "default": false
+          }
+        ]
+      },
+      "render": {},
+      "logs": {
+        "type": [
+          "@Log"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "isCordova": {
+        "result": "boolean"
+      },
+      "isElectron": {
+        "result": "boolean"
+      },
+      "updateCordovaContext": {},
+      "messages": {
+        "type": "array",
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "runMessages": {
+        "params": [
+          {
+            "name": "messages",
+            "type": "array",
+            "mandatory": true,
+            "default": []
+          }
+        ]
+      },
+      "lastPage": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "index.html"
+      },
+      "getGeneratedSchema": {
+        "params": [
+          {
+            "name": "schema",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ],
+        "result": "object"
+      },
+      "getGeneratedModel": {
+        "params": [
+          {
+            "name": "model",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ],
+        "result": "object"
+      },
+      "mergeBehavior": {
+        "params": [
+          {
+            "name": "behaviors",
+            "type": "object",
+            "mandatory": true,
+            "default": {}
+          },
+          {
+            "name": "behavior",
+            "type": "object",
+            "mandatory": true,
+            "default": {}
+          },
+          {
+            "name": "sysId",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          },
+          {
+            "name": "systemName",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ]
+      }
+    }
+  },
+  "behaviors": {
+    "a17dd217b9d1a281": {
+      "_id": "a17dd217b9d1a281",
+      "component": "MenuBar",
+      "state": "init",
+      "action": "function init(conf) { \n  var menuHeader = [],\n    menuItems = [],\n    menuActions = [],\n    menuSearch = [],\n    self = this;\n\n  // menu header\n  menuHeader = this.require('db').collections().MenuHeader.find({\n    \"type\": this.designer().type()\n  });\n  this.header(this.require(menuHeader[0]._id));\n\n  // menu items\n  menuItems = this.require('db').collections().MenuItem.find({\n    \"type\": this.designer().type()\n  });\n\n  menuItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuItems.forEach(function (menuItem) {\n    var id = menuItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // menu actions\n  menuActions = this.require('db').collections().MenuAction.find({\n    \"type\": this.designer().type()\n  });\n\n  menuSearch = this.require('db').collections().MenuSearch.find({\n    \"type\": this.designer().type()\n  });\n\n  menuActions = menuActions.concat(menuSearch);\n\n  menuActions.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuActions.forEach(function (menuAction) {\n    var id = menuAction._id;\n    self.actions().push(self.require(id));\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k13d5d1b80817357": {
+      "_id": "k13d5d1b80817357",
+      "component": "MenuBar",
+      "state": "render",
+      "action": "function render() { \n  var length = 0,\n    i = 0,\n    item = null,\n    domHeader = document.getElementById('designer-menubar-header'),\n    domItems = document.getElementById('designer-menubar-items'),\n    domAction = document.getElementById('designer-menubar-actions'),\n    self = this;\n\n  function _removeActive() {\n    var length = 0,\n      i = 0,\n      item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  // header\n  domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  var callback = function () {\n    _removeActive();\n    $(this).addClass('active');\n  };\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', callback);\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n\n  // actions\n  this.actions().forEach(function (action) {\n    domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');\n  });\n\n  // focus on first element\n  if (length > 0) {\n    this.designer().context(this.items(0).name());\n    item = domItems.children[0];\n    $(item).addClass('active');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k1ef571a20014c82": {
+      "_id": "k1ef571a20014c82",
+      "component": "ToolBar",
+      "state": "init",
+      "action": "function init(conf) { \n  var toolBarItems = [],\n    self = this;\n\n  // items\n  toolBarItems = this.require('db').collections().ToolBarItem.find({\n    \"type\": this.designer().type()\n  });\n\n  // sort items\n  toolBarItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  toolBarItems.forEach(function (toolBarItem) {\n    var id = toolBarItem._id;\n    self.items().push(self.require(id));\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "m1a48e1db7d16f30": {
+      "_id": "m1a48e1db7d16f30",
+      "component": "ToolBar",
+      "state": "render",
+      "action": "function render() { \n  var domItems = document.getElementById('designer-toolbar-items'),\n    i = 0,\n    length = 0,\n    item = null,\n    self = this;\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "a1c11a1251c1309b": {
+      "_id": "a1c11a1251c1309b",
+      "component": "Workspace",
+      "state": "init",
+      "action": "function init(conf) { \n  var Editor = null,\n    designer = null,\n    editor = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'schema',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'application/json',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'schema',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "b18fab15f501e117": {
+      "_id": "b18fab15f501e117",
+      "component": "Workspace",
+      "state": "render",
+      "action": "function render() { \n  this.require('editor').render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "b1a27810c7910e1c": {
+      "_id": "b1a27810c7910e1c",
+      "component": "Server",
+      "state": "start",
+      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    editor = this.require('editor'),\n    designer = this.require('designer');\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('RuntimeChannel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [],\n        system = {};\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  system = this.require('storage').get(systemId);\n  schema = system.schemas[id];\n\n  designer.store().uuid(id);\n  designer.store().data(schema);\n\n  document.title = 'schema ' + schema._name + ' · system ' + system.name;\n\n  editor.initValue(JSON.stringify(schema, null, '\\t'), 2);\n}",
+      "useCoreAPI": true,
+      "core": false
+    },
+    "b16f58188d717ef5": {
+      "_id": "b16f58188d717ef5",
+      "component": "Designer",
+      "state": "init",
+      "action": "function init(conf) { \n  var Store = null,\n    store = null,\n    MenuBar = null,\n    menubar = null,\n    ToolBar = null,\n    toolbar = null,\n    Workspace = null,\n    workspace = null,\n    Server = null,\n    server = null;\n\n  // type\n  this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  // store\n  Store = this.require('Store');\n  store = new Store();\n\n  // menu\n  MenuBar = this.require('MenuBar');\n  menubar = new MenuBar({\n    designer: this\n  });\n  ToolBar = this.require('ToolBar');\n  toolbar = new ToolBar({\n    designer: this\n  });\n\n  // workspace\n  Workspace = this.require('Workspace');\n  workspace = new Workspace({\n    designer: this\n  });\n\n  // server\n  Server = this.require('Server');\n  server = new Server({\n    'designer': this\n  });\n\n  this.store(store);\n  this.menubar(menubar);\n  this.toolbar(toolbar);\n  this.workspace(workspace);\n  this.server(server);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "b105d21fac11b017": {
+      "_id": "b105d21fac11b017",
+      "component": "Designer",
+      "state": "render",
+      "action": "function render() { \n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  this.menubar().render();\n  this.toolbar().render();\n  this.workspace().render();\n  this.server().start();\n\n  this.updateRouter();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "c1cd1e1b3ac14518": {
+      "_id": "c1cd1e1b3ac14518",
+      "component": "Designer",
+      "state": "updateRouter",
+      "action": "function updateRouter() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  id = decodeURIComponent(document.location.href.split('#')[1]);\n  collection = document.location.href.split('#')[2];\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + collection + '#' + context;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "a1e198168661bec0": {
+      "_id": "a1e198168661bec0",
+      "component": "Designer",
+      "state": "clear",
+      "action": "function clear() { \n  this.refresh();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f1c5b512cdf14566": {
+      "_id": "f1c5b512cdf14566",
+      "component": "Designer",
+      "state": "context",
+      "action": "function context(value) { \n  this.workspace().clear();\n  this.workspace().refresh();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "u102ee100eb1fb61": {
+      "_id": "u102ee100eb1fb61",
+      "component": "Designer",
+      "state": "save",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    message = this.require('message'),\n    schema = null,\n    property = '',\n    propVal = '';\n\n  try {\n    schema = JSON.parse(val);\n  } catch (e) {\n    message.danger('Can not save your schema: your schema has an invalid structure.');\n    return;\n  }\n\n  for (property in schema) {\n    if (schema.hasOwnProperty(property) && property.indexOf('_') !== 0) {\n      propVal = schema[property];\n      if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) === -1) {\n        message.danger('Invalid value for the property \\'' + property + '\\’.<br>Authorized values are: \\'property\\', \\'link\\', \\'collection\\', \\'event\\' and \\'method\\'.');\n        return;\n      }\n    }\n  }\n\n  for (property in schema) {\n    if (property.indexOf(' ') !== -1) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>Space is not authorized in the name of a property.');\n      return;\n    }\n    propVal = schema[property];\n    if (['property', 'link', 'collection', 'event', 'method'].indexOf(propVal) !== -1 && property.indexOf('_') === 0) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>A property name can not start with \\'_\\'.');\n      return;\n    }\n  }\n\n  if (!schema._name) {\n    message.danger('The property \\'_name\\' is missing.');\n    return;\n  }\n\n  if (!schema._id) {\n    message.danger('The property \\'_id\\' is missing.');\n    return;\n  }\n\n  // check if name change\n  if (designer.store().data()._name !== schema._name) {\n    this.require('channel').$editorUpdateSchemaName(schema._name, designer.store().uuid());\n    document.title = 'schema ' + schema._name + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  designer.store().data(schema);\n\n  // check if ID change\n  if (designer.store().uuid() !== designer.store().data()._id) {\n    this.require('channel').$editorUpdateSchemaId(designer.store().uuid(), designer.store().data()._id);\n    designer.store().uuid(designer.store().data()._id);\n  }\n\n  this.require('channel').$editorUpdateSchema(designer.store().uuid(), designer.store().data());\n  message.clean();\n  message.success('Schema saved.');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k171ad182081ca3c": {
+      "_id": "k171ad182081ca3c",
+      "component": "l1ffcf1761317c7b",
+      "state": "start",
+      "action": "function start() { \n  var Designer = null,\n    designer = null;\n\n  Designer = this.require('Designer');\n  designer = new Designer({\n    '_id': 'designer'\n  });\n  designer.render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "Designer": {}
+  },
+  "_id": "l1ffcf1761317c7b"
+}

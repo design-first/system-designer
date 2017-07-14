@@ -1,1 +1,742 @@
-{"name":"class-toolbar","master":false,"subsystem":false,"version":"1.0.0","description":"","schemas":{"f1257f17deb16097":{"_name":"ToolBar","designer":"property","items":"collection","render":"method","_id":"f1257f17deb16097","_inherit":["RuntimeComponent"]},"t19b6b11ff31158d":{"_name":"ToolBarItem","html":"link","position":"property","type":"property","hide":"method","show":"method","render":"method","click":"event","_id":"t19b6b11ff31158d","_inherit":["RuntimeComponent"]}},"models":{"l129a713e681c903":{"_name":"ToolBar","designer":{"type":"@Designer","readOnly":true,"mandatory":true,"default":{}},"items":{"type":["@ToolBarItem"],"readOnly":false,"mandatory":false,"default":[]},"render":{},"_id":"l129a713e681c903"},"u1f4c7177bb1a459":{"_name":"ToolBarItem","html":{"type":"@HTML","readOnly":false,"mandatory":false,"default":{}},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"click":{},"_id":"u1f4c7177bb1a459"}},"behaviors":{"c15ea3176d5139e8":{"_id":"c15ea3176d5139e8","component":"10bcb1a0511e09f","state":"click","action":"function click() { \n    $('#designer-toolbar-item-create').tooltip('hide');\n        var message = this.require('message'),\n    designer = this.require('designer');\n    \n    if (!designer.system() && designer.context() !== 'system') {\n        message.warning('You have no system: create first a system to continue.');\n    } else {\n        designer.workspace().create();\n    }\n}"},"o1ff8e17e1c1bcd7":{"_id":"o1ff8e17e1c1bcd7","component":"13a291c27f16310","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"c1076f15499194ba":{"_id":"c1076f15499194ba","component":"13a291c27f16311","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"k1a9e11cd571d17c":{"_id":"k1a9e11cd571d17c","component":"13a291c27f16314","state":"click","action":"function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    \n    switch (this.require('designer').context()) {\n      case 'system':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n        break;\n      case 'schemas':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true); \n        break;\n      case 'models':\n        this.require('designer').open('https://system-designer.readme.io/docs/edit-a-model', '_blank', true); \n        break;\n      case 'types':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-type', '_blank', true); \n        break;\n      case 'behaviors':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n        break;\n      case 'components':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true); \n        break;\n      case 'logs':\n        this.require('designer').open('https://system-designer.readme.io/docs/run-your-system', '_blank', true);\n        break;\n      default:\n        this.require('designer').open('https://system-designer.readme.io/docs/quick-start', '_blank', true); \n        break;\n    }\n}"},"q178081a11712887":{"_id":"q178081a11712887","component":"13f70137b61b19b","state":"click","action":"function click() { \n    var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n    \n    $('#designer-toolbar-item-publish').tooltip('hide');\n    if (designer.system()) {\n        if (runWidow && !runWidow.closed) {\n            runWidow.close();\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n            message.success('Running the system...');\n            \n            /*if (typeof require === 'undefined') {\n                runWidow.document.location.reload();\n                message.success('Running the system...');\n            } else {\n                // TODO \n                // to reload when implemented in electron\n                message.info('<b>info</b>: to run again the system, click the widow where your system is running and go to the menu \\'View > Refresh\\’.');\n            }*/\n        } else {\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n            message.success('Running the system...');\n        }\n    } else {\n        message.warning('You have no system to run.');\n    }\n}"},"a13b711adba1c7d4":{"_id":"a13b711adba1c7d4","component":"163a01b7ca1935c","state":"click","action":"function click() {\n    var debugWindow = this.require('designer').debugWindow(),\n        config = this.require('storage').get('system-designer-config'),\n        message = this.require('message');\n\n    $('#designer-toolbar-item-refresh').tooltip('hide');\n    if (config) {\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'client') {\n            if (config.urlClient) {\n                if (debugWindow && !debugWindow.closed) {\n                    message.success('Searching for a system...');\n                    this.require('channel').$designerSync();\n                } else {\n                    this.require('designer').debugWindow(this.require('designer').open(config.urlClient, 'debug'));\n                }\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'server') {\n            if (config.urlServer) {\n                message.success('Searching for a server...');\n                var self = this;\n                $.getJSON(config.urlServer + ':8888/$designerSync', function (system) {\n                    var Dialog = null,\n                        dialog = null;\n    \n                    Dialog = self.require('DialogImport');\n                    dialog = new Dialog({\n                        'title': 'A system has been found',\n                        'message': 'Do you wan to import it ?',\n                        'data': system\n                    });\n                    dialog.show();\n    \n                    dialog.on('ok', function () {\n                      var System = this.require('System'),\n                          sys = null,\n                          designer = this.require('designer'),\n                          message = this.require('message');\n              \n                      if (designer.system()) {\n                          designer.system().destroy();\n                      }\n                      sys = new System(this.data());\n                      designer.system(sys);\n              \n                      // empty log\n                      designer.logs().forEach(function (item) {\n                          this.logs().pop();\n                      }.bind(designer));\n              \n                      designer.save();\n              \n                      designer.space(sys.name());\n                      designer.spaces().render();\n                      designer.workspace().refresh();\n                      \n                      designer.updateRouter();\n\n                      this.hide();\n                      designer.save();\n              \n                      message.success('Importation of the system is done.');\n                    });\n                });\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType === 'undefined') {\n            message.warning('No url set. Please set the url in the configuration panel.');\n        }\n    } else {\n        message.warning('No url set. Please set the url in the configuration panel.');\n    }\n}"},"o1ec561a54015768":{"_id":"o1ec561a54015768","component":"163a01b7ca1935d","state":"click","action":"function click() {\n    $('#designer-toolbar-item-import').tooltip('hide');\n        var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Import a system'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name = '',\n            propName = '',\n            modelName = '',\n            compId = '',\n            modelId = '',\n            schemaId = '',\n            designer = this.require('designer'),\n            schemas = {},\n            models = {},\n            types = {},\n            components = {},\n            behaviors = {},\n            system = designer.system(),\n            message = this.require('message');\n            \n        function _getModelId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().models()) {\n                if (designer.system().models()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n\n        function _getSchemaId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().schemas()) {\n                if (designer.system().schemas()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n        \n       function _canOverrideBehavior(id, component, state, behaviors) {\n            var behavior = {},\n                behaviorId = '';\n\n            for (behaviorId in behaviors) {\n                behavior = behaviors[behaviorId];\n                if (behavior.component === component && behavior.state === state && behavior._id !== id) {\n                    delete behaviors[behavior._id];\n                    break;\n                }\n            }\n        }\n        \n        function _canOverride(sysId, schemas, behaviors, behavior) {\n            var def = {},\n                id = '',\n                result = true;\n            \n            id = _getSchemaId(behavior.component);\n            def = schemas[id];\n            \n            if (def && def[behavior.state]) {\n                if (def[behavior.state] === 'method') {\n                    _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);\n                }\n            } else {\n                result = false;\n            }\n            \n            if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {\n              result = false;  \n            }\n            \n            return result;\n        }\n\n        sys = this.data();\n        if (Object.keys(sys).length) {\n          \n            // schemas\n            schemas = JSON.parse(JSON.stringify(designer.system().schemas()));\n            for (name in sys.schemas) {\n                if (schemas[name]) {\n                    for (propName in sys.schemas[name]) {\n                        schemas[name][propName] = sys.schemas[name][propName];\n                    }\n                } else {\n                    if (!_getSchemaId(sys.schemas[name]._name)) {\n                        schemas[name] = sys.schemas[name];\n                    } else {\n                        for (propName in sys.schemas[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n                            }\n                        }\n                    }\n                }\n            }\n            designer.system().schemas(schemas);\n            \n            // behaviors\n            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));\n            for (name in sys.behaviors) {\n                if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {\n                    behaviors[name] = sys.behaviors[name];\n                }  else {\n                    // merge main / start / stop\n                    if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {\n                        designer.mergeBehavior(behaviors, sys.behaviors[name], designer.system().id(), sys.name);\n                    }\n                }\n            }\n            designer.system().behaviors(behaviors);\n            \n            // sync models\n            for (schemaId in schemas) {\n                designer.syncModel(schemas[schemaId]);    \n            } \n\n            // models\n            models = JSON.parse(JSON.stringify(designer.system().models()));\n            for (name in sys.models) {\n                if (models[name]) {\n                    for (propName in sys.models[name]) {\n                        models[name][propName] = sys.models[name][propName];\n                    }\n                } else {\n                     if (!_getModelId(sys.models[name]._name)) {\n                        models[name] = sys.models[name];\n                     } else {\n                        for (propName in sys.models[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n                            }\n                        }\n                     }\n                }\n            }\n            designer.system().models(models);\n \n            // sync behaviors and components\n            for (modelId in models) {\n                designer.syncBehavior(models[modelId]);    \n            } \n            \n            // types\n            types = JSON.parse(JSON.stringify(designer.system().types()));\n            for (name in sys.types) {\n                if (types[name]) {\n                    for (propName in sys.types[name]) {\n                        types[name][propName] = sys.types[name][propName];\n                    }\n                } else {\n                    types[name] = sys.types[name];\n                }\n            }\n            designer.system().types(types);\n            \n            // components\n            components = JSON.parse(JSON.stringify(designer.system().components()));\n            for (modelName in sys.components) {\n                if (!components[modelName]) {\n                    components[modelName] = {};\n                }\n                for (compId in sys.components[modelName]) {\n                    if (components[modelName][compId]) {\n                        for (propName in sys.components[modelName][compId]) {\n                            components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n                        }\n                    } else {\n                        components[modelName][compId] = sys.components[modelName][compId];\n                    }\n                }\n            }\n            designer.system().components(components);\n            \n             // sync components\n            for (modelId in models) {\n                designer.syncComponent(models[modelId]);    \n            }\n            \n            designer.system().schemas(schemas);\n            designer.system().models(models);\n            designer.system().types(types);\n            designer.system().behaviors(behaviors);\n            designer.system().components(components);\n            \n            if (designer.system().id() === sys._id) {\n                designer.system().version(sys.version);\n                designer.system().description(sys.description);\n            }\n            \n            designer.save();\n            \n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n            message.success('Composition of the system is done.');\n        } else {\n          if (this.require('designer').system()) {\n            message.danger('The system you try to import is invalid.');\n          } else {\n            message.danger('There is no system to compose with.');\n          }\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            \n            // empty log\n            designer.logs().forEach(function (item) {\n                this.logs().pop();\n            }.bind(designer));\n            \n            designer.save();\n            \n            designer.space(sys.name());\n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n\n            message.success('Importation of the system is done.');\n        } else {\n            message.danger('The system you try to import is invalid');\n        }\n    });\n}"},"e137f915b1b15f90":{"_id":"e137f915b1b15f90","component":"163a01b7ca1935e","state":"click","action":"function click() {\n    $('#designer-toolbar-item-export').tooltip('hide');\n    var message = this.require('message');\n    var Dialog = this.require('DialogExport');\n    \n    if (this.require('designer').system()) {\n      var dialog = new Dialog({\n          'title': 'Export the current system',\n      });\n      dialog.show();\n      \n      dialog.on('ok', function () {\n          var message = this.require('message');\n          // code inspired from the blog post\n          // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n          if (this.require('designer').system()) {\n              var system = null,\n              textToWrite = null,\n              textFileAsBlob = null,\n              fileNameToSaveAs = null,\n              downloadLink = null,\n              js = '';\n              source = '',\n              DialogShare = this.require('DialogShare');\n              \n              system = this.require('db').collections().System.find({\n                  '_id': this.require('designer').system().id()\n              })[0];\n              system = JSON.parse(JSON.stringify(system));\n              delete system.classInfo;\n              \n              if ($('#designer-dialog-export-url').prop(\"checked\")) {\n                  this.hide();\n  \n                  DialogShare = new DialogShare({\n                      'title': 'Copy the link to the system'\n                  });\n                  DialogShare.show();\n                  DialogShare.on('ok', function () {\n                      this.hide();\n                  });\n                  \n              } else {\n              \n                  if ($('#designer-dialog-export-json').prop(\"checked\")) {\n                      system = JSON.parse(JSON.stringify(system));\n                      \n                      if ($('#designer-dialog-export-isMaster').prop('checked')) {\n                        system.master = true;\n                      } else {\n                        system.master = false;\n                      }\n                      if ($('#designer-dialog-export-isSubsystem').prop('checked')) {\n                        system.subsystem = true;\n                      } else {\n                        system.subsystem = false;\n                      }\n                      textToWrite = JSON.stringify(system);\n                      fileNameToSaveAs = this.require('designer').system().name() + '.json';\n                  }\n                  \n                  if ($('#designer-dialog-export-javascript').prop('checked')) {\n                      source = decodeURIComponent(this.require('javascript-export.js').source());\n                      source = source\n                                  .replace(/{{version}}/g, this.require('designer').system().version())\n                                  .replace(/{{description}}/g, this.require('designer').system().description().replace(/\\n/g, '\\n * '))\n                                  .replace(/{{name}}/g, this.require('designer').system().name())\n                                  .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val());\n                                  \n                      // SYSTEM\n                      \n                      var confSystem = {};\n                      \n                      confSystem._id = system._id;\n                      confSystem.name = system.name;\n                      confSystem.version = system.version;\n                      confSystem.description = system.description;\n                      \n                      source = source + '/**\\n';\n                      source = source + ' * System ' +  confSystem.name + '\\n';\n                      source = source + ' * @system\\n';\n                      source = source + ' */\\n';\n                      source = source + 'runtime.system(' + JSON.stringify(confSystem, null, '\\t', 2) + ');\\n\\n';\n                      \n                      // SCHEMA / MODEL / TYPE     \n                      if (Object.keys(system.schemas).length > 0 || Object.keys(system.types).length > 0) {\n                        source = source + '\\n// Schemas, models and types creation\\n\\n\\n';\n                      }\n                      \n                      var name = '';\n                      var schemaSorted = [];\n                      var schemaNameSorted = [];\n                      var schemaName = {};\n                      \n                      for (name in system.schemas) {\n                        schemaSorted.push(system.schemas[name]);\n                        schemaNameSorted.push(system.schemas[name]._name);\n                        schemaName[system.schemas[name]._name] = system.schemas[name]._name;\n                      }\n                      schemaSorted.sort(function (schemaA, schemaB) {\n                        return schemaA._name > schemaB._name;\n                      });\n                      schemaNameSorted.sort();\n                      \n                      schemaSorted.forEach(function (schema) {\n                        source = source + '/**\\n';\n                        source = source + ' * Schema ' +  schema._name + '\\n';\n                        source = source + ' * @schema\\n';\n                        source = source + ' */\\n';\n                        source = source + 'runtime.require(\\'metamodel\\').schema(' + JSON.stringify(schema, null, '\\t', 2) + ');\\n\\n';\n                      });\n                      \n                      var modelSorted = [];\n                      var modelNameSorted = [];\n                      for (name in system.models) {\n                        modelSorted.push(system.models[name]);\n                        modelNameSorted.push(system.models[name]._name);\n                      }\n                      modelSorted.sort(function (modelA, modelB) {\n                        return modelA._name > modelB._name;\n                      });\n                      modelNameSorted.sort();\n                      \n                      modelSorted.forEach(function (model) {\n                        source = source + '/**\\n';\n                        source = source + ' * Model ' +  model._name + '\\n';\n                        source = source + ' * @model\\n';\n                        source = source + ' */\\n';\n                        source = source + 'runtime.require(\\'metamodel\\').model(' + JSON.stringify(model, null, '\\t', 2) + ');\\n\\n';\n                      });\n                      \n                      var typeSorted = [];\n                      var typeNameSorted = [];\n                      for (name in system.types) {\n                        typeSorted.push(system.types[name]);\n                        typeNameSorted.push(system.types[name].name);\n                      }\n                      typeSorted.sort(function (typeA, typeB) {\n                        return typeA.name > typeB.name;\n                      });\n                      typeNameSorted.sort();\n                      \n                      typeSorted.forEach(function (type) {\n                        source = source + '/**\\n';\n                        source = source + ' * Type ' + type.name + '\\n';\n                        source = source + ' * @type\\n';\n                        source = source + ' */\\n';\n                        source = source + 'runtime.require(\\'metamodel\\').type(' + JSON.stringify(type, null, '\\t', 2) + ');\\n\\n';\n                      });\n                      \n                      if (Object.keys(system.schemas).length > 0 || Object.keys(system.models).length > 0 || Object.keys(system.types).length > 0) {\n                        source = source + 'runtime.require(\\'metamodel\\').create();\\n\\n';\n                      }\n                      \n                      // COMPONENT   \n                      if (Object.keys(system.components).length > 0) {\n                        source = source + '\\n// Components creation\\n\\n\\n';\n                      }\n                      schemaNameSorted.forEach(function (collection) {\n                        for (name in system.components[collection]) {\n                          source = source + '/**\\n';\n                          source = source + ' * Component ' +  system.components[collection][name]._id + '\\n';\n                          source = source + ' * @component\\n';\n                          source = source + ' */\\n';\n                          source = source + 'new (runtime.require(\\'' + collection + '\\'))(' + JSON.stringify(system.components[collection][name], null, '\\t', 2) + ');\\n\\n';\n                        }\n                      });\n                      \n                      // BEHAVIOR   \n                      if (Object.keys(system.behaviors).length > 0) {\n                        source = source + '\\n// Behaviors creation\\n\\n\\n';\n                      }\n                      \n                      var behaviors = {};\n                      var behaviorsComponentNameSorted = [];\n                      var modelsByName = {};\n                      \n                      for (name in system.behaviors) {\n                        if (typeof behaviors[system.behaviors[name].component] === 'undefined') {\n                          behaviors[system.behaviors[name].component] = [];\n                        }\n                        behaviors[system.behaviors[name].component].push(system.behaviors[name]);\n                      }\n                  \n                      behaviorsComponentNameSorted = Object.keys(behaviors);\n                      behaviorsComponentNameSorted.sort();\n                      \n                      var id = '';\n                      for (id in system.models) {\n                        modelsByName[system.models[id]._name] = system.models[id];  \n                      }\n                      \n                      behaviorsComponentNameSorted.forEach(function forEach(componentName) {\n                        var componentBehaviors = behaviors[componentName];\n                        \n                        componentBehaviors.sort(function sort(behaviorA, behaviorB) {\n                          return behaviorA.state > behaviorB.state;\n                        });\n                        \n                        if (componentBehaviors.length > 0) {\n                          if (componentName === system._id) {\n                            source = source + '// system behaviors\\n\\n';\n                          } else {\n                            source = source + '// ' + componentName + ' behaviors\\n\\n';\n                          }\n                        }\n                        \n                        componentBehaviors.forEach(function forEach(behavior) {\n                          var useCoreAPI = typeof behavior.useCoreAPI !== 'undefined' ? behavior.useCoreAPI : false;\n                          var core = typeof behavior.core !== 'undefined' ? behavior.core : false;\n                          var comp = '';\n                          var behaviorParamDef = {};\n                          var options = ');\\n\\n';\n                          \n                          if (useCoreAPI && !core) {\n                            options = ', true);\\n\\n';\n                          }\n                          if (useCoreAPI && core) {\n                            options = ', true, true);\\n\\n';\n                          }\n                          \n                          source = source + '/**\\n';\n                          source = source + ' * @method ' + behavior.state  + '\\n';\n                          \n                          if (modelsByName[behavior.component] && modelsByName[behavior.component][behavior.state] && modelsByName[behavior.component][behavior.state].params) {\n                            modelsByName[behavior.component][behavior.state].params.forEach(function forEach(param) {\n                              source = source + ' * @param {' + param.type  + '} '  + param.name + '\\n';    \n                            });\n                          }\n                          if (modelsByName[behavior.component] && modelsByName[behavior.component][behavior.state] && modelsByName[behavior.component][behavior.state].result) {\n                              source = source + ' * @returns {' + modelsByName[behavior.component][behavior.state].result  + '} \\n';    \n                          }\n                          \n                          source = source + ' */\\n';\n                          \n                          switch (true) {\n                            case behavior.component === system._id:\n                              comp = 'runtime.system()';\n                              break;\n                            default:\n                              comp = 'runtime.require(\\'' + behavior.component + '\\')';\n                              break;\n                          } \n                        \n                        source = source + comp + '.on(\\'' + behavior.state + '\\', ' + behavior.action + options;\n                        })\n                      });\n                      \n                      // START\n                      source = source + '// Start the system\\n';\n                      source = source + 'runtime.system().start();\\n';\n                                  \n                      textToWrite = source;\n                      fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                  }\n                  \n                  if ($('#designer-dialog-export-html').prop(\"checked\")) {\n                      js = decodeURIComponent(this.require('system-runtime.min.js').source());\n                      source = this.require('export-app.html').source();\n                      source = source\n                                  .replace(/{{library}}/g, js)\n                                  .replace(/{{library}}/g, function() {return '\\$&'})\n                                  .replace(/{{name}}/g, this.require('designer').system().name())\n                                  .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n                                  .replace(/{{system}}/g, function(val) {return JSON.stringify(system)});\n                      textToWrite = source;\n                      fileNameToSaveAs = this.require('designer').system().name() + '.html';\n                  }\n                  \n                  if ($('#designer-dialog-export-node').prop(\"checked\")) {\n                      source = decodeURIComponent(this.require('app.js').source());\n                      source = source\n                                  .replace(/{{version}}/g, this.require('designer').system().version())\n                                  .replace(/{{description}}/g, this.require('designer').system().description().replace(/\\n/g, '\\n * '))\n                                  .replace(/{{name}}/g, this.require('designer').system().name())\n                                  .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n                                  .replace(/{{system}}/g, JSON.stringify(system));\n                      textToWrite = source;\n                      fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                  }\n                  \n                 if (!this.require('designer').isElectron()) {\n\n                  \ttextFileAsBlob = new Blob([textToWrite], {\n                  \t    type:'text/plain'\n                  \t});  \n                  \t\n                    if (navigator.msSaveBlob) {\n                      navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs);\n                    } else {\n\n                    \tdownloadLink = document.createElement('a');\n                    \t\n                    \tdownloadLink.download = fileNameToSaveAs;\n                    \tdownloadLink.innerHTML = 'Download File';\n                    \tif (window.webkitURL != null) {\n                    \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n                    \t} else {\n                    \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n                    \t\tdownloadLink.onclick = function (event) {\n                    \t\t    document.body.removeChild(event.target);\n                    \t\t};\n                    \t\tdownloadLink.style.display = 'none';\n                    \t\tdocument.body.appendChild(downloadLink);\n                    \t}\n                    \tdownloadLink.click();\n                    }\n                  \t\n                  \tthis.hide(); \n                 } else {\n                    this.hide(); \n                    \n                    var {dialog} = global.require(\"electron\").remote;\n                    var fs = global.require('fs');\n                    var savePath = dialog.showSaveDialog({\n                      'defaultPath': '~/' + fileNameToSaveAs\n                    });\n                    if (savePath) {\n                      fs.writeFile(savePath, textToWrite, function(err) {\n                        if (err) {\n                          message.danger('Exportation failed.');\n                        } else {\n                          message.success('Exportation is done.');\n                        }\n                      });\n                    }\n                 }\n              }\n          \t\n          } else {\n              message.warning('You have no system to export.');\n          }\n      });\n    } else {\n       message.warning('You have no system to export.');\n    }\n}"},"e1bb25114121f519":{"_id":"e1bb25114121f519","component":"1dbc51200e11510","state":"click","action":"function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true); \n}"},"g161d21f3a912625":{"_id":"g161d21f3a912625","component":"1dbc51200e11610","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"g10e66157581049b":{"_id":"g10e66157581049b","component":"1dbc51200e11611","state":"click","action":"function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"},"r1c1e3143bb14fea":{"_id":"r1c1e3143bb14fea","component":"1dbc51200e11612","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"n1e17b11f5d1fd1d":{"_id":"n1e17b11f5d1fd1d","component":"1dbc51200e11613","state":"click","action":"function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"},"u1b6fb175031cb76":{"_id":"u1b6fb175031cb76","component":"1dbc51200e11614","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"j1ac7610be61012b":{"_id":"j1ac7610be61012b","component":"1dbc51200e11615","state":"click","action":"function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/edit-a-model', '_blank', true); \n}"},"z151551d71511af6":{"_id":"z151551d71511af6","component":"1dbc51200e11616","state":"click","action":"function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n}"},"a1ca6b1c67e16e93":{"_id":"a1ca6b1c67e16e93","component":"1dbc51200e11617","state":"click","action":"function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true);\n}"},"y1fd9e171d717b39":{"_id":"y1fd9e171d717b39","component":"1dbc51200e116e10","state":"click","action":"function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-type', '_blank', true); \n}"},"y1163b139241a596":{"_id":"y1163b139241a596","component":"1dbc51200e116e11","state":"click","action":"function click() {\n  $('#designer-toolbar-item-sync').tooltip('hide');\n  var DialogSync = this.require('DialogSync');\n    \n  DialogSync = new DialogSync({\n      'title': 'GitHub'\n  });\n  DialogSync.show();\n  DialogSync.on('ok', function () {\n    if ($('#designer-dialog-sync-refresh').prop('checked')) {\n      this.require('github').refresh();\n    } else {\n      this.require('github').push(\n        $('#designer-dialog-sync-comments').val(), \n        $('#designer-dialog-type-creation-hasHTML').prop('checked'), \n        false, \n        $('#designer-dialog-sync-options-log-level-select').val(), \n        $('#designer-dialog-type-creation-hasPackage').prop('checked')\n      );\n    }\n    this.hide();\n  });\n}"},"p1087a100821fa03":{"_id":"p1087a100821fa03","component":"1dbc51200e116e3","state":"click","action":"function click() {\n    $('#designer-toolbar-item-config').tooltip('hide');\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        var message = this.require('message');\n        \n        this.hide();\n        message.success('Configuration saved.');\n    });\n}"},"j190d61dacc1fb05":{"_id":"j190d61dacc1fb05","component":"1dbc51200e116e4","state":"click","action":"function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"},"g1dfae1d94d10ce1":{"_id":"g1dfae1d94d10ce1","component":"1dbc51200e116e5","state":"click","action":"function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"},"t197d11eeee1e568":{"_id":"t197d11eeee1e568","component":"1dbc51200e116e6","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"w1e52a173f31d0da":{"_id":"w1e52a173f31d0da","component":"1dbc51200e116e7","state":"click","action":"function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"},"f14706139781d16b":{"_id":"f14706139781d16b","component":"1dbc51200e116e8","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"y1dbc0114c11c791":{"_id":"y1dbc0114c11c791","component":"1dbc51200e116e9","state":"click","action":"function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"},"g1fcf31e19f15b6f":{"_id":"g1fcf31e19f15b6f","component":"1dbc51200e11z10","state":"click","action":"function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n}"},"n14a6613bf419519":{"_id":"n14a6613bf419519","component":"1dbc51220e116e1","state":"click","action":"function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"},"c1bb2614ca314a68":{"_id":"c1bb2614ca314a68","component":"1dbc51300e11z11","state":"click","action":"function click() {\n    var data = this.require('designer').store().data();\n    \n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var name = data.name;\n    var doc = JSON.parse(JSON.stringify(data));\n    delete doc.classInfo;\n    this.require('designer').saveAs(doc, data.name + '.json');\n}"},"b1af5812c0310fcf":{"_id":"b1af5812c0310fcf","component":"1dbc51300e11z12","state":"click","action":"function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"schema \" + data._name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Schema \" + data._name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n    \n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n    \n    doc.schemas[data._id] = data;\n    \n    this.require('designer').saveAs(doc, 'schema.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"},"l14395177b314b43":{"_id":"l14395177b314b43","component":"1dbc51300e11z13","state":"click","action":"function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"model \" + data._name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Model \" + data._name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n    \n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n    \n    doc.models[data._id] = data;\n    \n    this.require('designer').saveAs(doc, 'model.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"},"i14acd1202219642":{"_id":"i14acd1202219642","component":"1dbc51300e11z14","state":"click","action":"function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"type \" + data.name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Type \" + data.name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.types[data.name] = data;\n\n    this.require('designer').saveAs(doc, 'type.' + data.name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"},"i179d41548d114e6":{"_id":"i179d41548d114e6","component":"1dbc51300e11z15","state":"click","action":"function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var name = data.state;\n    var exportName = '';\n    var doc = {\n        \"name\": \"behavior \" + name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Behavior \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.behaviors[data._id] = data;\n\n    if (this.require('designer').store().data().component === this.require('designer').system().id()) {\n        exportName = 'behavior.' + this.require('designer').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    } else {\n        exportName = 'behavior.' + this.require('designer').store().data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    }\n\n    this.require('designer').saveAs(doc, exportName);\n}"},"g1706d148ae11f5d":{"_id":"g1706d148ae11f5d","component":"1dbc51300e11z16","state":"click","action":"function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var name = data._id;\n    var model = this.require('designer').store().collection();\n    var doc = {\n        \"name\": \"component \" + name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Component \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    if (typeof doc.models[model]) {\n        doc.components[model] = {};\n    }\n\n    doc.components[model][data._id] = data;\n\n    this.require('designer').saveAs(doc, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"},"z14cf91f7131c34d":{"_id":"z14cf91f7131c34d","component":"1dbc51300e11z17","state":"click","action":"function click() {\n  $('#designer-toolbar-item-search').tooltip('hide');\n  \n  var message = this.require('message');\n  var Dialog = this.require('DialogSearch');\n  \n  if (this.require('designer').system()) {\n    var dialog = new Dialog({\n        'title': 'Search in the system',\n    });\n    dialog.show();\n    \n    dialog.on('ok', function click() {\n      this.hide();\n    });\n    \n    dialog.on('filter', function filter(value) {\n      var systemId = this.require('designer').system().id(),\n          schemas = this.require('designer').system().schemas(),\n          models = this.require('designer').system().models(),\n          types = this.require('designer').system().types(),\n          behaviors = this.require('designer').system().behaviors(),\n          components = this.require('designer').system().components(),\n          collection = '',\n          id = '',\n          toSearch = '',\n          index = -1,\n          result = [];\n      \n      // clean\n      document.getElementById('designer-dialog-search-result').innerHTML = '';\n\n      if (value.length > 0 && value.trim() !== '') {\n        if (this.inContent()) {\n          \n          // schema\n          for (id in schemas) {\n            toSearch = JSON.stringify(schemas[id]);\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#schemas#' + id + '\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Schema ' + schemas[id]._name + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // model\n          for (id in models) {\n            toSearch = JSON.stringify(models[id]);\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#models#' + id + '\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Model ' + models[id]._name + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // type\n          for (id in types) {\n            toSearch = JSON.stringify(types[id]);\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#types#' + types[id].name + '\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Type ' + types[id].name + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // behavior\n          for (id in behaviors) {\n            toSearch = behaviors[id].action;\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#behaviors#' + behaviors[id].component + '#' + behaviors[id].state +'\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Behavior ' + behaviors[id].component + '.' + behaviors[id].state + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // components\n          for (collection in components) {\n            for (id in components[collection]) {\n              toSearch = JSON.stringify(components[collection][id]);\n              index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n              if (index !=-1) {\n                link = '<a href=\"#' + systemId + '#components#' + collection + '#' + id +'\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                  '<h4 class=\"list-group-item-heading\">Component ' + components[collection][id]._id + '</h4>' +\n                  '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20).replace('<', '&lt;') + '...</p>' +\n                  '</a>';\n                \n                result.push(link);\n              }\n            }\n          }\n          \n        } else {\n          // schema\n          for (id in schemas) {\n            if (schemas[id]._name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#schemas#' + id + '\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Schema ' + schemas[id]._name + '</h4></a>');\n            }\n          }\n          \n          // model\n          for (id in models) {\n            if (models[id]._name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#models#' + id + '\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Model ' + models[id]._name + '</h4></a>');\n            }\n          }\n          \n          // type\n          for (id in types) {\n            if (types[id].name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#types#' + types[id].name + '\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Type ' + types[id].name + '</h4></a>');\n            }\n          }\n          \n          // behaviors\n          for (id in behaviors) {\n            if (behaviors[id].state.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#behaviors#' + behaviors[id].component + '#' + behaviors[id].state +'\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Behavior ' + behaviors[id].component + '.' + behaviors[id].state + '</h4></a>');\n            }\n          }\n          \n          // components\n          for (collection in components) {\n            for (id in components[collection]) {\n              if (components[collection][id]._id.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n                result.push('<a href=\"#' + systemId + '#components#' + collection + '#' + id +'\" class=\"list-group-item\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Component ' + components[collection][id]._id + '</h4></a>');\n              }\n            }\n          }\n        }\n        \n        // result\n        document.getElementById('designer-dialog-search-result').innerHTML = result.join(' ');\n      }\n    });\n  } else {\n    message.warning('There is no system.');\n  }\n}"},"u165f215d0217974":{"_id":"u165f215d0217974","component":"1dbc513e0e11z15","state":"click","action":"function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"},"f1846f199e41074c":{"_id":"f1846f199e41074c","component":"1dbc513e0e11z16","state":"click","action":"function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"},"i17f271591b13ab8":{"_id":"i17f271591b13ab8","component":"1dbc513e0e11z17","state":"click","action":"function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"},"q13ca018ddf1b2cb":{"_id":"q13ca018ddf1b2cb","component":"1dbc513e0e11z18","state":"click","action":"function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"},"m191d0168cd1e718":{"_id":"m191d0168cd1e718","component":"1dbc513e0e11z19","state":"click","action":"function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"},"m12f44111501c769":{"_id":"m12f44111501c769","component":"sdbc51200e11z00","state":"click","action":"function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"},"u1ad2a18ae7197d7":{"_id":"u1ad2a18ae7197d7","component":"sdbc51200e11z01","state":"click","action":"function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"},"a194c816a861f58c":{"_id":"a194c816a861f58c","component":"sdbc51200e11z02","state":"click","action":"function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"},"u1148712dc118eea":{"_id":"u1148712dc118eea","component":"sdbc51200e11z03","state":"click","action":"function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"},"l1c2d911d83104a2":{"_id":"l1c2d911d83104a2","component":"sdbc51200e11z04","state":"click","action":"function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"},"h1c4c115aa81281f":{"_id":"h1c4c115aa81281f","component":"tdbc51200e11z00","state":"click","action":"function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"},"p150db1b77d11ba1":{"_id":"p150db1b77d11ba1","component":"tdbc51200e11z01","state":"click","action":"function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"},"y19bc51629a15aca":{"_id":"y19bc51629a15aca","component":"tdbc51200e11z02","state":"click","action":"function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"},"d10d6e1b5571c73b":{"_id":"d10d6e1b5571c73b","component":"tdbc51200e11z03","state":"click","action":"function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"},"m17c7d1483011aa2":{"_id":"m17c7d1483011aa2","component":"tdbc51200e11z04","state":"click","action":"function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"},"i15954170f111203":{"_id":"i15954170f111203","component":"udbc51200e11z00","state":"click","action":"function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"},"d1d8ee1ac3812186":{"_id":"d1d8ee1ac3812186","component":"udbc51200e11z01","state":"click","action":"function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"},"i1a1951779613207":{"_id":"i1a1951779613207","component":"udbc51200e11z02","state":"click","action":"function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"},"t15f921e6a316234":{"_id":"t15f921e6a316234","component":"udbc51200e11z03","state":"click","action":"function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"},"d10e191ee9813950":{"_id":"d10e191ee9813950","component":"udbc51200e11z04","state":"click","action":"function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"},"h1bee51638018e23":{"_id":"h1bee51638018e23","component":"vdbc51200e11z00","state":"click","action":"function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"},"e1eabd18b6717d03":{"_id":"e1eabd18b6717d03","component":"vdbc51200e11z01","state":"click","action":"function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"},"s163371531d1ec0a":{"_id":"s163371531d1ec0a","component":"vdbc51200e11z02","state":"click","action":"function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"},"m134c713c841c559":{"_id":"m134c713c841c559","component":"vdbc51200e11z03","state":"click","action":"function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"},"w1f5751bd9e15f00":{"_id":"w1f5751bd9e15f00","component":"vdbc51200e11z04","state":"click","action":"function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"},"f1f85510ffb1f7de":{"_id":"f1f85510ffb1f7de","component":"wdbc51200e11z00","state":"click","action":"function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"},"q1812b16012148e4":{"_id":"q1812b16012148e4","component":"wdbc51200e11z01","state":"click","action":"function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"},"g1a0081da861f758":{"_id":"g1a0081da861f758","component":"wdbc51200e11z02","state":"click","action":"function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"},"x1013f12b661a249":{"_id":"x1013f12b661a249","component":"wdbc51200e11z03","state":"click","action":"function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"},"v1639613d361aacf":{"_id":"v1639613d361aacf","component":"wdbc51200e11z04","state":"click","action":"function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"}},"types":{},"components":{"ToolBarItem":{"10bcb1a0511e09f":{"_id":"10bcb1a0511e09f","html":"toolbar-item-create.html","position":20,"type":"designer"},"13a291c27f16310":{"_id":"13a291c27f16310","html":"toolbar-item-copyright.html","position":90,"type":"designer"},"13a291c27f16311":{"_id":"13a291c27f16311","html":"toolbar-item-copyright.html","position":90,"type":"system"},"13a291c27f16314":{"_id":"13a291c27f16314","html":"toolbar-item-help.html","position":80,"type":"designer"},"13f70137b61b19b":{"_id":"13f70137b61b19b","html":"toolbar-item-publish.html","position":30,"type":"designer"},"163a01b7ca1935d":{"_id":"163a01b7ca1935d","html":"toolbar-item-import.html","position":45,"type":"designer"},"1dbc51200e11510":{"_id":"1dbc51200e11510","html":"toolbar-item-help.html","position":80,"type":"schema"},"1dbc51200e11610":{"_id":"1dbc51200e11610","html":"toolbar-item-copyright.html","position":90,"type":"model"},"1dbc51200e11611":{"_id":"1dbc51200e11611","html":"toolbar-item-save.html","position":10,"type":"behavior"},"1dbc51200e11612":{"_id":"1dbc51200e11612","html":"toolbar-item-copyright.html","position":90,"type":"behavior"},"1dbc51200e11613":{"_id":"1dbc51200e11613","html":"toolbar-item-save.html","position":10,"type":"component"},"1dbc51200e11614":{"_id":"1dbc51200e11614","html":"toolbar-item-copyright.html","position":90,"type":"component"},"1dbc51200e11615":{"_id":"1dbc51200e11615","html":"toolbar-item-help.html","position":80,"type":"model"},"1dbc51200e11616":{"_id":"1dbc51200e11616","html":"toolbar-item-help.html","position":80,"type":"behavior"},"1dbc51200e11617":{"_id":"1dbc51200e11617","html":"toolbar-item-help.html","position":80,"type":"component"},"1dbc51200e116e10":{"_id":"1dbc51200e116e10","html":"toolbar-item-help.html","position":80,"type":"type"},"1dbc51200e116e11":{"_id":"1dbc51200e116e11","html":"toolbar-item-sync.html","position":65,"type":"designer"},"1dbc51200e116e3":{"_id":"1dbc51200e116e3","html":"toolbar-item-config.html","position":70,"type":"designer"},"1dbc51200e116e4":{"_id":"1dbc51200e116e4","html":"toolbar-item-save.html","position":10,"type":"system"},"1dbc51200e116e5":{"_id":"1dbc51200e116e5","html":"toolbar-item-save.html","position":10,"type":"type"},"1dbc51200e116e6":{"_id":"1dbc51200e116e6","html":"toolbar-item-copyright.html","position":90,"type":"type"},"1dbc51200e116e7":{"_id":"1dbc51200e116e7","html":"toolbar-item-save.html","position":10,"type":"schema"},"1dbc51200e116e8":{"_id":"1dbc51200e116e8","html":"toolbar-item-copyright.html","position":90,"type":"schema"},"1dbc51200e116e9":{"_id":"1dbc51200e116e9","html":"toolbar-item-save.html","position":10,"type":"model"},"1dbc51200e11z10":{"_id":"1dbc51200e11z10","html":"toolbar-item-help.html","position":80,"type":"system"},"1dbc51220e116e1":{"_id":"1dbc51220e116e1","html":"toolbar-item-copyright.html","position":10,"type":"documentation"},"1dbc513e0e11z17":{"_id":"1dbc513e0e11z17","html":"toolbar-item-undo.html","position":20,"type":"behavior"},"1dbc513e0e11z18":{"_id":"1dbc513e0e11z18","html":"toolbar-item-redo.html","position":30,"type":"behavior"},"1dbc513e0e11z19":{"_id":"1dbc513e0e11z19","html":"toolbar-item-select-all.html","position":40,"type":"behavior"},"sdbc51200e11z00":{"_id":"sdbc51200e11z00","html":"toolbar-item-undo.html","position":20,"type":"system"},"sdbc51200e11z01":{"_id":"sdbc51200e11z01","html":"toolbar-item-redo.html","position":30,"type":"system"},"sdbc51200e11z02":{"_id":"sdbc51200e11z02","html":"toolbar-item-select-all.html","position":40,"type":"system"},"tdbc51200e11z00":{"_id":"tdbc51200e11z00","html":"toolbar-item-undo.html","position":20,"type":"schema"},"tdbc51200e11z01":{"_id":"tdbc51200e11z01","html":"toolbar-item-redo.html","position":30,"type":"schema"},"tdbc51200e11z02":{"_id":"tdbc51200e11z02","html":"toolbar-item-select-all.html","position":40,"type":"schema"},"udbc51200e11z00":{"_id":"udbc51200e11z00","html":"toolbar-item-undo.html","position":20,"type":"model"},"udbc51200e11z01":{"_id":"udbc51200e11z01","html":"toolbar-item-redo.html","position":30,"type":"model"},"udbc51200e11z02":{"_id":"udbc51200e11z02","html":"toolbar-item-select-all.html","position":40,"type":"model"},"vdbc51200e11z00":{"_id":"vdbc51200e11z00","html":"toolbar-item-undo.html","position":20,"type":"type"},"vdbc51200e11z01":{"_id":"vdbc51200e11z01","html":"toolbar-item-redo.html","position":30,"type":"type"},"vdbc51200e11z02":{"_id":"vdbc51200e11z02","html":"toolbar-item-select-all.html","position":40,"type":"type"},"wdbc51200e11z00":{"_id":"wdbc51200e11z00","html":"toolbar-item-undo.html","position":20,"type":"component"},"wdbc51200e11z01":{"_id":"wdbc51200e11z01","html":"toolbar-item-redo.html","position":30,"type":"component"},"wdbc51200e11z02":{"_id":"wdbc51200e11z02","html":"toolbar-item-select-all.html","position":40,"type":"component"}}},"_id":"o1a37519ca718bc4"}
+{
+  "name": "class-toolbar",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "f1257f17deb16097": {
+      "_name": "ToolBar",
+      "designer": "property",
+      "items": "collection",
+      "render": "method",
+      "_id": "f1257f17deb16097",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    },
+    "t19b6b11ff31158d": {
+      "_name": "ToolBarItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "t19b6b11ff31158d",
+      "_inherit": [
+        "RuntimeComponent"
+      ]
+    }
+  },
+  "models": {
+    "l129a713e681c903": {
+      "_name": "ToolBar",
+      "designer": {
+        "type": "@Designer",
+        "readOnly": true,
+        "mandatory": true,
+        "default": {}
+      },
+      "items": {
+        "type": [
+          "@ToolBarItem"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "render": {},
+      "_id": "l129a713e681c903"
+    },
+    "u1f4c7177bb1a459": {
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {},
+      "_id": "u1f4c7177bb1a459"
+    }
+  },
+  "behaviors": {
+    "c15ea3176d5139e8": {
+      "_id": "c15ea3176d5139e8",
+      "component": "10bcb1a0511e09f",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-create').tooltip('hide');\n        var message = this.require('message'),\n    designer = this.require('designer');\n    \n    if (!designer.system() && designer.context() !== 'system') {\n        message.warning('You have no system: create first a system to continue.');\n    } else {\n        designer.workspace().create();\n    }\n}"
+    },
+    "o1ff8e17e1c1bcd7": {
+      "_id": "o1ff8e17e1c1bcd7",
+      "component": "13a291c27f16310",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "c1076f15499194ba": {
+      "_id": "c1076f15499194ba",
+      "component": "13a291c27f16311",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "k1a9e11cd571d17c": {
+      "_id": "k1a9e11cd571d17c",
+      "component": "13a291c27f16314",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    \n    switch (this.require('designer').context()) {\n      case 'system':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n        break;\n      case 'schemas':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true); \n        break;\n      case 'models':\n        this.require('designer').open('https://system-designer.readme.io/docs/edit-a-model', '_blank', true); \n        break;\n      case 'types':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-type', '_blank', true); \n        break;\n      case 'behaviors':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n        break;\n      case 'components':\n        this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true); \n        break;\n      case 'logs':\n        this.require('designer').open('https://system-designer.readme.io/docs/run-your-system', '_blank', true);\n        break;\n      default:\n        this.require('designer').open('https://system-designer.readme.io/docs/quick-start', '_blank', true); \n        break;\n    }\n}"
+    },
+    "q178081a11712887": {
+      "_id": "q178081a11712887",
+      "component": "13f70137b61b19b",
+      "state": "click",
+      "action": "function click() { \n    var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n    \n    $('#designer-toolbar-item-publish').tooltip('hide');\n    if (designer.system()) {\n        if (runWidow && !runWidow.closed) {\n            runWidow.close();\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n            message.success('Running the system...');\n            \n            /*if (typeof require === 'undefined') {\n                runWidow.document.location.reload();\n                message.success('Running the system...');\n            } else {\n                // TODO \n                // to reload when implemented in electron\n                message.info('<b>info</b>: to run again the system, click the widow where your system is running and go to the menu \\'View > Refresh\\’.');\n            }*/\n        } else {\n            this.require('designer').runWindow(this.require('designer').open('app.html#' + designer.system().id(), 'app'));\n            message.success('Running the system...');\n        }\n    } else {\n        message.warning('You have no system to run.');\n    }\n}"
+    },
+    "a13b711adba1c7d4": {
+      "_id": "a13b711adba1c7d4",
+      "component": "163a01b7ca1935c",
+      "state": "click",
+      "action": "function click() {\n    var debugWindow = this.require('designer').debugWindow(),\n        config = this.require('storage').get('system-designer-config'),\n        message = this.require('message');\n\n    $('#designer-toolbar-item-refresh').tooltip('hide');\n    if (config) {\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'client') {\n            if (config.urlClient) {\n                if (debugWindow && !debugWindow.closed) {\n                    message.success('Searching for a system...');\n                    this.require('channel').$designerSync();\n                } else {\n                    this.require('designer').debugWindow(this.require('designer').open(config.urlClient, 'debug'));\n                }\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'server') {\n            if (config.urlServer) {\n                message.success('Searching for a server...');\n                var self = this;\n                $.getJSON(config.urlServer + ':8888/$designerSync', function (system) {\n                    var Dialog = null,\n                        dialog = null;\n    \n                    Dialog = self.require('DialogImport');\n                    dialog = new Dialog({\n                        'title': 'A system has been found',\n                        'message': 'Do you wan to import it ?',\n                        'data': system\n                    });\n                    dialog.show();\n    \n                    dialog.on('ok', function () {\n                      var System = this.require('System'),\n                          sys = null,\n                          designer = this.require('designer'),\n                          message = this.require('message');\n              \n                      if (designer.system()) {\n                          designer.system().destroy();\n                      }\n                      sys = new System(this.data());\n                      designer.system(sys);\n              \n                      // empty log\n                      designer.logs().forEach(function (item) {\n                          this.logs().pop();\n                      }.bind(designer));\n              \n                      designer.save();\n              \n                      designer.space(sys.name());\n                      designer.spaces().render();\n                      designer.workspace().refresh();\n                      \n                      designer.updateRouter();\n\n                      this.hide();\n                      designer.save();\n              \n                      message.success('Importation of the system is done.');\n                    });\n                });\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType === 'undefined') {\n            message.warning('No url set. Please set the url in the configuration panel.');\n        }\n    } else {\n        message.warning('No url set. Please set the url in the configuration panel.');\n    }\n}"
+    },
+    "o1ec561a54015768": {
+      "_id": "o1ec561a54015768",
+      "component": "163a01b7ca1935d",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-import').tooltip('hide');\n        var DialogImportFile = this.require('DialogImportFile');\n    \n    DialogImportFile = new DialogImportFile({\n        'title': 'Import a system'\n    });\n    DialogImportFile.show();\n    \n    DialogImportFile.on('mergeSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            name = '',\n            propName = '',\n            modelName = '',\n            compId = '',\n            modelId = '',\n            schemaId = '',\n            designer = this.require('designer'),\n            schemas = {},\n            models = {},\n            types = {},\n            components = {},\n            behaviors = {},\n            system = designer.system(),\n            message = this.require('message');\n            \n        function _getModelId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().models()) {\n                if (designer.system().models()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n\n        function _getSchemaId(name) {\n            var result = '',\n                id = '';\n\n            for (id in designer.system().schemas()) {\n                if (designer.system().schemas()[id]._name === name) {\n                    result = id;\n                    break;\n                }\n            }\n            return result;\n        }\n        \n       function _canOverrideBehavior(id, component, state, behaviors) {\n            var behavior = {},\n                behaviorId = '';\n\n            for (behaviorId in behaviors) {\n                behavior = behaviors[behaviorId];\n                if (behavior.component === component && behavior.state === state && behavior._id !== id) {\n                    delete behaviors[behavior._id];\n                    break;\n                }\n            }\n        }\n        \n        function _canOverride(sysId, schemas, behaviors, behavior) {\n            var def = {},\n                id = '',\n                result = true;\n            \n            id = _getSchemaId(behavior.component);\n            def = schemas[id];\n            \n            if (def && def[behavior.state]) {\n                if (def[behavior.state] === 'method') {\n                    _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);\n                }\n            } else {\n                result = false;\n            }\n            \n            if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {\n              result = false;  \n            }\n            \n            return result;\n        }\n\n        sys = this.data();\n        if (Object.keys(sys).length) {\n          \n            // schemas\n            schemas = JSON.parse(JSON.stringify(designer.system().schemas()));\n            for (name in sys.schemas) {\n                if (schemas[name]) {\n                    for (propName in sys.schemas[name]) {\n                        schemas[name][propName] = sys.schemas[name][propName];\n                    }\n                } else {\n                    if (!_getSchemaId(sys.schemas[name]._name)) {\n                        schemas[name] = sys.schemas[name];\n                    } else {\n                        for (propName in sys.schemas[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n                            }\n                        }\n                    }\n                }\n            }\n            designer.system().schemas(schemas);\n            \n            // behaviors\n            behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));\n            for (name in sys.behaviors) {\n                if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {\n                    behaviors[name] = sys.behaviors[name];\n                }  else {\n                    // merge main / start / stop\n                    if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {\n                        designer.mergeBehavior(behaviors, sys.behaviors[name], designer.system().id(), sys.name);\n                    }\n                }\n            }\n            designer.system().behaviors(behaviors);\n            \n            // sync models\n            for (schemaId in schemas) {\n                designer.syncModel(schemas[schemaId]);    \n            } \n\n            // models\n            models = JSON.parse(JSON.stringify(designer.system().models()));\n            for (name in sys.models) {\n                if (models[name]) {\n                    for (propName in sys.models[name]) {\n                        models[name][propName] = sys.models[name][propName];\n                    }\n                } else {\n                     if (!_getModelId(sys.models[name]._name)) {\n                        models[name] = sys.models[name];\n                     } else {\n                        for (propName in sys.models[name]) {\n                            if (propName.indexOf('_') !== 0) {\n                                models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n                            }\n                        }\n                     }\n                }\n            }\n            designer.system().models(models);\n \n            // sync behaviors and components\n            for (modelId in models) {\n                designer.syncBehavior(models[modelId]);    \n            } \n            \n            // types\n            types = JSON.parse(JSON.stringify(designer.system().types()));\n            for (name in sys.types) {\n                if (types[name]) {\n                    for (propName in sys.types[name]) {\n                        types[name][propName] = sys.types[name][propName];\n                    }\n                } else {\n                    types[name] = sys.types[name];\n                }\n            }\n            designer.system().types(types);\n            \n            // components\n            components = JSON.parse(JSON.stringify(designer.system().components()));\n            for (modelName in sys.components) {\n                if (!components[modelName]) {\n                    components[modelName] = {};\n                }\n                for (compId in sys.components[modelName]) {\n                    if (components[modelName][compId]) {\n                        for (propName in sys.components[modelName][compId]) {\n                            components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n                        }\n                    } else {\n                        components[modelName][compId] = sys.components[modelName][compId];\n                    }\n                }\n            }\n            designer.system().components(components);\n            \n             // sync components\n            for (modelId in models) {\n                designer.syncComponent(models[modelId]);    \n            }\n            \n            designer.system().schemas(schemas);\n            designer.system().models(models);\n            designer.system().types(types);\n            designer.system().behaviors(behaviors);\n            designer.system().components(components);\n            \n            if (designer.system().id() === sys._id) {\n                designer.system().version(sys.version);\n                designer.system().description(sys.description);\n            }\n            \n            designer.save();\n            \n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n            message.success('Composition of the system is done.');\n        } else {\n          if (this.require('designer').system()) {\n            message.danger('The system you try to import is invalid.');\n          } else {\n            message.danger('There is no system to compose with.');\n          }\n        }\n    });\n    \n    DialogImportFile.on('importSystem', function () {\n        var System = this.require('System'),\n            sys = null,\n            designer = this.require('designer'),\n            message = this.require('message');\n\n        if (Object.keys(this.data()).length) {\n            if (designer.system()) {\n                designer.system().destroy();\n            }\n            sys = new System(this.data());\n            designer.system(sys);\n            \n            // empty log\n            designer.logs().forEach(function (item) {\n                this.logs().pop();\n            }.bind(designer));\n            \n            designer.save();\n            \n            designer.space(sys.name());\n            designer.spaces().render();\n            designer.workspace().refresh();\n            \n            designer.updateRouter();\n    \n            this.hide();\n\n            message.success('Importation of the system is done.');\n        } else {\n            message.danger('The system you try to import is invalid');\n        }\n    });\n}"
+    },
+    "e137f915b1b15f90": {
+      "_id": "e137f915b1b15f90",
+      "component": "163a01b7ca1935e",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export').tooltip('hide');\n    var message = this.require('message');\n    var Dialog = this.require('DialogExport');\n    \n    if (this.require('designer').system()) {\n      var dialog = new Dialog({\n          'title': 'Export the current system',\n      });\n      dialog.show();\n      \n      dialog.on('ok', function () {\n          var message = this.require('message');\n          // code inspired from the blog post\n          // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n          if (this.require('designer').system()) {\n              var system = null,\n              textToWrite = null,\n              textFileAsBlob = null,\n              fileNameToSaveAs = null,\n              downloadLink = null,\n              js = '';\n              source = '',\n              DialogShare = this.require('DialogShare');\n              \n              system = this.require('db').collections().System.find({\n                  '_id': this.require('designer').system().id()\n              })[0];\n              system = JSON.parse(JSON.stringify(system));\n              delete system.classInfo;\n              \n              if ($('#designer-dialog-export-url').prop(\"checked\")) {\n                  this.hide();\n  \n                  DialogShare = new DialogShare({\n                      'title': 'Copy the link to the system'\n                  });\n                  DialogShare.show();\n                  DialogShare.on('ok', function () {\n                      this.hide();\n                  });\n                  \n              } else {\n              \n                  if ($('#designer-dialog-export-json').prop(\"checked\")) {\n                      system = JSON.parse(JSON.stringify(system));\n                      \n                      if ($('#designer-dialog-export-isMaster').prop('checked')) {\n                        system.master = true;\n                      } else {\n                        system.master = false;\n                      }\n                      if ($('#designer-dialog-export-isSubsystem').prop('checked')) {\n                        system.subsystem = true;\n                      } else {\n                        system.subsystem = false;\n                      }\n                      textToWrite = JSON.stringify(system);\n                      fileNameToSaveAs = this.require('designer').system().name() + '.json';\n                  }\n                  \n                  if ($('#designer-dialog-export-javascript').prop('checked')) {\n                      source = decodeURIComponent(this.require('javascript-export.js').source());\n                      source = source\n                                  .replace(/{{version}}/g, this.require('designer').system().version())\n                                  .replace(/{{description}}/g, this.require('designer').system().description().replace(/\\n/g, '\\n * '))\n                                  .replace(/{{name}}/g, this.require('designer').system().name())\n                                  .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val());\n                                  \n                      // SYSTEM\n                      \n                      var confSystem = {};\n                      \n                      confSystem._id = system._id;\n                      confSystem.name = system.name;\n                      confSystem.version = system.version;\n                      confSystem.description = system.description;\n                      \n                      source = source + '/**\\n';\n                      source = source + ' * System ' +  confSystem.name + '\\n';\n                      source = source + ' * @system\\n';\n                      source = source + ' */\\n';\n                      source = source + 'runtime.system(' + JSON.stringify(confSystem, null, '\\t', 2) + ');\\n\\n';\n                      \n                      // SCHEMA / MODEL / TYPE     \n                      if (Object.keys(system.schemas).length > 0 || Object.keys(system.types).length > 0) {\n                        source = source + '\\n// Schemas, models and types creation\\n\\n\\n';\n                      }\n                      \n                      var name = '';\n                      var schemaSorted = [];\n                      var schemaNameSorted = [];\n                      var schemaName = {};\n                      \n                      for (name in system.schemas) {\n                        schemaSorted.push(system.schemas[name]);\n                        schemaNameSorted.push(system.schemas[name]._name);\n                        schemaName[system.schemas[name]._name] = system.schemas[name]._name;\n                      }\n                      schemaSorted.sort(function (schemaA, schemaB) {\n                        return schemaA._name > schemaB._name;\n                      });\n                      schemaNameSorted.sort();\n                      \n                      schemaSorted.forEach(function (schema) {\n                        source = source + '/**\\n';\n                        source = source + ' * Schema ' +  schema._name + '\\n';\n                        source = source + ' * @schema\\n';\n                        source = source + ' */\\n';\n                        source = source + 'runtime.require(\\'metamodel\\').schema(' + JSON.stringify(schema, null, '\\t', 2) + ');\\n\\n';\n                      });\n                      \n                      var modelSorted = [];\n                      var modelNameSorted = [];\n                      for (name in system.models) {\n                        modelSorted.push(system.models[name]);\n                        modelNameSorted.push(system.models[name]._name);\n                      }\n                      modelSorted.sort(function (modelA, modelB) {\n                        return modelA._name > modelB._name;\n                      });\n                      modelNameSorted.sort();\n                      \n                      modelSorted.forEach(function (model) {\n                        source = source + '/**\\n';\n                        source = source + ' * Model ' +  model._name + '\\n';\n                        source = source + ' * @model\\n';\n                        source = source + ' */\\n';\n                        source = source + 'runtime.require(\\'metamodel\\').model(' + JSON.stringify(model, null, '\\t', 2) + ');\\n\\n';\n                      });\n                      \n                      var typeSorted = [];\n                      var typeNameSorted = [];\n                      for (name in system.types) {\n                        typeSorted.push(system.types[name]);\n                        typeNameSorted.push(system.types[name].name);\n                      }\n                      typeSorted.sort(function (typeA, typeB) {\n                        return typeA.name > typeB.name;\n                      });\n                      typeNameSorted.sort();\n                      \n                      typeSorted.forEach(function (type) {\n                        source = source + '/**\\n';\n                        source = source + ' * Type ' + type.name + '\\n';\n                        source = source + ' * @type\\n';\n                        source = source + ' */\\n';\n                        source = source + 'runtime.require(\\'metamodel\\').type(' + JSON.stringify(type, null, '\\t', 2) + ');\\n\\n';\n                      });\n                      \n                      if (Object.keys(system.schemas).length > 0 || Object.keys(system.models).length > 0 || Object.keys(system.types).length > 0) {\n                        source = source + 'runtime.require(\\'metamodel\\').create();\\n\\n';\n                      }\n                      \n                      // COMPONENT   \n                      if (Object.keys(system.components).length > 0) {\n                        source = source + '\\n// Components creation\\n\\n\\n';\n                      }\n                      schemaNameSorted.forEach(function (collection) {\n                        for (name in system.components[collection]) {\n                          source = source + '/**\\n';\n                          source = source + ' * Component ' +  system.components[collection][name]._id + '\\n';\n                          source = source + ' * @component\\n';\n                          source = source + ' */\\n';\n                          source = source + 'new (runtime.require(\\'' + collection + '\\'))(' + JSON.stringify(system.components[collection][name], null, '\\t', 2) + ');\\n\\n';\n                        }\n                      });\n                      \n                      // BEHAVIOR   \n                      if (Object.keys(system.behaviors).length > 0) {\n                        source = source + '\\n// Behaviors creation\\n\\n\\n';\n                      }\n                      \n                      var behaviors = {};\n                      var behaviorsComponentNameSorted = [];\n                      var modelsByName = {};\n                      \n                      for (name in system.behaviors) {\n                        if (typeof behaviors[system.behaviors[name].component] === 'undefined') {\n                          behaviors[system.behaviors[name].component] = [];\n                        }\n                        behaviors[system.behaviors[name].component].push(system.behaviors[name]);\n                      }\n                  \n                      behaviorsComponentNameSorted = Object.keys(behaviors);\n                      behaviorsComponentNameSorted.sort();\n                      \n                      var id = '';\n                      for (id in system.models) {\n                        modelsByName[system.models[id]._name] = system.models[id];  \n                      }\n                      \n                      behaviorsComponentNameSorted.forEach(function forEach(componentName) {\n                        var componentBehaviors = behaviors[componentName];\n                        \n                        componentBehaviors.sort(function sort(behaviorA, behaviorB) {\n                          return behaviorA.state > behaviorB.state;\n                        });\n                        \n                        if (componentBehaviors.length > 0) {\n                          if (componentName === system._id) {\n                            source = source + '// system behaviors\\n\\n';\n                          } else {\n                            source = source + '// ' + componentName + ' behaviors\\n\\n';\n                          }\n                        }\n                        \n                        componentBehaviors.forEach(function forEach(behavior) {\n                          var useCoreAPI = typeof behavior.useCoreAPI !== 'undefined' ? behavior.useCoreAPI : false;\n                          var core = typeof behavior.core !== 'undefined' ? behavior.core : false;\n                          var comp = '';\n                          var behaviorParamDef = {};\n                          var options = ');\\n\\n';\n                          \n                          if (useCoreAPI && !core) {\n                            options = ', true);\\n\\n';\n                          }\n                          if (useCoreAPI && core) {\n                            options = ', true, true);\\n\\n';\n                          }\n                          \n                          source = source + '/**\\n';\n                          source = source + ' * @method ' + behavior.state  + '\\n';\n                          \n                          if (modelsByName[behavior.component] && modelsByName[behavior.component][behavior.state] && modelsByName[behavior.component][behavior.state].params) {\n                            modelsByName[behavior.component][behavior.state].params.forEach(function forEach(param) {\n                              source = source + ' * @param {' + param.type  + '} '  + param.name + '\\n';    \n                            });\n                          }\n                          if (modelsByName[behavior.component] && modelsByName[behavior.component][behavior.state] && modelsByName[behavior.component][behavior.state].result) {\n                              source = source + ' * @returns {' + modelsByName[behavior.component][behavior.state].result  + '} \\n';    \n                          }\n                          \n                          source = source + ' */\\n';\n                          \n                          switch (true) {\n                            case behavior.component === system._id:\n                              comp = 'runtime.system()';\n                              break;\n                            default:\n                              comp = 'runtime.require(\\'' + behavior.component + '\\')';\n                              break;\n                          } \n                        \n                        source = source + comp + '.on(\\'' + behavior.state + '\\', ' + behavior.action + options;\n                        })\n                      });\n                      \n                      // START\n                      source = source + '// Start the system\\n';\n                      source = source + 'runtime.system().start();\\n';\n                                  \n                      textToWrite = source;\n                      fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                  }\n                  \n                  if ($('#designer-dialog-export-html').prop(\"checked\")) {\n                      js = decodeURIComponent(this.require('system-runtime.min.js').source());\n                      source = this.require('export-app.html').source();\n                      source = source\n                                  .replace(/{{library}}/g, js)\n                                  .replace(/{{library}}/g, function() {return '\\$&'})\n                                  .replace(/{{name}}/g, this.require('designer').system().name())\n                                  .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n                                  .replace(/{{system}}/g, function(val) {return JSON.stringify(system)});\n                      textToWrite = source;\n                      fileNameToSaveAs = this.require('designer').system().name() + '.html';\n                  }\n                  \n                  if ($('#designer-dialog-export-node').prop(\"checked\")) {\n                      source = decodeURIComponent(this.require('app.js').source());\n                      source = source\n                                  .replace(/{{version}}/g, this.require('designer').system().version())\n                                  .replace(/{{description}}/g, this.require('designer').system().description().replace(/\\n/g, '\\n * '))\n                                  .replace(/{{name}}/g, this.require('designer').system().name())\n                                  .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n                                  .replace(/{{system}}/g, JSON.stringify(system));\n                      textToWrite = source;\n                      fileNameToSaveAs = this.require('designer').system().name() + '.js';\n                  }\n                  \n                 if (!this.require('designer').isElectron()) {\n\n                  \ttextFileAsBlob = new Blob([textToWrite], {\n                  \t    type:'text/plain'\n                  \t});  \n                  \t\n                    if (navigator.msSaveBlob) {\n                      navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs);\n                    } else {\n\n                    \tdownloadLink = document.createElement('a');\n                    \t\n                    \tdownloadLink.download = fileNameToSaveAs;\n                    \tdownloadLink.innerHTML = 'Download File';\n                    \tif (window.webkitURL != null) {\n                    \t\tdownloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);\n                    \t} else {\n                    \t\tdownloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n                    \t\tdownloadLink.onclick = function (event) {\n                    \t\t    document.body.removeChild(event.target);\n                    \t\t};\n                    \t\tdownloadLink.style.display = 'none';\n                    \t\tdocument.body.appendChild(downloadLink);\n                    \t}\n                    \tdownloadLink.click();\n                    }\n                  \t\n                  \tthis.hide(); \n                 } else {\n                    this.hide(); \n                    \n                    var {dialog} = global.require(\"electron\").remote;\n                    var fs = global.require('fs');\n                    var savePath = dialog.showSaveDialog({\n                      'defaultPath': '~/' + fileNameToSaveAs\n                    });\n                    if (savePath) {\n                      fs.writeFile(savePath, textToWrite, function(err) {\n                        if (err) {\n                          message.danger('Exportation failed.');\n                        } else {\n                          message.success('Exportation is done.');\n                        }\n                      });\n                    }\n                 }\n              }\n          \t\n          } else {\n              message.warning('You have no system to export.');\n          }\n      });\n    } else {\n       message.warning('You have no system to export.');\n    }\n}"
+    },
+    "e1bb25114121f519": {
+      "_id": "e1bb25114121f519",
+      "component": "1dbc51200e11510",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true); \n}"
+    },
+    "g161d21f3a912625": {
+      "_id": "g161d21f3a912625",
+      "component": "1dbc51200e11610",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "g10e66157581049b": {
+      "_id": "g10e66157581049b",
+      "component": "1dbc51200e11611",
+      "state": "click",
+      "action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
+    },
+    "r1c1e3143bb14fea": {
+      "_id": "r1c1e3143bb14fea",
+      "component": "1dbc51200e11612",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "n1e17b11f5d1fd1d": {
+      "_id": "n1e17b11f5d1fd1d",
+      "component": "1dbc51200e11613",
+      "state": "click",
+      "action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
+    },
+    "u1b6fb175031cb76": {
+      "_id": "u1b6fb175031cb76",
+      "component": "1dbc51200e11614",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "j1ac7610be61012b": {
+      "_id": "j1ac7610be61012b",
+      "component": "1dbc51200e11615",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/edit-a-model', '_blank', true); \n}"
+    },
+    "z151551d71511af6": {
+      "_id": "z151551d71511af6",
+      "component": "1dbc51200e11616",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n}"
+    },
+    "a1ca6b1c67e16e93": {
+      "_id": "a1ca6b1c67e16e93",
+      "component": "1dbc51200e11617",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true);\n}"
+    },
+    "y1fd9e171d717b39": {
+      "_id": "y1fd9e171d717b39",
+      "component": "1dbc51200e116e10",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-type', '_blank', true); \n}"
+    },
+    "y1163b139241a596": {
+      "_id": "y1163b139241a596",
+      "component": "1dbc51200e116e11",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-sync').tooltip('hide');\n  var DialogSync = this.require('DialogSync');\n    \n  DialogSync = new DialogSync({\n      'title': 'GitHub'\n  });\n  DialogSync.show();\n  DialogSync.on('ok', function () {\n    if ($('#designer-dialog-sync-refresh').prop('checked')) {\n      this.require('github').refresh();\n    } else {\n      this.require('github').push(\n        $('#designer-dialog-sync-comments').val(), \n        $('#designer-dialog-type-creation-hasHTML').prop('checked'), \n        false, \n        $('#designer-dialog-sync-options-log-level-select').val(), \n        $('#designer-dialog-type-creation-hasPackage').prop('checked')\n      );\n    }\n    this.hide();\n  });\n}"
+    },
+    "p1087a100821fa03": {
+      "_id": "p1087a100821fa03",
+      "component": "1dbc51200e116e3",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-config').tooltip('hide');\n    var DialogConfig = this.require('DialogConfig');\n    \n    DialogConfig = new DialogConfig({\n        'title': 'Configuration'\n    });\n    DialogConfig.show();\n    DialogConfig.on('ok', function () {\n        var message = this.require('message');\n        \n        this.hide();\n        message.success('Configuration saved.');\n    });\n}"
+    },
+    "j190d61dacc1fb05": {
+      "_id": "j190d61dacc1fb05",
+      "component": "1dbc51200e116e4",
+      "state": "click",
+      "action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n         this.require('designer').save(); }"
+    },
+    "g1dfae1d94d10ce1": {
+      "_id": "g1dfae1d94d10ce1",
+      "component": "1dbc51200e116e5",
+      "state": "click",
+      "action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
+    },
+    "t197d11eeee1e568": {
+      "_id": "t197d11eeee1e568",
+      "component": "1dbc51200e116e6",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "w1e52a173f31d0da": {
+      "_id": "w1e52a173f31d0da",
+      "component": "1dbc51200e116e7",
+      "state": "click",
+      "action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
+    },
+    "f14706139781d16b": {
+      "_id": "f14706139781d16b",
+      "component": "1dbc51200e116e8",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "y1dbc0114c11c791": {
+      "_id": "y1dbc0114c11c791",
+      "component": "1dbc51200e116e9",
+      "state": "click",
+      "action": "function click() {\n $('#designer-toolbar-item-save').tooltip('hide');\n        this.require('designer').save(); }"
+    },
+    "g1fcf31e19f15b6f": {
+      "_id": "g1fcf31e19f15b6f",
+      "component": "1dbc51200e11z10",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-help').tooltip('hide');\n    this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n}"
+    },
+    "n14a6613bf419519": {
+      "_id": "n14a6613bf419519",
+      "component": "1dbc51220e116e1",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-copyright').tooltip('hide');\n    var DialogCopyright = this.require('DialogCopyright');\n    var message = this.require('copyright.html');\n    \n    DialogCopyright = new DialogCopyright({\n        'title': 'System Designer',\n        'message': message.source().replace('{{version}}', this.require('designer').version())\n    });\n    DialogCopyright.show();\n    DialogCopyright.on('ok', function () {\n        this.hide();\n    });\n}"
+    },
+    "c1bb2614ca314a68": {
+      "_id": "c1bb2614ca314a68",
+      "component": "1dbc51300e11z11",
+      "state": "click",
+      "action": "function click() {\n    var data = this.require('designer').store().data();\n    \n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var name = data.name;\n    var doc = JSON.parse(JSON.stringify(data));\n    delete doc.classInfo;\n    this.require('designer').saveAs(doc, data.name + '.json');\n}"
+    },
+    "b1af5812c0310fcf": {
+      "_id": "b1af5812c0310fcf",
+      "component": "1dbc51300e11z12",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"schema \" + data._name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Schema \" + data._name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n    \n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n    \n    doc.schemas[data._id] = data;\n    \n    this.require('designer').saveAs(doc, 'schema.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+    },
+    "l14395177b314b43": {
+      "_id": "l14395177b314b43",
+      "component": "1dbc51300e11z13",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"model \" + data._name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Model \" + data._name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n    \n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n    \n    doc.models[data._id] = data;\n    \n    this.require('designer').saveAs(doc, 'model.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+    },
+    "i14acd1202219642": {
+      "_id": "i14acd1202219642",
+      "component": "1dbc51300e11z14",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var doc = {\n        \"name\": \"type \" + data.name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Type \" + data.name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.types[data.name] = data;\n\n    this.require('designer').saveAs(doc, 'type.' + data.name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+    },
+    "i179d41548d114e6": {
+      "_id": "i179d41548d114e6",
+      "component": "1dbc51300e11z15",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var name = data.state;\n    var exportName = '';\n    var doc = {\n        \"name\": \"behavior \" + name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Behavior \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.behaviors[data._id] = data;\n\n    if (this.require('designer').store().data().component === this.require('designer').system().id()) {\n        exportName = 'behavior.' + this.require('designer').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    } else {\n        exportName = 'behavior.' + this.require('designer').store().data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    }\n\n    this.require('designer').saveAs(doc, exportName);\n}"
+    },
+    "g1706d148ae11f5d": {
+      "_id": "g1706d148ae11f5d",
+      "component": "1dbc51300e11z16",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('designer').store().data();\n    var name = data._id;\n    var model = this.require('designer').store().collection();\n    var doc = {\n        \"name\": \"component \" + name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Component \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    if (typeof doc.models[model]) {\n        doc.components[model] = {};\n    }\n\n    doc.components[model][data._id] = data;\n\n    this.require('designer').saveAs(doc, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+    },
+    "z14cf91f7131c34d": {
+      "_id": "z14cf91f7131c34d",
+      "component": "1dbc51300e11z17",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-search').tooltip('hide');\n  \n  var message = this.require('message');\n  var Dialog = this.require('DialogSearch');\n  \n  if (this.require('designer').system()) {\n    var dialog = new Dialog({\n        'title': 'Search in the system',\n    });\n    dialog.show();\n    \n    dialog.on('ok', function click() {\n      this.hide();\n    });\n    \n    dialog.on('filter', function filter(value) {\n      var systemId = this.require('designer').system().id(),\n          schemas = this.require('designer').system().schemas(),\n          models = this.require('designer').system().models(),\n          types = this.require('designer').system().types(),\n          behaviors = this.require('designer').system().behaviors(),\n          components = this.require('designer').system().components(),\n          collection = '',\n          id = '',\n          toSearch = '',\n          index = -1,\n          result = [];\n      \n      // clean\n      document.getElementById('designer-dialog-search-result').innerHTML = '';\n\n      if (value.length > 0 && value.trim() !== '') {\n        if (this.inContent()) {\n          \n          // schema\n          for (id in schemas) {\n            toSearch = JSON.stringify(schemas[id]);\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#schemas#' + id + '\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Schema ' + schemas[id]._name + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // model\n          for (id in models) {\n            toSearch = JSON.stringify(models[id]);\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#models#' + id + '\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Model ' + models[id]._name + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // type\n          for (id in types) {\n            toSearch = JSON.stringify(types[id]);\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#types#' + types[id].name + '\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Type ' + types[id].name + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // behavior\n          for (id in behaviors) {\n            toSearch = behaviors[id].action;\n            index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n            if (index !=-1) {\n              link = '<a href=\"#' + systemId + '#behaviors#' + behaviors[id].component + '#' + behaviors[id].state +'\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                '<h4 class=\"list-group-item-heading\">Behavior ' + behaviors[id].component + '.' + behaviors[id].state + '</h4>' +\n                '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20) + '...</p>' +\n                '</a>';\n              \n              result.push(link);\n            }\n          }\n          \n          // components\n          for (collection in components) {\n            for (id in components[collection]) {\n              toSearch = JSON.stringify(components[collection][id]);\n              index = toSearch.toLowerCase().indexOf(value.toLowerCase());\n              if (index !=-1) {\n                link = '<a href=\"#' + systemId + '#components#' + collection + '#' + id +'\" class=\"list-group-item\" class=\"list-group-item active\">' +\n                  '<h4 class=\"list-group-item-heading\">Component ' + components[collection][id]._id + '</h4>' +\n                  '<p class=\"list-group-item-text\">...' + toSearch.substring(index - 20, index + value.length + 20).replace('<', '&lt;') + '...</p>' +\n                  '</a>';\n                \n                result.push(link);\n              }\n            }\n          }\n          \n        } else {\n          // schema\n          for (id in schemas) {\n            if (schemas[id]._name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#schemas#' + id + '\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Schema ' + schemas[id]._name + '</h4></a>');\n            }\n          }\n          \n          // model\n          for (id in models) {\n            if (models[id]._name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#models#' + id + '\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Model ' + models[id]._name + '</h4></a>');\n            }\n          }\n          \n          // type\n          for (id in types) {\n            if (types[id].name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#types#' + types[id].name + '\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Type ' + types[id].name + '</h4></a>');\n            }\n          }\n          \n          // behaviors\n          for (id in behaviors) {\n            if (behaviors[id].state.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n              result.push('<a href=\"#' + systemId + '#behaviors#' + behaviors[id].component + '#' + behaviors[id].state +'\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Behavior ' + behaviors[id].component + '.' + behaviors[id].state + '</h4></a>');\n            }\n          }\n          \n          // components\n          for (collection in components) {\n            for (id in components[collection]) {\n              if (components[collection][id]._id.toLowerCase().indexOf(value.toLowerCase()) !== -1) {\n                result.push('<a href=\"#' + systemId + '#components#' + collection + '#' + id +'\" class=\"list-group-item\" class=\"list-group-item\"><h4 class=\"list-group-item-heading\">Component ' + components[collection][id]._id + '</h4></a>');\n              }\n            }\n          }\n        }\n        \n        // result\n        document.getElementById('designer-dialog-search-result').innerHTML = result.join(' ');\n      }\n    });\n  } else {\n    message.warning('There is no system.');\n  }\n}"
+    },
+    "u165f215d0217974": {
+      "_id": "u165f215d0217974",
+      "component": "1dbc513e0e11z15",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "f1846f199e41074c": {
+      "_id": "f1846f199e41074c",
+      "component": "1dbc513e0e11z16",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "i17f271591b13ab8": {
+      "_id": "i17f271591b13ab8",
+      "component": "1dbc513e0e11z17",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"
+    },
+    "q13ca018ddf1b2cb": {
+      "_id": "q13ca018ddf1b2cb",
+      "component": "1dbc513e0e11z18",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"
+    },
+    "m191d0168cd1e718": {
+      "_id": "m191d0168cd1e718",
+      "component": "1dbc513e0e11z19",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"
+    },
+    "m12f44111501c769": {
+      "_id": "m12f44111501c769",
+      "component": "sdbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"
+    },
+    "u1ad2a18ae7197d7": {
+      "_id": "u1ad2a18ae7197d7",
+      "component": "sdbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"
+    },
+    "a194c816a861f58c": {
+      "_id": "a194c816a861f58c",
+      "component": "sdbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"
+    },
+    "u1148712dc118eea": {
+      "_id": "u1148712dc118eea",
+      "component": "sdbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "l1c2d911d83104a2": {
+      "_id": "l1c2d911d83104a2",
+      "component": "sdbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "h1c4c115aa81281f": {
+      "_id": "h1c4c115aa81281f",
+      "component": "tdbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"
+    },
+    "p150db1b77d11ba1": {
+      "_id": "p150db1b77d11ba1",
+      "component": "tdbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"
+    },
+    "y19bc51629a15aca": {
+      "_id": "y19bc51629a15aca",
+      "component": "tdbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"
+    },
+    "d10d6e1b5571c73b": {
+      "_id": "d10d6e1b5571c73b",
+      "component": "tdbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "m17c7d1483011aa2": {
+      "_id": "m17c7d1483011aa2",
+      "component": "tdbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "i15954170f111203": {
+      "_id": "i15954170f111203",
+      "component": "udbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"
+    },
+    "d1d8ee1ac3812186": {
+      "_id": "d1d8ee1ac3812186",
+      "component": "udbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"
+    },
+    "i1a1951779613207": {
+      "_id": "i1a1951779613207",
+      "component": "udbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"
+    },
+    "t15f921e6a316234": {
+      "_id": "t15f921e6a316234",
+      "component": "udbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "d10e191ee9813950": {
+      "_id": "d10e191ee9813950",
+      "component": "udbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "h1bee51638018e23": {
+      "_id": "h1bee51638018e23",
+      "component": "vdbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"
+    },
+    "e1eabd18b6717d03": {
+      "_id": "e1eabd18b6717d03",
+      "component": "vdbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"
+    },
+    "s163371531d1ec0a": {
+      "_id": "s163371531d1ec0a",
+      "component": "vdbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"
+    },
+    "m134c713c841c559": {
+      "_id": "m134c713c841c559",
+      "component": "vdbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "w1f5751bd9e15f00": {
+      "_id": "w1f5751bd9e15f00",
+      "component": "vdbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "f1f85510ffb1f7de": {
+      "_id": "f1f85510ffb1f7de",
+      "component": "wdbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-undo').tooltip('hide');\n   this.require('editor').undo(); \n}"
+    },
+    "q1812b16012148e4": {
+      "_id": "q1812b16012148e4",
+      "component": "wdbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-redo').tooltip('hide');\n   this.require('editor').redo(); \n}"
+    },
+    "g1a0081da861f758": {
+      "_id": "g1a0081da861f758",
+      "component": "wdbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-select-all').tooltip('hide');\n   this.require('editor').selectAll(); \n}"
+    },
+    "x1013f12b661a249": {
+      "_id": "x1013f12b661a249",
+      "component": "wdbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "v1639613d361aacf": {
+      "_id": "v1639613d361aacf",
+      "component": "wdbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    }
+  },
+  "types": {},
+  "components": {
+    "ToolBarItem": {
+      "10bcb1a0511e09f": {
+        "_id": "10bcb1a0511e09f",
+        "html": "toolbar-item-create.html",
+        "position": 20,
+        "type": "designer"
+      },
+      "13a291c27f16310": {
+        "_id": "13a291c27f16310",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "designer"
+      },
+      "13a291c27f16311": {
+        "_id": "13a291c27f16311",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "system"
+      },
+      "13a291c27f16314": {
+        "_id": "13a291c27f16314",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "designer"
+      },
+      "13f70137b61b19b": {
+        "_id": "13f70137b61b19b",
+        "html": "toolbar-item-publish.html",
+        "position": 30,
+        "type": "designer"
+      },
+      "163a01b7ca1935d": {
+        "_id": "163a01b7ca1935d",
+        "html": "toolbar-item-import.html",
+        "position": 45,
+        "type": "designer"
+      },
+      "1dbc51200e11510": {
+        "_id": "1dbc51200e11510",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "schema"
+      },
+      "1dbc51200e11610": {
+        "_id": "1dbc51200e11610",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "model"
+      },
+      "1dbc51200e11611": {
+        "_id": "1dbc51200e11611",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "behavior"
+      },
+      "1dbc51200e11612": {
+        "_id": "1dbc51200e11612",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "behavior"
+      },
+      "1dbc51200e11613": {
+        "_id": "1dbc51200e11613",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "component"
+      },
+      "1dbc51200e11614": {
+        "_id": "1dbc51200e11614",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "component"
+      },
+      "1dbc51200e11615": {
+        "_id": "1dbc51200e11615",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "model"
+      },
+      "1dbc51200e11616": {
+        "_id": "1dbc51200e11616",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "behavior"
+      },
+      "1dbc51200e11617": {
+        "_id": "1dbc51200e11617",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "component"
+      },
+      "1dbc51200e116e10": {
+        "_id": "1dbc51200e116e10",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "type"
+      },
+      "1dbc51200e116e11": {
+        "_id": "1dbc51200e116e11",
+        "html": "toolbar-item-sync.html",
+        "position": 65,
+        "type": "designer"
+      },
+      "1dbc51200e116e3": {
+        "_id": "1dbc51200e116e3",
+        "html": "toolbar-item-config.html",
+        "position": 70,
+        "type": "designer"
+      },
+      "1dbc51200e116e4": {
+        "_id": "1dbc51200e116e4",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "system"
+      },
+      "1dbc51200e116e5": {
+        "_id": "1dbc51200e116e5",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "type"
+      },
+      "1dbc51200e116e6": {
+        "_id": "1dbc51200e116e6",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "type"
+      },
+      "1dbc51200e116e7": {
+        "_id": "1dbc51200e116e7",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "schema"
+      },
+      "1dbc51200e116e8": {
+        "_id": "1dbc51200e116e8",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "schema"
+      },
+      "1dbc51200e116e9": {
+        "_id": "1dbc51200e116e9",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "model"
+      },
+      "1dbc51200e11z10": {
+        "_id": "1dbc51200e11z10",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "system"
+      },
+      "1dbc51220e116e1": {
+        "_id": "1dbc51220e116e1",
+        "html": "toolbar-item-copyright.html",
+        "position": 10,
+        "type": "documentation"
+      },
+      "1dbc513e0e11z17": {
+        "_id": "1dbc513e0e11z17",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "behavior"
+      },
+      "1dbc513e0e11z18": {
+        "_id": "1dbc513e0e11z18",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "behavior"
+      },
+      "1dbc513e0e11z19": {
+        "_id": "1dbc513e0e11z19",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "behavior"
+      },
+      "sdbc51200e11z00": {
+        "_id": "sdbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "system"
+      },
+      "sdbc51200e11z01": {
+        "_id": "sdbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "system"
+      },
+      "sdbc51200e11z02": {
+        "_id": "sdbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "system"
+      },
+      "tdbc51200e11z00": {
+        "_id": "tdbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "schema"
+      },
+      "tdbc51200e11z01": {
+        "_id": "tdbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "schema"
+      },
+      "tdbc51200e11z02": {
+        "_id": "tdbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "schema"
+      },
+      "udbc51200e11z00": {
+        "_id": "udbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "model"
+      },
+      "udbc51200e11z01": {
+        "_id": "udbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "model"
+      },
+      "udbc51200e11z02": {
+        "_id": "udbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "model"
+      },
+      "vdbc51200e11z00": {
+        "_id": "vdbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "type"
+      },
+      "vdbc51200e11z01": {
+        "_id": "vdbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "type"
+      },
+      "vdbc51200e11z02": {
+        "_id": "vdbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "type"
+      },
+      "wdbc51200e11z00": {
+        "_id": "wdbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "component"
+      },
+      "wdbc51200e11z01": {
+        "_id": "wdbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "component"
+      },
+      "wdbc51200e11z02": {
+        "_id": "wdbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "component"
+      }
+    }
+  },
+  "_id": "o1a37519ca718bc4"
+}
