@@ -24,11 +24,15 @@ module.exports = function (grunt) {
       designer: {
         files: [
           'src/systems/*/*.json',
+          'src/www/*.html',
           'src/www/systems/*.json',
           'src/www/styles/*.css'
         ],
         tasks: [
-          'build'
+          'copy:core',
+          'copy:web',
+          'copy:web-debug',
+          'merge-json:web'
         ],
         options: {
           spawn: false,
@@ -208,6 +212,17 @@ module.exports = function (grunt) {
         src: ['**'],
         dest: 'dist'
       },
+      'web-debug': {
+        expand: true,
+        cwd: 'dist',
+        src: ['*.html'],
+        dest: 'dist',
+        options: {
+          process: function (content, srcpath) {
+            return content.replace('</body>', '<script src="//localhost:35729/livereload.js"></script></body></body>');
+          },
+        },
+      },
       cordova: {
         expand: true,
         cwd: 'src/merges/cordova',
@@ -314,7 +329,7 @@ module.exports = function (grunt) {
       'cordova-model': {
         options: {
           process: function (src, filepath) {
-            return src +'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-model.json')) + ');';
+            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-model.json')) + ');';
           }
         },
         files: {
@@ -353,7 +368,14 @@ module.exports = function (grunt) {
       },
     },
     connect: {
-      server: {
+      watch: {
+        options: {
+          livereload: true,
+          port: 9001,
+          base: 'dist/'
+        }
+      },
+      basic: {
         options: {
           keepalive: true,
           port: 9001,
@@ -371,9 +393,19 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
+
+  // start the dev mode
+  grunt.registerTask('dev', [
+    'clean',
+    'web',
+    'copy:web-debug',
+    'connect:watch',
+    'watch'
+  ]);
+
   // start the server
   grunt.registerTask('start',
-    'connect'
+    'connect:basic'
   );
 
   // dist for web
@@ -382,8 +414,7 @@ module.exports = function (grunt) {
     'copy:lib-core',
     'copy:lib-ace',
     'copy:web',
-    'merge-json:web',
-
+    'merge-json:web'
   ]);
 
   // build for electron
