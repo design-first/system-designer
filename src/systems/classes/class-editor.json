@@ -5,18 +5,30 @@
   "version": "1.0.0",
   "description": "",
   "schemas": {
-    "n1939d1653f184dc": {
+    "1a3811dc79129d0": {
+      "_id": "1a3811dc79129d0",
       "_name": "Editor",
       "_inherit": [
         "RuntimeComponent"
       ],
       "editor": "property",
+      "type": "property",
+      "context": "property",
       "render": "method",
-      "_id": "n1939d1653f184dc"
+      "initValue": "method",
+      "getValue": "method",
+      "setValue": "method",
+      "setEditor": "method",
+      "undo": "method",
+      "redo": "method",
+      "selectAll": "method",
+      "copy": "method",
+      "paste": "method"
     }
   },
   "models": {
-    "v101091f80b15367": {
+    "17a551ea931289c": {
+      "_id": "17a551ea931289c",
       "_name": "Editor",
       "editor": {
         "type": "ace",
@@ -25,11 +37,192 @@
         "default": {}
       },
       "render": {},
-      "_id": "v101091f80b15367"
+      "getValue": {
+        "result": "any"
+      },
+      "setValue": {
+        "params": [
+          {
+            "name": "val",
+            "type": "any",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "type": {
+        "type": "editorRuntimeType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "ace"
+      },
+      "setEditor": {
+        "params": [
+          {
+            "name": "mode",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "lineNumber",
+            "type": "number",
+            "mandatory": false,
+            "default": 1
+          },
+          {
+            "name": "autocomplete",
+            "type": "boolean",
+            "mandatory": false,
+            "default": false
+          }
+        ]
+      },
+      "context": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "system"
+      },
+      "initValue": {
+        "params": [
+          {
+            "name": "value",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "lineNumber",
+            "type": "number",
+            "mandatory": false,
+            "default": 1
+          }
+        ]
+      },
+      "undo": {},
+      "redo": {},
+      "selectAll": {},
+      "copy": {},
+      "paste": {}
     }
   },
-  "behaviors": {},
-  "types": {},
+  "behaviors": {
+    "1b6011ee4810caa": {
+      "_id": "1b6011ee4810caa",
+      "component": "Editor",
+      "state": "getValue",
+      "action": "function getValue() { \n  var result = '';\n  \n  switch (this.type()) {\n    case 'ace':\n      result = this.editor().getValue();\n      break;\n    case 'codemirror':\n      result = this.editor().getValue();\n      break;\n    default:\n      break;\n  }\n  \n  return result;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "18cfb1c93610ad4": {
+      "_id": "18cfb1c93610ad4",
+      "component": "Editor",
+      "state": "setValue",
+      "action": "function setValue(val) { \n  switch (this.type()) {\n    case 'ace':\n      result = this.editor().setValue(val);\n      break;\n    case 'codemirror':\n      result = this.editor().setValue(val);\n      break;\n    default:\n      break;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "1a63c188a61e193": {
+      "_id": "1a63c188a61e193",
+      "component": "Editor",
+      "state": "setEditor",
+      "action": "function setEditor(mode, value, lineNumber, autocomplete) { \n  var language = {\n    'text': 'text/x-textile',\n    'json': 'application/json',\n    'javascript': 'text/javascript',\n    'html': 'htmlmixed',\n    'css': 'text/css'\n  };\n\n  switch (this.type()) {\n    case 'ace':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n          this.editor().getSession().setMode('ace/mode/' + mode);\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n          this.editor().focus();\n          break;\n        case 'behavior':\n          if (mode === 'javascript') {\n            this.editor().getSession().setMode('ace/mode/' + mode);\n            this.editor().getSession().setTabSize(2);\n    \n            var completer = {\n                getCompletions: function (editor, session, pos, prefix, callback) {\n                    var systemId = '',\n                        result = [],\n                        behavior = {},\n                        schemaName = '',\n                        schemas = {},\n                        schema = {},\n                        parents = {},\n                        i = 0;\n    \n                    function _getSchema(schemas, name) {\n                        var result = '',\n                            id = '';\n    \n                        for (id in schemas) {\n                            if (schemas[id]._name === name) {\n                                result = schemas[id];\n                                break;\n                            }\n                        }\n                        return result;\n                    }\n    \n                    id = document.location.href.split('#')[1];\n                    systemId = document.location.href.split('#')[2];\n    \n                    system = this.require('storage').get(systemId);\n                    if (system) {\n                        schemaName = system.behaviors[id].component;\n                        schemas = system.schemas;\n    \n                        schema = _getSchema(schemas, schemaName);\n    \n                        for (var name in schema) {\n                            if (name.indexOf('_') !== 0) {\n                                result.push({ name: name + '()', value: name + '()', meta: schema[name] });\n                            }\n                        }\n    \n                        // case of system\n                        if (system.behaviors[id].component === systemId) {\n                            result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });\n                            result.push({ name: 'id()', value: 'id()', meta: 'property' });\n                            result.push({ name: 'on()', value: 'on()', meta: 'method' });\n                            result.push({ name: 'off()', value: 'off()', meta: 'method' });\n                            result.push({ name: 'require()', value: 'require()', meta: 'method' });\n                            result.push({ name: 'destroy()', value: 'destroy()', meta: 'method' });\n                            result.push({ name: 'init()', value: 'init()', meta: 'method' });\n                            result.push({ name: 'error()', value: 'error()', meta: 'event' });\n                        }\n    \n                        // inherited\n                        parents = schema._inherit;\n                        if (parents) {\n                            length = parents.length;\n    \n                            for (i = 0; i < length; i++) {\n                                if (parents[i].indexOf('RuntimeComponent') !== -1) {\n                                    result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });\n                                    result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });\n                                    result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });\n                                    result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });\n                                    result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });\n                                    result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });\n                                    result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });\n                                    result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });\n                                } else {\n                                    schema = _getSchema(schemas, parents[i]);\n    \n                                    for (var prop in schema) {\n                                        if (prop.indexOf('_') !== 0) {\n                                            result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });\n                                        }\n                                    }\n                                }\n                            }\n                        }\n                    }\n                    \n                    result.sort(function (a, b) {\n                      if (a.name > b.name) {\n                        return 1;\n                      }\n                      if (a.name < b.name) {\n                        return -1;\n                      }\n                      return 0;\n                      }\n                    );\n                    callback(null, result);\n                }.bind(this)\n            };\n    \n            this.editor().setOptions({\n                enableBasicAutocompletion: [completer]\n            });\n            this.editor().setValue(value);\n    \n            this.editor().gotoLine(lineNumber);\n    \n            this.editor().getSession().$undoManager.reset();\n            this.editor().getSession().setUndoManager(new ace.UndoManager());\n            this.editor().focus();\n          } else {\n            this.editor().getSession().setMode('ace/mode/' + mode);\n            this.editor().setValue(value);\n            this.editor().gotoLine(lineNumber);\n            this.editor().getSession().$undoManager.reset();\n            this.editor().getSession().setUndoManager(new ace.UndoManager());\n            this.editor().focus();\n          }\n          break;\n        case 'component':\n          this.editor().getSession().setMode('ace/mode/' + mode);\n          if (mode === 'javascript') {\n            this.editor().getSession().setTabSize(2);\n          }\n          if (autocomplete) {\n            this.editor().setOptions({\n              enableBasicAutocompletion: true,\n            });\n          }\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n          this.editor().focus();\n          break;\n        default:\n          break;\n      }\n      break;\n    case 'codemirror':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n        case 'behavior':\n        case 'component':\n          this.editor().setValue('');\n          this.editor().setOption('mode', language[mode]);\n          this.editor().setValue(value);\n          this.editor().setCursor({\n            line: lineNumber - 1,\n            ch: 0\n          });\n          this.editor().clearHistory();\n          break;\n        default:\n          break;  \n      }\n      break;\n    default:\n      break;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "14e9517c531160a": {
+      "_id": "14e9517c531160a",
+      "component": "Editor",
+      "state": "render",
+      "action": "function render() { \n  switch (this.type()) {\n    case 'ace':\n      switch(this.context()) {\n        case 'system':\n          this.editor().getSession().setMode('ace/mode/text');\n          this.editor().setShowPrintMargin(false);\n          this.editor().setReadOnly(false);\n          this.editor().$blockScrolling = Infinity;\n          this.editor().setValue('');\n          this.editor().focus();\n          this.editor().commands.addCommand({\n              name: 'myCommand',\n              bindKey: { win: 'Ctrl-S', mac: 'Command-S' },\n              exec: function (editor) {\n                  runtime.require('designer').save();\n              }\n          });\n          break;\n        case 'schema':\n          this.editor().getSession().setMode('ace/mode/json');\n          var langTools = ace.require('ace/ext/language_tools');\n          var completer = {\n              getCompletions: function (editor, session, pos, prefix, callback) {\n                  callback(null, [\n                      { name: \"property\", value: \"property\", meta: \"type\" },\n                      { name: \"link\", value: \"link\", meta: \"type\" },\n                      { name: \"collection\", value: \"collection\", meta: \"type\" },\n                      { name: \"method\", value: \"method\", meta: \"type\" },\n                      { name: \"event\", value: \"event\", meta: \"type\" }\n                  ]);\n              }\n          };\n          this.editor().setOptions({\n              enableBasicAutocompletion: [completer]\n          });\n          this.editor().setShowPrintMargin(false);\n          this.editor().setReadOnly(false);\n          this.editor().$blockScrolling = Infinity;\n          this.editor().setValue('');\n          this.editor().commands.addCommand({\n              name: 'myCommand',\n              bindKey: { win: 'Ctrl-S', mac: 'Command-S' },\n              exec: function (editor) {\n                  runtime.require('designer').save();\n              }\n          });\n          this.editor().focus();\n          break;\n        case 'model':\n          this.editor().getSession().setMode('ace/mode/json');\n          var completer = {\n              getCompletions: function (editor, session, pos, prefix, callback) {\n                  var systemId = '',\n                      typeName = '',\n                      result = [],\n                      types = {},\n                      schemas = {};\n  \n                  result = [\n                      { name: \"any\", value: \"any\", meta: \"natif type\" },\n                      { name: \"string\", value: \"string\", meta: \"natif type\" },\n                      { name: \"number\", value: \"number\", meta: \"natif type\" },\n                      { name: \"boolean\", value: \"boolean\", meta: \"natif type\" },\n                      { name: \"date\", value: \"date\", meta: \"natif type\" },\n                      { name: \"object\", value: \"object\", meta: \"natif type\" },\n                      { name: \"array\", value: \"array\", meta: \"natif type\" },\n                      { name: \"json\", value: \"json\", meta: \"alias\" },\n                      { name: \"html\", value: \"html\", meta: \"alias\" },\n                      { name: \"css\", value: \"css\", meta: \"alias\" },\n                      { name: \"javascript\", value: \"javascript\", meta: \"alias\" }\n                  ];\n  \n                  systemId = document.location.href.split('#')[2].split('?')[0];\n                  system = this.require('storage').get(systemId);\n  \n                  if (system) {\n                      types = system.types;\n                      for (typeName in types) {\n                          result.push({ name: types[typeName].name, value: types[typeName].name, meta: \"custom type\" });\n                      }\n                      result.push({ name: \"@RuntimeComponent\", value: \"@RuntimeComponent\", meta: \"model\" });\n                      schemas = system.schemas;\n                      for (var name in schemas) {\n                          result.push({ name: '@' + schemas[name]._name, value: '@' + schemas[name]._name, meta: \"model\" });\n                      }\n                  }\n  \n                  result.sort(function (a, b) {\n                    if (a.name > b.name) {\n                      return 1;\n                    }\n                    if (a.name < b.name) {\n                      return -1;\n                    }\n                    return 0;\n                    }\n                  );\n\n                  callback(null, result);\n              }.bind(this)\n          };\n  \n          this.editor().setOptions({\n              enableBasicAutocompletion: [completer]\n          });\n          this.editor().setShowPrintMargin(false);\n          this.editor().setReadOnly(false);\n          this.editor().$blockScrolling = Infinity;\n          this.editor().setValue('');\n          this.editor().commands.addCommand({\n              name: 'myCommand',\n              bindKey: { win: 'Ctrl-S', mac: 'Command-S' },\n              exec: function (editor) {\n                  runtime.require('designer').save();\n              }\n          });\n          this.editor().focus();\n  \n          $(function () {\n              $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n          });\n          break;\n          case 'type':\n            this.editor().getSession().setMode('ace/mode/json');\n            var langTools = ace.require('ace/ext/language_tools');\n            var completer = {\n                getCompletions: function (editor, session, pos, prefix, callback) {\n                    var systemId = '',\n                        typeName = '',\n                        types = {},\n                        result = [],\n                        schemas = {};\n    \n                    result = [\n                        { name: \"any\", value: \"any\", meta: \"natif type\" },\n                        { name: \"string\", value: \"string\", meta: \"natif type\" },\n                        { name: \"number\", value: \"number\", meta: \"natif type\" },\n                        { name: \"boolean\", value: \"boolean\", meta: \"natif type\" },\n                        { name: \"date\", value: \"date\", meta: \"natif type\" },\n                        { name: \"object\", value: \"object\", meta: \"natif type\" },\n                        { name: \"array\", value: \"array\", meta: \"natif type\" },\n                        { name: \"json\", value: \"json\", meta: \"alias\" },\n                        { name: \"html\", value: \"html\", meta: \"alias\" },\n                        { name: \"css\", value: \"css\", meta: \"alias\" },\n                        { name: \"javascript\", value: \"javascript\", meta: \"alias\" }\n                    ];\n    \n                    systemId = document.location.href.split('#')[2];\n                    system = this.require('storage').get(systemId);\n    \n                    if (system) {\n                        types = system.types;\n                        for (typeName in types) {\n                            result.push({ name: types[typeName].name, value: types[typeName].name, meta: \"custom type\" });\n                        }\n                        result.push({ name: \"@RuntimeComponent\", value: \"@RuntimeComponent\", meta: \"model\" });\n                        schemas = system.schemas;\n                        for (var name in schemas) {\n                            result.push({ name: '@' + schemas[name]._name, value: '@' + schemas[name]._name, meta: \"model\" });\n                        }\n                    }\n    \n                    result.sort(function (a, b) {\n                      if (a.name > b.name) {\n                        return 1;\n                      }\n                      if (a.name < b.name) {\n                        return -1;\n                      }\n                      return 0;\n                      }\n                    );\n                    callback(null, result);\n                }.bind(this)\n            };\n    \n            this.editor().setOptions({\n                enableBasicAutocompletion: [completer]\n            });\n    \n            this.editor().setShowPrintMargin(false);\n            this.editor().setReadOnly(false);\n            this.editor().$blockScrolling = Infinity;\n            this.editor().setValue('');\n            this.editor().commands.addCommand({\n                name: 'myCommand',\n                bindKey: { win: 'Ctrl-S', mac: 'Command-S' },\n                exec: function (editor) {\n                    runtime.require('designer').save();\n                }\n            });\n            this.editor().focus();\n          break;\n        case 'behavior':\n          this.editor().getSession().setMode('ace/mode/javascript');\n          this.editor().getSession().setTabSize(2);\n          var completer = {\n              getCompletions: function (editor, session, pos, prefix, callback) {\n                  var systemId = '',\n                      result = [],\n                      behavior = {},\n                      schemaName = '',\n                      schemas = {},\n                      schema = {},\n                      parents = {},\n                      i = 0;\n  \n  \n                  function _searchApis(parents) {\n                      var length = 0,\n                          i = 0;\n  \n                      if (parents) {\n                          length = parents.length;\n                          for (i = 0; i < length; i++) {\n                              if (parents[i].indexOf('RuntimeComponent') !== -1) {\n                                  result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });\n                                  result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });\n                                  result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });\n                                  result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });\n                                  result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });\n                                  result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });\n                                  result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });\n                                  result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });\n                              } else {\n                                  schema = _getSchema(schemas, parents[i]);\n  \n                                  for (var prop in schema) {\n                                      if (prop.indexOf('_') !== 0) {\n                                          result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });\n                                      }\n                                  }\n  \n                                  if (typeof schema._inherit !== 'undefined') {\n                                      _searchApis(schema._inherit);\n                                  }\n                              }\n                          }\n                      }\n                  }\n  \n                  function _getSchema(schemas, name) {\n                      var result = '',\n                          id = '';\n  \n                      for (id in schemas) {\n                          if (schemas[id]._name === name) {\n                              result = schemas[id];\n                              break;\n                          }\n                      }\n                      return result;\n                  }\n  \n                  id = document.location.href.split('#')[1];\n                  systemId = document.location.href.split('#')[2];\n  \n                  system = this.require('storage').get(systemId);\n                  if (system) {\n                      schemaName = system.behaviors[id].component;\n                      schemas = system.schemas;\n  \n                      schema = _getSchema(schemas, schemaName);\n  \n                      for (var name in schema) {\n                          if (name.indexOf('_') !== 0) {\n                              result.push({ name: name + '()', value: name + '()', meta: schema[name] });\n                          }\n                      }\n  \n                      // case of system\n                      if (system.behaviors[id].component === systemId) {\n                          result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property' });\n                          result.push({ name: 'id()', value: 'id()', meta: 'property' });\n                          result.push({ name: 'on()', value: 'on()', meta: 'method' });\n                          result.push({ name: 'off()', value: 'off()', meta: 'method' });\n                          result.push({ name: 'require()', value: 'require()', meta: 'method' });\n                          result.push({ name: 'destroy()', value: 'destroy()', meta: 'method' });\n                          result.push({ name: 'init()', value: 'init()', meta: 'method' });\n                          result.push({ name: 'error()', value: 'error()', meta: 'event' });\n                      }\n  \n                      // inherited\n                      parents = schema._inherit;\n                      if (parents) {\n                          length = parents.length;\n  \n                          for (i = 0; i < length; i++) {\n                              if (parents[i].indexOf('RuntimeComponent') !== -1) {\n                                  result.push({ name: 'classInfo()', value: 'classInfo()', meta: 'property (inherited)' });\n                                  result.push({ name: 'id()', value: 'id()', meta: 'property (inherited)' });\n                                  result.push({ name: 'on()', value: 'on()', meta: 'method (inherited)' });\n                                  result.push({ name: 'off()', value: 'off()', meta: 'method (inherited)' });\n                                  result.push({ name: 'require()', value: 'require()', meta: 'method (inherited)' });\n                                  result.push({ name: 'destroy()', value: 'destroy()', meta: 'method (inherited)' });\n                                  result.push({ name: 'init()', value: 'init()', meta: 'method (inherited)' });\n                                  result.push({ name: 'error()', value: 'error()', meta: 'event (inherited)' });\n                              } else {\n                                  schema = _getSchema(schemas, parents[i]);\n  \n                                  for (var prop in schema) {\n                                      if (prop.indexOf('_') !== 0) {\n                                          result.push({ name: prop + '()', value: prop + '()', meta: schema[prop] + ' (inherited)' });\n                                      }\n                                  }\n                                  if (typeof schema._inherit !== 'undefined') {\n                                      _searchApis(schema._inherit);\n                                  }\n                              }\n                          }\n                      }\n                  }\n  \n                  result.sort(function (a, b) {\n                    if (a.name > b.name) {\n                      return 1;\n                    }\n                    if (a.name < b.name) {\n                      return -1;\n                    }\n                    return 0;\n                    }\n                  );\n                  callback(null, result);\n              }.bind(this)\n          };\n  \n          this.editor().setOptions({\n              enableBasicAutocompletion: [completer]\n          });\n          this.editor().setShowPrintMargin(false);\n          this.editor().setReadOnly(false);\n          this.editor().$blockScrolling = Infinity;\n          this.editor().setValue('');\n          this.editor().commands.addCommand({\n              name: 'myCommand',\n              bindKey: { win: 'Ctrl-S', mac: 'Command-S' },\n              exec: function (editor) {\n                  runtime.require('designer').save();\n              }\n          });\n          this.editor().focus();\n          break;\n          case 'component':\n            this.editor().setShowPrintMargin(false);\n            this.editor().setReadOnly(false);\n            this.editor().$blockScrolling = Infinity;\n            this.editor().setValue('');\n            this.editor().commands.addCommand({\n                name: 'myCommand',\n                bindKey: { win: 'Ctrl-S', mac: 'Command-S' },\n                exec: function (editor) {\n                    runtime.require('designer').save();\n                }\n            });\n            break;\n        default:\n          break;\n      }\n      break;\n    case 'codemirror':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n        case 'behavior':\n        case 'component':\n          this.editor().addKeyMap({\n            \"Cmd-S\": function () {runtime.require('designer').save() },\n            \"Ctrl-S\": function () {runtime.require('designer').save()}\n          });\n          break;\n        default:\n          break;  \n      }\n      break;\n    default:\n      break;\n  }\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "11df21f30c14808": {
+      "_id": "11df21f30c14808",
+      "component": "Editor",
+      "state": "initValue",
+      "action": "function initValue(value, lineNumber) { \n    var that = this;\n    \n    switch (this.type()) {\n    case 'ace':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n          break;\n        case 'behavior':\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n  \n          var Range = ace.require('ace/range').Range;\n          var endLine = behavior.action.indexOf('{') + 1;\n  \n          this.editor().session.addMarker(new Range(0, 0, 0, endLine), 'readonly');\n  \n          // readonly\n          this.editor().keyBinding.addKeyboardHandler({\n              handleKeyboard: function (data, hash, keyString, keyCode, event) {\n                  var result = null;\n\n                  switch (true) {\n                      case (hash === -1 || (keyCode <= 40 && keyCode >= 37)):\n                          result = false;\n                          break;\n                      case intersects(new Range(0, 0, 0, endLine)):\n                          if (event.keyCode !== 67) {\n                            result = {\n                                command: 'null',\n                                passEvent: false\n                            };\n                            \n                            if (event.keyCode !== 91 && event.keyCode !== 17) {\n                              runtime.require('message').warning('You can not modify the header of the behavior.');\n                            }\n                          } else {\n                            result = false;\n                          }\n                          break;\n                      default:\n                          break;\n                  }\n  \n                  if (result) {\n                      return result;\n                  }\n              }\n          });\n  \n          function intersects(range) {\n              var result = false,\n                  selection = that.editor().getSelectionRange();\n  \n              result = (selection.end.row === 0 && selection.end.column < endLine + 1) && selection.intersects(range) && that.require('designer').context() === 'action';\n              return result;\n          }\n          break;\n          case 'component':\n            break;\n        default:\n          break;\n      }\n      break;\n    case 'codemirror':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n        case 'behavior':\n        case 'component':\n          this.editor().setValue(value);\n          this.editor().setCursor({\n          line: lineNumber - 1,\n          ch: 0\n          });\n          this.editor().clearHistory();\n          break;\n        default:\n          break;  \n      }\n      break;\n    default:\n      break;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z17c861b9211fe8c": {
+      "_id": "z17c861b9211fe8c",
+      "component": "Editor",
+      "state": "undo",
+      "action": "function undo() { \n\t switch (this.type()) {\n    case 'ace':\n      this.require('editor').editor().focus();\n      this.editor().undo();\n      break;\n    case 'codemirror':\n      this.require('editor').editor().focus();\n      this.editor().undo();\n      break;\n    default:\n      break;\n\t }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "i132801925d14b80": {
+      "_id": "i132801925d14b80",
+      "component": "Editor",
+      "state": "redo",
+      "action": "function redo() { \n\t switch (this.type()) {\n    case 'ace':\n      this.require('editor').editor().focus();\n      this.editor().redo();\n      break;\n    case 'codemirror':\n      this.require('editor').editor().focus();\n      this.editor().redo();\n      break;\n    default:\n      break;\n\t }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s1134312b151d82d": {
+      "_id": "s1134312b151d82d",
+      "component": "Editor",
+      "state": "selectAll",
+      "action": "function selectAll() { \n  switch (this.type()) {\n    case 'ace':\n      this.require('editor').editor().focus();\n      this.editor().selectAll();\n      break;\n    case 'codemirror':\n      this.require('editor').editor().focus();\n      this.require('editor').editor().setSelection({\n        line: this.require('editor').editor().firstLine(), \n        ch: 0\n      },{\n        line: this.require('editor').editor().lastLine() + 1, \n        ch: 0\n      });\n      break;\n    default:\n      break;\n\t }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "o1b84c1595615c6f": {
+      "_id": "o1b84c1595615c6f",
+      "component": "Editor",
+      "state": "copy",
+      "action": "function copy() { \n  switch (this.type()) {\n    case 'ace':\n      this.require('editor').editor().focus();\n      document.execCommand('copy');\n      break;\n    case 'codemirror':\n      this.require('editor').editor().focus();\n      document.execCommand('copy');\n      break;\n    default:\n      break;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "e180711f2cf19133": {
+      "_id": "e180711f2cf19133",
+      "component": "Editor",
+      "state": "paste",
+      "action": "function paste() { \n\t switch (this.type()) {\n    case 'ace':\n      this.require('editor').editor().focus();\n      if (!document.execCommand('paste', null, null)) {\n        // TODO\n      }\n      break;\n    case 'codemirror':\n      if (!document.execCommand('paste', null, null)) {\n        // TODO\n      }\n      break;\n    default:\n      break;\n\t }\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {
+    "ace": {
+      "name": "ace",
+      "type": "object"
+    },
+    "editorRuntimeType": {
+      "name": "editorRuntimeType",
+      "type": "string",
+      "value": [
+        "ace",
+        "codemirror"
+      ]
+    },
+    "editorType": {
+      "name": "editorType",
+      "type": "string",
+      "value": [
+        "designer",
+        "system",
+        "type",
+        "schema",
+        "model",
+        "behavior",
+        "component",
+        "documentation"
+      ]
+    }
+  },
   "components": {},
-  "_id": "u11baa1e2d016277"
+  "_id": "18b661ab7219e8e"
 }
