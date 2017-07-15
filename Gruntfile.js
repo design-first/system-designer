@@ -242,7 +242,9 @@ module.exports = function (grunt) {
         dest: 'dist',
         options: {
           process: function (content, srcpath) {
-            return content.replace('<script src="lib/jquery/jquery.min.js"></script>', '<script>window.$ = window.jQuery = require("./lib/jquery/jquery.min.js");</script>');
+            content = content.replace('<html manifest="system-designer.appcache">', '<html>');
+            content = content.replace('<script src="lib/jquery/jquery.min.js"></script>', '<script>window.$ = window.jQuery = require("./lib/jquery/jquery.min.js");</script>');
+            return content;
           },
         },
       },
@@ -417,7 +419,7 @@ module.exports = function (grunt) {
     'merge-json:web'
   ]);
 
-  // build for electron
+  // dist for electron
   grunt.registerTask('electron', [
     'copy:core',
     'copy:lib-core',
@@ -427,7 +429,7 @@ module.exports = function (grunt) {
     'merge-json:electron'
   ]);
 
-  // build for cordova
+  // dist for cordova
   grunt.registerTask('cordova', [
     'copy:core',
     'copy:lib-core',
