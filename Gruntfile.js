@@ -32,7 +32,7 @@ module.exports = function (grunt) {
           'copy:core',
           'copy:web',
           'copy:web-debug',
-          'merge-json:web'
+          'json_merge:web'
         ],
         options: {
           spawn: false,
@@ -249,41 +249,41 @@ module.exports = function (grunt) {
         },
       },
     },
-    "merge-json": {
+    json_merge: {
       web: {
         files: {
-          'dist/systems/system-designer.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/editors/system-designer.json'],
-          //'dist/systems/system-designer-core.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/core/system-designer.json'],
-          'dist/systems/editor-system.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/editors/editor-system.json'],
-          'dist/systems/editor-schema.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/editors/editor-schema.json'],
-          'dist/systems/editor-model.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/editors/editor-model.json'],
-          'dist/systems/editor-type.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/editors/editor-type.json'],
-          'dist/systems/editor-behavior.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/editors/editor-behavior.json'],
-          'dist/systems/editor-component.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'src/systems/editors/editor-component.json']
+          'dist/systems/system-designer.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/system-designer.json'],
+          //'dist/systems/system-designer-core.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/core/system-designer.json'],
+          'dist/systems/editor-system.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-system.json'],
+          'dist/systems/editor-schema.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-schema.json'],
+          'dist/systems/editor-model.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-model.json'],
+          'dist/systems/editor-type.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-type.json'],
+          'dist/systems/editor-behavior.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-behavior.json'],
+          'dist/systems/editor-component.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-component.json']
         }
       },
       cordova: {
         files: {
-          'dist/systems/system-designer.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/editors/system-designer.json'],
-          //'dist/systems/system-designer-core.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/core/system-designer.json'],
-          'dist/systems/editor-system.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/editors/editor-system.json'],
-          'dist/systems/editor-schema.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/editors/editor-schema.json'],
-          'dist/systems/editor-model.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/editors/editor-model.json'],
-          'dist/systems/editor-type.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/editors/editor-type.json'],
-          'dist/systems/editor-behavior.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/editors/editor-behavior.json'],
-          'dist/systems/editor-component.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'src/systems/editors/editor-component.json']
+          'dist/systems/system-designer.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/system-designer.json'],
+          //'dist/systems/system-designer-core.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/core/system-designer.json'],
+          'dist/systems/editor-system.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-system.json'],
+          'dist/systems/editor-schema.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-schema.json'],
+          'dist/systems/editor-model.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-model.json'],
+          'dist/systems/editor-type.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-type.json'],
+          'dist/systems/editor-behavior.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-behavior.json'],
+          'dist/systems/editor-component.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-component.json']
         }
       },
       electron: {
         files: {
-          'dist/systems/system-designer.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/editors/system-designer.json'],
-          //'dist/systems/system-designer-core.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/core/system-designer.json'],
-          'dist/systems/editor-system.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/editors/editor-system.json'],
-          'dist/systems/editor-schema.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/editors/editor-schema.json'],
-          'dist/systems/editor-model.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/editors/editor-model.json'],
-          'dist/systems/editor-type.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/editors/editor-type.json'],
-          'dist/systems/editor-behavior.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'src/systems/editors/editor-behavior.json'],
-          'dist/systems/editor-component.json': ['addons/*.json', 'src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/v.json', 'src/systems/editors/editor-component.json']
+          'dist/systems/system-designer.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/system-designer.json'],
+          //'dist/systems/system-designer-core.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/core/system-designer.json'],
+          'dist/systems/editor-system.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-system.json'],
+          'dist/systems/editor-schema.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-schema.json'],
+          'dist/systems/editor-model.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-model.json'],
+          'dist/systems/editor-type.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-type.json'],
+          'dist/systems/editor-behavior.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-behavior.json'],
+          'dist/systems/editor-component.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/v.json', 'addons/*.json', 'src/systems/editors/editor-component.json']
         }
       }
     },
@@ -391,10 +391,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-merge-json');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
-
+  grunt.loadNpmTasks('grunt-json-merge');
 
   // start the dev mode
   grunt.registerTask('dev', [
@@ -416,7 +415,7 @@ module.exports = function (grunt) {
     'copy:lib-core',
     'copy:lib-ace',
     'copy:web',
-    'merge-json:web'
+    'json_merge:web'
   ]);
 
   // dist for electron
@@ -426,7 +425,7 @@ module.exports = function (grunt) {
     'copy:lib-ace',
     'copy:electron',
     'copy:electron-kludge',
-    'merge-json:electron'
+    'json_merge:electron'
   ]);
 
   // dist for cordova
@@ -435,7 +434,7 @@ module.exports = function (grunt) {
     'copy:lib-core',
     'copy:lib-codemirror',
     'copy:cordova',
-    'merge-json:cordova',
+    'json_merge:cordova',
     'concat'
   ]);
 
