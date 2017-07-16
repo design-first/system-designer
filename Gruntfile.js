@@ -52,7 +52,7 @@ module.exports = function (grunt) {
         "options": {
           "process": function (content, srcpath) {
             content = content.replace("<html manifest=\"system-designer.appcache\">", "<html>");
-            content.replace("</body>", "<script src=\"//localhost:35729/livereload.js\"></script></body></body>");
+            content = content.replace("</body>", "<script src=\"//localhost:35729/livereload.js\"></script></body></body>");
             return content;
           },
         },
