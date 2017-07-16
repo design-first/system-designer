@@ -54,10 +54,8 @@ System Designer has a GitHub module to synchronize your work between all these a
 Once you have cloned the repository:
 
 ```sh
-# needed by grunt (maybe you have this installed already)
-$ npm install -g grunt-cli
+# install dependencies
 $ npm install
-$ bower install
 ```	 	
 
 #### Build for web
