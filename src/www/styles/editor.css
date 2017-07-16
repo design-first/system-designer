@@ -18,13 +18,6 @@
  * limitations under the License.
  */
 
-/* Template-specific stuff
- *
- * Customizations just for the template; these are not necessary for anything
- * with disabling the responsiveness.
- */
-
-/* Account for fixed navbar */
 body {
   padding-top: 70px;
   padding-bottom: 30px;
@@ -33,15 +26,13 @@ body {
 body,
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  min-width: 600px; /**/
+  min-width: 500px; /* or 600px */
 }
 
-/* Don't let the lead text change font-size. */
 .lead {
   font-size: 16px;
 }
 
-/* Finesse the page header spacing */
 .page-header {
   margin-bottom: 30px;
 }
@@ -49,16 +40,8 @@ body,
   margin-bottom: 10px;
 }
 
-
-/* Non-responsive overrides
- *
- * Utilize the following CSS to disable the responsive-ness of the container,
- * grid system, and navbar.
- */
-
 /* Reset the container */
 .container {
-  /*width: 970px;*/
   width:100%;
   max-width: none !important;
 }
@@ -294,7 +277,7 @@ body,
     padding: 20px;
     padding-top: 11px;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
     background-color: #F8F8F8;
     border-right: 1px solid #eee;
   }
@@ -302,8 +285,8 @@ body,
 
 /* Sidebar navigation */
 .nav-sidebar {
-  margin-right: -21px; /* 20px padding + 1px border */
-  margin-bottom: 20px;
+  margin-right: -21px;
+  margin-bottom: 20px; /* or remove */
   margin-left: -20px;
 }
 .nav-sidebar > li{
@@ -333,7 +316,6 @@ body,
 }
 
 /* message */
-
  .designer-message-success {
   display: none;
  }
@@ -404,10 +386,9 @@ body,
 }
 
 /* Icons */
-
 .icon-reverse {
-    transform: scaleX(-1) !important;
-    -moz-transform: scaleX(-1) !important;
-    -webkit-transform: scaleX(-1) !important;
-    -ms-transform: scaleX(-1) !important;
+  transform: scaleX(-1) !important;
+  -moz-transform: scaleX(-1) !important;
+  -webkit-transform: scaleX(-1) !important;
+  -ms-transform: scaleX(-1) !important;
 }
