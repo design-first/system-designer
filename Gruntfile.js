@@ -51,7 +51,9 @@ module.exports = function (grunt) {
         "dest": "dist",
         "options": {
           "process": function (content, srcpath) {
-            return content.replace("</body>", "<script src=\"//localhost:35729/livereload.js\"></script></body></body>");
+            content = content.replace("<html manifest=\"system-designer.appcache\">", "<html>");
+            content.replace("</body>", "<script src=\"//localhost:35729/livereload.js\"></script></body></body>");
+            return content;
           },
         },
       }

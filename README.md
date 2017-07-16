@@ -99,6 +99,17 @@ $ npm run cordova
 
 Copy then the content of `/dist` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
 
+## Development
+
+To start System Designer in development mode:
+
+```sh
+# start the server and watcher
+$ npm run dev
+```
+
+Once server started, go to [http://localhost:9001/](http://localhost:9001/). All the modifications to the source code of System Designer will rebuild the solution and refresh the page.
+
 ## Documentation
 
 * [Quick Start in videos](https://system-designer.readme.io/docs/quick-start-in-videos)
