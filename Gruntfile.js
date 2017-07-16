@@ -20,372 +20,43 @@
 
 module.exports = function (grunt) {
   grunt.initConfig({
-    watch: {
-      designer: {
-        files: [
-          'src/systems/*/*.json',
-          'src/www/*.html',
-          'src/www/systems/*.json',
-          'src/www/styles/*.css'
-        ],
-        tasks: [
-          'copy:core',
-          'copy:web',
-          'copy:web-debug',
-          'json_merge:web'
-        ],
-        options: {
-          spawn: false,
-          livereload: true
-        }
-      }
-    },
-    clean: {
-      dist: ['dist']
-    },
-    copy: {
-      core: {
-        expand: true,
-        cwd: 'src/www',
-        src: ['**'],
-        dest: 'dist'
-      },
-      'lib-core': {
-        files: [
-          {
-            src: 'node_modules/jquery/dist/jquery.min.js',
-            dest: 'dist/lib/jquery/jquery.min.js'
-          },
-          {
-            src: 'node_modules/github-api/dist/GitHub.bundle.min.js',
-            dest: 'dist/lib/github-api/GitHub.bundle.min.js'
-          },
-          {
-            src: 'node_modules/github-api/dist/GitHub.bundle.min.js.map',
-            dest: 'dist/lib/github-api/GitHub.bundle.min.js.map'
-          },
-          {
-            src: 'node_modules/jsplumb/dist/js/jsplumb.min.js',
-            dest: 'dist/lib/jsplumb/jsplumb.min.js'
-          },
-          {
-            src: 'node_modules/system-runtime/dist/system-runtime.min.js',
-            dest: 'dist/lib/system-runtime/system-runtime.min.js'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/bootstrap/dist/css',
-            src: ['*'],
-            dest: 'dist/lib/bootstrap/dist/css'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/bootstrap/dist/fonts',
-            src: ['*'],
-            dest: 'dist/lib/bootstrap/dist/fonts'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/bootstrap/dist/js',
-            src: ['*'],
-            dest: 'dist/lib/bootstrap/dist/js'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/bootstrap/fonts/',
-            src: ['*'],
-            dest: 'dist/lib/bootstrap/fonts/'
-          },
-          {
-            expand: true,
-            cwd: 'node_modules/bootstrap/dist/js/',
-            src: ['*'],
-            dest: 'dist/lib/bootstrap/js/'
-          },
-          {
-            src: 'node_modules/prismjs/prism.js',
-            dest: 'dist/lib/prism/prism.js'
-          },
-          {
-            src: 'node_modules/prismjs/themes/prism.css',
-            dest: 'dist/lib/prism/prism.css'
-          }
-        ]
-      },
-      'lib-ace': {
-        files: [
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/ace.js',
-            dest: 'dist/lib/ace/ace.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/ext-language_tools.js',
-            dest: 'dist/lib/ace/ext-language_tools.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/ext-searchbox.js',
-            dest: 'dist/lib/ace/ext-searchbox.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/mode-css.js',
-            dest: 'dist/lib/ace/mode-css.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/mode-html.js',
-            dest: 'dist/lib/ace/mode-html.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/mode-javascript.js',
-            dest: 'dist/lib/ace/mode-javascript.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/mode-json.js',
-            dest: 'dist/lib/ace/mode-json.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/mode-text.js',
-            dest: 'dist/lib/ace/mode-text.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/worker-css.js',
-            dest: 'dist/lib/ace/worker-css.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/worker-html.js',
-            dest: 'dist/lib/ace/worker-html.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/worker-javascript.js',
-            dest: 'dist/lib/ace/worker-javascript.js'
-          },
-          {
-            src: 'bower_components/ace-builds/src-min-noconflict/worker-json.js',
-            dest: 'dist/lib/ace/worker-json.js'
-          }
-        ]
-      },
-      'lib-codemirror': {
-        files: [{
-          src: 'node_modules/codemirror/lib/codemirror.css',
-          dest: 'dist/lib/codemirror/codemirror.css'
-        },
-        {
-          src: 'node_modules/codemirror/theme/eclipse.css',
-          dest: 'dist/lib/codemirror/theme/eclipse.css'
-        },
-        {
-          src: 'node_modules/codemirror/lib/codemirror.js',
-          dest: 'dist/lib/codemirror/lib/codemirror.js'
-        },
-        {
-          src: 'node_modules/codemirror/addon/selection/active-line.js',
-          dest: 'dist/lib/codemirror/addon/selection/active-line.js'
-        },
-        {
-          src: 'node_modules/codemirror/mode/javascript/javascript.js',
-          dest: 'dist/lib/codemirror/mode/javascript/javascript.js'
-        },
-        {
-          src: 'node_modules/codemirror/mode/textile/textile.js',
-          dest: 'dist/lib/codemirror/mode/textile/textile.js'
-        },
-        {
-          src: 'node_modules/codemirror/mode/css/css.js',
-          dest: 'dist/lib/codemirror/mode/css/css.js'
-        },
-        {
-          src: 'node_modules/codemirror/mode/htmlmixed/htmlmixed.js',
-          dest: 'dist/lib/codemirror/mode/htmlmixed/htmlmixed.js'
-        },
-        {
-          src: 'node_modules/codemirror/mode/xml/xml.js',
-          dest: 'dist/lib/codemirror/mode/xml/xml.js'
-        },
-        {
-          src: 'node_modules/codemirror/addon/edit/closebrackets.js',
-          dest: 'dist/lib/codemirror/addon/edit/closebrackets.js'
-        }]
-      },
-      web: {
-        expand: true,
-        cwd: 'src/merges/web',
-        src: ['**'],
-        dest: 'dist'
-      },
-      'web-debug': {
-        expand: true,
-        cwd: 'dist',
-        src: ['*.html'],
-        dest: 'dist',
-        options: {
-          process: function (content, srcpath) {
-            return content.replace('</body>', '<script src="//localhost:35729/livereload.js"></script></body></body>');
-          },
-        },
-      },
-      cordova: {
-        expand: true,
-        cwd: 'src/merges/cordova',
-        src: ['**'],
-        dest: 'dist'
-      },
-      electron: {
-        expand: true,
-        cwd: 'src/merges/electron',
-        src: ['**'],
-        dest: 'dist'
-      },
-      'electron-kludge': {
-        expand: true,
-        cwd: 'dist',
-        src: ['*.html'],
-        dest: 'dist',
-        options: {
-          process: function (content, srcpath) {
-            content = content.replace('<html manifest="system-designer.appcache">', '<html>');
-            content = content.replace('<script src="lib/jquery/jquery.min.js"></script>', '<script>window.$ = window.jQuery = require("./lib/jquery/jquery.min.js");</script>');
+    watch: grunt.file.readJSON('tasks/watch.json'),
+    clean: grunt.file.readJSON('tasks/clean.json'),
+    copy: grunt.file.readJSON('tasks/copy.json'),
+    json_merge: grunt.file.readJSON('tasks/json_merge.json'),
+    connect: grunt.file.readJSON('tasks/connect.json'),
+    concat: grunt.file.readJSON('tasks/concat.json')
+  });
+
+  // non trivial copy
+  grunt.config.merge({
+    "copy": {
+      "electron-kludge": {
+        "expand": true,
+        "cwd": "dist",
+        "src": ["*.html"],
+        "dest": "dist",
+        "options": {
+          "process": function (content, srcpath) {
+            content = content.replace("<html manifest=\"system-designer.appcache\">", "<html>");
+            content = content.replace("<script src=\"lib/jquery/jquery.min.js\"></script>", "<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>");
             return content;
           },
+        }
+      },
+      "web-debug": {
+        "expand": true,
+        "cwd": "dist",
+        "src": ["*.html"],
+        "dest": "dist",
+        "options": {
+          "process": function (content, srcpath) {
+            return content.replace("</body>", "<script src=\"//localhost:35729/livereload.js\"></script></body></body>");
+          },
         },
-      },
-    },
-    json_merge: {
-      web: {
-        files: {
-          'dist/systems/system-designer.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/system-designer.json'],
-          //'dist/systems/system-designer-core.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/core/system-designer.json'],
-          'dist/systems/editor-system.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-system.json'],
-          'dist/systems/editor-schema.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-schema.json'],
-          'dist/systems/editor-model.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-model.json'],
-          'dist/systems/editor-type.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-type.json'],
-          'dist/systems/editor-behavior.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-behavior.json'],
-          'dist/systems/editor-component.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/web.json', 'addons/*.json', 'src/systems/editors/editor-component.json']
-        }
-      },
-      cordova: {
-        files: {
-          'dist/systems/system-designer.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/system-designer.json'],
-          //'dist/systems/system-designer-core.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/core/system-designer.json'],
-          'dist/systems/editor-system.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-system.json'],
-          'dist/systems/editor-schema.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-schema.json'],
-          'dist/systems/editor-model.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-model.json'],
-          'dist/systems/editor-type.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-type.json'],
-          'dist/systems/editor-behavior.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-behavior.json'],
-          'dist/systems/editor-component.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/cordova.json', 'addons/*.json', 'src/systems/editors/editor-component.json']
-        }
-      },
-      electron: {
-        files: {
-          'dist/systems/system-designer.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/system-designer.json'],
-          //'dist/systems/system-designer-core.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/core/system-designer.json'],
-          'dist/systems/editor-system.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-system.json'],
-          'dist/systems/editor-schema.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-schema.json'],
-          'dist/systems/editor-model.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-model.json'],
-          'dist/systems/editor-type.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-type.json'],
-          'dist/systems/editor-behavior.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/electron.json', 'addons/*.json', 'src/systems/editors/editor-behavior.json'],
-          'dist/systems/editor-component.json': ['src/systems/types/*.json', 'src/systems/classes/*.json', 'src/systems/modules/*.json', 'src/systems/platforms/v.json', 'addons/*.json', 'src/systems/editors/editor-component.json']
-        }
-      }
-    },
-    concat: {
-      'cordova-app': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/designer-runtime.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/designer-runtime.js': ['dist/scripts/designer-runtime.js']
-        }
-      },
-      'cordova-behavior': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-behavior.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/editor-behavior.js': ['dist/scripts/editor-behavior.js']
-        }
-      },
-      'cordova-component': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-component.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/editor-component.js': ['dist/scripts/editor-component.js']
-        }
-      },
-      'cordova-designer': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/system-designer.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/system-designer.js': ['dist/scripts/system-designer.js']
-        }
-      },
-      'cordova-model': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-model.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/editor-model.js': ['dist/scripts/editor-model.js']
-        }
-      },
-      'cordova-schema': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-schema.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/editor-schema.js': ['dist/scripts/editor-schema.js']
-        }
-      },
-      'cordova-system': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-system.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/editor-system.js': ['dist/scripts/editor-system.js']
-        }
-      },
-      'cordova-type': {
-        options: {
-          process: function (src, filepath) {
-            return src + 'runtime.install(' + JSON.stringify(grunt.file.readJSON('dist/systems/editor-type.json')) + ');';
-          }
-        },
-        files: {
-          'dist/scripts/editor-type.js': ['dist/scripts/editor-type.js']
-        }
-      },
-    },
-    connect: {
-      watch: {
-        options: {
-          livereload: true,
-          port: 9001,
-          base: 'dist/'
-        }
-      },
-      basic: {
-        options: {
-          keepalive: true,
-          port: 9001,
-          base: 'dist/'
-        }
       }
     }
-  });
+  })
 
   // default tasks
   grunt.loadNpmTasks('grunt-contrib-watch');

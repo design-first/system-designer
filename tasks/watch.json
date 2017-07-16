@@ -1,0 +1,20 @@
+{
+  "designer": {
+    "files": [
+      "src/systems/*/*.json",
+      "src/www/*.html",
+      "src/www/systems/*.json",
+      "src/www/styles/*.css"
+    ],
+    "tasks": [
+      "copy:core",
+      "copy:web",
+      "copy:web-debug",
+      "json_merge:web"
+    ],
+    "options": {
+      "spawn": false,
+      "livereload": true
+    }
+  }
+}
