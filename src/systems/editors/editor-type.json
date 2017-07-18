@@ -16,7 +16,7 @@
       "clear": "method",
       "_id": "a1097d1ea0812005",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "f1257f17deb16097": {
@@ -26,7 +26,7 @@
       "render": "method",
       "_id": "f1257f17deb16097",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "f1092816b571e03c": {
@@ -39,7 +39,7 @@
       "render": "method",
       "_id": "f1092816b571e03c",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "k1b97018e111d0e3": {
@@ -48,13 +48,13 @@
       "start": "method",
       "_id": "k1b97018e111d0e3",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "o1ead8184af1a83e": {
       "_name": "Designer",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ],
       "version": "property",
       "menubar": "property",
@@ -586,7 +586,7 @@
       "_id": "u127e61b253119ab",
       "component": "Server",
       "state": "start",
-      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    system = null,\n    designer = this.require('designer'),\n    editor = this.require('editor');\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('RuntimeChannel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  system = this.require('storage').get(systemId);\n  type = system.types[id];\n\n  designer.store().uuid(id);\n  designer.store().data(type);\n\n  document.title = 'type ' + id + ' · system ' + system.name;\n\n  editor.initValue(JSON.stringify(type, null, '\\t'), 2);\n}",
+      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    system = null,\n    designer = this.require('designer'),\n    editor = this.require('editor');\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('_Channel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  system = this.require('storage').get(systemId);\n  type = system.types[id];\n\n  designer.store().uuid(id);\n  designer.store().data(type);\n\n  document.title = 'type ' + id + ' · system ' + system.name;\n\n  editor.initValue(JSON.stringify(type, null, '\\t'), 2);\n}",
       "useCoreAPI": true,
       "core": false
     },

@@ -16,7 +16,7 @@
       "clear": "method",
       "_id": "a1097d1ea0812005",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "l1d113198721599d": {
@@ -31,7 +31,7 @@
       "click": "event",
       "_id": "l1d113198721599d",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "f1257f17deb16097": {
@@ -41,7 +41,7 @@
       "render": "method",
       "_id": "f1257f17deb16097",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "f1092816b571e03c": {
@@ -54,7 +54,7 @@
       "render": "method",
       "_id": "f1092816b571e03c",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "k1b97018e111d0e3": {
@@ -63,13 +63,13 @@
       "start": "method",
       "_id": "k1b97018e111d0e3",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ]
     },
     "o1ead8184af1a83e": {
       "_name": "Designer",
       "_inherit": [
-        "RuntimeComponent"
+        "_Component"
       ],
       "version": "property",
       "menubar": "property",
@@ -641,7 +641,7 @@
       "_id": "a1286e1807c116ef",
       "component": "Server",
       "state": "start",
-      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    system = '',\n    types = null,\n    title = '',\n    collection = '',\n    self = this,\n    designer = this.require('designer'),\n    result = {},\n    property = '',\n    propName = '',\n    editor = null;\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db.RuntimeMessage.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('RuntimeChannel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var storage = this.require('storage'),\n        config = storage.get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      storage.set('system-designer-message', message);\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      // message for server debug\n      if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = decodeURIComponent(document.location.href.split('#')[1].split('?')[0]);\n  collection = document.location.href.split('#')[2].split('?')[0];\n  systemId = document.location.href.split('#')[3].split('?')[0];\n\n  system = this.require('storage').get(systemId);\n  component = system.components[collection][id];\n  model = designer.getGeneratedModel(collection);\n\n  function _init(props) {\n    var propName = '',\n      position = 0,\n      menuitem = null,\n      arrId = [];\n\n    if (Object.keys(props)) {\n      // add menuitems\n      for (propName in props) {\n        self.require('db').collections().HTML.insert({\n          \"_id\": \"menu-item-property-\" + propName + \".html\",\n          \"source\": '<a id=\"designer-menu-item-property-' + propName + '\" href=\"#' + propName + '\">' + propName + '</a>'\n        });\n        arrId = self.require('db').collections().MenuItem.insert({\n          \"name\": propName,\n          \"html\": \"menu-item-property-\" + propName + \".html\",\n          \"position\": position + 10,\n          \"type\": \"component\"\n        });\n        self.require('designer').menubar().items().push(self.require(arrId[0]));\n      }\n\n      // items\n      var toto = self.require('designer').menubar().items().sort(function (itemA, itemB) {\n        var compA = runtime.require(itemA),\n          compB = runtime.require(itemB);\n\n        if (compA.position() > compB.position()) {\n          return 1;\n        }\n        if (compA.position() < compB.position()) {\n          return -1;\n        }\n        return 0;\n      });\n      // render\n      self.require('designer').menubar().render();\n    }\n  }\n\n  designer.store().uuid(id);\n  designer.store().collection(collection);\n  designer.store().data(component);\n\n  for (property in component) {\n    if (model[property] && model[property].type) {\n      switch (true) {\n        case model[property].type === 'html':\n          result[property] = 'html';\n          break;\n        case model[property].type === 'javascript':\n          result[property] = 'javascript';\n          break;\n        case model[property].type === 'css':\n          result[property] = 'css';\n          break;\n        case model[property].type === 'json':\n          result[property] = 'json';\n          break;\n        case model[property].type === 'object':\n          result[property] = 'json';\n          break;\n        case model[property].type === 'text':\n          result[property] = 'text';\n          break;\n        //case Array.isArray(model[property].type):\n        //result[property] = 'array';\n        //break;\n        default:\n          // case of object / json type\n          types = system.types;\n          if (\n            types &&\n            typeof types[model[property].type] !== 'undefined' &&\n            (types[model[property].type].type === 'object' || types[model[property].type].type === 'json')\n          ) {\n            result[property] = 'json';\n          }\n          break;\n      }\n    }\n  }\n\n  designer.store().extra(result);\n  _init(result);\n\n  document.title = 'component ' + id + ' · system ' + system.name;\n\n  editor = this.require('editor');\n  if (Object.keys(result).length === 0) {\n    editor.setEditor('json', JSON.stringify(component, null, '\\t'), 2);\n  } else {\n    propName = Object.keys(result)[0];\n    if (result[propName] === 'json') {\n      editor.setEditor(result[propName], JSON.stringify(component[propName], null, '\\t'), 2);\n    } else {\n      editor.setEditor(result[propName], component[propName], 1, true);\n    }\n  }\n}",
+      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    system = '',\n    types = null,\n    title = '',\n    collection = '',\n    self = this,\n    designer = this.require('designer'),\n    result = {},\n    property = '',\n    propName = '',\n    editor = null;\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('_Channel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var storage = this.require('storage'),\n        config = storage.get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      storage.set('system-designer-message', message);\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      // message for server debug\n      if (typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = decodeURIComponent(document.location.href.split('#')[1].split('?')[0]);\n  collection = document.location.href.split('#')[2].split('?')[0];\n  systemId = document.location.href.split('#')[3].split('?')[0];\n\n  system = this.require('storage').get(systemId);\n  component = system.components[collection][id];\n  model = designer.getGeneratedModel(collection);\n\n  function _init(props) {\n    var propName = '',\n      position = 0,\n      menuitem = null,\n      arrId = [];\n\n    if (Object.keys(props)) {\n      // add menuitems\n      for (propName in props) {\n        self.require('db').collections().HTML.insert({\n          \"_id\": \"menu-item-property-\" + propName + \".html\",\n          \"source\": '<a id=\"designer-menu-item-property-' + propName + '\" href=\"#' + propName + '\">' + propName + '</a>'\n        });\n        arrId = self.require('db').collections().MenuItem.insert({\n          \"name\": propName,\n          \"html\": \"menu-item-property-\" + propName + \".html\",\n          \"position\": position + 10,\n          \"type\": \"component\"\n        });\n        self.require('designer').menubar().items().push(self.require(arrId[0]));\n      }\n\n      // items\n      var toto = self.require('designer').menubar().items().sort(function (itemA, itemB) {\n        var compA = runtime.require(itemA),\n          compB = runtime.require(itemB);\n\n        if (compA.position() > compB.position()) {\n          return 1;\n        }\n        if (compA.position() < compB.position()) {\n          return -1;\n        }\n        return 0;\n      });\n      // render\n      self.require('designer').menubar().render();\n    }\n  }\n\n  designer.store().uuid(id);\n  designer.store().collection(collection);\n  designer.store().data(component);\n\n  for (property in component) {\n    if (model[property] && model[property].type) {\n      switch (true) {\n        case model[property].type === 'html':\n          result[property] = 'html';\n          break;\n        case model[property].type === 'javascript':\n          result[property] = 'javascript';\n          break;\n        case model[property].type === 'css':\n          result[property] = 'css';\n          break;\n        case model[property].type === 'json':\n          result[property] = 'json';\n          break;\n        case model[property].type === 'object':\n          result[property] = 'json';\n          break;\n        case model[property].type === 'text':\n          result[property] = 'text';\n          break;\n        //case Array.isArray(model[property].type):\n        //result[property] = 'array';\n        //break;\n        default:\n          // case of object / json type\n          types = system.types;\n          if (\n            types &&\n            typeof types[model[property].type] !== 'undefined' &&\n            (types[model[property].type].type === 'object' || types[model[property].type].type === 'json')\n          ) {\n            result[property] = 'json';\n          }\n          break;\n      }\n    }\n  }\n\n  designer.store().extra(result);\n  _init(result);\n\n  document.title = 'component ' + id + ' · system ' + system.name;\n\n  editor = this.require('editor');\n  if (Object.keys(result).length === 0) {\n    editor.setEditor('json', JSON.stringify(component, null, '\\t'), 2);\n  } else {\n    propName = Object.keys(result)[0];\n    if (result[propName] === 'json') {\n      editor.setEditor(result[propName], JSON.stringify(component[propName], null, '\\t'), 2);\n    } else {\n      editor.setEditor(result[propName], component[propName], 1, true);\n    }\n  }\n}",
       "useCoreAPI": true,
       "core": false
     },
