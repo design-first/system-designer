@@ -80,13 +80,6 @@
       "_inherit": [
         "_Component"
       ]
-    },
-    "v1b97319b8319d24": {
-      "_name": "MenuSearch",
-      "_inherit": [
-        "MenuAction"
-      ],
-      "_id": "v1b97319b8319d24"
     }
   },
   "models": {
@@ -233,13 +226,18 @@
       "show": {},
       "render": {},
       "_id": "p19358155261f3b0"
-    },
-    "p1fe7c1eefd106b0": {
-      "_name": "MenuSearch",
-      "_id": "p1fe7c1eefd106b0"
     }
   },
-  "behaviors": {},
+  "behaviors": {
+    "k1abbf119dc162e2": {
+      "_id": "k1abbf119dc162e2",
+      "component": "MenuBar",
+      "state": "init",
+      "action": "function init(conf) {\n  var menuHeader = [],\n    menuItems = [],\n    menuActions = [],\n    menuSearch = [],\n    self = this;\n\n  // menu header\n  menuHeader = this.require('db').collections().MenuHeader.find({\n    \"type\": this.designer().type()\n  });\n  this.header(this.require(menuHeader[0]._id));\n\n  // menu items\n  menuItems = this.require('db').collections().MenuItem.find({\n    \"type\": this.designer().type()\n  });\n\n  menuItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuItems.forEach(function (menuItem) {\n    var id = menuItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // menu actions\n  menuActions = this.require('db').collections().MenuAction.find({\n    \"type\": this.designer().type()\n  });\n\n  menuActions.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuActions.forEach(function (menuAction) {\n    var id = menuAction._id;\n    self.actions().push(self.require(id));\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
   "types": {},
   "components": {
     "MenuAction": {
@@ -473,14 +471,6 @@
         "name": "types",
         "html": "menu-item-types.html",
         "position": 30,
-        "type": "designer"
-      }
-    },
-    "MenuSearch": {
-      "10d07178311d4be": {
-        "_id": "10d07178311d4be",
-        "html": "menu-action-search.html",
-        "position": 10,
         "type": "designer"
       }
     }

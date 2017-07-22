@@ -19,16 +19,6 @@
         "_Component"
       ]
     },
-    "f1257f17deb16097": {
-      "_name": "ToolBar",
-      "designer": "property",
-      "items": "collection",
-      "render": "method",
-      "_id": "f1257f17deb16097",
-      "_inherit": [
-        "_Component"
-      ]
-    },
     "f1092816b571e03c": {
       "_name": "Workspace",
       "designer": "property",
@@ -81,12 +71,9 @@
       "createBehavior": "method",
       "deleteSchema": "method",
       "linkModel": "method",
-      "refresh": "method",
       "save": "method",
       "saveCordova": "method",
       "saveAs": "method",
-      "clear": "method",
-      "check": "method",
       "welcome": "method",
       "generateId": "method",
       "open": "method",
@@ -145,25 +132,6 @@
       "render": {},
       "clear": {}
     },
-    "l129a713e681c903": {
-      "_id": "l129a713e681c903",
-      "_name": "ToolBar",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": true,
-        "default": {}
-      },
-      "items": {
-        "type": [
-          "@ToolBarItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
-      "render": {}
-    },
     "v1435e1809e10be7": {
       "_id": "v1435e1809e10be7",
       "_name": "Workspace",
@@ -176,7 +144,6 @@
       "create": {},
       "load": {},
       "clear": {},
-      "refresh": {},
       "render": {}
     },
     "e1ca371b8a41af7b": {
@@ -396,7 +363,6 @@
           }
         ]
       },
-      "refresh": {},
       "save": {},
       "saveCordova": {},
       "saveAs": {
@@ -415,8 +381,6 @@
           }
         ]
       },
-      "clear": {},
-      "check": {},
       "welcome": {},
       "generateId": {
         "result": "string"
@@ -534,35 +498,11 @@
     }
   },
   "behaviors": {
-    "r1e32c1d96a1c94d": {
-      "_id": "r1e32c1d96a1c94d",
-      "component": "MenuBar",
-      "state": "init",
-      "action": "function init(conf) { \n  var menuHeader = [],\n    menuItems = [],\n    menuActions = [],\n    menuSearch = [],\n    self = this;\n\n  // menu header\n  menuHeader = this.require('db').collections().MenuHeader.find({\n    \"type\": this.designer().type()\n  });\n  this.header(this.require(menuHeader[0]._id));\n\n  // menu items\n  menuItems = this.require('db').collections().MenuItem.find({\n    \"type\": this.designer().type()\n  });\n\n  menuItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuItems.forEach(function (menuItem) {\n    var id = menuItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // menu actions\n  menuActions = this.require('db').collections().MenuAction.find({\n    \"type\": this.designer().type()\n  });\n\n  menuSearch = this.require('db').collections().MenuSearch.find({\n    \"type\": this.designer().type()\n  });\n\n  menuActions = menuActions.concat(menuSearch);\n\n  menuActions.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuActions.forEach(function (menuAction) {\n    var id = menuAction._id;\n    self.actions().push(self.require(id));\n  });\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "z1d5861abe114b70": {
       "_id": "z1d5861abe114b70",
       "component": "MenuBar",
       "state": "render",
       "action": "function render() { \n  var length = 0,\n    i = 0,\n    item = null,\n    domHeader = document.getElementById('designer-menubar-header'),\n    domItems = document.getElementById('designer-menubar-items'),\n    domAction = document.getElementById('designer-menubar-actions'),\n    self = this;\n\n  function _removeActive() {\n    var length = 0,\n      i = 0,\n      item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  // header\n  domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  var callback = function () {\n    _removeActive();\n    $(this).addClass('active');\n  };\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', callback);\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n\n  // actions\n  this.actions().forEach(function (action) {\n    domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');\n  });\n\n  // focus on first element\n  if (length > 0) {\n    this.designer().context(this.items(0).name());\n    item = domItems.children[0];\n    $(item).addClass('active');\n  }\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
-    "e11bea13551127a8": {
-      "_id": "e11bea13551127a8",
-      "component": "ToolBar",
-      "state": "init",
-      "action": "function init(conf) { \n  var toolBarItems = [],\n    self = this;\n\n  // items\n  toolBarItems = this.require('db').collections().ToolBarItem.find({\n    \"type\": this.designer().type()\n  });\n\n  // sort items\n  toolBarItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  toolBarItems.forEach(function (toolBarItem) {\n    var id = toolBarItem._id;\n    self.items().push(self.require(id));\n  });\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
-    "y1b9c812e7d13a4b": {
-      "_id": "y1b9c812e7d13a4b",
-      "component": "ToolBar",
-      "state": "render",
-      "action": "function render() { \n  var domItems = document.getElementById('designer-toolbar-items'),\n    i = 0,\n    length = 0,\n    item = null,\n    self = this;\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -590,19 +530,11 @@
       "useCoreAPI": true,
       "core": false
     },
-    "f13aac18b7010124": {
-      "_id": "f13aac18b7010124",
-      "component": "Designer",
-      "state": "init",
-      "action": "function init(conf) { \n  var Store = null,\n    store = null,\n    MenuBar = null,\n    menubar = null,\n    ToolBar = null,\n    toolbar = null,\n    Workspace = null,\n    workspace = null,\n    Server = null,\n    server = null;\n\n  // type\n  this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1].split('?')[0]);\n\n  // store\n  Store = this.require('Store');\n  store = new Store();\n\n  // menu\n  MenuBar = this.require('MenuBar');\n  menubar = new MenuBar({\n    designer: this\n  });\n  ToolBar = this.require('ToolBar');\n  toolbar = new ToolBar({\n    designer: this\n  });\n\n  // workspace\n  Workspace = this.require('Workspace');\n  workspace = new Workspace({\n    designer: this\n  });\n\n  // server\n  Server = this.require('Server');\n  server = new Server({\n    'designer': this\n  });\n\n  this.store(store);\n  this.menubar(menubar);\n  this.toolbar(toolbar);\n  this.workspace(workspace);\n  this.server(server);\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "x1cd3e156f81600f": {
       "_id": "x1cd3e156f81600f",
       "component": "Designer",
       "state": "render",
-      "action": "function render() { \n  var systemId = '',\n    System = null,\n    system = null,\n    sys = null;\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // set system\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  system = this.require('storage').get(systemId);\n  System = this.require('System');\n  sys = new System(system);\n  this.system(sys);\n\n  this.menubar().render();\n  this.toolbar().render();\n  this.workspace().render();\n  this.server().start();\n\n  this.updateRouter();\n}",
+      "action": "function render() {\n  var systemId = '',\n    System = null,\n    system = null,\n    sys = null,\n    Store = null,\n    store = null,\n    MenuBar = null,\n    menubar = null,\n    ToolBar = null,\n    toolbar = null,\n    Workspace = null,\n    workspace = null,\n    Server = null,\n    server = null;\n\n  // type\n  this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1].split('?')[0]);\n\n  // store\n  Store = this.require('Store');\n  store = new Store();\n  this.store(store);\n\n  // menu\n  MenuBar = this.require('MenuBar');\n  menubar = new MenuBar({\n    designer: this\n  });\n  this.menubar(menubar);\n\n  // toolbar\n  ToolBar = this.require('ToolBar');\n  toolbar = new ToolBar({\n    designer: this\n  });\n  this.toolbar(toolbar);\n\n  // workspace\n  Workspace = this.require('Workspace');\n  workspace = new Workspace({\n    designer: this\n  });\n  this.workspace(workspace);\n\n  // server\n  Server = this.require('Server');\n  server = new Server({\n    'designer': this\n  });\n  this.server(server);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // set system\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  system = this.require('storage').get(systemId);\n  System = this.require('System');\n  sys = new System(system);\n  this.system(sys);\n\n  // render\n  this.menubar().render();\n  this.toolbar().render();\n  this.workspace().render();\n  this.server().start();\n\n  this.updateRouter();\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -611,22 +543,6 @@
       "component": "Designer",
       "state": "updateRouter",
       "action": "function updateRouter() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  id = decodeURIComponent(document.location.href.split('#')[1]);\n  collection = document.location.href.split('#')[2];\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + collection + '#' + context;\n  }\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
-    "c1d8ec12f1b1c487": {
-      "_id": "c1d8ec12f1b1c487",
-      "component": "Designer",
-      "state": "clear",
-      "action": "function clear() { \n  this.refresh();\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
-    "u17a54198941f329": {
-      "_id": "u17a54198941f329",
-      "component": "Designer",
-      "state": "context",
-      "action": "function context(value) { \n  this.workspace().clear();\n  this.workspace().refresh();\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -642,12 +558,38 @@
       "_id": "z1b1ad1fdbb1a46a",
       "component": "w1a78b16d7311831",
       "state": "start",
-      "action": "function start() { \n  var Designer = null,\n    designer = null;\n\n  Designer = this.require('Designer');\n  designer = new Designer({\n    '_id': 'designer'\n  });\n  designer.render();\n}",
+      "action": "function start() { \n  this.require('designer').render();\n}",
       "useCoreAPI": false,
       "core": false
     }
   },
   "types": {},
-  "components": {},
+  "components": {
+    "Designer": {
+      "designer": {
+        "_id": "designer",
+        "context": "",
+        "debug": false,
+        "debugWindow": null,
+        "filter": "",
+        "lastPage": "index.html",
+        "logs": [],
+        "menubar": {},
+        "messages": [],
+        "oldContext": "",
+        "runWindow": null,
+        "server": {},
+        "space": "",
+        "spaces": {},
+        "state": {},
+        "store": {},
+        "system": {},
+        "toolbar": {},
+        "type": "designer",
+        "version": "2.0.0-alpha.1",
+        "workspace": {}
+      }
+    }
+  },
   "_id": "w1a78b16d7311831"
 }
