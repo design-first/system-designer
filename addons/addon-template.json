@@ -1,0 +1,138 @@
+{
+  "name": "addon-template",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "Template of addon",
+  "schemas": {
+    "p181111d5c01f97b": {
+      "_name": "HTML",
+      "source": "property",
+      "_id": "p181111d5c01f97b",
+      "_inherit": [
+        "_Component"
+      ]
+    },
+    "t19b6b11ff31158d": {
+      "_name": "ToolBarItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "t19b6b11ff31158d",
+      "_inherit": [
+        "_Component"
+      ]
+    },
+    "l1d113198721599d": {
+      "_name": "MenuItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "l1d113198721599d",
+      "_inherit": [
+        "_Component"
+      ]
+    }
+  },
+  "models": {
+    "w1417e1d6d613a0d": {
+      "_name": "HTML",
+      "source": {
+        "type": "html",
+        "readOnly": true,
+        "mandatory": true,
+        "default": ""
+      },
+      "_id": "w1417e1d6d613a0d"
+    },
+    "u1f4c7177bb1a459": {
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {},
+      "_id": "u1f4c7177bb1a459"
+    },
+    "u1f9a01abe31b3bf": {
+      "_id": "u1f9a01abe31b3bf",
+      "_name": "MenuItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {}
+    }
+  },
+  "behaviors": {},
+  "types": {
+    "editorType": {
+      "name": "editorType",
+      "type": "string",
+      "value": [
+        "designer",
+        "system",
+        "type",
+        "schema",
+        "model",
+        "behavior",
+        "component",
+        "documentation"
+      ]
+    }
+  },
+  "components": {
+    "ToolBarItem": {},
+    "HTML": {}
+  },
+  "_id": "c1e17a1676b1e178"
+}
