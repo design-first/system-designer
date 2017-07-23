@@ -5,16 +5,56 @@
   "version": "1.0.0",
   "description": "",
   "schemas": {
-    "a1097d1ea0812005": {
-      "_name": "MenuBar",
-      "designer": "property",
-      "logo": "property",
-      "header": "property",
-      "items": "collection",
-      "actions": "collection",
+    "t19b6b11ff31158d": {
+      "_name": "ToolBarItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
       "render": "method",
-      "clear": "method",
-      "_id": "a1097d1ea0812005",
+      "click": "event",
+      "_id": "t19b6b11ff31158d",
+      "_inherit": [
+        "_Component"
+      ]
+    },
+    "p1f6f51d9f111925": {
+      "_name": "MenuAction",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "p1f6f51d9f111925",
+      "_inherit": [
+        "_Component"
+      ]
+    },
+    "t14a79156a81862a": {
+      "_name": "MenuHeader",
+      "html": "link",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "t14a79156a81862a",
+      "_inherit": [
+        "_Component"
+      ]
+    },
+    "l1d113198721599d": {
+      "_name": "MenuItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "l1d113198721599d",
       "_inherit": [
         "_Component"
       ]
@@ -91,45 +131,107 @@
     }
   },
   "models": {
-    "y18b1217aaa13456": {
-      "_id": "y18b1217aaa13456",
-      "_name": "MenuBar",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": false,
-        "default": {}
-      },
-      "logo": {
-        "type": "@MenuLogo",
+    "u1f4c7177bb1a459": {
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "@HTML",
         "readOnly": false,
         "mandatory": false,
         "default": {}
       },
-      "header": {
-        "type": "@MenuHeader",
+      "position": {
+        "type": "number",
         "readOnly": false,
         "mandatory": false,
-        "default": {}
+        "default": 0
       },
-      "items": {
-        "type": [
-          "@MenuItem"
-        ],
+      "type": {
+        "type": "editorType",
         "readOnly": false,
         "mandatory": false,
-        "default": []
+        "default": "designer"
       },
-      "actions": {
-        "type": [
-          "@MenuAction"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
+      "hide": {},
+      "show": {},
       "render": {},
-      "clear": {}
+      "click": {},
+      "_id": "u1f4c7177bb1a459"
+    },
+    "w124ac16b591df57": {
+      "_name": "MenuAction",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "w124ac16b591df57"
+    },
+    "f13ebe1ad331b263": {
+      "_name": "MenuHeader",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "f13ebe1ad331b263"
+    },
+    "u1f9a01abe31b3bf": {
+      "_id": "u1f9a01abe31b3bf",
+      "_name": "MenuItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {}
     },
     "v1435e1809e10be7": {
       "_id": "v1435e1809e10be7",
@@ -497,14 +599,6 @@
     }
   },
   "behaviors": {
-    "k13d5d1b80817357": {
-      "_id": "k13d5d1b80817357",
-      "component": "MenuBar",
-      "state": "render",
-      "action": "function render() { \n  var length = 0,\n    i = 0,\n    item = null,\n    domHeader = document.getElementById('designer-menubar-header'),\n    domItems = document.getElementById('designer-menubar-items'),\n    domAction = document.getElementById('designer-menubar-actions'),\n    self = this;\n\n  function _removeActive() {\n    var length = 0,\n      i = 0,\n      item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  // header\n  domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  var callback = function () {\n    _removeActive();\n    $(this).addClass('active');\n  };\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', callback);\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n\n  // actions\n  this.actions().forEach(function (action) {\n    domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');\n  });\n\n  // focus on first element\n  if (length > 0) {\n    this.designer().context(this.items(0).name());\n    item = domItems.children[0];\n    $(item).addClass('active');\n  }\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "a1c11a1251c1309b": {
       "_id": "a1c11a1251c1309b",
       "component": "Workspace",
@@ -564,6 +658,44 @@
   },
   "types": {},
   "components": {
+    "ToolBarItem": {
+      "1dbc51200e11510": {
+        "_id": "1dbc51200e11510",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "schema"
+      },
+      "1dbc51200e116e7": {
+        "_id": "1dbc51200e116e7",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "schema"
+      },
+      "1dbc51200e116e8": {
+        "_id": "1dbc51200e116e8",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "schema"
+      },
+      "tdbc51200e11z00": {
+        "_id": "tdbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "schema"
+      },
+      "tdbc51200e11z01": {
+        "_id": "tdbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "schema"
+      },
+      "tdbc51200e11z02": {
+        "_id": "tdbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "schema"
+      }
+    },
     "Designer": {
       "designer": {
         "_id": "designer",
@@ -587,6 +719,30 @@
         "type": "designer",
         "version": "2.0.0-alpha.1",
         "workspace": {}
+      }
+    },
+    "MenuItem": {
+      "1f1781882618106": {
+        "_id": "1f1781882618106",
+        "name": "schema",
+        "html": "menu-item-schema.html",
+        "position": 10,
+        "type": "schema"
+      }
+    },
+    "MenuAction": {
+      "1f8571164c179bg": {
+        "_id": "1f8571164c179bg",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "schema"
+      }
+    },
+    "MenuHeader": {
+      "1fb101b99813a15": {
+        "_id": "1fb101b99813a15",
+        "html": "menu-header-schema.html",
+        "type": "schema"
       }
     }
   },

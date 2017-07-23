@@ -5,16 +5,41 @@
   "version": "1.0.0",
   "description": "",
   "schemas": {
-    "a1097d1ea0812005": {
-      "_name": "MenuBar",
-      "designer": "property",
-      "logo": "property",
-      "header": "property",
-      "items": "collection",
-      "actions": "collection",
+    "t19b6b11ff31158d": {
+      "_name": "ToolBarItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
       "render": "method",
-      "clear": "method",
-      "_id": "a1097d1ea0812005",
+      "click": "event",
+      "_id": "t19b6b11ff31158d",
+      "_inherit": [
+        "_Component"
+      ]
+    },
+    "p1f6f51d9f111925": {
+      "_name": "MenuAction",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "p1f6f51d9f111925",
+      "_inherit": [
+        "_Component"
+      ]
+    },
+    "t14a79156a81862a": {
+      "_name": "MenuHeader",
+      "html": "link",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "t14a79156a81862a",
       "_inherit": [
         "_Component"
       ]
@@ -106,6 +131,76 @@
     }
   },
   "models": {
+    "u1f4c7177bb1a459": {
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {},
+      "_id": "u1f4c7177bb1a459"
+    },
+    "w124ac16b591df57": {
+      "_name": "MenuAction",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "w124ac16b591df57"
+    },
+    "f13ebe1ad331b263": {
+      "_name": "MenuHeader",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "f13ebe1ad331b263"
+    },
     "q129be1c61b18285": {
       "_id": "q129be1c61b18285",
       "_name": "Designer",
@@ -445,46 +540,6 @@
         ]
       }
     },
-    "y18b1217aaa13456": {
-      "_id": "y18b1217aaa13456",
-      "_name": "MenuBar",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": false,
-        "default": {}
-      },
-      "logo": {
-        "type": "@MenuLogo",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-      },
-      "header": {
-        "type": "@MenuHeader",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-      },
-      "items": {
-        "type": [
-          "@MenuItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
-      "actions": {
-        "type": [
-          "@MenuAction"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
-      "render": {},
-      "clear": {}
-    },
     "u1f9a01abe31b3bf": {
       "_id": "u1f9a01abe31b3bf",
       "_name": "MenuItem",
@@ -557,14 +612,6 @@
       "component": "MenuItem",
       "state": "click",
       "action": "function click() { \n  this.require('designer').context(this.name());\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
-    "v13ef51174818465": {
-      "_id": "v13ef51174818465",
-      "component": "MenuBar",
-      "state": "render",
-      "action": "function render() { \n  var length = 0,\n    i = 0,\n    item = null,\n    domHeader = document.getElementById('designer-menubar-header'),\n    domItems = document.getElementById('designer-menubar-items'),\n    domAction = document.getElementById('designer-menubar-actions'),\n    self = this;\n\n  function _removeActive() {\n    var length = 0,\n      i = 0,\n      item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  // header\n  domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  var callback = function () {\n    _removeActive();\n    $(this).addClass('active');\n  };\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', callback);\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n\n  // actions\n  this.actions().forEach(function (action) {\n    domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');\n  });\n\n  // focus on first element\n  if (length > 0) {\n    this.designer().context(this.items(0).name());\n    item = domItems.children[0];\n    $(item).addClass('active');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -651,118 +698,51 @@
   },
   "types": {},
   "components": {
-    "MenuItem": {
-      "14f481302c106e6": {
-        "_id": "14f481302c106e6",
-        "name": "models",
-        "html": "menu-item-models.html",
+    "ToolBarItem": {
+      "13a291c27f16311": {
+        "_id": "13a291c27f16311",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "system"
+      },
+      "1dbc51200e116e4": {
+        "_id": "1dbc51200e116e4",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "system"
+      },
+      "1dbc51200e11z10": {
+        "_id": "1dbc51200e11z10",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "system"
+      },
+      "sdbc51200e11z00": {
+        "_id": "sdbc51200e11z00",
+        "html": "toolbar-item-undo.html",
         "position": 20,
-        "type": "designer"
+        "type": "system"
       },
-      "14f481302c106e7": {
-        "_id": "14f481302c106e7",
-        "name": "logs",
-        "html": "menu-item-logs.html",
-        "position": 60,
-        "type": "designer"
-      },
-      "154dd1323f1ffg0a": {
-        "_id": "154dd1323f1ffg0a",
-        "name": "system",
-        "html": "menu-item-system.html",
-        "position": 10,
-        "type": "designer"
-      },
-      "154dd1323f1ffg1a": {
-        "_id": "154dd1323f1ffg1a",
-        "name": "schemas",
-        "html": "menu-item-schemas.html",
-        "position": 10,
-        "type": "designer"
-      },
-      "154dd1324f1ffg00": {
-        "_id": "154dd1324f1ffg00",
-        "name": "overview",
-        "html": "menu-item-overview.html",
-        "position": 10,
-        "type": "documentation"
-      },
-      "154dd1324f1ffg01": {
-        "_id": "154dd1324f1ffg01",
-        "name": "quick-start",
-        "html": "menu-item-quick-start.html",
-        "position": 20,
-        "type": "documentation"
-      },
-      "154dd1324f1ffg02": {
-        "_id": "154dd1324f1ffg02",
-        "name": "guide",
-        "html": "menu-item-guide.html",
+      "sdbc51200e11z01": {
+        "_id": "sdbc51200e11z01",
+        "html": "toolbar-item-redo.html",
         "position": 30,
-        "type": "documentation"
+        "type": "system"
       },
-      "19ec81ce751e196": {
-        "_id": "19ec81ce751e196",
-        "name": "components",
-        "html": "menu-item-components.html",
-        "position": 50,
-        "type": "designer"
-      },
-      "1eb9d188b11824c": {
-        "_id": "1eb9d188b11824c",
-        "name": "behaviors",
-        "html": "menu-item-behaviors.html",
+      "sdbc51200e11z02": {
+        "_id": "sdbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
         "position": 40,
-        "type": "designer"
-      },
+        "type": "system"
+      }
+    },
+    "MenuItem": {
       "1f1781882618102": {
         "_id": "1f1781882618102",
         "name": "json",
         "html": "menu-item-json.html",
         "position": 50,
         "type": "system"
-      },
-      "1f1781882618104": {
-        "_id": "1f1781882618104",
-        "name": "type",
-        "html": "menu-item-type.html",
-        "position": 10,
-        "type": "type"
-      },
-      "1f1781882618106": {
-        "_id": "1f1781882618106",
-        "name": "schema",
-        "html": "menu-item-schema.html",
-        "position": 10,
-        "type": "schema"
-      },
-      "1f1781882618108": {
-        "_id": "1f1781882618108",
-        "name": "model",
-        "html": "menu-item-model.html",
-        "position": 10,
-        "type": "model"
-      },
-      "1f1781882618110": {
-        "_id": "1f1781882618110",
-        "name": "action",
-        "html": "menu-item-action.html",
-        "position": 10,
-        "type": "behavior"
-      },
-      "1f1781882618111": {
-        "_id": "1f1781882618111",
-        "name": "json",
-        "html": "menu-item-json.html",
-        "position": 20,
-        "type": "behavior"
-      },
-      "1f1781882618113": {
-        "_id": "1f1781882618113",
-        "name": "runtimeComponent",
-        "html": "menu-item-component.html",
-        "position": 200,
-        "type": "component"
       },
       "1f1781882618114": {
         "_id": "1f1781882618114",
@@ -784,13 +764,6 @@
         "html": "menu-item-version.html",
         "position": 20,
         "type": "system"
-      },
-      "1fd911618e18ea9": {
-        "_id": "1fd911618e18ea9",
-        "name": "types",
-        "html": "menu-item-types.html",
-        "position": 30,
-        "type": "designer"
       }
     },
     "Designer": {
@@ -816,6 +789,21 @@
         "type": "designer",
         "version": "2.0.0-alpha.1",
         "workspace": {}
+      }
+    },
+    "MenuAction": {
+      "1f8571164c179be": {
+        "_id": "1f8571164c179be",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "system"
+      }
+    },
+    "MenuHeader": {
+      "1fb101b99813a13": {
+        "_id": "1fb101b99813a13",
+        "html": "menu-header-system.html",
+        "type": "system"
       }
     }
   },
