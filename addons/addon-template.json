@@ -60,7 +60,7 @@
         "type": "@HTML",
         "readOnly": false,
         "mandatory": false,
-        "default": "toolbatItem_template"
+        "default": "toolbatItem_template.html"
       },
       "position": {
         "type": "number",
@@ -133,13 +133,13 @@
   "components": {
     "ToolBarItem": {},
     "HTML": {
-      "toolbatItem_template": {
-        "_id": "toolbatItem_template",
-        "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
-      },
       "menuItem_template.html": {
         "_id": "menuItem_template.html",
         "source": "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"
+      },
+      "toolbatItem_template.html": {
+        "_id": "toolbatItem_template.html",
+        "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
       }
     },
     "MenuItem": {}
