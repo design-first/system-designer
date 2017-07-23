@@ -3,7 +3,7 @@
   "master": false,
   "subsystem": false,
   "version": "1.0.0",
-  "description": "Template of addon",
+  "description": "Addon for creating:\n\n* menu items,\n* toolbar items and\n* actions when clicking on them.",
   "schemas": {
     "p181111d5c01f97b": {
       "_name": "HTML",
@@ -60,13 +60,13 @@
         "type": "@HTML",
         "readOnly": false,
         "mandatory": false,
-        "default": {}
+        "default": "toolbatItem_template"
       },
       "position": {
         "type": "number",
         "readOnly": false,
         "mandatory": false,
-        "default": 0
+        "default": 100
       },
       "type": {
         "type": "editorType",
@@ -87,13 +87,13 @@
         "type": "@HTML",
         "readOnly": false,
         "mandatory": false,
-        "default": {}
+        "default": "menuItem_template.html"
       },
       "position": {
         "type": "number",
         "readOnly": false,
         "mandatory": false,
-        "default": 0
+        "default": 100
       },
       "type": {
         "type": "editorType",
@@ -105,7 +105,7 @@
         "type": "string",
         "readOnly": false,
         "mandatory": false,
-        "default": ""
+        "default": "template"
       },
       "hide": {},
       "show": {},
@@ -132,7 +132,17 @@
   },
   "components": {
     "ToolBarItem": {},
-    "HTML": {}
+    "HTML": {
+      "toolbatItem_template": {
+        "_id": "toolbatItem_template",
+        "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
+      },
+      "menuItem_template.html": {
+        "_id": "menuItem_template.html",
+        "source": "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"
+      }
+    },
+    "MenuItem": {}
   },
   "_id": "c1e17a1676b1e178"
 }
