@@ -599,6 +599,42 @@
     }
   },
   "behaviors": {
+    "a194c816a861f58c": {
+      "_id": "a194c816a861f58c",
+      "component": "sdbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
+    },
+    "u1ad2a18ae7197d7": {
+      "_id": "u1ad2a18ae7197d7",
+      "component": "sdbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
+    },
+    "m12f44111501c769": {
+      "_id": "m12f44111501c769",
+      "component": "sdbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
+    },
+    "g1fcf31e19f15b6f": {
+      "_id": "g1fcf31e19f15b6f",
+      "component": "1dbc51200e11z10",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n}"
+    },
+    "j190d61dacc1fb05": {
+      "_id": "j190d61dacc1fb05",
+      "component": "1dbc51200e116e4",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save();\n}"
+    },
+    "c1076f15499194ba": {
+      "_id": "c1076f15499194ba",
+      "component": "13a291c27f16311",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+    },
     "a1b1d011fe31872d": {
       "_id": "a1b1d011fe31872d",
       "component": "v1c4421834f1995a",

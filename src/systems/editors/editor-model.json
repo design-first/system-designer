@@ -600,6 +600,42 @@
     }
   },
   "behaviors": {
+    "i1a1951779613207": {
+      "_id": "i1a1951779613207",
+      "component": "udbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
+    },
+    "d1d8ee1ac3812186": {
+      "_id": "d1d8ee1ac3812186",
+      "component": "udbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
+    },
+    "i15954170f111203": {
+      "_id": "i15954170f111203",
+      "component": "udbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
+    },
+    "y1dbc0114c11c791": {
+      "_id": "y1dbc0114c11c791",
+      "component": "1dbc51200e116e9",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save(); \n}"
+    },
+    "j1ac7610be61012b": {
+      "_id": "j1ac7610be61012b",
+      "component": "1dbc51200e11615",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/edit-a-model', '_blank', true); \n}"
+    },
+    "g161d21f3a912625": {
+      "_id": "g161d21f3a912625",
+      "component": "1dbc51200e11610",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+    },
     "y1dd5f105b41706a": {
       "_id": "y1dd5f105b41706a",
       "component": "Workspace",

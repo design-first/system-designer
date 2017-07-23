@@ -600,6 +600,42 @@
     }
   },
   "behaviors": {
+    "m191d0168cd1e718": {
+      "_id": "m191d0168cd1e718",
+      "component": "1dbc513e0e11z19",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
+    },
+    "q13ca018ddf1b2cb": {
+      "_id": "q13ca018ddf1b2cb",
+      "component": "1dbc513e0e11z18",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
+    },
+    "i17f271591b13ab8": {
+      "_id": "i17f271591b13ab8",
+      "component": "1dbc513e0e11z17",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
+    },
+    "z151551d71511af6": {
+      "_id": "z151551d71511af6",
+      "component": "1dbc51200e11616",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n}"
+    },
+    "r1c1e3143bb14fea": {
+      "_id": "r1c1e3143bb14fea",
+      "component": "1dbc51200e11612",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+    },
+    "g10e66157581049b": {
+      "_id": "g10e66157581049b",
+      "component": "1dbc51200e11611",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save(); \n}"
+    },
     "r1e032137771c493": {
       "_id": "r1e032137771c493",
       "component": "MenuItem",

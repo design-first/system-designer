@@ -599,6 +599,42 @@
     }
   },
   "behaviors": {
+    "y19bc51629a15aca": {
+      "_id": "y19bc51629a15aca",
+      "component": "tdbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
+    },
+    "p150db1b77d11ba1": {
+      "_id": "p150db1b77d11ba1",
+      "component": "tdbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
+    },
+    "h1c4c115aa81281f": {
+      "_id": "h1c4c115aa81281f",
+      "component": "tdbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
+    },
+    "f14706139781d16b": {
+      "_id": "f14706139781d16b",
+      "component": "1dbc51200e116e8",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+    },
+    "w1e52a173f31d0da": {
+      "_id": "w1e52a173f31d0da",
+      "component": "1dbc51200e116e7",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save();\n}"
+    },
+    "e1bb25114121f519": {
+      "_id": "e1bb25114121f519",
+      "component": "1dbc51200e11510",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true); \n}"
+    },
     "a1c11a1251c1309b": {
       "_id": "a1c11a1251c1309b",
       "component": "Workspace",
