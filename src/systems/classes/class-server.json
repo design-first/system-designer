@@ -7,7 +7,6 @@
   "schemas": {
     "k1b97018e111d0e3": {
       "_name": "Server",
-      "designer": "property",
       "start": "method",
       "_id": "k1b97018e111d0e3",
       "_inherit": [
@@ -18,18 +17,18 @@
   "models": {
     "e1ca371b8a41af7b": {
       "_name": "Server",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": true,
-        "default": {}
-      },
       "start": {},
       "_id": "e1ca371b8a41af7b"
     }
   },
   "behaviors": {},
   "types": {},
-  "components": {},
+  "components": {
+    "Server": {
+      "server": {
+        "_id": "server"
+      }
+    }
+  },
   "_id": "c1d6de1de4f1558a"
 }

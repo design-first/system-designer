@@ -7,7 +7,6 @@
   "schemas": {
     "f1092816b571e03c": {
       "_name": "Workspace",
-      "designer": "property",
       "create": "method",
       "load": "method",
       "clear": "method",
@@ -21,12 +20,6 @@
   "models": {
     "v1435e1809e10be7": {
       "_name": "Workspace",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": true,
-        "default": {}
-      },
       "create": {},
       "load": {},
       "clear": {},
@@ -36,6 +29,12 @@
   },
   "behaviors": {},
   "types": {},
-  "components": {},
+  "components": {
+    "Workspace": {
+      "workspace": {
+        "_id": "workspace"
+      }
+    }
+  },
   "_id": "s110211fc3410ad5"
 }

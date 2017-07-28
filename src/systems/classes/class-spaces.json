@@ -17,7 +17,6 @@
     },
     "v194541e0431ce95": {
       "_name": "Spaces",
-      "designer": "property",
       "items": "collection",
       "systems": "collection",
       "components": "collection",
@@ -49,12 +48,6 @@
     },
     "i15f6718c9d19b10": {
       "_name": "Spaces",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": false,
-        "default": {}
-      },
       "items": {
         "type": [
           "@SpaceItem"
@@ -86,6 +79,15 @@
   },
   "behaviors": {},
   "types": {},
-  "components": {},
+  "components": {
+    "Spaces": {
+      "spaces": {
+        "_id": "spaces",
+        "components": [],
+        "items": [],
+        "systems": []
+      }
+    }
+  },
   "_id": "p140631fa6f136f2"
 }

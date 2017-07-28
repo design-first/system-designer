@@ -61,7 +61,6 @@
     },
     "f1092816b571e03c": {
       "_name": "Workspace",
-      "designer": "property",
       "create": "method",
       "load": "method",
       "clear": "method",
@@ -73,7 +72,6 @@
     },
     "k1b97018e111d0e3": {
       "_name": "Server",
-      "designer": "property",
       "start": "method",
       "_id": "k1b97018e111d0e3",
       "_inherit": [
@@ -575,23 +573,11 @@
     "e1ca371b8a41af7b": {
       "_id": "e1ca371b8a41af7b",
       "_name": "Server",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": true,
-        "default": {}
-      },
       "start": {}
     },
     "v1435e1809e10be7": {
       "_id": "v1435e1809e10be7",
       "_name": "Workspace",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": true,
-        "default": {}
-      },
       "create": {},
       "load": {},
       "clear": {},
@@ -655,7 +641,7 @@
       "_id": "p1e0b1155ea1f248",
       "component": "1f1781882618115",
       "state": "click",
-      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    designer.store().data(JSON.parse(editor.getValue()));\n  } else {\n    extra = designer.store().extra();\n    if (extra && extra.context) {\n      data = designer.store().data();\n      data[extra.context] = editor.getValue();\n      designer.store().data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'name';\n  designer.store().extra(extra);\n\n  editor.setEditor('text', designer.store().data().name, 1);\n}",
+      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().name, 1);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -663,7 +649,7 @@
       "_id": "r1edbf1004f16a37",
       "component": "1f1781882618114",
       "state": "click",
-      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    designer.store().data(JSON.parse(editor.getValue()));\n  } else {\n    extra = designer.store().extra();\n    if (extra && extra.context) {\n      data = designer.store().data();\n      data[extra.context] = editor.getValue();\n      designer.store().data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'description';\n  designer.store().extra(extra);\n\n  editor.setEditor('text', designer.store().data().description, 1);\n}",
+      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'description';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().description, 1);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -671,7 +657,7 @@
       "_id": "o1626e18db0119a9",
       "component": "1f1781882618116",
       "state": "click",
-      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    designer.store().data(JSON.parse(editor.getValue()));\n  } else {\n    extra = designer.store().extra();\n    if (extra && extra.context) {\n      data = designer.store().data();\n      data[extra.context] = editor.getValue();\n      designer.store().data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'version';\n  designer.store().extra(extra);\n\n  editor.setEditor('text', designer.store().data().version, 1);\n}",
+      "action": "function click() { \n  var editor = this.require('editor'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'version';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().version, 1);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -679,15 +665,7 @@
       "_id": "o1363f106aa19961",
       "component": "1f1781882618102",
       "state": "click",
-      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer');\n  \n  editor.setEditor('json', JSON.stringify(designer.store().data(), null, '\\t'), 2);\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
-    "c14d681c8e615c31": {
-      "_id": "c14d681c8e615c31",
-      "component": "Workspace",
-      "state": "init",
-      "action": "function init(conf) { \n  var Editor = null,\n    editor = null,\n    designer = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'system',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'text/x-textile',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'system',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n}",
+      "action": "function click() { \n  var editor = this.require('editor');\n  \n  editor.setEditor('json', JSON.stringify(this.require('store').data(), null, '\\t'), 2);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -695,7 +673,7 @@
       "_id": "n1a54b1da681f33e",
       "component": "Workspace",
       "state": "render",
-      "action": "function render() { \n  this.require('editor').render();\n}",
+      "action": "function render() {\n  var Editor = null,\n    editor = null,\n    designer = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'system',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'text/x-textile',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'system',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n  \n  editor.render();\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -703,7 +681,7 @@
       "_id": "s105f81417a1d4dd",
       "component": "Server",
       "state": "start",
-      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    extra = {},\n    editor = this.require('editor'),\n    designer = this.require('designer');\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('_Channel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  // get system\n  id = document.location.href.split('#')[1].split('?')[0];\n  system = this.require('storage').get(id);\n\n  designer.store().uuid(id);\n  designer.store().data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  designer.store().extra(extra);\n\n  editor.initValue(designer.store().data().name, 1);\n}",
+      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    extra = {},\n    editor = this.require('editor'),\n    designer = this.require('designer');\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('_Channel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  // get system\n  id = document.location.href.split('#')[1].split('?')[0];\n  system = this.require('storage').get(id);\n\n  this.require('store').uuid(id);\n  this.require('store').data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  editor.initValue(this.require('store').data().name, 1);\n}",
       "useCoreAPI": true,
       "core": false
     },
@@ -711,7 +689,7 @@
       "_id": "g1e35b1112512787",
       "component": "Designer",
       "state": "render",
-      "action": "function render() {\n  var Store = null,\n    store = null,\n    MenuBar = null,\n    menubar = null,\n    ToolBar = null,\n    toolbar = null,\n    Workspace = null,\n    workspace = null,\n    Server = null,\n    server = null;\n\n  // type\n  this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  // store\n  Store = this.require('Store');\n  store = new Store();\n  this.store(store);\n\n  // menu\n  MenuBar = this.require('MenuBar');\n  menubar = new MenuBar({\n    designer: this\n  });\n  this.menubar(menubar);\n\n  // toolbar\n  ToolBar = this.require('ToolBar');\n  toolbar = new ToolBar({\n    designer: this\n  });\n  this.toolbar(toolbar);\n\n  // workspace\n  Workspace = this.require('Workspace');\n  workspace = new Workspace({\n    designer: this\n  });\n  this.workspace(workspace);\n\n  // server\n  Server = this.require('Server');\n  server = new Server({\n    'designer': this\n  });\n  this.server(server);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  this.menubar().render();\n  this.toolbar().render();\n  this.workspace().render();\n  this.server().start();\n  this.updateRouter();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
+      "action": "function render() {\n  // type\n  this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  \n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  this.require('server').start();\n  \n  this.updateRouter();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -719,7 +697,7 @@
       "_id": "i1927c1813f11c03",
       "component": "Designer",
       "state": "updateRouter",
-      "action": "function updateRouter() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1].split('?')[0];\n    menubar[i].href = '#' + this.store().uuid() + '#' + context;\n  }\n}",
+      "action": "function updateRouter() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1].split('?')[0];\n    menubar[i].href = '#' + this.require('store').uuid() + '#' + context;\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -727,7 +705,7 @@
       "_id": "f199b4184ea1639d",
       "component": "Designer",
       "state": "save",
-      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = designer.store().data();\n\n  switch (designer.context()) {\n    case 'name':\n      val = val.trim();\n      if (val.indexOf(' ') !== -1) {\n        val = val.replace(/ /gi, '-');\n        this.require('editor').setValue(val);\n      }\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val;\n      break;\n    case 'version':\n      store.version = val;\n      break;\n    case 'json':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  designer.store().data(store);\n\n  this.require('channel').$editorUpdateSystem(designer.store().uuid(), designer.store().data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  switch (designer.context()) {\n    case 'name':\n      val = val.trim();\n      if (val.indexOf(' ') !== -1) {\n        val = val.replace(/ /gi, '-');\n        this.require('editor').setValue(val);\n      }\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val;\n      break;\n    case 'version':\n      store.version = val;\n      break;\n    case 'json':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  this.require('store').data(store);\n\n  this.require('channel').$editorUpdateSystem(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}",
       "useCoreAPI": false,
       "core": false
     }

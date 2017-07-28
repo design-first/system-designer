@@ -7,7 +7,6 @@
   "schemas": {
     "f1257f17deb16097": {
       "_name": "ToolBar",
-      "designer": "property",
       "items": "collection",
       "render": "method",
       "_id": "f1257f17deb16097",
@@ -33,12 +32,6 @@
   "models": {
     "l129a713e681c903": {
       "_name": "ToolBar",
-      "designer": {
-        "type": "@Designer",
-        "readOnly": true,
-        "mandatory": true,
-        "default": {}
-      },
       "items": {
         "type": [
           "@ToolBarItem"
@@ -82,7 +75,7 @@
       "_id": "a13b711adba1c7d4",
       "component": "163a01b7ca1935c",
       "state": "click",
-      "action": "function click() {\n    var debugWindow = this.require('designer').debugWindow(),\n        config = this.require('storage').get('system-designer-config'),\n        message = this.require('message');\n\n    $('#designer-toolbar-item-refresh').tooltip('hide');\n    if (config) {\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'client') {\n            if (config.urlClient) {\n                if (debugWindow && !debugWindow.closed) {\n                    message.success('Searching for a system...');\n                    this.require('channel').$designerSync();\n                } else {\n                    this.require('designer').debugWindow(this.require('designer').open(config.urlClient, 'debug'));\n                }\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'server') {\n            if (config.urlServer) {\n                message.success('Searching for a server...');\n                var self = this;\n                $.getJSON(config.urlServer + ':8888/$designerSync', function (system) {\n                    var Dialog = null,\n                        dialog = null;\n    \n                    Dialog = self.require('DialogImport');\n                    dialog = new Dialog({\n                        'title': 'A system has been found',\n                        'message': 'Do you wan to import it ?',\n                        'data': system\n                    });\n                    dialog.show();\n    \n                    dialog.on('ok', function () {\n                      var System = this.require('System'),\n                          sys = null,\n                          designer = this.require('designer'),\n                          message = this.require('message');\n              \n                      if (designer.system()) {\n                          designer.system().destroy();\n                      }\n                      sys = new System(this.data());\n                      designer.system(sys);\n              \n                      // empty log\n                      designer.logs().forEach(function (item) {\n                          this.logs().pop();\n                      }.bind(designer));\n              \n                      designer.save();\n              \n                      designer.space(sys.name());\n                      designer.spaces().render();\n                      designer.workspace().render();\n                      \n                      designer.updateRouter();\n\n                      this.hide();\n                      designer.save();\n              \n                      message.success('Importation of the system is done.');\n                    });\n                });\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType === 'undefined') {\n            message.warning('No url set. Please set the url in the configuration panel.');\n        }\n    } else {\n        message.warning('No url set. Please set the url in the configuration panel.');\n    }\n}"
+      "action": "function click() {\n    var debugWindow = this.require('designer').debugWindow(),\n        config = this.require('storage').get('system-designer-config'),\n        message = this.require('message');\n\n    $('#designer-toolbar-item-refresh').tooltip('hide');\n    if (config) {\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'client') {\n            if (config.urlClient) {\n                if (debugWindow && !debugWindow.closed) {\n                    message.success('Searching for a system...');\n                    this.require('channel').$designerSync();\n                } else {\n                    this.require('designer').debugWindow(this.require('designer').open(config.urlClient, 'debug'));\n                }\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType !== 'undefined' && config.debugType === 'server') {\n            if (config.urlServer) {\n                message.success('Searching for a server...');\n                var self = this;\n                $.getJSON(config.urlServer + ':8888/$designerSync', function (system) {\n                    var Dialog = null,\n                        dialog = null;\n    \n                    Dialog = self.require('DialogImport');\n                    dialog = new Dialog({\n                        'title': 'A system has been found',\n                        'message': 'Do you wan to import it ?',\n                        'data': system\n                    });\n                    dialog.show();\n    \n                    dialog.on('ok', function () {\n                      var System = this.require('System'),\n                          sys = null,\n                          designer = this.require('designer'),\n                          message = this.require('message');\n              \n                      if (designer.system()) {\n                          designer.system().destroy();\n                      }\n                      sys = new System(this.data());\n                      designer.system(sys);\n              \n                      // empty log\n                      designer.logs().forEach(function (item) {\n                          this.logs().pop();\n                      }.bind(designer));\n              \n                      designer.save();\n              \n                      designer.space(sys.name());\n                      designer.spaces().render();\n                      this.require('workspace').render();\n                      \n                      designer.updateRouter();\n\n                      this.hide();\n                      designer.save();\n              \n                      message.success('Importation of the system is done.');\n                    });\n                });\n            } else {\n                message.warning('No url set. Please set the url in the configuration panel.');\n            }\n        }\n        if (typeof config.debugType === 'undefined') {\n            message.warning('No url set. Please set the url in the configuration panel.');\n        }\n    } else {\n        message.warning('No url set. Please set the url in the configuration panel.');\n    }\n}"
     },
     "e137f915b1b15f90": {
       "_id": "e137f915b1b15f90",
@@ -210,24 +203,23 @@
       "state": "click",
       "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
     },
-    "o1dabe1e8d118718": {
-      "_id": "o1dabe1e8d118718",
-      "component": "ToolBar",
-      "state": "init",
-      "action": "function init(conf) {\n  var toolBarItems = [],\n    self = this;\n\n  // items\n  toolBarItems = this.require('db').collections().ToolBarItem.find({\n    'type': this.designer().type()\n  });\n\n  // sort items\n  toolBarItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  toolBarItems.forEach(function (toolBarItem) {\n    var id = toolBarItem._id;\n    self.items().push(self.require(id));\n  });\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "n12d44154da1020f": {
       "_id": "n12d44154da1020f",
       "component": "ToolBar",
       "state": "render",
-      "action": "function render() { \n  var domItems = document.getElementById('designer-toolbar-items'),\n    i = 0,\n    length = 0,\n    item = null,\n    self = this;\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n}",
+      "action": "function render() { \n  var domItems = document.getElementById('designer-toolbar-items'),\n    i = 0,\n    length = 0,\n    item = null,\n    toolBarItems = [],\n    self = this;\n\n  // get items\n  toolBarItems = this.require('db').collections().ToolBarItem.find({\n    'type': this.require('designer').type()\n  });\n\n  // sort items\n  toolBarItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  toolBarItems.forEach(function (toolBarItem) {\n    var id = toolBarItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // render items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // add events\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
   },
   "types": {},
-  "components": {},
+  "components": {
+    "ToolBar": {
+      "toolbar": {
+        "_id": "toolbar",
+        "items": []
+      }
+    }
+  },
   "_id": "o1a37519ca718bc4"
 }
