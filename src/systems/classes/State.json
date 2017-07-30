@@ -14,6 +14,8 @@
       "type": "property",
       "collection": "property",
       "component": "property",
+      "lastPage": "property",
+      "messages": "property",
       "clear": "method",
       "_id": "y1efb3178341398a"
     }
@@ -46,7 +48,19 @@
         "default": ""
       },
       "clear": {},
-      "_id": "j18ad71fd8c1c175"
+      "_id": "j18ad71fd8c1c175",
+      "lastPage": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "index.html"
+      },
+      "messages": {
+        "type": "array",
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      }
     }
   },
   "behaviors": {},
@@ -57,6 +71,8 @@
         "_id": "state",
         "collection": "",
         "component": "",
+        "lastPage": "index.html",
+        "messages": [],
         "system": "",
         "type": ""
       }

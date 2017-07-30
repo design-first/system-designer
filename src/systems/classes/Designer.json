@@ -15,7 +15,6 @@
       "oldContext": "property",
       "space": "property",
       "system": "property",
-      "debug": "property",
       "filter": "property",
       "type": "property",
       "runWindow": "property",
@@ -39,9 +38,7 @@
       "isCordova": "method",
       "isElectron": "method",
       "updateCordovaContext": "method",
-      "messages": "property",
       "runMessages": "method",
-      "lastPage": "property",
       "getGeneratedSchema": "method",
       "getGeneratedModel": "method",
       "mergeBehavior": "method",
@@ -62,12 +59,6 @@
         "readOnly": false,
         "mandatory": false,
         "default": {}
-      },
-      "debug": {
-        "type": "boolean",
-        "readOnly": false,
-        "mandatory": false,
-        "default": false
       },
       "oldContext": {
         "type": "string",
@@ -110,18 +101,6 @@
         "readOnly": false,
         "mandatory": false,
         "default": null
-      },
-      "messages": {
-        "type": "array",
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
-      "lastPage": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": "index.html"
       },
       "updateRouter": {},
       "syncModel": {
@@ -400,7 +379,7 @@
       "_id": "u16f78106f713bd5",
       "component": "Designer",
       "state": "updateCordovaContext",
-      "action": "function updateCordovaContext() {\n  var params = {},\n      urlParams = [],\n      system = null;\n      \n  urlParams = document.location.href.split('?');\n\n  if (urlParams.length > 1) {\n      urlParams = urlParams[1].split('&');\n      urlParams.forEach(function (urlParam) {\n          var name = '',\n              value = '';\n\n          name = urlParam.split('=')[0].trim();\n          value = urlParam.split('=')[1].trim();\n\n          params[name] = decodeURIComponent(value);\n      });    \n  }\n      \n      \n  if (params.system) {\n    system = JSON.parse(params.system);\n    this.require('storage').set(system._id, system);\n  }\n  \n  if (params.ref) {\n    this.lastPage(params.ref);\n  }\n}"
+      "action": "function updateCordovaContext() {\n  var params = {},\n      urlParams = [],\n      system = null;\n      \n  urlParams = document.location.href.split('?');\n\n  if (urlParams.length > 1) {\n      urlParams = urlParams[1].split('&');\n      urlParams.forEach(function (urlParam) {\n          var name = '',\n              value = '';\n\n          name = urlParam.split('=')[0].trim();\n          value = urlParam.split('=')[1].trim();\n\n          params[name] = decodeURIComponent(value);\n      });    \n  }\n      \n      \n  if (params.system) {\n    system = JSON.parse(params.system);\n    this.require('storage').set(system._id, system);\n  }\n  \n  if (params.ref) {\n    this.require('state').lastPage(params.ref);\n  }\n}"
     }
   },
   "types": {},
@@ -409,12 +388,9 @@
       "designer": {
         "_id": "designer",
         "context": "",
-        "debug": false,
         "debugWindow": null,
         "filter": "",
-        "lastPage": "index.html",
         "logs": [],
-        "messages": [],
         "oldContext": "",
         "runWindow": null,
         "space": "",
