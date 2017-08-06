@@ -23,6 +23,7 @@ module.exports = function (grunt) {
     watch: grunt.file.readJSON('tasks/watch.json'),
     clean: grunt.file.readJSON('tasks/clean.json'),
     copy: grunt.file.readJSON('tasks/copy.json'),
+    jsbeautifier: grunt.file.readJSON('tasks/jsbeautifier.json'),
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
     concat: grunt.file.readJSON('tasks/concat.json')
@@ -66,6 +67,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-jsbeautifier');
   grunt.loadNpmTasks('grunt-json-merge');
 
   // start the dev mode
@@ -84,6 +86,7 @@ module.exports = function (grunt) {
 
   // dist for web
   grunt.registerTask('web', [
+    'jsbeautifier',
     'copy:core',
     'copy:lib-core',
     'copy:lib-ace',
@@ -93,6 +96,7 @@ module.exports = function (grunt) {
 
   // dist for electron
   grunt.registerTask('electron', [
+    'jsbeautifier',
     'copy:core',
     'copy:lib-core',
     'copy:lib-ace',
@@ -103,6 +107,7 @@ module.exports = function (grunt) {
 
   // dist for cordova
   grunt.registerTask('cordova', [
+    'jsbeautifier',
     'copy:core',
     'copy:lib-core',
     'copy:lib-codemirror',

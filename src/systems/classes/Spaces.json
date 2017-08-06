@@ -1,93 +1,93 @@
 {
-  "name": "class-spaces",
-  "master": false,
-  "subsystem": false,
-  "version": "1.0.0",
-  "description": "",
-  "schemas": {
-    "p14e93127f6159df": {
-      "_name": "SpaceItem",
-      "name": "property",
-      "uuid": "property",
-      "click": "event",
-      "_id": "p14e93127f6159df",
-      "_inherit": [
-        "_Component"
-      ]
+    "name": "class-spaces",
+    "master": false,
+    "subsystem": false,
+    "version": "1.0.0",
+    "description": "",
+    "schemas": {
+        "p14e93127f6159df": {
+            "_name": "SpaceItem",
+            "name": "property",
+            "uuid": "property",
+            "click": "event",
+            "_id": "p14e93127f6159df",
+            "_inherit": [
+                "_Component"
+            ]
+        },
+        "v194541e0431ce95": {
+            "_name": "Spaces",
+            "items": "collection",
+            "systems": "collection",
+            "components": "collection",
+            "render": "method",
+            "clear": "method",
+            "_id": "v194541e0431ce95",
+            "_inherit": [
+                "_Component"
+            ]
+        }
     },
-    "v194541e0431ce95": {
-      "_name": "Spaces",
-      "items": "collection",
-      "systems": "collection",
-      "components": "collection",
-      "render": "method",
-      "clear": "method",
-      "_id": "v194541e0431ce95",
-      "_inherit": [
-        "_Component"
-      ]
-    }
-  },
-  "models": {
-    "p1d9251b9e619c48": {
-      "_name": "SpaceItem",
-      "name": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-      },
-      "uuid": {
-        "type": "string",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-      },
-      "click": {},
-      "_id": "p1d9251b9e619c48"
+    "models": {
+        "p1d9251b9e619c48": {
+            "_name": "SpaceItem",
+            "name": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "uuid": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+            },
+            "click": {},
+            "_id": "p1d9251b9e619c48"
+        },
+        "i15f6718c9d19b10": {
+            "_name": "Spaces",
+            "items": {
+                "type": [
+                    "@SpaceItem"
+                ],
+                "readOnly": false,
+                "mandatory": false,
+                "default": []
+            },
+            "systems": {
+                "type": [
+                    "@SpaceItem"
+                ],
+                "readOnly": false,
+                "mandatory": false,
+                "default": []
+            },
+            "components": {
+                "type": [
+                    "@SpaceItem"
+                ],
+                "readOnly": false,
+                "mandatory": false,
+                "default": []
+            },
+            "clear": {},
+            "render": {},
+            "_id": "i15f6718c9d19b10"
+        }
     },
-    "i15f6718c9d19b10": {
-      "_name": "Spaces",
-      "items": {
-        "type": [
-          "@SpaceItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
-      "systems": {
-        "type": [
-          "@SpaceItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
-      "components": {
-        "type": [
-          "@SpaceItem"
-        ],
-        "readOnly": false,
-        "mandatory": false,
-        "default": []
-      },
-      "clear": {},
-      "render": {},
-      "_id": "i15f6718c9d19b10"
-    }
-  },
-  "behaviors": {},
-  "types": {},
-  "components": {
-    "Spaces": {
-      "spaces": {
-        "_id": "spaces",
-        "components": [],
-        "items": [],
-        "systems": []
-      }
-    }
-  },
-  "_id": "p140631fa6f136f2"
+    "behaviors": {},
+    "types": {},
+    "components": {
+        "Spaces": {
+            "spaces": {
+                "_id": "spaces",
+                "components": [],
+                "items": [],
+                "systems": []
+            }
+        }
+    },
+    "_id": "p140631fa6f136f2"
 }
