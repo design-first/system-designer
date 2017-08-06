@@ -1,740 +1,702 @@
 {
-    "name": "class-dialog",
-    "master": false,
-    "subsystem": false,
-    "version": "1.0.0",
-    "description": "",
-    "schemas": {
-        "n1a57f14f7e1d5fe": {
-            "_name": "Dialog",
-            "_inherit": [
-                "_Component"
-            ],
-            "title": "property",
-            "message": "property",
-            "data": "property",
-            "ok": "event",
-            "cancel": "event",
-            "show": "method",
-            "hide": "method",
-            "_id": "n1a57f14f7e1d5fe"
-        },
-        "r1ddda1abc81d3ae": {
-            "_name": "DialogCopyright",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "r1ddda1abc81d3ae"
-        },
-        "j1dd971e4e417dc0": {
-            "_name": "DialogBehaviorCreation",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "j1dd971e4e417dc0"
-        },
-        "r1117315b65182cd": {
-            "_name": "DialogCheck",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "r1117315b65182cd"
-        },
-        "z1cebc15af210ffd": {
-            "_name": "DialogComponentCreation",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "z1cebc15af210ffd"
-        },
-        "y18a2615cad1374d": {
-            "_name": "DialogConfig",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "y18a2615cad1374d"
-        },
-        "w1b40b10be812656": {
-            "_name": "DialogDropFile",
-            "_inherit": [
-                "Dialog"
-            ],
-            "mergeSystem": "event",
-            "importSystem": "event",
-            "_id": "w1b40b10be812656"
-        },
-        "w143aa1a8401eb92": {
-            "_name": "DialogExport",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "w143aa1a8401eb92"
-        },
-        "n1c79a1da261e02e": {
-            "_name": "DialogImport",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "n1c79a1da261e02e"
-        },
-        "c1758d13d20146d4": {
-            "_name": "DialogImportFile",
-            "_inherit": [
-                "Dialog"
-            ],
-            "mergeSystem": "event",
-            "importSystem": "event",
-            "_id": "c1758d13d20146d4"
-        },
-        "t13c8d1b4271338c": {
-            "_name": "DialogModelCreation",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "t13c8d1b4271338c"
-        },
-        "z19abb1de8815574": {
-            "_name": "DialogRuntimeComponentInfo",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "z19abb1de8815574"
-        },
-        "b1cad1118451b9d7": {
-            "_name": "DialogSchemaCreation",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "b1cad1118451b9d7"
-        },
-        "e1c0cd11f9210181": {
-            "_name": "DialogSearch",
-            "_inherit": [
-                "Dialog"
-            ],
-            "filter": "property",
-            "inContent": "property",
-            "_id": "e1c0cd11f9210181"
-        },
-        "v112c0137f31f448": {
-            "_name": "DialogShare",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "v112c0137f31f448"
-        },
-        "j1a5781d076127b4": {
-            "_name": "DialogSync",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "j1a5781d076127b4"
-        },
-        "y1cc6f1fdc415f97": {
-            "_name": "DialogSystemCreation",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "y1cc6f1fdc415f97"
-        },
-        "z15c55119a7160f3": {
-            "_name": "DialogTypeCreation",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "z15c55119a7160f3"
-        },
-        "g1db25176311401d": {
-            "_name": "DialogWelcome",
-            "_inherit": [
-                "Dialog"
-            ],
-            "_id": "g1db25176311401d"
-        }
+  "name": "class-dialog",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "n1a57f14f7e1d5fe": {
+      "_name": "Dialog",
+      "_inherit": ["_Component"],
+      "title": "property",
+      "message": "property",
+      "data": "property",
+      "ok": "event",
+      "cancel": "event",
+      "show": "method",
+      "hide": "method",
+      "_id": "n1a57f14f7e1d5fe"
     },
-    "models": {
-        "l1d4181e4d71ade2": {
-            "_name": "Dialog",
-            "title": {
-                "type": "string",
-                "readOnly": true,
-                "mandatory": true,
-                "default": ""
-            },
-            "message": {
-                "type": "string",
-                "readOnly": true,
-                "mandatory": false,
-                "default": ""
-            },
-            "data": {
-                "type": "object",
-                "readOnly": false,
-                "mandatory": false,
-                "default": {}
-            },
-            "show": {},
-            "hide": {},
-            "cancel": {},
-            "ok": {},
-            "_id": "l1d4181e4d71ade2"
-        },
-        "n14a831448a1ef6a": {
-            "_name": "DialogCopyright",
-            "_id": "n14a831448a1ef6a"
-        },
-        "g1ab8111f2d1c7ce": {
-            "_name": "DialogBehaviorCreation",
-            "_id": "g1ab8111f2d1c7ce"
-        },
-        "c17890126ea1316c": {
-            "_name": "DialogCheck",
-            "_id": "c17890126ea1316c"
-        },
-        "t12b5d1be8512beb": {
-            "_name": "DialogComponentCreation",
-            "_id": "t12b5d1be8512beb"
-        },
-        "t15a691554c1155f": {
-            "_name": "DialogConfig",
-            "_id": "t15a691554c1155f"
-        },
-        "c1b56e1fdb3174a8": {
-            "_name": "DialogDropFile",
-            "mergeSystem": {},
-            "importSystem": {},
-            "_id": "c1b56e1fdb3174a8"
-        },
-        "h1fedc1441312ac4": {
-            "_name": "DialogExport",
-            "_id": "h1fedc1441312ac4"
-        },
-        "t1c8ab1e8c010544": {
-            "_name": "DialogImport",
-            "_id": "t1c8ab1e8c010544"
-        },
-        "w15777160d41bb38": {
-            "_name": "DialogImportFile",
-            "mergeSystem": {},
-            "importSystem": {},
-            "_id": "w15777160d41bb38"
-        },
-        "v108dd1f00315ebe": {
-            "_name": "DialogModelCreation",
-            "_id": "v108dd1f00315ebe"
-        },
-        "o19888142191439e": {
-            "_name": "DialogRuntimeComponentInfo",
-            "_id": "o19888142191439e"
-        },
-        "i15fee18f0e164ba": {
-            "_name": "DialogSchemaCreation",
-            "_id": "i15fee18f0e164ba"
-        },
-        "u1caa614eb713967": {
-            "_name": "DialogSearch",
-            "filter": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "inContent": {
-                "type": "boolean",
-                "readOnly": false,
-                "mandatory": false,
-                "default": false
-            },
-            "_id": "u1caa614eb713967"
-        },
-        "e167bf16b5c1fd5f": {
-            "_name": "DialogShare",
-            "_id": "e167bf16b5c1fd5f"
-        },
-        "k105d3130531ae5c": {
-            "_name": "DialogSync",
-            "_id": "k105d3130531ae5c"
-        },
-        "k19f8d10dec1beda": {
-            "_name": "DialogSystemCreation",
-            "_id": "k19f8d10dec1beda"
-        },
-        "x1e7931468415710": {
-            "_name": "DialogTypeCreation",
-            "_id": "x1e7931468415710"
-        },
-        "e1dd3f1e688107a8": {
-            "_name": "DialogWelcome",
-            "_id": "e1dd3f1e688107a8"
-        }
+    "r1ddda1abc81d3ae": {
+      "_name": "DialogCopyright",
+      "_inherit": ["Dialog"],
+      "_id": "r1ddda1abc81d3ae"
     },
-    "behaviors": {
-        "k10e3f115ef1a83b": {
-            "_id": "k10e3f115ef1a83b",
-            "component": "DialogCopyright",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n  \n  $('#designer-dialog-copyright').empty();\n\n  html = this.require('dialog-modal-copyright.html');\n  document.querySelector('#designer-dialog-copyright').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-copyright-modal-ok');\n  dom.addEventListener('click', function (event) {\n      this.ok();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "k191d71c949120ec": {
-            "_id": "k191d71c949120ec",
-            "component": "DialogCopyright",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-copyright-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "z17fdc13a9a1f940": {
-            "_id": "z17fdc13a9a1f940",
-            "component": "DialogCopyright",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-copyright-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "k11cb01de7316017": {
-            "_id": "k11cb01de7316017",
-            "component": "DialogImport",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('.modal-backdrop').remove();\n  $('#designer-dialog-import').empty();\n  \n  html = this.require('dialog-modal-import.html');\n  document.querySelector('#designer-dialog-import').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n  \n  // events\n  dom = document.getElementById('designer-dialog-import-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-import-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "n1ff331a4a41052e": {
-            "_id": "n1ff331a4a41052e",
-            "component": "DialogImport",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-import-modal').modal('show');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "c10f7913c3113bb1": {
-            "_id": "c10f7913c3113bb1",
-            "component": "DialogImport",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-import-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "v15c47172a11008d": {
-            "_id": "v15c47172a11008d",
-            "component": "DialogCheck",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n  \n  $('#designer-dialog-check').empty();\n  \n  html = this.require('dialog-modal-check.html');\n  document.querySelector('#designer-dialog-check').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n  \n  dom = document.getElementById('designer-dialog-check-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "y1224610bd414f94": {
-            "_id": "y1224610bd414f94",
-            "component": "DialogCheck",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-check-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "v1328d14c881f685": {
-            "_id": "v1328d14c881f685",
-            "component": "DialogCheck",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-check-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "r102da1927e1cabc": {
-            "_id": "r102da1927e1cabc",
-            "component": "DialogCheck",
-            "state": "ok",
-            "action": "function ok() { \n  this.hide();\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "w17f82152171991e": {
-            "_id": "w17f82152171991e",
-            "component": "DialogWelcome",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n  \n  $('#designer-dialog-welcome').empty();\n  \n  html = this.require('dialog-modal-welcome.html');\n  document.querySelector('#designer-dialog-welcome').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n  \n  // events\n  dom = document.getElementById('designer-dialog-welcome-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "l149ed1bf1411137": {
-            "_id": "l149ed1bf1411137",
-            "component": "DialogWelcome",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-welcome-modal').modal('show');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "g184031e6b71648a": {
-            "_id": "g184031e6b71648a",
-            "component": "DialogWelcome",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-welcome-modal').modal('hide');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "z1d0ec1a0ce18278": {
-            "_id": "z1d0ec1a0ce18278",
-            "component": "DialogSync",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-sync').empty();\n\n  html = this.require('dialog-modal-sync.html');\n  document.querySelector('#designer-dialog-sync').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-sync-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-type-creation-hasHTML');\n  dom.addEventListener('click', function click(event) {\n    if ($('#designer-dialog-type-creation-hasHTML')[0].checked) {\n        $('#designer-dialog-sync-options-log-level').show();\n    } else {\n        $('#designer-dialog-sync-options-log-level').hide();\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-sync-commit');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-sync-comments-area').show();\n    $('#designer-dialog-sync-options-area').show();\n    $('#designer-dialog-sync-options-node').show();\n    if ($('#designer-dialog-type-creation-hasHTML')[0].checked) {\n        $('#designer-dialog-sync-options-log-level').show();\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-sync-refresh');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-sync-comments-area').hide();\n    $('#designer-dialog-sync-options-area').hide();\n    $('#designer-dialog-sync-options-log-level').hide();\n    $('#designer-dialog-sync-options-node').hide();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "f1df481fac01acdc": {
-            "_id": "f1df481fac01acdc",
-            "component": "DialogSync",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-sync-modal').modal('show');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "m187b818e2f1b30f": {
-            "_id": "m187b818e2f1b30f",
-            "component": "DialogSync",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-sync-modal').modal('hide');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "y1934b1e72412bd0": {
-            "_id": "y1934b1e72412bd0",
-            "component": "DialogShare",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = null,\n          dom = null,\n          sys = '';\n\n  $('#designer-dialog-share').empty();\n\n  sys = this.require('db').collections().System.find({\n      '_id': this.require('designer').system().id()\n  })[0];\n\n  html = this.require('dialog-modal-share.html');\n  document.querySelector('#designer-dialog-share').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, window.location.toString().split('#')[0] + '?system=' + encodeURIComponent(JSON.stringify(sys)))\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-share-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-share-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "l1eb0516ca015910": {
-            "_id": "l1eb0516ca015910",
-            "component": "DialogShare",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-share-modal').modal('show');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "q1e62a1c9d61ba89": {
-            "_id": "q1e62a1c9d61ba89",
-            "component": "DialogShare",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-share-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "s1d027166051b0ad": {
-            "_id": "s1d027166051b0ad",
-            "component": "DialogConfig",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      that = this,\n      storeConfig = null,\n      designer = that.require('designer');\n\n  $('#designer-dialog-config').empty();\n\n  html = this.require('dialog-modal-config.html');\n  document.querySelector('#designer-dialog-config').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // default config value\n  storeConfig = this.require('storage').get('system-designer-config');\n\n  if (!storeConfig) {\n    storeConfig = {};\n  }\n\n  if (typeof storeConfig.debugType === 'undefined') {\n    storeConfig.debugType = 'client';\n    this.require('storage').set('system-designer-config', storeConfig);\n  }\n  if (storeConfig.debugType === 'client') {\n    $('#designer-dialog-config-radio-client').attr('checked', true);\n    $('#designer-dialog-config-server-form').hide();\n  } else {\n    $('#designer-dialog-config-radio-server').attr('checked', true);\n    $('#designer-dialog-config-client-form').hide();\n  }\n  if (storeConfig.urlClient) {\n    $('#designer-dialog-config-url-client')[0].value = storeConfig.urlClient;\n  }\n  if (storeConfig.urlServer) {\n    $('#designer-dialog-config-url-server')[0].value = storeConfig.urlServer;\n  }\n  if (storeConfig.githubToken) {\n    $('#designer-dialog-config-github-token')[0].value = atob(storeConfig.githubToken);\n  }\n  if (storeConfig.githubRepository) {\n    $('#designer-dialog-config-github-repository')[0].value = storeConfig.githubRepository;\n  }\n  if (storeConfig.advancedMode) {\n    $('#designer-dialog-config-advanced-mode-isAdvanced').attr('checked', true);\n  }\n\n  // events\n  dom = document.getElementById('designer-dialog-config-radio-client');\n  dom.addEventListener('click', function click(event) {\n    var config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n\n    config.debugType = 'client';\n    this.require('storage').set('system-designer-config', config);\n\n    $('#designer-dialog-config-client-form').show();\n    $('#designer-dialog-config-server-form').hide();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-radio-server');\n  dom.addEventListener('click', function click(event) {\n    var config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n\n    config.debugType = 'server';\n    this.require('storage').set('system-designer-config', config);\n\n    $('#designer-dialog-config-client-form').hide();\n    $('#designer-dialog-config-server-form').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-url-client');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-url-client').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-github-token');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-github-token').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-github-repository');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-github-repository').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-url-server');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-url-server').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-advanced-mode-isAdvanced');\n  dom.addEventListener('click', function click(event) {\n    var config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n\n    config.advancedMode = $('#designer-dialog-config-advanced-mode-isAdvanced').prop('checked');\n    this.require('storage').set('system-designer-config', config);\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "f16d5719c171dfe5": {
-            "_id": "f16d5719c171dfe5",
-            "component": "DialogConfig",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-config-modal').modal('show');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "l1cb42113d7185c8": {
-            "_id": "l1cb42113d7185c8",
-            "component": "DialogConfig",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-config-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "f1f43d11c0d15597": {
-            "_id": "f1f43d11c0d15597",
-            "component": "DialogConfig",
-            "state": "ok",
-            "action": "function ok() { \n  var config = this.require('storage').get('system-designer-config');\n\n  if (!config) {\n    config = {};\n  }\n\n  config.urlClient = $('#designer-dialog-config-url-client')[0].value;\n  config.urlServer = $('#designer-dialog-config-url-server')[0].value;\n  config.githubToken = btoa($('#designer-dialog-config-github-token')[0].value);\n  config.githubRepository = $('#designer-dialog-config-github-repository')[0].value;\n\n  this.require('storage').set('system-designer-config', config);\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "t143b71071c16185": {
-            "_id": "t143b71071c16185",
-            "component": "DialogImportFile",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      that = this,\n      libraries = [],\n      library = '',\n      systems = [],\n      system = '',\n      sys = '',\n      systemIds = '',\n      length = 0,\n      i = 0,\n      list = '';\n\n  $('#designer-dialog-import-file').empty();\n\n  libraries = this.require('db').collections().JSON.find();\n  length = libraries.length;\n  for (i = 0; i < length; i++) {\n    library = this.require(libraries[i]._id);\n\n    list = list + '<a class=\"list-group-item\" id=\"designer-dialog-import-file-modal-library-' + library.id() + '\">' +\n        '<h4 class=\"list-group-item-heading\">' + JSON.parse(decodeURIComponent(library.source())).description.substr(0, 40).split('\\n')[0].split('.')[0] + '</h4>' +\n        '<p class=\"list-group-item-text\">v' + JSON.parse(decodeURIComponent(library.source())).version + '</p>' +\n        '</a>';\n  }\n\n  systems = this.require('storage').get('system-designer-systems');\n\n  if (systems) {\n    systemIds = systems.systems;\n  }\n  length = systemIds.length;\n\n  for (i = 0; i < length; i++) {\n    system = this.require('storage').get(systemIds[i]);\n\n    if (this.require('designer').system() && this.require('designer').system().id() === system._id) {\n    } else {\n        sys = sys + '<a class=\"list-group-item\" id=\"designer-dialog-import-file-modal-systems-' + system._id + '\">' +\n            '<h4 class=\"list-group-item-heading\">' + system.name + '</h4>' +\n            '<p class=\"list-group-item-text\">v' + system.version + '</p>' +\n            '</a>';\n    }\n  }\n\n  html = this.require('dialog-modal-import-file.html');\n  document.querySelector('#designer-dialog-import-file').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{library}}/gi, list)\n        .replace(/{{systems}}/gi, sys)\n  );\n\n  // init\n  if (sys === '') {\n    $('#designer-dialog-import-modal-from-systems-input').hide();\n    if (this.require('designer').isCordova()) {\n      $('#designer-dialog-import-modal-from-library-form').show();\n      $('#designer-dialog-import-modal-type-import').hide();\n    }\n  } else {\n    if (this.require('designer').isCordova()) {\n      $('#designer-dialog-import-modal-from-library-form').show();\n      $('#designer-dialog-import-modal-type-import').show();\n    }\n  }\n  if (this.require('designer').isCordova()) {\n    $('#designer-dialog-import-modal-from-file').attr('checked', false);\n    $('#designer-dialog-import-modal-from-library').attr('checked', true);\n  }\n  if (!this.require('designer').system()) {\n    $('#designer-dialog-import-file-modal-merge').hide();\n  }\n\n  // systems events  \n  var callbackSystemEvent = function cbSystemEvent(event) {\n    var id = '',\n        systems = null,\n        length = 0,\n        i = 0;\n\n    if ($(this).hasClass('active')) {\n      $(this).removeClass('active');\n      that.data(null);\n    } else {\n      id = this.getAttribute('id').replace('designer-dialog-import-file-modal-systems-', '');\n\n      that.data(that.require('storage').get(id));\n\n      // remove old active\n      systems = document.getElementById('designer-dialog-import-file-modal-systems');\n\n      length = systems.children.length;\n      for (i = 0; i < length; i++) {\n        $(systems.children[i]).removeClass('active');\n      }\n\n      // add current active\n      $(this).addClass('active');\n    }\n  };\n\n  length = systemIds.length;\n  for (i = 0; i < length; i++) {\n    system = that.require('storage').get(systems.systems[i]);\n    if (this.require('designer').system() && this.require('designer').system().id() === system._id) {\n    } else {\n      dom = document.getElementById('designer-dialog-import-file-modal-systems-' + system._id);\n      dom.addEventListener('click', callbackSystemEvent);\n    }\n  }\n\n  // library events  \n  var callbackEvent = function cbEvent(event) {\n    var id = '',\n        libraries = null,\n        length = 0,\n        i = 0;\n\n    if ($(this).hasClass('active')) {\n      $(this).removeClass('active');\n      that.data(null);\n    } else {\n      id = this.getAttribute('id').replace('designer-dialog-import-file-modal-library-', '');\n\n      that.data(JSON.parse(decodeURIComponent(that.require(id).source())));\n\n      // remove old active\n      libraries = document.getElementById('designer-dialog-import-file-modal-library');\n\n      length = libraries.children.length;\n      for (i = 0; i < length; i++) {\n        $(libraries.children[i]).removeClass('active');\n      }\n\n      // add current active\n      $(this).addClass('active');\n    }\n  };\n\n  length = libraries.length;\n  for (i = 0; i < length; i++) {\n    library = this.require(libraries[i]._id);\n    dom = document.getElementById('designer-dialog-import-file-modal-library-' + library.id());\n\n    dom.addEventListener('click', callbackEvent);\n  }\n\n  dom = document.getElementById('designer-dialog-import-modal-from-file');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-import-modal-from-file-form').show();\n    $('#designer-dialog-import-modal-from-systems-form').hide();\n    $('#designer-dialog-import-modal-from-library-form').hide();\n    $('#designer-dialog-import-file-modal-import').show();\n    $('#designer-dialog-import-file-modal-merge').removeClass('btn-primary');\n    $('#designer-dialog-import-file-modal-merge').addClass('btn-default');\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-modal-from-library');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-import-modal-from-library-form').show();\n    $('#designer-dialog-import-modal-from-systems-form').hide();\n    $('#designer-dialog-import-modal-from-file-form').hide();\n    $('#designer-dialog-import-file-modal-import').show();\n    $('#designer-dialog-import-file-modal-merge').removeClass('btn-primary');\n    $('#designer-dialog-import-file-modal-merge').addClass('btn-default');\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-modal-from-systems');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-import-modal-from-library-form').hide();\n    $('#designer-dialog-import-modal-from-systems-form').show();\n    $('#designer-dialog-import-modal-from-file-form').hide();\n    $('#designer-dialog-import-file-modal-import').hide();\n    $('#designer-dialog-import-file-modal-merge').removeClass('btn-default');\n    $('#designer-dialog-import-file-modal-merge').addClass('btn-primary');\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-merge');\n  dom.addEventListener('click', function click(event) {\n    this.mergeSystem();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-import');\n  dom.addEventListener('click', function click(event) {\n    this.importSystem();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-file');\n  dom.addEventListener('change', function click(e) {\n    e.stopPropagation();\n    e.preventDefault();\n\n    var files = e.target.files,\n        reader = new FileReader(),\n        json = '',\n        that = this;\n\n    reader.onload = function onload(event) {\n      json = json + event.target.result;\n    };\n    reader.onloadend = function onloadend() {\n      try {\n        that.data(JSON.parse(json));\n      } catch (e) {\n        that.data({});\n      }\n    };\n    if (files[0]) {\n      debugger;\n      reader.readAsText(files[0], 'UTF-8');\n    }\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "n1948e18c6f1f038": {
-            "_id": "n1948e18c6f1f038",
-            "component": "DialogImportFile",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-import-file-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "y1c99c14f7316ed0": {
-            "_id": "y1c99c14f7316ed0",
-            "component": "DialogImportFile",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-import-file-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "w13035176cd18ec0": {
-            "_id": "w13035176cd18ec0",
-            "component": "DialogDropFile",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = null,\n      dom = null;\n\n  $('#designer-dialog-drop-file').empty();\n\n  html = this.require('dialog-modal-drop-file.html');\n  document.querySelector('#designer-dialog-drop-file').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-drop-file-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-drop-file-modal-merge');\n  dom.addEventListener('click', function click(event) {\n    this.mergeSystem();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-drop-file-modal-import');\n  dom.addEventListener('click', function click(event) {\n    this.importSystem();\n  }.bind(this));\n\n  if (!this.require('designer').system()) {\n    $('#designer-dialog-drop-file-modal-merge').hide();\n  }\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "v1b5181a8ab164a9": {
-            "_id": "v1b5181a8ab164a9",
-            "component": "DialogDropFile",
-            "state": "mergeSystem",
-            "action": "function mergeSystem() { \n  var sys = null,\n      name = '',\n      modelName = '',\n      propName = '',\n      compId = '',\n      modelId = '',\n      schemaId = '',\n      designer = this.require('designer'),\n      schemas = {},\n      models = {},\n      types = {},\n      components = {},\n      behaviors = {},\n      system = designer.system(),\n      message = this.require('message');\n\n  sys = this.data();\n\n  function _getModelId(name) {\n    var result = '',\n        id = '';\n\n    for (id in designer.system().models()) {\n      if (designer.system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getSchemaId(name) {\n    var result = '',\n        id = '';\n\n    for (id in designer.system().schemas()) {\n      if (designer.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _canOverrideBehavior(id, component, state, behaviors) {\n    var behavior = {},\n        behaviorId = '';\n\n    for (behaviorId in behaviors) {\n      behavior = behaviors[behaviorId];\n      if (behavior.component === component && behavior.state === state && behavior._id !== id) {\n        delete behaviors[behavior._id];\n        break;\n      }\n    }\n  }\n\n  function _canOverride(sysId, schemas, behaviors, behavior) {\n    var def = {},\n        id = '',\n        result = true;\n\n    id = _getSchemaId(behavior.component);\n    def = schemas[id];\n\n    if (def && def[behavior.state]) {\n      if (def[behavior.state] === 'method') {\n        _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);\n      }\n    } else {\n      result = false;\n    }\n\n    if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {\n      result = false;\n    }\n\n    return result;\n  }\n\n  if (Object.keys(sys).length) {\n\n    // schemas\n    schemas = JSON.parse(JSON.stringify(designer.system().schemas()));\n    for (name in sys.schemas) {\n      if (schemas[name]) {\n        for (propName in sys.schemas[name]) {\n          schemas[name][propName] = sys.schemas[name][propName];\n        }\n      } else {\n        if (!_getSchemaId(sys.schemas[name]._name)) {\n          schemas[name] = sys.schemas[name];\n        } else {\n          for (propName in sys.schemas[name]) {\n            if (propName.indexOf('_') !== 0) {\n              schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n            }\n          }\n        }\n      }\n    }\n    designer.system().schemas(schemas);\n\n    // behaviors\n    behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));\n    for (name in sys.behaviors) {\n      if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {\n        behaviors[name] = sys.behaviors[name];\n      } else {\n        // merge main / start / stop\n        if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {\n          designer.mergeBehavior(behaviors, sys.behaviors[name], designer.system().id(), sys.name);\n        }\n      }\n    }\n    designer.system().behaviors(behaviors);\n\n    // sync models\n    for (schemaId in schemas) {\n      designer.syncModel(schemas[schemaId]);\n    }\n\n    // models\n    models = JSON.parse(JSON.stringify(designer.system().models()));\n    for (name in sys.models) {\n      if (models[name]) {\n          for (propName in sys.models[name]) {\n            models[name][propName] = sys.models[name][propName];\n          }\n      } else {\n        if (!_getModelId(sys.models[name]._name)) {\n            models[name] = sys.models[name];\n        } else {\n          for (propName in sys.models[name]) {\n            if (propName.indexOf('_') !== 0) {\n              models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n            }\n          }\n        }\n      }\n    }\n    designer.system().models(models);\n\n    // sync behaviors and components\n    for (modelId in models) {\n      designer.syncBehavior(models[modelId]);\n    }\n\n    // types\n    types = JSON.parse(JSON.stringify(designer.system().types()));\n    for (name in sys.types) {\n      if (types[name]) {\n        for (propName in sys.types[name]) {\n          types[name][propName] = sys.types[name][propName];\n        }\n      } else {\n        types[name] = sys.types[name];\n      }\n    }\n    designer.system().types(types);\n\n    // components\n    components = JSON.parse(JSON.stringify(designer.system().components()));\n    for (modelName in sys.components) {\n      if (!components[modelName]) {\n        components[modelName] = {};\n      }\n      for (compId in sys.components[modelName]) {\n          if (components[modelName][compId]) {\n            for (propName in sys.components[modelName][compId]) {\n              components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n            }\n        } else {\n          components[modelName][compId] = sys.components[modelName][compId];\n        }\n      }\n    }\n    designer.system().components(components);\n\n    // sync components\n    for (modelId in models) {\n      designer.syncComponent(models[modelId]);\n    }\n\n    designer.system().schemas(schemas);\n    designer.system().models(models);\n    designer.system().types(types);\n    designer.system().behaviors(behaviors);\n    designer.system().components(components);\n\n    if (designer.system().id() === sys._id) {\n      designer.system().version(sys.version);\n      designer.system().description(sys.description);\n    }\n\n    designer.save();\n\n    this.require('spaces').render();\n    this.require('workspace').render();\n\n    designer.updateRouter();\n\n    this.hide();\n    message.success('Composition of the system is done.');\n  } else {\n      message.danger('The system you try to import is invalid.');\n  }\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "q1fed61ef1315a53": {
-            "_id": "q1fed61ef1315a53",
-            "component": "DialogDropFile",
-            "state": "importSystem",
-            "action": "function importSystem() { \n  var System = this.require('System'),\n      sys = null,\n      designer = this.require('designer'),\n      message = this.require('message');\n\n  if (designer.system()) {\n    designer.system().destroy();\n  }\n  sys = new System(this.data());\n  designer.system(sys);\n\n  // empty log\n  designer.logs().forEach(function (item) {\n    this.logs().pop();\n  }.bind(designer));\n\n  designer.save();\n\n  designer.space(sys.name());\n  this.require('spaces').render();\n  this.require('workspace').render();\n\n  designer.updateRouter();\n\n  this.hide();\n  designer.save();\n\n  message.success('Importation of the system is done.');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "i1c2891d03c165db": {
-            "_id": "i1c2891d03c165db",
-            "component": "DialogDropFile",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-drop-file-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "w1ef271a5801083b": {
-            "_id": "w1ef271a5801083b",
-            "component": "DialogDropFile",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-drop-file-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "o158c0125d313bc1": {
-            "_id": "o158c0125d313bc1",
-            "component": "DialogTypeCreation",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-type-creation').empty();\n\n  html = this.require('dialog-modal-type-creation.html');\n  document.querySelector('#designer-dialog-type-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-type-creation-name');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-type-creation-name').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-type-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-type-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-type-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-type-creation-name').focus();\n  });\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "f1bf26153e91a94e": {
-            "_id": "f1bf26153e91a94e",
-            "component": "DialogTypeCreation",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-type-creation-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "r1b7ef1af221063a": {
-            "_id": "r1b7ef1af221063a",
-            "component": "DialogTypeCreation",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-type-creation-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "m1c6a71fad71fee1": {
-            "_id": "m1c6a71fad71fee1",
-            "component": "DialogExport",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      system = this.require('designer').system();\n\n  $('#designer-dialog-export').empty();\n\n  html = this.require('dialog-modal-export.html');\n  document.querySelector('#designer-dialog-export').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // default value\n  if (system.master() === true) {\n    $('#designer-dialog-export-isMaster').attr('checked', true);\n  }\n  if (system.subsystem() === true) {\n    $('#designer-dialog-export-isSubsystem').attr('checked', true);\n  }\n\n  //events\n  dom = document.getElementById('designer-dialog-export-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-json');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').show();\n    $('#designer-dialog-export-options-log-level').hide();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-javascript');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').hide();\n    $('#designer-dialog-export-options-log-level').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-html');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').hide();\n    $('#designer-dialog-export-options-log-level').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-node');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').hide();\n    $('#designer-dialog-export-options-log-level').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-modal');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      this.ok();\n      return false;\n    }\n  }.bind(this));\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "j1c3811fb511de72": {
-            "_id": "j1c3811fb511de72",
-            "component": "DialogExport",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-export-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "o11bf7168fa1a773": {
-            "_id": "o11bf7168fa1a773",
-            "component": "DialogExport",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-export-modal').modal('hide');\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "l15e6a1e7711d0ef": {
-            "_id": "l15e6a1e7711d0ef",
-            "component": "DialogSchemaCreation",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-schema-creation').empty();\n\n  html = this.require('dialog-modal-schema-creation.html');\n  document.querySelector('#designer-dialog-schema-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-schema-creation-name');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-schema-creation-name').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-schema-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-schema-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-schema-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-schema-creation-name').focus();\n  });\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "d1118d16e2b12b21": {
-            "_id": "d1118d16e2b12b21",
-            "component": "DialogSchemaCreation",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-schema-creation-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "o121e11a6ee1db91": {
-            "_id": "o121e11a6ee1db91",
-            "component": "DialogSchemaCreation",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-schema-creation-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "w1f7a8132f216d1c": {
-            "_id": "w1f7a8132f216d1c",
-            "component": "DialogSystemCreation",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-system-creation').empty();\n\n  html = this.require('dialog-modal-system-creation.html');\n  document.querySelector('#designer-dialog-system-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-system-creation-name');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-system-creation-name').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-system-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-system-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-system-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-system-creation-name').focus();\n  });\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "e1e6ca1015e1d465": {
-            "_id": "e1e6ca1015e1d465",
-            "component": "DialogSystemCreation",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-system-creation-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "m10f82178e11130e": {
-            "_id": "m10f82178e11130e",
-            "component": "DialogSystemCreation",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-system-creation-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "l1188a196431b09d": {
-            "_id": "l1188a196431b09d",
-            "component": "DialogModelCreation",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-model-creation').empty();\n\n  html = this.require('dialog-modal-model-creation.html');\n  document.querySelector('#designer-dialog-model-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  dom = document.getElementById('designer-dialog-model-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "v1f50e113f9119f9": {
-            "_id": "v1f50e113f9119f9",
-            "component": "DialogModelCreation",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-model-creation-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "t122401bc301f40a": {
-            "_id": "t122401bc301f40a",
-            "component": "DialogModelCreation",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-model-creation-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "n1de871334c1351c": {
-            "_id": "n1de871334c1351c",
-            "component": "DialogBehaviorCreation",
-            "state": "init",
-            "action": "function init(conf) { \n\n  var html = '',\n      dom = null,\n      selectStates = '',\n      states = [],\n      designer = this.require('designer'),\n      space = this.require('designer').space(),\n      schemas = designer.system().schemas(),\n      models = designer.system().models(),\n      schema = '',\n      name = '';\n\n  function _findSchemaId(compId) {\n    var result = compId,\n        modelName = '';\n\n    for (modelName in designer.system().components()) {\n      if (typeof designer.system().components()[modelName][compId] !== 'undefined') {\n        result = modelName;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getSchemaId(name) {\n    var result = '',\n        id = '';\n\n    for (id in designer.system().schemas()) {\n      if (designer.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  $('#designer-dialog-behavior-creation').empty();\n\n  if (space !== designer.system().name()) {\n    states = Object.keys(this.require('designer').getGeneratedSchema(_findSchemaId(space)));\n  } else {\n    states.push('start');\n    states.push('stop');\n  }\n\n  states.sort();\n  states.forEach(\n    function (name) {\n      selectStates = selectStates + '<option value=\"' + name + '\">' + name + '</option>';\n  });\n\n  html = this.require('dialog-modal-behavior-creation.html');\n  document.querySelector('#designer-dialog-behavior-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{states}}/gi, selectStates)\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-behavior-creation-state');\n  dom.addEventListener('keydown', function (event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-behavior-creation-state').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-behavior-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-behavior-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-behavior-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-behavior-creation-state').focus();\n  });\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "z134f51d13d1b4d0": {
-            "_id": "z134f51d13d1b4d0",
-            "component": "DialogBehaviorCreation",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-behavior-creation-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "b17f0312b751a46c": {
-            "_id": "b17f0312b751a46c",
-            "component": "DialogBehaviorCreation",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-behavior-creation-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "q1b5f114b1c1e74e": {
-            "_id": "q1b5f114b1c1e74e",
-            "component": "DialogComponentCreation",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      name = '',\n      dom = null,\n      selectModels = '',\n      designer = this.require('designer'),\n      models = designer.system().models();\n\n  $('#designer-dialog-component-creation').empty();\n\n  for (name in models) {\n    selectModels = selectModels + '<option value=\"' + name + '\">' + name + '</option>';\n  }\n\n  html = this.require('dialog-modal-component-creation.html');\n  document.querySelector('#designer-dialog-component-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{models}}/gi, selectModels)\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-component-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-component-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "r1efd0102531db59": {
-            "_id": "r1efd0102531db59",
-            "component": "DialogComponentCreation",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-component-creation-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "t1250217bbe111b1": {
-            "_id": "t1250217bbe111b1",
-            "component": "DialogComponentCreation",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-component-creation-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "r1b0d81aa7d163d1": {
-            "_id": "r1b0d81aa7d163d1",
-            "component": "DialogRuntimeComponentInfo",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-runtimecomponent-info').empty();\n\n  html = this.require('dialog-modal-runtimecomponent-info.html');\n  document.querySelector('#designer-dialog-runtimecomponent-info').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-runtimecomponent-info-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.hide();\n  }.bind(this));\t\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "n10b6a1d0411f758": {
-            "_id": "n10b6a1d0411f758",
-            "component": "DialogRuntimeComponentInfo",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-runtimecomponent-info-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "n1cb8f1f6981f0b8": {
-            "_id": "n1cb8f1f6981f0b8",
-            "component": "DialogRuntimeComponentInfo",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-runtimecomponent-info-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "p14fb71056d1c4e5": {
-            "_id": "p14fb71056d1c4e5",
-            "component": "DialogSearch",
-            "state": "init",
-            "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      system = this.require('designer').system();\n\n  $('#designer-dialog-search').empty();\n\n  html = this.require('dialog-modal-search.html');\n  document.querySelector('#designer-dialog-search').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-search-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-search-result');\n  dom.addEventListener('click', function click(event) {\n    this.hide();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-input-search');\n  dom.addEventListener('keyup', function keyup(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      return false;\n    } else {\n      this.filter(event.target.value);\n    }\n  }.bind(this));\n\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-option');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-checkbox-search')[0].checked = !this.inContent();\n    this.inContent(!this.inContent());\n    this.filter(this.filter());\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-search-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-input-search').focus();\n  });\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "i1f2a414c501ccef": {
-            "_id": "i1f2a414c501ccef",
-            "component": "DialogSearch",
-            "state": "show",
-            "action": "function show() { \n  $('#designer-dialog-search-modal').modal('show');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "m113f71766a1a35a": {
-            "_id": "m113f71766a1a35a",
-            "component": "DialogSearch",
-            "state": "hide",
-            "action": "function hide() { \n  $('#designer-dialog-search-modal').modal('hide');\n}",
-            "useCoreAPI": false,
-            "core": false
-        }
+    "j1dd971e4e417dc0": {
+      "_name": "DialogBehaviorCreation",
+      "_inherit": ["Dialog"],
+      "_id": "j1dd971e4e417dc0"
     },
-    "types": {},
-    "components": {},
-    "_id": "j14988167501fe95"
+    "r1117315b65182cd": {
+      "_name": "DialogCheck",
+      "_inherit": ["Dialog"],
+      "_id": "r1117315b65182cd"
+    },
+    "z1cebc15af210ffd": {
+      "_name": "DialogComponentCreation",
+      "_inherit": ["Dialog"],
+      "_id": "z1cebc15af210ffd"
+    },
+    "y18a2615cad1374d": {
+      "_name": "DialogConfig",
+      "_inherit": ["Dialog"],
+      "_id": "y18a2615cad1374d"
+    },
+    "w1b40b10be812656": {
+      "_name": "DialogDropFile",
+      "_inherit": ["Dialog"],
+      "mergeSystem": "event",
+      "importSystem": "event",
+      "_id": "w1b40b10be812656"
+    },
+    "w143aa1a8401eb92": {
+      "_name": "DialogExport",
+      "_inherit": ["Dialog"],
+      "_id": "w143aa1a8401eb92"
+    },
+    "n1c79a1da261e02e": {
+      "_name": "DialogImport",
+      "_inherit": ["Dialog"],
+      "_id": "n1c79a1da261e02e"
+    },
+    "c1758d13d20146d4": {
+      "_name": "DialogImportFile",
+      "_inherit": ["Dialog"],
+      "mergeSystem": "event",
+      "importSystem": "event",
+      "_id": "c1758d13d20146d4"
+    },
+    "t13c8d1b4271338c": {
+      "_name": "DialogModelCreation",
+      "_inherit": ["Dialog"],
+      "_id": "t13c8d1b4271338c"
+    },
+    "z19abb1de8815574": {
+      "_name": "DialogRuntimeComponentInfo",
+      "_inherit": ["Dialog"],
+      "_id": "z19abb1de8815574"
+    },
+    "b1cad1118451b9d7": {
+      "_name": "DialogSchemaCreation",
+      "_inherit": ["Dialog"],
+      "_id": "b1cad1118451b9d7"
+    },
+    "e1c0cd11f9210181": {
+      "_name": "DialogSearch",
+      "_inherit": ["Dialog"],
+      "filter": "property",
+      "inContent": "property",
+      "_id": "e1c0cd11f9210181"
+    },
+    "v112c0137f31f448": {
+      "_name": "DialogShare",
+      "_inherit": ["Dialog"],
+      "_id": "v112c0137f31f448"
+    },
+    "j1a5781d076127b4": {
+      "_name": "DialogSync",
+      "_inherit": ["Dialog"],
+      "_id": "j1a5781d076127b4"
+    },
+    "y1cc6f1fdc415f97": {
+      "_name": "DialogSystemCreation",
+      "_inherit": ["Dialog"],
+      "_id": "y1cc6f1fdc415f97"
+    },
+    "z15c55119a7160f3": {
+      "_name": "DialogTypeCreation",
+      "_inherit": ["Dialog"],
+      "_id": "z15c55119a7160f3"
+    },
+    "g1db25176311401d": {
+      "_name": "DialogWelcome",
+      "_inherit": ["Dialog"],
+      "_id": "g1db25176311401d"
+    }
+  },
+  "models": {
+    "l1d4181e4d71ade2": {
+      "_name": "Dialog",
+      "title": {
+        "type": "string",
+        "readOnly": true,
+        "mandatory": true,
+        "default": ""
+      },
+      "message": {
+        "type": "string",
+        "readOnly": true,
+        "mandatory": false,
+        "default": ""
+      },
+      "data": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "show": {},
+      "hide": {},
+      "cancel": {},
+      "ok": {},
+      "_id": "l1d4181e4d71ade2"
+    },
+    "n14a831448a1ef6a": {
+      "_name": "DialogCopyright",
+      "_id": "n14a831448a1ef6a"
+    },
+    "g1ab8111f2d1c7ce": {
+      "_name": "DialogBehaviorCreation",
+      "_id": "g1ab8111f2d1c7ce"
+    },
+    "c17890126ea1316c": {
+      "_name": "DialogCheck",
+      "_id": "c17890126ea1316c"
+    },
+    "t12b5d1be8512beb": {
+      "_name": "DialogComponentCreation",
+      "_id": "t12b5d1be8512beb"
+    },
+    "t15a691554c1155f": {
+      "_name": "DialogConfig",
+      "_id": "t15a691554c1155f"
+    },
+    "c1b56e1fdb3174a8": {
+      "_name": "DialogDropFile",
+      "mergeSystem": {},
+      "importSystem": {},
+      "_id": "c1b56e1fdb3174a8"
+    },
+    "h1fedc1441312ac4": {
+      "_name": "DialogExport",
+      "_id": "h1fedc1441312ac4"
+    },
+    "t1c8ab1e8c010544": {
+      "_name": "DialogImport",
+      "_id": "t1c8ab1e8c010544"
+    },
+    "w15777160d41bb38": {
+      "_name": "DialogImportFile",
+      "mergeSystem": {},
+      "importSystem": {},
+      "_id": "w15777160d41bb38"
+    },
+    "v108dd1f00315ebe": {
+      "_name": "DialogModelCreation",
+      "_id": "v108dd1f00315ebe"
+    },
+    "o19888142191439e": {
+      "_name": "DialogRuntimeComponentInfo",
+      "_id": "o19888142191439e"
+    },
+    "i15fee18f0e164ba": {
+      "_name": "DialogSchemaCreation",
+      "_id": "i15fee18f0e164ba"
+    },
+    "u1caa614eb713967": {
+      "_name": "DialogSearch",
+      "filter": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "inContent": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+      },
+      "_id": "u1caa614eb713967"
+    },
+    "e167bf16b5c1fd5f": {
+      "_name": "DialogShare",
+      "_id": "e167bf16b5c1fd5f"
+    },
+    "k105d3130531ae5c": {
+      "_name": "DialogSync",
+      "_id": "k105d3130531ae5c"
+    },
+    "k19f8d10dec1beda": {
+      "_name": "DialogSystemCreation",
+      "_id": "k19f8d10dec1beda"
+    },
+    "x1e7931468415710": {
+      "_name": "DialogTypeCreation",
+      "_id": "x1e7931468415710"
+    },
+    "e1dd3f1e688107a8": {
+      "_name": "DialogWelcome",
+      "_id": "e1dd3f1e688107a8"
+    }
+  },
+  "behaviors": {
+    "k10e3f115ef1a83b": {
+      "_id": "k10e3f115ef1a83b",
+      "component": "DialogCopyright",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n  \n  $('#designer-dialog-copyright').empty();\n\n  html = this.require('dialog-modal-copyright.html');\n  document.querySelector('#designer-dialog-copyright').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-copyright-modal-ok');\n  dom.addEventListener('click', function (event) {\n      this.ok();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k191d71c949120ec": {
+      "_id": "k191d71c949120ec",
+      "component": "DialogCopyright",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-copyright-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z17fdc13a9a1f940": {
+      "_id": "z17fdc13a9a1f940",
+      "component": "DialogCopyright",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-copyright-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k11cb01de7316017": {
+      "_id": "k11cb01de7316017",
+      "component": "DialogImport",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('.modal-backdrop').remove();\n  $('#designer-dialog-import').empty();\n  \n  html = this.require('dialog-modal-import.html');\n  document.querySelector('#designer-dialog-import').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n  \n  // events\n  dom = document.getElementById('designer-dialog-import-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-import-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "n1ff331a4a41052e": {
+      "_id": "n1ff331a4a41052e",
+      "component": "DialogImport",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-import-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "c10f7913c3113bb1": {
+      "_id": "c10f7913c3113bb1",
+      "component": "DialogImport",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-import-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "v15c47172a11008d": {
+      "_id": "v15c47172a11008d",
+      "component": "DialogCheck",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n  \n  $('#designer-dialog-check').empty();\n  \n  html = this.require('dialog-modal-check.html');\n  document.querySelector('#designer-dialog-check').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n  \n  dom = document.getElementById('designer-dialog-check-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "y1224610bd414f94": {
+      "_id": "y1224610bd414f94",
+      "component": "DialogCheck",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-check-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "v1328d14c881f685": {
+      "_id": "v1328d14c881f685",
+      "component": "DialogCheck",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-check-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r102da1927e1cabc": {
+      "_id": "r102da1927e1cabc",
+      "component": "DialogCheck",
+      "state": "ok",
+      "action": "function ok() { \n  this.hide();\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w17f82152171991e": {
+      "_id": "w17f82152171991e",
+      "component": "DialogWelcome",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n  \n  $('#designer-dialog-welcome').empty();\n  \n  html = this.require('dialog-modal-welcome.html');\n  document.querySelector('#designer-dialog-welcome').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n  \n  // events\n  dom = document.getElementById('designer-dialog-welcome-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l149ed1bf1411137": {
+      "_id": "l149ed1bf1411137",
+      "component": "DialogWelcome",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-welcome-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "g184031e6b71648a": {
+      "_id": "g184031e6b71648a",
+      "component": "DialogWelcome",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-welcome-modal').modal('hide');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z1d0ec1a0ce18278": {
+      "_id": "z1d0ec1a0ce18278",
+      "component": "DialogSync",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-sync').empty();\n\n  html = this.require('dialog-modal-sync.html');\n  document.querySelector('#designer-dialog-sync').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-sync-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-type-creation-hasHTML');\n  dom.addEventListener('click', function click(event) {\n    if ($('#designer-dialog-type-creation-hasHTML')[0].checked) {\n        $('#designer-dialog-sync-options-log-level').show();\n    } else {\n        $('#designer-dialog-sync-options-log-level').hide();\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-sync-commit');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-sync-comments-area').show();\n    $('#designer-dialog-sync-options-area').show();\n    $('#designer-dialog-sync-options-node').show();\n    if ($('#designer-dialog-type-creation-hasHTML')[0].checked) {\n        $('#designer-dialog-sync-options-log-level').show();\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-sync-refresh');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-sync-comments-area').hide();\n    $('#designer-dialog-sync-options-area').hide();\n    $('#designer-dialog-sync-options-log-level').hide();\n    $('#designer-dialog-sync-options-node').hide();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f1df481fac01acdc": {
+      "_id": "f1df481fac01acdc",
+      "component": "DialogSync",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-sync-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "m187b818e2f1b30f": {
+      "_id": "m187b818e2f1b30f",
+      "component": "DialogSync",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-sync-modal').modal('hide');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "y1934b1e72412bd0": {
+      "_id": "y1934b1e72412bd0",
+      "component": "DialogShare",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = null,\n          dom = null,\n          sys = '';\n\n  $('#designer-dialog-share').empty();\n\n  sys = this.require('db').collections().System.find({\n      '_id': this.require('designer').system().id()\n  })[0];\n\n  html = this.require('dialog-modal-share.html');\n  document.querySelector('#designer-dialog-share').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, window.location.toString().split('#')[0] + '?system=' + encodeURIComponent(JSON.stringify(sys)))\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-share-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-share-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l1eb0516ca015910": {
+      "_id": "l1eb0516ca015910",
+      "component": "DialogShare",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-share-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "q1e62a1c9d61ba89": {
+      "_id": "q1e62a1c9d61ba89",
+      "component": "DialogShare",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-share-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s1d027166051b0ad": {
+      "_id": "s1d027166051b0ad",
+      "component": "DialogConfig",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      that = this,\n      storeConfig = null,\n      designer = that.require('designer');\n\n  $('#designer-dialog-config').empty();\n\n  html = this.require('dialog-modal-config.html');\n  document.querySelector('#designer-dialog-config').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // default config value\n  storeConfig = this.require('storage').get('system-designer-config');\n\n  if (!storeConfig) {\n    storeConfig = {};\n  }\n\n  if (typeof storeConfig.debugType === 'undefined') {\n    storeConfig.debugType = 'client';\n    this.require('storage').set('system-designer-config', storeConfig);\n  }\n  if (storeConfig.debugType === 'client') {\n    $('#designer-dialog-config-radio-client').attr('checked', true);\n    $('#designer-dialog-config-server-form').hide();\n  } else {\n    $('#designer-dialog-config-radio-server').attr('checked', true);\n    $('#designer-dialog-config-client-form').hide();\n  }\n  if (storeConfig.urlClient) {\n    $('#designer-dialog-config-url-client')[0].value = storeConfig.urlClient;\n  }\n  if (storeConfig.urlServer) {\n    $('#designer-dialog-config-url-server')[0].value = storeConfig.urlServer;\n  }\n  if (storeConfig.githubToken) {\n    $('#designer-dialog-config-github-token')[0].value = atob(storeConfig.githubToken);\n  }\n  if (storeConfig.githubRepository) {\n    $('#designer-dialog-config-github-repository')[0].value = storeConfig.githubRepository;\n  }\n  if (storeConfig.advancedMode) {\n    $('#designer-dialog-config-advanced-mode-isAdvanced').attr('checked', true);\n  }\n\n  // events\n  dom = document.getElementById('designer-dialog-config-radio-client');\n  dom.addEventListener('click', function click(event) {\n    var config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n\n    config.debugType = 'client';\n    this.require('storage').set('system-designer-config', config);\n\n    $('#designer-dialog-config-client-form').show();\n    $('#designer-dialog-config-server-form').hide();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-radio-server');\n  dom.addEventListener('click', function click(event) {\n    var config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n\n    config.debugType = 'server';\n    this.require('storage').set('system-designer-config', config);\n\n    $('#designer-dialog-config-client-form').hide();\n    $('#designer-dialog-config-server-form').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-url-client');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-url-client').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-github-token');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-github-token').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-github-repository');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-github-repository').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-url-server');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n        event.stopPropagation();\n        event.preventDefault();\n        if ($('#designer-dialog-config-url-server').val()) {\n          this.ok();\n        }\n        return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-advanced-mode-isAdvanced');\n  dom.addEventListener('click', function click(event) {\n    var config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n\n    config.advancedMode = $('#designer-dialog-config-advanced-mode-isAdvanced').prop('checked');\n    this.require('storage').set('system-designer-config', config);\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-config-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f16d5719c171dfe5": {
+      "_id": "f16d5719c171dfe5",
+      "component": "DialogConfig",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-config-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l1cb42113d7185c8": {
+      "_id": "l1cb42113d7185c8",
+      "component": "DialogConfig",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-config-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f1f43d11c0d15597": {
+      "_id": "f1f43d11c0d15597",
+      "component": "DialogConfig",
+      "state": "ok",
+      "action": "function ok() { \n  var config = this.require('storage').get('system-designer-config');\n\n  if (!config) {\n    config = {};\n  }\n\n  config.urlClient = $('#designer-dialog-config-url-client')[0].value;\n  config.urlServer = $('#designer-dialog-config-url-server')[0].value;\n  config.githubToken = btoa($('#designer-dialog-config-github-token')[0].value);\n  config.githubRepository = $('#designer-dialog-config-github-repository')[0].value;\n\n  this.require('storage').set('system-designer-config', config);\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "t143b71071c16185": {
+      "_id": "t143b71071c16185",
+      "component": "DialogImportFile",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      that = this,\n      libraries = [],\n      library = '',\n      systems = [],\n      system = '',\n      sys = '',\n      systemIds = '',\n      length = 0,\n      i = 0,\n      list = '';\n\n  $('#designer-dialog-import-file').empty();\n\n  libraries = this.require('db').collections().JSON.find();\n  length = libraries.length;\n  for (i = 0; i < length; i++) {\n    library = this.require(libraries[i]._id);\n\n    list = list + '<a class=\"list-group-item\" id=\"designer-dialog-import-file-modal-library-' + library.id() + '\">' +\n        '<h4 class=\"list-group-item-heading\">' + JSON.parse(decodeURIComponent(library.source())).description.substr(0, 40).split('\\n')[0].split('.')[0] + '</h4>' +\n        '<p class=\"list-group-item-text\">v' + JSON.parse(decodeURIComponent(library.source())).version + '</p>' +\n        '</a>';\n  }\n\n  systems = this.require('storage').get('system-designer-systems');\n\n  if (systems) {\n    systemIds = systems.systems;\n  }\n  length = systemIds.length;\n\n  for (i = 0; i < length; i++) {\n    system = this.require('storage').get(systemIds[i]);\n\n    if (this.require('designer').system() && this.require('designer').system().id() === system._id) {\n    } else {\n        sys = sys + '<a class=\"list-group-item\" id=\"designer-dialog-import-file-modal-systems-' + system._id + '\">' +\n            '<h4 class=\"list-group-item-heading\">' + system.name + '</h4>' +\n            '<p class=\"list-group-item-text\">v' + system.version + '</p>' +\n            '</a>';\n    }\n  }\n\n  html = this.require('dialog-modal-import-file.html');\n  document.querySelector('#designer-dialog-import-file').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{library}}/gi, list)\n        .replace(/{{systems}}/gi, sys)\n  );\n\n  // init\n  if (sys === '') {\n    $('#designer-dialog-import-modal-from-systems-input').hide();\n    if (this.require('designer').isCordova()) {\n      $('#designer-dialog-import-modal-from-library-form').show();\n      $('#designer-dialog-import-modal-type-import').hide();\n    }\n  } else {\n    if (this.require('designer').isCordova()) {\n      $('#designer-dialog-import-modal-from-library-form').show();\n      $('#designer-dialog-import-modal-type-import').show();\n    }\n  }\n  if (this.require('designer').isCordova()) {\n    $('#designer-dialog-import-modal-from-file').attr('checked', false);\n    $('#designer-dialog-import-modal-from-library').attr('checked', true);\n  }\n  if (!this.require('designer').system()) {\n    $('#designer-dialog-import-file-modal-merge').hide();\n  }\n\n  // systems events  \n  var callbackSystemEvent = function cbSystemEvent(event) {\n    var id = '',\n        systems = null,\n        length = 0,\n        i = 0;\n\n    if ($(this).hasClass('active')) {\n      $(this).removeClass('active');\n      that.data(null);\n    } else {\n      id = this.getAttribute('id').replace('designer-dialog-import-file-modal-systems-', '');\n\n      that.data(that.require('storage').get(id));\n\n      // remove old active\n      systems = document.getElementById('designer-dialog-import-file-modal-systems');\n\n      length = systems.children.length;\n      for (i = 0; i < length; i++) {\n        $(systems.children[i]).removeClass('active');\n      }\n\n      // add current active\n      $(this).addClass('active');\n    }\n  };\n\n  length = systemIds.length;\n  for (i = 0; i < length; i++) {\n    system = that.require('storage').get(systems.systems[i]);\n    if (this.require('designer').system() && this.require('designer').system().id() === system._id) {\n    } else {\n      dom = document.getElementById('designer-dialog-import-file-modal-systems-' + system._id);\n      dom.addEventListener('click', callbackSystemEvent);\n    }\n  }\n\n  // library events  \n  var callbackEvent = function cbEvent(event) {\n    var id = '',\n        libraries = null,\n        length = 0,\n        i = 0;\n\n    if ($(this).hasClass('active')) {\n      $(this).removeClass('active');\n      that.data(null);\n    } else {\n      id = this.getAttribute('id').replace('designer-dialog-import-file-modal-library-', '');\n\n      that.data(JSON.parse(decodeURIComponent(that.require(id).source())));\n\n      // remove old active\n      libraries = document.getElementById('designer-dialog-import-file-modal-library');\n\n      length = libraries.children.length;\n      for (i = 0; i < length; i++) {\n        $(libraries.children[i]).removeClass('active');\n      }\n\n      // add current active\n      $(this).addClass('active');\n    }\n  };\n\n  length = libraries.length;\n  for (i = 0; i < length; i++) {\n    library = this.require(libraries[i]._id);\n    dom = document.getElementById('designer-dialog-import-file-modal-library-' + library.id());\n\n    dom.addEventListener('click', callbackEvent);\n  }\n\n  dom = document.getElementById('designer-dialog-import-modal-from-file');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-import-modal-from-file-form').show();\n    $('#designer-dialog-import-modal-from-systems-form').hide();\n    $('#designer-dialog-import-modal-from-library-form').hide();\n    $('#designer-dialog-import-file-modal-import').show();\n    $('#designer-dialog-import-file-modal-merge').removeClass('btn-primary');\n    $('#designer-dialog-import-file-modal-merge').addClass('btn-default');\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-modal-from-library');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-import-modal-from-library-form').show();\n    $('#designer-dialog-import-modal-from-systems-form').hide();\n    $('#designer-dialog-import-modal-from-file-form').hide();\n    $('#designer-dialog-import-file-modal-import').show();\n    $('#designer-dialog-import-file-modal-merge').removeClass('btn-primary');\n    $('#designer-dialog-import-file-modal-merge').addClass('btn-default');\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-modal-from-systems');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-import-modal-from-library-form').hide();\n    $('#designer-dialog-import-modal-from-systems-form').show();\n    $('#designer-dialog-import-modal-from-file-form').hide();\n    $('#designer-dialog-import-file-modal-import').hide();\n    $('#designer-dialog-import-file-modal-merge').removeClass('btn-default');\n    $('#designer-dialog-import-file-modal-merge').addClass('btn-primary');\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-merge');\n  dom.addEventListener('click', function click(event) {\n    this.mergeSystem();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-import');\n  dom.addEventListener('click', function click(event) {\n    this.importSystem();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-import-file-modal-file');\n  dom.addEventListener('change', function click(e) {\n    e.stopPropagation();\n    e.preventDefault();\n\n    var files = e.target.files,\n        reader = new FileReader(),\n        json = '',\n        that = this;\n\n    reader.onload = function onload(event) {\n      json = json + event.target.result;\n    };\n    reader.onloadend = function onloadend() {\n      try {\n        that.data(JSON.parse(json));\n      } catch (e) {\n        that.data({});\n      }\n    };\n    if (files[0]) {\n      debugger;\n      reader.readAsText(files[0], 'UTF-8');\n    }\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "n1948e18c6f1f038": {
+      "_id": "n1948e18c6f1f038",
+      "component": "DialogImportFile",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-import-file-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "y1c99c14f7316ed0": {
+      "_id": "y1c99c14f7316ed0",
+      "component": "DialogImportFile",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-import-file-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w13035176cd18ec0": {
+      "_id": "w13035176cd18ec0",
+      "component": "DialogDropFile",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = null,\n      dom = null;\n\n  $('#designer-dialog-drop-file').empty();\n\n  html = this.require('dialog-modal-drop-file.html');\n  document.querySelector('#designer-dialog-drop-file').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-drop-file-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-drop-file-modal-merge');\n  dom.addEventListener('click', function click(event) {\n    this.mergeSystem();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-drop-file-modal-import');\n  dom.addEventListener('click', function click(event) {\n    this.importSystem();\n  }.bind(this));\n\n  if (!this.require('designer').system()) {\n    $('#designer-dialog-drop-file-modal-merge').hide();\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "v1b5181a8ab164a9": {
+      "_id": "v1b5181a8ab164a9",
+      "component": "DialogDropFile",
+      "state": "mergeSystem",
+      "action": "function mergeSystem() { \n  var sys = null,\n      name = '',\n      modelName = '',\n      propName = '',\n      compId = '',\n      modelId = '',\n      schemaId = '',\n      designer = this.require('designer'),\n      schemas = {},\n      models = {},\n      types = {},\n      components = {},\n      behaviors = {},\n      system = designer.system(),\n      message = this.require('message');\n\n  sys = this.data();\n\n  function _getModelId(name) {\n    var result = '',\n        id = '';\n\n    for (id in designer.system().models()) {\n      if (designer.system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getSchemaId(name) {\n    var result = '',\n        id = '';\n\n    for (id in designer.system().schemas()) {\n      if (designer.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _canOverrideBehavior(id, component, state, behaviors) {\n    var behavior = {},\n        behaviorId = '';\n\n    for (behaviorId in behaviors) {\n      behavior = behaviors[behaviorId];\n      if (behavior.component === component && behavior.state === state && behavior._id !== id) {\n        delete behaviors[behavior._id];\n        break;\n      }\n    }\n  }\n\n  function _canOverride(sysId, schemas, behaviors, behavior) {\n    var def = {},\n        id = '',\n        result = true;\n\n    id = _getSchemaId(behavior.component);\n    def = schemas[id];\n\n    if (def && def[behavior.state]) {\n      if (def[behavior.state] === 'method') {\n        _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);\n      }\n    } else {\n      result = false;\n    }\n\n    if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {\n      result = false;\n    }\n\n    return result;\n  }\n\n  if (Object.keys(sys).length) {\n\n    // schemas\n    schemas = JSON.parse(JSON.stringify(designer.system().schemas()));\n    for (name in sys.schemas) {\n      if (schemas[name]) {\n        for (propName in sys.schemas[name]) {\n          schemas[name][propName] = sys.schemas[name][propName];\n        }\n      } else {\n        if (!_getSchemaId(sys.schemas[name]._name)) {\n          schemas[name] = sys.schemas[name];\n        } else {\n          for (propName in sys.schemas[name]) {\n            if (propName.indexOf('_') !== 0) {\n              schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n            }\n          }\n        }\n      }\n    }\n    designer.system().schemas(schemas);\n\n    // behaviors\n    behaviors = JSON.parse(JSON.stringify(designer.system().behaviors()));\n    for (name in sys.behaviors) {\n      if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {\n        behaviors[name] = sys.behaviors[name];\n      } else {\n        // merge main / start / stop\n        if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {\n          designer.mergeBehavior(behaviors, sys.behaviors[name], designer.system().id(), sys.name);\n        }\n      }\n    }\n    designer.system().behaviors(behaviors);\n\n    // sync models\n    for (schemaId in schemas) {\n      designer.syncModel(schemas[schemaId]);\n    }\n\n    // models\n    models = JSON.parse(JSON.stringify(designer.system().models()));\n    for (name in sys.models) {\n      if (models[name]) {\n          for (propName in sys.models[name]) {\n            models[name][propName] = sys.models[name][propName];\n          }\n      } else {\n        if (!_getModelId(sys.models[name]._name)) {\n            models[name] = sys.models[name];\n        } else {\n          for (propName in sys.models[name]) {\n            if (propName.indexOf('_') !== 0) {\n              models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n            }\n          }\n        }\n      }\n    }\n    designer.system().models(models);\n\n    // sync behaviors and components\n    for (modelId in models) {\n      designer.syncBehavior(models[modelId]);\n    }\n\n    // types\n    types = JSON.parse(JSON.stringify(designer.system().types()));\n    for (name in sys.types) {\n      if (types[name]) {\n        for (propName in sys.types[name]) {\n          types[name][propName] = sys.types[name][propName];\n        }\n      } else {\n        types[name] = sys.types[name];\n      }\n    }\n    designer.system().types(types);\n\n    // components\n    components = JSON.parse(JSON.stringify(designer.system().components()));\n    for (modelName in sys.components) {\n      if (!components[modelName]) {\n        components[modelName] = {};\n      }\n      for (compId in sys.components[modelName]) {\n          if (components[modelName][compId]) {\n            for (propName in sys.components[modelName][compId]) {\n              components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n            }\n        } else {\n          components[modelName][compId] = sys.components[modelName][compId];\n        }\n      }\n    }\n    designer.system().components(components);\n\n    // sync components\n    for (modelId in models) {\n      designer.syncComponent(models[modelId]);\n    }\n\n    designer.system().schemas(schemas);\n    designer.system().models(models);\n    designer.system().types(types);\n    designer.system().behaviors(behaviors);\n    designer.system().components(components);\n\n    if (designer.system().id() === sys._id) {\n      designer.system().version(sys.version);\n      designer.system().description(sys.description);\n    }\n\n    designer.save();\n\n    this.require('spaces').render();\n    this.require('workspace').render();\n\n    designer.updateRouter();\n\n    this.hide();\n    message.success('Composition of the system is done.');\n  } else {\n      message.danger('The system you try to import is invalid.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "q1fed61ef1315a53": {
+      "_id": "q1fed61ef1315a53",
+      "component": "DialogDropFile",
+      "state": "importSystem",
+      "action": "function importSystem() { \n  var System = this.require('System'),\n      sys = null,\n      designer = this.require('designer'),\n      state = this.require('state'),\n      message = this.require('message');\n\n  if (designer.system()) {\n    designer.system().destroy();\n  }\n  sys = new System(this.data());\n  designer.system(sys);\n\n  // empty log\n  state.logs().forEach(function (item) {\n    this.logs().pop();\n  }.bind(state));\n\n  designer.save();\n\n  this.require('state').space(sys.name());\n  this.require('spaces').render();\n  this.require('workspace').render();\n\n  designer.updateRouter();\n\n  this.hide();\n  designer.save();\n\n  message.success('Importation of the system is done.');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "i1c2891d03c165db": {
+      "_id": "i1c2891d03c165db",
+      "component": "DialogDropFile",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-drop-file-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w1ef271a5801083b": {
+      "_id": "w1ef271a5801083b",
+      "component": "DialogDropFile",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-drop-file-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "o158c0125d313bc1": {
+      "_id": "o158c0125d313bc1",
+      "component": "DialogTypeCreation",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-type-creation').empty();\n\n  html = this.require('dialog-modal-type-creation.html');\n  document.querySelector('#designer-dialog-type-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-type-creation-name');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-type-creation-name').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-type-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-type-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-type-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-type-creation-name').focus();\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f1bf26153e91a94e": {
+      "_id": "f1bf26153e91a94e",
+      "component": "DialogTypeCreation",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-type-creation-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r1b7ef1af221063a": {
+      "_id": "r1b7ef1af221063a",
+      "component": "DialogTypeCreation",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-type-creation-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "m1c6a71fad71fee1": {
+      "_id": "m1c6a71fad71fee1",
+      "component": "DialogExport",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      system = this.require('designer').system();\n\n  $('#designer-dialog-export').empty();\n\n  html = this.require('dialog-modal-export.html');\n  document.querySelector('#designer-dialog-export').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // default value\n  if (system.master() === true) {\n    $('#designer-dialog-export-isMaster').attr('checked', true);\n  }\n  if (system.subsystem() === true) {\n    $('#designer-dialog-export-isSubsystem').attr('checked', true);\n  }\n\n  //events\n  dom = document.getElementById('designer-dialog-export-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-json');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').show();\n    $('#designer-dialog-export-options-log-level').hide();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-javascript');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').hide();\n    $('#designer-dialog-export-options-log-level').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-html');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').hide();\n    $('#designer-dialog-export-options-log-level').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-node');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-export-options').hide();\n    $('#designer-dialog-export-options-log-level').show();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-export-modal');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      this.ok();\n      return false;\n    }\n  }.bind(this));\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "j1c3811fb511de72": {
+      "_id": "j1c3811fb511de72",
+      "component": "DialogExport",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-export-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "o11bf7168fa1a773": {
+      "_id": "o11bf7168fa1a773",
+      "component": "DialogExport",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-export-modal').modal('hide');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l15e6a1e7711d0ef": {
+      "_id": "l15e6a1e7711d0ef",
+      "component": "DialogSchemaCreation",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-schema-creation').empty();\n\n  html = this.require('dialog-modal-schema-creation.html');\n  document.querySelector('#designer-dialog-schema-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-schema-creation-name');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-schema-creation-name').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-schema-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-schema-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-schema-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-schema-creation-name').focus();\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "d1118d16e2b12b21": {
+      "_id": "d1118d16e2b12b21",
+      "component": "DialogSchemaCreation",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-schema-creation-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "o121e11a6ee1db91": {
+      "_id": "o121e11a6ee1db91",
+      "component": "DialogSchemaCreation",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-schema-creation-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w1f7a8132f216d1c": {
+      "_id": "w1f7a8132f216d1c",
+      "component": "DialogSystemCreation",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-system-creation').empty();\n\n  html = this.require('dialog-modal-system-creation.html');\n  document.querySelector('#designer-dialog-system-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-system-creation-name');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-system-creation-name').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-system-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-system-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-system-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-system-creation-name').focus();\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "e1e6ca1015e1d465": {
+      "_id": "e1e6ca1015e1d465",
+      "component": "DialogSystemCreation",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-system-creation-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "m10f82178e11130e": {
+      "_id": "m10f82178e11130e",
+      "component": "DialogSystemCreation",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-system-creation-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l1188a196431b09d": {
+      "_id": "l1188a196431b09d",
+      "component": "DialogModelCreation",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-model-creation').empty();\n\n  html = this.require('dialog-modal-model-creation.html');\n  document.querySelector('#designer-dialog-model-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  dom = document.getElementById('designer-dialog-model-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "v1f50e113f9119f9": {
+      "_id": "v1f50e113f9119f9",
+      "component": "DialogModelCreation",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-model-creation-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "t122401bc301f40a": {
+      "_id": "t122401bc301f40a",
+      "component": "DialogModelCreation",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-model-creation-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "n1de871334c1351c": {
+      "_id": "n1de871334c1351c",
+      "component": "DialogBehaviorCreation",
+      "state": "init",
+      "action": "function init(conf) { \n\n  var html = '',\n      dom = null,\n      selectStates = '',\n      states = [],\n      designer = this.require('designer'),\n      space = this.require('state').space(),\n      schemas = designer.system().schemas(),\n      models = designer.system().models(),\n      schema = '',\n      name = '';\n\n  function _findSchemaId(compId) {\n    var result = compId,\n        modelName = '';\n\n    for (modelName in designer.system().components()) {\n      if (typeof designer.system().components()[modelName][compId] !== 'undefined') {\n        result = modelName;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getSchemaId(name) {\n    var result = '',\n        id = '';\n\n    for (id in designer.system().schemas()) {\n      if (designer.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  $('#designer-dialog-behavior-creation').empty();\n\n  if (space !== designer.system().name()) {\n    states = Object.keys(this.require('designer').getGeneratedSchema(_findSchemaId(space)));\n  } else {\n    states.push('start');\n    states.push('stop');\n  }\n\n  states.sort();\n  states.forEach(\n    function (name) {\n      selectStates = selectStates + '<option value=\"' + name + '\">' + name + '</option>';\n  });\n\n  html = this.require('dialog-modal-behavior-creation.html');\n  document.querySelector('#designer-dialog-behavior-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{states}}/gi, selectStates)\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-behavior-creation-state');\n  dom.addEventListener('keydown', function (event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      if ($('#designer-dialog-behavior-creation-state').val()) {\n        this.ok();\n      }\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-behavior-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-behavior-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-behavior-creation-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-behavior-creation-state').focus();\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z134f51d13d1b4d0": {
+      "_id": "z134f51d13d1b4d0",
+      "component": "DialogBehaviorCreation",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-behavior-creation-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "b17f0312b751a46c": {
+      "_id": "b17f0312b751a46c",
+      "component": "DialogBehaviorCreation",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-behavior-creation-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "q1b5f114b1c1e74e": {
+      "_id": "q1b5f114b1c1e74e",
+      "component": "DialogComponentCreation",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      name = '',\n      dom = null,\n      selectModels = '',\n      designer = this.require('designer'),\n      models = designer.system().models();\n\n  $('#designer-dialog-component-creation').empty();\n\n  for (name in models) {\n    selectModels = selectModels + '<option value=\"' + name + '\">' + name + '</option>';\n  }\n\n  html = this.require('dialog-modal-component-creation.html');\n  document.querySelector('#designer-dialog-component-creation').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{models}}/gi, selectModels)\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-component-creation-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-component-creation-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r1efd0102531db59": {
+      "_id": "r1efd0102531db59",
+      "component": "DialogComponentCreation",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-component-creation-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "t1250217bbe111b1": {
+      "_id": "t1250217bbe111b1",
+      "component": "DialogComponentCreation",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-component-creation-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r1b0d81aa7d163d1": {
+      "_id": "r1b0d81aa7d163d1",
+      "component": "DialogRuntimeComponentInfo",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  $('#designer-dialog-runtimecomponent-info').empty();\n\n  html = this.require('dialog-modal-runtimecomponent-info.html');\n  document.querySelector('#designer-dialog-runtimecomponent-info').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-runtimecomponent-info-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.hide();\n  }.bind(this));\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "n10b6a1d0411f758": {
+      "_id": "n10b6a1d0411f758",
+      "component": "DialogRuntimeComponentInfo",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-runtimecomponent-info-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "n1cb8f1f6981f0b8": {
+      "_id": "n1cb8f1f6981f0b8",
+      "component": "DialogRuntimeComponentInfo",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-runtimecomponent-info-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "p14fb71056d1c4e5": {
+      "_id": "p14fb71056d1c4e5",
+      "component": "DialogSearch",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null,\n      system = this.require('designer').system();\n\n  $('#designer-dialog-search').empty();\n\n  html = this.require('dialog-modal-search.html');\n  document.querySelector('#designer-dialog-search').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-search-modal-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-search-result');\n  dom.addEventListener('click', function click(event) {\n    this.hide();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-input-search');\n  dom.addEventListener('keyup', function keyup(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      return false;\n    } else {\n      this.filter(event.target.value);\n    }\n  }.bind(this));\n\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      return false;\n    }\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-option');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-checkbox-search')[0].checked = !this.inContent();\n    this.inContent(!this.inContent());\n    this.filter(this.filter());\n  }.bind(this));\n\n  // focus\n  $('#designer-dialog-search-modal').on('shown.bs.modal', function modal() {\n    $('#designer-dialog-input-search').focus();\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "i1f2a414c501ccef": {
+      "_id": "i1f2a414c501ccef",
+      "component": "DialogSearch",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-search-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "m113f71766a1a35a": {
+      "_id": "m113f71766a1a35a",
+      "component": "DialogSearch",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-search-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {},
+  "_id": "j14988167501fe95"
 }

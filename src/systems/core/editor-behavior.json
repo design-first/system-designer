@@ -1,682 +1,623 @@
 {
-    "name": "editor-behavior",
-    "master": true,
-    "subsystem": false,
-    "version": "1.0.0",
-    "description": "",
-    "schemas": {
-        "t19b6b11ff31158d": {
-            "_name": "ToolBarItem",
-            "html": "link",
-            "position": "property",
-            "type": "property",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "click": "event",
-            "_id": "t19b6b11ff31158d",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "p1f6f51d9f111925": {
-            "_name": "MenuAction",
-            "html": "link",
-            "position": "property",
-            "type": "property",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "_id": "p1f6f51d9f111925",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "t14a79156a81862a": {
-            "_name": "MenuHeader",
-            "html": "link",
-            "type": "property",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "_id": "t14a79156a81862a",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "l1d113198721599d": {
-            "_name": "MenuItem",
-            "html": "link",
-            "position": "property",
-            "type": "property",
-            "name": "property",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "click": "event",
-            "_id": "l1d113198721599d",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "f1092816b571e03c": {
-            "_name": "Workspace",
-            "create": "method",
-            "load": "method",
-            "clear": "method",
-            "refresh": "method",
-            "render": "method",
-            "_id": "f1092816b571e03c",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "k1b97018e111d0e3": {
-            "_name": "Server",
-            "start": "method",
-            "_id": "k1b97018e111d0e3",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "o1ead8184af1a83e": {
-            "_name": "Designer",
-            "_inherit": [
-                "_Component"
-            ],
-            "version": "property",
-            "context": "property",
-            "oldContext": "property",
-            "space": "property",
-            "system": "property",
-            "filter": "property",
-            "type": "property",
-            "runWindow": "property",
-            "debugWindow": "property",
-            "updateRouter": "method",
-            "syncModel": "method",
-            "syncBehavior": "method",
-            "syncComponent": "method",
-            "createModel": "method",
-            "createBehavior": "method",
-            "deleteSchema": "method",
-            "linkModel": "method",
-            "save": "method",
-            "saveCordova": "method",
-            "saveAs": "method",
-            "welcome": "method",
-            "generateId": "method",
-            "open": "method",
-            "render": "event",
-            "logs": "collection",
-            "isCordova": "method",
-            "isElectron": "method",
-            "updateCordovaContext": "method",
-            "runMessages": "method",
-            "getGeneratedSchema": "method",
-            "getGeneratedModel": "method",
-            "mergeBehavior": "method",
-            "_id": "o1ead8184af1a83e"
-        }
+  "name": "editor-behavior",
+  "master": true,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "z1e592183e81ce64": {
+      "_id": "z1e592183e81ce64",
+      "_name": "Router",
+      "_inherit": ["_Component"],
+      "start": "method",
+      "update": "method"
     },
-    "models": {
-        "u1f4c7177bb1a459": {
-            "_name": "ToolBarItem",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "position": {
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "click": {},
-            "_id": "u1f4c7177bb1a459"
-        },
-        "w124ac16b591df57": {
-            "_name": "MenuAction",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "position": {
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "_id": "w124ac16b591df57"
-        },
-        "f13ebe1ad331b263": {
-            "_name": "MenuHeader",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "_id": "f13ebe1ad331b263"
-        },
-        "u1f9a01abe31b3bf": {
-            "_id": "u1f9a01abe31b3bf",
-            "_name": "MenuItem",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "position": {
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "name": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "click": {}
-        },
-        "v1435e1809e10be7": {
-            "_id": "v1435e1809e10be7",
-            "_name": "Workspace",
-            "create": {},
-            "load": {},
-            "clear": {},
-            "render": {}
-        },
-        "e1ca371b8a41af7b": {
-            "_id": "e1ca371b8a41af7b",
-            "_name": "Server",
-            "start": {}
-        },
-        "q129be1c61b18285": {
-            "_id": "q129be1c61b18285",
-            "_name": "Designer",
-            "version": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "2.0.0-alpha.1"
-            },
-            "context": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "oldContext": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "space": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "system": {
-                "type": "@System",
-                "readOnly": false,
-                "mandatory": false,
-                "default": {}
-            },
-            "filter": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "runWindow": {
-                "type": "object",
-                "readOnly": false,
-                "mandatory": false,
-                "default": null
-            },
-            "debugWindow": {
-                "type": "object",
-                "readOnly": false,
-                "mandatory": false,
-                "default": null
-            },
-            "updateRouter": {},
-            "syncModel": {
-                "params": [{
-                    "name": "schema",
-                    "type": "object",
-                    "mandatory": false,
-                    "default": {}
-                }]
-            },
-            "syncBehavior": {
-                "params": [{
-                    "name": "model",
-                    "type": "object",
-                    "mandatory": false,
-                    "default": {}
-                }]
-            },
-            "syncComponent": {
-                "params": [{
-                        "name": "model",
-                        "type": "object",
-                        "mandatory": false,
-                        "default": {}
-                    },
-                    {
-                        "name": "forceDelete",
-                        "type": "boolean",
-                        "mandatory": false,
-                        "default": true
-                    }
-                ]
-            },
-            "createModel": {
-                "params": [{
-                    "name": "schema",
-                    "type": "object",
-                    "mandatory": false,
-                    "default": {}
-                }]
-            },
-            "createBehavior": {
-                "params": [{
-                        "name": "type",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": "method"
-                    },
-                    {
-                        "name": "model",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": ""
-                    },
-                    {
-                        "name": "state",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": ""
-                    },
-                    {
-                        "name": "def",
-                        "type": "object",
-                        "mandatory": false,
-                        "default": {}
-                    }
-                ]
-            },
-            "deleteSchema": {
-                "params": [{
-                    "name": "schemaId",
-                    "type": "string",
-                    "mandatory": false,
-                    "default": ""
-                }]
-            },
-            "linkModel": {
-                "params": [{
-                        "name": "source",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": ""
-                    },
-                    {
-                        "name": "target",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": ""
-                    }
-                ]
-            },
-            "save": {},
-            "saveCordova": {},
-            "saveAs": {
-                "params": [{
-                        "name": "data",
-                        "type": "object",
-                        "mandatory": false,
-                        "default": {}
-                    },
-                    {
-                        "name": "fileName",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": ""
-                    }
-                ]
-            },
-            "welcome": {},
-            "generateId": {
-                "result": "string"
-            },
-            "open": {
-                "params": [{
-                        "name": "url",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": ""
-                    },
-                    {
-                        "name": "target",
-                        "type": "string",
-                        "mandatory": false,
-                        "default": ""
-                    },
-                    {
-                        "name": "isExt",
-                        "type": "boolean",
-                        "mandatory": false,
-                        "default": false
-                    }
-                ]
-            },
-            "render": {},
-            "logs": {
-                "type": [
-                    "@Log"
-                ],
-                "readOnly": false,
-                "mandatory": false,
-                "default": []
-            },
-            "isCordova": {
-                "result": "boolean"
-            },
-            "isElectron": {
-                "result": "boolean"
-            },
-            "updateCordovaContext": {},
-            "runMessages": {
-                "params": [{
-                    "name": "messages",
-                    "type": "array",
-                    "mandatory": true,
-                    "default": []
-                }]
-            },
-            "getGeneratedSchema": {
-                "params": [{
-                    "name": "schema",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }],
-                "result": "object"
-            },
-            "getGeneratedModel": {
-                "params": [{
-                    "name": "model",
-                    "type": "string",
-                    "mandatory": true,
-                    "default": ""
-                }],
-                "result": "object"
-            },
-            "mergeBehavior": {
-                "params": [{
-                        "name": "behaviors",
-                        "type": "object",
-                        "mandatory": true,
-                        "default": {}
-                    },
-                    {
-                        "name": "behavior",
-                        "type": "object",
-                        "mandatory": true,
-                        "default": {}
-                    },
-                    {
-                        "name": "sysId",
-                        "type": "string",
-                        "mandatory": true,
-                        "default": ""
-                    },
-                    {
-                        "name": "systemName",
-                        "type": "string",
-                        "mandatory": true,
-                        "default": ""
-                    }
-                ]
-            }
-        }
+    "t19b6b11ff31158d": {
+      "_name": "ToolBarItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "t19b6b11ff31158d",
+      "_inherit": ["_Component"]
     },
-    "behaviors": {
-        "m191d0168cd1e718": {
-            "_id": "m191d0168cd1e718",
-            "component": "1dbc513e0e11z19",
-            "state": "click",
-            "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
-        },
-        "q13ca018ddf1b2cb": {
-            "_id": "q13ca018ddf1b2cb",
-            "component": "1dbc513e0e11z18",
-            "state": "click",
-            "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
-        },
-        "i17f271591b13ab8": {
-            "_id": "i17f271591b13ab8",
-            "component": "1dbc513e0e11z17",
-            "state": "click",
-            "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
-        },
-        "z151551d71511af6": {
-            "_id": "z151551d71511af6",
-            "component": "1dbc51200e11616",
-            "state": "click",
-            "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n}"
-        },
-        "r1c1e3143bb14fea": {
-            "_id": "r1c1e3143bb14fea",
-            "component": "1dbc51200e11612",
-            "state": "click",
-            "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
-        },
-        "g10e66157581049b": {
-            "_id": "g10e66157581049b",
-            "component": "1dbc51200e11611",
-            "state": "click",
-            "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save(); \n}"
-        },
-        "r1e032137771c493": {
-            "_id": "r1e032137771c493",
-            "component": "MenuItem",
-            "state": "click",
-            "action": "function click() { \n  this.require('designer').context(this.name());\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "w1d94e18b9f10fe3": {
-            "_id": "w1d94e18b9f10fe3",
-            "component": "Workspace",
-            "state": "render",
-            "action": "function render() { \n  var Editor = null,\n    designer = null,\n    editor = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'behavior',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'text/javascript',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'behavior',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n  \n  editor.render();\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "h1bbad16fa9189c2": {
-            "_id": "h1bbad16fa9189c2",
-            "component": "Server",
-            "state": "start",
-            "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    designer = this.require('designer'),\n    editor = this.require('editor'),\n    Range = null,\n    endLine = null;\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('_Channel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  behavior = this.require('storage').get(systemId).behaviors[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(behavior);\n\n  if (behavior.state === 'start' && systemId === behavior.component) {\n    document.title = 'behavior ' + designer.system().name() + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  } else {\n    document.title = 'behavior ' + behavior.component + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  }\n\n  editor.initValue(behavior.action, 2);\n}",
-            "useCoreAPI": true,
-            "core": false
-        },
-        "o1b89518d6212c82": {
-            "_id": "o1b89518d6212c82",
-            "component": "1f1781882618110",
-            "state": "click",
-            "action": "function click() { \n  var editor = this.require('editor');\n\n  try {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } catch (e) {\n    // TODO message ?\n  }\n\n  editor.setEditor('javascript',this.require('store').data().action, 2);\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "a16d1816a121a0ca": {
-            "_id": "a16d1816a121a0ca",
-            "component": "1f1781882618111",
-            "state": "click",
-            "action": "function click() { \n  var editor = this.require('editor');\n\n  if (editor.getValue().indexOf('{') !== 0) {\n    this.require('store').data().action = editor.getValue();\n  }\n\n  editor.setEditor('json', JSON.stringify(this.require('store').data(), null, '\\t'), 2);\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "r1841b145401b120": {
-            "_id": "r1841b145401b120",
-            "component": "Designer",
-            "state": "render",
-            "action": "function render() {\n  var systemId = '',\n    System = null,\n    system = null,\n    sys = null;\n\n  // type\n  this.type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // set system\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  system = this.require('storage').get(systemId);\n  System = this.require('System');\n  sys = new System(system);\n  this.system(sys);\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  this.require('server').start();\n  \n  this.updateRouter();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "k10e2f1b28217d01": {
-            "_id": "k10e2f1b28217d01",
-            "component": "Designer",
-            "state": "updateRouter",
-            "action": "function updateRouter() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    systemId = '',\n    href = '';\n\n  id = document.location.href.split('#')[1];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + systemId + '#' + context;\n  }\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "t103d416bd313444": {
-            "_id": "t103d416bd313444",
-            "component": "Designer",
-            "state": "save",
-            "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  if (designer.context() === 'action') {\n    store.action = val;\n  } else {\n    store = JSON.parse(val);\n  }\n  this.require('store').data(store);\n\n  // check if ID change\n  if (this.require('store').uuid() !== this.require('store').data()._id) {\n    this.require('channel').$editorDeleteBehavior(this.require('store').uuid());\n    this.require('store').uuid(this.require('store').data()._id);\n  }\n\n  if (behavior.state === 'start' && designer.system().id() === behavior.component) {\n    document.title = 'behavior ' + designer.system().name() + ' · ' + document.title.split('·')[1].trim();\n  } else {\n    document.title = 'behavior ' + this.require('store').data().component + '.' + this.require('store').data().state + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  this.require('channel').$editorUpdateBehavior(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('Behavior saved.');\n}",
-            "useCoreAPI": false,
-            "core": false
-        },
-        "l16eb31f3a515bb9": {
-            "_id": "l16eb31f3a515bb9",
-            "component": "c1444b19a0c1ec4d",
-            "state": "start",
-            "action": "function start() { \n  this.require('designer').render();\n}",
-            "useCoreAPI": false,
-            "core": false
-        }
+    "p1f6f51d9f111925": {
+      "_name": "MenuAction",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "p1f6f51d9f111925",
+      "_inherit": ["_Component"]
     },
-    "types": {},
-    "components": {
-        "ToolBarItem": {
-            "1dbc51200e11611": {
-                "_id": "1dbc51200e11611",
-                "html": "toolbar-item-save.html",
-                "position": 10,
-                "type": "behavior"
-            },
-            "1dbc51200e11612": {
-                "_id": "1dbc51200e11612",
-                "html": "toolbar-item-copyright.html",
-                "position": 90,
-                "type": "behavior"
-            },
-            "1dbc51200e11616": {
-                "_id": "1dbc51200e11616",
-                "html": "toolbar-item-help.html",
-                "position": 80,
-                "type": "behavior"
-            },
-            "1dbc513e0e11z17": {
-                "_id": "1dbc513e0e11z17",
-                "html": "toolbar-item-undo.html",
-                "position": 20,
-                "type": "behavior"
-            },
-            "1dbc513e0e11z18": {
-                "_id": "1dbc513e0e11z18",
-                "html": "toolbar-item-redo.html",
-                "position": 30,
-                "type": "behavior"
-            },
-            "1dbc513e0e11z19": {
-                "_id": "1dbc513e0e11z19",
-                "html": "toolbar-item-select-all.html",
-                "position": 40,
-                "type": "behavior"
-            }
-        },
-        "MenuItem": {
-            "1f1781882618110": {
-                "_id": "1f1781882618110",
-                "name": "action",
-                "html": "menu-item-action.html",
-                "position": 10,
-                "type": "behavior"
-            },
-            "1f1781882618111": {
-                "_id": "1f1781882618111",
-                "name": "json",
-                "html": "menu-item-json.html",
-                "position": 20,
-                "type": "behavior"
-            }
-        },
-        "Designer": {},
-        "MenuAction": {
-            "1f8571164c179bi": {
-                "_id": "1f8571164c179bi",
-                "html": "menu-action-version.html",
-                "position": 10,
-                "type": "behavior"
-            }
-        },
-        "MenuHeader": {
-            "1fb101b99813a17": {
-                "_id": "1fb101b99813a17",
-                "html": "menu-header-behavior.html",
-                "type": "behavior"
-            }
-        }
+    "t14a79156a81862a": {
+      "_name": "MenuHeader",
+      "html": "link",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "t14a79156a81862a",
+      "_inherit": ["_Component"]
     },
-    "_id": "c1444b19a0c1ec4d"
+    "l1d113198721599d": {
+      "_name": "MenuItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "l1d113198721599d",
+      "_inherit": ["_Component"]
+    },
+    "f1092816b571e03c": {
+      "_name": "Workspace",
+      "create": "method",
+      "load": "method",
+      "clear": "method",
+      "refresh": "method",
+      "render": "method",
+      "_id": "f1092816b571e03c",
+      "_inherit": ["_Component"]
+    },
+    "k1b97018e111d0e3": {
+      "_name": "Server",
+      "start": "method",
+      "_id": "k1b97018e111d0e3",
+      "_inherit": ["_Component"]
+    },
+    "o1ead8184af1a83e": {
+      "_name": "Designer",
+      "_inherit": ["_Component"],
+      "version": "property",
+      "system": "property",
+      "runWindow": "property",
+      "debugWindow": "property",
+      "syncModel": "method",
+      "syncBehavior": "method",
+      "syncComponent": "method",
+      "createModel": "method",
+      "createBehavior": "method",
+      "deleteSchema": "method",
+      "linkModel": "method",
+      "save": "method",
+      "saveCordova": "method",
+      "saveAs": "method",
+      "welcome": "method",
+      "generateId": "method",
+      "open": "method",
+      "render": "event",
+      "isCordova": "method",
+      "isElectron": "method",
+      "updateCordovaContext": "method",
+      "runMessages": "method",
+      "getGeneratedSchema": "method",
+      "getGeneratedModel": "method",
+      "mergeBehavior": "method",
+      "_id": "o1ead8184af1a83e"
+    }
+  },
+  "models": {
+    "c1b00612faf188cf": {
+      "_id": "c1b00612faf188cf",
+      "_name": "Router",
+      "start": {},
+      "update": {}
+    },
+    "u1f4c7177bb1a459": {
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {},
+      "_id": "u1f4c7177bb1a459"
+    },
+    "w124ac16b591df57": {
+      "_name": "MenuAction",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "w124ac16b591df57"
+    },
+    "f13ebe1ad331b263": {
+      "_name": "MenuHeader",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "f13ebe1ad331b263"
+    },
+    "u1f9a01abe31b3bf": {
+      "_id": "u1f9a01abe31b3bf",
+      "_name": "MenuItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {}
+    },
+    "v1435e1809e10be7": {
+      "_id": "v1435e1809e10be7",
+      "_name": "Workspace",
+      "create": {},
+      "load": {},
+      "clear": {},
+      "render": {}
+    },
+    "e1ca371b8a41af7b": {
+      "_id": "e1ca371b8a41af7b",
+      "_name": "Server",
+      "start": {}
+    },
+    "q129be1c61b18285": {
+      "_id": "q129be1c61b18285",
+      "_name": "Designer",
+      "version": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "2.0.0-alpha.1"
+      },
+      "system": {
+        "type": "@System",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "runWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "debugWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "syncModel": {
+        "params": [{
+          "name": "schema",
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        }]
+      },
+      "syncBehavior": {
+        "params": [{
+          "name": "model",
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        }]
+      },
+      "syncComponent": {
+        "params": [{
+          "name": "model",
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        }, {
+          "name": "forceDelete",
+          "type": "boolean",
+          "mandatory": false,
+          "default": true
+        }]
+      },
+      "createModel": {
+        "params": [{
+          "name": "schema",
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        }]
+      },
+      "createBehavior": {
+        "params": [{
+          "name": "type",
+          "type": "string",
+          "mandatory": false,
+          "default": "method"
+        }, {
+          "name": "model",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "state",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "def",
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        }]
+      },
+      "deleteSchema": {
+        "params": [{
+          "name": "schemaId",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }]
+      },
+      "linkModel": {
+        "params": [{
+          "name": "source",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "target",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }]
+      },
+      "save": {},
+      "saveCordova": {},
+      "saveAs": {
+        "params": [{
+          "name": "data",
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        }, {
+          "name": "fileName",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }]
+      },
+      "welcome": {},
+      "generateId": {
+        "result": "string"
+      },
+      "open": {
+        "params": [{
+          "name": "url",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "target",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "isExt",
+          "type": "boolean",
+          "mandatory": false,
+          "default": false
+        }]
+      },
+      "render": {},
+      "isCordova": {
+        "result": "boolean"
+      },
+      "isElectron": {
+        "result": "boolean"
+      },
+      "updateCordovaContext": {},
+      "runMessages": {
+        "params": [{
+          "name": "messages",
+          "type": "array",
+          "mandatory": true,
+          "default": []
+        }]
+      },
+      "getGeneratedSchema": {
+        "params": [{
+          "name": "schema",
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }],
+        "result": "object"
+      },
+      "getGeneratedModel": {
+        "params": [{
+          "name": "model",
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }],
+        "result": "object"
+      },
+      "mergeBehavior": {
+        "params": [{
+          "name": "behaviors",
+          "type": "object",
+          "mandatory": true,
+          "default": {}
+        }, {
+          "name": "behavior",
+          "type": "object",
+          "mandatory": true,
+          "default": {}
+        }, {
+          "name": "sysId",
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }, {
+          "name": "systemName",
+          "type": "string",
+          "mandatory": true,
+          "default": ""
+        }]
+      }
+    }
+  },
+  "behaviors": {
+    "m191d0168cd1e718": {
+      "_id": "m191d0168cd1e718",
+      "component": "1dbc513e0e11z19",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
+    },
+    "q13ca018ddf1b2cb": {
+      "_id": "q13ca018ddf1b2cb",
+      "component": "1dbc513e0e11z18",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
+    },
+    "i17f271591b13ab8": {
+      "_id": "i17f271591b13ab8",
+      "component": "1dbc513e0e11z17",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
+    },
+    "z151551d71511af6": {
+      "_id": "z151551d71511af6",
+      "component": "1dbc51200e11616",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-behavior', '_blank', true); \n}"
+    },
+    "r1c1e3143bb14fea": {
+      "_id": "r1c1e3143bb14fea",
+      "component": "1dbc51200e11612",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+    },
+    "g10e66157581049b": {
+      "_id": "g10e66157581049b",
+      "component": "1dbc51200e11611",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save(); \n}"
+    },
+    "r1e032137771c493": {
+      "_id": "r1e032137771c493",
+      "component": "MenuItem",
+      "state": "click",
+      "action": "function click() { \n  this.require('state').context(this.name());\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w1d94e18b9f10fe3": {
+      "_id": "w1d94e18b9f10fe3",
+      "component": "Workspace",
+      "state": "render",
+      "action": "function render() { \n  var Editor = null,\n    designer = null,\n    editor = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'behavior',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'text/javascript',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'behavior',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n  \n  editor.render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "h1bbad16fa9189c2": {
+      "_id": "h1bbad16fa9189c2",
+      "component": "Server",
+      "state": "start",
+      "action": "function start() { \n  var RuntimeChannel = null,\n    channel = null,\n    id = '',\n    designer = this.require('designer'),\n    editor = this.require('editor'),\n    Range = null,\n    endLine = null;\n\n  this.require('storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\n\n  RuntimeChannel = this.require('_Channel');\n  channel = new RuntimeChannel({\n    '_id': 'channel'\n  });\n\n  channel.on('send', function (message) {\n    if (message.event.indexOf('$system') !== 0) {\n      var config = this.require('storage').get('system-designer-config'),\n        designer = this.require('designer'),\n        messages = [];\n\n      if (designer.isCordova()) {\n        messages = designer.messages();\n        messages.push(message);\n        designer.messages(messages);\n      }\n\n      this.require('storage').set('system-designer-message', message);\n\n      // message for server debug\n      if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n        $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n      }\n    }\n  });\n\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  behavior = this.require('storage').get(systemId).behaviors[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(behavior);\n\n  if (behavior.state === 'start' && systemId === behavior.component) {\n    document.title = 'behavior ' + designer.system().name() + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  } else {\n    document.title = 'behavior ' + behavior.component + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  }\n\n  editor.initValue(behavior.action, 2);\n}",
+      "useCoreAPI": true,
+      "core": false
+    },
+    "o1b89518d6212c82": {
+      "_id": "o1b89518d6212c82",
+      "component": "1f1781882618110",
+      "state": "click",
+      "action": "function click() { \n  var editor = this.require('editor');\n\n  try {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } catch (e) {\n    // TODO message ?\n  }\n\n  editor.setEditor('javascript',this.require('store').data().action, 2);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "a16d1816a121a0ca": {
+      "_id": "a16d1816a121a0ca",
+      "component": "1f1781882618111",
+      "state": "click",
+      "action": "function click() { \n  var editor = this.require('editor');\n\n  if (editor.getValue().indexOf('{') !== 0) {\n    this.require('store').data().action = editor.getValue();\n  }\n\n  editor.setEditor('json', JSON.stringify(this.require('store').data(), null, '\\t'), 2);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r1841b145401b120": {
+      "_id": "r1841b145401b120",
+      "component": "Designer",
+      "state": "render",
+      "action": "function render() {\n  var systemId = '',\n    System = null,\n    system = null,\n    sys = null;\n\n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // set system\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  system = this.require('storage').get(systemId);\n  System = this.require('System');\n  sys = new System(system);\n  this.system(sys);\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  this.require('server').start();\n  \n  this.require('router').update();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "t103d416bd313444": {
+      "_id": "t103d416bd313444",
+      "component": "Designer",
+      "state": "save",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  if (this.require('state').context() === 'action') {\n    store.action = val;\n  } else {\n    store = JSON.parse(val);\n  }\n  this.require('store').data(store);\n\n  // check if ID change\n  if (this.require('store').uuid() !== this.require('store').data()._id) {\n    this.require('channel').$editorDeleteBehavior(this.require('store').uuid());\n    this.require('store').uuid(this.require('store').data()._id);\n  }\n\n  if (behavior.state === 'start' && designer.system().id() === behavior.component) {\n    document.title = 'behavior ' + designer.system().name() + ' · ' + document.title.split('·')[1].trim();\n  } else {\n    document.title = 'behavior ' + this.require('store').data().component + '.' + this.require('store').data().state + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  this.require('channel').$editorUpdateBehavior(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('Behavior saved.');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l16eb31f3a515bb9": {
+      "_id": "l16eb31f3a515bb9",
+      "component": "c1444b19a0c1ec4d",
+      "state": "start",
+      "action": "function start() { \n  this.require('designer').render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k1fa3c1a56a14081": {
+      "_id": "k1fa3c1a56a14081",
+      "component": "Router",
+      "state": "update",
+      "action": "function update() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    systemId = '',\n    href = '';\n\n  id = document.location.href.split('#')[1];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + systemId + '#' + context;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "Router": {
+      "router": {
+        "_id": "router"
+      }
+    },
+    "ToolBarItem": {
+      "1dbc51200e11611": {
+        "_id": "1dbc51200e11611",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "behavior"
+      },
+      "1dbc51200e11612": {
+        "_id": "1dbc51200e11612",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "behavior"
+      },
+      "1dbc51200e11616": {
+        "_id": "1dbc51200e11616",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "behavior"
+      },
+      "1dbc513e0e11z17": {
+        "_id": "1dbc513e0e11z17",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "behavior"
+      },
+      "1dbc513e0e11z18": {
+        "_id": "1dbc513e0e11z18",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "behavior"
+      },
+      "1dbc513e0e11z19": {
+        "_id": "1dbc513e0e11z19",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "behavior"
+      }
+    },
+    "MenuItem": {
+      "1f1781882618110": {
+        "_id": "1f1781882618110",
+        "name": "action",
+        "html": "menu-item-action.html",
+        "position": 10,
+        "type": "behavior"
+      },
+      "1f1781882618111": {
+        "_id": "1f1781882618111",
+        "name": "json",
+        "html": "menu-item-json.html",
+        "position": 20,
+        "type": "behavior"
+      }
+    },
+    "Designer": {},
+    "MenuAction": {
+      "1f8571164c179bi": {
+        "_id": "1f8571164c179bi",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "behavior"
+      }
+    },
+    "MenuHeader": {
+      "1fb101b99813a17": {
+        "_id": "1fb101b99813a17",
+        "html": "menu-header-behavior.html",
+        "type": "behavior"
+      }
+    }
+  },
+  "_id": "c1444b19a0c1ec4d"
 }

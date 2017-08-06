@@ -1,224 +1,210 @@
 {
-    "name": "class-menubar",
-    "master": false,
-    "subsystem": false,
-    "version": "1.0.0",
-    "description": "",
-    "schemas": {
-        "p1f6f51d9f111925": {
-            "_name": "MenuAction",
-            "html": "link",
-            "position": "property",
-            "type": "property",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "_id": "p1f6f51d9f111925",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "a1097d1ea0812005": {
-            "_name": "MenuBar",
-            "logo": "property",
-            "header": "property",
-            "items": "collection",
-            "actions": "collection",
-            "render": "method",
-            "clear": "method",
-            "_id": "a1097d1ea0812005",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "t14a79156a81862a": {
-            "_name": "MenuHeader",
-            "html": "link",
-            "type": "property",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "_id": "t14a79156a81862a",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "l1d113198721599d": {
-            "_name": "MenuItem",
-            "html": "link",
-            "position": "property",
-            "type": "property",
-            "name": "property",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "click": "event",
-            "_id": "l1d113198721599d",
-            "_inherit": [
-                "_Component"
-            ]
-        },
-        "h1d5181d0f31d7fc": {
-            "_name": "MenuLogo",
-            "html": "link",
-            "hide": "method",
-            "show": "method",
-            "render": "method",
-            "_id": "h1d5181d0f31d7fc",
-            "_inherit": [
-                "_Component"
-            ]
-        }
+  "name": "class-menubar",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "p1f6f51d9f111925": {
+      "_name": "MenuAction",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "p1f6f51d9f111925",
+      "_inherit": ["_Component"]
     },
-    "models": {
-        "w124ac16b591df57": {
-            "_name": "MenuAction",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "position": {
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "_id": "w124ac16b591df57"
-        },
-        "y18b1217aaa13456": {
-            "_name": "MenuBar",
-            "logo": {
-                "type": "@MenuLogo",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "header": {
-                "type": "@MenuHeader",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "items": {
-                "type": [
-                    "@MenuItem"
-                ],
-                "readOnly": false,
-                "mandatory": false,
-                "default": []
-            },
-            "actions": {
-                "type": [
-                    "@MenuAction"
-                ],
-                "readOnly": false,
-                "mandatory": false,
-                "default": []
-            },
-            "clear": {},
-            "render": {},
-            "_id": "y18b1217aaa13456"
-        },
-        "f13ebe1ad331b263": {
-            "_name": "MenuHeader",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "_id": "f13ebe1ad331b263"
-        },
-        "u1f9a01abe31b3bf": {
-            "_name": "MenuItem",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "position": {
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-            },
-            "name": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "click": {},
-            "_id": "u1f9a01abe31b3bf"
-        },
-        "p19358155261f3b0": {
-            "_name": "MenuLogo",
-            "html": {
-                "type": "@HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "hide": {},
-            "show": {},
-            "render": {},
-            "_id": "p19358155261f3b0"
-        }
+    "a1097d1ea0812005": {
+      "_name": "MenuBar",
+      "logo": "property",
+      "header": "property",
+      "items": "collection",
+      "actions": "collection",
+      "render": "method",
+      "clear": "method",
+      "_id": "a1097d1ea0812005",
+      "_inherit": ["_Component"]
     },
-    "behaviors": {
-        "b126ff129e914cfa": {
-            "_id": "b126ff129e914cfa",
-            "component": "MenuBar",
-            "state": "render",
-            "action": "function render() {\n  var length = 0,\n    i = 0,\n    item = null,\n    domHeader = document.getElementById('designer-menubar-header'),\n    domItems = document.getElementById('designer-menubar-items'),\n    domAction = document.getElementById('designer-menubar-actions'),\n    self = this,\n    arr = window.location.href.split('#'),\n    params = window.location.href.split('?messages='),\n    messages = [],\n    context = 'system',\n    space = '',\n    designer = this.require('designer'),\n    menuHeader = [],\n    menuItems = [],\n    menuActions = [],\n    menuSearch = [];\n\n  function _removeActive() {\n    var length = 0,\n      i = 0,\n      item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  // menu header\n  menuHeader = this.require('db').collections().MenuHeader.find({\n    'type': this.require('designer').type()\n  });\n  this.header(this.require(menuHeader[0]._id));\n\n  // menu items\n  menuItems = this.require('db').collections().MenuItem.find({\n    'type': this.require('designer').type()\n  });\n\n  menuItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuItems.forEach(function (menuItem) {\n    var id = menuItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // menu actions\n  menuActions = this.require('db').collections().MenuAction.find({\n    'type': this.require('designer').type()\n  });\n\n  menuActions.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuActions.forEach(function (menuAction) {\n    var id = menuAction._id;\n    self.actions().push(self.require(id));\n  });\n\n  // header\n  domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  var callback = function () {\n    _removeActive();\n    $(this).addClass('active');\n  };\n\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', callback);\n    item.addEventListener('click', function click() {\n      this.click();\n    }.bind(self.items(i)));\n  }\n\n  // actions\n  this.actions().forEach(function (action) {\n    domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');\n  });\n\n  if (designer.type() === 'designer') {\n    // focus on first element\n    // or restore the context\n    if (arr.length > 2 && arr[2].length !== 0) {\n      context = arr[2];\n      context = context.split('?')[0];\n    }\n    if (arr.length > 3) {\n      space = arr[3];\n      space = space.split('?')[0];\n    }\n    if (arr.length > 4) {\n      designer.state().component(arr[4].split('?')[0]);\n    }\n\n    for (i = 0; i < length; i++) {\n      if (this.items(i).name() === context) {\n        item = domItems.children[i];\n        $(item).addClass('active');\n      }\n    }\n    if (space) {\n      designer.space(space);\n    }\n    designer.context(context);\n\n    var that = this;\n    $('#designer-menu-action-search').on('keyup', function keyup(event) {\n      var value = $('#designer-menu-action-search').val();\n      that.require('designer').filter(value);\n    });\n\n    designer.updateRouter();\n\n    // run messages\n    if (params[1]) {\n      messages = JSON.parse(decodeURIComponent(params[1]));\n      designer.messages(messages);\n    }\n  } else {\n    // focus on first element\n    if (length > 0) {\n      this.require('designer').context(this.items(0).name());\n      item = domItems.children[0];\n      $(item).addClass('active');\n    }\n  }\n}",
-            "useCoreAPI": false,
-            "core": false
-        }
+    "t14a79156a81862a": {
+      "_name": "MenuHeader",
+      "html": "link",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "t14a79156a81862a",
+      "_inherit": ["_Component"]
     },
-    "types": {},
-    "components": {
-        "MenuAction": {},
-        "MenuHeader": {},
-        "MenuItem": {},
-        "MenuBar": {
-            "menubar": {
-                "_id": "menubar",
-                "actions": [],
-                "header": "",
-                "items": [],
-                "logo": ""
-            }
-        }
+    "l1d113198721599d": {
+      "_name": "MenuItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event",
+      "_id": "l1d113198721599d",
+      "_inherit": ["_Component"]
     },
-    "_id": "z114fb15eb1118b1"
+    "h1d5181d0f31d7fc": {
+      "_name": "MenuLogo",
+      "html": "link",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "h1d5181d0f31d7fc",
+      "_inherit": ["_Component"]
+    }
+  },
+  "models": {
+    "w124ac16b591df57": {
+      "_name": "MenuAction",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "w124ac16b591df57"
+    },
+    "y18b1217aaa13456": {
+      "_name": "MenuBar",
+      "logo": {
+        "type": "@MenuLogo",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "header": {
+        "type": "@MenuHeader",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "items": {
+        "type": ["@MenuItem"],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "actions": {
+        "type": ["@MenuAction"],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "clear": {},
+      "render": {},
+      "_id": "y18b1217aaa13456"
+    },
+    "f13ebe1ad331b263": {
+      "_name": "MenuHeader",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "f13ebe1ad331b263"
+    },
+    "u1f9a01abe31b3bf": {
+      "_name": "MenuItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {},
+      "_id": "u1f9a01abe31b3bf"
+    },
+    "p19358155261f3b0": {
+      "_name": "MenuLogo",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "p19358155261f3b0"
+    }
+  },
+  "behaviors": {
+    "b126ff129e914cfa": {
+      "_id": "b126ff129e914cfa",
+      "component": "MenuBar",
+      "state": "render",
+      "action": "function render() {\n  var length = 0,\n    i = 0,\n    item = null,\n    domHeader = document.getElementById('designer-menubar-header'),\n    domItems = document.getElementById('designer-menubar-items'),\n    domAction = document.getElementById('designer-menubar-actions'),\n    self = this,\n    arr = window.location.href.split('#'),\n    params = window.location.href.split('?messages='),\n    messages = [],\n    context = 'system',\n    space = '',\n    designer = this.require('designer'),\n    menuHeader = [],\n    menuItems = [],\n    menuActions = [],\n    menuSearch = [];\n  \n  function _removeActive() {\n    var length = 0,\n      i = 0,\n      item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  // menu header\n  menuHeader = this.require('db').collections().MenuHeader.find({\n    'type': this.require('state').type()\n  });\n  this.header(this.require(menuHeader[0]._id));\n\n  // menu items\n  menuItems = this.require('db').collections().MenuItem.find({\n    'type': this.require('state').type()\n  });\n\n  menuItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuItems.forEach(function (menuItem) {\n    var id = menuItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // menu actions\n  menuActions = this.require('db').collections().MenuAction.find({\n    'type': this.require('state').type()\n  });\n\n  menuActions.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  menuActions.forEach(function (menuAction) {\n    var id = menuAction._id;\n    self.actions().push(self.require(id));\n  });\n\n  // header\n  domHeader.insertAdjacentHTML('afterbegin', this.header().html().source());\n\n  // items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // events\n  var callback = function () {\n    _removeActive();\n    $(this).addClass('active');\n  };\n\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', callback);\n    item.addEventListener('click', function click() {\n      this.click();\n    }.bind(self.items(i)));\n  }\n\n  // actions\n  this.actions().forEach(function (action) {\n    domAction.insertAdjacentHTML('afterbegin', '<li>' + action.html().source() + '</>');\n  });\n\n  if (this.require('state').type() === 'designer') {\n    // focus on first element\n    // or restore the context\n    if (arr.length > 2 && arr[2].length !== 0) {\n      context = arr[2];\n      context = context.split('?')[0];\n    }\n    if (arr.length > 3) {\n      space = arr[3];\n      space = space.split('?')[0];\n    }\n    if (arr.length > 4) {\n      this.require('state').component(arr[4].split('?')[0]);\n    }\n\n    for (i = 0; i < length; i++) {\n      if (this.items(i).name() === context) {\n        item = domItems.children[i];\n        $(item).addClass('active');\n      }\n    }\n    if (space) {\n      this.require('state').space(space);\n    }\n    this.require('state').context(context);\n\n    designer.updateRouter();\n\n    // run messages\n    if (params[1]) {\n      messages = JSON.parse(decodeURIComponent(params[1]));\n      designer.messages(messages);\n    }\n  } else {\n    // focus on first element\n    if (length > 0) {\n      this.require('state').context(this.items(0).name());\n      item = domItems.children[0];\n      $(item).addClass('active');\n    }\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "MenuAction": {},
+    "MenuHeader": {},
+    "MenuItem": {},
+    "MenuBar": {
+      "menubar": {
+        "_id": "menubar",
+        "actions": [],
+        "header": "",
+        "items": [],
+        "logo": ""
+      }
+    }
+  },
+  "_id": "z114fb15eb1118b1"
 }

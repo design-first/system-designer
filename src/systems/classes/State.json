@@ -1,82 +1,116 @@
 {
-    "name": "class-state",
-    "master": false,
-    "subsystem": false,
-    "version": "1.0.0",
-    "description": "",
-    "schemas": {
-        "y1efb3178341398a": {
-            "_name": "State",
-            "_inherit": [
-                "_Component"
-            ],
-            "system": "property",
-            "type": "property",
-            "collection": "property",
-            "component": "property",
-            "lastPage": "property",
-            "messages": "property",
-            "clear": "method",
-            "_id": "y1efb3178341398a"
-        }
-    },
-    "models": {
-        "j18ad71fd8c1c175": {
-            "_name": "State",
-            "system": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "type": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "collection": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "component": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-            },
-            "clear": {},
-            "_id": "j18ad71fd8c1c175",
-            "lastPage": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "index.html"
-            },
-            "messages": {
-                "type": "array",
-                "readOnly": false,
-                "mandatory": false,
-                "default": []
-            }
-        }
-    },
-    "behaviors": {},
-    "types": {},
-    "components": {
-        "State": {
-            "state": {
-                "_id": "state",
-                "collection": "",
-                "component": "",
-                "lastPage": "index.html",
-                "messages": [],
-                "system": "",
-                "type": ""
-            }
-        }
-    },
-    "_id": "z1c0ca1d5b31d495"
+  "name": "class-state",
+  "master": false,
+  "subsystem": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "y1efb3178341398a": {
+      "_name": "State",
+      "_inherit": [
+        "_Component"
+      ],
+      "system": "property",
+      "type": "property",
+      "collection": "property",
+      "component": "property",
+      "lastPage": "property",
+      "messages": "property",
+      "context": "property",
+      "oldContext": "property",
+      "space": "property",
+      "logs": "collection",
+      "clear": "method",
+      "_id": "y1efb3178341398a"
+    }
+  },
+  "models": {
+    "j18ad71fd8c1c175": {
+      "_name": "State",
+      "system": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "collection": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "component": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "clear": {},
+      "_id": "j18ad71fd8c1c175",
+      "lastPage": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "index.html"
+      },
+      "messages": {
+        "type": "array",
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      },
+      "context": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "oldContext": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "space": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "logs": {
+        "type": [
+          "@Log"
+        ],
+        "readOnly": false,
+        "mandatory": false,
+        "default": []
+      }
+    }
+  },
+  "behaviors": {},
+  "types": {},
+  "components": {
+    "State": {
+      "state": {
+        "_id": "state",
+        "collection": "",
+        "component": "",
+        "context": "",
+        "lastPage": "index.html",
+        "messages": [],
+        "oldContext": "",
+        "space": "",
+        "system": "",
+        "type": "designer",
+        "logs": []
+      }
+    }
+  },
+  "_id": "z1c0ca1d5b31d495"
 }
