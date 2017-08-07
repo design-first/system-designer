@@ -41,7 +41,8 @@
       "$designerDeleteComponent": "event",
       "$designerUpdateComponent": "event",
       "$designerUpdateModel": "event",
-      "$designerUpdateBehavior": "event"
+      "$designerUpdateBehavior": "event",
+      "send": "event"
     }
   },
   "models": {
@@ -320,11 +321,24 @@
           "name": "message",
           "type": "string"
         }]
+      },
+
+      "send": {
+        "params": [{
+          "name": "message",
+          "type": "message"
+        }]
       }
     }
   },
   "behaviors": {},
   "types": {},
-  "components": {},
+  "components": {
+    "_Channel": {
+      "channel": {
+        "_id": "channel"
+      }
+    }
+  },
   "_id": "f1233c15d691b3da"
 }

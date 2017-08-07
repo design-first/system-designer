@@ -8,9 +8,7 @@
     "1a3811dc79129d0": {
       "_id": "1a3811dc79129d0",
       "_name": "Editor",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "editor": "property",
       "type": "property",
       "context": "property",
@@ -56,30 +54,26 @@
       },
       "setEditor": {
         "params": [{
-            "name": "mode",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
-          {
-            "name": "value",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
-          {
-            "name": "lineNumber",
-            "type": "number",
-            "mandatory": false,
-            "default": 1
-          },
-          {
-            "name": "autocomplete",
-            "type": "boolean",
-            "mandatory": false,
-            "default": false
-          }
-        ]
+          "name": "mode",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "value",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "lineNumber",
+          "type": "number",
+          "mandatory": false,
+          "default": 1
+        }, {
+          "name": "autocomplete",
+          "type": "boolean",
+          "mandatory": false,
+          "default": false
+        }]
       },
       "context": {
         "type": "editorType",
@@ -89,18 +83,16 @@
       },
       "initValue": {
         "params": [{
-            "name": "value",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
-          {
-            "name": "lineNumber",
-            "type": "number",
-            "mandatory": false,
-            "default": 1
-          }
-        ]
+          "name": "value",
+          "type": "string",
+          "mandatory": false,
+          "default": ""
+        }, {
+          "name": "lineNumber",
+          "type": "number",
+          "mandatory": false,
+          "default": 1
+        }]
       },
       "undo": {},
       "redo": {},
@@ -146,7 +138,7 @@
       "_id": "11df21f30c14808",
       "component": "Editor",
       "state": "initValue",
-      "action": "function initValue(value, lineNumber) { \n    var that = this;\n    \n    switch (this.type()) {\n    case 'ace':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n          break;\n        case 'behavior':\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n  \n          var Range = ace.require('ace/range').Range;\n          var endLine = behavior.action.indexOf('{') + 1;\n  \n          this.editor().session.addMarker(new Range(0, 0, 0, endLine), 'readonly');\n  \n          // readonly\n          this.editor().keyBinding.addKeyboardHandler({\n              handleKeyboard: function (data, hash, keyString, keyCode, event) {\n                  var result = null;\n\n                  switch (true) {\n                      case (hash === -1 || (keyCode <= 40 && keyCode >= 37)):\n                          result = false;\n                          break;\n                      case intersects(new Range(0, 0, 0, endLine)):\n                          if (event.keyCode !== 67) {\n                            result = {\n                                command: 'null',\n                                passEvent: false\n                            };\n                            \n                            if (event.keyCode !== 91 && event.keyCode !== 17) {\n                              runtime.require('message').warning('You can not modify the header of the behavior.');\n                            }\n                          } else {\n                            result = false;\n                          }\n                          break;\n                      default:\n                          break;\n                  }\n  \n                  if (result) {\n                      return result;\n                  }\n              }\n          });\n  \n          function intersects(range) {\n              var result = false,\n                  selection = that.editor().getSelectionRange();\n  \n              result = (selection.end.row === 0 && selection.end.column < endLine + 1) && selection.intersects(range) && that.require('state').context() === 'action';\n              return result;\n          }\n          break;\n          case 'component':\n            break;\n        default:\n          break;\n      }\n      break;\n    case 'codemirror':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n        case 'behavior':\n        case 'component':\n          this.editor().setValue(value);\n          this.editor().setCursor({\n          line: lineNumber - 1,\n          ch: 0\n          });\n          this.editor().clearHistory();\n          break;\n        default:\n          break;  \n      }\n      break;\n    default:\n      break;\n  }\n}",
+      "action": "function initValue(value, lineNumber) { \n    var that = this;\n    \n    switch (this.type()) {\n    case 'ace':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n          break;\n        case 'behavior':\n          this.editor().setValue(value);\n          this.editor().gotoLine(lineNumber);\n          this.editor().getSession().$undoManager.reset();\n          this.editor().getSession().setUndoManager(new ace.UndoManager());\n  \n          var Range = ace.require('ace/range').Range;\n          var endLine = value.indexOf('{') + 1;\n  \n          this.editor().session.addMarker(new Range(0, 0, 0, endLine), 'readonly');\n  \n          // readonly\n          this.editor().keyBinding.addKeyboardHandler({\n              handleKeyboard: function (data, hash, keyString, keyCode, event) {\n                  var result = null;\n\n                  switch (true) {\n                      case (hash === -1 || (keyCode <= 40 && keyCode >= 37)):\n                          result = false;\n                          break;\n                      case intersects(new Range(0, 0, 0, endLine)):\n                          if (event.keyCode !== 67) {\n                            result = {\n                                command: 'null',\n                                passEvent: false\n                            };\n                            \n                            if (event.keyCode !== 91 && event.keyCode !== 17) {\n                              runtime.require('message').warning('You can not modify the header of the behavior.');\n                            }\n                          } else {\n                            result = false;\n                          }\n                          break;\n                      default:\n                          break;\n                  }\n  \n                  if (result) {\n                      return result;\n                  }\n              }\n          });\n  \n          function intersects(range) {\n              var result = false,\n                  selection = that.editor().getSelectionRange();\n  \n              result = (selection.end.row === 0 && selection.end.column < endLine + 1) && selection.intersects(range) && that.require('state').context() === 'action';\n              return result;\n          }\n          break;\n          case 'component':\n            break;\n        default:\n          break;\n      }\n      break;\n    case 'codemirror':\n      switch(this.context()) {\n        case 'system':\n        case 'schema':\n        case 'model':\n        case 'type':\n        case 'behavior':\n        case 'component':\n          this.editor().setValue(value);\n          this.editor().setCursor({\n          line: lineNumber - 1,\n          ch: 0\n          });\n          this.editor().clearHistory();\n          break;\n        default:\n          break;  \n      }\n      break;\n    default:\n      break;\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -199,24 +191,12 @@
     "editorRuntimeType": {
       "name": "editorRuntimeType",
       "type": "string",
-      "value": [
-        "ace",
-        "codemirror"
-      ]
+      "value": ["ace", "codemirror"]
     },
     "editorType": {
       "name": "editorType",
       "type": "string",
-      "value": [
-        "designer",
-        "system",
-        "type",
-        "schema",
-        "model",
-        "behavior",
-        "component",
-        "documentation"
-      ]
+      "value": ["designer", "system", "type", "schema", "model", "behavior", "component", "documentation"]
     }
   },
   "components": {},
