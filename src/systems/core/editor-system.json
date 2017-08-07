@@ -111,30 +111,19 @@
       "_name": "Designer",
       "_inherit": ["_Component"],
       "version": "property",
-      "system": "property",
       "runWindow": "property",
       "debugWindow": "property",
-      "syncModel": "method",
-      "syncBehavior": "method",
-      "syncComponent": "method",
-      "createModel": "method",
-      "createBehavior": "method",
-      "deleteSchema": "method",
       "linkModel": "method",
       "save": "method",
       "saveCordova": "method",
       "saveAs": "method",
       "welcome": "method",
-      "generateId": "method",
       "open": "method",
       "render": "event",
       "isCordova": "method",
       "isElectron": "method",
       "updateCordovaContext": "method",
       "runMessages": "method",
-      "getGeneratedSchema": "method",
-      "getGeneratedModel": "method",
-      "mergeBehavior": "method",
       "_id": "o1ead8184af1a83e"
     }
   },
@@ -502,12 +491,6 @@
         "mandatory": false,
         "default": "2.0.0-alpha.1"
       },
-      "system": {
-        "type": "@System",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-      },
       "runWindow": {
         "type": "object",
         "readOnly": false,
@@ -519,74 +502,6 @@
         "readOnly": false,
         "mandatory": false,
         "default": null
-      },
-      "syncModel": {
-        "params": [{
-          "name": "schema",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "syncBehavior": {
-        "params": [{
-          "name": "model",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "syncComponent": {
-        "params": [{
-          "name": "model",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }, {
-          "name": "forceDelete",
-          "type": "boolean",
-          "mandatory": false,
-          "default": true
-        }]
-      },
-      "createModel": {
-        "params": [{
-          "name": "schema",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "createBehavior": {
-        "params": [{
-          "name": "type",
-          "type": "string",
-          "mandatory": false,
-          "default": "method"
-        }, {
-          "name": "model",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "state",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "def",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "deleteSchema": {
-        "params": [{
-          "name": "schemaId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
       },
       "linkModel": {
         "params": [{
@@ -617,9 +532,6 @@
         }]
       },
       "welcome": {},
-      "generateId": {
-        "result": "string"
-      },
       "open": {
         "params": [{
           "name": "url",
@@ -652,47 +564,6 @@
           "type": "array",
           "mandatory": true,
           "default": []
-        }]
-      },
-      "getGeneratedSchema": {
-        "params": [{
-          "name": "schema",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }],
-        "result": "object"
-      },
-      "getGeneratedModel": {
-        "params": [{
-          "name": "model",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }],
-        "result": "object"
-      },
-      "mergeBehavior": {
-        "params": [{
-          "name": "behaviors",
-          "type": "object",
-          "mandatory": true,
-          "default": {}
-        }, {
-          "name": "behavior",
-          "type": "object",
-          "mandatory": true,
-          "default": {}
-        }, {
-          "name": "sysId",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }, {
-          "name": "systemName",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
         }]
       }
     },

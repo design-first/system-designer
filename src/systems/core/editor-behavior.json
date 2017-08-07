@@ -112,30 +112,19 @@
       "_name": "Designer",
       "_inherit": ["_Component"],
       "version": "property",
-      "system": "property",
       "runWindow": "property",
       "debugWindow": "property",
-      "syncModel": "method",
-      "syncBehavior": "method",
-      "syncComponent": "method",
-      "createModel": "method",
-      "createBehavior": "method",
-      "deleteSchema": "method",
       "linkModel": "method",
       "save": "method",
       "saveCordova": "method",
       "saveAs": "method",
       "welcome": "method",
-      "generateId": "method",
       "open": "method",
       "render": "event",
       "isCordova": "method",
       "isElectron": "method",
       "updateCordovaContext": "method",
       "runMessages": "method",
-      "getGeneratedSchema": "method",
-      "getGeneratedModel": "method",
-      "mergeBehavior": "method",
       "_id": "o1ead8184af1a83e"
     }
   },
@@ -543,12 +532,6 @@
         "mandatory": false,
         "default": "2.0.0-alpha.1"
       },
-      "system": {
-        "type": "@System",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-      },
       "runWindow": {
         "type": "object",
         "readOnly": false,
@@ -560,74 +543,6 @@
         "readOnly": false,
         "mandatory": false,
         "default": null
-      },
-      "syncModel": {
-        "params": [{
-          "name": "schema",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "syncBehavior": {
-        "params": [{
-          "name": "model",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "syncComponent": {
-        "params": [{
-          "name": "model",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }, {
-          "name": "forceDelete",
-          "type": "boolean",
-          "mandatory": false,
-          "default": true
-        }]
-      },
-      "createModel": {
-        "params": [{
-          "name": "schema",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "createBehavior": {
-        "params": [{
-          "name": "type",
-          "type": "string",
-          "mandatory": false,
-          "default": "method"
-        }, {
-          "name": "model",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "state",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "def",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
-      },
-      "deleteSchema": {
-        "params": [{
-          "name": "schemaId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
       },
       "linkModel": {
         "params": [{
@@ -658,9 +573,6 @@
         }]
       },
       "welcome": {},
-      "generateId": {
-        "result": "string"
-      },
       "open": {
         "params": [{
           "name": "url",
@@ -693,47 +605,6 @@
           "type": "array",
           "mandatory": true,
           "default": []
-        }]
-      },
-      "getGeneratedSchema": {
-        "params": [{
-          "name": "schema",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }],
-        "result": "object"
-      },
-      "getGeneratedModel": {
-        "params": [{
-          "name": "model",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }],
-        "result": "object"
-      },
-      "mergeBehavior": {
-        "params": [{
-          "name": "behaviors",
-          "type": "object",
-          "mandatory": true,
-          "default": {}
-        }, {
-          "name": "behavior",
-          "type": "object",
-          "mandatory": true,
-          "default": {}
-        }, {
-          "name": "sysId",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }, {
-          "name": "systemName",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
         }]
       }
     }
@@ -811,7 +682,7 @@
       "_id": "r1841b145401b120",
       "component": "Designer",
       "state": "render",
-      "action": "function render() {\n  var systemId = '',\n    System = null,\n    system = null,\n    sys = null,\n    id = '',\n    behavior = null;\n\n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // set system\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  system = this.require('storage').get(systemId);\n  System = this.require('System');\n  sys = new System(system);\n  this.system(sys);\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n\n  // \n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  behavior = this.require('storage').get(systemId).behaviors[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(behavior);\n\n  if (behavior.state === 'start' && systemId === behavior.component) {\n    document.title = 'behavior ' + this.system().name() + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  } else {\n    document.title = 'behavior ' + behavior.component + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  }\n\n  this.require('editor').initValue(behavior.action, 2);\n  \n  this.require('router').update();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
+      "action": "function render() {\n  var systemId = '',\n    System = null,\n    system = null,\n    sys = null,\n    id = '',\n    behavior = null;\n\n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // set system\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  system = this.require('storage').get(systemId);\n  System = this.require('System');\n  sys = new System(system);\n  this.require('factory').system(sys);\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n\n  // \n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  behavior = this.require('storage').get(systemId).behaviors[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(behavior);\n\n  if (behavior.state === 'start' && systemId === behavior.component) {\n    document.title = 'behavior ' + this.require('factory').system().name() + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  } else {\n    document.title = 'behavior ' + behavior.component + '.' + behavior.state + ' · system ' + this.require('storage').get(systemId).name;\n  }\n\n  this.require('editor').initValue(behavior.action, 2);\n  \n  this.require('router').update();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -819,7 +690,7 @@
       "_id": "t103d416bd313444",
       "component": "Designer",
       "state": "save",
-      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  if (this.require('state').context() === 'action') {\n    store.action = val;\n  } else {\n    store = JSON.parse(val);\n  }\n  this.require('store').data(store);\n\n  // check if ID change\n  if (this.require('store').uuid() !== this.require('store').data()._id) {\n    this.require('channel').$editorDeleteBehavior(this.require('store').uuid());\n    this.require('store').uuid(this.require('store').data()._id);\n  }\n\n  if (store.state === 'start' && designer.system().id() === store.component) {\n    document.title = 'behavior ' + designer.system().name() + ' · ' + document.title.split('·')[1].trim();\n  } else {\n    document.title = 'behavior ' + this.require('store').data().component + '.' + this.require('store').data().state + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  this.require('channel').$editorUpdateBehavior(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('Behavior saved.');\n}",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  if (this.require('state').context() === 'action') {\n    store.action = val;\n  } else {\n    store = JSON.parse(val);\n  }\n  this.require('store').data(store);\n\n  // check if ID change\n  if (this.require('store').uuid() !== this.require('store').data()._id) {\n    this.require('channel').$editorDeleteBehavior(this.require('store').uuid());\n    this.require('store').uuid(this.require('store').data()._id);\n  }\n\n  if (store.state === 'start' && this.require('factory').system().id() === store.component) {\n    document.title = 'behavior ' + this.require('factory').system().name() + ' · ' + document.title.split('·')[1].trim();\n  } else {\n    document.title = 'behavior ' + this.require('store').data().component + '.' + this.require('store').data().state + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  this.require('channel').$editorUpdateBehavior(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('Behavior saved.');\n}",
       "useCoreAPI": false,
       "core": false
     },
