@@ -1,6 +1,6 @@
 {
   "_id": "e89c617b6b15d28",
-  "name": "designer-cordova",
+  "name": "cordova",
   "description": "Cordova specificities",
   "version": "1.0.0",
   "components": {
@@ -73,50 +73,6 @@
         "_id": "model-type.html",
         "source": "<div class=\"col-xs-offset-2 col-sm-offset-3 col-xs-8 col-sm-6 placeholder designer-type\" id=\"designer-type-{{id}}\">\n    <div class=\"panel panel-default\">\n        <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">{{title}}</h3>\n            <div class=\"dropdown dropdown-menu-right\">\n                <button type=\"button\" id=\"designer-type-{{id}}-delete\" class=\"btn btn-default\" data-placement=\"right\">\n                    <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                </button>\n            </div>\n        </div>\n        <div class=\"panel-body\">\n            <ul class=\"list-group\">\n                {{content}}\n            </ul>\n        </div>\n    </div>\n</div>"
       }
-    },
-    "ToolBarItem": {
-      "1dbc51300e11z11": {
-        "_id": "1dbc51300e11z11",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "system"
-      },
-      "1dbc51300e11z12": {
-        "_id": "1dbc51300e11z12",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "schema"
-      },
-      "1dbc51300e11z13": {
-        "_id": "1dbc51300e11z13",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "model"
-      },
-      "1dbc51300e11z14": {
-        "_id": "1dbc51300e11z14",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "type"
-      },
-      "1dbc51300e11z15": {
-        "_id": "1dbc51300e11z15",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "behavior"
-      },
-      "1dbc51300e11z16": {
-        "_id": "1dbc51300e11z16",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "component"
-      },
-      "163a01b7ca1935e": {
-        "_id": "163a01b7ca1935e",
-        "html": "toolbar-item-export.html",
-        "position": 50,
-        "type": "designer"
-      }
     }
   },
   "behaviors": {},
@@ -125,17 +81,6 @@
       "_name": "HTML",
       "source": "property",
       "_id": "p181111d5c01f97b"
-    },
-    "t19b6b11ff31158d": {
-      "_name": "ToolBarItem",
-      "html": "link",
-      "position": "property",
-      "type": "property",
-      "hide": "method",
-      "show": "method",
-      "render": "method",
-      "click": "event",
-      "_id": "t19b6b11ff31158d"
     }
   },
   "models": {
@@ -148,33 +93,9 @@
         "default": ""
       },
       "_id": "w1417e1d6d613a0d"
-    },
-    "u1f4c7177bb1a459": {
-      "_name": "ToolBarItem",
-      "html": {
-        "type": "@HTML",
-        "readOnly": false,
-        "mandatory": false,
-        "default": ""
-      },
-      "position": {
-        "type": "number",
-        "readOnly": false,
-        "mandatory": false,
-        "default": 0
-      },
-      "type": {
-        "type": "editorType",
-        "readOnly": false,
-        "mandatory": false,
-        "default": "designer"
-      },
-      "hide": {},
-      "show": {},
-      "render": {},
-      "click": {},
-      "_id": "u1f4c7177bb1a459"
     }
   },
-  "types": {}
+  "types": {},
+  "master": false,
+  "subsystem": false
 }

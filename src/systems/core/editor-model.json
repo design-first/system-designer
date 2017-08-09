@@ -62,7 +62,8 @@
       "render": "method",
       "click": "event",
       "_id": "t19b6b11ff31158d",
-      "_inherit": ["_Component"]
+      "_inherit": ["_Component"],
+      "platform": "property"
     },
     "p1f6f51d9f111925": {
       "_name": "MenuAction",
@@ -437,7 +438,13 @@
       "show": {},
       "render": {},
       "click": {},
-      "_id": "u1f4c7177bb1a459"
+      "_id": "u1f4c7177bb1a459",
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
     },
     "w124ac16b591df57": {
       "_name": "MenuAction",
@@ -610,6 +617,24 @@
     }
   },
   "behaviors": {
+    "t15f921e6a316234": {
+      "_id": "t15f921e6a316234",
+      "component": "udbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "d10e191ee9813950": {
+      "_id": "d10e191ee9813950",
+      "component": "udbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "l14395177b314b43": {
+      "_id": "l14395177b314b43",
+      "component": "1dbc51300e11z13",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('store').data();\n    var doc = {\n        \"name\": \"model \" + data._name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Model \" + data._name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n    \n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n    \n    doc.models[data._id] = data;\n    \n    this.require('designer').saveAs(doc, 'model.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+    },
     "i1a1951779613207": {
       "_id": "i1a1951779613207",
       "component": "udbc51200e11z02",
@@ -711,41 +736,68 @@
       }
     },
     "ToolBarItem": {
+      "udbc51200e11z03": {
+        "_id": "udbc51200e11z03",
+        "html": "toolbar-item-copy.html",
+        "position": 50,
+        "type": "model",
+        "platform": "electron"
+      },
+      "udbc51200e11z04": {
+        "_id": "udbc51200e11z04",
+        "html": "toolbar-item-paste.html",
+        "position": 60,
+        "type": "model",
+        "platform": "electron"
+      },
+      "1dbc51300e11z13": {
+        "_id": "1dbc51300e11z13",
+        "html": "toolbar-item-export-document.html",
+        "position": 70,
+        "type": "model",
+        "platform": "web"
+      },
       "1dbc51200e11610": {
         "_id": "1dbc51200e11610",
         "html": "toolbar-item-copyright.html",
         "position": 90,
-        "type": "model"
+        "type": "model",
+        "platform": "all"
       },
       "1dbc51200e11615": {
         "_id": "1dbc51200e11615",
         "html": "toolbar-item-help.html",
         "position": 80,
-        "type": "model"
+        "type": "model",
+        "platform": "all"
       },
       "1dbc51200e116e9": {
         "_id": "1dbc51200e116e9",
         "html": "toolbar-item-save.html",
         "position": 10,
-        "type": "model"
+        "type": "model",
+        "platform": "all"
       },
       "udbc51200e11z00": {
         "_id": "udbc51200e11z00",
         "html": "toolbar-item-undo.html",
         "position": 20,
-        "type": "model"
+        "type": "model",
+        "platform": "all"
       },
       "udbc51200e11z01": {
         "_id": "udbc51200e11z01",
         "html": "toolbar-item-redo.html",
         "position": 30,
-        "type": "model"
+        "type": "model",
+        "platform": "all"
       },
       "udbc51200e11z02": {
         "_id": "udbc51200e11z02",
         "html": "toolbar-item-select-all.html",
         "position": 40,
-        "type": "model"
+        "type": "model",
+        "platform": "all"
       }
     },
     "Designer": {},

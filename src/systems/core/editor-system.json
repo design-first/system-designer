@@ -62,7 +62,8 @@
       "render": "method",
       "click": "event",
       "_id": "t19b6b11ff31158d",
-      "_inherit": ["_Component"]
+      "_inherit": ["_Component"],
+      "platform": "property"
     },
     "p1f6f51d9f111925": {
       "_name": "MenuAction",
@@ -436,7 +437,13 @@
       "show": {},
       "render": {},
       "click": {},
-      "_id": "u1f4c7177bb1a459"
+      "_id": "u1f4c7177bb1a459",
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
     },
     "w124ac16b591df57": {
       "_name": "MenuAction",
@@ -609,6 +616,24 @@
     }
   },
   "behaviors": {
+    "u1148712dc118eea": {
+      "_id": "u1148712dc118eea",
+      "component": "sdbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "l1c2d911d83104a2": {
+      "_id": "l1c2d911d83104a2",
+      "component": "sdbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "c1bb2614ca314a68": {
+      "_id": "c1bb2614ca314a68",
+      "component": "1dbc51300e11z11",
+      "state": "click",
+      "action": "function click() {\n    var data = this.require('store').data();\n    \n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var name = data.name;\n    var doc = JSON.parse(JSON.stringify(data));\n    delete doc.classInfo;\n    this.require('designer').saveAs(doc, data.name + '.json');\n}"
+    },
     "a194c816a861f58c": {
       "_id": "a194c816a861f58c",
       "component": "sdbc51200e11z02",
@@ -750,41 +775,68 @@
       }
     },
     "ToolBarItem": {
+      "sdbc51200e11z03": {
+        "_id": "sdbc51200e11z03",
+        "html": "toolbar-item-copy.html",
+        "position": 50,
+        "type": "system",
+        "platform": "electron"
+      },
+      "sdbc51200e11z04": {
+        "_id": "sdbc51200e11z04",
+        "html": "toolbar-item-paste.html",
+        "position": 60,
+        "type": "system",
+        "platform": "electron"
+      },
+      "1dbc51300e11z11": {
+        "_id": "1dbc51300e11z11",
+        "html": "toolbar-item-export-document.html",
+        "position": 70,
+        "type": "system",
+        "platform": "web"
+      },
       "13a291c27f16311": {
         "_id": "13a291c27f16311",
         "html": "toolbar-item-copyright.html",
         "position": 90,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "1dbc51200e116e4": {
         "_id": "1dbc51200e116e4",
         "html": "toolbar-item-save.html",
         "position": 10,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "1dbc51200e11z10": {
         "_id": "1dbc51200e11z10",
         "html": "toolbar-item-help.html",
         "position": 80,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "sdbc51200e11z00": {
         "_id": "sdbc51200e11z00",
         "html": "toolbar-item-undo.html",
         "position": 20,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "sdbc51200e11z01": {
         "_id": "sdbc51200e11z01",
         "html": "toolbar-item-redo.html",
         "position": 30,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "sdbc51200e11z02": {
         "_id": "sdbc51200e11z02",
         "html": "toolbar-item-select-all.html",
         "position": 40,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       }
     },
     "MenuItem": {

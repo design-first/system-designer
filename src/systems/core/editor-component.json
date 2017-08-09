@@ -62,7 +62,8 @@
       "render": "method",
       "click": "event",
       "_id": "t19b6b11ff31158d",
-      "_inherit": ["_Component"]
+      "_inherit": ["_Component"],
+      "platform": "property"
     },
     "p1f6f51d9f111925": {
       "_name": "MenuAction",
@@ -436,7 +437,13 @@
       "show": {},
       "render": {},
       "click": {},
-      "_id": "u1f4c7177bb1a459"
+      "_id": "u1f4c7177bb1a459",
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
     },
     "w124ac16b591df57": {
       "_name": "MenuAction",
@@ -609,6 +616,24 @@
     }
   },
   "behaviors": {
+    "x1013f12b661a249": {
+      "_id": "x1013f12b661a249",
+      "component": "wdbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "v1639613d361aacf": {
+      "_id": "v1639613d361aacf",
+      "component": "wdbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "g1706d148ae11f5d": {
+      "_id": "g1706d148ae11f5d",
+      "component": "1dbc51300e11z16",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('store').data();\n    var name = data._id;\n    var model = this.require('store').collection();\n    var doc = {\n        \"name\": \"component \" + name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Component \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    if (typeof doc.models[model]) {\n        doc.components[model] = {};\n    }\n\n    doc.components[model][data._id] = data;\n\n    this.require('designer').saveAs(doc, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+    },
     "g1a0081da861f758": {
       "_id": "g1a0081da861f758",
       "component": "wdbc51200e11z02",
@@ -718,41 +743,68 @@
       }
     },
     "ToolBarItem": {
+      "wdbc51200e11z03": {
+        "_id": "wdbc51200e11z03",
+        "html": "toolbar-item-copy.html",
+        "position": 50,
+        "type": "component",
+        "platform": "electron"
+      },
+      "wdbc51200e11z04": {
+        "_id": "wdbc51200e11z04",
+        "html": "toolbar-item-paste.html",
+        "position": 60,
+        "type": "component",
+        "platform": "electron"
+      },
+      "1dbc51300e11z16": {
+        "_id": "1dbc51300e11z16",
+        "html": "toolbar-item-export-document.html",
+        "position": 70,
+        "type": "component",
+        "platform": "web"
+      },
       "1dbc51200e11613": {
         "_id": "1dbc51200e11613",
         "html": "toolbar-item-save.html",
         "position": 10,
-        "type": "component"
+        "type": "component",
+        "platform": "all"
       },
       "1dbc51200e11614": {
         "_id": "1dbc51200e11614",
         "html": "toolbar-item-copyright.html",
         "position": 90,
-        "type": "component"
+        "type": "component",
+        "platform": "all"
       },
       "1dbc51200e11617": {
         "_id": "1dbc51200e11617",
         "html": "toolbar-item-help.html",
         "position": 80,
-        "type": "component"
+        "type": "component",
+        "platform": "all"
       },
       "wdbc51200e11z00": {
         "_id": "wdbc51200e11z00",
         "html": "toolbar-item-undo.html",
         "position": 20,
-        "type": "component"
+        "type": "component",
+        "platform": "all"
       },
       "wdbc51200e11z01": {
         "_id": "wdbc51200e11z01",
         "html": "toolbar-item-redo.html",
         "position": 30,
-        "type": "component"
+        "type": "component",
+        "platform": "all"
       },
       "wdbc51200e11z02": {
         "_id": "wdbc51200e11z02",
         "html": "toolbar-item-select-all.html",
         "position": 40,
-        "type": "component"
+        "type": "component",
+        "platform": "all"
       }
     },
     "Designer": {},

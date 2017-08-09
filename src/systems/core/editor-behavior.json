@@ -53,7 +53,9 @@
       "update": "method"
     },
     "t19b6b11ff31158d": {
+      "_id": "t19b6b11ff31158d",
       "_name": "ToolBarItem",
+      "_inherit": ["_Component"],
       "html": "link",
       "position": "property",
       "type": "property",
@@ -61,8 +63,7 @@
       "show": "method",
       "render": "method",
       "click": "event",
-      "_id": "t19b6b11ff31158d",
-      "_inherit": ["_Component"]
+      "platform": "property"
     },
     "p1f6f51d9f111925": {
       "_name": "MenuAction",
@@ -437,7 +438,13 @@
       "show": {},
       "render": {},
       "click": {},
-      "_id": "u1f4c7177bb1a459"
+      "_id": "u1f4c7177bb1a459",
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
     },
     "w124ac16b591df57": {
       "_name": "MenuAction",
@@ -610,6 +617,24 @@
     }
   },
   "behaviors": {
+    "u165f215d0217974": {
+      "_id": "u165f215d0217974",
+      "component": "1dbc513e0e11z15",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+    },
+    "f1846f199e41074c": {
+      "_id": "f1846f199e41074c",
+      "component": "1dbc513e0e11z16",
+      "state": "click",
+      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+    },
+    "i179d41548d114e6": {
+      "_id": "i179d41548d114e6",
+      "component": "1dbc51300e11z15",
+      "state": "click",
+      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('store').data();\n    var name = data.state;\n    var exportName = '';\n    var doc = {\n        \"name\": \"behavior \" + name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Behavior \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.behaviors[data._id] = data;\n\n    if (this.require('store').data().component === this.require('factory').system().id()) {\n        exportName = 'behavior.' + this.require('factory').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    } else {\n        exportName = 'behavior.' + this.require('store').data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    }\n\n    this.require('designer').saveAs(doc, exportName);\n}"
+    },
     "m191d0168cd1e718": {
       "_id": "m191d0168cd1e718",
       "component": "1dbc513e0e11z19",
@@ -735,41 +760,68 @@
       }
     },
     "ToolBarItem": {
+      "1dbc513e0e11z15": {
+        "_id": "1dbc513e0e11z15",
+        "html": "toolbar-item-copy.html",
+        "position": 50,
+        "type": "behavior",
+        "platform": "electron"
+      },
+      "1dbc513e0e11z16": {
+        "_id": "1dbc513e0e11z16",
+        "html": "toolbar-item-paste.html",
+        "position": 60,
+        "type": "behavior",
+        "platform": "electron"
+      },
+      "1dbc51300e11z15": {
+        "_id": "1dbc51300e11z15",
+        "html": "toolbar-item-export-document.html",
+        "position": 70,
+        "type": "behavior",
+        "platform": "web"
+      },
       "1dbc51200e11611": {
         "_id": "1dbc51200e11611",
         "html": "toolbar-item-save.html",
         "position": 10,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       },
       "1dbc51200e11612": {
         "_id": "1dbc51200e11612",
         "html": "toolbar-item-copyright.html",
         "position": 90,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       },
       "1dbc51200e11616": {
         "_id": "1dbc51200e11616",
         "html": "toolbar-item-help.html",
         "position": 80,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       },
       "1dbc513e0e11z17": {
         "_id": "1dbc513e0e11z17",
         "html": "toolbar-item-undo.html",
         "position": 20,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       },
       "1dbc513e0e11z18": {
         "_id": "1dbc513e0e11z18",
         "html": "toolbar-item-redo.html",
         "position": 30,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       },
       "1dbc513e0e11z19": {
         "_id": "1dbc513e0e11z19",
         "html": "toolbar-item-select-all.html",
         "position": 40,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       }
     },
     "MenuItem": {
