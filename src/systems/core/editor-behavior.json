@@ -621,19 +621,19 @@
       "_id": "u165f215d0217974",
       "component": "1dbc513e0e11z15",
       "state": "click",
-      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+      "action": "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy(); \n}"
     },
     "f1846f199e41074c": {
       "_id": "f1846f199e41074c",
       "component": "1dbc513e0e11z16",
       "state": "click",
-      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+      "action": "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  this.require('editor').paste(); \n}"
     },
     "i179d41548d114e6": {
       "_id": "i179d41548d114e6",
       "component": "1dbc51300e11z15",
       "state": "click",
-      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('store').data();\n    var name = data.state;\n    var exportName = '';\n    var doc = {\n        \"name\": \"behavior \" + name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Behavior \" + name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.behaviors[data._id] = data;\n\n    if (this.require('store').data().component === this.require('factory').system().id()) {\n        exportName = 'behavior.' + this.require('factory').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    } else {\n        exportName = 'behavior.' + this.require('store').data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n    }\n\n    this.require('designer').saveAs(doc, exportName);\n}"
+      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var name = data.state;\n  var exportName = '';\n  var doc = {\n    \"name\": \"behavior \" + name,\n    \"master\": false,\n    \"subsystem\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"Behavior \" + name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.behaviors[data._id] = data;\n\n  if (this.require('store').data().component === this.require('factory').system().id()) {\n    exportName = 'behavior.' + this.require('factory').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  } else {\n    exportName = 'behavior.' + this.require('store').data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  }\n\n  this.require('designer').saveAs(doc, exportName);\n}"
     },
     "m191d0168cd1e718": {
       "_id": "m191d0168cd1e718",
@@ -691,7 +691,7 @@
       "_id": "o1b89518d6212c82",
       "component": "1f1781882618110",
       "state": "click",
-      "action": "function click() { \n  var editor = this.require('editor');\n\n  try {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } catch (e) {\n    // TODO message ?\n  }\n\n  editor.setEditor('javascript',this.require('store').data().action, 2);\n}",
+      "action": "function click() { \n  var editor = this.require('editor');\n\n  try {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } catch (e) {\n  }\n\n  editor.setEditor('javascript',this.require('store').data().action, 2);\n}",
       "useCoreAPI": false,
       "core": false
     },

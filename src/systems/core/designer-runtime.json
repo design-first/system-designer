@@ -78,7 +78,7 @@
       "_id": "i139a61d4aa1bea7",
       "component": "logger",
       "state": "info",
-      "action": "function info(message) { \n  if (this.level() === 'info' || this.level() === 'debug') {\n    var date = new Date(),\n        time = date.toTimeString(),\n        ms = date.getMilliseconds();\n\n    time = time.split(' ')[0].trim();\n    time = time.replace(':', 'h');\n    time = time.replace(':', 'm');\n    time = time.split('m')[0].trim();\n    time = time + ':' + ms;\n\n    this.require('channel').$appLogInfo('[' + time + '] ' + message);\n  }\t\n}",
+      "action": "function info(message) { \n  if (this.level() === 'info' || this.level() === 'debug') {\n    this.require('channel').$appLogInfo('[info] ' + message);\n  }\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -86,7 +86,7 @@
       "_id": "r1c1841a98e1bc15",
       "component": "logger",
       "state": "debug",
-      "action": "function debug(message) { \n  if (this.level() === 'debug') {\n    var date = new Date(),\n        time = date.toTimeString(),\n        ms = date.getMilliseconds();\n  \n    time = time.split(' ')[0].trim();\n    time = time.replace(':', 'h');\n    time = time.replace(':', 'm');\n    time = time.split('m')[0].trim();\n    time = time + ':' + ms;\n  \n    this.require('channel').$appLogDebug('[' + time + '] ' + message);\n  }\t\n}",
+      "action": "function debug(message) { \n  if (this.level() === 'debug') {\n    this.require('channel').$appLogDebug('[debug] ' + message);\n  }\t\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -94,7 +94,7 @@
       "_id": "m1d30414ed912a2a",
       "component": "logger",
       "state": "error",
-      "action": "function error(message) { \n  var date = new Date(),\n      time = date.toTimeString(),\n      ms = date.getMilliseconds();\n\n  time = time.split(' ')[0].trim();\n  time = time.replace(':', 'h');\n  time = time.replace(':', 'm');\n  time = time.split('m')[0].trim();\n  time = time + ':' + ms;\n\n  this.require('channel').$appLogError('[' + time + '] ' + message);\n}",
+      "action": "function error(message) { \n  this.require('channel').$appLogError('[error] ' + message);\n}",
       "useCoreAPI": false,
       "core": true
     },
@@ -102,7 +102,7 @@
       "_id": "d1d19f1ae9a12118",
       "component": "logger",
       "state": "warn",
-      "action": "function warn(message) { \n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    var date = new Date(),\n        time = date.toTimeString(),\n        ms = date.getMilliseconds();\n\n    time = time.split(' ')[0].trim();\n    time = time.replace(':', 'h');\n    time = time.replace(':', 'm');\n    time = time.split('m')[0].trim();\n    time = time + ':' + ms;\n\n    this.require('channel').$appLogWarn('[' + time + '] ' + message);\n  }\n}",
+      "action": "function warn(message) { \n  if (this.level() === 'info' || this.level() === 'warn' || this.level() === 'debug') {\n    this.require('channel').$appLogWarn('[warn] ' + message);\n  }\n}",
       "useCoreAPI": false,
       "core": true
     }

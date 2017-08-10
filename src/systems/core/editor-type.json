@@ -620,19 +620,19 @@
       "_id": "m134c713c841c559",
       "component": "vdbc51200e11z03",
       "state": "click",
-      "action": "function click() { \n    $('#designer-toolbar-item-copy').tooltip('hide');\n    this.require('editor').copy(); \n}"
+      "action": "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy(); \n}"
     },
     "w1f5751bd9e15f00": {
       "_id": "w1f5751bd9e15f00",
       "component": "vdbc51200e11z04",
       "state": "click",
-      "action": "function click() { \n    $('#designer-toolbar-item-paste').tooltip('hide');\n   this.require('editor').paste(); \n}"
+      "action": "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  this.require('editor').paste(); \n}"
     },
     "i14acd1202219642": {
       "_id": "i14acd1202219642",
       "component": "1dbc51300e11z14",
       "state": "click",
-      "action": "function click() {\n    $('#designer-toolbar-item-export-document').tooltip('hide');\n    \n    var data = this.require('store').data();\n    var doc = {\n        \"name\": \"type \" + data.name,\n        \"master\": false,\n        \"subsystem\": true,\n        \"version\": \"0.0.1\",\n        \"description\": \"Type \" + data.name,\n        \"schemas\": {},\n        \"models\": {},\n        \"behaviors\": {},\n        \"types\": {},\n        \"components\": {}\n    };\n\n    // clean\n    doc.name = doc.name.trim();\n    doc.name = doc.name.replace(/ /gi, '-');\n    doc.name = doc.name.toLocaleLowerCase();\n\n    doc.types[data.name] = data;\n\n    this.require('designer').saveAs(doc, 'type.' + data.name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var doc = {\n    \"name\": \"type \" + data.name,\n    \"master\": false,\n    \"subsystem\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"Type \" + data.name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.types[data.name] = data;\n\n  this.require('designer').saveAs(doc, 'type.' + data.name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
     },
     "s163371531d1ec0a": {
       "_id": "s163371531d1ec0a",
