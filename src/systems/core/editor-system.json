@@ -682,7 +682,7 @@
       "_id": "z1b2ed1f26c196e0",
       "component": "MenuItem",
       "state": "click",
-      "action": "function click() { \n  this.require('state').context(this.name());\n}",
+      "action": "function click() { \n  this.require('state').menu(this.name());\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -738,7 +738,7 @@
       "_id": "f199b4184ea1639d",
       "component": "Designer",
       "state": "save",
-      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  switch (this.require('state').context()) {\n    case 'name':\n      val = val.trim();\n      if (val.indexOf(' ') !== -1) {\n        val = val.replace(/ /gi, '-');\n        this.require('editor').setValue(val);\n      }\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val;\n      break;\n    case 'version':\n      store.version = val;\n      break;\n    case 'json':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  this.require('store').data(store);\n\n  this.require('channel').$editorUpdateSystem(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  switch (this.require('state').menu()) {\n    case 'name':\n      val = val.trim();\n      if (val.indexOf(' ') !== -1) {\n        val = val.replace(/ /gi, '-');\n        this.require('editor').setValue(val);\n      }\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val;\n      break;\n    case 'version':\n      store.version = val;\n      break;\n    case 'json':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  this.require('store').data(store);\n\n  this.require('channel').$editorUpdateSystem(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}",
       "useCoreAPI": false,
       "core": false
     },

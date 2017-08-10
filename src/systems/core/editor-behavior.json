@@ -675,7 +675,7 @@
       "_id": "r1e032137771c493",
       "component": "MenuItem",
       "state": "click",
-      "action": "function click() { \n  this.require('state').context(this.name());\n}",
+      "action": "function click() { \n  this.require('state').menu(this.name());\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -715,7 +715,7 @@
       "_id": "t103d416bd313444",
       "component": "Designer",
       "state": "save",
-      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  if (this.require('state').context() === 'action') {\n    store.action = val;\n  } else {\n    store = JSON.parse(val);\n  }\n  this.require('store').data(store);\n\n  // check if ID change\n  if (this.require('store').uuid() !== this.require('store').data()._id) {\n    this.require('channel').$editorDeleteBehavior(this.require('store').uuid());\n    this.require('store').uuid(this.require('store').data()._id);\n  }\n\n  if (store.state === 'start' && this.require('factory').system().id() === store.component) {\n    document.title = 'behavior ' + this.require('factory').system().name() + ' · ' + document.title.split('·')[1].trim();\n  } else {\n    document.title = 'behavior ' + this.require('store').data().component + '.' + this.require('store').data().state + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  this.require('channel').$editorUpdateBehavior(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('Behavior saved.');\n}",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  if (this.require('state').menu() === 'action') {\n    store.action = val;\n  } else {\n    store = JSON.parse(val);\n  }\n  this.require('store').data(store);\n\n  // check if ID change\n  if (this.require('store').uuid() !== this.require('store').data()._id) {\n    this.require('channel').$editorDeleteBehavior(this.require('store').uuid());\n    this.require('store').uuid(this.require('store').data()._id);\n  }\n\n  if (store.state === 'start' && this.require('factory').system().id() === store.component) {\n    document.title = 'behavior ' + this.require('factory').system().name() + ' · ' + document.title.split('·')[1].trim();\n  } else {\n    document.title = 'behavior ' + this.require('store').data().component + '.' + this.require('store').data().state + ' · ' + document.title.split('·')[1].trim();\n  }\n\n  this.require('channel').$editorUpdateBehavior(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('Behavior saved.');\n}",
       "useCoreAPI": false,
       "core": false
     },
