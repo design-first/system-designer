@@ -1,0 +1,102 @@
+{
+  "name": "Export-class",
+  "master": false,
+  "subsystem": false,
+  "version": "0.0.1",
+  "description": "",
+  "schemas": {
+    "v1dfff1f04618899": {
+      "_id": "v1dfff1f04618899",
+      "_name": "Export",
+      "_inherit": ["_Component"],
+      "toJSON": "method",
+      "toHTML": "method",
+      "toJavaScript": "method",
+      "toNode": "method"
+    }
+  },
+  "models": {
+    "v1ca291072418fa4": {
+      "_id": "v1ca291072418fa4",
+      "_name": "Export",
+      "toJSON": {
+        "params": [{
+          "name": "isMaster",
+          "type": "boolean",
+          "mandatory": false,
+          "default": true
+        }],
+        "result": "string"
+      },
+      "toHTML": {
+        "params": [{
+          "name": "logLevel",
+          "type": "string",
+          "mandatory": false,
+          "default": "info"
+        }],
+        "result": "string"
+      },
+      "toNode": {
+        "params": [{
+          "name": "logLevel",
+          "type": "string",
+          "mandatory": false,
+          "default": "info"
+        }],
+        "result": "string"
+      },
+      "toJavaScript": {
+        "params": [{
+          "name": "logLevel",
+          "type": "string",
+          "mandatory": false,
+          "default": "info"
+        }]
+      }
+    }
+  },
+  "behaviors": {
+    "p14b27128f61643e": {
+      "_id": "p14b27128f61643e",
+      "component": "Export",
+      "state": "toJSON",
+      "action": "function toJSON(isMaster) { \n  var system = this.require('db').collections().System.find({\n    '_id': this.require('factory').system().id()\n  })[0];\n  system = JSON.parse(JSON.stringify(system));\n  delete system.classInfo;\n\n  system = JSON.parse(JSON.stringify(system));\n  \n  if (isMaster) {\n    system.master = true;\n  } else {\n    system.master = false;\n  }\n  \n  return JSON.stringify(system);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "g131c91154e14849": {
+      "_id": "g131c91154e14849",
+      "component": "Export",
+      "state": "toHTML",
+      "action": "function toHTML(logLevel) { \n  var system = this.require('db').collections().System.find({\n    '_id': this.require('factory').system().id()\n  })[0];\n  system = JSON.parse(JSON.stringify(system));\n  delete system.classInfo;\n  \n  var js = this.require('system-runtime.min.js').source();\n  var source = this.require('export-app.html').source();\n  \n  source = source\n              .replace(/{{library}}/g, js)\n              .replace(/{{library}}/g, function() {return '\\$&'})\n              .replace(/{{name}}/g, this.require('factory').system().name())\n              .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n              .replace(/{{system}}/g, function(val) {return JSON.stringify(system)});\n\n  return source;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r11d81144f810201": {
+      "_id": "r11d81144f810201",
+      "component": "Export",
+      "state": "toNode",
+      "action": "function toNode(logLevel) { \n  var system = this.require('db').collections().System.find({\n    '_id': this.require('factory').system().id()\n  })[0];\n  system = JSON.parse(JSON.stringify(system));\n  delete system.classInfo;\n  \n  var source = this.require('app.js').source();\n  \n  source = source\n              .replace(/{{version}}/g, this.require('factory').system().version())\n              .replace(/{{description}}/g, this.require('factory').system().description().replace(/\\n/g, '\\n * '))\n              .replace(/{{name}}/g, this.require('factory').system().name())\n              .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n              .replace(/{{system}}/g, JSON.stringify(system));\n\n  return source;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "h14919197fb17aaf": {
+      "_id": "h14919197fb17aaf",
+      "component": "Export",
+      "state": "toJavaScript",
+      "action": "function toJavaScript(logLevel) { \n  var system = this.require('db').collections().System.find({\n    '_id': this.require('factory').system().id()\n  })[0];\n  system = JSON.parse(JSON.stringify(system));\n  delete system.classInfo;\n  \n  var source = this.require('javascript-export.js').source();\n  \n  source = source\n              .replace(/{{version}}/g, this.require('factory').system().version())\n              .replace(/{{description}}/g, this.require('factory').system().description().replace(/\\n/g, '\\n * '))\n              .replace(/{{name}}/g, this.require('factory').system().name())\n              .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val());\n              \n  // SYSTEM\n  \n  var confSystem = {};\n  \n  confSystem._id = system._id;\n  confSystem.name = system.name;\n  confSystem.version = system.version;\n  confSystem.description = system.description;\n  \n  source = source + '/**\\n';\n  source = source + ' * System ' +  confSystem.name + '\\n';\n  source = source + ' * @system\\n';\n  source = source + ' */\\n';\n  source = source + 'runtime.system(' + JSON.stringify(confSystem, null, '\\t', 2) + ');\\n\\n';\n  \n  // SCHEMA / MODEL / TYPE     \n  if (Object.keys(system.schemas).length > 0 || Object.keys(system.types).length > 0) {\n    source = source + '\\n// Schemas, models and types creation\\n\\n\\n';\n  }\n  \n  var name = '';\n  var schemaSorted = [];\n  var schemaNameSorted = [];\n  var schemaName = {};\n  \n  for (name in system.schemas) {\n    schemaSorted.push(system.schemas[name]);\n    schemaNameSorted.push(system.schemas[name]._name);\n    schemaName[system.schemas[name]._name] = system.schemas[name]._name;\n  }\n  schemaSorted.sort(function (schemaA, schemaB) {\n    return schemaA._name > schemaB._name;\n  });\n  schemaNameSorted.sort();\n  \n  schemaSorted.forEach(function (schema) {\n    source = source + '/**\\n';\n    source = source + ' * Schema ' +  schema._name + '\\n';\n    source = source + ' * @schema\\n';\n    source = source + ' */\\n';\n    source = source + 'runtime.require(\\'metamodel\\').schema(' + JSON.stringify(schema, null, '\\t', 2) + ');\\n\\n';\n  });\n  \n  var modelSorted = [];\n  var modelNameSorted = [];\n  for (name in system.models) {\n    modelSorted.push(system.models[name]);\n    modelNameSorted.push(system.models[name]._name);\n  }\n  modelSorted.sort(function (modelA, modelB) {\n    return modelA._name > modelB._name;\n  });\n  modelNameSorted.sort();\n  \n  modelSorted.forEach(function (model) {\n    source = source + '/**\\n';\n    source = source + ' * Model ' +  model._name + '\\n';\n    source = source + ' * @model\\n';\n    source = source + ' */\\n';\n    source = source + 'runtime.require(\\'metamodel\\').model(' + JSON.stringify(model, null, '\\t', 2) + ');\\n\\n';\n  });\n  \n  var typeSorted = [];\n  var typeNameSorted = [];\n  for (name in system.types) {\n    typeSorted.push(system.types[name]);\n    typeNameSorted.push(system.types[name].name);\n  }\n  typeSorted.sort(function (typeA, typeB) {\n    return typeA.name > typeB.name;\n  });\n  typeNameSorted.sort();\n  \n  typeSorted.forEach(function (type) {\n    source = source + '/**\\n';\n    source = source + ' * Type ' + type.name + '\\n';\n    source = source + ' * @type\\n';\n    source = source + ' */\\n';\n    source = source + 'runtime.require(\\'metamodel\\').type(' + JSON.stringify(type, null, '\\t', 2) + ');\\n\\n';\n  });\n  \n  if (Object.keys(system.schemas).length > 0 || Object.keys(system.models).length > 0 || Object.keys(system.types).length > 0) {\n    source = source + 'runtime.require(\\'metamodel\\').create();\\n\\n';\n  }\n  \n  // COMPONENT   \n  if (Object.keys(system.components).length > 0) {\n    source = source + '\\n// Components creation\\n\\n\\n';\n  }\n  schemaNameSorted.forEach(function (collection) {\n    for (name in system.components[collection]) {\n      source = source + '/**\\n';\n      source = source + ' * Component ' +  system.components[collection][name]._id + '\\n';\n      source = source + ' * @component\\n';\n      source = source + ' */\\n';\n      source = source + 'new (runtime.require(\\'' + collection + '\\'))(' + JSON.stringify(system.components[collection][name], null, '\\t', 2) + ');\\n\\n';\n    }\n  });\n  \n  // BEHAVIOR   \n  if (Object.keys(system.behaviors).length > 0) {\n    source = source + '\\n// Behaviors creation\\n\\n\\n';\n  }\n  \n  var behaviors = {};\n  var behaviorsComponentNameSorted = [];\n  var modelsByName = {};\n  \n  for (name in system.behaviors) {\n    if (typeof behaviors[system.behaviors[name].component] === 'undefined') {\n      behaviors[system.behaviors[name].component] = [];\n    }\n    behaviors[system.behaviors[name].component].push(system.behaviors[name]);\n  }\n\n  behaviorsComponentNameSorted = Object.keys(behaviors);\n  behaviorsComponentNameSorted.sort();\n  \n  var id = '';\n  for (id in system.models) {\n    modelsByName[system.models[id]._name] = system.models[id];  \n  }\n  \n  behaviorsComponentNameSorted.forEach(function forEach(componentName) {\n    var componentBehaviors = behaviors[componentName];\n    \n    componentBehaviors.sort(function sort(behaviorA, behaviorB) {\n      return behaviorA.state > behaviorB.state;\n    });\n    \n    if (componentBehaviors.length > 0) {\n      if (componentName === system._id) {\n        source = source + '// system behaviors\\n\\n';\n      } else {\n        source = source + '// ' + componentName + ' behaviors\\n\\n';\n      }\n    }\n    \n    componentBehaviors.forEach(function forEach(behavior) {\n      var useCoreAPI = typeof behavior.useCoreAPI !== 'undefined' ? behavior.useCoreAPI : false;\n      var core = typeof behavior.core !== 'undefined' ? behavior.core : false;\n      var comp = '';\n      var behaviorParamDef = {};\n      var options = ');\\n\\n';\n      \n      if (useCoreAPI && !core) {\n        options = ', true);\\n\\n';\n      }\n      if (useCoreAPI && core) {\n        options = ', true, true);\\n\\n';\n      }\n      \n      source = source + '/**\\n';\n      source = source + ' * @method ' + behavior.state  + '\\n';\n      \n      if (modelsByName[behavior.component] && modelsByName[behavior.component][behavior.state] && modelsByName[behavior.component][behavior.state].params) {\n        modelsByName[behavior.component][behavior.state].params.forEach(function forEach(param) {\n          source = source + ' * @param {' + param.type  + '} '  + param.name + '\\n';    \n        });\n      }\n      if (modelsByName[behavior.component] && modelsByName[behavior.component][behavior.state] && modelsByName[behavior.component][behavior.state].result) {\n          source = source + ' * @returns {' + modelsByName[behavior.component][behavior.state].result  + '} \\n';    \n      }\n      \n      source = source + ' */\\n';\n      \n      switch (true) {\n        case behavior.component === system._id:\n          comp = 'runtime.system()';\n          break;\n        default:\n          comp = 'runtime.require(\\'' + behavior.component + '\\')';\n          break;\n      } \n    \n    source = source + comp + '.on(\\'' + behavior.state + '\\', ' + behavior.action + options;\n    })\n  });\n  \n  // START\n  source = source + '// Start the system\\n';\n  source = source + 'runtime.system().start();\\n';\n              \n  return source;\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "Export": {
+      "export": {
+        "_id": "export"
+      }
+    }
+  },
+  "_id": "b1b4c41801f15706"
+}
