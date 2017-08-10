@@ -9,7 +9,8 @@
       "_name": "JSON",
       "source": "property",
       "_id": "r1bacb1740a1fc45",
-      "_inherit": ["_Component"]
+      "_inherit": ["_Component"],
+      "platform": "property"
     }
   },
   "models": {
@@ -21,7 +22,13 @@
         "mandatory": true,
         "default": {}
       },
-      "_id": "v1146f14eaa15324"
+      "_id": "v1146f14eaa15324",
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
     }
   },
   "behaviors": {},
@@ -110,7 +117,8 @@
               }
             }
           }
-        }
+        },
+        "platform": "all"
       },
       "02-TodoMVC.json": {
         "_id": "02-TodoMVC.json",
@@ -796,7 +804,8 @@
             }
           },
           "_id": "13e7b1b46c1b2ef"
-        }
+        },
+        "platform": "all"
       },
       "03-example-dvd-collection.json": {
         "_id": "03-example-dvd-collection.json",
@@ -1097,7 +1106,8 @@
               "render": {}
             }
           }
-        }
+        },
+        "platform": "all"
       },
       "04-WebComponents.json": {
         "_id": "04-WebComponents.json",
@@ -1271,7 +1281,8 @@
             "MyWidget": {}
           },
           "_id": "1261a1e1fa1f9d3"
-        }
+        },
+        "platform": "all"
       },
       "05-example-node.json": {
         "_id": "05-example-node.json",
@@ -1296,7 +1307,8 @@
           "types": {},
           "components": {},
           "_id": "1638e12721115b5"
-        }
+        },
+        "platform": "electron"
       },
       "06-REST-Server.json": {
         "_id": "06-REST-Server.json",
@@ -2079,7 +2091,8 @@
             }
           },
           "_id": "134f61c924166c0"
-        }
+        },
+        "platform": "electron"
       },
       "07-REST-Client.json": {
         "_id": "07-REST-Client.json",
@@ -2615,7 +2628,8 @@
             }
           },
           "_id": "b199d91a7d310943"
-        }
+        },
+        "platform": "electron"
       },
       "08-FilterList.json": {
         "_id": "08-FilterList.json",
@@ -2848,7 +2862,8 @@
             }
           },
           "_id": "k119f317c9d181db"
-        }
+        },
+        "platform": "all"
       },
       "09-system-channel.json": {
         "_id": "09-system-channel.json",
@@ -2917,7 +2932,8 @@
             }
           },
           "_id": "12eaf148b211195"
-        }
+        },
+        "platform": "all"
       },
       "10-helper-database-events.json": {
         "_id": "10-helper-database-events.json",
@@ -3054,7 +3070,8 @@
           },
           "components": {},
           "_id": "1d4431844018720"
-        }
+        },
+        "platform": "all"
       },
       "11-system-css.json": {
         "_id": "11-system-css.json",
@@ -3114,7 +3131,8 @@
             }
           },
           "_id": "100f91634c16625"
-        }
+        },
+        "platform": "all"
       },
       "12-system-html.json": {
         "_id": "12-system-html.json",
@@ -3181,7 +3199,8 @@
             }
           },
           "_id": "1c1591f45b14c17"
-        }
+        },
+        "platform": "all"
       },
       "13-system-js.json": {
         "_id": "13-system-js.json",
@@ -3241,7 +3260,8 @@
             }
           },
           "_id": "1c01e1007a1f8e4"
-        }
+        },
+        "platform": "all"
       }
     }
   },
