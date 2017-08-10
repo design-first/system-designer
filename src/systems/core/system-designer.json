@@ -317,7 +317,7 @@
       "_id": "k13951153851cc3a",
       "component": "Designer",
       "state": "save",
-      "action": "function save() { \n  var systems = this.require('storage').get('system-designer-systems'),\n    designer = this.require('designer'),\n    system = this.require('db').collections().System.find({\n      '_id': this.require('factory').system().id()\n    })[0],\n    systemId = system._id;\n\n  // delete classInfo\n  system = JSON.parse(JSON.stringify(system));\n  delete system.classInfo;\n\n  // save system\n  this.require('storage').set(systemId, system);\n\n  // save index\n  if (!systems) {\n    systems = { 'systems': [systemId] };\n  } else {\n    if (systems.systems.indexOf(systemId) === -1) {\n      systems.systems.push(systemId);\n    }\n  }\n  this.require('storage').set('system-designer-systems', systems);\n}",
+      "action": "function save() { \n  var systems = this.require('storage').get('system-designer-systems'),\n    system = this.require('factory').toJSON(),\n    systemId = system._id;\n\n  // save system\n  this.require('storage').set(systemId, system);\n\n  // save index\n  if (!systems) {\n    systems = { 'systems': [systemId] };\n  } else {\n    if (systems.systems.indexOf(systemId) === -1) {\n      systems.systems.push(systemId);\n    }\n  }\n  this.require('storage').set('system-designer-systems', systems);\n}",
       "useCoreAPI": false,
       "core": false
     },
