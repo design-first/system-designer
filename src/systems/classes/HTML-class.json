@@ -8,7 +8,8 @@
       "_name": "HTML",
       "source": "property",
       "_id": "p181111d5c01f97b",
-      "_inherit": ["_Component"]
+      "_inherit": ["_Component"],
+      "render": "method"
     }
   },
   "models": {
@@ -20,10 +21,27 @@
         "mandatory": true,
         "default": ""
       },
-      "_id": "w1417e1d6d613a0d"
+      "_id": "w1417e1d6d613a0d",
+      "render": {
+        "params": [{
+          "name": "id",
+          "type": "any",
+          "mandatory": false,
+          "default": null
+        }]
+      }
     }
   },
-  "behaviors": {},
+  "behaviors": {
+    "c103c31cc9d1821e": {
+      "_id": "c103c31cc9d1821e",
+      "component": "HTML",
+      "state": "render",
+      "action": "function render(id) { \n  var dom = null;\n  \n  id = id || 'designer-workspace';\n  \n  if (id === 'body') {\n    dom = document.body;\n  } else {\n    dom = document.getElementById(id);\n  }\n  \n  dom.insertAdjacentHTML('beforeend', this.source());\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
   "types": {},
   "components": {
     "HTML": {
@@ -405,5 +423,6 @@
       }
     }
   },
-  "_id": "s1866318d7c1fccf"
+  "_id": "s1866318d7c1fccf",
+  "subsystem": false
 }

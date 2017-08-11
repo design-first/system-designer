@@ -10,8 +10,8 @@
         "_Component"
       ],
       "_name": "HTML",
-      "source": "property",
-      "platform": "property"
+      "render": "method",
+      "source": "property"
     },
     "t19b6b11ff31158d": {
       "_id": "t19b6b11ff31158d",
@@ -55,11 +55,15 @@
         "mandatory": true,
         "default": ""
       },
-      "platform": {
-        "type": "platform",
-        "readOnly": false,
-        "mandatory": false,
-        "default": "all"
+      "render": {
+        "params": [
+          {
+            "name": "id",
+            "type": "any",
+            "mandatory": false,
+            "default": null
+          }
+        ]
       }
     },
     "u1f4c7177bb1a459": {
@@ -162,20 +166,35 @@
     }
   },
   "components": {
-    "ToolBarItem": {},
+    "ToolBarItem": {
+      "l18cba197631613e": {
+        "_id": "l18cba197631613e",
+        "html": "toolbatItem_template.html",
+        "platform": "all",
+        "position": 100,
+        "type": "designer"
+      }
+    },
     "HTML": {
       "menuItem_template.html": {
         "_id": "menuItem_template.html",
-        "source": "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>",
-        "platform": "all"
+        "source": "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"
       },
       "toolbatItem_template.html": {
         "_id": "toolbatItem_template.html",
-        "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>",
-        "platform": "all"
+        "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
       }
     },
-    "MenuItem": {}
+    "MenuItem": {
+      "c17280161701dcf0": {
+        "_id": "c17280161701dcf0",
+        "html": "menuItem_template.html",
+        "name": "template",
+        "platform": "all",
+        "position": 100,
+        "type": "designer"
+      }
+    }
   },
   "_id": "c1e17a1676b1e178"
 }
