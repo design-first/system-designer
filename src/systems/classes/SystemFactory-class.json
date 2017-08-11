@@ -381,10 +381,10 @@
       },
       "create": {
         "params": [{
-          "name": "name",
-          "type": "string",
+          "name": "sys",
+          "type": "object",
           "mandatory": false,
-          "default": ""
+          "default": {}
         }],
         "result": "object"
       },
@@ -657,7 +657,7 @@
       "_id": "g172411b1b817aec",
       "component": "SystemFactory",
       "state": "create",
-      "action": "function create(name) { \n  var System = this.require('System'),\n      uuid = this.generateId()\n      mainUuid = this.generateId(),\n      system = {};\n\n  // set system\n  system = {\n    \"name\": name,\n    \"master\": true,\n    \"subsystem\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"\",\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {},\n    \"_id\": uuid\n  };\n\n  // add main method\n  system.behaviors[mainUuid] = {\n    \"_id\": mainUuid,\n    \"component\": uuid,\n    \"state\": \"start\",\n    \"action\": \"function start() { \\n\\t\\n}\",\n    \"useCoreAPI\": false,\n    \"core\": false\n  };\n\n  // add (TODO improve)\n  if (this.system()) {\n    this.system().destroy();\n  }\n\n  this.system(new System(system));\n  \n  return JSON.parse(JSON.stringify(system));\n}",
+      "action": "function create(sys) { \n  var System = this.require('System'),\n      uuid = this.generateId(),\n      mainUuid = this.generateId(),\n      system = {};\n      \n  sys = JSON.parse(JSON.stringify(sys));    \n      \n  // default system\n  system = {\n    \"name\": \"default\",\n    \"master\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"\",\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {},\n    \"_id\": uuid\n  };\n  \n  for (var prop in sys) {\n    if (sys.hasOwnProperty(prop)) {\n      system[prop] = sys[prop];\n    }\n  }\n\n  // add main method\n  system.behaviors[mainUuid] = {\n    \"_id\": mainUuid,\n    \"component\": uuid,\n    \"state\": \"start\",\n    \"action\": \"function start() { \\n\\t\\n}\",\n    \"useCoreAPI\": false,\n    \"core\": false\n  };\n\n  // add (TODO improve)\n  if (this.system()) {\n    this.system().destroy();\n  }\n\n  this.system(new System(system));\n  \n  return JSON.parse(JSON.stringify(system));\n}",
       "useCoreAPI": false,
       "core": false
     },
