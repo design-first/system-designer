@@ -1,7 +1,6 @@
 {
   "name": "editor-system",
   "master": true,
-  "subsystem": false,
   "version": "1.0.0",
   "description": "",
   "schemas": {
@@ -714,7 +713,7 @@
       "_id": "o1363f106aa19961",
       "component": "1f1781882618102",
       "state": "click",
-      "action": "function click() { \n  var editor = this.require('editor');\n  \n  editor.setEditor('json', JSON.stringify(this.require('store').data(), null, '\\t'), 2);\n}",
+      "action": "function click() { \n  var editor = this.require('editor'),\n      cleanSystem = this.require('store').data();\n  \n  delete cleanSystem.classInfo;\n  \n  editor.setEditor('json', JSON.stringify(cleanSystem, null, '\\t'), 2);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -845,28 +844,32 @@
         "name": "json",
         "html": "menu-item-json.html",
         "position": 50,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "1f1781882618114": {
         "_id": "1f1781882618114",
         "name": "description",
         "html": "menu-item-description.html",
         "position": 30,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "1f1781882618115": {
         "_id": "1f1781882618115",
         "name": "name",
         "html": "menu-item-name.html",
         "position": 10,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       },
       "1f1781882618116": {
         "_id": "1f1781882618116",
         "name": "version",
         "html": "menu-item-version.html",
         "position": 20,
-        "type": "system"
+        "type": "system",
+        "platform": "all"
       }
     },
     "Designer": {},
@@ -886,5 +889,6 @@
       }
     }
   },
-  "_id": "v1c4421834f1995a"
+  "_id": "v1c4421834f1995a",
+  "subsystem": false
 }

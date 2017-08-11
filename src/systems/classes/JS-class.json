@@ -1,7 +1,6 @@
 {
   "name": "JS-class",
   "master": false,
-  "subsystem": false,
   "version": "1.0.0",
   "description": "",
   "schemas": {
@@ -38,7 +37,7 @@
       },
       "javascript-export.js": {
         "_id": "javascript-export.js",
-        "source": "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @module {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// install System Runtime\nlet runtime = require('system-runtime');\n\n// set the level of log\nruntime.require('logger').level('{{logLevel}}');\n\n// install and start the system\nruntime.install('{{name}}.json');"
+        "source": "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @system {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// uncomment this line if running this script on node.js\n// let runtime = require('system-runtime');\n\nruntime.require('logger').level('{{logLevel}}');\n"
       },
       "system-runtime.min.js": {
         "_id": "system-runtime.min.js",

@@ -1,7 +1,6 @@
 {
   "name": "editor-model",
   "master": true,
-  "subsystem": false,
   "version": "1.0.0",
   "description": "",
   "schemas": {
@@ -633,7 +632,7 @@
       "_id": "l14395177b314b43",
       "component": "1dbc51300e11z13",
       "state": "click",
-      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var doc = {\n    \"name\": \"model \" + data._name,\n    \"master\": false,\n    \"subsystem\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"Model \" + data._name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.models[data._id] = data;\n\n  this.require('designer').saveAs(doc, 'model.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var doc = {\n    \"name\": \"model \" + data._name,\n    \"master\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"Model \" + data._name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.models[data._id] = data;\n\n  this.require('designer').saveAs(doc, 'model.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
     },
     "i1a1951779613207": {
       "_id": "i1a1951779613207",
@@ -807,7 +806,8 @@
         "name": "model",
         "html": "menu-item-model.html",
         "position": 10,
-        "type": "model"
+        "type": "model",
+        "platform": "all"
       }
     },
     "MenuAction": {

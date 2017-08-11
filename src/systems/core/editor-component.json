@@ -1,7 +1,6 @@
 {
   "name": "editor-component",
   "master": true,
-  "subsystem": false,
   "version": "1.0.0",
   "description": "",
   "schemas": {
@@ -632,7 +631,7 @@
       "_id": "g1706d148ae11f5d",
       "component": "1dbc51300e11z16",
       "state": "click",
-      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var name = data._id;\n  var model = this.require('store').collection();\n  var doc = {\n    \"name\": \"component \" + name,\n    \"master\": false,\n    \"subsystem\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"Component \" + name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  if (typeof doc.models[model]) {\n    doc.components[model] = {};\n  }\n\n  doc.components[model][data._id] = data;\n\n  this.require('designer').saveAs(doc, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
+      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var name = data._id;\n  var model = this.require('store').collection();\n  var doc = {\n    \"name\": \"component \" + name,\n    \"master\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"Component \" + name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  if (typeof doc.models[model]) {\n    doc.components[model] = {};\n  }\n\n  doc.components[model][data._id] = data;\n\n  this.require('designer').saveAs(doc, 'component.' + name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
     },
     "g1a0081da861f758": {
       "_id": "g1a0081da861f758",
@@ -814,7 +813,8 @@
         "name": "runtimeComponent",
         "html": "menu-item-component.html",
         "position": 200,
-        "type": "component"
+        "type": "component",
+        "platform": "all"
       }
     },
     "MenuAction": {

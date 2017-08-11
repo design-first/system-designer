@@ -1,7 +1,6 @@
 {
   "name": "editor-behavior",
   "master": true,
-  "subsystem": false,
   "version": "1.0.0",
   "description": "",
   "schemas": {
@@ -633,7 +632,7 @@
       "_id": "i179d41548d114e6",
       "component": "1dbc51300e11z15",
       "state": "click",
-      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var name = data.state;\n  var exportName = '';\n  var doc = {\n    \"name\": \"behavior \" + name,\n    \"master\": false,\n    \"subsystem\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"Behavior \" + name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.behaviors[data._id] = data;\n\n  if (this.require('store').data().component === this.require('factory').system().id()) {\n    exportName = 'behavior.' + this.require('factory').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  } else {\n    exportName = 'behavior.' + this.require('store').data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  }\n\n  this.require('designer').saveAs(doc, exportName);\n}"
+      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var name = data.state;\n  var exportName = '';\n  var doc = {\n    \"name\": \"behavior \" + name,\n    \"master\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"Behavior \" + name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.behaviors[data._id] = data;\n\n  if (this.require('store').data().component === this.require('factory').system().id()) {\n    exportName = 'behavior.' + this.require('factory').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  } else {\n    exportName = 'behavior.' + this.require('store').data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  }\n\n  this.require('designer').saveAs(doc, exportName);\n}"
     },
     "m191d0168cd1e718": {
       "_id": "m191d0168cd1e718",
@@ -830,14 +829,16 @@
         "name": "action",
         "html": "menu-item-action.html",
         "position": 10,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       },
       "1f1781882618111": {
         "_id": "1f1781882618111",
         "name": "json",
         "html": "menu-item-json.html",
         "position": 20,
-        "type": "behavior"
+        "type": "behavior",
+        "platform": "all"
       }
     },
     "Designer": {},
