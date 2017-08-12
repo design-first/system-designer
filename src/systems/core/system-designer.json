@@ -220,7 +220,7 @@
       "_id": "q178081a11712887",
       "component": "13f70137b61b19b",
       "state": "click",
-      "action": "function click() {\n  var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n\n  $('#designer-toolbar-item-publish').tooltip('hide');\n  if (this.require('factory').system()) {\n    if (runWidow && !runWidow.closed) {\n      runWidow.close();\n      this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n      message.success('Running the system...');\n\n      /*if (typeof require === 'undefined') {\n          runWidow.document.location.reload();\n          message.success('Running the system...');\n      } else {\n          // TODO \n          // to reload when implemented in electron\n          message.info('<b>info</b>: to run again the system, click the widow where your system is running and go to the menu \\'View > Refresh\\’.');\n      }*/\n    } else {\n      this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n      message.success('Running the system...');\n    }\n  } else {\n    message.warning('You have no system to run.');\n  }\n}"
+      "action": "function click() {\n  var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow();\n\n  $('#designer-toolbar-item-publish').tooltip('hide');\n  if (this.require('factory').system()) {\n    \n    // force save befor running the app\n    this.require('designer').save();\n    \n    if (runWidow && !runWidow.closed) {\n      runWidow.close();\n      this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n      message.success('Running the system...');\n\n      /*if (typeof require === 'undefined') {\n          runWidow.document.location.reload();\n          message.success('Running the system...');\n      } else {\n          // TODO \n          // to reload when implemented in electron\n          message.info('<b>info</b>: to run again the system, click the widow where your system is running and go to the menu \\'View > Refresh\\’.');\n      }*/\n    } else {\n      this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n      message.success('Running the system...');\n    }\n  } else {\n    message.warning('You have no system to run.');\n  }\n}"
     },
     "k1a9e11cd571d17c": {
       "_id": "k1a9e11cd571d17c",
@@ -1318,5 +1318,6 @@
     }
   },
   "types": {},
-  "master": true
+  "master": true,
+  "subsystem": false
 }
