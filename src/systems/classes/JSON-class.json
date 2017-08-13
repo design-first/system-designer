@@ -3256,7 +3256,7 @@
           "name": "extension-template",
           "master": false,
           "version": "1.0.0",
-          "description": "Create an extension. \n With this template you can create:\n\n* menubar items,\n* toolbar items and\n* actions when clicking on them.",
+          "description": "Create an extension\n\nExtension for creating:\n\n* menubar items,\n* toolbar items,\n* actions when clicking on them and\n* showing dialog.",
           "schemas": {
             "p181111d5c01f97b": {
               "_id": "p181111d5c01f97b",
@@ -3291,6 +3291,19 @@
               "show": "method",
               "render": "method",
               "click": "event"
+            },
+            "n1a57f14f7e1d5fe": {
+              "_id": "n1a57f14f7e1d5fe",
+              "_name": "Dialog",
+              "_inherit": ["_Component"],
+              "title": "property",
+              "message": "property",
+              "data": "property",
+              "ok": "event",
+              "cancel": "event",
+              "show": "method",
+              "hide": "method",
+              "render": "method"
             }
           },
           "models": {
@@ -3319,7 +3332,7 @@
                 "type": "@HTML",
                 "readOnly": false,
                 "mandatory": false,
-                "default": "toolbatItem_template.html"
+                "default": "toolbar-item-template.html"
               },
               "position": {
                 "type": "number",
@@ -3351,7 +3364,7 @@
                 "type": "@HTML",
                 "readOnly": false,
                 "mandatory": false,
-                "default": "menuItem_template.html"
+                "default": "menuitem-template.html"
               },
               "position": {
                 "type": "number",
@@ -3381,14 +3394,98 @@
               "show": {},
               "render": {},
               "click": {}
+            },
+            "l1d4181e4d71ade2": {
+              "_id": "l1d4181e4d71ade2",
+              "_name": "Dialog",
+              "title": {
+                "type": "text",
+                "readOnly": true,
+                "mandatory": true,
+                "default": ""
+              },
+              "message": {
+                "type": "text",
+                "readOnly": true,
+                "mandatory": false,
+                "default": ""
+              },
+              "data": {
+                "type": "object",
+                "readOnly": false,
+                "mandatory": false,
+                "default": {}
+              },
+              "show": {},
+              "hide": {},
+              "cancel": {},
+              "ok": {},
+              "render": {}
             }
           },
-          "behaviors": {},
+          "behaviors": {
+            "o17fec18a0514438": {
+              "_id": "o17fec18a0514438",
+              "component": "dialog-template",
+              "state": "show",
+              "action": "function show() { \n  $('#designer-dialog-template').modal('show');\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "x137c71fac11a07b": {
+              "_id": "x137c71fac11a07b",
+              "component": "dialog-template",
+              "state": "hide",
+              "action": "function hide() { \n  $('#designer-dialog-template').modal('hide');\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "l11cba1844d1f82a": {
+              "_id": "l11cba1844d1f82a",
+              "component": "dialog-template",
+              "state": "cancel",
+              "action": "function cancel() { \n  this.hide();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "j125311215811235": {
+              "_id": "j125311215811235",
+              "component": "dialog-template",
+              "state": "ok",
+              "action": "function ok() { \n  this.hide();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "s1e5a615cf0153dc": {
+              "_id": "s1e5a615cf0153dc",
+              "component": "dialog-template",
+              "state": "render",
+              "action": "function render() { \n  var html = '',\n      dom = null;\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.require('dialog-template.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-template-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-template-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show\n  $('#designer-dialog-template').modal('show');\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "m1f448175f61f877": {
+              "_id": "m1f448175f61f877",
+              "component": "toolbar_item_template",
+              "state": "click",
+              "action": "function click() { \n  this.require('dialog_template').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "g10c63191dc16341": {
+              "_id": "g10c63191dc16341",
+              "component": "toolbar-item-template",
+              "state": "click",
+              "action": "function click() { \n  this.require('dialog-template').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
           "types": {
             "editorType": {
               "name": "editorType",
               "type": "string",
-              "value": ["designer", "system", "type", "schema", "model", "behavior", "component", "documentation"]
+              "value": ["designer", "system", "type", "schema", "model", "behavior", "component"]
             },
             "platform": {
               "_id": "r10214160211309c",
@@ -3398,21 +3495,40 @@
             }
           },
           "components": {
-            "ToolBarItem": {},
+            "ToolBarItem": {
+              "toolbar-item-template": {
+                "_id": "toolbar-item-template",
+                "html": "toolbar-item-template.html",
+                "platform": "all",
+                "position": 100,
+                "type": "designer"
+              }
+            },
             "HTML": {
-              "menuItem_template.html": {
-                "_id": "menuItem_template.html",
+              "dialog-template.html": {
+                "_id": "dialog-template.html",
+                "source": "<div class=\"modal fade\" id=\"designer-dialog-template\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"templateLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"templateLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                {{message}}\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-default\" id=\"designer-dialog-template-cancel\">Cancel</button>\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-template-ok\">OK</button>\n            </div>\n        </div>\n    </div>\n</div>"
+              },
+              "menuitem-template.html": {
+                "_id": "menuitem-template.html",
                 "source": "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"
               },
-              "toolbatItem_template.html": {
-                "_id": "toolbatItem_template.html",
+              "toolbar-item-template.html": {
+                "_id": "toolbar-item-template.html",
                 "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
               }
             },
-            "MenuItem": {}
+            "MenuItem": {},
+            "Dialog": {
+              "dialog-template": {
+                "_id": "dialog-template",
+                "data": {},
+                "message": "This is a template of dialog.",
+                "title": "An example of Dialog"
+              }
+            }
           },
-          "_id": "c1e17a1676b1e178",
-          "subsystem": false
+          "_id": "c1e17a1676b1e178"
         }
       }
     }

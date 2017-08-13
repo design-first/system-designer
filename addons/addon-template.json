@@ -1,1 +1,246 @@
-{"name":"addon-template","master":false,"version":"1.0.0","description":"Addon for creating:\n\n* menubar items,\n* toolbar items and\n* actions when clicking on them.","schemas":{"p181111d5c01f97b":{"_id":"p181111d5c01f97b","_inherit":["_Component"],"_name":"HTML","render":"method","source":"property"},"t19b6b11ff31158d":{"_id":"t19b6b11ff31158d","_name":"ToolBarItem","_inherit":["_Component"],"html":"link","position":"property","type":"property","platform":"property","hide":"method","show":"method","render":"method","click":"event"},"l1d113198721599d":{"_id":"l1d113198721599d","_name":"MenuItem","_inherit":["_Component"],"html":"link","position":"property","type":"property","name":"property","platform":"property","hide":"method","show":"method","render":"method","click":"event"}},"models":{"w1417e1d6d613a0d":{"_id":"w1417e1d6d613a0d","_name":"HTML","source":{"type":"html","readOnly":true,"mandatory":true,"default":""},"render":{"params":[{"name":"id","type":"any","mandatory":false,"default":null}]}},"u1f4c7177bb1a459":{"_id":"u1f4c7177bb1a459","_name":"ToolBarItem","html":{"type":"@HTML","readOnly":false,"mandatory":false,"default":"toolbatItem_template.html"},"position":{"type":"number","readOnly":false,"mandatory":false,"default":100},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"click":{},"platform":{"type":"platform","readOnly":false,"mandatory":false,"default":"all"}},"u1f9a01abe31b3bf":{"_id":"u1f9a01abe31b3bf","_name":"MenuItem","html":{"type":"@HTML","readOnly":false,"mandatory":false,"default":"menuItem_template.html"},"position":{"type":"number","readOnly":false,"mandatory":false,"default":100},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"name":{"type":"string","readOnly":false,"mandatory":false,"default":"template"},"platform":{"type":"platform","readOnly":false,"mandatory":false,"default":"all"},"hide":{},"show":{},"render":{},"click":{}}},"behaviors":{},"types":{"editorType":{"name":"editorType","type":"string","value":["designer","system","type","schema","model","behavior","component","documentation"]},"platform":{"_id":"r10214160211309c","name":"platform","type":"string","value":["all","web","electron","cordova"]}},"components":{"ToolBarItem":{},"HTML":{"menuItem_template.html":{"_id":"menuItem_template.html","source":"<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"},"toolbatItem_template.html":{"_id":"toolbatItem_template.html","source":"<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"}},"MenuItem":{}},"_id":"c1e17a1676b1e178","subsystem":false}
+{
+  "name": "addon-template",
+  "master": false,
+  "version": "1.0.0",
+  "description": "Addon for creating:\n\n* menubar items,\n* toolbar items,\n* actions when clicking on them and\n* showing dialog.",
+  "schemas": {
+    "p181111d5c01f97b": {
+      "_id": "p181111d5c01f97b",
+      "_inherit": [
+        "_Component"
+      ],
+      "_name": "HTML",
+      "render": "method",
+      "source": "property"
+    },
+    "t19b6b11ff31158d": {
+      "_id": "t19b6b11ff31158d",
+      "_name": "ToolBarItem",
+      "_inherit": [
+        "_Component"
+      ],
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "platform": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event"
+    },
+    "l1d113198721599d": {
+      "_id": "l1d113198721599d",
+      "_name": "MenuItem",
+      "_inherit": [
+        "_Component"
+      ],
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "platform": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "click": "event"
+    },
+    "n1a57f14f7e1d5fe": {
+      "_id": "n1a57f14f7e1d5fe",
+      "_name": "Dialog",
+      "_inherit": [
+        "_Component"
+      ],
+      "title": "property",
+      "message": "property",
+      "data": "property",
+      "ok": "event",
+      "cancel": "event",
+      "show": "method",
+      "hide": "method",
+      "render": "method"
+    }
+  },
+  "models": {
+    "w1417e1d6d613a0d": {
+      "_id": "w1417e1d6d613a0d",
+      "_name": "HTML",
+      "source": {
+        "type": "html",
+        "readOnly": true,
+        "mandatory": true,
+        "default": ""
+      },
+      "render": {
+        "params": [
+          {
+            "name": "id",
+            "type": "any",
+            "mandatory": false,
+            "default": null
+          }
+        ]
+      }
+    },
+    "u1f4c7177bb1a459": {
+      "_id": "u1f4c7177bb1a459",
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "toolbar-item-template.html"
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 100
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {},
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
+    },
+    "u1f9a01abe31b3bf": {
+      "_id": "u1f9a01abe31b3bf",
+      "_name": "MenuItem",
+      "html": {
+        "type": "@HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "menuitem-template.html"
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 100
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "template"
+      },
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "click": {}
+    },
+    "l1d4181e4d71ade2": {
+      "_id": "l1d4181e4d71ade2",
+      "_name": "Dialog",
+      "title": {
+        "type": "text",
+        "readOnly": true,
+        "mandatory": true,
+        "default": ""
+      },
+      "message": {
+        "type": "text",
+        "readOnly": true,
+        "mandatory": false,
+        "default": ""
+      },
+      "data": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "show": {},
+      "hide": {},
+      "cancel": {},
+      "ok": {},
+      "render": {}
+    }
+  },
+  "behaviors": {
+    "m1f448175f61f877": {
+      "_id": "m1f448175f61f877",
+      "component": "toolbar_item_template",
+      "state": "click",
+      "action": "function click() { \n  this.require('dialog_template').render();\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "g10c63191dc16341": {
+      "_id": "g10c63191dc16341",
+      "component": "toolbar-item-template",
+      "state": "click",
+      "action": "function click() { \n  this.require('dialog-template').render();\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {
+    "editorType": {
+      "name": "editorType",
+      "type": "string",
+      "value": [
+        "designer",
+        "system",
+        "type",
+        "schema",
+        "model",
+        "behavior",
+        "component"
+      ]
+    },
+    "platform": {
+      "_id": "r10214160211309c",
+      "name": "platform",
+      "type": "string",
+      "value": [
+        "all",
+        "web",
+        "electron",
+        "cordova"
+      ]
+    }
+  },
+  "components": {
+    "ToolBarItem": {},
+    "HTML": {
+      "dialog-template.html": {
+        "_id": "dialog-template.html",
+        "source": "<div class=\"modal fade\" id=\"designer-dialog-template\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"templateLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"templateLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                {{message}}\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-default\" id=\"designer-dialog-template-cancel\">Cancel</button>\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-template-ok\">OK</button>\n            </div>\n        </div>\n    </div>\n</div>"
+      },
+      "menuitem-template.html": {
+        "_id": "menuitem-template.html",
+        "source": "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"
+      },
+      "toolbar-item-template.html": {
+        "_id": "toolbar-item-template.html",
+        "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
+      }
+    },
+    "MenuItem": {},
+    "Dialog": {}
+  },
+  "_id": "c1e17a1676b1e199"
+}
