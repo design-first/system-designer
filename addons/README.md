@@ -5,5 +5,6 @@ To extend System Designer, just copy and paste a system into the `/addons` direc
 You will find a here a template (*addon-template.json*) that you can use to:
 
 * create menubar items,
-* create toolbar items and
-* add actions when clicking on these items.
+* create toolbar items,
+* add actions when clicking on these items and
+* showing dialogs.
