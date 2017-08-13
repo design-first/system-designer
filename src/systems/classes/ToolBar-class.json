@@ -9,16 +9,12 @@
       "items": "collection",
       "render": "method",
       "_id": "f1257f17deb16097",
-      "_inherit": [
-        "_Component"
-      ]
+      "_inherit": ["_Component"]
     },
     "t19b6b11ff31158d": {
       "_id": "t19b6b11ff31158d",
       "_name": "ToolBarItem",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "html": "link",
       "position": "property",
       "type": "property",
@@ -33,9 +29,7 @@
     "l129a713e681c903": {
       "_name": "ToolBar",
       "items": {
-        "type": [
-          "@ToolBarItem"
-        ],
+        "type": ["@ToolBarItem"],
         "readOnly": false,
         "mandatory": false,
         "default": []
@@ -81,7 +75,7 @@
       "_id": "n12d44154da1020f",
       "component": "ToolBar",
       "state": "render",
-      "action": "function render() { \n  var domItems = document.getElementById('designer-toolbar-items'),\n    i = 0,\n    length = 0,\n    item = null,\n    toolBarItems = [],\n    platformToolBarItems = [],\n    platform = '',\n    self = this;\n\n  // get items\n  toolBarItems = this.require('db').collections().ToolBarItem.find({\n    'type': this.require('state').type(),\n    'platform': 'all'\n  });\n  \n  // get platformspecific items\n  switch(true) {\n    case this.require('designer').isElectron() === true:\n      platform = 'electron';\n      break;\n    case this.require('designer').isCordova() === true:\n      platform = 'electron';\n      break;\n    default:\n      platform = 'web';\n      break;\n  }\n  \n  platformToolBarItems = this.require('db').collections().ToolBarItem.find({\n    'type': this.require('state').type(),\n    'platform': platform\n  });\n  \n  toolBarItems = toolBarItems.concat(platformToolBarItems);\n\n  // sort items\n  toolBarItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  toolBarItems.forEach(function (toolBarItem) {\n    var id = toolBarItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // render items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // add events\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n}",
+      "action": "function render() { \n  var domItems = document.getElementById('designer-toolbar-items'),\n    i = 0,\n    length = 0,\n    item = null,\n    toolBarItems = [],\n    platformToolBarItems = [],\n    platform = '',\n    self = this;\n    \n  // empty\n  $('#designer-toolbar-items').empty();\n  this.items([]);\n\n  // get items\n  toolBarItems = this.require('db').collections().ToolBarItem.find({\n    'type': this.require('state').type(),\n    'platform': 'all'\n  });\n  \n  // get platformspecific items\n  switch(true) {\n    case this.require('designer').isElectron() === true:\n      platform = 'electron';\n      break;\n    case this.require('designer').isCordova() === true:\n      platform = 'electron';\n      break;\n    default:\n      platform = 'web';\n      break;\n  }\n  \n  platformToolBarItems = this.require('db').collections().ToolBarItem.find({\n    'type': this.require('state').type(),\n    'platform': platform\n  });\n  \n  toolBarItems = toolBarItems.concat(platformToolBarItems);\n\n  // sort items\n  toolBarItems.sort(function (itemA, itemB) {\n    if (itemA.position > itemB.position) {\n      return 1;\n    }\n    if (itemA.position < itemB.position) {\n      return -1;\n    }\n    return 0;\n  });\n\n  toolBarItems.forEach(function (toolBarItem) {\n    var id = toolBarItem._id;\n    self.items().push(self.require(id));\n  });\n\n  // render items\n  this.items().forEach(function (item) {\n    domItems.insertAdjacentHTML('beforeend', '<li>' + item.html().source() + '</>');\n  });\n\n  // add events\n  length = domItems.children.length;\n  for (i = 0; i < length; i++) {\n    item = domItems.children[i];\n    item.addEventListener('click', function () {\n      this.click();\n    }.bind(self.items(i)));\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
@@ -91,12 +85,7 @@
       "_id": "r10214160211309c",
       "name": "platform",
       "type": "string",
-      "value": [
-        "all",
-        "web",
-        "electron",
-        "cordova"
-      ]
+      "value": ["all", "web", "electron", "cordova"]
     }
   },
   "components": {

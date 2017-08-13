@@ -1,0 +1,55 @@
+{
+  "name": "Extension-class",
+  "master": false,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "x15866118f7110a3": {
+      "_id": "x15866118f7110a3",
+      "_name": "Extension",
+      "_inherit": ["_Component"],
+      "source": "property",
+      "isCore": "property",
+      "installed": "property"
+    }
+  },
+  "models": {
+    "h19261129ee12d64": {
+      "_id": "h19261129ee12d64",
+      "_name": "Extension",
+      "source": {
+        "type": "json",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {}
+      },
+      "installed": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+      },
+      "isCore": {
+        "type": "boolean",
+        "readOnly": false,
+        "mandatory": false,
+        "default": false
+      }
+    }
+  },
+  "behaviors": {
+    "r149191da07157be": {
+      "_id": "r149191da07157be",
+      "component": "a17fd51fe2d145a6",
+      "state": "start",
+      "action": "function start() { \n\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "Extension": {}
+  },
+  "_id": "a17fd51fe2d145a6"
+}

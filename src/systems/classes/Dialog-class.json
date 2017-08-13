@@ -104,6 +104,13 @@
       "_name": "DialogWelcome",
       "_inherit": ["Dialog"],
       "_id": "g1db25176311401d"
+    },
+    "m1b56110321128fb": {
+      "_id": "m1b56110321128fb",
+      "_name": "DialogExtension",
+      "_inherit": ["Dialog"],
+      "add": "method",
+      "remove": "method"
     }
   },
   "models": {
@@ -214,6 +221,12 @@
     "e1dd3f1e688107a8": {
       "_name": "DialogWelcome",
       "_id": "e1dd3f1e688107a8"
+    },
+    "u147e01d928148d4": {
+      "_id": "u147e01d928148d4",
+      "_name": "DialogExtension",
+      "add": {},
+      "remove": {}
     }
   },
   "behaviors": {
@@ -630,6 +643,46 @@
       "component": "DialogSearch",
       "state": "hide",
       "action": "function hide() { \n  $('#designer-dialog-search-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "a1782f14fca18eba": {
+      "_id": "a1782f14fca18eba",
+      "component": "DialogExtension",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-extension-modal').modal('show');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r1a97f1be45125db": {
+      "_id": "r1a97f1be45125db",
+      "component": "DialogExtension",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-extension-modal').modal('hide');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "y1cef2194f4195d5": {
+      "_id": "y1cef2194f4195d5",
+      "component": "DialogExtension",
+      "state": "init",
+      "action": "function init(conf) { \n\tvar html = '',\n      dom = null,\n      extensions = [],\n      extension = '',\n      listExtensions = '',\n      systems = null,\n      sys = '',\n      system = null,\n      length = 0,\n      i = 0,\n      that = this;\n\n  $('.modal-backdrop').remove();\n  $('#designer-dialog').empty();\n  \n  // init extensions list\n  extensions = this.require('db').collections().Extension.find({\n    'installed': true\n  });\n  \n  length = extensions.length;\n  for (i = 0; i < length; i++) {\n    extension = this.require(extensions[i]._id);\n\n    listExtensions = listExtensions + '<a class=\"list-group-item\" id=\"designer-dialog-extension-modal-extensions-' + extension.id() + '\">' +\n      '<h4 class=\"list-group-item-heading\">' + extension.source().name + '</h4>' +\n      '<p class=\"list-group-item-text\">v' + extension.source().version + '</p>' +\n      '</a>';\n  }\n\n  // init systems list\n  systems = this.require('storage').get('system-designer-systems');\n  if (systems) {\n    systemIds = systems.systems;\n  }\n  length = systemIds.length;\n\n  for (i = 0; i < length; i++) {\n    system = this.require('storage').get(systemIds[i]);\n \n    if (system && system.name.indexOf('extension-') !== -1) {\n      sys = sys + '<a class=\"list-group-item\" id=\"designer-dialog-extension-modal-systems-' + system._id + '\">' +\n          '<h4 class=\"list-group-item-heading\">' + system.name + '</h4>' +\n          '<p class=\"list-group-item-text\">v' + system.version + '</p>' +\n          '</a>';\n    }\n  }\n\n  html = this.require('dialog-modal-extension.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n     .replace(/{{title}}/gi, this.title())\n        .replace(/{{extensions}}/gi, listExtensions)\n        .replace(/{{systems}}/gi, sys)\n  );\n  \n  // systems events  \n  var callbackSystemEvent = function cbSystemEvent(event) {\n    var id = '',\n        systems = null,\n        length = 0,\n        i = 0;\n\n    if ($(this).hasClass('active')) {\n      $(this).removeClass('active');\n      that.data(null);\n    } else {\n      id = this.getAttribute('id').replace('designer-dialog-extension-modal-systems-', '');\n\n      that.data(that.require('storage').get(id));\n\n      // remove old active\n      systems = document.getElementById('designer-dialog-extension-modal-systems');\n\n      length = systems.children.length;\n      for (i = 0; i < length; i++) {\n        $(systems.children[i]).removeClass('active');\n      }\n\n      // add current active\n      $(this).addClass('active');\n    }\n  };\n\n  systems = this.require('storage').get('system-designer-systems');\n  if (systems) {\n    systemIds = systems.systems;\n  }\n  length = systemIds.length;\n\n  for (i = 0; i < length; i++) {\n    system = this.require('storage').get(systemIds[i]);\n\n    if (system && system.name.indexOf('extension-') !== -1) {\n      dom = document.getElementById('designer-dialog-extension-modal-systems-' + system._id);\n      dom.addEventListener('click', callbackSystemEvent);\n    }\n  }\n\n  // extensions events  \n  var callbackEvent = function cbEvent(event) {\n    var id = '',\n        libraries = null,\n        length = 0,\n        i = 0;\n\n    if ($(this).hasClass('active')) {\n      $(this).removeClass('active');\n      that.data(null);\n    } else {\n      id = this.getAttribute('id').replace('designer-dialog-extension-modal-extensions-', '');\n\n      that.data(that.require(id));\n\n      // remove old active\n      libraries = document.getElementById('designer-dialog-extension-modal-extensions');\n\n      length = libraries.children.length;\n      for (i = 0; i < length; i++) {\n        $(libraries.children[i]).removeClass('active');\n      }\n\n      // add current active\n      $(this).addClass('active');\n    }\n  };\n  \n  extensions = this.require('db').collections().Extension.find({\n    'installed': true\n  });\n  \n  length = extensions.length;\n  for (i = 0; i < length; i++) {\n    extension = this.require(extensions[i]._id);\n\n    dom = document.getElementById('designer-dialog-extension-modal-extensions-' + extension.id());\n    dom.addEventListener('click', callbackEvent);\n  }\n  \n  dom = document.getElementById('designer-dialog-extension-modal-action-remove');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-extension-modal-extensions-area').show();\n    $('#designer-dialog-extension-modal-systems-area').hide();\n    $('#designer-dialog-extension-modal-remove').show();\n    $('#designer-dialog-extension-modal-add').hide();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-extension-modal-action-add');\n  dom.addEventListener('click', function click(event) {\n    $('#designer-dialog-extension-modal-extensions-area').hide();\n    $('#designer-dialog-extension-modal-systems-area').show();\n    $('#designer-dialog-extension-modal-remove').hide();\n    $('#designer-dialog-extension-modal-add').show();\n  }.bind(this));\n  \n  // events\n  dom = document.getElementById('designer-dialog-extension-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-extension-modal-add');\n  dom.addEventListener('click', function click(event) {\n    this.add();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-extension-modal-remove');\n  dom.addEventListener('click', function click(event) {\n    this.remove();\n  }.bind(this));\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "u11da5146311bf9b": {
+      "_id": "u11da5146311bf9b",
+      "component": "DialogExtension",
+      "state": "add",
+      "action": "function add() { \n\tvar Extension = this.require('Extension'),\n\tsystem = this.data(),\n\textension = null,\n\textensions = [],\n\textensionToSave = {\n\t  extensions: []\n\t},\n\tcleanJson = '',\n\treg = null;\n\n\t// TODO check if extension already exist\n\t// => update it\n\t// TODO need to save extensions in localstorage\n\t// TODO check if data is valid ?\n\t\n\tnew Extension({\n\t  'source': system,\n\t  'installed': true\n\t});\n\t\n\t// extensions\n\textensions = this.require('db').collections().Extension.find();\n\t\n\textensionToSave.extensions = extensions.map(function map(extension) {\n\t  var clean = JSON.parse(JSON.stringify(extension));\n\t  delete clean.classInfo;\n\t  return clean;\n\t});\n  \n  this.require('storage').set('system-designer-extensions', extensionToSave);\n\t\n\t// TODO put that in function\n  cleanJson = JSON.stringify(system);\n  reg = new RegExp(system._id, 'g');\n  cleanJson = cleanJson.replace(reg, 'ext_' + system._id );\n  system = JSON.parse(cleanJson);\n      \n\tthis.require('runtime').install(system);\n\tthis.require('menubar').render();\n\tthis.require('toolbar').render();\n\t\n\tthis.hide();\n\tthis.require('message').success('The extension has been added.')\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "h125f41b82b19da2": {
+      "_id": "h125f41b82b19da2",
+      "component": "DialogExtension",
+      "state": "remove",
+      "action": "function remove() { \n\tvar extension = this.data(),\n\textensions = [],\n\textensionToSave = {\n\t  extensions: []\n\t};\n\t\n\t// TODO put that in function\n\n\tthis.require('runtime').uninstall('ext_' + extension.source()._id);\n\tthis.require('menubar').render();\n\tthis.require('toolbar').render();\n\t\n\textension.destroy();\n\t\n\t// extensions\n\textensions = this.require('db').collections().Extension.find();\n\t\n\textensionToSave.extensions = extensions.map(function map(extension) {\n\t  var clean = JSON.parse(JSON.stringify(extension));\n\t  delete clean.classInfo;\n\t  return clean;\n\t});\n  \n  this.require('storage').set('system-designer-extensions', extensionToSave);\n\t\n\tthis.hide();\n\t\n\tthis.require('message').success('The extension has been removed.');\n}",
       "useCoreAPI": false,
       "core": false
     }
