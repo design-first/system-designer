@@ -3215,6 +3215,7 @@
               "title": "property",
               "message": "property",
               "data": "property",
+              "html": "link",
               "ok": "event",
               "cancel": "event",
               "show": "method",
@@ -3332,6 +3333,12 @@
                 "mandatory": false,
                 "default": {}
               },
+              "html": {
+                "type": "@HTML",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
               "show": {},
               "hide": {},
               "cancel": {},
@@ -3376,7 +3383,7 @@
               "_id": "s1e5a615cf0153dc",
               "component": "dialog-template",
               "state": "render",
-              "action": "function render() { \n  var html = '',\n      dom = null;\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.require('dialog-template.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-template-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-template-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show\n  $('#designer-dialog-template').modal('show');\t\n}",
+              "action": "function render() { \n  var html = '',\n      dom = null;\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-template-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-template-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show\n  $('#designer-dialog-template').modal('show');\t\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -3440,11 +3447,12 @@
                 "_id": "dialog-template",
                 "data": {},
                 "message": "This is a template of dialog.",
-                "title": "An example of Dialog"
+                "title": "An example of Dialog",
+                "html": "dialog-template.html"
               }
             }
           },
-          "_id": "c1e17a1676b1e178"
+          "_id": "v191051d32e1b9d9"
         }
       },
       "00-example-quick-start.json": {
