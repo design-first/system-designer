@@ -39,6 +39,7 @@
       "$designerUpdateComponent": "event",
       "$designerUpdateModel": "event",
       "$designerUpdateBehavior": "event",
+      "$designerSetSystem": "event",
       "$runtimeCreateComponent": "event",
       "$runtimeDeleteComponent": "event",
       "$runtimeUpdateComponent": "event",
@@ -91,6 +92,7 @@
       "position": "property",
       "type": "property",
       "name": "property",
+      "platform": "property",
       "hide": "method",
       "show": "method",
       "render": "method",
@@ -429,6 +431,14 @@
           "name": "message",
           "type": "message"
         }]
+      },
+      "$designerSetSystem": {
+        "params": [{
+          "name": "system",
+          "type": "object",
+          "mandatory": false,
+          "default": {}
+        }]
       }
     },
     "c1b00612faf188cf": {
@@ -539,6 +549,12 @@
         "readOnly": false,
         "mandatory": false,
         "default": ""
+      },
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
       },
       "hide": {},
       "show": {},
@@ -768,7 +784,7 @@
       "_id": "q178081a11712887",
       "component": "13f70137b61b19b",
       "state": "click",
-      "action": "function click() {\n  var designer = this.require('designer'),\n    message = this.require('message'),\n    runWidow = this.require('designer').runWindow(),\n    system = this.require('factory').system(),\n    json = {},\n    cleanJson = '',\n    reg = null;\n\n  $('#designer-toolbar-item-publish').tooltip('hide');\n  if (system) {\n    \n    // force save befor running the app\n    this.require('designer').save();\n    \n    if (system.name().indexOf('extension-') === -1) {\n      if (runWidow && !runWidow.closed) {\n        runWidow.close();\n        this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n        message.success('Running the system...');\n    \n        /*if (typeof require === 'undefined') {\n            runWidow.document.location.reload();\n            message.success('Running the system...');\n        } else {\n            // TODO \n            // to reload when implemented in electron\n            message.info('<b>info</b>: to run again the system, click the widow where your system is running and go to the menu \\'View > Refresh\\’.');\n        }*/\n      } else {\n        this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n        message.success('Running the system...');\n      }\n    } else {\n      json = this.require('factory').toJSON();\n\n      cleanJson = JSON.stringify(json);\n      reg = new RegExp(json._id, 'g');\n      cleanJson = cleanJson.replace(reg, 'ext_' + json._id );\n      json = JSON.parse(cleanJson);\n      \n      runtime.uninstall(json._id);\n      runtime.install(json);\n      this.require('menubar').render();\n      this.require('toolbar').render();\n      message.success('The extension has been installed.');\n    }\n  } else {\n    message.warning('You have no system to run.');\n  }\n}",
+      "action": "function click() {\n  var designer = this.require('designer'),\n    message = this.require('message'),\n    debugWindow = this.require('designer').debugWindow()\n    runWidow = this.require('designer').runWindow(),\n    system = this.require('factory').system(),\n    json = {},\n    cleanJson = '',\n    reg = null;\n\n  $('#designer-toolbar-item-publish').tooltip('hide');\n  if (system) {\n\n    // force save befor running the app\n    this.require('designer').save();\n\n\n    switch(true) {\n      // case of extension\n      case system.name().indexOf('extension-') !== -1:\n        json = this.require('factory').toJSON();\n\n        cleanJson = JSON.stringify(json);\n        reg = new RegExp(json._id, 'g');\n        cleanJson = cleanJson.replace(reg, 'ext_' + json._id);\n        json = JSON.parse(cleanJson);\n\n        runtime.uninstall(json._id);\n        runtime.install(json);\n        this.require('menubar').render();\n        this.require('toolbar').render();\n        message.success('The extension has been installed.');\n        break;\n      \n      // case of remote debugging\n      case debugWindow && !debugWindow.closed:\n        this.require('channel').$designerSetSystem(this.require('factory').toJSON());\n        // TODO Refresh the page\n        message.success('Running the system in the remote page...');\n        break;\n\n      // reload the running page\n      case runWidow && !runWidow.closed:\n        runWidow.close();\n        this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n        message.success('Running the system...');\n\n        /*if (typeof require === 'undefined') {\n            runWidow.document.location.reload();\n            message.success('Running the system...');\n        } else {\n            // TODO \n            // to reload when implemented in electron\n            message.info('<b>info</b>: to run again the system, click the widow where your system is running and go to the menu \\'View > Refresh\\’.');\n        }*/\n        break;\n\n      // we load for the first time the page\n      default:\n        this.require('designer').runWindow(this.require('designer').open('app.html#' + this.require('factory').system().id(), 'app'));\n        message.success('Running the system...');\n        break;\n    }\n  } else {\n    message.warning('You have no system to run.');\n  }\n}",
       "useCoreAPI": true
     },
     "k1a9e11cd571d17c": {
