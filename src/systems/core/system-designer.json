@@ -1114,8 +1114,8 @@
       "component": "_Channel",
       "state": "init",
       "action": "function init(conf) { \n  window.addEventListener('message', function message(event) {\n    var data = null,\n        config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n    data = JSON.parse(event.data);\n    if (data &&\n      typeof data.event !== 'undefined' &&\n      typeof data.from !== 'undefined' &&\n      typeof data.data !== 'undefined') {\n      $db._Message.insert(data);\n    }\n  }.bind(this), false);\n\n  this.require('_Storage').on('changed', function changed(obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      if (this.require('designer').debugWindow()) {\n        this.require('designer').debugWindow().postMessage(JSON.stringify(obj['system-designer-message'].newValue), '*');\n      }\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
-      "useCoreAPI": false,
-      "core": true
+      "useCoreAPI": true,
+      "core": false
     },
     "i1fa311dc26116f8": {
       "_id": "i1fa311dc26116f8",
