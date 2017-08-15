@@ -549,7 +549,7 @@
       "_id": "p1bf7312724172d3",
       "component": "SystemFactory",
       "state": "updateComponent",
-      "action": "function updateComponent(id, collection, field, value) { \n  var components = this.system().components();\n\n  if (typeof components[collection] !== 'undefined' && components[collection][id] !== 'undefined') {\n    components[collection][id][field] = value;\n    this.system().components(components);\n  }\t\n}",
+      "action": "function updateComponent(id, collection, field, value) { \n  var components = this.system().components();\n\n  if (typeof components[collection] !== 'undefined' && \n      typeof components[collection][id] !== 'undefined' &&\n      typeof components[collection][id][field] !== 'undefined') {\n    components[collection][id][field] = value;\n    this.system().components(components);\n  }\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -715,6 +715,5 @@
       }
     }
   },
-  "_id": "b1a876118c8137a2",
-  "subsystem": false
+  "_id": "b1a876118c8137a2"
 }
