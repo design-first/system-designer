@@ -121,6 +121,10 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/). All
 * [Code of Conduct](CODE_OF_CONDUCT.md)
 * [Contributing Guidelines](CONTRIBUTING.md)
 
+**Do not use System Designer if you do not believe in Equality and Diversity.**
+
+**System Designer is not for people of hate.**
+
 ## Licence
 
 Copyright © 2017 Erwan Carriou
