@@ -91,6 +91,7 @@
       "position": "property",
       "type": "property",
       "name": "property",
+      "platform": "property",
       "hide": "method",
       "show": "method",
       "render": "method",
@@ -328,6 +329,12 @@
         }]
       },
       "$designerDeleteModel": {
+        "params": [{
+          "name": "id",
+          "type": "string"
+        }]
+      },
+      "$designerDeleteType": {
         "params": [{
           "name": "id",
           "type": "string"
@@ -599,6 +606,12 @@
         "readOnly": false,
         "mandatory": false,
         "default": ""
+      },
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
       },
       "hide": {},
       "show": {},

@@ -91,6 +91,7 @@
       "position": "property",
       "type": "property",
       "name": "property",
+      "platform": "property",
       "hide": "method",
       "show": "method",
       "render": "method",
@@ -334,6 +335,12 @@
           "type": "string"
         }]
       },
+      "$designerDeleteType": {
+        "params": [{
+          "name": "id",
+          "type": "string"
+        }]
+      },
       "$editorUpdateSystem": {
         "params": [{
           "name": "id",
@@ -515,6 +522,12 @@
         "readOnly": false,
         "mandatory": false,
         "default": ""
+      },
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
       },
       "hide": {},
       "show": {},
