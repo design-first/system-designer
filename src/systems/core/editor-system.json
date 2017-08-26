@@ -742,7 +742,7 @@
       "_id": "g1e35b1112512787",
       "component": "Designer",
       "state": "render",
-      "action": "function render() {\n  var id = '',\n    system = null,\n    extra = {};\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  \n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  \n  // set editor\n  system = this.require('storage').get(id);\n  \n  this.require('factory').create(system);\n\n  this.require('store').uuid(id);\n  this.require('store').data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  this.require('editor').initValue(this.require('store').data().name, 1);\n  \n  this.require('router').update();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
+      "action": "function render() {\n  var id = '',\n    system = null,\n    extra = {};\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  \n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  \n  // set editor\n  system = this.require('storage').get(id);\n  \n  this.require('factory').create(system);\n\n  this.require('store').uuid(id);\n  this.require('store').data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  this.require('editor').initValue(this.require('store').data().name, 1);\n  \n  this.require('router').update();\n  \n  // command\n  document.body.addEventListener('keydown', function(event){\n    var key = event.which || event.keyCode;\n    var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n    var command = event.metaKey ? event.metaKey : ((key === 91) ? true : false);\n\n    if (key == 79 && (ctrl || command)) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n        event.stopPropagation();\n        event.preventDefault();\n        return false;\n      } else {\n        var Dialog = runtime.require('DialogCommand');\n        var dialog = new Dialog({'title':''});\n        dialog.show();\n        event.stopPropagation();\n        event.preventDefault();\n        return false;\n      }\n    }\n  });\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -775,6 +775,22 @@
       "component": "_Channel",
       "state": "init",
       "action": "function init(conf) { \n  this.require('_Storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w1aa16102d712d94": {
+      "_id": "w1aa16102d712d94",
+      "component": "x1cfa910cac1f8da",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l11b92128ce147e8": {
+      "_id": "l11b92128ce147e8",
+      "component": "k13bb31b8681ba70",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
@@ -849,6 +865,20 @@
         "position": 40,
         "type": "system",
         "platform": "all"
+      },
+      "x1cfa910cac1f8da": {
+        "_id": "x1cfa910cac1f8da",
+        "html": "toolbar-item-command.html",
+        "platform": "web",
+        "position": 75,
+        "type": "system"
+      },
+      "k13bb31b8681ba70": {
+        "_id": "k13bb31b8681ba70",
+        "html": "toolbar-item-command.html",
+        "platform": "electron",
+        "position": 75,
+        "type": "system"
       }
     },
     "MenuItem": {

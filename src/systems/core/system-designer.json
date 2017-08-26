@@ -879,7 +879,7 @@
       "_id": "o12c7d1448a1dc16",
       "component": "Designer",
       "state": "render",
-      "action": "function render() {\n  var System = null,\n    systemId = '',\n    extensions = null;\n\n  // message\n  this.require('logger').on('warn', function warn(message) {\n    this.require('message').warning(message);\n  });\n  this.require('logger').on('error', function error(message) {\n    this.require('message').danger(message);\n  });\n  \n  // extensions\n  extensions = this.require('storage').get('system-designer-extensions');\n  if (extensions && extensions.extensions && extensions.extensions.length) {\n    extensions.extensions.forEach(function (extension) {\n      var Extension = this.require('Extension'),\n          system = {},\n          cleanJson = {},\n          reg = null;\n          \n      system = extension.source;\n      \n      cleanJson = JSON.stringify(system);\n      reg = new RegExp(system._id, 'g');\n      cleanJson = cleanJson.replace(reg, 'ext_' + system._id );\n      system = JSON.parse(cleanJson);\n      \n      this.require('runtime').install(system);\n      \n      new Extension(extension);\n    }.bind(this));\n  }\n\n  // system\n  System = this.require('System');\n  var systems = this.require('storage').get('system-designer-systems');\n\n  // case of url\n  switch (true) {\n    case window.location.href.split('#').length > 1 && window.location.href.split('#')[1].length > 0:\n      systemId = window.location.href.split('#')[1];\n      if (this.require('storage').get(systemId)) {\n        this.require('factory').create(this.require('storage').get(systemId));\n      }\n      break;\n    default:\n      if (systems && systems.systems && systems.systems.length && systems.systems[0].length) {\n        systems.systems.sort(function (sysA, sysB) {\n          var a = this.require('storage').get(sysA),\n            b = this.require('storage').get(sysB),\n            result = 0;\n\n          if (a.name > b.name) {\n            result = 1;\n          }\n          if (a.name < b.name) {\n            result = -1;\n          }\n          return result;\n        }.bind(this));\n\n        this.require('factory').create(this.require('storage').get(systems.systems[0]));\n      }\n      break;\n  }\n  \n  this.welcome();\n\n  this.require('router').start();\n  \n  // resize event\n  $(window).resize(function () {\n    jsPlumb.repaintEverything();\n  });\n\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('spaces').render();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { 'show': 2000, 'hide': 100 }, trigger: 'hover' });\n  });\n  \n  // command\n  document.body.addEventListener('keydown', function(event){\n    var key = event.which || event.keyCode;\n    var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n\n    if (key == 80 && ctrl) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-command-modal').modal('show');\n      } else {\n        var Dialog = runtime.require('DialogCommand');\n        var dialog = new Dialog({'title':''});\n        dialog.show();\n      }\n    }\n  });\n\n  // run messages if any\n  this.runMessages(this.require('state').messages());\n  this.require('state').messages([]);\n}",
+      "action": "function render() {\n  var System = null,\n    systemId = '',\n    extensions = null;\n\n  // message\n  this.require('logger').on('warn', function warn(message) {\n    this.require('message').warning(message);\n  });\n  this.require('logger').on('error', function error(message) {\n    this.require('message').danger(message);\n  });\n  \n  // extensions\n  extensions = this.require('storage').get('system-designer-extensions');\n  if (extensions && extensions.extensions && extensions.extensions.length) {\n    extensions.extensions.forEach(function (extension) {\n      var Extension = this.require('Extension'),\n          system = {},\n          cleanJson = {},\n          reg = null;\n          \n      system = extension.source;\n      \n      cleanJson = JSON.stringify(system);\n      reg = new RegExp(system._id, 'g');\n      cleanJson = cleanJson.replace(reg, 'ext_' + system._id );\n      system = JSON.parse(cleanJson);\n      \n      this.require('runtime').install(system);\n      \n      new Extension(extension);\n    }.bind(this));\n  }\n\n  // system\n  System = this.require('System');\n  var systems = this.require('storage').get('system-designer-systems');\n\n  // case of url\n  switch (true) {\n    case window.location.href.split('#').length > 1 && window.location.href.split('#')[1].length > 0:\n      systemId = window.location.href.split('#')[1];\n      if (this.require('storage').get(systemId)) {\n        this.require('factory').create(this.require('storage').get(systemId));\n      }\n      break;\n    default:\n      if (systems && systems.systems && systems.systems.length && systems.systems[0].length) {\n        systems.systems.sort(function (sysA, sysB) {\n          var a = this.require('storage').get(sysA),\n            b = this.require('storage').get(sysB),\n            result = 0;\n\n          if (a.name > b.name) {\n            result = 1;\n          }\n          if (a.name < b.name) {\n            result = -1;\n          }\n          return result;\n        }.bind(this));\n\n        this.require('factory').create(this.require('storage').get(systems.systems[0]));\n      }\n      break;\n  }\n  \n  this.welcome();\n\n  this.require('router').start();\n  \n  // resize event\n  $(window).resize(function () {\n    jsPlumb.repaintEverything();\n  });\n\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('spaces').render();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { 'show': 2000, 'hide': 100 }, trigger: 'hover' });\n  });\n  \n  // command\n  document.body.addEventListener('keydown', function(event){\n    var key = event.which || event.keyCode;\n    var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n    var command = event.metaKey ? event.metaKey : ((key === 91) ? true : false);\n\n    if (key == 79 && (ctrl || command)) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n        event.stopPropagation();\n        event.preventDefault();\n        return false;\n      } else {\n        var Dialog = runtime.require('DialogCommand');\n        var dialog = new Dialog({'title':''});\n        dialog.show();\n        event.stopPropagation();\n        event.preventDefault();\n        return false;\n      }\n    }\n  });\n\n  // run messages if any\n  this.runMessages(this.require('state').messages());\n  this.require('state').messages([]);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -1170,6 +1170,22 @@
       "action": "function click() {\n  $('#designer-toolbar-item-extension').tooltip('hide');\n  var DialogExtension = this.require('DialogExtension');\n\n  DialogExtension = new DialogExtension({\n    'title': 'Manage your extensions'\n  });\n  DialogExtension.show();\n}",
       "useCoreAPI": false,
       "core": false
+    },
+    "k1f66b12b5f1b625": {
+      "_id": "k1f66b12b5f1b625",
+      "component": "l1f2871e69b1b85e",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w19413126bf1bf40": {
+      "_id": "w19413126bf1bf40",
+      "component": "s1aa5c1170e1eba3",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
@@ -1276,6 +1292,20 @@
         "html": "toolbar-item-extension.html",
         "platform": "all",
         "position": 67,
+        "type": "designer"
+      },
+      "l1f2871e69b1b85e": {
+        "_id": "l1f2871e69b1b85e",
+        "html": "toolbar-item-command.html",
+        "platform": "web",
+        "position": 37,
+        "type": "designer"
+      },
+      "s1aa5c1170e1eba3": {
+        "_id": "s1aa5c1170e1eba3",
+        "html": "toolbar-item-command.html",
+        "platform": "electron",
+        "position": 37,
         "type": "designer"
       }
     },
