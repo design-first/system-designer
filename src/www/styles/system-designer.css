@@ -693,9 +693,15 @@ designer-spaces-components-header {
   display: none;
 }
 
-/* Dialog seach */
+/* Dialog search */
 #designer-dialog-option:hover {
   cursor: pointer;
+}
+
+.badge {
+  background-color: #337ab7;
+  right: 5px;
+  position: absolute;
 }
 
 /* Dialog Extensions  */
@@ -711,8 +717,16 @@ designer-spaces-components-header {
   display: none;
 }
 
-.badge {
-  background-color: #337ab7;
-  right: 5px;
-  position: absolute;
+/* Dialog Command */
+#designer-dialog-command-modal .modal-body {
+  padding-bottom: 0px;
 }
+
+#designer-dialog-command-result-area {
+  margin-bottom: 0px;
+}
+
+.result-command {
+  max-height: 300px;
+  overflow: auto;
+} 

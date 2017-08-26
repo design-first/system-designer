@@ -694,7 +694,7 @@
       "_id": "t17faa1c1e816821",
       "component": "Designer",
       "state": "render",
-      "action": "function render() {\n  var id = '',\n    systemId = '',\n    system = '',\n    type = '';\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  // set editors\n  system = this.require('storage').get(systemId);\n  type = system.types[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(type);\n\n  document.title = 'type ' + id + ' · system ' + system.name;\n\n  this.require('editor').initValue(JSON.stringify(type, null, '\\t'), 2);\n\n  this.require('router').update();\n\n  // TODO create a function\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
+      "action": "function render() {\n  var id = '',\n    systemId = '',\n    system = '',\n    type = '';\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n\n  // set editors\n  system = this.require('storage').get(systemId);\n  this.require('factory').create(system);\n  type = system.types[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(type);\n\n  document.title = 'type ' + id + ' · system ' + system.name;\n\n  this.require('editor').initValue(JSON.stringify(type, null, '\\t'), 2);\n\n  this.require('router').update();\n\n  // TODO create a function\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -839,6 +839,5 @@
     },
     "Workspace": {}
   },
-  "_id": "w1667a15e2a1e2ef",
-  "subsystem": false
+  "_id": "w1667a15e2a1e2ef"
 }

@@ -742,7 +742,7 @@
       "_id": "g1e35b1112512787",
       "component": "Designer",
       "state": "render",
-      "action": "function render() {\n  var id = '',\n    system = null,\n    extra = {};\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  \n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  \n  // set editor\n  system = this.require('storage').get(id);\n\n  this.require('store').uuid(id);\n  this.require('store').data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  this.require('editor').initValue(this.require('store').data().name, 1);\n  \n  this.require('router').update();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
+      "action": "function render() {\n  var id = '',\n    system = null,\n    extra = {};\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  \n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  \n  // set editor\n  system = this.require('storage').get(id);\n  \n  this.require('factory').create(system);\n\n  this.require('store').uuid(id);\n  this.require('store').data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  this.require('editor').initValue(this.require('store').data().name, 1);\n  \n  this.require('router').update();\n\n  $(function () {\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { \"show\": 1000, \"hide\": 100 } });\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -902,6 +902,5 @@
       }
     }
   },
-  "_id": "v1c4421834f1995a",
-  "subsystem": false
+  "_id": "v1c4421834f1995a"
 }
