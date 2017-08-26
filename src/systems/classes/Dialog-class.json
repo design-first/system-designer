@@ -121,6 +121,11 @@
       "filter": "property",
       "currentSelection": "property",
       "nbResult": "property"
+    },
+    "k16ab6191c412fea": {
+      "_id": "k16ab6191c412fea",
+      "_name": "DialogDelete",
+      "_inherit": ["Dialog"]
     }
   },
   "models": {
@@ -271,6 +276,10 @@
         "mandatory": false,
         "default": 0
       }
+    },
+    "i1d79c1b51e1c166": {
+      "_id": "i1d79c1b51e1c166",
+      "_name": "DialogDelete"
     }
   },
   "behaviors": {
@@ -775,6 +784,38 @@
       "component": "DialogCommand",
       "state": "hide",
       "action": "function hide() { \n  $('#designer-dialog-command-modal').modal('hide');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "o1007d12b0a1a3e3": {
+      "_id": "o1007d12b0a1a3e3",
+      "component": "DialogDelete",
+      "state": "init",
+      "action": "function init(conf) { \n  var html = '',\n      dom = null;\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.require('dialog-modal-delete.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-delete-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-delete-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show\n  $('#designer-dialog-delete-modal').modal('show');\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "b190621a3cf139b0": {
+      "_id": "b190621a3cf139b0",
+      "component": "DialogDelete",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-delete-modal').modal('hide');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z19b6c1e87e10065": {
+      "_id": "z19b6c1e87e10065",
+      "component": "DialogDelete",
+      "state": "show",
+      "action": "function show() { \n  $('#designer-dialog-delete-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "a110631fc9a10b17": {
+      "_id": "a110631fc9a10b17",
+      "component": "DialogDelete",
+      "state": "cancel",
+      "action": "function cancel() { \n  this.hide();\t\n}",
       "useCoreAPI": false,
       "core": false
     }
