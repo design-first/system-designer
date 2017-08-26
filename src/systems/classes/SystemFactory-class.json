@@ -557,7 +557,7 @@
       "_id": "u15b121620519864",
       "component": "SystemFactory",
       "state": "deleteComponent",
-      "action": "function deleteComponent(id, collection) { \n  var components = this.system().components();\n\n  if (typeof components[collection] !== 'undefined') {\n    delete components[collection][id];\n    this.system().components(components);\n  }\t\n}",
+      "action": "function deleteComponent(id, collection) { \n  var components = this.system().components(),\n      behaviors = this.system().behaviors(),\n      behaviorId = '';\n\n  if (typeof components[collection] !== 'undefined') {\n    delete components[collection][id];\n    this.system().components(components);\n    \n    // remove behaviors linked to the component\n    for (behaviorId in behaviors) {\n      if (behaviors[behaviorId].component === id) {\n\t      //delete behaviors[behaviorId];\n\t      this.deleteBehavior(behaviorId);\n\t      this.require('channel').$designerDeleteBehavior(behaviorId);\n\t      break;\n\t    }\n    }\n    \n    this.system().behaviors(behaviors);\n  }\t\n}",
       "useCoreAPI": false,
       "core": false
     },
