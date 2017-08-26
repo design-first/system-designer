@@ -19,6 +19,7 @@
       "$editorUpdateBehavior": "event",
       "$editorDeleteBehavior": "event",
       "$editorUpdateComponent": "event",
+      "$editorUpdateComponentId": "event",
       "$editorDeleteComponent": "event",
       "$appLogDebug": "event",
       "$appLogInfo": "event",
@@ -205,6 +206,20 @@
           "name": "component",
           "type": "object"
         }]
+      },
+      "$editorUpdateComponentId": {
+        "params": [{
+            "name": "oldId",
+            "type": "string"
+          }, {
+            "name": "newId",
+            "type": "string"
+          },
+          {
+            "name": "collection",
+            "type": "string"
+          }
+        ]
       },
       "$designerUpdateComponent": {
         "params": [{
