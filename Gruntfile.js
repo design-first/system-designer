@@ -35,11 +35,12 @@ module.exports = function (grunt) {
       "electron-kludge": {
         "expand": true,
         "cwd": "dist",
-        "src": ["*.html"],
+        "src": ["*.html", "app/index.html"],
         "dest": "dist",
         "options": {
           "process": function (content, srcpath) {
             content = content.replace("<html manifest=\"system-designer.appcache\">", "<html>");
+            content = content.replace("<html manifest=\"../system-designer.appcache\">", "<html>");
             content = content.replace("<script src=\"lib/jquery/jquery.min.js\"></script>", "<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>");
             return content;
           },
@@ -48,11 +49,12 @@ module.exports = function (grunt) {
       "web-debug": {
         "expand": true,
         "cwd": "dist",
-        "src": ["*.html"],
+        "src": ["*.html", "app/index.html"],
         "dest": "dist",
         "options": {
           "process": function (content, srcpath) {
             content = content.replace("<html manifest=\"system-designer.appcache\">", "<html>");
+            content = content.replace("<html manifest=\"../system-designer.appcache\">", "<html>");            
             content = content.replace("</body>", "<script src=\"//localhost:35729/livereload.js\"></script></body></body>");
             return content;
           },
