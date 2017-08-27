@@ -234,17 +234,15 @@
       },
       "$editorUpdateComponentId": {
         "params": [{
-            "name": "oldId",
-            "type": "string"
-          }, {
-            "name": "newId",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          }
-        ]
+          "name": "oldId",
+          "type": "string"
+        }, {
+          "name": "newId",
+          "type": "string"
+        }, {
+          "name": "collection",
+          "type": "string"
+        }]
       },
       "$designerUpdateComponent": {
         "params": [{
@@ -824,7 +822,7 @@
       "_id": "c15ea3176d5139e8",
       "component": "10bcb1a0511e09f",
       "state": "click",
-      "action": "function click() { \n  $('#designer-toolbar-item-create').tooltip('hide');\n  var message = this.require('message'),\n  designer = this.require('designer');\n  \n  if (!this.require('factory').system() && this.require('state').menu() !== 'system') {\n    message.warning('You have no system: create first a system to continue.');\n  } else {\n    this.require('workspace').create();\n  }\n}"
+      "action": "function click() { \n  $('#designer-toolbar-item-create').tooltip('hide');\n  var message = this.require('message'),\n      designer = this.require('designer');\n  \n  if (!this.require('factory').system() && this.require('state').menu() !== 'system') {\n    message.warning('You have no system: create first a system to continue.');\n  } else {\n    if (this.require('factory').system() && Object.keys(this.require('factory').system().schemas()).length === 0 && this.require('state').menu() === 'components') {\n      message.warning('You have no schema: create first a schema to continue.');\n    } else {\n      this.require('workspace').create();\n    }\n  }\n}"
     },
     "l19fda1461e1d86c": {
       "_id": "l19fda1461e1d86c",

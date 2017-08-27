@@ -208,17 +208,15 @@
       },
       "$editorUpdateComponentId": {
         "params": [{
-            "name": "oldId",
-            "type": "string"
-          }, {
-            "name": "newId",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          }
-        ]
+          "name": "oldId",
+          "type": "string"
+        }, {
+          "name": "newId",
+          "type": "string"
+        }, {
+          "name": "collection",
+          "type": "string"
+        }]
       },
       "$designerUpdateComponent": {
         "params": [{
@@ -768,6 +766,14 @@
       "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
+    },
+    "g1dba4115411bfcc": {
+      "_id": "g1dba4115411bfcc",
+      "component": "m194b11ca08158b0",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var doc = {\n    \"name\": \"type \" + data.name,\n    \"master\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"Type \" + data.name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.types[data.name] = data;\n\n  this.require('designer').saveAs(doc, 'type.' + data.name.replace(/ /gi, '-').toLowerCase() + '.json');\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
@@ -853,6 +859,13 @@
         "html": "toolbar-item-command.html",
         "platform": "electron",
         "position": 75,
+        "type": "type"
+      },
+      "m194b11ca08158b0": {
+        "_id": "m194b11ca08158b0",
+        "html": "toolbar-item-export-document.html",
+        "platform": "electron",
+        "position": 70,
         "type": "type"
       }
     },

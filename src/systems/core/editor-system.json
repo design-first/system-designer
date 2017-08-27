@@ -208,17 +208,15 @@
       },
       "$editorUpdateComponentId": {
         "params": [{
-            "name": "oldId",
-            "type": "string"
-          }, {
-            "name": "newId",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          }
-        ]
+          "name": "oldId",
+          "type": "string"
+        }, {
+          "name": "newId",
+          "type": "string"
+        }, {
+          "name": "collection",
+          "type": "string"
+        }]
       },
       "$designerUpdateComponent": {
         "params": [{
@@ -808,6 +806,14 @@
       "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
+    },
+    "i1583613c5e1556e": {
+      "_id": "i1583613c5e1556e",
+      "component": "j1e8261c4c11fea8",
+      "state": "click",
+      "action": "function click() {\n  var data = this.require('store').data();\n  \n  $('#designer-toolbar-item-export-document').tooltip('hide');\n  \n  var name = data.name;\n  var doc = JSON.parse(JSON.stringify(data));\n  delete doc.classInfo;\n  this.require('designer').saveAs(doc, data.name + '.json');\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
@@ -893,6 +899,13 @@
         "html": "toolbar-item-command.html",
         "platform": "electron",
         "position": 75,
+        "type": "system"
+      },
+      "j1e8261c4c11fea8": {
+        "_id": "j1e8261c4c11fea8",
+        "html": "toolbar-item-export-document.html",
+        "platform": "electron",
+        "position": 70,
         "type": "system"
       }
     },
