@@ -1249,7 +1249,7 @@
             },
             "1723516a30132ac": {
               "_id": "1723516a30132ac",
-              "_name": "RuntimeDatabase",
+              "_name": "_Database",
               "_inherit": ["_Component"],
               "_core": true,
               "insert": "event",
@@ -1258,7 +1258,7 @@
             },
             "104ad1f48518376": {
               "_id": "104ad1f48518376",
-              "_name": "RuntimeChannel",
+              "_name": "_Channel",
               "_inherit": ["_Component"],
               "send": "event",
               "serverDatabaseInsert": "event",
@@ -1358,7 +1358,7 @@
             },
             "q146a11f3a417b17": {
               "_id": "q146a11f3a417b17",
-              "_name": "RuntimeDatabase",
+              "_name": "_Database",
               "_core": true,
               "insert": {
                 "params": [{
@@ -1381,7 +1381,7 @@
             },
             "u1427b16ae11ce88": {
               "_id": "u1427b16ae11ce88",
-              "_name": "RuntimeChannel",
+              "_name": "_Channel",
               "send": {
                 "params": [{
                   "name": "message",
@@ -1620,7 +1620,7 @@
             },
             "1de8c154bb18a01": {
               "_id": "1de8c154bb18a01",
-              "component": "RuntimeDatabase",
+              "component": "_Database",
               "state": "insert",
               "action": "function insert(event) { \n  var logs = [],\n      lastInsertOrder = -1;\n      \n  if ($metamodel.inheritFrom(event.collection,'SyncComponent')) {    \n    if (this.require('restServer').fileStorageEnabled()) {\n      this.require('fileStorage').save();\n    }\n\n    if (this.require('db').collections().StreamHandler.count() > 0) {\n      // search if last insert action before this one \n      // was a message from the server or not\n      logs = $db.RuntimeLog.find({\n        'action': 'insert',\n        'id': event.document._id\n      });\n     \n      if (logs.length) {\n        logs.sort(function sort(logA, logB) {\n          return logA.order - logB.order;\n        });\n        lastInsertOrder = logs[0].order;\n      }\n      \n      logs = $db.RuntimeLog.find({\n        'order': lastInsertOrder - 1,\n        'collection': 'RuntimeMessage'\n      });\n      \n      switch (true) {\n        case !logs[0]:\n        case logs[0] && \n             logs[0].value.event !== 'clientDatabaseInsert':\n        case logs[0] && logs[0].value.event === 'clientDatabaseInsert' && \n             logs[0].value.data[0].document._id !== event.document._id:\n            \n            // an event is send to the channel\n            this.require('channel').serverDatabaseInsert(event);\n          break;\n        default:\n          break;\n      }\n    }\n  }\n}",
               "useCoreAPI": true,
@@ -1628,7 +1628,7 @@
             },
             "173ff13cde1c29e": {
               "_id": "173ff13cde1c29e",
-              "component": "RuntimeDatabase",
+              "component": "_Database",
               "state": "remove",
               "action": "function remove(event) { \n  var logs = [],\n      lastInsertOrder = -1;\n      \n  if ($metamodel.inheritFrom(event.collection,'SyncComponent')) {\n    if (this.require('restServer').fileStorageEnabled()) {\n      this.require('fileStorage').save();\n    }\n  \n    if (this.require('db').collections().StreamHandler.count() > 0) {\n      // search if last remove action before this one \n      // was a message from the server or not\n      logs = $db.RuntimeLog.find({\n        'action': 'remove',\n        'id': event.id\n      });\n      \n      if (logs.length) {\n        logs.sort(function sort(logA, logB) {\n          return logA.order - logB.order;\n        });\n        lastInsertOrder = logs[0].order;\n      }\n      \n      logs = $db.RuntimeLog.find({\n        'order': lastInsertOrder - 1,\n        'collection': 'RuntimeMessage'\n      });\n      \n      switch (true) {\n        case !logs[0]:\n        case logs[0] && \n             logs[0].value.event !== 'clientDatabaseRemove':\n        case logs[0] && logs[0].value.event === 'clientDatabaseRemove' && \n             logs[0].value.data[0].collection !== event.collection &&\n             logs[0].value.data[0].id !== event.id:\n             \n          // an event is send to the channel\n          this.require('channel').serverDatabaseRemove(event);\n          break;\n        default:\n          break;\n      }\n    }\n  }\n}",
               "useCoreAPI": true,
@@ -1636,7 +1636,7 @@
             },
             "1e0a71b78c1fd0e": {
               "_id": "1e0a71b78c1fd0e",
-              "component": "RuntimeDatabase",
+              "component": "_Database",
               "state": "update",
               "action": "function update(event) { \n  var logs = [],\n      lastInsertOrder = -1;\n  \n  if ($metamodel.inheritFrom(event.collection,'SyncComponent')) {\n    if (this.require('restServer').fileStorageEnabled()) {\n      this.require('fileStorage').save();\n    }\n \n    if (this.require('db').collections().StreamHandler.count() > 0) {\n      // search if last insert action before this one \n      // was a message from the server or not\n      logs = $db.RuntimeLog.find({\n        'action': 'udpdate',\n        'id': event.id\n      });\n      \n      if (logs.length) {\n        logs.sort(function sort(logA, logB) {\n          return logA.order - logB.order;\n        });\n        lastInsertOrder = logs[0].order;\n      }\n      \n      logs = $db.RuntimeLog.find({\n        'order': lastInsertOrder - 1,\n        'collection': 'RuntimeMessage'\n      });\n      \n      switch (true) {\n        case !logs[0]:\n        case logs[0] && \n             logs[0].value.event !== 'clientDatabaseUpdate':\n        case logs[0] && logs[0].value.event === 'clientDatabaseUpdate' && \n             logs[0].value.data[0].id !== event.id && \n             logs[0].value.data[0].field !== event.field &&\n             logs[0].value.data[0].value !== event.value:\n             \n          // an event is send to the channel\n          this.require('channel').serverDatabaseUpdate(event);\n          break;\n        default:\n          break;\n      }\n    }\n  }\n}",
               "useCoreAPI": true,
@@ -1652,7 +1652,7 @@
             },
             "1ae8e11ece1a658": {
               "_id": "1ae8e11ece1a658",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "send",
               "action": "function send(message) { \n  var streamsHandlers = [],\n      strMessage = '';\n    \n  try {\n    strMessage = JSON.stringify(message);\n  } catch(e) {\n  }\n  \n  if (strMessage !== '') {\n    streamsHandlers = this.require('db').collections().StreamHandler.find();\n    streamsHandlers.forEach(function (streamHandler) {\n      this.require(streamHandler._id).response().write('event:' + message.event + '\\n');\n      this.require(streamHandler._id).response().write('data:' + strMessage + '\\n\\n');\n    }.bind(this));\n  }\n}",
               "useCoreAPI": false,
@@ -1668,7 +1668,7 @@
             },
             "q1fd171f1a5179a4": {
               "_id": "q1fd171f1a5179a4",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "clientDatabaseInsert",
               "action": "function clientDatabaseInsert(event, requestHandlerId) { \n  var requestHandler = this.require(requestHandlerId),\n      doc = null,\n      tabid = [];\n\n  if (event.collection && $db[event.collection] ) {\n    tabid = $db[event.collection].insert(event.document);\n    doc = $db[event.collection].find({\n      '_id': tabid[0]\n    })[0];\n    doc = JSON.parse(JSON.stringify(doc));\n    delete doc.classInfo;\n\n    requestHandler.response().writeHead(201, { \n      'Content-Type': 'application/json', \n      'Access-Control-Allow-Origin': '*' \n    });\n    requestHandler.response().end(JSON.stringify(doc));\n  } else {\n    requestHandler.response().writeHead(200, { \n      'Content-Type': 'application/json', \n      'Access-Control-Allow-Origin': '*'\n    });\n    requestHandler.response().end('');\n  }\t\n}",
               "useCoreAPI": true,
@@ -1684,7 +1684,7 @@
             },
             "a14f5d1c8bb17a91": {
               "_id": "a14f5d1c8bb17a91",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "clientDatabaseRemove",
               "action": "function clientDatabaseRemove(event, requestHandlerId) { \n  var requestHandler = this.require(requestHandlerId);\n  \n  // delete compononent(s)\n  if (event.collection && $db[event.collection]) {\n    if (event.id) {\n      $db[event.collection].remove({\n        '_id': event.id\n      });\n    } else {\n      $db[event.collection].remove();\n    }\n  }\n  \n  // response\n  requestHandler.response().writeHead(200, { \n    'Content-Type': 'application/json', \n    'Access-Control-Allow-Origin': '*'\n  });\n  requestHandler.response().end('');\n}",
               "useCoreAPI": true,
@@ -1716,7 +1716,7 @@
             },
             "j1d4bc174cf18613": {
               "_id": "j1d4bc174cf18613",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "clientDatabaseUpdate",
               "action": "function clientDatabaseUpdate(event, requestHandlerId) { \n  var requestHandler = this.require(requestHandlerId),\n      update = {};\n  \n  if (event.collection && $db[event.collection] && event.id) {\n    update[event.field] = event.value;\n    $db[event.collection].update({\n      '_id': event.id\n    }, update);\n    \n    doc = $db[event.collection].find({\n      '_id': event.id\n    })[0];\n    doc = JSON.parse(JSON.stringify(doc));\n    delete doc.classInfo;\n    \n    requestHandler.response().end(JSON.stringify(doc));\n  } else {\n    requestHandler.response().end('');\n  }\t\n}",
               "useCoreAPI": true,
@@ -1740,7 +1740,7 @@
             },
             "y137ee15e6717a6b": {
               "_id": "y137ee15e6717a6b",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "externalPost",
               "action": "function externalPost(event, requestHandlerId) { \n  var requestHandler = this.require(requestHandlerId),\n      doc = null,\n      tabid = [];\n\n  if (event.collection && $db[event.collection] ) {\n    tabid = $db[event.collection].insert(event.document);\n    doc = $db[event.collection].find({\n      '_id': tabid[0]\n    })[0];\n    doc = JSON.parse(JSON.stringify(doc));\n    delete doc.classInfo;\n\n    requestHandler.response().writeHead(201, { \n      'Content-Type': 'application/json', \n      'Access-Control-Allow-Origin': '*' \n    });\n    requestHandler.response().end(JSON.stringify(doc));\n  } else {\n    requestHandler.response().writeHead(200, { \n      'Content-Type': 'application/json', \n      'Access-Control-Allow-Origin': '*'\n    });\n    requestHandler.response().end('');\n  }\t\n}",
               "useCoreAPI": true,
@@ -1748,7 +1748,7 @@
             },
             "q1f7f1141a41ef3b": {
               "_id": "q1f7f1141a41ef3b",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "externalPatch",
               "action": "function externalPatch(event, requestHandlerId) { \n  var requestHandler = this.require(requestHandlerId),\n      update = {},\n      doc = '';\n  \n  if (event.collection && $db[event.collection] && event.id) {\n    update[event.field] = event.value;\n    $db[event.collection].update({\n      '_id': event.id\n    }, update);\n    \n    doc = $db[event.collection].find({\n      '_id': event.id\n    })[0];\n    \n    if (doc) {\n      doc = JSON.parse(JSON.stringify(doc));\n      delete doc.classInfo;\n    }\n    \n    requestHandler.response().end(JSON.stringify(doc));\n  } else {\n    requestHandler.response().end('');\n  }\t\t\n}",
               "useCoreAPI": true,
@@ -1756,7 +1756,7 @@
             },
             "b12cc710da219872": {
               "_id": "b12cc710da219872",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "externalGet",
               "action": "function externalGet(event, requestHandlerId) { \n  var search = [],\n      result = '',\n      requestHandler = null;\n\n  // find document(s)\n  if (event.collection && $db[event.collection]) {\n    if (event.id) {\n      search = $db[event.collection].find({\n        '_id': event.id\n      });\n\n      if (search.length) {\n        search = search[0];\n        if (event.property) { // get a component property\n          search = JSON.parse(JSON.stringify(search));\n          result = search[event.property];\n        } else { // get a component\n          search = JSON.parse(JSON.stringify(search));\n          delete search.classInfo;\n          result = search;\n        }\n      } else {\n        result = '';\n        this.require('logger').warn('There is no document with _id ' + '\\'' + event.id + '\\’ (for the collection \\'' + event.collection + '\\')');\n      }\n    } else { // get a collection\n      result = [];\n\n      search = $db[event.collection].find();\n      search.forEach(function (val) {\n        var doc = val;\n\n        doc = JSON.parse(JSON.stringify(doc));\n        delete doc.classInfo;\n\n        result.push(doc);\n      });\n    }\n  }\n    \n  // response  \n    \n  requestHandler = this.require(requestHandlerId);\n  requestHandler.response().writeHead(200, { \n    'Content-Type': 'application/json', \n    'Access-Control-Allow-Origin': '*' \n  });\n  \n  if (result === '') {\n    requestHandler.response().end('');\n  } else {\n    requestHandler.response().end(JSON.stringify(result));\n  }\t\n}",
               "useCoreAPI": true,
@@ -1764,7 +1764,7 @@
             },
             "w12a1e1723b12eda": {
               "_id": "w12a1e1723b12eda",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "externalDelete",
               "action": "function externalDelete(event, requestHandlerId) { \n  var requestHandler = this.require(requestHandlerId);\n  \n  // delete compononent(s)\n  if (event.collection && $db[event.collection]) {\n    if (event.id) {\n      $db[event.collection].remove({\n        '_id': event.id\n      });\n    } else {\n      $db[event.collection].remove();\n    }\n  }\n  \n  // response\n  requestHandler.response().writeHead(200, { \n    'Content-Type': 'application/json', \n    'Access-Control-Allow-Origin': '*'\n  });\n  requestHandler.response().end('');\t\n}",
               "useCoreAPI": true,
@@ -1772,7 +1772,7 @@
             },
             "w1786916bfb1f226": {
               "_id": "w1786916bfb1f226",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "externalPut",
               "action": "function externalPut(event, requestHandlerId) { \n  var requestHandler = this.require(requestHandlerId),\n      doc = '';\n  \n  if (event.collection && $db[event.collection] && event.id) {\n    search = $db[event.collection].find({\n      '_id': event.id\n    });\n\n    if (search.length) { // update\n\n      $db[event.collection].update({\n        '_id': event.id\n      }, event.document);\n\n      doc = $db[event.collection].find({\n        '_id': event.id\n      })[0];\n      doc = JSON.parse(JSON.stringify(doc));\n      delete doc.classInfo;\n\n      requestHandler.response().writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });\n      requestHandler.response().end(JSON.stringify(doc));\n    } else { // create\n\n      event.document._id = event.id;\n\n      $db[event.collection].insert(event.document);\n\n      doc = $db[event.collection].find({\n        '_id': event.id\n      })[0];\n      doc = JSON.parse(JSON.stringify(doc));\n      delete doc.classInfo;\n\n      requestHandler.response().writeHead(201, { \n        'Content-Type': 'application/json', \n        'Access-Control-Allow-Origin': '*' \n      });\n      requestHandler.response().end(JSON.stringify(doc));\n    }\n  } else {\n    requestHandler.response().writeHead(200, { \n      'Content-Type': 'application/json', \n      'Access-Control-Allow-Origin': '*' \n    });\n    requestHandler.response().end('');\n  }\t\n}",
               "useCoreAPI": true,
@@ -1788,7 +1788,7 @@
             },
             "p149c01e01c15a9f": {
               "_id": "p149c01e01c15a9f",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "clientGet",
               "action": "function clientGet(event, requestHandlerId) { \n  var search = [],\n      result = [],\n      requestHandler = null,\n      systemId = this.require('runtime').system().id(),\n      eventResult = {};\n \n  // find document(s)\n  if (event.collection && $db[event.collection]) {\n    if (event.id) {\n      search = $db[event.collection].find({\n        '_id': event.id\n      });\n\n      if (search.length) {\n        search = search[0];\n        search = JSON.parse(JSON.stringify(search));\n        delete search.classInfo;\n        result.push(search);\n      } else {\n        result = '';\n        this.require('logger').warn('There is no document with _id ' + '\\'' + event.id + '\\’ (for the collection \\'' + event.collection + '\\')');\n      }\n    } else { // get a collection\n      result = [];\n\n      search = $db[event.collection].find();\n      search.forEach(function (val) {\n        var doc = val;\n\n        doc = JSON.parse(JSON.stringify(doc));\n        delete doc.classInfo;\n\n        result.push(doc);\n      });\n    }\n  }\n    \n  // response  \n    \n  requestHandler = this.require(requestHandlerId);\n  requestHandler.response().writeHead(200, { \n    'Content-Type': 'application/json', \n    'Access-Control-Allow-Origin': '*' \n  });\n  \n  if (result === '') {\n    requestHandler.response().end('');\n  } else {\n    eventResult.from = systemId;\n    eventResult.event = 'serverGetResult';\n    eventResult.data = [{\n      'collection': event.collection,\n      'id': event.id,\n      'result': result\n    }];\n  \n    requestHandler.response().end(JSON.stringify(eventResult));\n  }\t\n}",
               "useCoreAPI": true,
@@ -1993,7 +1993,7 @@
                 "status": "unloaded"
               }
             },
-            "RuntimeChannel": {
+            "_Channel": {
               "channel": {
                 "_id": "channel"
               }
@@ -2023,7 +2023,7 @@
             },
             "1723516a30132ac": {
               "_id": "1723516a30132ac",
-              "_name": "RuntimeDatabase",
+              "_name": "_Database",
               "_inherit": ["_Component"],
               "_core": true,
               "insert": "event",
@@ -2032,7 +2032,7 @@
             },
             "104ad1f48518376": {
               "_id": "104ad1f48518376",
-              "_name": "RuntimeChannel",
+              "_name": "_Channel",
               "_inherit": ["_Component"],
               "send": "event",
               "serverDatabaseInsert": "event",
@@ -2102,7 +2102,7 @@
             },
             "a18245170ae12e8b": {
               "_id": "a18245170ae12e8b",
-              "_name": "RuntimeDatabase",
+              "_name": "_Database",
               "_core": true,
               "insert": {
                 "params": [{
@@ -2125,7 +2125,7 @@
             },
             "f1c2361dfff1428f": {
               "_id": "f1c2361dfff1428f",
-              "_name": "RuntimeChannel",
+              "_name": "_Channel",
               "send": {
                 "params": [{
                   "name": "message",
@@ -2284,7 +2284,7 @@
             },
             "1de8c154bb18a01": {
               "_id": "1de8c154bb18a01",
-              "component": "RuntimeDatabase",
+              "component": "_Database",
               "state": "insert",
               "action": "function insert(event) { \n  var logs = [],\n      lastInsertOrder = -1;\n     \n  if ($metamodel.inheritFrom(event.collection, 'SyncComponent')) {\n\n    // search if last insert action before this one \n    // was a message from the server or not\n    logs = $db.RuntimeLog.find({\n      'action': 'insert',\n      'id': event.document._id\n    });\n    \n    if (logs.length) {\n      logs.sort(function sort(logA, logB) {\n        return logA.order - logB.order;\n      });\n      lastInsertOrder = logs[0].order;\n    }\n    \n    logs = $db.RuntimeLog.find({\n      'order': lastInsertOrder - 1,\n      'collection': 'RuntimeMessage'\n    });\n\n    switch (true) {\n      case !logs[0]:\n      case logs[0] && \n           logs[0].value.event !== 'serverDatabaseInsert':\n      case logs[0] && logs[0].value.event === 'serverDatabaseInsert' && \n           logs[0].value.data[0].document._id !== event.document._id:\n           \n        // send the event to another system   \n        this.require('channel').clientDatabaseInsert(event);\n        break;\n      default:\n        break;\n    }\n  }\n}",
               "useCoreAPI": true,
@@ -2292,7 +2292,7 @@
             },
             "173ff13cde1c29e": {
               "_id": "173ff13cde1c29e",
-              "component": "RuntimeDatabase",
+              "component": "_Database",
               "state": "remove",
               "action": "function remove(event) { \n  var restClient = this.require('restClient'),\n      url = 'http://',\n      body = '',\n      lastInsertOrder = -1,\n      systemId = this.require('runtime').system().id();\n      \n if ($metamodel.inheritFrom(event.collection, 'SyncComponent')) {\n  \n    // search if last remove action before this one \n    // was a message from the server or not\n    logs = $db.RuntimeLog.find({\n      'action': 'remove',\n      'id': event.id\n    });\n    \n    if (logs.length) {\n      logs.sort(function sort(logA, logB) {\n        return logA.order - logB.order;\n      });\n      lastInsertOrder = logs[0].order;\n    }\n    \n    logs = $db.RuntimeLog.find({\n      'order': lastInsertOrder - 1,\n      'collection': 'RuntimeMessage'\n    });\n    \n    switch (true) {\n      case !logs[0]:\n      case logs[0] && \n           logs[0].value.event !== 'serverDatabaseRemove':\n      case logs[0] && logs[0].value.event === 'serverDatabaseRemove' && \n           logs[0].value.data[0].collection !== event.collection &&\n           logs[0].value.data[0].id !== event.id:\n           \n        // send the event to another system    \n        this.require('channel').clientDatabaseRemove(event);\n        break;\n      default:\n        break;\n    }\n  }\t\n}",
               "useCoreAPI": true,
@@ -2300,7 +2300,7 @@
             },
             "1e0a71b78c1fd0e": {
               "_id": "1e0a71b78c1fd0e",
-              "component": "RuntimeDatabase",
+              "component": "_Database",
               "state": "update",
               "action": "function update(event) { \n  var restClient = this.require('restClient'),\n      url = 'http://',\n      body = {},\n      logs = [],\n      lastInsertOrder = -1,\n      systemId = this.require('runtime').system().id();\n      \nif ($metamodel.inheritFrom(event.collection, 'SyncComponent')) {\n  \n    // search if last insert action before this one \n    // was a message from the server or not\n    logs = $db.RuntimeLog.find({\n      'action': 'udpdate',\n      'id': event.id\n    });\n    \n    if (logs.length) {\n      logs.sort(function sort(logA, logB) {\n        return logA.order - logB.order;\n      });\n      lastInsertOrder = logs[0].order;\n    }\n    \n    logs = $db.RuntimeLog.find({\n      'order': lastInsertOrder - 1,\n      'collection': 'RuntimeMessage'\n    });\n    \n    switch (true) {\n      case !logs[0]:\n      case logs[0] && \n           logs[0].value.event !== 'serverDatabaseUpdate':\n      case logs[0] && logs[0].value.event === 'serverDatabaseUpdate' && \n           logs[0].value.data[0].id !== event.id && \n           logs[0].value.data[0].field !== event.field &&\n           logs[0].value.data[0].value !== event.value:\n           \n        // send the event to another system   \n        this.require('channel').clientDatabaseUpdate(event);\n        break;\n      default:\n        break;\n    }\n  }\n}",
               "useCoreAPI": true,
@@ -2308,7 +2308,7 @@
             },
             "t1a74b1a3f8109c2": {
               "_id": "t1a74b1a3f8109c2",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "serverDatabaseInsert",
               "action": "function serverDatabaseInsert(event) { \n  var collection = this.require('db').collections()[event.collection],\n      result = [];\n    \n  result = collection.find({\n    '_id': event.document._id\n  });\n  \n  if (result.length === 0) {\n    collection.insert(event.document);\n  }\n}",
               "useCoreAPI": false,
@@ -2316,7 +2316,7 @@
             },
             "v1189411f7619879": {
               "_id": "v1189411f7619879",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "serverDatabaseRemove",
               "action": "function serverDatabaseRemove(event) { \n  var collection = this.require('db').collections()[event.collection],\n      result = [];\n      \n  result = collection.find({\n    '_id': event.id\n  });\n  \n  if (result.length !== 0) {\n    collection.remove({\n      '_id': event.id\n    });\n  }\n}",
               "useCoreAPI": false,
@@ -2324,7 +2324,7 @@
             },
             "p1001b116f31e25b": {
               "_id": "p1001b116f31e25b",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "serverDatabaseUpdate",
               "action": "function serverDatabaseUpdate(event) { \n  var update = {},\n      collection = this.require('db').collections()[event.collection],\n      result = [],\n      doc = null;\n    \n  result = collection.find({\n    '_id': event.id\n  });\n  doc = result[0];\n\n  update[event.field] = event.value;\n  if (doc[event.field] !== event.value) {\n    collection.update({\n        '_id': event.id\n      },\n      update\n    );\t\n  }\n}",
               "useCoreAPI": false,
@@ -2364,7 +2364,7 @@
             },
             "h1efac1d27212324": {
               "_id": "h1efac1d27212324",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "send",
               "action": "function send(message) { \n  \n  // send the message to the server (which is another system)\n  \n  switch (message.event) {\n    case 'clientGet':\n      this.require('httpRequest').get(message.data[0].collection, message.data[0].id);\n      break;\n    case 'clientDatabaseInsert':\n      this.require('httpRequest').post(message.data[0].collection, message.data[0].document);\n      break;\n    case 'clientDatabaseUpdate':\n      this.require('httpRequest').patch(message.data[0].collection, message.data[0].id, message.data[0].field, message.data[0].value);\n      break;\n     case 'clientDatabaseRemove':\n      this.require('httpRequest').del(message.data[0].collection, message.data[0].id);\n      break;\n   default:\n      break;\n  }\n}",
               "useCoreAPI": false,
@@ -2380,7 +2380,7 @@
             },
             "x161ee1ad1d14e88": {
               "_id": "x161ee1ad1d14e88",
-              "component": "RuntimeChannel",
+              "component": "_Channel",
               "state": "serverGetResult",
               "action": "function serverGetResult(event) { \n  var collection = this.require('db').collections()[event.collection];\n    \n  event.result.forEach(function (doc) {\n    collection.insert(doc);\n  });\n}",
               "useCoreAPI": false,
@@ -2519,7 +2519,7 @@
                 "pushEnabled": false
               }
             },
-            "RuntimeChannel": {
+            "_Channel": {
               "channel": {
                 "_id": "channel"
               }
@@ -3189,8 +3189,6 @@
               "position": "property",
               "type": "property",
               "platform": "property",
-              "hide": "method",
-              "show": "method",
               "render": "method",
               "click": "event"
             },
@@ -3263,8 +3261,6 @@
                 "mandatory": false,
                 "default": "designer"
               },
-              "hide": {},
-              "show": {},
               "render": {},
               "click": {},
               "platform": {
@@ -3452,7 +3448,7 @@
               }
             }
           },
-          "_id": "v191051d32e1b9d9"
+          "_id": "y1e43b1b7411effe"
         }
       },
       "00-example-quick-start.json": {

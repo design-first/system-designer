@@ -21,6 +21,7 @@
       "isElectron": "method",
       "updateCordovaContext": "method",
       "runMessages": "method",
+      "installExtensions": "method",
       "_id": "o1ead8184af1a83e"
     }
   },
@@ -108,7 +109,8 @@
         }]
       },
       "updateCordovaContext": {},
-      "_id": "q129be1c61b18285"
+      "_id": "q129be1c61b18285",
+      "installExtensions": {}
     }
   },
   "behaviors": {
@@ -141,6 +143,14 @@
       "component": "Designer",
       "state": "updateCordovaContext",
       "action": "function updateCordovaContext() {\n  var params = {},\n      urlParams = [],\n      system = null;\n      \n  urlParams = document.location.href.split('?');\n\n  if (urlParams.length > 1) {\n      urlParams = urlParams[1].split('&');\n      urlParams.forEach(function (urlParam) {\n          var name = '',\n              value = '';\n\n          name = urlParam.split('=')[0].trim();\n          value = urlParam.split('=')[1].trim();\n\n          params[name] = decodeURIComponent(value);\n      });    \n  }\n      \n      \n  if (params.system) {\n    system = JSON.parse(params.system);\n    this.require('storage').set(system._id, system);\n  }\n  \n  if (params.ref) {\n    this.require('state').lastPage(params.ref);\n  }\n}"
+    },
+    "i1ae8c1cb711320e": {
+      "_id": "i1ae8c1cb711320e",
+      "component": "Designer",
+      "state": "installExtensions",
+      "action": "function installExtensions() { \n\tvar extensions = null;\n  \n  // extensions\n  extensions = this.require('storage').get('system-designer-extensions');\n  if (extensions && extensions.extensions && extensions.extensions.length) {\n    extensions.extensions.forEach(function (extension) {\n      var Extension = this.require('Extension'),\n          system = {},\n          cleanJson = {},\n          reg = null;\n          \n      system = extension.source;\n      \n      cleanJson = JSON.stringify(system);\n      reg = new RegExp(system._id, 'g');\n      cleanJson = cleanJson.replace(reg, 'ext_' + system._id );\n      system = JSON.parse(cleanJson);\n      \n      this.require('runtime').install(system);\n      \n      new Extension(extension);\n    }.bind(this));\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
