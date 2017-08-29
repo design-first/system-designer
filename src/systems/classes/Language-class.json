@@ -15,7 +15,9 @@
       "createStartBehavior": "method",
       "createMergeComment": "method",
       "createBehaviorHeader": "method",
-      "createBehaviorParameters": "method"
+      "createBehaviorParameters": "method",
+      "createBehaviorParametersEvent": "method",
+      "createBehaviorParametersEventArray": "method"
     }
   },
   "models": {
@@ -93,6 +95,12 @@
           "default": {}
         }],
         "result": "string"
+      },
+      "createBehaviorParametersEvent": {
+        "result": "string"
+      },
+      "createBehaviorParametersEventArray": {
+        "result": "string"
       }
     }
   },
@@ -109,7 +117,7 @@
       "_id": "v19a5a1998c1efa2",
       "component": "Language",
       "state": "createBehavior",
-      "action": "function createBehavior(name, params, body) { \n\tvar behavior = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '\\t\\n';\n\t    }\n\t    behavior = \"function \" + name + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
+      "action": "function createBehavior(name, params, body) { \n\tvar behavior = '',\n\t    funcName = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '\\t\\n';\n\t    }\n\t    debugger;\n\t    if (name.indexOf('.') !== -1) {\n\t      funcName = name.split('.')[1];\n\t    } else {\n\t      funcName = name;\n\t    }\n\t    \n\t    behavior = \"function \" + funcName + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -150,6 +158,22 @@
       "component": "Language",
       "state": "createBehaviorParameters",
       "action": "function createBehaviorParameters(model) { \n\tvar params = '',\n\t    i = 0,\n\t    length = 0;\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t   if (model && model.length) {\n        length = model.length;\n        for (i = 0; i < length; i++) {\n          if (i === 0) {\n            params = model[i].name;\n          } else {\n            params = params + ', ' + model[i].name;\n          }\n        }\n      }\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn params;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l171be17d531662a": {
+      "_id": "l171be17d531662a",
+      "component": "Language",
+      "state": "createBehaviorParametersEvent",
+      "action": "function createBehaviorParametersEvent() { \n\tvar parameters = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    parameters = 'value';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn parameters;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "y16ae91b06c1a586": {
+      "_id": "y16ae91b06c1a586",
+      "component": "Language",
+      "state": "createBehaviorParametersEventArray",
+      "action": "function createBehaviorParametersEventArray() { \n\tvar parameters = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    parameters = 'value, type';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn parameters;\n}",
       "useCoreAPI": false,
       "core": false
     }
