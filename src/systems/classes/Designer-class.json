@@ -19,9 +19,11 @@
       "render": "event",
       "isCordova": "method",
       "isElectron": "method",
+      "isMac": "method",
       "updateCordovaContext": "method",
       "runMessages": "method",
       "installExtensions": "method",
+      "addShorcuts": "method",
       "_id": "o1ead8184af1a83e"
     }
   },
@@ -110,7 +112,11 @@
       },
       "updateCordovaContext": {},
       "_id": "q129be1c61b18285",
-      "installExtensions": {}
+      "installExtensions": {},
+      "isMac": {
+        "result": "boolean"
+      },
+      "addShorcuts": {}
     }
   },
   "behaviors": {
@@ -149,6 +155,14 @@
       "component": "Designer",
       "state": "installExtensions",
       "action": "function installExtensions() { \n\tvar extensions = null;\n  \n  // extensions\n  extensions = this.require('storage').get('system-designer-extensions');\n  if (extensions && extensions.extensions && extensions.extensions.length) {\n    extensions.extensions.forEach(function (extension) {\n      var Extension = this.require('Extension'),\n          system = {},\n          cleanJson = {},\n          reg = null;\n          \n      system = extension.source;\n      \n      cleanJson = JSON.stringify(system);\n      reg = new RegExp(system._id, 'g');\n      cleanJson = cleanJson.replace(reg, 'ext_' + system._id );\n      system = JSON.parse(cleanJson);\n      \n      this.require('runtime').install(system);\n      \n      new Extension(extension);\n    }.bind(this));\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "j1fc6515c8f1838f": {
+      "_id": "j1fc6515c8f1838f",
+      "component": "Designer",
+      "state": "isMac",
+      "action": "function isMac() { \n\tvar result = false;\n\t\n\tif (navigator.userAgent.toLowerCase().indexOf('macintosh') !== -1) {\n\t  result = true;\n\t} \n\treturn result;\n}",
       "useCoreAPI": false,
       "core": false
     }
