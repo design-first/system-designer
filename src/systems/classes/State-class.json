@@ -6,9 +6,7 @@
   "schemas": {
     "y1efb3178341398a": {
       "_name": "State",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "type": "property",
       "component": "property",
       "lastPage": "property",
@@ -16,6 +14,7 @@
       "menu": "property",
       "previousMenu": "property",
       "space": "property",
+      "navigation": "property",
       "logs": "collection",
       "_id": "y1efb3178341398a"
     }
@@ -67,29 +66,58 @@
         "default": ""
       },
       "logs": {
-        "type": [
-          "@Log"
-        ],
+        "type": ["@Log"],
         "readOnly": false,
         "mandatory": false,
         "default": []
+      },
+      "navigation": {
+        "type": "navigation",
+        "readOnly": false,
+        "mandatory": false,
+        "default": {
+          "menu": [],
+          "spaces": []
+        }
       }
     }
   },
   "behaviors": {},
-  "types": {},
+  "types": {
+    "navigation": {
+      "_id": "n1bb7e1a8a713f75",
+      "name": "navigation",
+      "type": "object",
+      "schema": {
+        "menu": {
+          "type": "array",
+          "mandatory": false,
+          "default": []
+        },
+        "spaces": {
+          "type": "array",
+          "mandatory": false,
+          "default": []
+        }
+      }
+    }
+  },
   "components": {
     "State": {
       "state": {
         "_id": "state",
         "component": "",
-        "menu": "",
         "lastPage": "index.html",
+        "logs": [],
+        "menu": "",
         "messages": [],
+        "navigation": {
+          "menu": [],
+          "spaces": []
+        },
         "previousMenu": "",
         "space": "",
-        "type": "designer",
-        "logs": []
+        "type": "designer"
       }
     }
   },
