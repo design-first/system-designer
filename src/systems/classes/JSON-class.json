@@ -3172,7 +3172,7 @@
           "name": "extension-template",
           "master": false,
           "version": "1.0.0",
-          "description": "Create an extension\n\nExtension for creating:\n\n* menubar items,\n* toolbar items,\n* actions when clicking on them and\n* showing dialog.",
+          "description": "Create an extension\n\nExtension for creating:\n\n* menubar items,\n* toolbar items,\n* actions when clicking on them and\n* show modal dialog.",
           "schemas": {
             "p181111d5c01f97b": {
               "_id": "p181111d5c01f97b",
@@ -3204,13 +3204,13 @@
               "render": "method",
               "click": "event"
             },
-            "n1a57f14f7e1d5fe": {
-              "_id": "n1a57f14f7e1d5fe",
-              "_name": "Dialog",
+            "l1cbdc1fc4612ece": {
+              "_id": "l1cbdc1fc4612ece",
+              "_name": "Modal",
               "_inherit": ["_Component"],
               "title": "property",
               "message": "property",
-              "data": "property",
+              "store": "property",
               "html": "link",
               "ok": "event",
               "cancel": "event",
@@ -3304,13 +3304,13 @@
               "render": {},
               "click": {}
             },
-            "l1d4181e4d71ade2": {
-              "_id": "l1d4181e4d71ade2",
-              "_name": "Dialog",
+            "q1d12b19f4712a7a": {
+              "_id": "q1d12b19f4712a7a",
+              "_name": "Modal",
               "title": {
                 "type": "text",
                 "readOnly": true,
-                "mandatory": true,
+                "mandatory": false,
                 "default": ""
               },
               "message": {
@@ -3319,7 +3319,7 @@
                 "mandatory": false,
                 "default": ""
               },
-              "data": {
+              "store": {
                 "type": "object",
                 "readOnly": false,
                 "mandatory": false,
@@ -3339,22 +3339,6 @@
             }
           },
           "behaviors": {
-            "o17fec18a0514438": {
-              "_id": "o17fec18a0514438",
-              "component": "dialog-template",
-              "state": "show",
-              "action": "function show() { \n  $('#designer-dialog-template').modal('show');\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "x137c71fac11a07b": {
-              "_id": "x137c71fac11a07b",
-              "component": "dialog-template",
-              "state": "hide",
-              "action": "function hide() { \n  $('#designer-dialog-template').modal('hide');\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
             "l11cba1844d1f82a": {
               "_id": "l11cba1844d1f82a",
               "component": "dialog-template",
@@ -3391,7 +3375,47 @@
               "_id": "g10c63191dc16341",
               "component": "toolbar-item-template",
               "state": "click",
-              "action": "function click() { \n  this.require('dialog-template').render();\t\n}",
+              "action": "function click() { \n  this.require('modal-template').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "d1bdde1f59f1befe": {
+              "_id": "d1bdde1f59f1befe",
+              "component": "Modal",
+              "state": "show",
+              "action": "function show() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('show');\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "n1467b1097a16481": {
+              "_id": "n1467b1097a16481",
+              "component": "Modal",
+              "state": "hide",
+              "action": "function hide() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('hide');\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "t1fb0b150c810528": {
+              "_id": "t1fb0b150c810528",
+              "component": "Modal",
+              "state": "render",
+              "action": "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#modal-template').modal('show');\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "f129cf160cb1e071": {
+              "_id": "f129cf160cb1e071",
+              "component": "Modal",
+              "state": "cancel",
+              "action": "function cancel() { \n  this.hide();\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "e10b6512ef215e75": {
+              "_id": "e10b6512ef215e75",
+              "component": "Modal",
+              "state": "ok",
+              "action": "function ok() { \n  this.hide();\t\n}",
               "useCoreAPI": false,
               "core": false
             }
@@ -3420,31 +3444,31 @@
               }
             },
             "HTML": {
-              "dialog-template.html": {
-                "_id": "dialog-template.html",
-                "source": "<div class=\"modal fade\" id=\"designer-dialog-template\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"templateLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"templateLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                {{message}}\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-default\" id=\"designer-dialog-template-cancel\">Cancel</button>\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-template-ok\">OK</button>\n            </div>\n        </div>\n    </div>\n</div>"
-              },
               "menuitem-template.html": {
                 "_id": "menuitem-template.html",
                 "source": "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"
               },
               "toolbar-item-template.html": {
                 "_id": "toolbar-item-template.html",
-                "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
+                "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Template\">\n  <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n</button>"
+              },
+              "modal-template.html": {
+                "_id": "modal-template.html",
+                "source": "<div class=\"modal fade\" id=\"modal-template\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalLabel\">\n  <div class=\"modal-dialog modal-lg\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\" id=\"modalLabel\">{{title}}</h4>\n      </div>\n      <div class=\"modal-body\">\n        {{message}}\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" id=\"modal-template-cancel\">Cancel</button>\n        <button type=\"button\" class=\"btn btn-primary\" id=\"modal-template-ok\">OK</button>\n      </div>\n    </div>\n  </div>\n</div>"
               }
             },
             "MenuItem": {},
-            "Dialog": {
-              "dialog-template": {
-                "_id": "dialog-template",
-                "data": {},
-                "message": "This is a template of dialog.",
-                "title": "An example of Dialog",
-                "html": "dialog-template.html"
+            "Modal": {
+              "modal-template": {
+                "_id": "modal-template",
+                "store": {},
+                "message": "This is a template of a modal dialog.",
+                "title": "An example of modal dialog",
+                "html": "modal-template.html"
               }
             }
           },
-          "_id": "t1c7071c58413677"
+          "_id": "r161cd1f48d1c312"
         }
       },
       "00-example-quick-start.json": {
