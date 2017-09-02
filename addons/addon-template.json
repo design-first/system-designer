@@ -40,7 +40,6 @@
       "_inherit": ["_Component"],
       "title": "property",
       "message": "property",
-      "store": "property",
       "html": "link",
       "ok": "event",
       "cancel": "event",
@@ -149,17 +148,11 @@
         "mandatory": false,
         "default": ""
       },
-      "store": {
-        "type": "object",
-        "readOnly": false,
-        "mandatory": false,
-        "default": {}
-      },
       "html": {
         "type": "@HTML",
         "readOnly": false,
         "mandatory": false,
-        "default": ""
+        "default": "modal-template.html"
       },
       "show": {},
       "hide": {},
@@ -229,7 +222,7 @@
       "_id": "t1fb0b150c810528",
       "component": "Modal",
       "state": "render",
-      "action": "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#modal-template').modal('show');\t\n}",
+      "action": "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#' + id).modal('show');\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -283,7 +276,6 @@
     "Modal": {
       "modal-template": {
         "_id": "modal-template",
-        "store": {},
         "message": "This is a template of a modal dialog.",
         "title": "An example of modal dialog",
         "html": "modal-template.html"

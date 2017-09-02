@@ -7,9 +7,7 @@
     "x15866118f7110a3": {
       "_id": "x15866118f7110a3",
       "_name": "Extension",
-      "_inherit": [
-        "_Component"
-      ],
+      "_inherit": ["_Component"],
       "source": "property",
       "isCore": "property",
       "installed": "property"
@@ -42,7 +40,287 @@
   "behaviors": {},
   "types": {},
   "components": {
-    "Extension": {}
+    "Extension": {
+      "w15b291d1a312ff6": {
+        "_id": "w15b291d1a312ff6",
+        "installed": false,
+        "isCore": true,
+        "source": {
+          "name": "extension-modeljson",
+          "master": false,
+          "version": "1.0.0",
+          "description": "Create an extension\n\nExtension for creating:\n\n* menubar items,\n* toolbar items,\n* actions when clicking on them and\n* show modal dialog.",
+          "schemas": {
+            "p181111d5c01f97b": {
+              "_id": "p181111d5c01f97b",
+              "_inherit": ["_Component"],
+              "_name": "HTML",
+              "render": "method",
+              "source": "property"
+            },
+            "t19b6b11ff31158d": {
+              "_id": "t19b6b11ff31158d",
+              "_name": "ToolBarItem",
+              "_inherit": ["_Component"],
+              "html": "link",
+              "position": "property",
+              "type": "property",
+              "platform": "property",
+              "render": "method",
+              "click": "event"
+            },
+            "l1d113198721599d": {
+              "_id": "l1d113198721599d",
+              "_name": "MenuItem",
+              "_inherit": ["_Component"],
+              "html": "link",
+              "position": "property",
+              "type": "property",
+              "name": "property",
+              "platform": "property",
+              "render": "method",
+              "click": "event"
+            },
+            "l1cbdc1fc4612ece": {
+              "_id": "l1cbdc1fc4612ece",
+              "_name": "Modal",
+              "_inherit": ["_Component"],
+              "title": "property",
+              "message": "property",
+              "html": "link",
+              "ok": "event",
+              "cancel": "event",
+              "show": "method",
+              "hide": "method",
+              "render": "method"
+            }
+          },
+          "models": {
+            "w1417e1d6d613a0d": {
+              "_id": "w1417e1d6d613a0d",
+              "_name": "HTML",
+              "source": {
+                "type": "html",
+                "readOnly": true,
+                "mandatory": true,
+                "default": ""
+              },
+              "render": {
+                "params": [{
+                  "name": "id",
+                  "type": "any",
+                  "mandatory": false,
+                  "default": null
+                }]
+              }
+            },
+            "u1f4c7177bb1a459": {
+              "_id": "u1f4c7177bb1a459",
+              "_name": "ToolBarItem",
+              "html": {
+                "type": "@HTML",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "toolbar-item-template.html"
+              },
+              "position": {
+                "type": "number",
+                "readOnly": false,
+                "mandatory": false,
+                "default": 100
+              },
+              "type": {
+                "type": "editorType",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "designer"
+              },
+              "render": {},
+              "click": {},
+              "platform": {
+                "type": "platform",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "all"
+              }
+            },
+            "u1f9a01abe31b3bf": {
+              "_id": "u1f9a01abe31b3bf",
+              "_name": "MenuItem",
+              "html": {
+                "type": "@HTML",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "menuitem-template.html"
+              },
+              "position": {
+                "type": "number",
+                "readOnly": false,
+                "mandatory": false,
+                "default": 100
+              },
+              "type": {
+                "type": "editorType",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "designer"
+              },
+              "name": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "template"
+              },
+              "platform": {
+                "type": "platform",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "all"
+              },
+              "render": {},
+              "click": {}
+            },
+            "q1d12b19f4712a7a": {
+              "_id": "q1d12b19f4712a7a",
+              "_name": "Modal",
+              "title": {
+                "type": "text",
+                "readOnly": true,
+                "mandatory": false,
+                "default": ""
+              },
+              "message": {
+                "type": "text",
+                "readOnly": true,
+                "mandatory": false,
+                "default": ""
+              },
+              "html": {
+                "type": "@HTML",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "modal-template.html"
+              },
+              "show": {},
+              "hide": {},
+              "cancel": {},
+              "ok": {},
+              "render": {}
+            }
+          },
+          "behaviors": {
+            "d1bdde1f59f1befe": {
+              "_id": "d1bdde1f59f1befe",
+              "component": "Modal",
+              "state": "show",
+              "action": "function show() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('show');\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "n1467b1097a16481": {
+              "_id": "n1467b1097a16481",
+              "component": "Modal",
+              "state": "hide",
+              "action": "function hide() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('hide');\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "t1fb0b150c810528": {
+              "_id": "t1fb0b150c810528",
+              "component": "Modal",
+              "state": "render",
+              "action": "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#' + id).modal('show');\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "f129cf160cb1e071": {
+              "_id": "f129cf160cb1e071",
+              "component": "Modal",
+              "state": "cancel",
+              "action": "function cancel() { \n  this.hide();\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "e10b6512ef215e75": {
+              "_id": "e10b6512ef215e75",
+              "component": "Modal",
+              "state": "ok",
+              "action": "function ok() { \n  this.hide();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "z1f6731cf3219889": {
+              "_id": "z1f6731cf3219889",
+              "component": "x10b021de0a19b46",
+              "state": "click",
+              "action": "function click() { \n  this.require('j16a581f46813de3').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "v19bb01b70a1a51c": {
+              "_id": "v19bb01b70a1a51c",
+              "component": "j16a581f46813de3",
+              "state": "ok",
+              "action": "function ok() { \n\tvar name = $('#modal-modeljson-name').val(),\n\t    jsonText = $('#modal-modeljson-json').val(),\n\t    json = null,\n\t    schema = {},\n\t    model = {},\n\t    property = '';\n\n  function _getType(value) {\n    var type = '';\n  \n    if (Array.isArray(value)) {\n      type = 'array';\n    } else {\n      type = typeof value;\n    }\n  \n    return type;\n  }   \n\n\tif (name && jsonText) {\n\t  try {\n\t    json = JSON.parse(jsonText);\n\t  } catch(e) {\n\t    this.require('logger').warn('Your JSON is invalid.');\n\t  }\n\t  \n\t  if (json) {\n\t    schema = this.require('factory').addSchema(name.trim());\n\t    this.require('designer').save();\n\t    \n\t    for (property in json) {\n\t      type = _getType(json[property]);\n\t      if (type === 'array') {\n\t        schema[property] =  \"collection\";\n\t      } else {\n\t        schema[property] =  \"property\";\n\t      }\n\t    }\n\t    \n\t    this.require('factory').updateSchema(schema._id, schema);\n\t    this.require('designer').save();\n\t    \n\t    model = this.require('factory').createModel(schema);\n\t    this.require('designer').save();\n\t    \n\t    for (property in schema) {\n\t      if (property.indexOf('_') !== 0) {\n\t        type = _getType(json[property]);\n\t        switch (type) {\n\t          case 'object':\n\t            model[property].type = 'object';\n\t            model[property].default = {};\n\t            break;\n\t          case 'number':\n\t            model[property].type = 'number';\n\t            model[property].default = 0;\n\t            break;\n\t          case 'boolean':\n\t            model[property].type = 'boolean';\n\t            model[property].default = false;\n\t            break;\n\t          case 'array':\n\t            model[property].type = ['any'];\n\t            model[property].default = [];\n\t            break;\n\t          default:\n\t            break;\n\t        }\n\t      }\n\t    }\n\t   \n\t    this.require('factory').updateModel(model._id, model);\n\t    this.require('designer').save();\n\n      this.require('channel').$designerCreateSchema(name, schema);\n\n      this.require('spaces').render();\n      this.require('workspace').render();\t\n\t    \n\t    this.require('message').success('A model has been created for the JSON.');\n\t  }\n\t}    \n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "h19d481534915d09": {
+              "_id": "h19d481534915d09",
+              "component": "j16a581f46813de3",
+              "state": "render",
+              "action": "function render() { \n  this.require('Modal').render(this);\t\n  \n  $('#modal-modeljson').on('shown.bs.modal', function modal() {\n    $('#modal-modeljson-name').focus();\n  });\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {
+            "editorType": {
+              "name": "editorType",
+              "type": "string",
+              "value": ["designer", "system", "type", "schema", "model", "behavior", "component"]
+            },
+            "platform": {
+              "_id": "r10214160211309c",
+              "name": "platform",
+              "type": "string",
+              "value": ["all", "web", "electron", "cordova"]
+            }
+          },
+          "components": {
+            "ToolBarItem": {
+              "x10b021de0a19b46": {
+                "_id": "x10b021de0a19b46",
+                "html": "toolbar-item-modeljson.html",
+                "platform": "all",
+                "position": 70,
+                "type": "designer"
+              }
+            },
+            "HTML": {
+              "modal-modeljson.html": {
+                "_id": "modal-modeljson.html",
+                "source": "<div class=\"modal fade\" id=\"modal-modeljson\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalLabel\">\n  <div class=\"modal-dialog modal-lg\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\" id=\"modalLabel\">{{title}}</h4>\n      </div>\n      <div class=\"modal-body\">\n        <form class=\"form-horizontal\" role=\"form\">\n          <div class=\"form-group\">\n            <label class=\"col-xs-offset-0 col-xs-2 control-label\">Name</label>\n            <div class=\"col-xs-offset-0 col-xs-9\">\n              <input class=\"form-control\" placeholder=\"give a name to your model\" type=\"text\" id=\"modal-modeljson-name\">\n            </div>\n          </div>\n\t\t\t\t\t<div class=\"form-group\">\n\t\t\t\t\t\t<label class=\"col-xs-offset-0 col-xs-2 control-label\">JSON</label>\n\t\t\t\t\t\t<div class=\"col-xs-offset-0 col-xs-9\">\n\t\t\t\t\t\t\t<textarea class=\"form-control\" placeholder=\"put your JSON here\" rows=\"2\" id=\"modal-modeljson-json\"></textarea>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</form>\t\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" id=\"modal-modeljson-cancel\">Cancel</button>\n        <button type=\"button\" class=\"btn btn-primary\" id=\"modal-modeljson-ok\">OK</button>\n      </div>\n    </div>\n  </div>\n</div>"
+              },
+              "toolbar-item-modeljson.html": {
+                "_id": "toolbar-item-modeljson.html",
+                "source": "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Create a model from JSON\">\n  <span class=\"glyphicon glyphicon-unchecked\" aria-hidden=\"true\"></span>\n</button>"
+              }
+            },
+            "MenuItem": {},
+            "Modal": {
+              "j16a581f46813de3": {
+                "_id": "j16a581f46813de3",
+                "html": "modal-modeljson.html",
+                "message": "",
+                "title": "Create a model from JSON"
+              }
+            }
+          },
+          "_id": "u155371124418bea"
+        }
+      }
+    }
   },
   "_id": "a17fd51fe2d145a7"
 }

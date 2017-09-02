@@ -3210,7 +3210,6 @@
               "_inherit": ["_Component"],
               "title": "property",
               "message": "property",
-              "store": "property",
               "html": "link",
               "ok": "event",
               "cancel": "event",
@@ -3319,12 +3318,6 @@
                 "mandatory": false,
                 "default": ""
               },
-              "store": {
-                "type": "object",
-                "readOnly": false,
-                "mandatory": false,
-                "default": {}
-              },
               "html": {
                 "type": "@HTML",
                 "readOnly": false,
@@ -3339,38 +3332,6 @@
             }
           },
           "behaviors": {
-            "l11cba1844d1f82a": {
-              "_id": "l11cba1844d1f82a",
-              "component": "dialog-template",
-              "state": "cancel",
-              "action": "function cancel() { \n  this.hide();\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "j125311215811235": {
-              "_id": "j125311215811235",
-              "component": "dialog-template",
-              "state": "ok",
-              "action": "function ok() { \n  this.hide();\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "s1e5a615cf0153dc": {
-              "_id": "s1e5a615cf0153dc",
-              "component": "dialog-template",
-              "state": "render",
-              "action": "function render() { \n  var html = '',\n      dom = null;\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-template-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-template-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show\n  $('#designer-dialog-template').modal('show');\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "m1f448175f61f877": {
-              "_id": "m1f448175f61f877",
-              "component": "toolbar_item_template",
-              "state": "click",
-              "action": "function click() { \n  this.require('dialog_template').render();\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
             "g10c63191dc16341": {
               "_id": "g10c63191dc16341",
               "component": "toolbar-item-template",
@@ -3399,7 +3360,7 @@
               "_id": "t1fb0b150c810528",
               "component": "Modal",
               "state": "render",
-              "action": "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#modal-template').modal('show');\t\n}",
+              "action": "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#' + id).modal('show');\t\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -3461,7 +3422,6 @@
             "Modal": {
               "modal-template": {
                 "_id": "modal-template",
-                "store": {},
                 "message": "This is a template of a modal dialog.",
                 "title": "An example of modal dialog",
                 "html": "modal-template.html"
