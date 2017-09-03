@@ -46,10 +46,10 @@
         "installed": false,
         "isCore": true,
         "source": {
-          "name": "extension-modeljson",
+          "name": "extension-model-json",
           "master": false,
           "version": "1.0.0",
-          "description": "Create an extension\n\nExtension for creating:\n\n* menubar items,\n* toolbar items,\n* actions when clicking on them and\n* show modal dialog.",
+          "description": "Create a model from a JSON file",
           "schemas": {
             "p181111d5c01f97b": {
               "_id": "p181111d5c01f97b",
@@ -233,27 +233,11 @@
               "useCoreAPI": false,
               "core": false
             },
-            "f129cf160cb1e071": {
-              "_id": "f129cf160cb1e071",
-              "component": "Modal",
-              "state": "cancel",
-              "action": "function cancel() { \n  this.hide();\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "e10b6512ef215e75": {
-              "_id": "e10b6512ef215e75",
-              "component": "Modal",
-              "state": "ok",
-              "action": "function ok() { \n  this.hide();\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
             "z1f6731cf3219889": {
               "_id": "z1f6731cf3219889",
               "component": "x10b021de0a19b46",
               "state": "click",
-              "action": "function click() { \n  this.require('j16a581f46813de3').render();\t\n}",
+              "action": "function click() { \n  if (this.require('factory').system()) {\n    this.require('j16a581f46813de3').render();\n  } else {\n\t  this.require('message').warning('There is no system');\n\t} \n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -261,7 +245,7 @@
               "_id": "v19bb01b70a1a51c",
               "component": "j16a581f46813de3",
               "state": "ok",
-              "action": "function ok() { \n\tvar name = $('#modal-modeljson-name').val(),\n\t    jsonText = $('#modal-modeljson-json').val(),\n\t    json = null,\n\t    schema = {},\n\t    model = {},\n\t    property = '';\n\n  function _getType(value) {\n    var type = '';\n  \n    if (Array.isArray(value)) {\n      type = 'array';\n    } else {\n      type = typeof value;\n    }\n  \n    return type;\n  }   \n\n\tif (name && jsonText) {\n\t  try {\n\t    json = JSON.parse(jsonText);\n\t  } catch(e) {\n\t    this.require('logger').warn('Your JSON is invalid.');\n\t  }\n\t  \n\t  if (json) {\n\t    schema = this.require('factory').addSchema(name.trim());\n\t    this.require('designer').save();\n\t    \n\t    for (property in json) {\n\t      type = _getType(json[property]);\n\t      if (type === 'array') {\n\t        schema[property] =  \"collection\";\n\t      } else {\n\t        schema[property] =  \"property\";\n\t      }\n\t    }\n\t    \n\t    this.require('factory').updateSchema(schema._id, schema);\n\t    this.require('designer').save();\n\t    \n\t    model = this.require('factory').createModel(schema);\n\t    this.require('designer').save();\n\t    \n\t    for (property in schema) {\n\t      if (property.indexOf('_') !== 0) {\n\t        type = _getType(json[property]);\n\t        switch (type) {\n\t          case 'object':\n\t            model[property].type = 'object';\n\t            model[property].default = {};\n\t            break;\n\t          case 'number':\n\t            model[property].type = 'number';\n\t            model[property].default = 0;\n\t            break;\n\t          case 'boolean':\n\t            model[property].type = 'boolean';\n\t            model[property].default = false;\n\t            break;\n\t          case 'array':\n\t            model[property].type = ['any'];\n\t            model[property].default = [];\n\t            break;\n\t          default:\n\t            break;\n\t        }\n\t      }\n\t    }\n\t   \n\t    this.require('factory').updateModel(model._id, model);\n\t    this.require('designer').save();\n\n      this.require('channel').$designerCreateSchema(name, schema);\n\n      this.require('spaces').render();\n      this.require('workspace').render();\t\n\t    \n\t    this.require('message').success('A model has been created for the JSON.');\n\t  }\n\t}    \n}",
+              "action": "function ok() { \n\tvar name = $('#modal-modeljson-name').val(),\n\t    jsonText = $('#modal-modeljson-json').val(),\n\t    json = null,\n\t    schema = {},\n\t    model = {},\n\t    property = '';\n\n  function _getType(value) {\n    var type = '';\n  \n    if (Array.isArray(value)) {\n      type = 'array';\n    } else {\n      type = typeof value;\n    }\n  \n    return type;\n  }   \n\n\tif (name && jsonText) {\n\t  try {\n\t    json = JSON.parse(jsonText);\n\t  } catch(e) {\n\t    this.require('logger').warn('Your JSON is invalid.');\n\t  }\n\t  \n\t  if (json) {\n\t    schema = this.require('factory').addSchema(name.trim());\n\t    this.require('designer').save();\n\t    \n\t    for (property in json) {\n\t      type = _getType(json[property]);\n\t      if (type === 'array') {\n\t        schema[property] =  'collection';\n\t      } else {\n\t        schema[property] =  'property';\n\t      }\n\t    }\n\t    \n\t    this.require('factory').updateSchema(schema._id, schema);\n\t    this.require('designer').save();\n\t    \n\t    model = this.require('factory').createModel(schema);\n\t    this.require('designer').save();\n\t    \n\t    for (property in schema) {\n\t      if (property.indexOf('_') !== 0) {\n\t        type = _getType(json[property]);\n\t        switch (type) {\n\t          case 'object':\n\t            model[property].type = 'object';\n\t            model[property].default = {};\n\t            break;\n\t          case 'number':\n\t            model[property].type = 'number';\n\t            model[property].default = 0;\n\t            break;\n\t          case 'boolean':\n\t            model[property].type = 'boolean';\n\t            model[property].default = false;\n\t            break;\n\t          case 'array':\n\t            model[property].type = ['any'];\n\t            model[property].default = [];\n\t            break;\n\t          default:\n\t            break;\n\t        }\n\t      }\n\t    }\n\t   \n\t    this.require('factory').updateModel(model._id, model);\n\t    this.require('designer').save();\n\n      this.require('channel').$designerCreateSchema(name, schema);\n      \n      this.hide();\n\n      this.require('spaces').render();\n      this.require('workspace').render();\t\n\t    \n\t    this.require('message').success('A model has been created for the JSON.');\n\t  }\n\t}    \n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -270,6 +254,14 @@
               "component": "j16a581f46813de3",
               "state": "render",
               "action": "function render() { \n  this.require('Modal').render(this);\t\n  \n  $('#modal-modeljson').on('shown.bs.modal', function modal() {\n    $('#modal-modeljson-name').focus();\n  });\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "h1f7551398814e9b": {
+              "_id": "h1f7551398814e9b",
+              "component": "j16a581f46813de3",
+              "state": "cancel",
+              "action": "function cancel() { \n  this.hide();\t\n}",
               "useCoreAPI": false,
               "core": false
             }
