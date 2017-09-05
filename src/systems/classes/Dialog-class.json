@@ -866,6 +866,22 @@
       "action": "function ok() { \n  var that = this, \n    message = this.require('message'),\n    behavior = {},\n    ModelBehavior = null,\n    modelBehavior = null,\n    model = '',\n    state = '',\n    componentId = '';\n  \n  function _findSchemaId(compId) {\n    var result = compId,\n      modelName = '';\n  \n    for (modelName in that.require('factory').system().components()) {\n      if (typeof that.require('factory').system().components()[modelName][compId] !== 'undefined') {\n        result = modelName;\n        break;\n      }\n    }\n    return result;\n  }\n  \n  // get value\n  model = _findSchemaId(this.require('state').space());\n  state = $('#designer-dialog-behavior-creation-state').val();\n  componentId = this.require('state').space();\n  \n  behavior = this.require('factory').addBehavior(model, componentId, state);\n  \n  if (Object.keys(behavior).length) {\n    ModelBehavior = this.require('ModelBehavior');\n  \n    modelBehavior = new ModelBehavior({\n      'uuid': behavior._id\n    });\n  \n    modelBehavior.title(state);\n    modelBehavior.document(behavior);\n    modelBehavior.content(JSON.parse(JSON.stringify(behavior.action)));\n  \n    this.hide();\n    modelBehavior.render();\n  \n    Prism.highlightAll();\n  \n    // little effect\n    $('#designer-behavior-' + behavior._id).hide();\n    $('#designer-behavior-' + behavior._id).fadeIn(1000);\n  \n    this.require('designer').save();\n  \n    this.require('channel').$designerCreateBehavior(behavior);\n  } else {\n    this.hide();\n    message.warning('Can not create two behaviors for a method.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
+    },
+    "h19e081c0c015dec": {
+      "_id": "h19e081c0c015dec",
+      "component": "DialogImportFile",
+      "state": "mergeSystem",
+      "action": "function mergeSystem() { \n  this.require('factory').mergeSystem(this.data());\n  this.require('designer').save();\n\n  this.require('spaces').render();\n  this.require('workspace').render();\n\n  this.require('router').update();\n\n  this.hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k170351fdea1494e": {
+      "_id": "k170351fdea1494e",
+      "component": "DialogImportFile",
+      "state": "importSystem",
+      "action": "function importSystem() { \n  var sys = null,\n    designer = this.require('designer'),\n    message = this.require('message');\n\n  if (Object.keys(this.data()).length) {\n    if (this.require('factory').system()) {\n      this.require('factory').system().destroy();\n    }\n    \n    sys = this.require('factory').create(this.data());\n\n    // empty log\n    this.require('state').logs().forEach(function (item) {\n      this.logs().pop();\n    }.bind(this.require('state')));\n\n    designer.save();\n\n    this.require('state').space(sys.name());\n\n    this.require('spaces').render();\n    this.require('workspace').render();\n\n    this.require('router').update();\n\n    this.hide();\n\n    message.success('Importation of the system is done.');\n  } else {\n    message.danger('The system you try to import is invalid');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
