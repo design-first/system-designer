@@ -74,7 +74,6 @@ module.exports = function (grunt) {
 
   // start the dev mode
   grunt.registerTask('dev', [
-    'clean',
     'web',
     'copy:web-debug',
     'connect:watch',
@@ -88,6 +87,7 @@ module.exports = function (grunt) {
 
   // dist for web
   grunt.registerTask('web', [
+    'clean',
     'jsbeautifier',
     'copy:core',
     'copy:lib-core',
@@ -98,6 +98,7 @@ module.exports = function (grunt) {
 
   // dist for electron
   grunt.registerTask('electron', [
+    'clean',
     'jsbeautifier',
     'copy:core',
     'copy:lib-core',
@@ -109,6 +110,7 @@ module.exports = function (grunt) {
 
   // dist for cordova
   grunt.registerTask('cordova', [
+    'clean',
     'jsbeautifier',
     'copy:core',
     'copy:lib-core',

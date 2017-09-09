@@ -63,8 +63,6 @@ $ npm install
 Here are the different tasks you can use to build and start System Designer:
 
 ```sh
-# clean
-$ npm run clean
 # build
 $ npm run web
 # start web server
@@ -78,8 +76,6 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/).
 To build for [Electron](http://electron.atom.io):
 
 ```sh
-# clean
-$ npm run clean
 # build
 $ npm run electron
 ```
@@ -91,8 +87,6 @@ Copy then the content of `/dist` directory into your [System Designer for Electr
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
-# clean
-$ npm run clean
 # build
 $ npm run cordova
 ```
