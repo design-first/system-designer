@@ -1201,7 +1201,7 @@
           "name": "example-node",
           "master": true,
           "version": "1.0.1",
-          "description": "Create a server application\n\nThis example shows you how to create a Node.js application in System Designer.\n\nYou can the test the application directly in System Designer.\n\nnote: use 'global.require' instead of 'require' to require a module.",
+          "description": "Create a server application\n\nThis example shows you how to create a Node.js application in System Designer.\n\nYou can the test the application directly in System Designer (* macOS and windows versions only).\n\nnote: use 'global.require' instead of 'require' to require a module.",
           "schemas": {},
           "models": {},
           "behaviors": {
@@ -1226,7 +1226,7 @@
           "name": "REST-Server",
           "master": true,
           "version": "1.0.0",
-          "description": "Create a REST server\n\n1. Create a schema, example 'Book', make it inherit from 'SyncComponent', add properties\n2. Create 'Book' components\n3. Run the application\n4. Now you can send GET/POST/PUT/DELETE/PATCH requests to http://127.0.0.1:8080/rest/Book\n\nnote: because the running application and System Designer are synchronized, if you open the 'Components' tab when performing the requests, you will see directly the modification on the panel (i.e. if you delete a component with a DELETE request, it will be removed from System Designer)",
+          "description": "Create a REST server\n\n1. Create a schema, example 'Book', make it inherit from 'SyncComponent', add properties\n2. Create 'Book' components\n3. Run the application (* System Designer macOS and windows versions only)\n4. Now you can send GET/POST/PUT/DELETE/PATCH requests to http://127.0.0.1:8080/rest/Book\n\nnote: because the running application and System Designer are synchronized, if you open the 'Components' tab when performing the requests, you will see directly the modification on the panel (i.e. if you delete a component with a DELETE request, it will be removed from System Designer)",
           "schemas": {
             "192b31826d11d82": {
               "_id": "192b31826d11d82",
@@ -3449,42 +3449,6 @@
               "fullName": "method"
             }
           },
-          "behaviors": {
-            "137491d3c61213b": {
-              "_id": "137491d3c61213b",
-              "component": "100e51f87218a8f",
-              "state": "start",
-              "action": "function start() {\n  var luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n }",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "11a2910bbd142e1": {
-              "_id": "11a2910bbd142e1",
-              "component": "Jedi",
-              "state": "fullName",
-              "action": "function fullName() {\n\tvar result = this.firstName() + ' ' + this.lastName();\n\treturn result;\n}",
-              "useCoreAPI": false,
-              "core": false
-            }
-          },
-          "types": {},
-          "components": {
-            "Jedi": {
-              "vador": {
-                "_id": "vador",
-                "father": "",
-                "firstName": "Dark",
-                "lastName": "Vador"
-              },
-              "luke": {
-                "_id": "luke",
-                "father": "vador",
-                "firstName": "Luke",
-                "lastName": "Skywalker"
-              }
-            }
-          },
-          "_id": "100e51f87218a8f",
           "models": {
             "1a3a2150b31c099": {
               "_id": "1a3a2150b31c099",
@@ -3511,7 +3475,43 @@
                 "result": "string"
               }
             }
-          }
+          },
+          "behaviors": {
+            "137491d3c61213b": {
+              "_id": "137491d3c61213b",
+              "component": "100e51f87218a8f",
+              "state": "start",
+              "action": "function start() {\n  let luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n }",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "11a2910bbd142e1": {
+              "_id": "11a2910bbd142e1",
+              "component": "Jedi",
+              "state": "fullName",
+              "action": "function fullName() {\n  let result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {},
+          "components": {
+            "Jedi": {
+              "vador": {
+                "_id": "vador",
+                "father": "",
+                "firstName": "Dark",
+                "lastName": "Vador"
+              },
+              "luke": {
+                "_id": "luke",
+                "father": "vador",
+                "firstName": "Luke",
+                "lastName": "Skywalker"
+              }
+            }
+          },
+          "_id": "100e51f87218a8f"
         },
         "platform": "all"
       }
