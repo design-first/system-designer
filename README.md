@@ -51,6 +51,15 @@ System Designer has a GitHub module to synchronize your work between all these a
 
 #### Installation
 
+Clone the repository:
+
+```sh
+# Clone the repository
+$ git clone https://github.com/design-first/system-designer.git
+# Go to the repository
+$ cd system-designer
+```
+
 Once you have cloned the repository:
 
 ```sh
@@ -76,7 +85,6 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/).
 To build for [Electron](http://electron.atom.io):
 
 ```sh
-# build
 $ npm run electron
 ```
 
@@ -87,7 +95,6 @@ Copy then the content of `/dist` directory into your [System Designer for Electr
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
-# build
 $ npm run cordova
 ```
 
@@ -98,7 +105,6 @@ Copy then the content of `/dist` directory into your [System Designer for Cordov
 To start System Designer in development mode:
 
 ```sh
-# start the server and watcher
 $ npm run dev
 ```
 
