@@ -773,6 +773,93 @@
               "fullName": "method"
             }
           },
+          "models": {
+            "1d3741fe4e17da2": {
+              "_id": "1d3741fe4e17da2",
+              "_name": "Director",
+              "firstName": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "lastName": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "fullName": {
+                "result": "string"
+              }
+            },
+            "175a418c6a1d85b": {
+              "_id": "175a418c6a1d85b",
+              "_name": "DVD",
+              "title": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "type": {
+                "type": "category",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "action"
+              },
+              "director": {
+                "type": "Director",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            },
+            "1c63e161f71cf4a": {
+              "_id": "1c63e161f71cf4a",
+              "_name": "CSS",
+              "source": {
+                "type": "css",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "render": {}
+            },
+            "155a8100d518f95": {
+              "_id": "155a8100d518f95",
+              "_name": "JS",
+              "source": {
+                "type": "javascript",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "render": {}
+            },
+            "1afbe1c5f81272e": {
+              "_id": "1afbe1c5f81272e",
+              "_name": "HTML",
+              "source": {
+                "type": "html",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "render": {}
+            },
+            "140eb10aae166de": {
+              "_id": "140eb10aae166de",
+              "_name": "List",
+              "model": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "render": {}
+            }
+          },
           "behaviors": {
             "1f59c1798a1d79b": {
               "_id": "1f59c1798a1d79b",
@@ -834,7 +921,7 @@
               "_id": "162fb15a00169fc",
               "component": "DVD",
               "state": "init",
-              "action": "function init(conf) {\n  this.require('list').render();\n}",
+              "action": "function init(conf) {\n  if (this.require('list')) {\n    this.require('list').render();\n  }\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -930,94 +1017,7 @@
               }
             }
           },
-          "_id": "1aa641bbf11edea",
-          "models": {
-            "1d3741fe4e17da2": {
-              "_id": "1d3741fe4e17da2",
-              "_name": "Director",
-              "firstName": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "lastName": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "fullName": {
-                "result": "string"
-              }
-            },
-            "175a418c6a1d85b": {
-              "_id": "175a418c6a1d85b",
-              "_name": "DVD",
-              "title": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "type": {
-                "type": "category",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "action"
-              },
-              "director": {
-                "type": "Director",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              }
-            },
-            "1c63e161f71cf4a": {
-              "_id": "1c63e161f71cf4a",
-              "_name": "CSS",
-              "source": {
-                "type": "css",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "render": {}
-            },
-            "155a8100d518f95": {
-              "_id": "155a8100d518f95",
-              "_name": "JS",
-              "source": {
-                "type": "javascript",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "render": {}
-            },
-            "1afbe1c5f81272e": {
-              "_id": "1afbe1c5f81272e",
-              "_name": "HTML",
-              "source": {
-                "type": "html",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "render": {}
-            },
-            "140eb10aae166de": {
-              "_id": "140eb10aae166de",
-              "_name": "List",
-              "model": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "render": {}
-            }
-          }
+          "_id": "1aa641bbf11edea"
         },
         "platform": "all"
       },
