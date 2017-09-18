@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/design-first/system-designer.svg?branch=master)](https://travis-ci.org/design-first/system-designer)
 [![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
 
-![Image Alt](https://designfirst.io/img/systemdesigner.png)
+![Image Alt](https://designfirst.io/img/systemdesignerv2.png)
 
 ## What is System Designer ?
 
