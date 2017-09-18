@@ -112,7 +112,6 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/). All
 
 ## Documentation
 
-* [Quick Start in videos](https://system-designer.readme.io/docs/quick-start-in-videos)
 * [Quick Start](https://system-designer.readme.io/docs/quick-start)
 * [Documentation](https://system-designer.readme.io/)
 
