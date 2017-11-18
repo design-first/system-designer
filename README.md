@@ -28,7 +28,7 @@ A system:
 
 If you look at the different JavaScript frameworks on the market, you will notice that they all have their own way to define a model, generally only with code.
 
-System Designer uses [UML](http://www.uml.org), a standard, to define your system. So you probably already know how to design in System Designer even if you have never run it.
+System Designer uses [UML](http://www.uml.org), a standard, to define your model. So you probably already know how to design in System Designer even if you have never run it.
 
 The definition of the model is stored on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson). With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
