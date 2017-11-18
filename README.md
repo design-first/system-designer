@@ -8,16 +8,17 @@
 ## What is System Designer ?
 
 No matter the frameworks you use and the code you write, the most important is the model that you define to create your application. System Designer helps you to design this model and to generate the classes and components to build your application.
+With System Designer you do not create application anymore, you create systems.
 
-#### Design your application with UML
+#### Design your system with UML
 
 If you look at the different JavaScript frameworks on the market, you will notice that they all have their own way to define a model, generally only with code.
 
-System Designer uses [UML](http://www.uml.org), a standard, to define your model. So you probably already know how to create a model in System Designer even if you have never run it.
+System Designer uses [UML](http://www.uml.org), a standard, to define your system. So you probably already know how to design in System Designer even if you have never run it.
 
 The definition of the model is stored on a JSON format called [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson). With [MSON](https://system-runtime.readme.io/docs/design-your-model#section-mson) you can define types, classes, one to one / one to many relationships and multi inheritance between classes.
 
-#### Code the behavior of your model
+#### Code the behavior of your system
 
 Once you have created your model, System Designer generates the skeletons of all your methods. You only have then to add your code to implement them.
 
@@ -29,17 +30,17 @@ There is no need to code to instantiate a component. Create a component in Syste
 
 In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your components as NoSQL Documents.
 
-#### Run your application
+#### Run your system
 
-You can run your application directly from System Designer and then export it to HTML, JSON or a Node.js module (* macOS, Windows 10 and Chrome Web App version only).
+You can run your system directly from System Designer and then export it to HTML, JSON or a Node.js module (* macOS, Windows 10 and Chrome Web App version only).
 
-Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your application. All warnings are send and shown in System Designer.
+Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your system. All warnings are send and shown in System Designer.
 
-#### Debug your application
+#### Debug your system
 
-System Designer can load the model of any application that runs on the browser or on Node.js. You can see the schemas, models, components and methods of the running application and you can edit them.
+System Designer can load the model of any system that runs on the browser or on Node.js. You can see the schemas, models, components and methods of the running system and you can edit them.
 
-All modifications to the model done inside System Designer will be send to the running application. There is no need to reload to see your modifications.
+All modifications to the model done inside System Designer will be send to the running system. There is no need to reload to see your modifications.
 
 #### Design on the go
 
@@ -64,7 +65,7 @@ Once you have cloned the repository:
 
 ```sh
 # install dependencies
-$ npm install
+$ npm i
 ```	 	
 
 #### Build for web
