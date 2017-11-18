@@ -21,7 +21,10 @@ A system:
 
 ![Image Alt](https://designfirst.io/img/system.png)
 
-#### Design your system with UML
+
+## What can I do with System Designer ?
+
+#### Design your system with ease
 
 If you look at the different JavaScript frameworks on the market, you will notice that they all have their own way to define a model, generally only with code.
 
