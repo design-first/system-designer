@@ -7,8 +7,19 @@
 
 ## What is System Designer ?
 
-No matter the frameworks you use and the code you write, the most important is the model that you define to create your application. System Designer helps you to design this model and to generate the classes and components to build your application.
-With System Designer you do not create application anymore, you create systems.
+No matter the frameworks you use and the code you write, the most important is the model that you define to create your system. System Designer helps you to design this model and to generate the classes and components to build your system.
+
+## What is a system ?
+
+With System Designer you create in fact a **system** and not an application. But what is a system ?
+
+A system:
+
+* is defined by a model,
+* is composed by components and
+* reacts to events with behaviors.
+
+![Image Alt](https://designfirst.io/img/system.png)
 
 #### Design your system with UML
 
