@@ -69,16 +69,12 @@ System Designer has a GitHub module to synchronize your work between all these a
 Clone the repository:
 
 ```sh
-# Clone the repository
 $ git clone https://github.com/design-first/system-designer.git
-# Go to the repository
-$ cd system-designer
 ```
 
-Once you have cloned the repository:
+Once you have cloned the repository, install the dependencies:
 
 ```sh
-# install dependencies
 $ npm i
 ```	 	
 
