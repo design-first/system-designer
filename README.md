@@ -135,7 +135,7 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/). All
 
 **System Designer is not for people of hate.**
 
-## Licence
+## License
 
 Copyright © 2017 Erwan Carriou
 
