@@ -1,34 +1,19 @@
 const puppeteer = require('puppeteer');
-const assert = require('assert');
-const mochaAsync = (fn) => {
-  return done => {
-    fn.call().then(done, err => {
-      done(err);
-      browser.close();
-    });
-  };
-};
-let browser = null;
-let page = null;
 
-before(mochaAsync(async () => {
-  browser = await puppeteer.launch();
-  page = await browser.newPage();
+async function test() {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
-  await page.goto('http://localhost:9001');
+  await page.goto('file://' + global.process.env.PWD + '/dist/index.html');
   await page.content();
   await page.waitForSelector('#myModalLabel');
-}));
 
-describe('System Designer', () => {
+  const version = await page.$eval('#designer-menubar-actions', el => el.innerText);
+  if ('v2.1.0', version) {
+    console.log('System Designer is opening');
+  }
 
-  it('is running', mochaAsync(async () => {
-    const firstPar = await page.$eval('#designer-menubar-actions', el => el.innerText);
+  await browser.close();
+}
 
-    assert.equal('v2.1.0', firstPar.trim());
-  }));
-});
-
-after(mochaAsync(async () => {
-  browser.close();
-}));
+test();

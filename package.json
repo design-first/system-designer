@@ -31,7 +31,7 @@
   },
   "main": "dist/index.html",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
+    "test": "npm run cordova && node ./test/test.js",
     "watch": "grunt watch",
     "clean": "grunt clean",
     "build": "grunt web",
@@ -59,7 +59,6 @@
     "jsplumb": "^2.5.7",
     "prismjs": "^1.8.4",
     "puppeteer": "^0.13.0",
-    "mocha": "^4.0.1",
     "system-runtime": "^2.1.0"
   }
 }
