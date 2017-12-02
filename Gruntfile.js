@@ -120,11 +120,6 @@ module.exports = function (grunt) {
     'concat'
   ]);
 
-  // default test
-  grunt.registerTask('test', [
-    'web'
-  ]);
-
   // default build
   grunt.registerTask('build', [
     'web'
