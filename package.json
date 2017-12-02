@@ -31,7 +31,7 @@
   },
   "main": "dist/index.html",
   "scripts": {
-    "test": "npm run cordova && node ./test/test.js",
+    "test": "npm run cordova && jasmine test/run-spec.js",
     "watch": "grunt watch",
     "clean": "grunt clean",
     "build": "grunt web",
@@ -55,6 +55,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-jsbeautifier": "^0.2.13",
     "grunt-json-merge": "^0.2.2",
+    "jasmine": "^2.8.0",
     "jquery": "^3.2.1",
     "jsplumb": "^2.5.7",
     "prismjs": "^1.8.4",
