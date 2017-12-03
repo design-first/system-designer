@@ -21,7 +21,7 @@ describe('System Designer', function () {
       await browser.close();
       expect(version.trim()).toBe('v2.1.0');
       done();
-    } catch (e) {
+    } catch (err) {
       done.fail(err);
     }
   })
