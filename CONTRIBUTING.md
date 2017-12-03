@@ -4,6 +4,10 @@
 
 Read the [documentation](https://system-designer.readme.io/) before to see if your questions has been answered in the documentation
 
+## For suggestions
+
+Give a concrete example of what you want to see in System Designer.
+
 ## For issues
 
 Give the following informations related to your problem: 
