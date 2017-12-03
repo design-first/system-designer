@@ -11,6 +11,7 @@ describe('System Designer', function () {
         ]
       });
       const page = await browser.newPage();
+      const packageVersion = require('../package.json').version;
 
       await page.goto('file://' + global.process.env.PWD + '/dist/index.html');
       await page.content();
@@ -19,7 +20,8 @@ describe('System Designer', function () {
       const version = await page.$eval('#designer-menubar-actions', el => el.innerText);
 
       await browser.close();
-      expect(version.trim()).toBe('v2.1.0');
+
+      expect(version.trim()).toBe('v' + packageVersion);
       done();
     } catch (err) {
       done.fail(err);
