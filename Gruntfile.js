@@ -31,31 +31,31 @@ module.exports = function (grunt) {
 
   // non trivial copy
   grunt.config.merge({
-    "copy": {
-      "electron-kludge": {
-        "expand": true,
-        "cwd": "dist",
-        "src": ["*.html", "app/index.html"],
-        "dest": "dist",
-        "options": {
-          "process": function (content, srcpath) {
-            content = content.replace("<html manifest=\"system-designer.appcache\">", "<html>");
-            content = content.replace("<html manifest=\"../system-designer.appcache\">", "<html>");
-            content = content.replace("<script src=\"lib/jquery/jquery.min.js\"></script>", "<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>");
+    'copy': {
+      'electron-kludge': {
+        'expand': true,
+        'cwd': 'dist',
+        'src': ['*.html', 'app/index.html'],
+        'dest': 'dist',
+        'options': {
+          'process': function (content, srcpath) {
+            content = content.replace('<html manifest=\"system-designer.appcache\">', '<html>');
+            content = content.replace('<html manifest=\"../system-designer.appcache\">', '<html>');
+            content = content.replace('<script src=\"lib/jquery/jquery.min.js\"></script>', '<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>');
             return content;
           },
         }
       },
-      "web-debug": {
-        "expand": true,
-        "cwd": "dist",
-        "src": ["*.html", "app/index.html"],
-        "dest": "dist",
-        "options": {
-          "process": function (content, srcpath) {
-            content = content.replace("<html manifest=\"system-designer.appcache\">", "<html>");
-            content = content.replace("<html manifest=\"../system-designer.appcache\">", "<html>");
-            content = content.replace("</body>", "<script src=\"//localhost:35729/livereload.js\"></script></body></body>");
+      'web-livereload': {
+        'expand': true,
+        'cwd': 'dist',
+        'src': ['*.html', 'app/index.html'],
+        'dest': 'dist',
+        'options': {
+          'process': function (content, srcpath) {
+            content = content.replace('<html manifest=\"system-designer.appcache\">', '<html>');
+            content = content.replace('<html manifest=\"../system-designer.appcache\">', '<html>');
+            content = content.replace('</body>', '<script src=\"//localhost:35729/livereload.js\"></script></body></body>');
             return content;
           },
         },
@@ -75,49 +75,49 @@ module.exports = function (grunt) {
   // start the dev mode
   grunt.registerTask('dev', [
     'web',
-    'copy:web-debug',
+    'copy:web-livereload',
     'connect:watch',
     'watch'
   ]);
 
   // start the server
   grunt.registerTask('start',
-    'connect:basic'
+    'connect:web-server'
   );
 
   // dist for web
   grunt.registerTask('web', [
     'clean',
     'jsbeautifier',
-    'copy:core',
-    'copy:lib-core',
-    'copy:lib-ace',
-    'copy:web',
-    'json_merge:web'
+    'copy:web-folder',
+    'copy:libraries',
+    'copy:ace',
+    'copy:web-files',
+    'json_merge:web-systems'
   ]);
 
   // dist for electron
   grunt.registerTask('electron', [
     'clean',
     'jsbeautifier',
-    'copy:core',
-    'copy:lib-core',
-    'copy:lib-ace',
-    'copy:electron',
+    'copy:web-folder',
+    'copy:libraries',
+    'copy:ace',
+    'copy:electron-files',
     'copy:electron-kludge',
-    'json_merge:electron'
+    'json_merge:electron-systems'
   ]);
 
   // dist for cordova
   grunt.registerTask('cordova', [
     'clean',
     'jsbeautifier',
-    'copy:core',
-    'copy:lib-core',
-    'copy:lib-codemirror',
-    'copy:cordova',
-    'json_merge:cordova',
-    'concat'
+    'copy:web-folder',
+    'copy:libraries',
+    'copy:codemirror',
+    'copy:cordova-files',
+    'json_merge:cordova-systems',
+    'concat:cordova-specific'
   ]);
 
   // default build

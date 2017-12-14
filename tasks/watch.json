@@ -8,10 +8,10 @@
       "extensions/*.json"
     ],
     "tasks": [
-      "copy:core",
-      "copy:web",
-      "copy:web-debug",
-      "json_merge:web"
+      "copy:web-folder",
+      "copy:web-livereload",
+      "copy:web-files",
+      "json_merge:web-systems"
     ],
     "options": {
       "spawn": false,

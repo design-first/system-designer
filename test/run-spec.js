@@ -1,30 +1,38 @@
+const puppeteer = require('puppeteer');
+const expect = require('chai').expect;
+
+let browser = null;
+let page = null;
+
 describe('System Designer', function () {
-  it('can be started', async function (done) {
-    try {
-      const puppeteer = require('puppeteer');
-      const browser = await puppeteer.launch({
-        ignoreHTTPSErrors: true,
-        args: [
-          '--disable-setuid-sandbox',
-          '--no-sandbox',
-          '--allow-file-access-from-files'
-        ]
-      });
-      const page = await browser.newPage();
-      const packageVersion = require('../package.json').version;
 
-      await page.goto('file://' + global.process.env.PWD + '/dist/index.html');
-      await page.content();
-      await page.waitForSelector('#myModalLabel');
+  this.timeout(5000);
 
-      const version = await page.$eval('#designer-menubar-actions', el => el.innerText);
+  before(async () => {
+    browser = await puppeteer.launch({
+      ignoreHTTPSErrors: true,
+      args: [
+        '--disable-setuid-sandbox',
+        '--no-sandbox',
+        '--allow-file-access-from-files'
+      ]
+    });
+    page = await browser.newPage();
+  });
 
-      await browser.close();
+  it('can be started', async () => {
+    const packageVersion = require('../package.json').version;
 
-      expect(version.trim()).toBe('v' + packageVersion);
-      done();
-    } catch (err) {
-      done.fail(err);
-    }
+    await page.goto('file://' + global.process.env.PWD + '/dist/index.html');
+    await page.content();
+    await page.waitForSelector('#myModalLabel');
+
+    const version = await page.$eval('#designer-menubar-actions', el => el.innerText);
+
+    expect(version.trim()).equal('v' + packageVersion);
   })
+
+  after(async () => {
+    await browser.close();
+  });
 });

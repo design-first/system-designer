@@ -1,5 +1,5 @@
 {
-  "core": {
+  "web-folder": {
     "expand": true,
     "cwd": "src/www",
     "src": [
@@ -7,7 +7,7 @@
     ],
     "dest": "dist"
   },
-  "lib-core": {
+  "libraries": {
     "files": [
       {
         "src": "node_modules/jquery/dist/jquery.min.js",
@@ -79,7 +79,7 @@
       }
     ]
   },
-  "lib-ace": {
+  "ace": {
     "files": [
       {
         "src": "node_modules/ace-builds/src-min-noconflict/ace.js",
@@ -131,7 +131,7 @@
       }
     ]
   },
-  "lib-codemirror": {
+  "codemirror": {
     "files": [
       {
         "src": "node_modules/codemirror/lib/codemirror.css",
@@ -175,7 +175,7 @@
       }
     ]
   },
-  "web": {
+  "web-files": {
     "expand": true,
     "cwd": "src/merges/web",
     "src": [
@@ -183,7 +183,7 @@
     ],
     "dest": "dist"
   },
-  "cordova": {
+  "cordova-files": {
     "expand": true,
     "cwd": "src/merges/cordova",
     "src": [
@@ -191,7 +191,7 @@
     ],
     "dest": "dist"
   },
-  "electron": {
+  "electron-files": {
     "expand": true,
     "cwd": "src/merges/electron",
     "src": [

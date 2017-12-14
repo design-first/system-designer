@@ -31,7 +31,7 @@
   },
   "main": "dist/index.html",
   "scripts": {
-    "test": "jasmine test/run-spec.js",
+    "test": "mocha test/run-spec.js",
     "watch": "grunt watch",
     "clean": "grunt clean",
     "build": "grunt web && npm run test",
@@ -44,6 +44,7 @@
   "devDependencies": {
     "ace-builds": "^1.2.9",
     "bootstrap": "^3.3.7",
+    "chai": "^4.1.2",
     "codemirror": "^5.32.0",
     "github-api": "^3.0.0",
     "grunt": "^1.0.1",
@@ -55,9 +56,9 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-jsbeautifier": "^0.2.13",
     "grunt-json-merge": "^0.2.2",
-    "jasmine": "^2.8.0",
     "jquery": "^3.2.1",
-    "jsplumb": "^2.5.8",
+    "jsplumb": "^2.5.9",
+    "mocha": "^4.0.1",
     "prismjs": "^1.9.0",
     "puppeteer": "^0.13.0",
     "system-runtime": "^2.1.1"
