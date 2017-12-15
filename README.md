@@ -83,9 +83,12 @@ $ npm i
 Here are the different tasks you can use to build and start System Designer:
 
 ```sh
-# build
 $ npm run web
-# start web server
+```
+
+Then you can start the server:
+
+```sh
 $ npm run start
 ```
 
