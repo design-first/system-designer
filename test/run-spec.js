@@ -21,15 +21,13 @@ describe('System Designer', function () {
   });
 
   it('can be started', async () => {
-    const packageVersion = require('../package.json').version;
-
     await page.goto('file://' + global.process.env.PWD + '/dist/index.html');
     await page.content();
     await page.waitForSelector('#myModalLabel');
 
-    const version = await page.$eval('#designer-menubar-actions', el => el.innerText);
+    const version = await page.$eval('#designer-spaces-type', el => el.innerText);
 
-    expect(version.trim()).equal('v' + packageVersion);
+    expect(version.trim()).equal('Systems');
   })
 
   after(async () => {
