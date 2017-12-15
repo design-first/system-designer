@@ -89,7 +89,7 @@ $ npm run web
 $ npm run start
 ```
 
-Once server started, go to [http://localhost:9001/](http://localhost:8080/).
+Once server started, go to [http://localhost:8080/](http://localhost:8080/).
 
 #### Build for Electron
 
