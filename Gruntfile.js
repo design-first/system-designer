@@ -38,13 +38,11 @@ module.exports = function (grunt) {
         'src': ['*.html', 'app/index.html'],
         'dest': 'dist',
         'options': {
-          'process': function (content, srcpath) {
-            content = content.replace('<html manifest=\"system-designer.appcache\">', '<html>');
-            content = content.replace('<html manifest=\"../system-designer.appcache\">', '<html>');
-            content = content.replace('<script src=\"lib/jquery/jquery.min.js\"></script>', '<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>');
-            return content;
-          },
-        }
+          'process': content =>
+            content.replace('<html manifest=\"system-designer.appcache\">', '<html>')
+              .replace('<html manifest=\"../system-designer.appcache\">', '<html>')
+              .replace('<script src=\"lib/jquery/jquery.min.js\"></script>', '<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>')
+        },
       },
       'web-livereload': {
         'expand': true,
@@ -52,16 +50,15 @@ module.exports = function (grunt) {
         'src': ['*.html', 'app/index.html'],
         'dest': 'dist',
         'options': {
-          'process': function (content, srcpath) {
-            content = content.replace('<html manifest=\"system-designer.appcache\">', '<html>');
-            content = content.replace('<html manifest=\"../system-designer.appcache\">', '<html>');
-            content = content.replace('</body>', '<script src=\"//localhost:35729/livereload.js\"></script></body></body>');
-            return content;
-          },
+          'process': content =>
+            content.replace('<html manifest=\"system-designer.appcache\">', '<html>')
+              .replace('<html manifest=\"../system-designer.appcache\">', '<html>')
+              .replace('</body>', '<script src=\"//localhost:35729/livereload.js\"></script></body></body>')
         },
       }
     }
-  })
+  }
+  )
 
   // default tasks
   grunt.loadNpmTasks('grunt-contrib-watch');
