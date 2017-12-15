@@ -40,13 +40,11 @@ body,
   margin-bottom: 10px;
 }
 
-/* Reset the container */
 .container {
   width:100%;
   max-width: none !important;
 }
 
-/* Demonstrate the grids */
 .col-xs-4 {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -62,12 +60,10 @@ body,
   margin-left: 0;
 }
 
-/* Always float the navbar header */
 .navbar-header {
   float: left;
 }
 
-/* Undo the collapsing navbar */
 .navbar-collapse {
   display: block !important;
   height: auto !important;
@@ -87,7 +83,6 @@ body,
   margin-left: -15px;
 }
 
-/* Always apply the floated nav */
 .navbar-nav {
   float: left;
   margin: 0;
@@ -99,12 +94,10 @@ body,
   padding: 15px;
 }
 
-/* Redeclare since we override the float above */
 .navbar-nav.navbar-right {
   float: right;
 }
 
-/* Undo custom dropdowns */
 .navbar .navbar-nav .open .dropdown-menu {
   position: absolute;
   float: left;
@@ -134,7 +127,6 @@ body,
   background-color: transparent !important;
 }
 
-/* Undo form expansion */
 .navbar-form {
   float: left;
   width: auto;
@@ -147,7 +139,6 @@ body,
   box-shadow: none;
 }
 
-/* Copy-pasted from forms.less since we mixin the .form-inline styles. */
 .navbar-form .form-group {
   display: inline-block;
   margin-bottom: 0;
@@ -207,7 +198,6 @@ body,
   top: 0;
 }
 
-/* Undo inline form compaction on small screens */
 .form-inline .form-group {
   display: inline-block;
   margin-bottom: 0;
@@ -265,7 +255,6 @@ body,
   top: 0;
 }
 
-/* Sidebar */
 .sidebar {
   position: fixed;
   width: 50px;
@@ -297,7 +286,6 @@ body,
   border-left: 1px solid #eee;
   }
 
-/* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px;
   margin-bottom: 20px;
@@ -312,7 +300,6 @@ body,
   background-color: #F8F8F8;
 }
 
-/* Place holder */
 .placeholders {
   margin-bottom: 30px;
   text-align: center;
@@ -356,7 +343,6 @@ body,
    background-color: #E7E7E7;
  }
  
- /* toolbar */
 .tooltip-inner { 
   background-color: #E7E7E7; 
   color:black;
@@ -372,7 +358,6 @@ body,
   border-bottom-color:white!important;
 }
 
-/* spaces */ 
 #designer-spaces-items li:hover {
    background-color: #E7E7E7;
  }
@@ -400,7 +385,6 @@ body,
   background-color: #E7E7E7;
 }
 
-/* component */
 .placeholder.designer-component > div > .panel-body:hover {
   cursor: pointer;
 }
@@ -448,7 +432,6 @@ body,
   margin-left: 35px;
 }
 
-/* model */
 .placeholder.designer-model > div > .panel-body:hover  {
   cursor: pointer;
 }
@@ -508,7 +491,6 @@ body,
   border:0px;
 }
 
-/* behavior */
 .placeholder.designer-behavior > div > .panel-body {
   max-height: 300px;
   overflow: auto;
@@ -518,7 +500,6 @@ body,
   border: 0px;
 }
 
-/* type */
 .placeholder.designer-type > div > .panel-body:hover {
   cursor: pointer;
 }
@@ -535,7 +516,6 @@ body,
   margin-bottom: 5px;
 }
 
-/* schema */
 .placeholder.designer-schema > div > .panel-body:hover  {
   cursor: pointer;
 }
@@ -549,7 +529,6 @@ body,
   text-align: left;
 }
 
-/* system */
 .placeholder.designer-system > div > .panel-body:hover {
   cursor: pointer;
 }
@@ -564,7 +543,6 @@ body,
   text-align: left;
 }
 
-/* dropdown */
 .dropdown-menu-right {
   right: 17px;
   left: auto;
@@ -577,28 +555,23 @@ body,
   border-radius: 5px;
 }
 
-/* prism */
 pre[class*="language-"] {
   background-color: #FFFFFF;
 }
 
-/* action menu */
 .dropdown-menu li {
   cursor: pointer; 
 }
 
-/* */
 .list-group.designer-library {
   cursor: pointer; 
   margin-bottom: 0px;
 }
 
-/* modal */
 .modal-dialog .modal-content .modal-footer {
   border:0px;
 }
 
-/* hover */
 .designer-system tr:hover {
   background-color: #F5F5F5;
 }
@@ -612,7 +585,6 @@ pre[class*="language-"] {
   background-color: #F5F5F5;
 }
 
-/* Sidebar */
 .designer-spaces-header {
   text-align: center;
   padding-bottom: 10px;
@@ -649,18 +621,15 @@ designer-spaces-components-header {
   margin-bottom: 0;
 }
 
-/* help */
 .designer-spaces-help-text {
   padding: 15px;
   text-align: justify;
 }
 
-/* button */
 .btn:focus {
   outline: none !important;
 }
 
-/* */
 .designer-library {
   max-height: 200px;
   overflow: auto;
@@ -671,7 +640,6 @@ designer-spaces-components-header {
   overflow: auto;
 } 
 
-/* Dialog Import File  */
 #designer-dialog-import-modal-from-library-form {
   display: none;
 }
@@ -679,7 +647,6 @@ designer-spaces-components-header {
   display: none;
 }
 
-/* Dialog export*/
 #designer-dialog-export-options-sub-system {
   display: none;
 }
@@ -688,12 +655,10 @@ designer-spaces-components-header {
   display: none;
 }
 
-/* Dialog sync */
 #designer-dialog-sync-options-log-level {
   display: none;
 }
 
-/* Dialog search */
 #designer-dialog-option:hover {
   cursor: pointer;
 }
@@ -704,7 +669,6 @@ designer-spaces-components-header {
   position: absolute;
 }
 
-/* Dialog Extensions  */
 #designer-dialog-extension-modal-extensions-area {
   display: none;
 }
@@ -717,7 +681,6 @@ designer-spaces-components-header {
   display: none;
 }
 
-/* Dialog Command */
 #designer-dialog-command-modal .modal-body {
   padding-bottom: 0px;
 }
