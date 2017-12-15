@@ -57,8 +57,7 @@ module.exports = function (grunt) {
         },
       }
     }
-  }
-  )
+  });
 
   // default tasks
   grunt.loadNpmTasks('grunt-contrib-watch');
