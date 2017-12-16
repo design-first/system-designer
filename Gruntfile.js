@@ -19,6 +19,11 @@
  */
 
 module.exports = function (grunt) {
+
+  // load tasks
+  require('load-grunt-tasks')(grunt);
+
+  // load configuration
   grunt.initConfig({
     watch: grunt.file.readJSON('tasks/watch.json'),
     clean: grunt.file.readJSON('tasks/clean.json'),
@@ -59,15 +64,6 @@ module.exports = function (grunt) {
     }
   });
 
-  // default tasks
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-jsbeautifier');
-  grunt.loadNpmTasks('grunt-json-merge');
-
   // start the dev mode
   grunt.registerTask('dev', [
     'web',
@@ -81,7 +77,7 @@ module.exports = function (grunt) {
     'connect:web-server'
   );
 
-  // dist for web
+  // build for web
   grunt.registerTask('web', [
     'clean',
     'jsbeautifier',
@@ -92,7 +88,7 @@ module.exports = function (grunt) {
     'json_merge:web-systems'
   ]);
 
-  // dist for electron
+  // build for electron
   grunt.registerTask('electron', [
     'clean',
     'jsbeautifier',
@@ -104,7 +100,7 @@ module.exports = function (grunt) {
     'json_merge:electron-systems'
   ]);
 
-  // dist for cordova
+  // build for cordova
   grunt.registerTask('cordova', [
     'clean',
     'jsbeautifier',
