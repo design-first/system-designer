@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/design-first/system-designer.svg?branch=master)](https://travis-ci.org/design-first/system-designer)
 [![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
+[![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://en.liberapay.com/ecarriou/donate)
 
 ![Image Alt](https://designfirst.io/img/systemdesignerv2.png)
 
