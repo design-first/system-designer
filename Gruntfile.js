@@ -66,7 +66,12 @@ module.exports = function (grunt) {
 
   // start the dev mode
   grunt.registerTask('dev', [
-    'web',
+    'clean',
+    'copy:web-folder',
+    'copy:libraries',
+    'copy:ace',
+    'copy:web-files',
+    'json_merge:web-systems',
     'copy:web-livereload',
     'connect:watch',
     'watch'
