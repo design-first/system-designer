@@ -57,431 +57,527 @@
         "default": ""
       },
       "syncModel": {
-        "params": [{
-          "name": "schema",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "schema",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "syncBehavior": {
-        "params": [{
-          "name": "model",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "model",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "syncComponent": {
-        "params": [{
-          "name": "model",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }, {
-          "name": "forceDelete",
-          "type": "boolean",
-          "mandatory": false,
-          "default": true
-        }]
+        "params": [
+          {
+            "name": "model",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          },
+          {
+            "name": "forceDelete",
+            "type": "boolean",
+            "mandatory": false,
+            "default": true
+          }
+        ]
       },
       "createModel": {
-        "params": [{
-          "name": "schema",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }],
+        "params": [
+          {
+            "name": "schema",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ],
         "result": "object"
       },
       "createBehavior": {
-        "params": [{
-          "name": "type",
-          "type": "string",
-          "mandatory": false,
-          "default": "method"
-        }, {
-          "name": "model",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "state",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "def",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "type",
+            "type": "string",
+            "mandatory": false,
+            "default": "method"
+          },
+          {
+            "name": "model",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "def",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "deleteSchema": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "sync",
-          "type": "boolean",
-          "mandatory": false,
-          "default": true
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "sync",
+            "type": "boolean",
+            "mandatory": false,
+            "default": true
+          }
+        ]
       },
       "generateId": {
         "result": "string"
       },
       "getGeneratedSchema": {
-        "params": [{
-          "name": "schema",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }],
+        "params": [
+          {
+            "name": "schema",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ],
         "result": "object"
       },
       "getGeneratedModel": {
-        "params": [{
-          "name": "model",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }],
+        "params": [
+          {
+            "name": "model",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ],
         "result": "object"
       },
       "mergeBehavior": {
-        "params": [{
-          "name": "behaviors",
-          "type": "object",
-          "mandatory": true,
-          "default": {}
-        }, {
-          "name": "behavior",
-          "type": "object",
-          "mandatory": true,
-          "default": {}
-        }, {
-          "name": "sysId",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }, {
-          "name": "systemName",
-          "type": "string",
-          "mandatory": true,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "behaviors",
+            "type": "object",
+            "mandatory": true,
+            "default": {}
+          },
+          {
+            "name": "behavior",
+            "type": "object",
+            "mandatory": true,
+            "default": {}
+          },
+          {
+            "name": "sysId",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          },
+          {
+            "name": "systemName",
+            "type": "string",
+            "mandatory": true,
+            "default": ""
+          }
+        ]
       },
       "mergeSystem": {
-        "params": [{
-          "name": "sys",
-          "type": "any",
-          "mandatory": false,
-          "default": null
-        }]
+        "params": [
+          {
+            "name": "sys",
+            "type": "any",
+            "mandatory": false,
+            "default": null
+          }
+        ]
       },
       "updateBehavior": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "behavior",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "behavior",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "updateComponent": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "collection",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "field",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "value",
-          "type": "any",
-          "mandatory": false,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "collection",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "field",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "value",
+            "type": "any",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
       },
       "deleteComponent": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "collection",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "collection",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
       },
       "createComponent": {
-        "params": [{
-          "name": "collection",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "component",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "collection",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "component",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "updateSystem": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "system",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "system",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "overwriteComponent": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "collection",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "component",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "collection",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "component",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "deleteBehavior": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
       },
       "udpdateBehavior": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "behavior",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "behavior",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "updateModelId": {
-        "params": [{
-          "name": "oldId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "newId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "oldId",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "newId",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
       },
       "updateModel": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "model",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "model",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "updateSchemaId": {
-        "params": [{
-          "name": "oldId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "newId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "oldId",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "newId",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
       },
       "updateSchema": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "schema",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "schema",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "updateSchemaName": {
-        "params": [{
-          "name": "name",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "name",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
       },
       "deleteType": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
       },
       "updateType": {
-        "params": [{
-          "name": "id",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "type",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }]
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "type",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          }
+        ]
       },
       "create": {
-        "params": [{
-          "name": "sys",
-          "type": "object",
-          "mandatory": false,
-          "default": {}
-        }, {
-          "name": "withStartMethod",
-          "type": "boolean",
-          "mandatory": false,
-          "default": false
-        }],
+        "params": [
+          {
+            "name": "sys",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          },
+          {
+            "name": "withStartMethod",
+            "type": "boolean",
+            "mandatory": false,
+            "default": false
+          }
+        ],
         "result": "System"
       },
       "toJSON": {
         "result": "any"
       },
       "addSchema": {
-        "params": [{
-          "name": "name",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }],
+        "params": [
+          {
+            "name": "name",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ],
         "result": "object"
       },
       "addType": {
-        "params": [{
-          "name": "name",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "isEnum",
-          "type": "boolean",
-          "mandatory": false,
-          "default": false
-        }],
+        "params": [
+          {
+            "name": "name",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "isEnum",
+            "type": "boolean",
+            "mandatory": false,
+            "default": false
+          }
+        ],
         "result": "object"
       },
       "addComponent": {
-        "params": [{
-          "name": "model",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }],
+        "params": [
+          {
+            "name": "model",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ],
         "result": "object"
       },
       "addBehavior": {
-        "params": [{
-          "name": "model",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "component",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "state",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }],
+        "params": [
+          {
+            "name": "model",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "component",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ],
         "result": "object"
       },
       "updateComponentId": {
-        "params": [{
-          "name": "oldId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "newId",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }, {
-          "name": "collection",
-          "type": "string"
-        }]
+        "params": [
+          {
+            "name": "oldId",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "newId",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "collection",
+            "type": "string"
+          }
+        ]
       },
       "getModelPaths": {
-        "params": [{
-          "name": "model",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }],
+        "params": [
+          {
+            "name": "model",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ],
         "result": "array"
       },
       "isModel": {
-        "params": [{
-          "name": "name",
-          "type": "string",
-          "mandatory": false,
-          "default": ""
-        }],
+        "params": [
+          {
+            "name": "name",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ],
         "result": "boolean"
       }
     }
@@ -491,7 +587,8 @@
       "_id": "d1a56d197331e510",
       "component": "SystemFactory",
       "state": "mergeBehavior",
-      "action": "function mergeBehavior(behaviors, behavior, sysId, systemName) { \n\tvar that = this,\n\t    source = {},\n\t    lastA = -1,\n\t    firstB = -1,\n\t    lastB = -1,\n\t    toAdd = '';\n\t    \n\tfunction _getBehavior() {\n\t  var result = null,\n\t      id = '';\n\t      \n\t  for (id in behaviors) {\n\t    if (behaviors[id].state === behavior.state && behaviors[id].component === sysId) {\n\t      result = behaviors[id];\n\t      break;\n\t    }\n\t  }\n\t  \n\t  if (!result) {\n\t    result = {\n\t      \"_id\": that.generateId(),\n\t      \"component\": sysId,\n\t      \"state\": behavior.state,\n\t      \"action\": this.require('language').createBehavior(behavior.state),\n\t    };\n\t  }\n\t  \n\t  return result;\n\t}  \n\t\n\tsource = _getBehavior();\n\t    \n\tlastA = source.action.lastIndexOf('}');\n\tfirstB = behavior.action.indexOf('{');\n\tlastB = behavior.action.lastIndexOf('}');\n\t\n\ttoAdd = behavior.action.substring(firstB + 1, lastB);\n\t\n\tif (toAdd.trim() !== '') { \n\t  toAdd = this.require('language').createMergeComment(systemName) + toAdd + '\\n}';\n\t} else {\n\t  toAdd = '}';\n\t}\n\t\n\tsource.action = source.action.substring(0, lastA) + toAdd;\n\t\n\tbehaviors[source._id] =  source;\n}",
+      "action":
+        "function mergeBehavior(behaviors, behavior, sysId, systemName) { \n\tvar that = this,\n\t    source = {},\n\t    lastA = -1,\n\t    firstB = -1,\n\t    lastB = -1,\n\t    toAdd = '';\n\t    \n\tfunction _getBehavior() {\n\t  var result = null,\n\t      id = '';\n\t      \n\t  for (id in behaviors) {\n\t    if (behaviors[id].state === behavior.state && behaviors[id].component === sysId) {\n\t      result = behaviors[id];\n\t      break;\n\t    }\n\t  }\n\t  \n\t  if (!result) {\n\t    result = {\n\t      \"_id\": that.generateId(),\n\t      \"component\": sysId,\n\t      \"state\": behavior.state,\n\t      \"action\": this.require('language').createBehavior(behavior.state),\n\t    };\n\t  }\n\t  \n\t  return result;\n\t}  \n\t\n\tsource = _getBehavior();\n\t    \n\tlastA = source.action.lastIndexOf('}');\n\tfirstB = behavior.action.indexOf('{');\n\tlastB = behavior.action.lastIndexOf('}');\n\t\n\ttoAdd = behavior.action.substring(firstB + 1, lastB);\n\t\n\tif (toAdd.trim() !== '') { \n\t  toAdd = this.require('language').createMergeComment(systemName) + toAdd + '\\n}';\n\t} else {\n\t  toAdd = '}';\n\t}\n\t\n\tsource.action = source.action.substring(0, lastA) + toAdd;\n\t\n\tbehaviors[source._id] =  source;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -499,7 +596,8 @@
       "_id": "r177551fafb195af",
       "component": "SystemFactory",
       "state": "getGeneratedSchema",
-      "action": "function getGeneratedSchema(schema) { \n  var schemaDef = null,\n      result = {},\n      i = 0,\n      length = 0,\n      propName = '';\n\n  function _getSchemaDef(name, schemas) {\n      var result = '',\n          id = '';\n\n      for (id in schemas) {\n          if (schemas[id]._name === name) {\n              result = schemas[id];\n              break;\n          }\n      }\n      return result;\n  }\n\n  function _searchParents(parents, states, schemas) {\n      var parent = '',\n          schemaDef = null,\n          i = 0,\n          length = 0;\n\n      length = parents.length;\n      for (i = 0; i < length; i++) {\n          parent = parents[i];\n          if (parent === '_Component') {\n              result.init = 'init';\n              result.destroy = 'destroy';\n              result.error = 'error';\n          } else {\n              schemaDef = _getSchemaDef(parent, schemas);\n\n              for (propName in schemaDef) {\n                  if (propName.indexOf('_') !== 0) {\n                      result[propName] = schemaDef[propName];\n                  }\n              }\n\n              if (schemaDef._inherit) {\n                  _searchParents(schemaDef._inherit, result, schemas);\n              }\n          }\n      }\n  }\n\n  schemaDef = _getSchemaDef(schema, this.system().schemas());\n\n  for (propName in schemaDef) {\n      if (propName.indexOf('_') !== 0) {\n          result[propName] = schemaDef[propName];\n      }\n  }\n\n  if (schemaDef._inherit) {\n      _searchParents(schemaDef._inherit, result, this.system().schemas());\n  }\n\n  return result;\n}",
+      "action":
+        "function getGeneratedSchema(schema) { \n  var schemaDef = null,\n      result = {},\n      i = 0,\n      length = 0,\n      propName = '';\n\n  function _getSchemaDef(name, schemas) {\n      var result = '',\n          id = '';\n\n      for (id in schemas) {\n          if (schemas[id]._name === name) {\n              result = schemas[id];\n              break;\n          }\n      }\n      return result;\n  }\n\n  function _searchParents(parents, states, schemas) {\n      var parent = '',\n          schemaDef = null,\n          i = 0,\n          length = 0;\n\n      length = parents.length;\n      for (i = 0; i < length; i++) {\n          parent = parents[i];\n          if (parent === '_Component') {\n              result.init = 'init';\n              result.destroy = 'destroy';\n              result.error = 'error';\n          } else {\n              schemaDef = _getSchemaDef(parent, schemas);\n\n              for (propName in schemaDef) {\n                  if (propName.indexOf('_') !== 0) {\n                      result[propName] = schemaDef[propName];\n                  }\n              }\n\n              if (schemaDef._inherit) {\n                  _searchParents(schemaDef._inherit, result, schemas);\n              }\n          }\n      }\n  }\n\n  schemaDef = _getSchemaDef(schema, this.system().schemas());\n\n  for (propName in schemaDef) {\n      if (propName.indexOf('_') !== 0) {\n          result[propName] = schemaDef[propName];\n      }\n  }\n\n  if (schemaDef._inherit) {\n      _searchParents(schemaDef._inherit, result, this.system().schemas());\n  }\n\n  return result;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -507,7 +605,8 @@
       "_id": "z13a3b1308218a5d",
       "component": "SystemFactory",
       "state": "getGeneratedModel",
-      "action": "function getGeneratedModel(model) { \n  var modelDef = null,\n      result = {},\n      i = 0,\n      length = 0,\n      propName = '';\n\n  function _getInherit(name, schemas) {\n      var result = '',\n          id = '';\n\n      for (id in schemas) {\n          if (schemas[id]._name === name) {\n              result = schemas[id]._inherit;\n              break;\n          }\n      }\n      return result;\n  }\n\n  function _getModelDef(name, models) {\n      var result = '',\n          id = '';\n\n      for (id in models) {\n          if (models[id]._name === name) {\n              result = models[id];\n              break;\n          }\n      }\n      return result;\n  }\n\n  function _searchParents(parents, states, models, schemas) {\n      var parent = '',\n          modelDef = null,\n          i = 0,\n          length = 0;\n\n      length = parents.length;\n      for (i = 0; i < length; i++) {\n          parent = parents[i];\n          if (parent === '_Component') {\n              result.init = {\n                  \"params\": [{\n                      \"name\": \"conf\",\n                      \"type\": \"object\"\n                  }]\n              };\n\n              result.destroy = {\n                  \"params\": []\n              };\n\n              result.error = {\n                  \"params\": [{\n                      \"name\": \"data\",\n                      \"type\": \"errorParam\"\n                  }]\n              };\n\n          } else {\n              modelDef = _getModelDef(parent, models);\n\n              for (propName in modelDef) {\n                  if (propName.indexOf('_') !== 0 && typeof result[propName] === 'undefined') {\n                      result[propName] = modelDef[propName];\n                  }\n              }\n\n              if (_getInherit(parent, schemas)) {\n                  _searchParents(_getInherit(parent, schemas), result, models, schemas);\n              }\n          }\n      }\n  }\n\n  modelDef = _getModelDef(model, this.system().models());\n\n  for (propName in modelDef) {\n      if (propName.indexOf('_') !== 0) {\n          result[propName] = modelDef[propName];\n      }\n  }\n\n  if (_getInherit(model, this.system().schemas())) {\n      _searchParents(_getInherit(model, this.system().schemas()), result, this.system().models(), this.system().schemas());\n  }\n\n  return result;\n}",
+      "action":
+        "function getGeneratedModel(model) { \n  var modelDef = null,\n      result = {},\n      i = 0,\n      length = 0,\n      propName = '';\n\n  function _getInherit(name, schemas) {\n      var result = '',\n          id = '';\n\n      for (id in schemas) {\n          if (schemas[id]._name === name) {\n              result = schemas[id]._inherit;\n              break;\n          }\n      }\n      return result;\n  }\n\n  function _getModelDef(name, models) {\n      var result = '',\n          id = '';\n\n      for (id in models) {\n          if (models[id]._name === name) {\n              result = models[id];\n              break;\n          }\n      }\n      return result;\n  }\n\n  function _searchParents(parents, states, models, schemas) {\n      var parent = '',\n          modelDef = null,\n          i = 0,\n          length = 0;\n\n      length = parents.length;\n      for (i = 0; i < length; i++) {\n          parent = parents[i];\n          if (parent === '_Component') {\n              result.init = {\n                  \"params\": [{\n                      \"name\": \"conf\",\n                      \"type\": \"object\"\n                  }]\n              };\n\n              result.destroy = {\n                  \"params\": []\n              };\n\n              result.error = {\n                  \"params\": [{\n                      \"name\": \"data\",\n                      \"type\": \"errorParam\"\n                  }]\n              };\n\n          } else {\n              modelDef = _getModelDef(parent, models);\n\n              for (propName in modelDef) {\n                  if (propName.indexOf('_') !== 0 && typeof result[propName] === 'undefined') {\n                      result[propName] = modelDef[propName];\n                  }\n              }\n\n              if (_getInherit(parent, schemas)) {\n                  _searchParents(_getInherit(parent, schemas), result, models, schemas);\n              }\n          }\n      }\n  }\n\n  modelDef = _getModelDef(model, this.system().models());\n\n  for (propName in modelDef) {\n      if (propName.indexOf('_') !== 0) {\n          result[propName] = modelDef[propName];\n      }\n  }\n\n  if (_getInherit(model, this.system().schemas())) {\n      _searchParents(_getInherit(model, this.system().schemas()), result, this.system().models(), this.system().schemas());\n  }\n\n  return result;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -515,7 +614,8 @@
       "_id": "z13676132a318174",
       "component": "SystemFactory",
       "state": "generateId",
-      "action": "function generateId() {\n  function gen() {\n      return Math.floor((1 + Math.random()) * 0x10000).toString(16);\n  }\n  function getPrefix() {\n      var validPrefix = 'abcdefghijklmnopqrstuvwxyz';\n      return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));\n  }\n  \n  return getPrefix() + gen() + gen() + gen();\n}",
+      "action":
+        "function generateId() {\n  function gen() {\n      return Math.floor((1 + Math.random()) * 0x10000).toString(16);\n  }\n  function getPrefix() {\n      var validPrefix = 'abcdefghijklmnopqrstuvwxyz';\n      return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));\n  }\n  \n  return getPrefix() + gen() + gen() + gen();\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -523,7 +623,8 @@
       "_id": "f14ed91a7d21b111",
       "component": "SystemFactory",
       "state": "syncBehavior",
-      "action": "function syncBehavior(model) { \n  var behaviors = this.system().behaviors(),\n    components = this.system().components(),\n    schema = null,\n    propName = '',\n    params = '',\n    header = '',\n    def = null,\n    methodDef = null,\n    length = 0,\n    i = 0,\n    behaviorId = '',\n    action = '',\n    behavior = null,\n    that = this;\n\n  function _getSchema(name) {\n    var result = '',\n      id = '';\n\n    for (id in that.system().schemas()) {\n      if (that.system().schemas()[id]._name === name) {\n        result = that.system().schemas()[id];\n        break;\n      }\n    }\n    return result;\n  }\n\n  schema = _getSchema(model._name);\n\n  for (propName in schema) {\n    switch (true) {\n      case schema[propName] === 'method':\n      case schema[propName] === 'event':\n        // params\n        def = model[propName];\n\n        if (typeof model[propName] !== 'object') {\n          if (schema[propName] === 'method') {\n            def = {\n              \"params\": [\n                {\n                  \"name\": \"param\",\n                  \"type\": \"string\",\n                  \"mandatory\": false,\n                  \"default\": \"\"\n                }\n              ],\n              \"result\": \"string\"\n            };\n          } else {\n            def = {\n              \"params\": [\n                {\n                  \"name\": \"param\",\n                  \"type\": \"string\",\n                  \"mandatory\": false,\n                  \"default\": \"\"\n                }\n              ]\n            };\n          }\n        }\n        methodDef = def.params;\n        params = '';\n        if (methodDef && methodDef.length) {\n          length = methodDef.length;\n          for (i = 0; i < length; i++) {\n            if (i === 0) {\n              params = methodDef[i].name;\n            } else {\n              params = params + ', ' + methodDef[i].name;\n            }\n          }\n        }\n\n        header = this.require('language').createBehaviorHeader(propName, params);\n\n        for (behaviorId in behaviors) {\n          behavior = behaviors[behaviorId];\n          \n          // behaviors on models\n          if (behavior.component === model._name && behavior.state === propName) {\n            action = behavior.action.split('{');\n            action[0] = header;\n            behaviors[behaviorId].action = action.join('{');\n            this.system().behaviors(behaviors);\n            this.require('channel').$designerUpdateBehavior(behavior._id, behavior);\n          }\n          \n          // behaviors on components\n          for (var component in components[model._name]) {\n             if (behavior.component === components[model._name][component]._id && behavior.state === propName) {\n              action = behavior.action.split('{');\n              action[0] = header;\n              behaviors[behaviorId].action = action.join('{');\n              this.system().behaviors(behaviors);\n              this.require('channel').$designerUpdateBehavior(behavior._id, behavior);\n            }\n          }\n        }\n\n        break;\n      default:\n        break;\n    }\n  }\n}",
+      "action":
+        "function syncBehavior(model) { \n  var behaviors = this.system().behaviors(),\n    components = this.system().components(),\n    schema = null,\n    propName = '',\n    params = '',\n    header = '',\n    def = null,\n    methodDef = null,\n    length = 0,\n    i = 0,\n    behaviorId = '',\n    action = '',\n    behavior = null,\n    that = this;\n\n  function _getSchema(name) {\n    var result = '',\n      id = '';\n\n    for (id in that.system().schemas()) {\n      if (that.system().schemas()[id]._name === name) {\n        result = that.system().schemas()[id];\n        break;\n      }\n    }\n    return result;\n  }\n\n  schema = _getSchema(model._name);\n\n  for (propName in schema) {\n    switch (true) {\n      case schema[propName] === 'method':\n      case schema[propName] === 'event':\n        // params\n        def = model[propName];\n\n        if (typeof model[propName] !== 'object') {\n          if (schema[propName] === 'method') {\n            def = {\n              \"params\": [\n                {\n                  \"name\": \"param\",\n                  \"type\": \"string\",\n                  \"mandatory\": false,\n                  \"default\": \"\"\n                }\n              ],\n              \"result\": \"string\"\n            };\n          } else {\n            def = {\n              \"params\": [\n                {\n                  \"name\": \"param\",\n                  \"type\": \"string\",\n                  \"mandatory\": false,\n                  \"default\": \"\"\n                }\n              ]\n            };\n          }\n        }\n        methodDef = def.params;\n        params = '';\n        if (methodDef && methodDef.length) {\n          length = methodDef.length;\n          for (i = 0; i < length; i++) {\n            if (i === 0) {\n              params = methodDef[i].name;\n            } else {\n              params = params + ', ' + methodDef[i].name;\n            }\n          }\n        }\n\n        header = this.require('language').createBehaviorHeader(propName, params);\n\n        for (behaviorId in behaviors) {\n          behavior = behaviors[behaviorId];\n          \n          // behaviors on models\n          if (behavior.component === model._name && behavior.state === propName) {\n            action = behavior.action.split('{');\n            action[0] = header;\n            behaviors[behaviorId].action = action.join('{');\n            this.system().behaviors(behaviors);\n            this.require('channel').$designerUpdateBehavior(behavior._id, behavior);\n          }\n          \n          // behaviors on components\n          for (var component in components[model._name]) {\n             if (behavior.component === components[model._name][component]._id && behavior.state === propName) {\n              action = behavior.action.split('{');\n              action[0] = header;\n              behaviors[behaviorId].action = action.join('{');\n              this.system().behaviors(behaviors);\n              this.require('channel').$designerUpdateBehavior(behavior._id, behavior);\n            }\n          }\n        }\n\n        break;\n      default:\n        break;\n    }\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -531,7 +632,8 @@
       "_id": "y17ae11cbc214f76",
       "component": "SystemFactory",
       "state": "syncModel",
-      "action": "function syncModel(schema) { \n  var schemas = this.system().schemas(),\n      models = this.system().models(),\n      components = this.system().components(),\n      behaviors = this.system().behaviors(),\n      name = '',\n      id = '',\n      propName = '',\n      component = null,\n      behavior = null,\n      model = null,\n      oldSchema = null,\n      createModel = false;\n\n  name = schema._name;\n\n  // search\n  for (id in models) {\n    if (models[id]._name === schema._name) {\n      model = models[id];\n    }\n  }\n\n  // case of no model\n  if (!model) {\n    createModel = true;\n    model = {\n      \"_id\": this.generateId(),\n      \"_name\": name\n    };\n  }\n\n  // previous schema\n  oldSchema = schemas[schema._id];\n  for (propName in schema) {\n    if ((schema.hasOwnProperty(propName) &&\n        oldSchema &&\n        (typeof oldSchema[propName] === 'undefined' ||\n            oldSchema[propName] !== schema[propName])) ||\n        createModel\n    ) {\n        switch (true) {\n          case schema[propName] === 'property':\n            model[propName] = {\n              \"type\": \"any\",\n              \"readOnly\": false,\n              \"mandatory\": false,\n              \"default\": \"\"\n            };\n\n            for (component in components[name]) {\n              components[name][component][propName] = model[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n\n            break;\n          case schema[propName] === 'link':\n            model[propName] = {\n              \"type\": \"_Component\",\n              \"readOnly\": false,\n              \"mandatory\": false,\n              \"default\": \"\"\n            };\n\n            for (component in components[name]) {\n              components[name][component][propName] = model[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n\n            break;\n          case schema[propName] === 'method':\n            if (typeof model[propName] === 'undefined' || (typeof model[propName] !== 'undefined' && typeof model[propName].type !== 'undefined')) {\n              model[propName] = {\n                  \"params\": [{\n                        \"name\": \"param\",\n                        \"type\": \"any\",\n                        \"mandatory\": false,\n                        \"default\": null\n                      }],\n                  \"result\": \"any\"\n              };\n\n              // create behavior\n              this.createBehavior('method', model._name, propName, model[propName]);\n            }\n\n            break;\n          case schema[propName] === 'event':\n            if (typeof model[propName] === 'undefined' || (typeof model[propName] !== 'undefined' && typeof model[propName].type !== 'undefined')) {\n              model[propName] = {\n                \"params\": [{\n                    \"name\": \"param\",\n                    \"type\": \"any\",\n                    \"mandatory\": false,\n                    \"default\": null\n                }]\n              };\n\n              // remove this to create a behavior by default for event\n              //this.createBehavior('event', model._name, propName, model[propName]);\n            } else {\n              if (typeof model[propName].result !== 'undefined') {\n                delete model[propName].result;\n              }\n            }\n\n            break;\n          case schema[propName] === 'collection':\n            model[propName] = {\n              \"type\": [\"_Component\"],\n              \"readOnly\": false,\n              \"mandatory\": false,\n              \"default\": []\n            };\n\n            for (component in components[name]) {\n              components[name][component][propName] = model[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n\n            break;\n          case propName.indexOf('_') !== 1:\n            if (propName !== '_id' && propName !== '_inherit') {\n              model[propName] = schema[propName];\n            }\n            break;\n          default:\n            break;\n        }\n    }\n  }\n\n  if (oldSchema) {\n    for (propName in oldSchema) {\n      if (propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {\n        delete model[propName];\n\n        for (component in components[name]) {\n          delete components[name][component][propName];\n          this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          this.system().components(components);\n        }\n\n        for (behavior in behaviors) {\n          if (model && behaviors[behavior].component === model._name && behaviors[behavior].state === propName) {\n            delete behaviors[behavior];\n            this.require('channel').$designerDeleteBehavior(behavior);\n            this.system().behaviors(behaviors);\n          }\n          for (component in components[name]) {\n            if (behaviors[behavior] && behaviors[behavior].component === components[name][component]._id && behaviors[behavior].state === propName) { \n              delete behaviors[behavior];\n              this.require('channel').$designerDeleteBehavior(behavior);\n              this.system().behaviors(behaviors);\n            }\n          }\n        }\n      }\n    }\n  }\n\n  models[model._id] = model;\n  this.system().models(models);\n  this.require('channel').$designerUpdateModel(model._id, model);\n}",
+      "action":
+        "function syncModel(schema) { \n  var schemas = this.system().schemas(),\n      models = this.system().models(),\n      components = this.system().components(),\n      behaviors = this.system().behaviors(),\n      name = '',\n      id = '',\n      propName = '',\n      component = null,\n      behavior = null,\n      model = null,\n      oldSchema = null,\n      createModel = false;\n\n  name = schema._name;\n\n  // search\n  for (id in models) {\n    if (models[id]._name === schema._name) {\n      model = models[id];\n    }\n  }\n\n  // case of no model\n  if (!model) {\n    createModel = true;\n    model = {\n      \"_id\": this.generateId(),\n      \"_name\": name\n    };\n  }\n\n  // previous schema\n  oldSchema = schemas[schema._id];\n  for (propName in schema) {\n    if ((schema.hasOwnProperty(propName) &&\n        oldSchema &&\n        (typeof oldSchema[propName] === 'undefined' ||\n            oldSchema[propName] !== schema[propName])) ||\n        createModel\n    ) {\n        switch (true) {\n          case schema[propName] === 'property':\n            model[propName] = {\n              \"type\": \"any\",\n              \"readOnly\": false,\n              \"mandatory\": false,\n              \"default\": \"\"\n            };\n\n            for (component in components[name]) {\n              components[name][component][propName] = model[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n\n            break;\n          case schema[propName] === 'link':\n            model[propName] = {\n              \"type\": \"_Component\",\n              \"readOnly\": false,\n              \"mandatory\": false,\n              \"default\": \"\"\n            };\n\n            for (component in components[name]) {\n              components[name][component][propName] = model[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n\n            break;\n          case schema[propName] === 'method':\n            if (typeof model[propName] === 'undefined' || (typeof model[propName] !== 'undefined' && typeof model[propName].type !== 'undefined')) {\n              model[propName] = {\n                  \"params\": [{\n                        \"name\": \"param\",\n                        \"type\": \"any\",\n                        \"mandatory\": false,\n                        \"default\": null\n                      }],\n                  \"result\": \"any\"\n              };\n\n              // create behavior\n              this.createBehavior('method', model._name, propName, model[propName]);\n            }\n\n            break;\n          case schema[propName] === 'event':\n            if (typeof model[propName] === 'undefined' || (typeof model[propName] !== 'undefined' && typeof model[propName].type !== 'undefined')) {\n              model[propName] = {\n                \"params\": [{\n                    \"name\": \"param\",\n                    \"type\": \"any\",\n                    \"mandatory\": false,\n                    \"default\": null\n                }]\n              };\n\n              // remove this to create a behavior by default for event\n              //this.createBehavior('event', model._name, propName, model[propName]);\n            } else {\n              if (typeof model[propName].result !== 'undefined') {\n                delete model[propName].result;\n              }\n            }\n\n            break;\n          case schema[propName] === 'collection':\n            model[propName] = {\n              \"type\": [\"_Component\"],\n              \"readOnly\": false,\n              \"mandatory\": false,\n              \"default\": []\n            };\n\n            for (component in components[name]) {\n              components[name][component][propName] = model[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n\n            break;\n          case propName.indexOf('_') !== 1:\n            if (propName !== '_id' && propName !== '_inherit') {\n              model[propName] = schema[propName];\n            }\n            break;\n          default:\n            break;\n        }\n    }\n  }\n\n  if (oldSchema) {\n    for (propName in oldSchema) {\n      if (propName.indexOf('_') !== 0 && typeof schema[propName] === 'undefined') {\n        delete model[propName];\n\n        for (component in components[name]) {\n          delete components[name][component][propName];\n          this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          this.system().components(components);\n        }\n\n        for (behavior in behaviors) {\n          if (model && behaviors[behavior].component === model._name && behaviors[behavior].state === propName) {\n            delete behaviors[behavior];\n            this.require('channel').$designerDeleteBehavior(behavior);\n            this.system().behaviors(behaviors);\n          }\n          for (component in components[name]) {\n            if (behaviors[behavior] && behaviors[behavior].component === components[name][component]._id && behaviors[behavior].state === propName) { \n              delete behaviors[behavior];\n              this.require('channel').$designerDeleteBehavior(behavior);\n              this.system().behaviors(behaviors);\n            }\n          }\n        }\n      }\n    }\n  }\n\n  models[model._id] = model;\n  this.system().models(models);\n  this.require('channel').$designerUpdateModel(model._id, model);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -539,7 +641,8 @@
       "_id": "z16b03119e81c817",
       "component": "SystemFactory",
       "state": "syncComponent",
-      "action": "function syncComponent(model, forceDelete) { \n  var components = this.system().components(),\n      name = '',\n      componentId = '',\n      propName = '',\n      modelDef = null,\n      component = null,\n      createModel = false;\n\n  name = model._name;\n\n  schema = this.getGeneratedSchema(name);\n  modelDef = this.getGeneratedModel(name);\n\n  for (propName in schema) {\n    switch (true) {\n      case schema[propName] === 'property':\n          for (component in components[name]) {\n            if (typeof components[name][component][propName] === 'undefined') {\n              components[name][component][propName] = modelDef[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n          }\n          break;\n      case schema[propName] === 'link':\n          for (component in components[name]) {\n            if (typeof components[name][component][propName] === 'undefined') {\n              components[name][component][propName] = modelDef[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n          }\n          break;\n      case schema[propName] === 'collection':\n        for (component in components[name]) {\n          if (typeof components[name][component][propName] === 'undefined') {\n            components[name][component][propName] = modelDef[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n            this.system().components(components);\n          }\n        }\n        break;\n      default:\n        break;\n    }\n  }\n\n  if (forceDelete) {\n    for (componentId in components[name]) {\n      for (propName in components[name][componentId]) {\n        if (typeof modelDef[propName] === 'undefined' && propName.indexOf('_') !== 0) {\n          delete components[name][componentId][propName];\n          this.require('channel').$designerDeleteComponent(componentId, name);\n          this.system().components(components);\n        }\n      }\n    }\n  }\n}",
+      "action":
+        "function syncComponent(model, forceDelete) { \n  var components = this.system().components(),\n      name = '',\n      componentId = '',\n      propName = '',\n      modelDef = null,\n      component = null,\n      createModel = false;\n\n  name = model._name;\n\n  schema = this.getGeneratedSchema(name);\n  modelDef = this.getGeneratedModel(name);\n\n  for (propName in schema) {\n    switch (true) {\n      case schema[propName] === 'property':\n          for (component in components[name]) {\n            if (typeof components[name][component][propName] === 'undefined') {\n              components[name][component][propName] = modelDef[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n          }\n          break;\n      case schema[propName] === 'link':\n          for (component in components[name]) {\n            if (typeof components[name][component][propName] === 'undefined') {\n              components[name][component][propName] = modelDef[propName].default;\n              this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n              this.system().components(components);\n            }\n          }\n          break;\n      case schema[propName] === 'collection':\n        for (component in components[name]) {\n          if (typeof components[name][component][propName] === 'undefined') {\n            components[name][component][propName] = modelDef[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n            this.system().components(components);\n          }\n        }\n        break;\n      default:\n        break;\n    }\n  }\n\n  if (forceDelete) {\n    for (componentId in components[name]) {\n      for (propName in components[name][componentId]) {\n        if (typeof modelDef[propName] === 'undefined' && propName.indexOf('_') !== 0) {\n          delete components[name][componentId][propName];\n          this.require('channel').$designerDeleteComponent(componentId, name);\n          this.system().components(components);\n        }\n      }\n    }\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -547,7 +650,8 @@
       "_id": "f17e231c64613693",
       "component": "SystemFactory",
       "state": "createModel",
-      "action": "function createModel(schema) { \n  var schemas = this.system().schemas(),\n      models = this.system().models(),\n      components = this.system().components(),\n      name = '',\n      id = '',\n      propName = '',\n      component = null,\n      behavior = null,\n      model = null,\n      oldSchema = null;\n\n  id = this.generateId();\n\n  model = {\n    \"_id\": id,\n    \"_name\": schema._name\n  };\n\n  for (propName in schema) {\n    if (propName.indexOf('_') !== 0) {\n      switch (true) {\n        case schema[propName] === 'property':\n          model[propName] = {\n            \"type\": \"any\",\n            \"readOnly\": false,\n            \"mandatory\": false,\n            \"default\": \"\"\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'link':\n          model[propName] = {\n            \"type\": \"_Component\",\n            \"readOnly\": false,\n            \"mandatory\": false,\n            \"default\": \"\"\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'method':\n          model[propName] = {\n            \"params\": [{\n                \"name\": \"param\",\n                \"type\": \"any\",\n                \"mandatory\": false,\n                \"default\": null\n              }],\n            \"result\": \"any\"\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'event':\n          model[propName] = {\n            \"params\": [{\n              \"name\": \"param\",\n              \"type\": \"any\",\n              \"mandatory\": false,\n              \"default\": null\n            }]\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'collection':\n          model[propName] = {\n            \"type\": [\"_Component\"],\n            \"readOnly\": false,\n            \"mandatory\": false,\n            \"default\": []\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        default:\n          break;\n      }\n    }\n  }\n\n  models[id] = model;\n\n  this.system().models(models);\n  \n  this.require('channel').$designerCreateModel(model._id, model);\n  this.system().components(components);\n  \n  return model;\n}",
+      "action":
+        "function createModel(schema) { \n  var schemas = this.system().schemas(),\n      models = this.system().models(),\n      components = this.system().components(),\n      name = '',\n      id = '',\n      propName = '',\n      component = null,\n      behavior = null,\n      model = null,\n      oldSchema = null;\n\n  id = this.generateId();\n\n  model = {\n    \"_id\": id,\n    \"_name\": schema._name\n  };\n\n  for (propName in schema) {\n    if (propName.indexOf('_') !== 0) {\n      switch (true) {\n        case schema[propName] === 'property':\n          model[propName] = {\n            \"type\": \"any\",\n            \"readOnly\": false,\n            \"mandatory\": false,\n            \"default\": \"\"\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'link':\n          model[propName] = {\n            \"type\": \"_Component\",\n            \"readOnly\": false,\n            \"mandatory\": false,\n            \"default\": \"\"\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'method':\n          model[propName] = {\n            \"params\": [{\n                \"name\": \"param\",\n                \"type\": \"any\",\n                \"mandatory\": false,\n                \"default\": null\n              }],\n            \"result\": \"any\"\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'event':\n          model[propName] = {\n            \"params\": [{\n              \"name\": \"param\",\n              \"type\": \"any\",\n              \"mandatory\": false,\n              \"default\": null\n            }]\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        case schema[propName] === 'collection':\n          model[propName] = {\n            \"type\": [\"_Component\"],\n            \"readOnly\": false,\n            \"mandatory\": false,\n            \"default\": []\n          };\n\n          for (component in components[name]) {\n            components[name][component][propName] = model[propName].default;\n            this.require('channel').$designerUpdateComponent(component, name, components[name][component]);\n          }\n\n          break;\n        default:\n          break;\n      }\n    }\n  }\n\n  models[id] = model;\n\n  this.system().models(models);\n  \n  this.require('channel').$designerCreateModel(model._id, model);\n  this.system().components(components);\n  \n  return model;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -555,7 +659,8 @@
       "_id": "z1168215afe1773c",
       "component": "SystemFactory",
       "state": "deleteSchema",
-      "action": "function deleteSchema(id, sync) {\n  var behaviorId = '',\n    modelId = '',\n    behavior = null,\n    schemas = this.system().schemas(),\n    models = this.system().models(),\n    behaviors = this.system().behaviors(),\n    components = this.system().components(),\n    schemaName = '';\n\n  function _getModelId(name, models) {\n    var result = '',\n      id = '';\n\n    for (id in models) {\n      if (models[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  if (sync && schemas[id] && schemas[id]._name) {\n  \n    schemaName = schemas[id]._name;\n    \n    // components\n    delete components[schemaName];\n    this.system().components(components);\n  \n    // behaviors\n    for (behaviorId in behaviors) {\n      behavior = behaviors[behaviorId];\n      if (behavior.component === schemaName) {\n        delete behaviors[behaviorId];\n        this.system().behaviors(behaviors);\n      }\n    }\n  \n    // model\n    modelId = _getModelId(schemas[id]._name, models);\n    if (modelId) {\n      delete models[modelId];\n      this.system().models(models);\n    }\n  }\n\n  // schema\n  delete schemas[id];\n  this.system().schemas(schemas);\n}",
+      "action":
+        "function deleteSchema(id, sync) {\n  var behaviorId = '',\n    modelId = '',\n    behavior = null,\n    schemas = this.system().schemas(),\n    models = this.system().models(),\n    behaviors = this.system().behaviors(),\n    components = this.system().components(),\n    schemaName = '';\n\n  function _getModelId(name, models) {\n    var result = '',\n      id = '';\n\n    for (id in models) {\n      if (models[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  if (sync && schemas[id] && schemas[id]._name) {\n  \n    schemaName = schemas[id]._name;\n    \n    // components\n    delete components[schemaName];\n    this.system().components(components);\n  \n    // behaviors\n    for (behaviorId in behaviors) {\n      behavior = behaviors[behaviorId];\n      if (behavior.component === schemaName) {\n        delete behaviors[behaviorId];\n        this.system().behaviors(behaviors);\n      }\n    }\n  \n    // model\n    modelId = _getModelId(schemas[id]._name, models);\n    if (modelId) {\n      delete models[modelId];\n      this.system().models(models);\n    }\n  }\n\n  // schema\n  delete schemas[id];\n  this.system().schemas(schemas);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -563,7 +668,8 @@
       "_id": "v1bc5010b18187ff",
       "component": "SystemFactory",
       "state": "createBehavior",
-      "action": "function createBehavior(type, model, state, def) { \n  var body = '\\t\\n',\n      behaviors = this.system().behaviors();\n\n  function _canCreate(type, component, state, behaviors) {\n    var behavior = {},\n        id = '',\n        exist = false,\n        result = true;\n\n    for (id in behaviors) {\n      behavior = behaviors[id];\n      if (behavior.component === component && behavior.state === state) {\n        exist = true;\n        break;\n      }\n    }\n    if (exist) {\n      result = false;\n    }\n\n    return result;\n  }\n\n  if (_canCreate(type, model, state, behaviors)) {\n    uuid = this.generateId();\n\n    // params\n    methodDef = def.params;\n    params = this.require('language').createBehaviorParameters(methodDef);\n\n    // body\n    result = def.result;\n    if (result) {\n      body = this.require('language').createBehaviorBody(result);\n    }\n\n    // set behavior\n    behavior = {\n      \"_id\": uuid,\n      \"component\": model,\n      \"state\": state,\n      \"action\": this.require('language').createBehavior(state, params, body),\n      \"useCoreAPI\": false,\n      \"core\": false\n    };\n\n    behaviors[uuid] = behavior;\n\n    this.system().behaviors(behaviors);\n\n    this.require('channel').$designerCreateBehavior(behavior);\n  }\n}",
+      "action":
+        "function createBehavior(type, model, state, def) { \n  var body = '\\t\\n',\n      behaviors = this.system().behaviors();\n\n  function _canCreate(type, component, state, behaviors) {\n    var behavior = {},\n        id = '',\n        exist = false,\n        result = true;\n\n    for (id in behaviors) {\n      behavior = behaviors[id];\n      if (behavior.component === component && behavior.state === state) {\n        exist = true;\n        break;\n      }\n    }\n    if (exist) {\n      result = false;\n    }\n\n    return result;\n  }\n\n  if (_canCreate(type, model, state, behaviors)) {\n    uuid = this.generateId();\n\n    // params\n    methodDef = def.params;\n    params = this.require('language').createBehaviorParameters(methodDef);\n\n    // body\n    result = def.result;\n    if (result) {\n      body = this.require('language').createBehaviorBody(result);\n    }\n\n    // set behavior\n    behavior = {\n      \"_id\": uuid,\n      \"component\": model,\n      \"state\": state,\n      \"action\": this.require('language').createBehavior(state, params, body),\n      \"useCoreAPI\": false,\n      \"core\": false\n    };\n\n    behaviors[uuid] = behavior;\n\n    this.system().behaviors(behaviors);\n\n    this.require('channel').$designerCreateBehavior(behavior);\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -571,7 +677,8 @@
       "_id": "c1b62f1086818a0f",
       "component": "SystemFactory",
       "state": "mergeSystem",
-      "action": "function mergeSystem(sys) { \n  var System = this.require('System'),\n    name = '',\n    propName = '',\n    modelName = '',\n    compId = '',\n    modelId = '',\n    schemaId = '',\n    factory = this.require('factory'),\n    schemas = {},\n    models = {},\n    types = {},\n    components = {},\n    behaviors = {},\n    system = this.system(),\n    message = this.require('message');\n\n  function _getModelId(name) {\n    var result = '',\n      id = '';\n\n    for (id in factory.system().models()) {\n      if (factory.system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getSchemaId(name) {\n    var result = '',\n      id = '';\n\n    for (id in factory.system().schemas()) {\n      if (factory.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _canOverrideBehavior(id, component, state, behaviors) {\n    var behavior = {},\n      behaviorId = '';\n\n    for (behaviorId in behaviors) {\n      behavior = behaviors[behaviorId];\n      if (behavior.component === component && behavior.state === state && behavior._id !== id) {\n        delete behaviors[behavior._id];\n        break;\n      }\n    }\n  }\n\n  function _canOverride(sysId, schemas, behaviors, behavior) {\n    var def = {},\n      id = '',\n      result = true;\n\n    id = _getSchemaId(behavior.component);\n    def = schemas[id];\n\n    if (def && def[behavior.state]) {\n      if (def[behavior.state] === 'method') {\n        _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);\n      }\n    }\n\n    if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {\n      result = false;\n    }\n\n    return result;\n  }\n\n  if (Object.keys(sys).length) {\n \n    // schemas\n    schemas = JSON.parse(JSON.stringify(this.require('factory').system().schemas()));\n    for (name in sys.schemas) {\n      if (schemas[name]) {\n        for (propName in sys.schemas[name]) {\n          schemas[name][propName] = sys.schemas[name][propName];\n        }\n      } else {\n        if (!_getSchemaId(sys.schemas[name]._name)) {\n          schemas[name] = sys.schemas[name];\n        } else {\n          for (propName in sys.schemas[name]) {\n            if (propName.indexOf('_') !== 0) {\n              schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n            }\n          }\n        }\n      }\n    }\n    this.require('factory').system().schemas(schemas);\n\n    // behaviors\n    behaviors = JSON.parse(JSON.stringify(this.require('factory').system().behaviors()));\n    for (name in sys.behaviors) {\n      if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {\n        behaviors[name] = sys.behaviors[name];\n      } else {\n        // merge main / start / stop\n        if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {\n          this.require('factory').mergeBehavior(behaviors, sys.behaviors[name], this.require('factory').system().id(), sys.name);\n        }\n      }\n    }\n    this.require('factory').system().behaviors(behaviors);\n\n\n    // models\n    models = JSON.parse(JSON.stringify(this.require('factory').system().models()));\n    for (name in sys.models) {\n      if (models[name]) {\n        for (propName in sys.models[name]) {\n          models[name][propName] = sys.models[name][propName];\n        }\n      } else {\n        if (!_getModelId(sys.models[name]._name)) {\n          models[name] = sys.models[name];\n        } else {\n          for (propName in sys.models[name]) {\n            if (propName.indexOf('_') !== 0) {\n              models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n            }\n          }\n        }\n      }\n    }\n    \n    // sync models\n    for (schemaId in schemas) {\n      this.require('factory').syncModel(schemas[schemaId]);\n    }\n    \n    this.require('factory').system().models(models);\n\n    // sync behaviors and components\n    for (modelId in models) {\n      this.require('factory').syncBehavior(models[modelId]);\n    }\n\n    // types\n    types = JSON.parse(JSON.stringify(this.require('factory').system().types()));\n    for (name in sys.types) {\n      if (types[name]) {\n        for (propName in sys.types[name]) {\n          types[name][propName] = sys.types[name][propName];\n        }\n      } else {\n        types[name] = sys.types[name];\n      }\n    }\n    this.require('factory').system().types(types);\n\n    // components\n    components = JSON.parse(JSON.stringify(this.require('factory').system().components()));\n    for (modelName in sys.components) {\n      if (!components[modelName]) {\n        components[modelName] = {};\n      }\n      for (compId in sys.components[modelName]) {\n        if (components[modelName][compId]) {\n          for (propName in sys.components[modelName][compId]) {\n            components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n          }\n        } else {\n          components[modelName][compId] = sys.components[modelName][compId];\n        }\n      }\n    }\n    this.require('factory').system().components(components);\n\n    // sync components\n    for (modelId in models) {\n      this.require('factory').syncComponent(models[modelId]);\n    }\n\n    this.require('factory').system().schemas(schemas);\n    this.require('factory').system().models(models);\n    this.require('factory').system().types(types);\n    this.require('factory').system().behaviors(behaviors);\n    this.require('factory').system().components(components);\n\n    if (this.require('factory').system().id() === sys._id) {\n      this.require('factory').system().version(sys.version);\n      this.require('factory').system().description(sys.description);\n    }\n\n    message.success('Composition of the system is done.');\n  } else {\n    if (this.require('factory').system()) {\n      message.danger('The system you try to import is invalid.');\n    } else {\n      message.danger('There is no system to compose with.');\n    }\n  }\n}",
+      "action":
+        "function mergeSystem(sys) { \n  var System = this.require('System'),\n    name = '',\n    propName = '',\n    modelName = '',\n    compId = '',\n    modelId = '',\n    schemaId = '',\n    factory = this.require('factory'),\n    schemas = {},\n    models = {},\n    types = {},\n    components = {},\n    behaviors = {},\n    system = this.system(),\n    message = this.require('message');\n\n  function _getModelId(name) {\n    var result = '',\n      id = '';\n\n    for (id in factory.system().models()) {\n      if (factory.system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getSchemaId(name) {\n    var result = '',\n      id = '';\n\n    for (id in factory.system().schemas()) {\n      if (factory.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _canOverrideBehavior(id, component, state, behaviors) {\n    var behavior = {},\n      behaviorId = '';\n\n    for (behaviorId in behaviors) {\n      behavior = behaviors[behaviorId];\n      if (behavior.component === component && behavior.state === state && behavior._id !== id) {\n        delete behaviors[behavior._id];\n        break;\n      }\n    }\n  }\n\n  function _canOverride(sysId, schemas, behaviors, behavior) {\n    var def = {},\n      id = '',\n      result = true;\n\n    id = _getSchemaId(behavior.component);\n    def = schemas[id];\n\n    if (def && def[behavior.state]) {\n      if (def[behavior.state] === 'method') {\n        _canOverrideBehavior(behavior._id, behavior.component, behavior.state, behaviors);\n      }\n    }\n\n    if ((behavior.state === 'main' || behavior.state === 'start' || behavior.state === 'stop') && behavior.component === sysId) {\n      result = false;\n    }\n\n    return result;\n  }\n\n  if (Object.keys(sys).length) {\n \n    // schemas\n    schemas = JSON.parse(JSON.stringify(this.require('factory').system().schemas()));\n    for (name in sys.schemas) {\n      if (schemas[name]) {\n        for (propName in sys.schemas[name]) {\n          schemas[name][propName] = sys.schemas[name][propName];\n        }\n      } else {\n        if (!_getSchemaId(sys.schemas[name]._name)) {\n          schemas[name] = sys.schemas[name];\n        } else {\n          for (propName in sys.schemas[name]) {\n            if (propName.indexOf('_') !== 0) {\n              schemas[_getSchemaId(sys.schemas[name]._name)][propName] = sys.schemas[name][propName];\n            }\n          }\n        }\n      }\n    }\n    this.require('factory').system().schemas(schemas);\n\n    // behaviors\n    behaviors = JSON.parse(JSON.stringify(this.require('factory').system().behaviors()));\n    for (name in sys.behaviors) {\n      if (name !== sys._id && _canOverride(sys._id, schemas, behaviors, sys.behaviors[name])) {\n        behaviors[name] = sys.behaviors[name];\n      } else {\n        // merge main / start / stop\n        if ((sys.behaviors[name].state === 'main' || sys.behaviors[name].state === 'start' || sys.behaviors[name].state === 'stop') && sys.behaviors[name].component === sys._id) {\n          this.require('factory').mergeBehavior(behaviors, sys.behaviors[name], this.require('factory').system().id(), sys.name);\n        }\n      }\n    }\n    this.require('factory').system().behaviors(behaviors);\n\n\n    // models\n    models = JSON.parse(JSON.stringify(this.require('factory').system().models()));\n    for (name in sys.models) {\n      if (models[name]) {\n        for (propName in sys.models[name]) {\n          models[name][propName] = sys.models[name][propName];\n        }\n      } else {\n        if (!_getModelId(sys.models[name]._name)) {\n          models[name] = sys.models[name];\n        } else {\n          for (propName in sys.models[name]) {\n            if (propName.indexOf('_') !== 0) {\n              models[_getModelId(sys.models[name]._name)][propName] = sys.models[name][propName];\n            }\n          }\n        }\n      }\n    }\n    \n    // sync models\n    for (schemaId in schemas) {\n      this.require('factory').syncModel(schemas[schemaId]);\n    }\n    \n    this.require('factory').system().models(models);\n\n    // sync behaviors and components\n    for (modelId in models) {\n      this.require('factory').syncBehavior(models[modelId]);\n    }\n\n    // types\n    types = JSON.parse(JSON.stringify(this.require('factory').system().types()));\n    for (name in sys.types) {\n      if (types[name]) {\n        for (propName in sys.types[name]) {\n          types[name][propName] = sys.types[name][propName];\n        }\n      } else {\n        types[name] = sys.types[name];\n      }\n    }\n    this.require('factory').system().types(types);\n\n    // components\n    components = JSON.parse(JSON.stringify(this.require('factory').system().components()));\n    for (modelName in sys.components) {\n      if (!components[modelName]) {\n        components[modelName] = {};\n      }\n      for (compId in sys.components[modelName]) {\n        if (components[modelName][compId]) {\n          for (propName in sys.components[modelName][compId]) {\n            components[modelName][compId][propName] = sys.components[modelName][compId][propName];\n          }\n        } else {\n          components[modelName][compId] = sys.components[modelName][compId];\n        }\n      }\n    }\n    this.require('factory').system().components(components);\n\n    // sync components\n    for (modelId in models) {\n      this.require('factory').syncComponent(models[modelId]);\n    }\n\n    this.require('factory').system().schemas(schemas);\n    this.require('factory').system().models(models);\n    this.require('factory').system().types(types);\n    this.require('factory').system().behaviors(behaviors);\n    this.require('factory').system().components(components);\n\n    if (this.require('factory').system().id() === sys._id) {\n      this.require('factory').system().version(sys.version);\n      this.require('factory').system().description(sys.description);\n    }\n\n    message.success('Composition of the system is done.');\n  } else {\n    if (this.require('factory').system()) {\n      message.danger('The system you try to import is invalid.');\n    } else {\n      message.danger('There is no system to compose with.');\n    }\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -579,7 +686,8 @@
       "_id": "c179f91426817730",
       "component": "SystemFactory",
       "state": "updateBehavior",
-      "action": "function updateBehavior(id, behavior) { \n  var behaviors = this.system().behaviors();\n\n  behaviors[id] = behavior;\n  this.system().behaviors(behaviors);\n}",
+      "action":
+        "function updateBehavior(id, behavior) { \n  var behaviors = this.system().behaviors();\n\n  behaviors[id] = behavior;\n  this.system().behaviors(behaviors);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -587,7 +695,8 @@
       "_id": "p1bf7312724172d3",
       "component": "SystemFactory",
       "state": "updateComponent",
-      "action": "function updateComponent(id, collection, field, value) { \n  var components = this.system().components();\n\n  if (typeof components[collection] !== 'undefined' && \n      typeof components[collection][id] !== 'undefined' &&\n      typeof components[collection][id][field] !== 'undefined') {\n    components[collection][id][field] = value;\n    this.system().components(components);\n  }\t\n}",
+      "action":
+        "function updateComponent(id, collection, field, value) { \n  var components = this.system().components();\n\n  if (typeof components[collection] !== 'undefined' && \n      typeof components[collection][id] !== 'undefined' &&\n      typeof components[collection][id][field] !== 'undefined') {\n    components[collection][id][field] = value;\n    this.system().components(components);\n  }\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -595,7 +704,8 @@
       "_id": "u15b121620519864",
       "component": "SystemFactory",
       "state": "deleteComponent",
-      "action": "function deleteComponent(id, collection) { \n  var components = this.system().components(),\n      behaviors = this.system().behaviors(),\n      behaviorId = '';\n\n  if (typeof components[collection] !== 'undefined') {\n    delete components[collection][id];\n    this.system().components(components);\n    \n    // remove behaviors linked to the component\n    for (behaviorId in behaviors) {\n      if (behaviors[behaviorId].component === id) {\n\t      this.deleteBehavior(behaviorId);\n\t      this.require('channel').$designerDeleteBehavior(behaviorId);\n\t      break;\n\t    }\n    }\n  }\t\n}",
+      "action":
+        "function deleteComponent(id, collection) { \n  var components = this.system().components(),\n      behaviors = this.system().behaviors(),\n      behaviorId = '';\n\n  if (typeof components[collection] !== 'undefined') {\n    delete components[collection][id];\n    this.system().components(components);\n    \n    // remove behaviors linked to the component\n    for (behaviorId in behaviors) {\n      if (behaviors[behaviorId].component === id) {\n\t      this.deleteBehavior(behaviorId);\n\t      this.require('channel').$designerDeleteBehavior(behaviorId);\n\t      break;\n\t    }\n    }\n  }\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -603,7 +713,8 @@
       "_id": "d129be15b711107c",
       "component": "SystemFactory",
       "state": "createComponent",
-      "action": "function createComponent(collection, component) { \n  var components = this.system().components();\n\n  if (typeof components[collection] === 'undefined') {\n    components[collection] = {};\n  }\n\n  delete component.classInfo;\n\n  components[collection][component._id] = component;\n  this.system().components(components);\n}",
+      "action":
+        "function createComponent(collection, component) { \n  var components = this.system().components();\n\n  if (typeof components[collection] === 'undefined') {\n    components[collection] = {};\n  }\n\n  delete component.classInfo;\n\n  components[collection][component._id] = component;\n  this.system().components(components);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -611,7 +722,8 @@
       "_id": "x10f461f9731db3d",
       "component": "SystemFactory",
       "state": "updateSystem",
-      "action": "function updateSystem(id, system) { \n  var System = this.require('System'),\n      sys = null;\n\n  if (this.system()) {\n    this.system().destroy();\n  }\n  \n  sys = new System(system);\n  this.system(sys);\n}",
+      "action":
+        "function updateSystem(id, system) { \n  var System = this.require('System'),\n      sys = null;\n\n  if (this.system()) {\n    this.system().destroy();\n  }\n  \n  sys = new System(system);\n  this.system(sys);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -619,7 +731,8 @@
       "_id": "b1c3581800519d9b",
       "component": "SystemFactory",
       "state": "overwriteComponent",
-      "action": "function overwriteComponent(id, collection, component) { \n  var components = this.system().components();\n  \n  components[collection][id] = component;\n  this.system().components(components);\n}",
+      "action":
+        "function overwriteComponent(id, collection, component) { \n  var components = this.system().components();\n  \n  components[collection][id] = component;\n  this.system().components(components);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -627,7 +740,8 @@
       "_id": "p1258b190941d225",
       "component": "SystemFactory",
       "state": "deleteBehavior",
-      "action": "function deleteBehavior(id) { \n  var behaviors = this.system().behaviors();\n\n  delete behaviors[id];\n  this.system().behaviors(behaviors);\n}",
+      "action":
+        "function deleteBehavior(id) { \n  var behaviors = this.system().behaviors();\n\n  delete behaviors[id];\n  this.system().behaviors(behaviors);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -635,7 +749,8 @@
       "_id": "n199891dd69109ed",
       "component": "SystemFactory",
       "state": "udpdateBehavior",
-      "action": "function udpdateBehavior(id, behavior) { \n  var behaviors = this.system().behaviors();\n\n  behaviors[id] = behavior;\n  this.system().behaviors(behaviors);\n}",
+      "action":
+        "function udpdateBehavior(id, behavior) { \n  var behaviors = this.system().behaviors();\n\n  behaviors[id] = behavior;\n  this.system().behaviors(behaviors);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -643,7 +758,8 @@
       "_id": "s15ad71a52019253",
       "component": "SystemFactory",
       "state": "updateModelId",
-      "action": "function updateModelId(oldId, newId) { \n  var models = this.system().models(),\n      model = null;\n\n  model = JSON.parse(JSON.stringify(models[oldId]));\n\n  delete models[oldId];\n\n  model._id = newId;\n  models[newId] = model;\n\n  this.system().models(models);\n}",
+      "action":
+        "function updateModelId(oldId, newId) { \n  var models = this.system().models(),\n      model = null;\n\n  model = JSON.parse(JSON.stringify(models[oldId]));\n\n  delete models[oldId];\n\n  model._id = newId;\n  models[newId] = model;\n\n  this.system().models(models);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -651,7 +767,8 @@
       "_id": "a1ae681430b1cbc0",
       "component": "SystemFactory",
       "state": "updateModel",
-      "action": "function updateModel(id, model) { \n var models = this.system().models();\n \n  models[id] = model;\n  this.system().models(models);\n}",
+      "action":
+        "function updateModel(id, model) { \n var models = this.system().models();\n \n  models[id] = model;\n  this.system().models(models);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -659,7 +776,8 @@
       "_id": "p17e2e1c19b19ed7",
       "component": "SystemFactory",
       "state": "updateSchemaId",
-      "action": "function updateSchemaId(oldId, newId) { \n  var schemas = this.system().schemas(),\n      schema = null;\n\n  schema = JSON.parse(JSON.stringify(schemas[oldId]));\n\n  delete schemas[oldId];\n\n  schema._id = newId;\n  \n  schemas[newId] = schema;\n  \n  this.system().schemas(schemas);\n}",
+      "action":
+        "function updateSchemaId(oldId, newId) { \n  var schemas = this.system().schemas(),\n      schema = null;\n\n  schema = JSON.parse(JSON.stringify(schemas[oldId]));\n\n  delete schemas[oldId];\n\n  schema._id = newId;\n  \n  schemas[newId] = schema;\n  \n  this.system().schemas(schemas);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -667,7 +785,8 @@
       "_id": "o188e9105da13288",
       "component": "SystemFactory",
       "state": "updateSchema",
-      "action": "function updateSchema(id, schema) { \n  var schemas = this.system().schemas();\n      \n  schemas[id] = schema;\n  \n  this.system().schemas(schemas);\n}",
+      "action":
+        "function updateSchema(id, schema) { \n  var schemas = this.system().schemas();\n      \n  schemas[id] = schema;\n  \n  this.system().schemas(schemas);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -675,7 +794,8 @@
       "_id": "v1fc521228d1d589",
       "component": "SystemFactory",
       "state": "updateSchemaName",
-      "action": "function updateSchemaName(name, id) { \n  var oldName = this.system().schemas()[id]._name,\n      models = this.system().models(),\n      behaviors = this.system().behaviors(),\n      components = this.system().components(),\n      modelId = '',\n      behaviorId = '',\n      behavior = null;\n\n  function _getModelId(name, models) {\n    var result = '',\n        id = '';\n\n    for (id in models) {\n      if (models[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  modelId = _getModelId(oldName, this.system().models());\n\n  // update model\n  models[modelId]._name = name;\n  this.system().models(models);\n\n  // update behaviors\n  for (behaviorId in behaviors) {\n    if (behaviors[behaviorId].component === oldName) {\n      behaviors[behaviorId].component = name;\n\n      this.system().behaviors(behaviors);\n    }\n  }\n\n  // components\n  if (components[oldName]) {\n    components[name] = JSON.parse(JSON.stringify(components[oldName]));\n    delete components[oldName];\n\n    this.system().components(components);\n  }\n}",
+      "action":
+        "function updateSchemaName(name, id) { \n  var oldName = this.system().schemas()[id]._name,\n      models = this.system().models(),\n      behaviors = this.system().behaviors(),\n      components = this.system().components(),\n      modelId = '',\n      behaviorId = '',\n      behavior = null;\n\n  function _getModelId(name, models) {\n    var result = '',\n        id = '';\n\n    for (id in models) {\n      if (models[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  modelId = _getModelId(oldName, this.system().models());\n\n  // update model\n  models[modelId]._name = name;\n  this.system().models(models);\n\n  // update behaviors\n  for (behaviorId in behaviors) {\n    if (behaviors[behaviorId].component === oldName) {\n      behaviors[behaviorId].component = name;\n\n      this.system().behaviors(behaviors);\n    }\n  }\n\n  // components\n  if (components[oldName]) {\n    components[name] = JSON.parse(JSON.stringify(components[oldName]));\n    delete components[oldName];\n\n    this.system().components(components);\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -683,7 +803,8 @@
       "_id": "o1a54f1f354126b9",
       "component": "SystemFactory",
       "state": "deleteType",
-      "action": "function deleteType(id) { \n  var types = this.system().types();\n\n  delete types[id];\n  this.system().types(types);\n}",
+      "action":
+        "function deleteType(id) { \n  var types = this.system().types();\n\n  delete types[id];\n  this.system().types(types);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -691,7 +812,8 @@
       "_id": "g151cb1f2bc16ab5",
       "component": "SystemFactory",
       "state": "updateType",
-      "action": "function updateType(id, type) { \n  var types = this.system().types();\n\n  types[id] = type;\n  this.system().types(types);\n}",
+      "action":
+        "function updateType(id, type) { \n  var types = this.system().types();\n\n  types[id] = type;\n  this.system().types(types);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -699,7 +821,8 @@
       "_id": "g172411b1b817aec",
       "component": "SystemFactory",
       "state": "create",
-      "action": "function create(sys, withStartMethod) { \n  var System = this.require('System'),\n      uuid = this.generateId(),\n      mainUuid = this.generateId(),\n      system = {},\n      instance = null,\n      migrateSys = '';\n      \n  sys = JSON.parse(JSON.stringify(sys));    \n  \n  // deprecated property\n  delete sys.subsystem;\n  \n  // migrate v1->v2\n  migrateSys = JSON.stringify(sys);\n  migrateSys = migrateSys.replace(/\\\"RuntimeComponent\\\"/g, '\"_Component\"');\n  migrateSys = migrateSys.replace(/\\\"RuntimeDatabase\\\"/g, '\"_Database\"');\n  migrateSys = migrateSys.replace(/\\\"RuntimeChannel\\\"/g, '\"_Channel\"');\n  // migrateSys = migrateSys.replace(/\\\"\\u0040/g, '\"');\n  \n  sys = JSON.parse(migrateSys);\n  \n      \n  // default system\n  system = {\n    \"name\": \"default\",\n    \"master\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"\",\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {},\n    \"_id\": uuid\n  };\n  \n  for (var prop in sys) {\n    if (sys.hasOwnProperty(prop)) {\n      system[prop] = sys[prop];\n    }\n  }\n\n  if (withStartMethod) {\n    // add main method\n    system.behaviors[mainUuid] = {\n      \"_id\": mainUuid,\n      \"component\": system._id,\n      \"state\": \"start\",\n      \"action\": this.require('language').createStartBehavior(),\n      \"useCoreAPI\": false,\n      \"core\": false\n    };\n  }\n\n  // add (TODO improve)\n  if (this.system()) {\n    this.system().destroy();\n  }\n  \n  instance = new System(system);\n\n  this.system(instance);\n\n  return instance;\n}",
+      "action":
+        "function create(sys, withStartMethod) { \n  var System = this.require('System'),\n      uuid = this.generateId(),\n      mainUuid = this.generateId(),\n      system = {},\n      instance = null,\n      migrateSys = '';\n      \n  sys = JSON.parse(JSON.stringify(sys));    \n  \n  // deprecated property\n  delete sys.subsystem;\n  \n  // migrate v1->v2\n  migrateSys = JSON.stringify(sys);\n  migrateSys = migrateSys.replace(/\\\"RuntimeComponent\\\"/g, '\"_Component\"');\n  migrateSys = migrateSys.replace(/\\\"RuntimeDatabase\\\"/g, '\"_Database\"');\n  migrateSys = migrateSys.replace(/\\\"RuntimeChannel\\\"/g, '\"_Channel\"');\n  // migrateSys = migrateSys.replace(/\\\"\\u0040/g, '\"');\n  \n  sys = JSON.parse(migrateSys);\n  \n      \n  // default system\n  system = {\n    \"name\": \"default\",\n    \"master\": true,\n    \"version\": \"0.0.1\",\n    \"description\": \"\",\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {},\n    \"_id\": uuid\n  };\n  \n  for (var prop in sys) {\n    if (sys.hasOwnProperty(prop)) {\n      system[prop] = sys[prop];\n    }\n  }\n\n  if (withStartMethod) {\n    // add main method\n    system.behaviors[mainUuid] = {\n      \"_id\": mainUuid,\n      \"component\": system._id,\n      \"state\": \"start\",\n      \"action\": this.require('language').createStartBehavior(),\n      \"useCoreAPI\": false,\n      \"core\": false\n    };\n  }\n\n  // add (TODO improve)\n  if (this.system()) {\n    this.system().destroy();\n  }\n  \n  instance = new System(system);\n\n  this.system(instance);\n\n  return instance;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -707,7 +830,8 @@
       "_id": "j18c34108721d01d",
       "component": "SystemFactory",
       "state": "toJSON",
-      "action": "function toJSON() { \n  var result = {};\n\t\n  if (this.system()) {\n    result = this.require('db').collections().System.find({\n      '_id': this.system().id()\n    })[0];\n  }\n\t\n  result = JSON.parse(JSON.stringify(result));\n  delete result.classInfo;\n\t\n  return result;\n}",
+      "action":
+        "function toJSON() { \n  var result = {};\n\t\n  if (this.system()) {\n    result = this.require('db').collections().System.find({\n      '_id': this.system().id()\n    })[0];\n  }\n\t\n  result = JSON.parse(JSON.stringify(result));\n  delete result.classInfo;\n\t\n  return result;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -715,7 +839,8 @@
       "_id": "f184d9169fd1d682",
       "component": "SystemFactory",
       "state": "addSchema",
-      "action": "function addSchema(name) { \n  var id = this.generateId().toString(),\n      schema = {},\n      schemas = {};\n  \n  // set schema\n  schema = {\n    \"_id\": id,\n    \"_name\": name,\n    \"_inherit\": [\"_Component\"]\n  };\n  \n  schemas = this.system().schemas();\n  schemas[id] = schema;\n  \n  this.system().schemas(schemas);\n  \n  return JSON.parse(JSON.stringify(schema));\n}",
+      "action":
+        "function addSchema(name) { \n  var id = this.generateId().toString(),\n      schema = {},\n      schemas = {};\n  \n  // set schema\n  schema = {\n    \"_id\": id,\n    \"_name\": name,\n    \"_inherit\": [\"_Component\"]\n  };\n  \n  schemas = this.system().schemas();\n  schemas[id] = schema;\n  \n  this.system().schemas(schemas);\n  \n  return JSON.parse(JSON.stringify(schema));\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -723,7 +848,8 @@
       "_id": "h16f101a2bf17a4d",
       "component": "SystemFactory",
       "state": "addType",
-      "action": "function addType(name, isEnum) { \n  var id = this.generateId().toString(),\n      types = this.system().types(),\n      type = {};\n  \n  // set type\n  if (isEnum) {\n    type = {\n      \"_id\": id,\n      \"name\": name,\n      \"type\": \"any\",\n      \"value\": [\"value1\", \"value2\"]\n    };\n  } else {\n    type = {\n      \"_id\": id,\n      \"name\": name,\n      \"type\": \"object\",\n      \"schema\": {\n        \"property1\": {\n          \"type\": \"any\",\n          \"mandatory\": false,\n          \"default\": \"\"\n        },\n        \"property2\": {\n          \"type\": \"any\",\n          \"mandatory\": false,\n          \"default\": \"\"\n        }\n      }\n    };\n  }\n  \n  types[name] = type;\n  this.require('factory').system().types(types);\n  \n  return JSON.parse(JSON.stringify(type));\n}",
+      "action":
+        "function addType(name, isEnum) { \n  var id = this.generateId().toString(),\n      types = this.system().types(),\n      type = {};\n  \n  // set type\n  if (isEnum) {\n    type = {\n      \"_id\": id,\n      \"name\": name,\n      \"type\": \"any\",\n      \"value\": [\"value1\", \"value2\"]\n    };\n  } else {\n    type = {\n      \"_id\": id,\n      \"name\": name,\n      \"type\": \"object\",\n      \"schema\": {\n        \"property1\": {\n          \"type\": \"any\",\n          \"mandatory\": false,\n          \"default\": \"\"\n        },\n        \"property2\": {\n          \"type\": \"any\",\n          \"mandatory\": false,\n          \"default\": \"\"\n        }\n      }\n    };\n  }\n  \n  types[name] = type;\n  this.require('factory').system().types(types);\n  \n  return JSON.parse(JSON.stringify(type));\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -731,7 +857,8 @@
       "_id": "j18b1b101501aead",
       "component": "SystemFactory",
       "state": "addComponent",
-      "action": "function addComponent(model) { \n  var schemaDef = this.getGeneratedSchema(model),\n      components = this.system().components(),\n      uuid = this.generateId(),\n      component = {};\n  \n  // set component\n  component = {\n    \"_id\": uuid,\n  };\n  \n  // set properties default values\n  var propertyNames = [];\n  for (var att in schemaDef) {\n    if (schemaDef[att] === 'property') {\n      propertyNames.push(att);\n    }\n    if (schemaDef[att] === 'link') {\n      propertyNames.push(att);\n    }\n    if (schemaDef[att] === 'collection') {\n      propertyNames.push(att);\n    }\n  }\n  \n  propertyNames.sort();\n  \n  modelDef = this.getGeneratedModel(model);\n  \n  length = propertyNames.length;\n  for (var i = 0; i < length; i++) {\n    if (modelDef && modelDef[propertyNames[i]]) {\n      component[propertyNames[i]] = modelDef[propertyNames[i]].default;\n    }\n  }\n  \n  if (!components[model]) {\n    components[model] = {};\n  }\n  components[model][uuid] = component;\n  \n  this.system().components(components);\n  \n  return JSON.parse(JSON.stringify(component));\n}",
+      "action":
+        "function addComponent(model) { \n  var schemaDef = this.getGeneratedSchema(model),\n      components = this.system().components(),\n      uuid = this.generateId(),\n      component = {};\n  \n  // set component\n  component = {\n    \"_id\": uuid,\n  };\n  \n  // set properties default values\n  var propertyNames = [];\n  for (var att in schemaDef) {\n    if (schemaDef[att] === 'property') {\n      propertyNames.push(att);\n    }\n    if (schemaDef[att] === 'link') {\n      propertyNames.push(att);\n    }\n    if (schemaDef[att] === 'collection') {\n      propertyNames.push(att);\n    }\n  }\n  \n  propertyNames.sort();\n  \n  modelDef = this.getGeneratedModel(model);\n  \n  length = propertyNames.length;\n  for (var i = 0; i < length; i++) {\n    if (modelDef && modelDef[propertyNames[i]]) {\n      component[propertyNames[i]] = modelDef[propertyNames[i]].default;\n    }\n  }\n  \n  if (!components[model]) {\n    components[model] = {};\n  }\n  components[model][uuid] = component;\n  \n  this.system().components(components);\n  \n  return JSON.parse(JSON.stringify(component));\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -739,7 +866,8 @@
       "_id": "w1c83110cfc1f1f9",
       "component": "SystemFactory",
       "state": "addBehavior",
-      "action": "function addBehavior(model, component, state) {\n  var that = this,\n      schemas = this.system().schemas(),\n      models = this.system().models(),\n      modelDef = null,\n      factory = this,\n      behaviors = this.system().behaviors(),\n      types = this.system().types(),\n      message = this.require('message'),\n      language = this.require('language'),\n      schemaId = '',\n      modelId = '',\n      methodDef = null,\n      behavior = {},\n      result = '',\n      body = '\\t\\n',\n      ModelBehavior = null,\n      modelBehavior = null,\n      uuid = '',\n      params = '',\n      canCreate = true,\n      i = 0,\n      length = 0;\n \n  function _getSchemaId(name) {\n    var result = '',\n      id = '';\n\n    for (id in that.system().schemas()) {\n      if (that.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getModelId(name) {\n    var result = '',\n      id = '';\n\n    for (id in that.system().models()) {\n      if (that.system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _existBehavior(state, space, model) {\n    var result = false;\n\n    if (_isModel(space)) {\n      for (id in that.system().behaviors()) {\n        if (that.system().behaviors()[id].state === state && that.system().behaviors()[id].component === model) {\n          result = true;\n          break;\n        }\n      }\n    } else {\n      for (id in that.system().behaviors()) {\n        if (that.system().behaviors()[id].state === state && that.system().behaviors()[id].component === space) {\n          result = true;\n          break;\n        }\n      }\n    }\n    return result;\n  }\n\n  function _isModel(name) {\n    var result = false;\n\n    if (Object.keys(that.system().components()).indexOf(name) !== -1) {\n      result = true;\n    }\n\n    return result;\n  }\n\n  // get value\n\n  if (model && state) {\n\n    uuid = this.require('factory').generateId();\n\n    if (model !== this.require('factory').system().name()) {\n\n      schemaId = _getSchemaId(model);\n      modelId = _getModelId(model);\n      modelDef = this.getGeneratedModel(model);\n\n      // method params\n      if (modelDef[state]) {\n        methodDef = modelDef[state].params;\n      }\n      params = language.createBehaviorParameters(methodDef);\n      \n      \n      // property params\n      if (schemas[schemaId][state] === 'property' || schemas[schemaId][state] === 'link') {\n        if (models[modelId][state].type === 'array') {\n          params = language.createBehaviorParametersEventArray();\n        } else {\n          params = language.createBehaviorParametersEvent();\n        }\n      }\n      \n      // case of structure\n      if (state.indexOf('.') !== -1 && schemas[schemaId][state.split('.')[0]] === 'property' && typeof types[models[modelId][state.split('.')[0]].type] !== 'undefined') {\n        if (types[models[modelId][state.split('.')[0]].type].schema[state.split('.')[1]].type === 'array') {\n          params = language.createBehaviorParametersEventArray();\n        } else {\n          params = language.createBehaviorParametersEvent();\n        }\n      }\n      \n      // collection params\n      if (schemas[schemaId][state] === 'collection') {\n        params = language.createBehaviorParametersEventArray();\n      }\n\n      // method params\n      if (schemas[schemaId][state] === 'method') {\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n      \n      // _Component state params\n      if (state === 'init') {\n        params = 'conf';\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n\n      if (state === 'destroy') {\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n\n      if (state === 'error') {\n        params = 'data';\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n\n      // body\n      if (modelDef[state]) {\n        result = modelDef[state].result;\n      }\n      if (result) {\n       body = this.require('language').createBehaviorBody(result);\n      }\n    } else {\n      component = this.require('factory').system().id();\n      if (_existBehavior(state, component, model)) {\n        canCreate = false;\n      }\n    }\n\n    if (canCreate) {\n      // set model\n      if (state !== 'destroy') {\n        behavior = {\n          \"_id\": uuid,\n          \"component\": component,\n          \"state\": state,\n          \"action\": this.require('language').createBehavior(state, params, body),\n          \"useCoreAPI\": false,\n          \"core\": false\n        };\n      } else {\n        behavior = {\n          \"_id\": uuid,\n          \"component\": component,\n          \"state\": \"destroy\",\n          \"action\": this.require('language').createDestroyBehavior(),\n          \"useCoreAPI\": true,\n          \"core\": false\n        };\n      }\n\n      behaviors[uuid] = behavior;\n      this.require('factory').system().behaviors(behaviors);\n    }\n  }\n  \n  return JSON.parse(JSON.stringify(behavior));\n}",
+      "action":
+        "function addBehavior(model, component, state) {\n  var that = this,\n      schemas = this.system().schemas(),\n      models = this.system().models(),\n      modelDef = null,\n      factory = this,\n      behaviors = this.system().behaviors(),\n      types = this.system().types(),\n      message = this.require('message'),\n      language = this.require('language'),\n      schemaId = '',\n      modelId = '',\n      methodDef = null,\n      behavior = {},\n      result = '',\n      body = '\\t\\n',\n      ModelBehavior = null,\n      modelBehavior = null,\n      uuid = '',\n      params = '',\n      canCreate = true,\n      i = 0,\n      length = 0;\n \n  function _getSchemaId(name) {\n    var result = '',\n      id = '';\n\n    for (id in that.system().schemas()) {\n      if (that.system().schemas()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _getModelId(name) {\n    var result = '',\n      id = '';\n\n    for (id in that.system().models()) {\n      if (that.system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  function _existBehavior(state, space, model) {\n    var result = false;\n\n    if (_isModel(space)) {\n      for (id in that.system().behaviors()) {\n        if (that.system().behaviors()[id].state === state && that.system().behaviors()[id].component === model) {\n          result = true;\n          break;\n        }\n      }\n    } else {\n      for (id in that.system().behaviors()) {\n        if (that.system().behaviors()[id].state === state && that.system().behaviors()[id].component === space) {\n          result = true;\n          break;\n        }\n      }\n    }\n    return result;\n  }\n\n  function _isModel(name) {\n    var result = false;\n\n    if (Object.keys(that.system().components()).indexOf(name) !== -1) {\n      result = true;\n    }\n\n    return result;\n  }\n\n  // get value\n\n  if (model && state) {\n\n    uuid = this.require('factory').generateId();\n\n    if (model !== this.require('factory').system().name()) {\n\n      schemaId = _getSchemaId(model);\n      modelId = _getModelId(model);\n      modelDef = this.getGeneratedModel(model);\n\n      // method params\n      if (modelDef[state]) {\n        methodDef = modelDef[state].params;\n      }\n      params = language.createBehaviorParameters(methodDef);\n      \n      \n      // property params\n      if (schemas[schemaId][state] === 'property' || schemas[schemaId][state] === 'link') {\n        if (models[modelId][state].type === 'array') {\n          params = language.createBehaviorParametersEventArray();\n        } else {\n          params = language.createBehaviorParametersEvent();\n        }\n      }\n      \n      // case of structure\n      if (state.indexOf('.') !== -1 && schemas[schemaId][state.split('.')[0]] === 'property' && typeof types[models[modelId][state.split('.')[0]].type] !== 'undefined') {\n        if (types[models[modelId][state.split('.')[0]].type].schema[state.split('.')[1]].type === 'array') {\n          params = language.createBehaviorParametersEventArray();\n        } else {\n          params = language.createBehaviorParametersEvent();\n        }\n      }\n      \n      // collection params\n      if (schemas[schemaId][state] === 'collection') {\n        params = language.createBehaviorParametersEventArray();\n      }\n\n      // method params\n      if (schemas[schemaId][state] === 'method') {\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n      \n      // _Component state params\n      if (state === 'init') {\n        params = 'conf';\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n\n      if (state === 'destroy') {\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n\n      if (state === 'error') {\n        params = 'data';\n        if (_existBehavior(state, this.require('state').space(), model)) {\n          canCreate = false;\n        }\n      }\n\n      // body\n      if (modelDef[state]) {\n        result = modelDef[state].result;\n      }\n      if (result) {\n       body = this.require('language').createBehaviorBody(result);\n      }\n    } else {\n      component = this.require('factory').system().id();\n      if (_existBehavior(state, component, model)) {\n        canCreate = false;\n      }\n    }\n\n    if (canCreate) {\n      // set model\n      if (state !== 'destroy') {\n        behavior = {\n          \"_id\": uuid,\n          \"component\": component,\n          \"state\": state,\n          \"action\": this.require('language').createBehavior(state, params, body),\n          \"useCoreAPI\": false,\n          \"core\": false\n        };\n      } else {\n        behavior = {\n          \"_id\": uuid,\n          \"component\": component,\n          \"state\": \"destroy\",\n          \"action\": this.require('language').createDestroyBehavior(),\n          \"useCoreAPI\": true,\n          \"core\": false\n        };\n      }\n\n      behaviors[uuid] = behavior;\n      this.require('factory').system().behaviors(behaviors);\n    }\n  }\n  \n  return JSON.parse(JSON.stringify(behavior));\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -747,7 +875,8 @@
       "_id": "u1e3e81ddc719f7f",
       "component": "SystemFactory",
       "state": "updateComponentId",
-      "action": "function updateComponentId(oldId, newId, collection) { \n  var behaviors = this.require('factory').system().behaviors(),\n      behavior = {},\n      behaviorId ='';\n\n  this.updateComponent(oldId, collection, '_id', newId);\n  // TODO ? this.require('channel').$designerUpdateComponent ...\n  \n  // update behaviors linked to the component\n  for (behaviorId in behaviors) {\n    if (behaviors[behaviorId].component === oldId) {\n      behavior = behaviors[behaviorId];\n      behavior.component = newId;\n      this.updateBehavior(behaviorId, behavior);\n      this.require('channel').$designerUpdateBehavior(behaviorId, behavior);\n      break;\n    }\n  }\n}",
+      "action":
+        "function updateComponentId(oldId, newId, collection) { \n  var behaviors = this.require('factory').system().behaviors(),\n      behavior = {},\n      behaviorId ='';\n\n  this.updateComponent(oldId, collection, '_id', newId);\n  // TODO ? this.require('channel').$designerUpdateComponent ...\n  \n  // update behaviors linked to the component\n  for (behaviorId in behaviors) {\n    if (behaviors[behaviorId].component === oldId) {\n      behavior = behaviors[behaviorId];\n      behavior.component = newId;\n      this.updateBehavior(behaviorId, behavior);\n      this.require('channel').$designerUpdateBehavior(behaviorId, behavior);\n      break;\n    }\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -755,7 +884,8 @@
       "_id": "c104ab1e9711e87a",
       "component": "SystemFactory",
       "state": "getModelPaths",
-      "action": "function getModelPaths(model) { \n\tvar result = [],\n\t    modelDef = '',\n\t    components = this.system().components(),\n\t    prop = '',\n\t    propType = '',\n\t    types = this.system().types();\n\t    \n  function _findModelName(id) {\n    var result = id,\n        modelName = '';\n  \n    for (modelName in components) {\n      if (typeof components[modelName][id] !== 'undefined') {\n        result = modelName;\n        break;\n      }\n    }\n    return result;\n  }    \n  \n  modelDef = this.getGeneratedModel(_findModelName(model));\n\t\n\tif (model !== this.system().name()) {\n  \tfor (prop in modelDef) {\n  \t  if (modelDef[prop].type && typeof types[modelDef[prop].type] !== 'undefined') {\n  \t    if (typeof types[modelDef[prop].type].schema !== 'undefined') {\n  \t      result.push(prop);\n  \t      for (propType in types[modelDef[prop].type].schema) {\n  \t        result.push(prop + '.' + propType);\n  \t      }\n  \t    } else {\n  \t      result.push(prop);\n  \t    }\n  \t  } else {\n  \t    result.push(prop);\n  \t  }\n    }\n  } else {\n    result.push('start');\n    result.push('stop');\n  }\n\n  result.sort();\n  \n  return result;\n}",
+      "action":
+        "function getModelPaths(model) { \n\tvar result = [],\n\t    modelDef = '',\n\t    components = this.system().components(),\n\t    prop = '',\n\t    propType = '',\n\t    types = this.system().types();\n\t    \n  function _findModelName(id) {\n    var result = id,\n        modelName = '';\n  \n    for (modelName in components) {\n      if (typeof components[modelName][id] !== 'undefined') {\n        result = modelName;\n        break;\n      }\n    }\n    return result;\n  }    \n  \n  modelDef = this.getGeneratedModel(_findModelName(model));\n\t\n\tif (model !== this.system().name()) {\n  \tfor (prop in modelDef) {\n  \t  if (modelDef[prop].type && typeof types[modelDef[prop].type] !== 'undefined') {\n  \t    if (typeof types[modelDef[prop].type].schema !== 'undefined') {\n  \t      result.push(prop);\n  \t      for (propType in types[modelDef[prop].type].schema) {\n  \t        result.push(prop + '.' + propType);\n  \t      }\n  \t    } else {\n  \t      result.push(prop);\n  \t    }\n  \t  } else {\n  \t    result.push(prop);\n  \t  }\n    }\n  } else {\n    result.push('start');\n    result.push('stop');\n  }\n\n  result.sort();\n  \n  return result;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -763,7 +893,8 @@
       "_id": "d1915d138cc1d922",
       "component": "SystemFactory",
       "state": "isModel",
-      "action": "function isModel(name) { \n\tvar schemas = this.system().schemas(),\n\t    result = false,\n\t    prop = '';\n\t    \n\t// compatibility\n\tif (name.indexOf('@') === 0 || name === '_Component') {\n\t  result = true;  \n\t}\n\t\n\tif (!result) {\n\t  for (prop in schemas) {\n\t    if (schemas[prop]._name === name) {\n\t      result = true;\n\t      break;\n\t    }\n\t  }\n\t}\n\t\n\treturn result;\n}",
+      "action":
+        "function isModel(name) { \n\tvar schemas = this.system().schemas(),\n\t    result = false,\n\t    prop = '';\n\t    \n\t// compatibility\n\tif (name.indexOf('@') === 0 || name === '_Component') {\n\t  result = true;  \n\t}\n\t\n\tif (!result) {\n\t  for (prop in schemas) {\n\t    if (schemas[prop]._name === name) {\n\t      result = true;\n\t      break;\n\t    }\n\t  }\n\t}\n\t\n\treturn result;\n}",
       "useCoreAPI": false,
       "core": false
     }
