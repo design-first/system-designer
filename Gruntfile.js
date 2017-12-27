@@ -31,7 +31,8 @@ module.exports = function (grunt) {
     prettier: grunt.file.readJSON('tasks/prettier.json'),
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
-    concat: grunt.file.readJSON('tasks/concat.json')
+    concat: grunt.file.readJSON('tasks/concat.json'),
+    mocha_istanbul: grunt.file.readJSON('tasks/mocha_istanbul.json')
   });
 
   // non trivial copy
@@ -90,7 +91,8 @@ module.exports = function (grunt) {
     'copy:libraries',
     'copy:ace',
     'copy:web-files',
-    'json_merge:web-systems'
+    'json_merge:web-systems',
+    'test'
   ]);
 
   // build for electron
@@ -120,5 +122,10 @@ module.exports = function (grunt) {
   // default build
   grunt.registerTask('build', [
     'web'
+  ]);
+
+   // default test
+   grunt.registerTask('test', [
+    'mocha_istanbul:e2etest'
   ]);
 };
