@@ -126,6 +126,6 @@ module.exports = function (grunt) {
 
    // default test
    grunt.registerTask('test', [
-    'mocha_istanbul:e2etest'
+    'mocha_istanbul:smoketest'
   ]);
 };
