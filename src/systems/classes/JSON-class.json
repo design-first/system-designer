@@ -980,7 +980,7 @@
               "component": "DVD",
               "state": "destroy",
               "action":
-                "function destroy() {\n  this.require('list').render();\n}",
+                "function destroy() { \n\n  this.require('list').render();\n\n  // destroy the component\n  $component.destroy(this.id());\n}",
               "useCoreAPI": false,
               "core": false
             },
