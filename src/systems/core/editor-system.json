@@ -609,7 +609,7 @@
         "type": "string",
         "readOnly": false,
         "mandatory": false,
-        "default": "2.3.0"
+        "default": "2.4.0"
       },
       "runWindow": {
         "type": "object",
@@ -907,7 +907,7 @@
       "component": "_Channel",
       "state": "send",
       "action":
-        "function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state');\n\n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\t\n}",
+        "function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state');\n\n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer.replace(':8888', '') + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\t\n}",
       "useCoreAPI": false,
       "core": false
     },

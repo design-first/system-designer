@@ -312,6 +312,12 @@ body,
   min-width: 300px;
   margin-bottom: 20px;
 }
+@media (max-width: 968px) {
+  .placeholder {
+    min-width: 260px;
+  }
+}
+
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
@@ -702,4 +708,13 @@ designer-spaces-components-header {
 .list-group.designer-command-result {
   cursor: pointer;
   margin-bottom: 0px;
+}
+
+@media (max-width: 767px) {
+  .form-horizontal .checkbox,
+  .form-horizontal .checkbox-inline,
+  .form-horizontal .radio,
+  .form-horizontal .radio-inline {
+    padding-top: 0px;
+  }
 }
