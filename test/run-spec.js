@@ -26,7 +26,7 @@ let page = null;
 
 describe('System Designer', function () {
 
-  this.timeout(5000);
+  this.timeout(10000);
 
   before(async () => {
     browser = await puppeteer.launch({
