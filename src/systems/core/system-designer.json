@@ -1166,7 +1166,7 @@
       "component": "_Channel",
       "state": "$editorUpdateSchemaName",
       "action":
-        "function $editorUpdateSchemaName(name, id) { \n  this.require('factory').updateSchemaName(name, id);\n\n  designer.save();\t\n}",
+        "function $editorUpdateSchemaName(name, id) { \n  this.require('factory').updateSchemaName(name, id);\n  \n  this.require('designer').save();\t\n}",
       "useCoreAPI": false,
       "core": false
     },
