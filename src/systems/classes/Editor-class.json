@@ -28,7 +28,7 @@
       "_id": "17a551ea931289c",
       "_name": "Editor",
       "editor": {
-        "type": "ace",
+        "type": "editorRef",
         "readOnly": true,
         "mandatory": true,
         "default": {}
@@ -203,10 +203,6 @@
     }
   },
   "types": {
-    "ace": {
-      "name": "ace",
-      "type": "object"
-    },
     "editorRuntimeType": {
       "name": "editorRuntimeType",
       "type": "string",
@@ -224,6 +220,10 @@
         "behavior",
         "component"
       ]
+    },
+    "editorRef": {
+      "name": "editorRef",
+      "type": "object"
     }
   },
   "components": {},
