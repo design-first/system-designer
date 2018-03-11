@@ -807,7 +807,7 @@
       "component": "1dbc51200e11612",
       "state": "click",
       "action":
-        "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+        "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
     },
     "g10e66157581049b": {
       "_id": "g10e66157581049b",
@@ -910,7 +910,7 @@
       "component": "r11f4117b5111373",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');;\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+        "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');;\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -919,7 +919,7 @@
       "component": "u11695143131df2f",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+        "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
