@@ -1,23 +1,8 @@
 {
-  "_id": "e89c617b6b15d28",
   "name": "electron",
-  "description": "Electron specificities",
+  "master": false,
   "version": "1.0.0",
-  "components": {
-    "HTML": {
-      "copyright.html": {
-        "_id": "copyright.html",
-        "source":
-          "Version {{version}}<br>Copyright © 2018 - <a href=\"\" onclick=\"runtime.require('designer').open('https://system-designer.readme.io/docs/who-is-behind-system-designer', '_blanck', true);return false;\">Erwan Carriou</a><br><br>System\nDesigner is <a href=\"\" onclick=\"runtime.require('designer').open('https://www.apache.org/licenses/LICENSE-2.0', '_blanck', true);return false;\">distributed under Apache License 2.0</a> and is powered by <a href=\"\" onclick=\"runtime.require('designer').open('https://designfirst.io/systemruntime/', '_blanck', true);return false;\">System Runtime</a>.<br><br>For comments or questions\nyou can <a href=\"\" onclick=\"runtime.require('designer').open('https://system-designer.readme.io/discuss/', '_blanck', true);return false;\">go to the support page</a> or <a href=\"mailto:erwan.carriou@mac.com\">send me an email</a>.<br>If you find a bug, please\nreport it on <a href=\"\" onclick=\"runtime.require('designer').open('https://github.com/design-first/system-designer/issues', '_blanck', true);return false;\">this page</a>."
-      },
-      "dialog-modal-welcome.html": {
-        "_id": "dialog-modal-welcome.html",
-        "source":
-          "<div class=\"modal fade\" id=\"designer-dialog-welcome-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                <form class=\"form-horizontal\" role=\"form\" id=\"designer-dialog-welcome-modal-form\">\n                    System Designer will help you to create systems. To begin have a look on our\n                    <a onclick=\"runtime.require('designer').open('https://system-designer.readme.io/docs/quick-start', '_blanck', true)\">Quick Start</a> page or at this short video:\n                        <br>\n                        <br>\n                        <div style=\"text-align: center;\">\n                            <video width=\"640\" height=\"360\" controls=\"controls\" style=\"max-width:100%;height:auto;\">\n                                <source src=\"video/systemdesigner.mp4\" type=\"video/mp4\">\n                            </video>\n                        </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-welcome-modal-ok\">OK</button>\n            </div>\n        </div>\n    </div>\n</div>\n<style>\n    #designer-dialog-welcome-modal-form a:hover {\n        cursor: pointer;\n        cursor: hand;\n    }\n</style>"
-      }
-    }
-  },
-  "behaviors": {},
+  "description": "Electron specificities",
   "schemas": {
     "p181111d5c01f97b": {
       "_name": "HTML",
@@ -48,6 +33,21 @@
       "_id": "w1417e1d6d613a0d"
     }
   },
+  "behaviors": {},
   "types": {},
-  "master": false
+  "components": {
+    "HTML": {
+      "copyright.html": {
+        "_id": "copyright.html",
+        "source":
+          "Version {{version}}<br>Copyright © 2018 - <a href=\"\" onclick=\"runtime.require('designer').open('https://system-designer.readme.io/docs/who-is-behind-system-designer', '_blanck', true);return false;\">Erwan Carriou</a><br><br>System\nDesigner is <a href=\"\" onclick=\"runtime.require('designer').open('https://www.apache.org/licenses/LICENSE-2.0', '_blanck', true);return false;\">distributed under Apache License 2.0</a> and is powered by <a href=\"\" onclick=\"runtime.require('designer').open('https://designfirst.io/systemruntime/', '_blanck', true);return false;\">System Runtime</a>.<br><br>For comments or questions\nyou can <a href=\"\" onclick=\"runtime.require('designer').open('https://system-designer.readme.io/discuss/', '_blanck', true);return false;\">go to the support page</a> or <a href=\"mailto:erwan.carriou@mac.com\">send me an email</a>.<br>If you find a bug, please\nreport it on <a href=\"\" onclick=\"runtime.require('designer').open('https://github.com/design-first/system-designer/issues', '_blanck', true);return false;\">this page</a>."
+      },
+      "dialog-modal-welcome.html": {
+        "_id": "dialog-modal-welcome.html",
+        "source":
+          "<div class=\"modal fade\" id=\"designer-dialog-welcome-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                <form class=\"form-horizontal\" role=\"form\" id=\"designer-dialog-welcome-modal-form\">\n                    System Designer will help you to create systems. To begin have a look on our\n                    <a onclick=\"runtime.require('designer').open('https://system-designer.readme.io/docs/quick-start', '_blanck', true)\">Quick Start</a> page or at this short video:\n                        <br>\n                        <br>\n                        <div style=\"text-align: center;\">\n                            <video width=\"640\" height=\"360\" controls=\"controls\" style=\"max-width:100%;height:auto;\">\n                                <source src=\"video/systemdesigner.mp4\" type=\"video/mp4\">\n                            </video>\n                        </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-welcome-modal-ok\">Close</button>\n            </div>\n        </div>\n    </div>\n</div>\n<style>\n    #designer-dialog-welcome-modal-form a:hover {\n        cursor: pointer;\n        cursor: hand;\n    }\n</style>"
+      }
+    }
+  },
+  "_id": "e89c617b6b15d28"
 }
