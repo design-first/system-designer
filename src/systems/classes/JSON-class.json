@@ -980,7 +980,7 @@
               "component": "DVD",
               "state": "destroy",
               "action":
-                "function destroy() { \n  const list = this.require('list'); \n\n  // destroy the component\n  $component.destroy(this.id());\n  \n  list.render();\n}",
+                "function destroy() { \n  var list = this.require('list'); \n\n  // destroy the component\n  $component.destroy(this.id());\n  \n  list.render();\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -3756,7 +3756,7 @@
               "component": "100e51f87218a8f",
               "state": "start",
               "action":
-                "function start() {\n  let luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n}",
+                "function start() {\n  var luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -3765,7 +3765,7 @@
               "component": "Jedi",
               "state": "fullName",
               "action":
-                "function fullName() {\n  let result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
+                "function fullName() {\n  var result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
               "useCoreAPI": false,
               "core": false
             }
