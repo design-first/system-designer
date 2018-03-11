@@ -56,7 +56,7 @@
       "dialog-modal-welcome.html": {
         "_id": "dialog-modal-welcome.html",
         "source":
-          "<div class=\"modal fade\" id=\"designer-dialog-welcome-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                <form class=\"form-horizontal\" role=\"form\">\n                    System Designer will help you to create systems. To begin have a look on our\n                    <a href=\"https://system-designer.readme.io/docs/quick-start\" target=\"_blank\">Quick Start</a> page or\n                    at this short video:\n                    <br>\n                    <br>\n                    <div style=\"text-align: center;\">\n                        <video width=\"640\" height=\"360\" controls=\"controls\" style=\"max-width:100%;height:auto;\">\n                            <source src=\"video/systemdesigner.mp4\" type=\"video/mp4\">\n                        </video>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-welcome-modal-ok\">OK</button>\n            </div>\n        </div>\n    </div>\n</div>"
+          "<div class=\"modal fade\" id=\"designer-dialog-welcome-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n    <div class=\"modal-dialog modal-lg\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"myModalLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                <form class=\"form-horizontal\" role=\"form\">\n                    System Designer will help you to create systems. To begin have a look on our\n                    <a href=\"https://system-designer.readme.io/docs/quick-start\" target=\"_blank\">Quick Start</a> page or\n                    at this short video:\n                    <br>\n                    <br>\n                    <div style=\"text-align: center;\">\n                        <video width=\"640\" height=\"360\" controls=\"controls\" style=\"max-width:100%;height:auto;\">\n                            <source src=\"video/systemdesigner.mp4\" type=\"video/mp4\">\n                        </video>\n                    </div>\n                </form>\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-welcome-modal-ok\">Close</button>\n            </div>\n        </div>\n    </div>\n</div>"
       },
       "menu-action-version.html": {
         "_id": "menu-action-version.html",
@@ -505,6 +505,11 @@
         "_id": "dialog-modal-delete.html",
         "source":
           "<div class=\"modal fade\" id=\"designer-dialog-delete-modal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"deleteLabel\">\n    <div class=\"modal-dialog modal-sm\" role=\"document\">\n        <div class=\"modal-content\">\n            <div class=\"modal-header\">\n                <h4 class=\"modal-title\" id=\"deleteLabel\">{{title}}</h4>\n            </div>\n            <div class=\"modal-body\">\n                {{message}}\n            </div>\n            <div class=\"modal-footer\">\n                <button type=\"button\" class=\"btn btn-default\" id=\"designer-dialog-delete-cancel\">Cancel</button>\n                <button type=\"button\" class=\"btn btn-primary\" id=\"designer-dialog-delete-ok\">Delete</button>\n            </div>\n        </div>\n    </div>\n</div>"
+      },
+      "message-help.html": {
+        "_id": "message-help.html",
+        "source":
+          "<div id=\"panel-message-help\" class=\"panel panel-default panel-help\">\n  <div class=\"panel-body\">\n  {{message}}            \n  </div>\n</div>"
       }
     }
   },

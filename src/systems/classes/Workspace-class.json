@@ -12,6 +12,13 @@
       "render": "method",
       "_id": "f1092816b571e03c",
       "_inherit": ["_Component"]
+    },
+    "f1a0b01c1fb15a8e": {
+      "_id": "f1a0b01c1fb15a8e",
+      "_name": "MessageHelp",
+      "_inherit": ["_Component"],
+      "render": "method",
+      "remove": "method"
     }
   },
   "models": {
@@ -22,14 +29,44 @@
       "clear": {},
       "_id": "v1435e1809e10be7",
       "render": {}
+    },
+    "k1127212a8e18f9c": {
+      "_id": "k1127212a8e18f9c",
+      "_name": "MessageHelp",
+      "render": {},
+      "remove": {}
     }
   },
-  "behaviors": {},
+  "behaviors": {
+    "d1c07e16ad411943": {
+      "_id": "d1c07e16ad411943",
+      "component": "MessageHelp",
+      "state": "render",
+      "action":
+        "function render() {\n  let template = '';\n  let message = '';\n  let dom = null;\n  let menu = this.require('state').menu();\n  let system = this.require('factory').system();\n\n  template = this.require('message-help.html');\n  \n  switch (true) {\n    case menu === 'systems':\n      message = \"To create a system, click on the '+' button or click here.\";\n      break;\n    case menu === 'schemas' && typeof system !== 'undefined':\n      message = \"To create a schema, click on the '+' button or click here.\";\n      break;\n    case menu === 'types' && typeof system !== 'undefined':\n      message = \"To create a type, click on the '+' button or click here.\";\n      break;\n    case menu === 'behaviors' && typeof system !== 'undefined':\n      message = \"To create a behavior, click on the '+' button or click here.\";\n      break;  \n    case menu === 'components' && typeof system !== 'undefined':\n      message = \"To create a component, click on the '+' button or click here.\";\n      break;\n    default:\n      break;\n  }\n\n  document.querySelector('#designer-workspace').insertAdjacentHTML(\n    'afterbegin', \n    template.source().replace(/{{message}}/gi, message));\n\n  // events\n  dom = document.getElementById('panel-message-help');\n  if (dom) {\n    dom.addEventListener('click', function click(event) {\n      this.require('workspace').create();\n    }.bind(this));\n  }\n\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "j14bb21eb8a1b68a": {
+      "_id": "j14bb21eb8a1b68a",
+      "component": "MessageHelp",
+      "state": "remove",
+      "action":
+        "function remove() { \n  if ($('#panel-message-help')) {\n\t  $('#panel-message-help').remove();\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
   "types": {},
   "components": {
     "Workspace": {
       "workspace": {
         "_id": "workspace"
+      }
+    },
+    "MessageHelp": {
+      "message-help": {
+        "_id": "message-help"
       }
     }
   },
