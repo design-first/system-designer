@@ -117,9 +117,9 @@ To build for [Cordova](http://cordova.apache.org):
 
 ```sh
 # run ios simulator
-$ cordova build ios
+$ cordova run ios
 # run android simulator
-$ cordova build android
+$ cordova run android
 ```
 
 Copy then the content of `/www` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
