@@ -105,15 +105,30 @@ $ npm run electron
 
 Copy then the content of `/dist` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
 
+Then in your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project:
+
+```sh
+$ npm run start
+```
+
 #### Build for Cordova
 
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
-$ npm run cordova
+# run ios simulator
+$ cordova build ios
+# run android simulator
+$ cordova build android
 ```
 
-Copy then the content of `/dist` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
+Copy then the content of `/www` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
+
+Then in your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project:
+
+```sh
+$ npm run start
+```
 
 ## Development
 
