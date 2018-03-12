@@ -116,10 +116,7 @@ $ npm run start
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
-# run ios simulator
-$ cordova run ios
-# run android simulator
-$ cordova run android
+$ cordova run cordova
 ```
 
 Copy then the content of `/www` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
@@ -127,7 +124,11 @@ Copy then the content of `/www` directory into your [System Designer for Cordova
 Then in your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project:
 
 ```sh
-$ npm run start
+# run ios simulator
+$ cordova run ios
+
+# run android simulator
+$ cordova run android
 ```
 
 ## Development
