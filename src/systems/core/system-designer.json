@@ -889,7 +889,7 @@
       "component": "1dbc51300e11z17",
       "state": "click",
       "action":
-        "function click() {\n  $('#designer-toolbar-item-search').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n\n  var message = this.require('message');\n  var Dialog = this.require('DialogSearch');\n\n  if (this.require('factory').system()) {\n    var dialog = new Dialog({\n      'title': 'Search in the system',\n    });\n    dialog.show();\n  } else {\n    message.warning('There is no system.');\n  }\n}"
+        "function click() {\n  $('#designer-toolbar-item-search').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n\n  var message = this.require('message');\n  var Dialog = this.require('DialogSearch');\n\n  if (this.require('factory').system()) {\n    var dialog = new Dialog({\n      'title': 'Search in the system',\n    });\n    dialog.show();\n  } else {\n    message.warning('You have no system.');\n  }\n}"
     },
     "a13b711adba1c7d4": {
       "_id": "a13b711adba1c7d4",
