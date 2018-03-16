@@ -309,18 +309,7 @@ body,
 }
 .placeholder {
   padding: 10px;
-  min-width: 300px;
   margin-bottom: 20px;
-}
-@media (max-width: 968px) {
-  .placeholder {
-    min-width: 260px;
-  }
-}
-@media (max-width: 768px) {
-  .placeholder {
-    min-width: 315px;
-  }
 }
 
 .placeholder img {
@@ -379,7 +368,7 @@ body,
 }
 
 #designer-spaces-system-items li:hover {
-  background-color: #e7e7e7;
+  background-color: hsl(0, 0%, 91%);
 }
 
 #designer-spaces-system-items > .active {
@@ -751,7 +740,7 @@ designer-spaces-components-header {
 
 .panel-help {
   width: 200px;
-  color: #ccc;
+  color: #99999f;
   border-color: #ccc;
   display: block;
   margin-left: auto;
@@ -767,4 +756,14 @@ designer-spaces-components-header {
 #designer-spaces-items {
   overflow: auto;
   max-height: 300px;
+}
+
+#designer-spaces-components-items {
+  overflow: auto;
+  max-height: 300px;
+}
+
+.row {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
 }
