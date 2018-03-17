@@ -1,7 +1,7 @@
 {
   "name": "system-designer",
   "master": true,
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "A Designer for Systems",
   "schemas": {
     "104ad1f48518376": {
@@ -161,393 +161,165 @@
       "_name": "_Channel",
       "$editorUpdateSchemaName": {
         "params": [
-          {
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "type": "string"
-          }
+          { "name": "name", "type": "string" },
+          { "name": "id", "type": "string" }
         ]
       },
       "$designerSync": {},
-      "$appLoadSystem": {
-        "params": [
-          {
-            "name": "system",
-            "type": "object"
-          }
-        ]
-      },
+      "$appLoadSystem": { "params": [{ "name": "system", "type": "object" }] },
       "$designerCreateBehavior": {
-        "params": [
-          {
-            "name": "behavior",
-            "type": "object"
-          }
-        ]
+        "params": [{ "name": "behavior", "type": "object" }]
       },
       "$editorUpdateBehavior": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "behavior",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "behavior", "type": "object" }
         ]
       },
       "$designerUpdateBehavior": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "behavior",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "behavior", "type": "object" }
         ]
       },
       "$editorDeleteBehavior": {
-        "params": [
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ]
+        "params": [{ "name": "id", "type": "string" }]
       },
       "$designerDeleteBehavior": {
-        "params": [
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ]
+        "params": [{ "name": "id", "type": "string" }]
       },
       "$designerCreateComponent": {
         "params": [
-          {
-            "name": "collection",
-            "type": "string"
-          },
-          {
-            "name": "component",
-            "type": "object"
-          }
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
         ]
       },
       "$editorUpdateComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          },
-          {
-            "name": "component",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
         ]
       },
       "$editorUpdateComponentId": {
         "params": [
-          {
-            "name": "oldId",
-            "type": "string"
-          },
-          {
-            "name": "newId",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          }
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" },
+          { "name": "collection", "type": "string" }
         ]
       },
       "$designerUpdateComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          },
-          {
-            "name": "component",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
         ]
       },
       "$editorDeleteComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
         ]
       },
       "$designerDeleteComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
         ]
       },
       "$designerCreateType": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "type",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "type", "type": "object" }
         ]
       },
       "$editorUpdateType": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "type",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "type", "type": "object" }
         ]
       },
-      "$editorDeleteType": {
-        "params": [
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ]
-      },
+      "$editorDeleteType": { "params": [{ "name": "id", "type": "string" }] },
       "$designerCreateSchema": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "schema",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "schema", "type": "object" }
         ]
       },
       "$editorUpdateSchema": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "schema",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "schema", "type": "object" }
         ]
       },
       "$editorUpdateSchemaId": {
         "params": [
-          {
-            "name": "oldId",
-            "type": "string"
-          },
-          {
-            "name": "newId",
-            "type": "string"
-          }
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" }
         ]
       },
       "$designerDeleteSchema": {
-        "params": [
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ]
+        "params": [{ "name": "id", "type": "string" }]
       },
       "$designerCreateModel": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "model",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
         ]
       },
       "$editorUpdateModel": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "model",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
         ]
       },
       "$designerUpdateModel": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "model",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
         ]
       },
       "$editorUpdateModelId": {
         "params": [
-          {
-            "name": "oldId",
-            "type": "string"
-          },
-          {
-            "name": "newId",
-            "type": "string"
-          }
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" }
         ]
       },
       "$designerDeleteModel": {
-        "params": [
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ]
+        "params": [{ "name": "id", "type": "string" }]
       },
-      "$designerDeleteType": {
-        "params": [
-          {
-            "name": "id",
-            "type": "string"
-          }
-        ]
-      },
+      "$designerDeleteType": { "params": [{ "name": "id", "type": "string" }] },
       "$editorUpdateSystem": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "system",
-            "type": "object"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "system", "type": "object" }
         ]
       },
-      "$appLogDebug": {
-        "params": [
-          {
-            "name": "message",
-            "type": "string"
-          }
-        ]
-      },
-      "$appLogInfo": {
-        "params": [
-          {
-            "name": "message",
-            "type": "string"
-          }
-        ]
-      },
-      "$appLogWarn": {
-        "params": [
-          {
-            "name": "message",
-            "type": "string"
-          }
-        ]
-      },
-      "$appLogError": {
-        "params": [
-          {
-            "name": "message",
-            "type": "string"
-          }
-        ]
-      },
+      "$appLogDebug": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogInfo": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogWarn": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogError": { "params": [{ "name": "message", "type": "string" }] },
       "$runtimeCreateComponent": {
         "params": [
-          {
-            "name": "collection",
-            "type": "string"
-          },
-          {
-            "name": "component",
-            "type": "object"
-          }
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
         ]
       },
       "$runtimeDeleteComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
         ]
       },
       "$runtimeUpdateComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "name": "collection",
-            "type": "string"
-          },
-          {
-            "name": "field",
-            "type": "string"
-          },
-          {
-            "name": "value",
-            "type": "any"
-          }
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "field", "type": "string" },
+          { "name": "value", "type": "any" }
         ]
       },
-      "send": {
-        "params": [
-          {
-            "name": "message",
-            "type": "message"
-          }
-        ]
-      },
+      "send": { "params": [{ "name": "message", "type": "message" }] },
       "$designerSetSystem": {
         "params": [
           {
@@ -720,7 +492,7 @@
         "type": "string",
         "readOnly": false,
         "mandatory": false,
-        "default": "2.4.0"
+        "default": "2.5.0"
       },
       "runWindow": {
         "type": "object",
@@ -792,12 +564,8 @@
         ]
       },
       "render": {},
-      "isCordova": {
-        "result": "boolean"
-      },
-      "isElectron": {
-        "result": "boolean"
-      },
+      "isCordova": { "result": "boolean" },
+      "isElectron": { "result": "boolean" },
       "updateCordovaContext": {},
       "messages": {
         "type": "array",
@@ -816,9 +584,7 @@
         ]
       },
       "installExtensions": {},
-      "isMac": {
-        "result": "boolean"
-      },
+      "isMac": { "result": "boolean" },
       "addShorcuts": {}
     },
     "j1311d115381b738": {
@@ -876,10 +642,7 @@
         "type": "navigation",
         "readOnly": false,
         "mandatory": false,
-        "default": {
-          "menu": [],
-          "spaces": []
-        }
+        "default": { "menu": [], "spaces": [] }
       }
     }
   },
@@ -969,7 +732,7 @@
       "component": "Spaces",
       "state": "render",
       "action":
-        "function render() { \n  var item = null,\n      items = [],\n      system = this.require('factory').system(),\n      SpaceItem = this.require('SpaceItem'),\n      spaceItem = null,\n      space = '',\n      id = '',\n      domItems = document.getElementById('designer-spaces-items'),\n      systemdomItems = document.getElementById('designer-spaces-system-items'),\n      componentdomItems = document.getElementById('designer-spaces-components-items'),\n      self = this,\n      name = '',\n      callback = null,\n      modelsName = [],\n      showComponents = false,\n      modelName = '',\n      componentId = '';\n\n  function _removeActive() {\n    var length = 0,\n        i = 0,\n        item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  function _findModel(compId, components) {\n    var result = '',\n        modelName = '';\n\n    for (modelName in components) {\n      if (typeof components[modelName][compId] !== 'undefined') {\n        result = modelName;\n        break;\n      }\n    }\n    return result;\n  }\n\n  $('#designer-spaces-help').empty();\n\n  // update header and help\n  switch (this.require('state').menu()) {\n    case 'systems':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Systems';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-system.html').source());\n      break;\n    case 'schemas':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Schemas';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-schemas.html').source());\n      break;\n    case 'models':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Models';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-models.html').source());\n      break;\n    case 'types':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Types';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-types.html').source());\n      break;\n    case 'behaviors':\n      $('#designer-spaces-spaces-system').show();\n      $('#designer-spaces-spaces-components').show();\n      document.getElementById('designer-spaces-type').innerHTML = 'Models';\n      document.getElementById('designer-spaces-system-header').innerHTML = 'System';\n      document.getElementById('designer-spaces-components-header').innerHTML = 'Components';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-behaviors.html').source());\n      break;\n    case 'components':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Models';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-components.html').source());\n      break;\n    case 'logs':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Logs';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-logs.html').source());\n      break;\n    default:\n      break;\n  }\n\n  // update spaces\n  // clear\n  $('#designer-spaces-items').empty();\n  $('#designer-spaces-system-items').empty();\n  $('#designer-spaces-components-items').empty();\n  if (system) {\n    switch (this.require('state').menu()) {\n      case 'systems':\n        // items                   \n        var systems = this.require('storage').get('system-designer-systems'),\n            systemIds = [],\n            length = 0,\n            i = 0;\n\n        if (systems) {\n          systemIds = systems.systems;\n        }\n        length = systemIds.length;\n\n        for (i = 0; i < length; i++) {\n          system = this.require('storage').get(systemIds[i]);\n\n          spaceItem = new SpaceItem({\n              'name': system.name,\n              'uuid': system._id\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n        \n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + item.uuid() + '#systems#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n              this.click();\n          }.bind(self.items(i)));\n        }\n\n        this.items().forEach(function (item) {\n          item.on('click', function () {\n            var designer = this.require('designer'),\n                system = this.require('storage').get(this.uuid()),\n                System = this.require('System');\n                \n            if (system) {\n              this.require('factory').create(system);\n            }\n            // empty log\n            this.require('state').logs().forEach(function (item) {\n              this.logs().pop();\n            }.bind(this.require('state')));\n          });\n        });\n\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            if (this.require('factory').system()) {\n              if ($('#designer-space-' + this.require('factory').system().name()).length) {\n                $('#designer-space-' + this.require('factory').system().name()).addClass('active');\n                this.require('state').space(this.require('factory').system().name());\n              }\n            } else {\n              item = domItems.children[0];\n              $(item).addClass('active');\n              this.require('state').space(this.items(0).name());\n            }\n          }\n        }\n\n        break;\n      case 'schemas':\n        // items    \n        for (name in system.schemas()) {\n          spaceItem = new SpaceItem({\n            'name': system.schemas()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.uuid() + '\" class=\"\"><a href=\"#' + system.id() + '#schemas#' + item.uuid() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.uuid());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).uuid());\n          }\n        } else {\n          this.require('state').space('');\n        }\n        break;\n        \n      case 'models':\n        // items    \n        for (name in system.models()) {\n          spaceItem = new SpaceItem({\n            'name': system.models()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.uuid() + '\" class=\"\"><a href=\"#' + system.id() + '#models#' + item.uuid() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.uuid());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).uuid());\n          }\n        } else {\n          this.require('state').space('');\n        }\n        break;\n      case 'types':\n        // items\n        for (name in system.types()) {\n          spaceItem = new SpaceItem({\n            'name': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#types#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).name());\n          }\n        }\n        break;\n      case 'behaviors':\n        // items\n        for (name in system.models()) {\n          spaceItem = new SpaceItem({\n            'name': system.models()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() < b.name()) {\n            result = 1;\n          }\n          if (a.name() > b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.items().reverse();\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          modelsName.push(item.name());\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#behaviors#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n\n        // systems\n        this.systems().forEach(function (item) {\n          this.systems().pop();\n        }.bind(this));\n\n        // sort\n        this.systems().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() < b.name()) {\n            result = 1;\n          }\n          if (a.name() > b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        if (this.require('storage').get('system-designer-systems') && this.require('storage').get('system-designer-systems').systems.length) {\n          spaceItem = new SpaceItem({\n            'name': this.require('factory').system().name(),\n            'uuid': this.require('factory').system().id()\n          });\n          this.systems().push(spaceItem);\n        }\n\n        this.systems().reverse();\n\n        this.systems().forEach(function (item) {\n          systemdomItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#behaviors#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().unshift('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = systemdomItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = systemdomItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.systems(i)));\n        }\n\n        space = this.require('state').space();\n        if (modelsName.indexOf(space) !== -1) {\n          showComponents = true;\n          modelName = space;\n        } else {\n          modelName = _findModel(space, this.require('factory').system().components());\n          if (modelName) {\n            showComponents = true;\n          }\n        }\n\n        if (showComponents) {\n\n          // components\n          this.components().forEach(function (item) {\n            this.components().pop();\n          }.bind(this));\n\n          // components\n          for (id in system.components()[modelName]) {\n            spaceItem = new SpaceItem({\n              'name': id,\n              'uuid': id\n            });\n            this.components().push(spaceItem);\n          }\n\n          // sort\n          this.components().sort(function (idA, idB) {\n            var a = runtime.require(idA),\n                b = runtime.require(idB);\n\n            var result = 0;\n            if (a.name() < b.name()) {\n              result = 1;\n            }\n            if (a.name() > b.name()) {\n              result = -1;\n            }\n            return result;\n          });\n\n          this.components().reverse();\n\n          this.components().forEach(function (item) {\n            modelsName.push(item.name());\n            componentdomItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name().replace(/\\./g, '-') + '\" class=\"\"><a href=\"#' + system.id() + '#behaviors#' + item.name() + '\">' + item.name() + '</a></li>');\n            this.require('state').navigation().spaces().push('designer-space-' + item.name());\n          }.bind(this));\n\n          // events\n          callback = function () {\n            _removeActive();\n            $(this).addClass('active');\n          };\n          length = componentdomItems.children.length;\n          for (i = 0; i < length; i++) {\n            item = componentdomItems.children[i];\n            item.addEventListener('click', callback);\n            item.addEventListener('click', function () {\n              this.click();\n            }.bind(self.components(i)));\n          }\n        }\n\n        // focus\n        if (this.items().length > 0) {\n          if ($('#designer-space-' + this.require('state').space().replace(/\\./g, '-')).length) {\n            $('#designer-space-' + this.require('state').space().replace(/\\./g, '-')).addClass('active');\n          } else {\n            item = systemdomItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.systems(0).name());\n          }\n        } else {\n          item = systemdomItems.children[0];\n          $(item).addClass('active');\n          this.require('state').space(this.systems(0).name());\n        }\n\n        break;\n        \n      case 'components':\n        // items\n        for (name in system.models()) {\n          spaceItem = new SpaceItem({\n            'name': system.models()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#components#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).name());\n          }\n        }\n\n        break;\n      case 'logs':\n        domItems.insertAdjacentHTML('beforeend', '<li class=\"active\"><a href=\"#' + system.id() + '#logs\">Console output</a></li>');\n        this.require('state').navigation().spaces([]);  \n        break;\n      default:\n        break;\n    }\n  }\n}",
+        "function render() { \n  var item = null,\n      items = [],\n      components = [],\n      systemItems = [],\n      system = this.require('factory').system(),\n      SpaceItem = this.require('SpaceItem'),\n      spaceItem = null,\n      space = '',\n      id = '',\n      domItems = document.getElementById('designer-spaces-items'),\n      systemdomItems = document.getElementById('designer-spaces-system-items'),\n      componentdomItems = document.getElementById('designer-spaces-components-items'),\n      self = this,\n      name = '',\n      callback = null,\n      modelsName = [],\n      showComponents = false,\n      modelName = '',\n      componentId = '';\n\n  function _removeActive() {\n    var length = 0,\n        i = 0,\n        item = null;\n\n    length = domItems.children.length;\n    for (i = 0; i < length; i++) {\n      item = domItems.children[i];\n      $(item).removeClass('active');\n    }\n  }\n\n  function _findModel(compId, components) {\n    var result = '',\n        modelName = '';\n\n    for (modelName in components) {\n      if (typeof components[modelName][compId] !== 'undefined') {\n        result = modelName;\n        break;\n      }\n    }\n    return result;\n  }\n\n  $('#designer-spaces-help').empty();\n\n  // update header and help\n  switch (this.require('state').menu()) {\n    case 'systems':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Systems';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-system.html').source());\n      break;\n    case 'schemas':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Schemas';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-schemas.html').source());\n      break;\n    case 'models':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Models';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-models.html').source());\n      break;\n    case 'types':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Types';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-types.html').source());\n      break;\n    case 'behaviors':\n      $('#designer-spaces-spaces-system').show();\n      $('#designer-spaces-spaces-components').show();\n      document.getElementById('designer-spaces-type').innerHTML = 'Models';\n      document.getElementById('designer-spaces-system-header').innerHTML = 'System';\n      document.getElementById('designer-spaces-components-header').innerHTML = 'Components';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-behaviors.html').source());\n      break;\n    case 'components':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Models';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-components.html').source());\n      break;\n    case 'logs':\n      $('#designer-spaces-spaces-system').hide();\n      $('#designer-spaces-spaces-components').hide();\n      document.getElementById('designer-spaces-type').innerHTML = 'Logs';\n      // help\n      document.getElementById('designer-spaces-help').insertAdjacentHTML('beforeend', this.require('help-logs.html').source());\n      break;\n    default:\n      break;\n  }\n\n  // update spaces\n  // clear\n  $('#designer-spaces-items').empty();\n  $('#designer-spaces-system-items').empty();\n  $('#designer-spaces-components-items').empty();\n  if (system) {\n    switch (this.require('state').menu()) {\n      case 'systems':\n        // items                   \n        var systems = this.require('storage').get('system-designer-systems'),\n            systemIds = [],\n            length = 0,\n            i = 0;\n\n        if (systems) {\n          systemIds = systems.systems;\n        }\n        length = systemIds.length;\n\n        for (i = 0; i < length; i++) {\n          system = this.require('storage').get(systemIds[i]);\n\n          spaceItem = new SpaceItem({\n              'name': system.name,\n              'uuid': system._id\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n        \n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + item.uuid() + '#systems#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n              this.click();\n          }.bind(self.items(i)));\n        }\n\n        this.items().forEach(function (item) {\n          item.on('click', function () {\n            var designer = this.require('designer'),\n                system = this.require('storage').get(this.uuid()),\n                System = this.require('System');\n                \n            if (system) {\n              this.require('factory').create(system);\n            }\n            // empty log\n            this.require('state').logs().forEach(function (item) {\n              this.logs().pop();\n            }.bind(this.require('state')));\n          });\n        });\n\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            if (this.require('factory').system()) {\n              if ($('#designer-space-' + this.require('factory').system().name()).length) {\n                $('#designer-space-' + this.require('factory').system().name()).addClass('active');\n                this.require('state').space(this.require('factory').system().name());\n              }\n            } else {\n              item = domItems.children[0];\n              $(item).addClass('active');\n              this.require('state').space(this.items(0).name());\n            }\n          }\n        }\n\n        break;\n      case 'schemas':\n        // items    \n        for (name in system.schemas()) {\n          spaceItem = new SpaceItem({\n            'name': system.schemas()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.uuid() + '\" class=\"\"><a href=\"#' + system.id() + '#schemas#' + item.uuid() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.uuid());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).uuid());\n          }\n        } else {\n          this.require('state').space('');\n        }\n        break;\n        \n      case 'models':\n        // items    \n        for (name in system.models()) {\n          spaceItem = new SpaceItem({\n            'name': system.models()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.uuid() + '\" class=\"\"><a href=\"#' + system.id() + '#models#' + item.uuid() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.uuid());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).uuid());\n          }\n        } else {\n          this.require('state').space('');\n        }\n        break;\n      case 'types':\n        // items\n        for (name in system.types()) {\n          spaceItem = new SpaceItem({\n            'name': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#types#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).name());\n          }\n        }\n        break;\n      case 'behaviors':\n        // items\n        for (name in system.models()) {\n          spaceItem = new SpaceItem({\n            'name': system.models()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        \n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() < b.name()) {\n            result = 1;\n          }\n          if (a.name() > b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.items().reverse();\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          modelsName.push(item.name());\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#behaviors#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n\n        // systems\n        systemItems = []\n\n        if (this.require('storage').get('system-designer-systems') && this.require('storage').get('system-designer-systems').systems.length) {\n          spaceItem = new SpaceItem({\n            'name': this.require('factory').system().name(),\n            'uuid': this.require('factory').system().id()\n          });\n          systemItems.push(spaceItem);\n        }\n        \n        this.systems(systemItems);\n\n        this.systems().forEach(function (item) {\n          systemdomItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#behaviors#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().unshift('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = systemdomItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = systemdomItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.systems(i)));\n        }\n\n        space = this.require('state').space();\n        if (modelsName.indexOf(space) !== -1) {\n          showComponents = true;\n          modelName = space;\n        } else {\n          modelName = _findModel(space, this.require('factory').system().components());\n          if (modelName) {\n            showComponents = true;\n          }\n        }\n\n        if (showComponents) {\n\n          // components\n          components = [];\n\n          // components\n          for (id in system.components()[modelName]) {\n            spaceItem = new SpaceItem({\n              'name': id,\n              'uuid': id\n            });\n            components.push(spaceItem);\n          }\n\n          this.components(components);\n\n          // sort\n          this.components().sort(function (idA, idB) {\n            var a = runtime.require(idA),\n                b = runtime.require(idB);\n\n            var result = 0;\n            if (a.name() < b.name()) {\n              result = 1;\n            }\n            if (a.name() > b.name()) {\n              result = -1;\n            }\n            return result;\n          });\n\n          this.components().reverse();\n\n          this.components().forEach(function (item) {\n            modelsName.push(item.name());\n            componentdomItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name().replace(/\\./g, '-') + '\" class=\"\"><a href=\"#' + system.id() + '#behaviors#' + item.name() + '\">' + item.name() + '</a></li>');\n            this.require('state').navigation().spaces().push('designer-space-' + item.name());\n          }.bind(this));\n\n          // events\n          callback = function () {\n            _removeActive();\n            $(this).addClass('active');\n          };\n          length = componentdomItems.children.length;\n          for (i = 0; i < length; i++) {\n            item = componentdomItems.children[i];\n            item.addEventListener('click', callback);\n            item.addEventListener('click', function () {\n              this.click();\n            }.bind(self.components(i)));\n          }\n        }\n\n        // focus\n        if (this.items().length > 0) {\n          if ($('#designer-space-' + this.require('state').space().replace(/\\./g, '-')).length) {\n            $('#designer-space-' + this.require('state').space().replace(/\\./g, '-')).addClass('active');\n          } else {\n            item = systemdomItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.systems(0).name());\n          }\n        } else {\n          item = systemdomItems.children[0];\n          $(item).addClass('active');\n          this.require('state').space(this.systems(0).name());\n        }\n\n        break;\n        \n      case 'components':\n        // items\n        for (name in system.models()) {\n          spaceItem = new SpaceItem({\n            'name': system.models()[name]._name,\n            'uuid': name\n          });\n          items.push(spaceItem);\n        }\n        this.items(items);\n\n        // sort\n        this.items().sort(function (idA, idB) {\n          var a = runtime.require(idA),\n              b = runtime.require(idB);\n\n          var result = 0;\n          if (a.name() > b.name()) {\n            result = 1;\n          }\n          if (a.name() < b.name()) {\n            result = -1;\n          }\n          return result;\n        });\n\n        this.require('state').navigation().spaces([]);\n        this.items().forEach(function (item) {\n          domItems.insertAdjacentHTML('beforeend', '<li id=\"designer-space-' + item.name() + '\" class=\"\"><a href=\"#' + system.id() + '#components#' + item.name() + '\">' + item.name() + '</a></li>');\n          this.require('state').navigation().spaces().push('designer-space-' + item.name());\n        }.bind(this));\n\n        // events\n        callback = function () {\n          _removeActive();\n          $(this).addClass('active');\n        };\n        length = domItems.children.length;\n        for (i = 0; i < length; i++) {\n          item = domItems.children[i];\n          item.addEventListener('click', callback);\n          item.addEventListener('click', function () {\n            this.click();\n          }.bind(self.items(i)));\n        }\n        // focus\n        if (length > 0) {\n          if ($('#designer-space-' + this.require('state').space()).length) {\n            $('#designer-space-' + this.require('state').space()).addClass('active');\n          } else {\n            item = domItems.children[0];\n            $(item).addClass('active');\n            this.require('state').space(this.items(0).name());\n          }\n        }\n\n        break;\n      case 'logs':\n        domItems.insertAdjacentHTML('beforeend', '<li class=\"active\"><a href=\"#' + system.id() + '#logs\">Console output</a></li>');\n        this.require('state').navigation().spaces([]);  \n        break;\n      default:\n        break;\n    }\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -1389,11 +1152,7 @@
   },
   "types": {},
   "components": {
-    "Router": {
-      "router": {
-        "_id": "router"
-      }
-    },
+    "Router": { "router": { "_id": "router" } },
     "ToolBarItem": {
       "1dbc51300e11z17": {
         "_id": "1dbc51300e11z17",

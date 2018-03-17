@@ -64,12 +64,8 @@
         ],
         "result": "string"
       },
-      "createDestroyBehavior": {
-        "result": "string"
-      },
-      "createStartBehavior": {
-        "result": "string"
-      },
+      "createDestroyBehavior": { "result": "string" },
+      "createStartBehavior": { "result": "string" },
       "createMergeComment": {
         "params": [
           {
@@ -109,12 +105,8 @@
         ],
         "result": "string"
       },
-      "createBehaviorParametersEvent": {
-        "result": "string"
-      },
-      "createBehaviorParametersEventArray": {
-        "result": "string"
-      }
+      "createBehaviorParametersEvent": { "result": "string" },
+      "createBehaviorParametersEventArray": { "result": "string" }
     }
   },
   "behaviors": {
@@ -123,7 +115,7 @@
       "component": "Language",
       "state": "createBehaviorBody",
       "action":
-        "function createBehaviorBody(returnedType) { \n\tvar body = '\\t\\n';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n      switch (returnedType) {\n        case 'css':\n        case 'html':\n        case 'javascript':  \n        case 'string':\n          body = \"\\let result = '';\\n\\treturn result;\\n\";\n          break;\n        case 'array':\n          body = \"\\tlet result = [];\\n\\treturn result;\\n\";\n          break;\n        case 'number':\n          body = \"\\tlet result = 0;\\n\\treturn result;\\n\";\n          break;\n        case 'boolean':\n          body = \"\\tlet result = false;\\n\\treturn result;\\n\";\n          break;\n        case 'object':\n        case 'json':\n          body = \"\\tlet result = {};\\n\\treturn result;\\n\";\n          break;\n        case 'date':\n          body = \"\\tlet result = '';\\n\\treturn result;\\n\";\n          break;\n        case 'any':\n          body = \"\\tlet result = null;\\n\\treturn result;\\n\";\n          break;\n        default:\n          body = \"\\tlet result = {};\\n\\treturn result;\\n\";\n          break;\n      }\n\t    break;\n\t  default:\n\t    break;\n\t}\n\t\n\treturn body;\n}",
+        "function createBehaviorBody(returnedType) { \n\tvar body = '  \\n';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n      switch (returnedType) {\n        case 'css':\n        case 'html':\n        case 'javascript':  \n        case 'string':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        case 'array':\n          body = \"  let result = [];\\n  return result;\\n\";\n          break;\n        case 'number':\n          body = \"  let result = 0;\\n  return result;\\n\";\n          break;\n        case 'boolean':\n          body = \"  let result = false;\\n  return result;\\n\";\n          break;\n        case 'object':\n        case 'json':\n          body = \"  let result = {};\\n  return result;\\n\";\n          break;\n        case 'date':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        case 'any':\n          body = \"  let result = null;\\n  return result;\\n\";\n          break;\n        default:\n          body = \"  let result = {};\\n  return result;\\n\";\n          break;\n      }\n\t    break;\n\t  default:\n\t    break;\n\t}\n\t\n\treturn body;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -132,7 +124,7 @@
       "component": "Language",
       "state": "createBehavior",
       "action":
-        "function createBehavior(name, params, body) { \n\tvar behavior = '',\n\t    funcName = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '\\t\\n';\n\t    }\n\t    \n\t    if (name.indexOf('.') !== -1) {\n\t      funcName = name.split('.')[1];\n\t    } else {\n\t      funcName = name;\n\t    }\n\t    \n\t    behavior = \"function \" + funcName + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
+        "function createBehavior(name, params, body) { \n\tvar behavior = '',\n\t    funcName = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '  \\n';\n\t    }\n\t    \n\t    if (name.indexOf('.') !== -1) {\n\t      funcName = name.split('.')[1];\n\t    } else {\n\t      funcName = name;\n\t    }\n\t    \n\t    behavior = \"function \" + funcName + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -150,7 +142,7 @@
       "component": "Language",
       "state": "createStartBehavior",
       "action":
-        "function createStartBehavior() { \n\tvar behavior = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    behavior = \"function start() { \\n\\t\\n}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
+        "function createStartBehavior() { \n\tvar behavior = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    behavior = \"function start() { \\n  \\n}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -209,12 +201,7 @@
     }
   },
   "components": {
-    "Language": {
-      "language": {
-        "_id": "language",
-        "target": "javascript"
-      }
-    }
+    "Language": { "language": { "_id": "language", "target": "javascript" } }
   },
   "_id": "c1e49117cdf1ef81"
 }
