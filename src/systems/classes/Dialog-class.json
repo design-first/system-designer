@@ -173,22 +173,13 @@
       "_name": "DialogComponentCreation",
       "_id": "t12b5d1be8512beb"
     },
-    "t15a691554c1155f": {
-      "_name": "DialogConfig",
-      "_id": "t15a691554c1155f"
-    },
+    "t15a691554c1155f": { "_name": "DialogConfig", "_id": "t15a691554c1155f" },
     "c1b56e1fdb3174a8": {
       "_name": "DialogDropFile",
       "_id": "c1b56e1fdb3174a8"
     },
-    "h1fedc1441312ac4": {
-      "_name": "DialogExport",
-      "_id": "h1fedc1441312ac4"
-    },
-    "t1c8ab1e8c010544": {
-      "_name": "DialogImport",
-      "_id": "t1c8ab1e8c010544"
-    },
+    "h1fedc1441312ac4": { "_name": "DialogExport", "_id": "h1fedc1441312ac4" },
+    "t1c8ab1e8c010544": { "_name": "DialogImport", "_id": "t1c8ab1e8c010544" },
     "w15777160d41bb38": {
       "_name": "DialogImportFile",
       "mergeSystem": {},
@@ -229,14 +220,8 @@
         "default": 0
       }
     },
-    "e167bf16b5c1fd5f": {
-      "_name": "DialogShare",
-      "_id": "e167bf16b5c1fd5f"
-    },
-    "k105d3130531ae5c": {
-      "_name": "DialogSync",
-      "_id": "k105d3130531ae5c"
-    },
+    "e167bf16b5c1fd5f": { "_name": "DialogShare", "_id": "e167bf16b5c1fd5f" },
+    "k105d3130531ae5c": { "_name": "DialogSync", "_id": "k105d3130531ae5c" },
     "k19f8d10dec1beda": {
       "_name": "DialogSystemCreation",
       "_id": "k19f8d10dec1beda"
@@ -245,10 +230,7 @@
       "_name": "DialogTypeCreation",
       "_id": "x1e7931468415710"
     },
-    "e1dd3f1e688107a8": {
-      "_name": "DialogWelcome",
-      "_id": "e1dd3f1e688107a8"
-    },
+    "e1dd3f1e688107a8": { "_name": "DialogWelcome", "_id": "e1dd3f1e688107a8" },
     "u147e01d928148d4": {
       "_id": "u147e01d928148d4",
       "_name": "DialogExtension",
@@ -277,10 +259,7 @@
         "default": 0
       }
     },
-    "i1d79c1b51e1c166": {
-      "_id": "i1d79c1b51e1c166",
-      "_name": "DialogDelete"
-    }
+    "i1d79c1b51e1c166": { "_id": "i1d79c1b51e1c166", "_name": "DialogDelete" }
   },
   "behaviors": {
     "k10e3f115ef1a83b": {
@@ -898,7 +877,7 @@
       "component": "DialogSystemCreation",
       "state": "ok",
       "action":
-        "function ok() { \n  var designer = this.require('designer'),\n    that = this,\n    name = null,\n    system = {},\n    ModelSystem = null,\n    modelSystem = null;\n  \n  function canCreate(name) {\n    var systems = that.require('storage').get('system-designer-systems'),\n      systemIds = [],\n      regExp = /[\\#\\&\\(\\)\\[\\]\\'\\\"\\*\\,\\;\\:\\%]/i,\n      i = 0,\n      result = true;\n  \n    if (systems) {\n      systemIds = systems.systems;\n    }\n    length = systemIds.length;\n  \n    for (i = 0; i < length; i++) {\n      system = that.require('storage').get(systemIds[i]);\n      if (system.name === name) {\n        result = false;\n        break;\n      }\n    }\n  \n    result = result && (name.match(regExp) === null);\n  \n    return result;\n  }\n  \n  // get value\n  name = $('#designer-dialog-system-creation-name').val();\n  \n  // clean\n  name = name.trim();\n  name = name.replace(/ /gi, '-');\n  \n  if (name && canCreate(name)) {\n  \n    system = this.require('factory').create({'name': name}, true);\n  \n    ModelSystem = this.require('ModelSystem');\n    modelSystem = new ModelSystem({\n      'title': name\n    });\n    modelSystem.uuid = system._id;\n    modelSystem.document(JSON.parse(JSON.stringify(system)));\n    modelSystem.content(JSON.stringify(system));\n  \n    designer.save();\n  \n    this.hide();\n    this.require('message-help').remove();\n  \n    this.require('state').space(name);\n  \n    this.require('spaces').render();\n    this.require('workspace').render();\n  \n    this.require('message').success('System created. You can now begin to create schemas.');\n  }\n}",
+        "function ok() { \n  var designer = this.require('designer'),\n    that = this,\n    name = null,\n    system = {},\n    ModelSystem = null,\n    modelSystem = null;\n  \n  function canCreate(name) {\n    var systems = that.require('storage').get('system-designer-systems'),\n      systemIds = [],\n      i = 0,\n      result = true;\n  \n    if (systems) {\n      systemIds = systems.systems;\n    }\n    length = systemIds.length;\n  \n    for (i = 0; i < length; i++) {\n      system = that.require('storage').get(systemIds[i]);\n      if (system.name === name) {\n        result = false;\n        break;\n      }\n    }\n  \n    return result;\n  }\n  \n  // get value\n  name = $('#designer-dialog-system-creation-name').val();\n  \n  // clean\n  name = name.trim();\n  name = name.replace(/\\s|\\t/gi, '-').replace(/[\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '');\n  \n  if (name && canCreate(name)) {\n  \n    system = this.require('factory').create({'name': name}, true);\n  \n    ModelSystem = this.require('ModelSystem');\n    modelSystem = new ModelSystem({\n      'title': name\n    });\n    modelSystem.uuid = system._id;\n    modelSystem.document(JSON.parse(JSON.stringify(system)));\n    modelSystem.content(JSON.stringify(system));\n  \n    designer.save();\n  \n    this.hide();\n    this.require('message-help').remove();\n  \n    this.require('state').space(name);\n  \n    this.require('spaces').render();\n    this.require('workspace').render();\n  \n    this.require('message').success('System created. You can now begin to create schemas.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -907,7 +886,7 @@
       "component": "DialogSchemaCreation",
       "state": "ok",
       "action":
-        "function ok() { \n  var designer = this.require('designer'),\n    that = this,\n    name = null,\n    schema = {},\n    ModelSchema = null,\n    modelSchema = null;\n  \n  function canCreate(name) {\n    var result = true,\n      regExp = /[\\#\\&\\(\\)\\[\\]\\'\\\"\\*\\,\\;\\:\\%]/i,\n      id = '';\n  \n    for (id in that.require('factory').system().schemas()) {\n      if (that.require('factory').system().schemas()[id]._name === name) {\n        result = false;\n        break;\n      }\n    }\n  \n    if (that.require('factory').system().name() === name) {\n      result = false;\n    }\n  \n    result = result && (name.match(regExp) === null);\n  \n    return result;\n  }\n  \n  // get value\n  name = $('#designer-dialog-schema-creation-name').val();\n  \n  // clean\n  name = name.trim();\n  name = name.replace(/ /gi, '_');\n  \n  if (name && canCreate(name)) {\n    schema = this.require('factory').addSchema(name);\n  \n    ModelSchema = this.require('ModelSchema');\n    modelSchema = new ModelSchema({\n      'title': name\n    });\n  \n    modelSchema.document(JSON.parse(JSON.stringify(schema)));\n    modelSchema.content(JSON.stringify(schema));\n    modelSchema.uuid(schema._id);\n  \n    this.require('designer').save();\n  \n    this.require('factory').createModel(schema);\n  \n    this.require('designer').save();\n  \n    this.require('channel').$designerCreateSchema(name, schema);\n  \n    this.hide();\n    this.require('message-help').remove();\n  \n    this.require('state').space(schema._id);\n  \n    this.require('spaces').render();\n    this.require('workspace').render();\n  \n    this.require('router').update();\n  \n    this.require('message').success('Schema created. A model has been also generated.');\n  }\n}",
+        "function ok() { \n  var designer = this.require('designer'),\n    that = this,\n    name = null,\n    schema = {},\n    ModelSchema = null,\n    modelSchema = null;\n  \n  function canCreate(name) {\n    var result = true,\n      id = '';\n  \n    for (id in that.require('factory').system().schemas()) {\n      if (that.require('factory').system().schemas()[id]._name === name) {\n        result = false;\n        break;\n      }\n    }\n  \n    if (that.require('factory').system().name() === name) {\n      result = false;\n    }\n  \n    return result;\n  }\n  \n  // get value\n  name = $('#designer-dialog-schema-creation-name').val();\n  \n  // clean\n  name = name.trim();\n  name = name.replace(/\\s|\\t/gi, '_').replace(/[\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '');\n  \n  if (name && canCreate(name)) {\n    schema = this.require('factory').addSchema(name);\n  \n    ModelSchema = this.require('ModelSchema');\n    modelSchema = new ModelSchema({\n      'title': name\n    });\n  \n    modelSchema.document(JSON.parse(JSON.stringify(schema)));\n    modelSchema.content(JSON.stringify(schema));\n    modelSchema.uuid(schema._id);\n  \n    this.require('designer').save();\n  \n    this.require('factory').createModel(schema);\n  \n    this.require('designer').save();\n  \n    this.require('channel').$designerCreateSchema(name, schema);\n  \n    this.hide();\n    this.require('message-help').remove();\n  \n    this.require('state').space(schema._id);\n  \n    this.require('spaces').render();\n    this.require('workspace').render();\n  \n    this.require('router').update();\n  \n    this.require('message').success('Schema created. A model has been also generated.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -924,7 +903,7 @@
       "component": "DialogTypeCreation",
       "state": "ok",
       "action":
-        "function ok() { \n  var designer = this.require('designer'),\n    name = null,\n    isEnum = false,\n    type = {},\n    ModelType = null,\n    modelType = null,\n    id = '';\n  \n  // get value\n  name = $('#designer-dialog-type-creation-name').val();\n  isEnum = $('#designer-dialog-type-creation-isEnum')[0].checked;\n  \n  // clean\n  name = name.trim();\n  name = name.replace(/ /gi, '_');\n  \n  if (name) {\n    type = this.require('factory').addType(name, isEnum);\n  \n    ModelType = this.require('ModelType');\n    modelType = new ModelType({\n      'title': name\n    });\n    modelType.uuid = name;\n    modelType.document(JSON.parse(JSON.stringify(type)));\n    modelType.content(JSON.stringify(type));\n  \n    designer.save();\n  \n    this.require('channel').$designerCreateType(name, type);\n  \n    this.hide();\n    this.require('message-help').remove();\n  \n    this.require('state').space(name);\n  \n    this.require('spaces').render();\n    this.require('workspace').render();\n  \n    this.require('message').success('Type created. You can use it in your model.');\n  }\n}",
+        "function ok() { \n  var designer = this.require('designer'),\n    name = null,\n    isEnum = false,\n    type = {},\n    ModelType = null,\n    modelType = null,\n    id = '',\n    that = this;\n    \n  function canCreate(name) {\n    var result = true,\n      id = '';\n  \n    for (id in that.require('factory').system().types()) {\n      if (that.require('factory').system().types()[id].name === name) {\n        result = false;\n        break;\n      }\n    }\n  \n    if (that.require('factory').system().name() === name) {\n      result = false;\n    }\n  \n    return result;\n  }\n  \n  // get value\n  name = $('#designer-dialog-type-creation-name').val();\n  isEnum = $('#designer-dialog-type-creation-isEnum')[0].checked;\n  \n  // clean\n  name = name.trim();\n  name = name.replace(/\\s|\\t/gi, '_').replace(/[\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '');\n  \n  if (name && canCreate(name)) {\n    type = this.require('factory').addType(name, isEnum);\n  \n    ModelType = this.require('ModelType');\n    modelType = new ModelType({\n      'title': name\n    });\n    modelType.uuid = name;\n    modelType.document(JSON.parse(JSON.stringify(type)));\n    modelType.content(JSON.stringify(type));\n  \n    designer.save();\n  \n    this.require('channel').$designerCreateType(name, type);\n  \n    this.hide();\n    this.require('message-help').remove();\n  \n    this.require('state').space(name);\n  \n    this.require('spaces').render();\n    this.require('workspace').render();\n  \n    this.require('message').success('Type created. You can use it in your model.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
