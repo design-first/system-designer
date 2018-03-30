@@ -14,7 +14,7 @@ Give the following informations related to your problem:
 
 - [ ] System Designer version number (ex: *v1.9.9*)
 - [ ] Platform (ex: *macOS version*)
-- [ ] Your OS version (ex: *macOS 10.12.6*)
+- [ ] Your OS version (ex: *macOS 10.13.3*)
 - [ ] If use on a phone, please give the model (ex: *iPhone 6S*)
 - [ ] Steps to reproduce the problem
 
