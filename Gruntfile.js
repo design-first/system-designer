@@ -45,9 +45,7 @@ module.exports = function (grunt) {
         'dest': 'dist',
         'options': {
           'process': content =>
-            content.replace('<html manifest=\"system-designer.appcache\">', '<html>')
-              .replace('<html manifest=\"../system-designer.appcache\">', '<html>')
-              .replace('<script src=\"lib/jquery/jquery.min.js\"></script>', '<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>')
+            content.replace('<script src=\"lib/jquery/jquery.min.js\"></script>', '<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>')
         },
       },
       'web-livereload': {
@@ -124,8 +122,8 @@ module.exports = function (grunt) {
     'web'
   ]);
 
-   // default test
-   grunt.registerTask('test', [
+  // default test
+  grunt.registerTask('test', [
     'mocha_istanbul:smoketest'
   ]);
 };
