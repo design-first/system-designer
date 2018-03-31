@@ -123,22 +123,12 @@
             "mandatory": false,
             "default": ""
           },
-          {
-            "name": "def",
-            "type": "object",
-            "mandatory": false,
-            "default": {}
-          }
+          { "name": "def", "type": "object", "mandatory": false, "default": {} }
         ]
       },
       "deleteSchema": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "sync",
             "type": "boolean",
@@ -147,9 +137,7 @@
           }
         ]
       },
-      "generateId": {
-        "result": "string"
-      },
+      "generateId": { "result": "string" },
       "getGeneratedSchema": {
         "params": [
           {
@@ -202,22 +190,12 @@
       },
       "mergeSystem": {
         "params": [
-          {
-            "name": "sys",
-            "type": "any",
-            "mandatory": false,
-            "default": null
-          }
+          { "name": "sys", "type": "any", "mandatory": false, "default": null }
         ]
       },
       "updateBehavior": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "behavior",
             "type": "object",
@@ -228,12 +206,7 @@
       },
       "updateComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "collection",
             "type": "string",
@@ -246,22 +219,12 @@
             "mandatory": false,
             "default": ""
           },
-          {
-            "name": "value",
-            "type": "any",
-            "mandatory": false,
-            "default": ""
-          }
+          { "name": "value", "type": "any", "mandatory": false, "default": "" }
         ]
       },
       "deleteComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "collection",
             "type": "string",
@@ -288,12 +251,7 @@
       },
       "updateSystem": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "system",
             "type": "object",
@@ -304,12 +262,7 @@
       },
       "overwriteComponent": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "collection",
             "type": "string",
@@ -326,22 +279,12 @@
       },
       "deleteBehavior": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": false, "default": "" }
         ]
       },
       "udpdateBehavior": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "behavior",
             "type": "object",
@@ -368,12 +311,7 @@
       },
       "updateModel": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "model",
             "type": "object",
@@ -400,12 +338,7 @@
       },
       "updateSchema": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "schema",
             "type": "object",
@@ -422,32 +355,17 @@
             "mandatory": false,
             "default": ""
           },
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": false, "default": "" }
         ]
       },
       "deleteType": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          }
+          { "name": "id", "type": "string", "mandatory": false, "default": "" }
         ]
       },
       "updateType": {
         "params": [
-          {
-            "name": "id",
-            "type": "string",
-            "mandatory": false,
-            "default": ""
-          },
+          { "name": "id", "type": "string", "mandatory": false, "default": "" },
           {
             "name": "type",
             "type": "object",
@@ -473,9 +391,7 @@
         ],
         "result": "System"
       },
-      "toJSON": {
-        "result": "any"
-      },
+      "toJSON": { "result": "any" },
       "addSchema": {
         "params": [
           {
@@ -552,10 +468,7 @@
             "mandatory": false,
             "default": ""
           },
-          {
-            "name": "collection",
-            "type": "string"
-          }
+          { "name": "collection", "type": "string" }
         ]
       },
       "getModelPaths": {
@@ -696,7 +609,7 @@
       "component": "SystemFactory",
       "state": "updateComponent",
       "action":
-        "function updateComponent(id, collection, field, value) { \n  var components = this.system().components();\n\n  if (typeof components[collection] !== 'undefined' && \n      typeof components[collection][id] !== 'undefined' &&\n      typeof components[collection][id][field] !== 'undefined') {\n    components[collection][id][field] = value;\n    this.system().components(components);\n  }\t\n}",
+        "function updateComponent(id, collection, field, value) { \n  var components = this.system().components();\n\n  function _hasSchema(name, schemas) {\n    var result = false,\n        id = '';\n\n    for (id in schemas) {\n        if (schemas[id]._name === name) {\n            result = true;\n            break;\n        }\n    }\n    return result;\n  }\n  \n  if (_hasSchema(collection, this.system().schemas())) {\n    if (typeof components[collection] !== 'undefined' && \n        typeof components[collection][id] !== 'undefined' &&\n        typeof components[collection][id][field] !== 'undefined') {\n      components[collection][id][field] = value;\n      this.system().components(components);\n    }\t\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -705,7 +618,7 @@
       "component": "SystemFactory",
       "state": "deleteComponent",
       "action":
-        "function deleteComponent(id, collection) { \n  var components = this.system().components(),\n      behaviors = this.system().behaviors(),\n      behaviorId = '';\n\n  if (typeof components[collection] !== 'undefined') {\n    delete components[collection][id];\n    this.system().components(components);\n    \n    // remove behaviors linked to the component\n    for (behaviorId in behaviors) {\n      if (behaviors[behaviorId].component === id) {\n\t      this.deleteBehavior(behaviorId);\n\t      this.require('channel').$designerDeleteBehavior(behaviorId);\n\t      break;\n\t    }\n    }\n  }\t\n}",
+        "function deleteComponent(id, collection) { \n  var components = this.system().components(),\n      behaviors = this.system().behaviors(),\n      behaviorId = '';\n      \n  function _hasSchema(name, schemas) {\n    var result = false,\n        id = '';\n\n    for (id in schemas) {\n        if (schemas[id]._name === name) {\n            result = true;\n            break;\n        }\n    }\n    return result;\n  }\n  \n  if (_hasSchema(collection, this.system().schemas())) {\n    if (typeof components[collection] !== 'undefined') {\n      delete components[collection][id];\n      this.system().components(components);\n      \n      // remove behaviors linked to the component\n      for (behaviorId in behaviors) {\n        if (behaviors[behaviorId].component === id) {\n  \t      this.deleteBehavior(behaviorId);\n  \t      this.require('channel').$designerDeleteBehavior(behaviorId);\n  \t      break;\n  \t    }\n      }\n    }\t\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -714,7 +627,7 @@
       "component": "SystemFactory",
       "state": "createComponent",
       "action":
-        "function createComponent(collection, component) { \n  var components = this.system().components();\n\n  if (typeof components[collection] === 'undefined') {\n    components[collection] = {};\n  }\n\n  delete component.classInfo;\n\n  components[collection][component._id] = component;\n  this.system().components(components);\n}",
+        "function createComponent(collection, component) { \n  var components = this.system().components();\n  \n  function _hasSchema(name, schemas) {\n    var result = false,\n        id = '';\n\n    for (id in schemas) {\n        if (schemas[id]._name === name) {\n            result = true;\n            break;\n        }\n    }\n    return result;\n  }\n  \n  if (_hasSchema(collection, this.system().schemas())) {\n    if (typeof components[collection] === 'undefined') {\n      components[collection] = {};\n    }\n  \n    delete component.classInfo;\n  \n    components[collection][component._id] = component;\n    this.system().components(components);\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -901,12 +814,7 @@
   },
   "types": {},
   "components": {
-    "SystemFactory": {
-      "factory": {
-        "_id": "factory",
-        "system": ""
-      }
-    }
+    "SystemFactory": { "factory": { "_id": "factory", "system": "" } }
   },
   "_id": "b1a876118c8137a2"
 }
