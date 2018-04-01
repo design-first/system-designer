@@ -1,7 +1,9 @@
 # System Designer
 
+[![npm](https://img.shields.io/npm/v/system-designer.svg)](https://www.npmjs.com/package/system-designer)
 [![Build Status](https://travis-ci.org/design-first/system-designer.svg?branch=master)](https://travis-ci.org/design-first/system-designer)
 [![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
+[![npm](https://img.shields.io/npm/dt/system-designer.svg)](https://www.npmjs.com/package/system-designer)
 
 ![Image Alt](https://designfirst.io/img/systemdesignerv2.png)
 

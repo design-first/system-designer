@@ -48,6 +48,15 @@ module.exports = function (grunt) {
             content.replace('<script src=\"lib/jquery/jquery.min.js\"></script>', '<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>')
         },
       },
+      'minify-json': {
+        'expand': true,
+        'cwd': 'dist/systems',
+        'src': ['*.json'],
+        'dest': 'dist/systems',
+        'options': {
+          'process': content => JSON.stringify(JSON.parse(content))
+        }
+      },
       'web-livereload': {
         'expand': true,
         'cwd': 'dist',
@@ -90,6 +99,7 @@ module.exports = function (grunt) {
     'copy:ace',
     'copy:web-files',
     'json_merge:web-systems',
+    'copy:minify-json',
     'test'
   ]);
 
@@ -102,7 +112,8 @@ module.exports = function (grunt) {
     'copy:ace',
     'copy:electron-files',
     'copy:electron-kludge',
-    'json_merge:electron-systems'
+    'json_merge:electron-systems',
+    'copy:minify-json',
   ]);
 
   // build for cordova
@@ -114,6 +125,7 @@ module.exports = function (grunt) {
     'copy:codemirror',
     'copy:cordova-files',
     'json_merge:cordova-systems',
+    'copy:minify-json',
     'concat:cordova-specific'
   ]);
 
