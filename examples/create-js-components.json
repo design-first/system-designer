@@ -1,0 +1,58 @@
+{
+  "name": "create-js-components",
+  "master": true,
+  "version": "1.0.1",
+  "description": "Create JavaScript components\n\nThis system is taken from the tutorial: https://system-designer.readme.io/docs/bundle-your-javascript",
+  "schemas": {
+    "1845f15ebf19bd7": {
+      "_id": "1845f15ebf19bd7",
+      "_name": "JavaScript",
+      "_inherit": [
+        "_Component"
+      ],
+      "source": "property",
+      "render": "method"
+    }
+  },
+  "models": {
+    "1e8da152c31a87c": {
+      "_id": "1e8da152c31a87c",
+      "_name": "JavaScript",
+      "source": {
+        "type": "javascript",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "render": {}
+    }
+  },
+  "behaviors": {
+    "199651cf5c14981": {
+      "_id": "199651cf5c14981",
+      "component": "1c01e1007a1f8e4",
+      "state": "start",
+      "action": "function start() { \n  this.require('custom_js').render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "1711716a0413c31": {
+      "_id": "1711716a0413c31",
+      "component": "JavaScript",
+      "state": "render",
+      "action": "function render() {\n    var div = document.createElement('script');\n    \n    div.innerHTML = this.source();\n    document.head.appendChild(div);\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "JavaScript": {
+      "custom_js": {
+        "_id": "custom_js",
+        "source": "alert('Hello world!');"
+      }
+    }
+  },
+  "_id": "1c01e1007a1f8e4"
+}

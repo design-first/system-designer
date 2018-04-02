@@ -1,0 +1,21 @@
+{
+	"name": "nodejs",
+	"master": true,
+	"version": "1.0.1",
+	"description": "Create a server application\n\nThis example shows you how to create a Node.js application in System Designer.\n\nYou can the test the application directly in System Designer (* macOS and windows versions only).",
+	"schemas": {},
+	"models": {},
+	"behaviors": {
+		"17d001e5ae12a44": {
+			"_id": "17d001e5ae12a44",
+			"component": "1638e12721115b5",
+			"state": "start",
+			"action": "function start() { \n  var http = require('http'),\n      logger = this.require('logger');\n\n  http.createServer(function (req, res) {\n    res.writeHead(200);\n    res.end('hello world\\n');\n  }).listen(1234);\n  \n  logger.info('server is running at http://127.0.0.1:1234');\n}",
+			"useCoreAPI": false,
+			"core": false
+		}
+	},
+	"types": {},
+	"components": {},
+	"_id": "1638e12721115b5"
+}

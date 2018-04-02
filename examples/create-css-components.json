@@ -1,0 +1,58 @@
+{
+  "name": "create-css-components",
+  "master": true,
+  "version": "1.0.1",
+  "description": "Create CSS components\n\nThis system is taken from the tutorial: https://system-designer.readme.io/docs/bundle-your-css",
+  "schemas": {
+    "15c421db8d144f8": {
+      "_id": "15c421db8d144f8",
+      "_name": "CSS",
+      "_inherit": [
+        "_Component"
+      ],
+      "source": "property",
+      "render": "method"
+    }
+  },
+  "models": {
+    "10ae813c1515699": {
+      "_id": "10ae813c1515699",
+      "_name": "CSS",
+      "source": {
+        "type": "css",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "render": {}
+    }
+  },
+  "behaviors": {
+    "16146151931c38f": {
+      "_id": "16146151931c38f",
+      "component": "100f91634c16625",
+      "state": "start",
+      "action": "function start() { \n  this.require('custom_style').render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "170e3198b61ba9d": {
+      "_id": "170e3198b61ba9d",
+      "component": "CSS",
+      "state": "render",
+      "action": "function render() {\n    var div = document.createElement('style');\n    \n    div.innerHTML = this.source();\n    document.head.appendChild(div);\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "CSS": {
+      "custom_style": {
+        "_id": "custom_style",
+        "source": "body {\n    background-color: #F5F5F5;\n}"
+      }
+    }
+  },
+  "_id": "100f91634c16625"
+}

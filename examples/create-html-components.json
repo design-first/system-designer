@@ -1,0 +1,67 @@
+{
+  "name": "create-html-components",
+  "master": true,
+  "version": "1.0.1",
+  "description": "Create HTML components\n\nThis system is taken from the tutorial: https://system-designer.readme.io/docs/bundle-your-html",
+  "schemas": {
+    "1bab01d624199e0": {
+      "_id": "1bab01d624199e0",
+      "_name": "HTML",
+      "_inherit": [
+        "_Component"
+      ],
+      "source": "property",
+      "render": "method"
+    }
+  },
+  "models": {
+    "1574d10d061c69e": {
+      "_id": "1574d10d061c69e",
+      "_name": "HTML",
+      "source": {
+        "type": "html",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "render": {
+        "params": [
+          {
+            "name": "id",
+            "type": "string",
+            "mandatory": false,
+            "default": "body"
+          }
+        ]
+      }
+    }
+  },
+  "behaviors": {
+    "1da271631b1b122": {
+      "_id": "1da271631b1b122",
+      "component": "1c1591f45b14c17",
+      "state": "start",
+      "action": "function start() { \n  this.require('custom_html').render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "1ba4d1878011fd3": {
+      "_id": "1ba4d1878011fd3",
+      "component": "HTML",
+      "state": "render",
+      "action": "function render(id) {\n  var dom = null;\n  \n  if (id === 'body') {\n    dom = document.body;\n  } else {\n    dom = document.getElementById(id);\n  }\n  \n  dom.insertAdjacentHTML('beforeend', this.source());\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "HTML": {
+      "custom_html": {
+        "_id": "custom_html",
+        "source": "<div style=\"margin-top:20%; text-align:center;\">\n    <input type=\"text\" name=\"input\" placeholder=\"Enter some text here\">\n</div>"
+      }
+    }
+  },
+  "_id": "1c1591f45b14c17"
+}

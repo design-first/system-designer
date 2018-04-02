@@ -1,0 +1,728 @@
+{
+	"name": "todo-mvc",
+	"master": true,
+	"version": "1.0.1",
+	"description": "Create a Todo manager.\n\nThe purpose of this example is to learn how to code in System Designer.\n\nTaken from TodoMVC, http://todomvc.com.\n\nBased on the work made by TasteJS (under a Creative Commons Attribution 4.0 International License).",
+	"schemas": {
+		"16a9f1c82c18818": {
+			"_id": "16a9f1c82c18818",
+			"_name": "TodoItem",
+			"_inherit": [
+				"_Component"
+			],
+			"component": "link",
+			"todo": "property",
+			"render": "method"
+		},
+		"1740a1d82d1d818": {
+			"_id": "1740a1d82d1d818",
+			"_name": "TodoApp",
+			"_inherit": [
+				"_Component"
+			],
+			"component": "link",
+			"list": "link",
+			"toggleButton": "link",
+			"footer": "link",
+			"render": "method",
+			"bindEvents": "method",
+			"addItem": "event",
+			"removeItem": "event",
+			"toggleItem": "event",
+			"clearCompletedItems": "event",
+			"toggleAllItems": "event",
+			"editItem": "event",
+			"saveItem": "event"
+		},
+		"11a211d1b71929d": {
+			"_id": "11a211d1b71929d",
+			"_name": "Todo",
+			"_inherit": [
+				"_Component"
+			],
+			"isCompleted": "property",
+			"label": "property"
+		},
+		"1ff3e1dc98118dc": {
+			"_id": "1ff3e1dc98118dc",
+			"_name": "HTMLComponent",
+			"_inherit": [
+				"_Component"
+			],
+			"template": "property",
+			"style": "property",
+			"render": "method"
+		},
+		"10e201646713c17": {
+			"_id": "10e201646713c17",
+			"_name": "TodoFooter",
+			"_inherit": [
+				"_Component"
+			],
+			"component": "link",
+			"clear": "link",
+			"render": "method"
+		},
+		"185be1d12213f59": {
+			"_id": "185be1d12213f59",
+			"_name": "TodoList",
+			"_inherit": [
+				"_Component"
+			],
+			"render": "method"
+		},
+		"1a1c918f9c1283e": {
+			"_id": "1a1c918f9c1283e",
+			"_name": "Router",
+			"_inherit": [
+				"_Component"
+			],
+			"path": "property",
+			"start": "method"
+		},
+		"1541114a9a17011": {
+			"_id": "1541114a9a17011",
+			"_name": "Store",
+			"_inherit": [
+				"_Component"
+			],
+			"add": "method",
+			"remove": "method",
+			"get": "method",
+			"getAll": "method"
+		},
+		"1723516a30132ac": {
+			"_id": "1723516a30132ac",
+			"_name": "_Database",
+			"_inherit": [
+				"_Component"
+			],
+			"_core": true,
+			"insert": "event",
+			"update": "event",
+			"remove": "event"
+		},
+		"1dd961a048100cc": {
+			"_id": "1dd961a048100cc",
+			"_name": "TodoToggleButton",
+			"_inherit": [
+				"_Component"
+			],
+			"component": "link",
+			"render": "method"
+		}
+	},
+	"models": {
+		"101e8182641017c": {
+			"_id": "101e8182641017c",
+			"_name": "TodoItem",
+			"component": {
+				"type": "HTMLComponent",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "todoitem"
+			},
+			"todo": {
+				"type": "Todo",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"render": {}
+		},
+		"1f99b13a2c10817": {
+			"_id": "1f99b13a2c10817",
+			"_name": "TodoApp",
+			"component": {
+				"type": "HTMLComponent",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "todoapp"
+			},
+			"toggleButton": {
+				"type": "TodoToggleButton",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "todo-toggle-button"
+			},
+			"list": {
+				"type": "TodoList",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "todo-list"
+			},
+			"footer": {
+				"type": "TodoFooter",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "todo-footer"
+			},
+			"render": {},
+			"addItem": {
+				"params": [
+					{
+						"name": "node",
+						"type": "DOMElement",
+						"mandatory": false,
+						"default": null
+					}
+				]
+			},
+			"bindEvents": {},
+			"removeItem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string",
+						"mandatory": false,
+						"default": ""
+					}
+				]
+			},
+			"toggleItem": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string",
+						"mandatory": false,
+						"default": ""
+					}
+				]
+			},
+			"clearCompletedItems": {},
+			"toggleAllItems": {
+				"params": [
+					{
+						"name": "value",
+						"type": "boolean",
+						"mandatory": false,
+						"default": false
+					}
+				]
+			},
+			"editItem": {
+				"params": [
+					{
+						"name": "node",
+						"type": "DOMElement",
+						"mandatory": false,
+						"default": null
+					}
+				]
+			},
+			"saveItem": {
+				"params": [
+					{
+						"name": "node",
+						"type": "DOMElement",
+						"mandatory": false,
+						"default": null
+					}
+				]
+			}
+		},
+		"1f4381d57e18dc2": {
+			"_id": "1f4381d57e18dc2",
+			"_name": "Todo",
+			"label": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "new todo"
+			},
+			"isCompleted": {
+				"type": "boolean",
+				"readOnly": false,
+				"mandatory": false,
+				"default": false
+			}
+		},
+		"1b91e159ee1ac17": {
+			"_id": "1b91e159ee1ac17",
+			"_name": "HTMLComponent",
+			"template": {
+				"type": "html",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"style": {
+				"type": "css",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"render": {
+				"params": [
+					{
+						"name": "elt",
+						"type": "DOMElement",
+						"mandatory": false,
+						"default": null
+					}
+				]
+			}
+		},
+		"1db15107941dcbc": {
+			"_id": "1db15107941dcbc",
+			"_name": "TodoFooter",
+			"component": {
+				"type": "HTMLComponent",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "footer"
+			},
+			"render": {},
+			"clear": {
+				"type": "HTMLComponent",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "clearcompleted"
+			}
+		},
+		"13b02113771092d": {
+			"_id": "13b02113771092d",
+			"_name": "TodoList",
+			"render": {}
+		},
+		"1c77717cd21a4f5": {
+			"_id": "1c77717cd21a4f5",
+			"_name": "Router",
+			"path": {
+				"type": "string",
+				"readOnly": false,
+				"mandatory": false,
+				"default": ""
+			},
+			"start": {}
+		},
+		"1ce171b33918f6a": {
+			"_id": "1ce171b33918f6a",
+			"_name": "Store",
+			"add": {
+				"params": [
+					{
+						"name": "todo",
+						"type": "object",
+						"mandatory": true,
+						"default": {}
+					}
+				]
+			},
+			"remove": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string",
+						"mandatory": true,
+						"default": ""
+					}
+				]
+			},
+			"getAll": {
+				"result": "array"
+			},
+			"get": {
+				"params": [
+					{
+						"name": "id",
+						"type": "string",
+						"mandatory": false,
+						"default": ""
+					}
+				],
+				"result": "any"
+			}
+		},
+		"154bc108b91ea44": {
+			"_id": "154bc108b91ea44",
+			"_name": "_Database",
+			"_core": true,
+			"insert": {
+				"params": [
+					{
+						"name": "event",
+						"type": "dbInsertEvent"
+					}
+				]
+			},
+			"update": {
+				"params": [
+					{
+						"name": "event",
+						"type": "dbUpdateEvent"
+					}
+				]
+			},
+			"remove": {
+				"params": [
+					{
+						"name": "event",
+						"type": "dbRemoveEvent"
+					}
+				]
+			}
+		},
+		"1b3e315905198bb": {
+			"_id": "1b3e315905198bb",
+			"_name": "TodoToggleButton",
+			"render": {},
+			"component": {
+				"type": "HTMLComponent",
+				"readOnly": false,
+				"mandatory": false,
+				"default": "toggleall"
+			}
+		}
+	},
+	"behaviors": {
+		"18dab15bb11ee9b": {
+			"_id": "18dab15bb11ee9b",
+			"component": "13e7b1b46c1b2ef",
+			"state": "start",
+			"action": "function start() { \n  var store = null;\n  \n  // get data from localstore\n  store = this.require('store').getAll();\n  store.forEach(function (todo) {\n    this.require('db').collections().Todo.insert(todo);\n  }.bind(this));\n \n  // add CSS\n  this.require('page').render();\n\n  // add TodoApp widget\n  this.require('todo-app').render();\n  this.require('todo-app').bindEvents();\n  \n  // add footer\n  this.require('info').render();\n  \n  // start router\n  this.require('router').start();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"103b6139091a334": {
+			"_id": "103b6139091a334",
+			"component": "HTMLComponent",
+			"state": "render",
+			"action": "function render(elt) { \n  var eltStyle = document.createElement('style'),\n      style = this.style(),\n      template = this.template(),\n      domNode = elt;\n\n  // render style\n  if (style) {\n    eltStyle.innerHTML = style;\n    document.head.appendChild(eltStyle);\n  }\n  \n  // render html\n  if (template) {\n    if (domNode === null) {\n      domNode = document.body;\n    }\n    \n    domNode.insertAdjacentHTML('beforeend', template);\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"12d0c1b8bf1ecb8": {
+			"_id": "12d0c1b8bf1ecb8",
+			"component": "TodoApp",
+			"state": "render",
+			"action": "function render() { \n  // template    \n  this.component().render();  \n  \n  // toggle button\n  this.toggleButton().render();\n  \n  // list\n  this.list().render();\n  \n  // footer\n  this.footer().render();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1ee1810bf31a414": {
+			"_id": "1ee1810bf31a414",
+			"component": "TodoFooter",
+			"state": "render",
+			"action": "function render() { \n  var template = this.component().template(),\n      domNode = null,\n      domTodoApp = null, \n      path = this.require('router').path(),\n      Todo = this.require('db').collections().Todo,\n      uncompletedTodo = [],\n      completedTodo = [];\n      \n  domTodoApp = document.getElementsByClassName('todoapp')[0];\n  if (domTodoApp) {\n      \n    // clean space\n    domNode = document.getElementsByClassName('footer')[0];\n    if (domNode) {\n      domNode.parentNode.removeChild(domNode);\n    } \n    \n    if (Todo.count() > 0) {\n      \n      uncompletedTodo = Todo.find({\n        'isCompleted': false\n      });\n      \n      // templating\n      template = template.replace(/{nbItems}/g, uncompletedTodo.length);\n      template = template.replace(/{item}/g, uncompletedTodo.length > 1 ? 'items' : 'item');\n      template = template.replace(/{select_all}/g, path === '' ? 'selected' : '');\n      template = template.replace(/{select_active}/g, path === 'active' ? 'selected' : '');\n      template = template.replace(/{select_completed}/g, path === 'completed' ? 'selected' : '');\n      \n      // if run inside System Designer\n      if (location.href.indexOf('/app/') !== -1) {\n        template = template.replace(/{path}/g, '#' + document.location.href.split('#')[1].split('?')[0].split('/')[0]);\n      } else {\n        template = template.replace(/{path}/g, '');\n      }\n      \n      domTodoApp.insertAdjacentHTML('beforeend', template);\n      \n      // clear button\n      completedTodo = Todo.find({\n        'isCompleted': true\n      });\n      \n      if (completedTodo.length > 0) {\n        template = this.clear().template();\n        \n        domNode = document.getElementsByClassName('footer')[0];\n        domNode.insertAdjacentHTML('beforeend', template);\n      }\n    }\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"12704171731fa79": {
+			"_id": "12704171731fa79",
+			"component": "TodoApp",
+			"state": "bindEvents",
+			"action": "function bindEvents() { \n\tvar dom = null;\n\t\n\tdom = document.getElementsByClassName('todoapp')[0];\n\tdom.addEventListener('keyup', function keyup(e) {\n\t  var ENTER_CODE = 13;\n\t  \n\t  if (e.keyCode == ENTER_CODE) {\n\t    switch (true) {\n\t      case e.target.className === 'new-todo':\n  \t      this.addItem(e.target);\n  \t    break;\n  \t  case e.target.className === 'edit':\n  \t    this.saveItem(e.target);\n  \t    break;\n  \t  default:\n  \t    break;\n\t    }\n\t  }\n\t}.bind(this));\n\t\n\tdom = document.getElementsByClassName('todoapp')[0];\n\tdom.addEventListener('click', function click(e) {\n\t  var id = '';\n\t  \n\t  switch (true) {\n\t    case e.target.className === 'destroy':\n\t      id = e.target.parentNode.parentNode.getAttribute('data-id');\n\t      this.removeItem(id);\n\t      break;\n\t    case e.target.className === 'toggle':\n\t      id = e.target.parentNode.parentNode.getAttribute('data-id');\n\t      this.toggleItem(id);\n\t      break;\n\t    case e.target.className === 'clear-completed':\n        this.clearCompletedItems();\n\t      break;\n\t    case e.target.className === 'toggle-all':\n        this.toggleAllItems(e.target.checked);\n\t      break;\n\t    default:\n\t      break;\n\t  }\n\t}.bind(this));\n\t\n\tdom = document.getElementsByClassName('todoapp')[0];\n\tdom.addEventListener('dblclick', function dbclick(e) {\n\t  switch (true) {\n\t    case e.target.tagName === 'LABEL':\n\t      this.editItem(e.target.parentNode.parentNode);\n\t      break;\n\t    default:\n\t      break;\n\t  }\n\t}.bind(this));\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"17d07185ae1bf87": {
+			"_id": "17d07185ae1bf87",
+			"component": "TodoApp",
+			"state": "addItem",
+			"action": "function addItem(node) { \n  var Todo = this.require('Todo');\n  \n  if (node.value.trim().length > 0) {\n    new Todo({\n      'label': node.value.trim(),\n      'isCompleted': false\n    });\n    node.value = '';\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"192f912efc13eb3": {
+			"_id": "192f912efc13eb3",
+			"component": "Todo",
+			"state": "init",
+			"action": "function init(conf) { \n  var todoApp = this.require('todo-app');\n  \n  if (todoApp) {\n    if (todoApp.toggleButton()) {\n      todoApp.toggleButton().render();\n    }\n    if (todoApp.list()) {\n      todoApp.list().render();\n    }\n    if (todoApp.footer()) {\n      todoApp.footer().render();\n    }\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1405c13bb6137c2": {
+			"_id": "1405c13bb6137c2",
+			"component": "TodoList",
+			"state": "render",
+			"action": "function render() { \n  var domNode = null,\n      path = this.require('router').path(),\n      Todo = this.require('db').collections().Todo,\n      todos = [];\n      \n  domNode = document.getElementsByClassName('todo-list')[0];\n  if (domNode) {\n    \n    // clean\n    this.require('db').collections().TodoItem.remove();\n    domNode.innerHTML = '';\n    \n    // find todos depenfing of path\n    switch (path) {\n      case 'active':\n        todos = Todo.find({\n          'isCompleted': false\n        });\n        break;\n      case 'completed':\n        todos = Todo.find({\n          'isCompleted': true\n        });\n        break;\n      default: \n         todos = Todo.find({});\n         break;\n    }\n    \n    // add the todos in the list\n    todos.forEach(function(todo) {\n      var TodoItem = this.require('TodoItem'),\n          todoItem = new TodoItem({\n            todo: this.require(todo._id)\n          });\n          \n      todoItem.render();\n    }.bind(this));\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"15f5414fe61ccd7": {
+			"_id": "15f5414fe61ccd7",
+			"component": "TodoItem",
+			"state": "render",
+			"action": "function render() { \n var template = this.component().template(),\n     domNode = null;\n      \n  // templating\n  template = template.replace(/{id}/g, this.todo().id());\n  template = template.replace(/{checked}/g, this.todo().isCompleted() ? 'checked': '');\n  template = template.replace(/{label}/g, this.todo().label());  \n  template = template.replace(/{completed}/g, this.todo().isCompleted() ? 'completed': '');  \n    \n  domNode = document.getElementsByClassName('todo-list')[0];\n  domNode.insertAdjacentHTML('beforeend', template);\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"130591377c16440": {
+			"_id": "130591377c16440",
+			"component": "Router",
+			"state": "start",
+			"action": "function start() { \n  var currentPath = window.location.href.split('#/')[1];\n  \n  // init \n  if (currentPath) {\n    this.path(currentPath);\n  }\n  \n  // on url change\n  window.addEventListener('hashchange', function (e) {\n    this.path(window.location.href.split('#/')[1]);\n  }.bind(this));\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1c661163d414918": {
+			"_id": "1c661163d414918",
+			"component": "Router",
+			"state": "path",
+			"action": "function path(value) { \n  // render TodoApp widget\n  this.require('todo-app').toggleButton().render();\n  this.require('todo-app').list().render();\n  this.require('todo-app').footer().render();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"107be1485a17252": {
+			"_id": "107be1485a17252",
+			"component": "Store",
+			"state": "add",
+			"action": "function add(todo) { \n  var store = null,\n      todos = {\n        'Todo': {}\n      };\n  \n  try {\n    if (typeof localStorage !== 'undefined') {\n      store = localStorage.getItem('todos-system');\n      if (store) {\n        todos = JSON.parse(store);\n      }\n      \n      todos.Todo[todo._id] = todo;\n      \n      localStorage.setItem('todos-system', JSON.stringify(todos));\n    } else {\n      this.require('logger').warn('no localStorage object found.');\n    }\n  } catch(e) {}\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"13ec21928013caf": {
+			"_id": "13ec21928013caf",
+			"component": "Store",
+			"state": "remove",
+			"action": "function remove(id) { \n  var store = null,\n      todos = {\n        'Todo': {}\n      };\n      \n  try {    \n    if (typeof localStorage !== 'undefined') {\n      store = localStorage.getItem('todos-system');\n      if (store) {\n      todos = JSON.parse(store);\n      }\n      \n      delete todos.Todo[id];\n      \n      localStorage.setItem('todos-system', JSON.stringify(todos));\n    } else {\n      this.require('logger').warn('no localStorage object found.');\n    }\n  } catch(e) {}\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"12ab411c671f7c8": {
+			"_id": "12ab411c671f7c8",
+			"component": "Store",
+			"state": "getAll",
+			"action": "function getAll() { \n  var store = null,\n      todos = {\n        'Todo': {}\n      },\n      result = [],\n      id = '';\n\t\n  try {\n    if (typeof localStorage !== 'undefined') {\n      store = localStorage.getItem('todos-system');\n      if (store) {\n        store = localStorage.getItem('todos-system');\n        todos = JSON.parse(store);\n      }\n      \n      for (id in todos.Todo) {\n        result.push(todos.Todo[id]);\n      }\n    } else {\n      this.require('logger').warn('no localStorage object found.');\n    }\n  } catch(e) {}\n  \n  return result;\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1de8c154bb18a01": {
+			"_id": "1de8c154bb18a01",
+			"component": "_Database",
+			"state": "insert",
+			"action": "function insert(event) { \n  if (event.collection === 'Todo') {\n    this.require('store').add(event.document);\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1adce1764013758": {
+			"_id": "1adce1764013758",
+			"component": "_Database",
+			"state": "remove",
+			"action": "function remove(event) { \n  if (event.collection === 'Todo') {\n\t  this.require('store').remove(event.id);\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"11040179ef13eb8": {
+			"_id": "11040179ef13eb8",
+			"component": "TodoToggleButton",
+			"state": "render",
+			"action": "function render() { \n  var domNode = null;\n  \n  // clean\n  domNode = document.getElementsByClassName('toggle-all')[0];\n  if (domNode) {\n    domNode.parentNode.removeChild(domNode);\n  } \n  domNode = document.querySelector('label[for=toggle-all]');\n  if (domNode) {\n    domNode.parentNode.removeChild(domNode);\n  } \n  \n  if (this.require('db').collections().Todo.count() > 0) {\n    this.component().render(document.getElementsByClassName('main')[0]);\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1dcca14ac81485e": {
+			"_id": "1dcca14ac81485e",
+			"component": "_Database",
+			"state": "update",
+			"action": "function update(event) { \n  var document = {},\n      store = this.require('store');\n\n\tif (event.collection === 'Todo') {\n\t  document = store.get(event.id);\n\t  document[event.field] = event.value;\n\t  store.add(document);\n  }\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1731a1fcac1f119": {
+			"_id": "1731a1fcac1f119",
+			"component": "Store",
+			"state": "get",
+			"action": "function get(id) { \n  var store = null,\n      todos = {\n        'Todo': {}\n      },\n      result = [];\n      \n\ttry { \n    if (typeof localStorage !== 'undefined') {\n      store = localStorage.getItem('todos-system');\n      if (store) {\n        todos = JSON.parse(store);\n      }\n      \n      result = todos.Todo[id];\n    } else {\n    this.require('logger').warn('no localStorage object found.');\n    }\n  } catch(e) {}\n\t\n  return result;\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"189961a32819de9": {
+			"_id": "189961a32819de9",
+			"component": "TodoApp",
+			"state": "removeItem",
+			"action": "function removeItem(id) { \n  this.require(id).destroy();\n  \n  this.toggleButton().render();\n  this.list().render();\n  this.footer().render();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"17ab514348121b3": {
+			"_id": "17ab514348121b3",
+			"component": "TodoApp",
+			"state": "toggleItem",
+			"action": "function toggleItem(id) { \n  this.require(id).isCompleted(!this.require(id).isCompleted());\n\t\n  this.toggleButton().render();\n  this.list().render();\n  this.footer().render();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"119191db0917a5e": {
+			"_id": "119191db0917a5e",
+			"component": "TodoApp",
+			"state": "clearCompletedItems",
+			"action": "function clearCompletedItems() { \n  var Todo = this.require('db').collections().Todo;\n  \n  Todo.remove({\n\t  'isCompleted': true\n  });\n\t\n  this.toggleButton().render();\n  this.list().render();\n  this.footer().render();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"11355111d516779": {
+			"_id": "11355111d516779",
+			"component": "TodoApp",
+			"state": "toggleAllItems",
+			"action": "function toggleAllItems(value) { \n  var Todo = this.require('db').collections().Todo;\n  \n  Todo.update({}, {\n    'isCompleted': value\n  });\n  \n  this.list().render();\n  this.footer().render();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"169021b1611a39f": {
+			"_id": "169021b1611a39f",
+			"component": "TodoApp",
+			"state": "editItem",
+			"action": "function editItem(node) { \n  node.setAttribute('class', 'editing');\n  node.children[1].value = node.children[1].value;\n  node.children[1].focus();\n}",
+			"useCoreAPI": false,
+			"core": false
+		},
+		"1a2f014dd11c329": {
+			"_id": "1a2f014dd11c329",
+			"component": "TodoApp",
+			"state": "saveItem",
+			"action": "function saveItem(node) { \n  var value = node.value,\n      li = node.parentNode,\n      id = li.getAttribute('data-id'),\n      label = '';\n  \n  if (value.trim().length > 0) {\n    this.require(id).label(value);\n  \n    label = document.querySelector('li[data-id=\\'' + id +'\\'] label');\n    label.innerText = value;\n  } else {\n    this.removeItem(id);\n  }\n  \n  li.setAttribute('class', '');\n  node.blur();\n}",
+			"useCoreAPI": false,
+			"core": false
+		}
+	},
+	"types": {
+		"DOMElement": {
+			"_id": "17e7e1bd1419021",
+			"name": "DOMElement",
+			"type": "object"
+		},
+		"dbUpdateEvent": {
+			"_id": "1f5c41309711752",
+			"name": "dbUpdateEvent",
+			"type": "object",
+			"schema": {
+				"collection": {
+					"type": "string",
+					"mandatory": true,
+					"default": ""
+				},
+				"id": {
+					"type": "string",
+					"mandatory": true,
+					"default": ""
+				},
+				"field": {
+					"type": "string",
+					"mandatory": true,
+					"default": ""
+				},
+				"value": {
+					"type": "any",
+					"mandatory": true,
+					"default": null
+				}
+			}
+		},
+		"dbRemoveEvent": {
+			"_id": "1952e1ac4213f4a",
+			"name": "dbRemoveEvent",
+			"type": "object",
+			"schema": {
+				"collection": {
+					"type": "string",
+					"mandatory": true,
+					"default": ""
+				},
+				"id": {
+					"type": "string",
+					"mandatory": true,
+					"default": ""
+				}
+			}
+		},
+		"dbInsertEvent": {
+			"_id": "148ef1e19810e6d",
+			"name": "dbInsertEvent",
+			"type": "object",
+			"schema": {
+				"collection": {
+					"type": "string",
+					"mandatory": true,
+					"default": ""
+				},
+				"document": {
+					"type": "object",
+					"mandatory": true,
+					"default": {}
+				}
+			}
+		}
+	},
+	"components": {
+		"TodoApp": {
+			"todo-app": {
+				"_id": "todo-app",
+				"component": "todoapp",
+				"footer": "todo-footer",
+				"list": "todo-list",
+				"toggleButton": "todo-toggle-button"
+			}
+		},
+		"TodoItem": {},
+		"Todo": {},
+		"TodoFooter": {
+			"todo-footer": {
+				"_id": "todo-footer",
+				"clear": "clearcompleted",
+				"component": "footer"
+			}
+		},
+		"HTMLComponent": {
+			"todoitem": {
+				"_id": "todoitem",
+				"template": "<li data-id=\"{id}\" class=\"{completed}\">\n\t<div class=\"view\">\n\t\t<input class=\"toggle\" type=\"checkbox\" {checked}>\n\t\t<label>{label}</label>\n\t\t<button class=\"destroy\"></button>\n\t</div>\n\t<input class=\"edit\" value=\"{label}\">\n</li>",
+				"style": ""
+			},
+			"info": {
+				"_id": "info",
+				"template": "<footer class=\"info\">\n\t<p>Double-click to edit a todo</p>\n\t<p>Created by <a href=\"https://designfirst.io/systemdesigner/\">System Designer</a></p>\n\t<p>Part of <a href=\"http://todomvc.com\">TodoMVC</a></p>\n</footer>",
+				"style": ""
+			},
+			"footer": {
+				"_id": "footer",
+				"template": "<footer class=\"footer\">\n    <span class=\"todo-count\"><strong>{nbItems}</strong> {item} left</span>\n    <ul class=\"filters\">\n    \t<li>\n    \t\t<a class=\"{select_all}\" href=\"{path}#/\">All</a>\n    \t</li>\n    \t<li>\n    \t\t<a class=\"{select_active}\" href=\"{path}#/active\">Active</a>\n    \t</li>\n    \t<li>\n    \t\t<a class=\"{select_completed}\" href=\"{path}#/completed\">Completed</a>\n    \t</li>\n    </ul>\n</footer>",
+				"style": ""
+			},
+			"todoapp": {
+				"_id": "todoapp",
+				"template": "<section class=\"todoapp\">\n\t<header class=\"header\">\n\t\t<h1>todos</h1>\n\t\t<input class=\"new-todo\" placeholder=\"What needs to be done?\" autofocus>\n\t</header>\n\t<section class=\"main\">\n    \t<ul class=\"todo-list\"></ul>\n    </section>\n</section>",
+				"style": ""
+			},
+			"page": {
+				"_id": "page",
+				"template": "",
+				"style": "html,\nbody {\n\tmargin: 0;\n\tpadding: 0;\n}\n\nbutton {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tbackground: none;\n\tfont-size: 100%;\n\tvertical-align: baseline;\n\tfont-family: inherit;\n\tfont-weight: inherit;\n\tcolor: inherit;\n\t-webkit-appearance: none;\n\tappearance: none;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n}\n\nbody {\n\tfont: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;\n\tline-height: 1.4em;\n\tbackground: #f5f5f5;\n\tcolor: #4d4d4d;\n\tmin-width: 230px;\n\tmax-width: 550px;\n\tmargin: 0 auto;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n\tfont-weight: 300;\n}\n\n:focus {\n\toutline: 0;\n}\n\n.hidden {\n\tdisplay: none;\n}\n\n.todoapp {\n\tbackground: #fff;\n\tmargin: 130px 0 40px 0;\n\tposition: relative;\n\tbox-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),\n\t            0 25px 50px 0 rgba(0, 0, 0, 0.1);\n}\n\n.todoapp input::-webkit-input-placeholder {\n\tfont-style: italic;\n\tfont-weight: 300;\n\tcolor: #e6e6e6;\n}\n\n.todoapp input::-moz-placeholder {\n\tfont-style: italic;\n\tfont-weight: 300;\n\tcolor: #e6e6e6;\n}\n\n.todoapp input::input-placeholder {\n\tfont-style: italic;\n\tfont-weight: 300;\n\tcolor: #e6e6e6;\n}\n\n.todoapp h1 {\n\tposition: absolute;\n\ttop: -155px;\n\twidth: 100%;\n\tfont-size: 100px;\n\tfont-weight: 100;\n\ttext-align: center;\n\tcolor: rgba(175, 47, 47, 0.15);\n\t-webkit-text-rendering: optimizeLegibility;\n\t-moz-text-rendering: optimizeLegibility;\n\ttext-rendering: optimizeLegibility;\n}\n\n.new-todo,\n.edit {\n\tposition: relative;\n\tmargin: 0;\n\twidth: 100%;\n\tfont-size: 24px;\n\tfont-family: inherit;\n\tfont-weight: inherit;\n\tline-height: 1.4em;\n\tborder: 0;\n\tcolor: inherit;\n\tpadding: 6px;\n\tborder: 1px solid #999;\n\tbox-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);\n\tbox-sizing: border-box;\n\t-webkit-font-smoothing: antialiased;\n\t-moz-osx-font-smoothing: grayscale;\n}\n\n.new-todo {\n\tpadding: 16px 16px 16px 60px;\n\tborder: none;\n\tbackground: rgba(0, 0, 0, 0.003);\n\tbox-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);\n}\n\n.main {\n\tposition: relative;\n\tz-index: 2;\n\tborder-top: 1px solid #e6e6e6;\n}\n\nlabel[for='toggle-all'] {\n\tdisplay: none;\n}\n\n.toggle-all {\n\tposition: absolute;\n\ttop: -55px;\n\tleft: -12px;\n\twidth: 60px;\n\theight: 34px;\n\ttext-align: center;\n\tborder: none; /* Mobile Safari */\n}\n\n.toggle-all:before {\n\tcontent: '❯';\n\tfont-size: 22px;\n\tcolor: #e6e6e6;\n\tpadding: 10px 27px 10px 27px;\n}\n\n.toggle-all:checked:before {\n\tcolor: #737373;\n}\n\n.todo-list {\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n}\n\n.todo-list li {\n\tposition: relative;\n\tfont-size: 24px;\n\tborder-bottom: 1px solid #ededed;\n}\n\n.todo-list li:last-child {\n\tborder-bottom: none;\n}\n\n.todo-list li.editing {\n\tborder-bottom: none;\n\tpadding: 0;\n}\n\n.todo-list li.editing .edit {\n\tdisplay: block;\n\twidth: 506px;\n\tpadding: 12px 16px;\n\tmargin: 0 0 0 43px;\n}\n\n.todo-list li.editing .view {\n\tdisplay: none;\n}\n\n.todo-list li .toggle {\n\ttext-align: center;\n\twidth: 40px;\n\t/* auto, since non-WebKit browsers doesn't support input styling */\n\theight: auto;\n\tposition: absolute;\n\ttop: 0;\n\tbottom: 0;\n\tmargin: auto 0;\n\tborder: none; /* Mobile Safari */\n\t-webkit-appearance: none;\n\tappearance: none;\n}\n\n.todo-list li .toggle:after {\n\tcontent: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"-10 -18 100 135\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"none\" stroke=\"#ededed\" stroke-width=\"3\"/></svg>');\n}\n\n.todo-list li .toggle:checked:after {\n\tcontent: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"-10 -18 100 135\"><circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"none\" stroke=\"#bddad5\" stroke-width=\"3\"/><path fill=\"#5dc2af\" d=\"M72 25L42 71 27 56l-4 4 20 20 34-52z\"/></svg>');\n}\n\n.todo-list li label {\n\tword-break: break-all;\n\tpadding: 15px 60px 15px 15px;\n\tmargin-left: 45px;\n\tdisplay: block;\n\tline-height: 1.2;\n\ttransition: color 0.4s;\n}\n\n.todo-list li.completed label {\n\tcolor: #d9d9d9;\n\ttext-decoration: line-through;\n}\n\n.todo-list li .destroy {\n\tdisplay: none;\n\tposition: absolute;\n\ttop: 0;\n\tright: 10px;\n\tbottom: 0;\n\twidth: 40px;\n\theight: 40px;\n\tmargin: auto 0;\n\tfont-size: 30px;\n\tcolor: #cc9a9a;\n\tmargin-bottom: 11px;\n\ttransition: color 0.2s ease-out;\n}\n\n.todo-list li .destroy:hover {\n\tcolor: #af5b5e;\n}\n\n.todo-list li .destroy:after {\n\tcontent: '×';\n}\n\n.todo-list li:hover .destroy {\n\tdisplay: block;\n}\n\n.todo-list li .edit {\n\tdisplay: none;\n}\n\n.todo-list li.editing:last-child {\n\tmargin-bottom: -1px;\n}\n\n.footer {\n\tcolor: #777;\n\tpadding: 10px 15px;\n\theight: 20px;\n\ttext-align: center;\n\tborder-top: 1px solid #e6e6e6;\n}\n\n.footer:before {\n\tcontent: '';\n\tposition: absolute;\n\tright: 0;\n\tbottom: 0;\n\tleft: 0;\n\theight: 50px;\n\toverflow: hidden;\n\tbox-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),\n\t            0 8px 0 -3px #f6f6f6,\n\t            0 9px 1px -3px rgba(0, 0, 0, 0.2),\n\t            0 16px 0 -6px #f6f6f6,\n\t            0 17px 2px -6px rgba(0, 0, 0, 0.2);\n}\n\n.todo-count {\n\tfloat: left;\n\ttext-align: left;\n}\n\n.todo-count strong {\n\tfont-weight: 300;\n}\n\n.filters {\n\tmargin: 0;\n\tpadding: 0;\n\tlist-style: none;\n\tposition: absolute;\n\tright: 0;\n\tleft: 0;\n}\n\n.filters li {\n\tdisplay: inline;\n}\n\n.filters li a {\n\tcolor: inherit;\n\tmargin: 3px;\n\tpadding: 3px 7px;\n\ttext-decoration: none;\n\tborder: 1px solid transparent;\n\tborder-radius: 3px;\n}\n\n.filters li a:hover {\n\tborder-color: rgba(175, 47, 47, 0.1);\n}\n\n.filters li a.selected {\n\tborder-color: rgba(175, 47, 47, 0.2);\n}\n\n.clear-completed,\nhtml .clear-completed:active {\n\tfloat: right;\n\tposition: relative;\n\tline-height: 20px;\n\ttext-decoration: none;\n\tcursor: pointer;\n}\n\n.clear-completed:hover {\n\ttext-decoration: underline;\n}\n\n.info {\n\tmargin: 65px auto 0;\n\tcolor: #bfbfbf;\n\tfont-size: 10px;\n\ttext-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);\n\ttext-align: center;\n}\n\n.info p {\n\tline-height: 1;\n}\n\n.info a {\n\tcolor: inherit;\n\ttext-decoration: none;\n\tfont-weight: 400;\n}\n\n.info a:hover {\n\ttext-decoration: underline;\n}\n\n/*\n\tHack to remove background from Mobile Safari.\n\tCan't use it globally since it destroys checkboxes in Firefox\n*/\n@media screen and (-webkit-min-device-pixel-ratio:0) {\n\t.toggle-all,\n\t.todo-list li .toggle {\n\t\tbackground: none;\n\t}\n\n\t.todo-list li .toggle {\n\t\theight: 40px;\n\t}\n\n\t.toggle-all {\n\t\t-webkit-transform: rotate(90deg);\n\t\ttransform: rotate(90deg);\n\t\t-webkit-appearance: none;\n\t\tappearance: none;\n\t}\n}\n\n@media (max-width: 430px) {\n\t.footer {\n\t\theight: 50px;\n\t}\n\n\t.filters {\n\t\tbottom: 10px;\n\t}\n}\n"
+			},
+			"clearcompleted": {
+				"_id": "clearcompleted",
+				"style": "",
+				"template": "<button class=\"clear-completed\">Clear completed</button>"
+			},
+			"toggleall": {
+				"_id": "toggleall",
+				"style": "",
+				"template": "<input class=\"toggle-all\" type=\"checkbox\">\n<label for=\"toggle-all\">Mark all as complete</label>"
+			}
+		},
+		"TodoList": {
+			"todo-list": {
+				"_id": "todo-list"
+			}
+		},
+		"Router": {
+			"router": {
+				"_id": "router",
+				"path": ""
+			}
+		},
+		"Store": {
+			"store": {
+				"_id": "store"
+			}
+		},
+		"TodoToggleButton": {
+			"todo-toggle-button": {
+				"_id": "todo-toggle-button",
+				"component": "toggleall"
+			}
+		}
+	},
+	"_id": "13e7b1b46c1b2ef"
+}
