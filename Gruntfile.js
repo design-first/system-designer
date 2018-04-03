@@ -74,7 +74,7 @@ module.exports = function (grunt) {
 
   // start the dev mode
   grunt.registerTask('dev', [
-    'clean',
+    'clean:build',
     'copy:web-folder',
     'copy:libraries',
     'copy:ace',
@@ -92,7 +92,7 @@ module.exports = function (grunt) {
 
   // build for web
   grunt.registerTask('web', [
-    'clean',
+    'clean:build',
     'prettier',
     'copy:web-folder',
     'copy:libraries',
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
 
   // build for electron
   grunt.registerTask('electron', [
-    'clean',
+    'clean:build',
     'prettier',
     'copy:web-folder',
     'copy:libraries',
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
 
   // build for cordova
   grunt.registerTask('cordova', [
-    'clean',
+    'clean:build',
     'prettier',
     'copy:web-folder',
     'copy:libraries',
@@ -126,7 +126,8 @@ module.exports = function (grunt) {
     'copy:cordova-files',
     'json_merge:cordova-systems',
     'copy:minify-json',
-    'concat:cordova-specific'
+    'concat:cordova-specific',
+    'clean:systems',
   ]);
 
   // default build
