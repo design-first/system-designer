@@ -184,7 +184,7 @@
       "component": "Designer",
       "state": "init",
       "action":
-        "function init(conf) { \n  if (!this.isCordova() && !this.isElectron()) {\n    if ('serviceWorker' in navigator) {\n      navigator.serviceWorker.register('/cache.js');\n    }\n  }\n}",
+        "function init(conf) { \n  if (!this.isCordova() && !this.isElectron()) {\n    if ('serviceWorker' in navigator) {\n      navigator.serviceWorker.register('./cache.js');\n    }\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
