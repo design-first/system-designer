@@ -106,12 +106,8 @@
           }
         ]
       },
-      "isCordova": {
-        "result": "boolean"
-      },
-      "isElectron": {
-        "result": "boolean"
-      },
+      "isCordova": { "result": "boolean" },
+      "isElectron": { "result": "boolean" },
       "runMessages": {
         "params": [
           {
@@ -125,9 +121,7 @@
       "updateCordovaContext": {},
       "_id": "q129be1c61b18285",
       "installExtensions": {},
-      "isMac": {
-        "result": "boolean"
-      },
+      "isMac": { "result": "boolean" },
       "addShorcuts": {}
     }
   },
@@ -182,6 +176,15 @@
       "state": "isMac",
       "action":
         "function isMac() { \n\tvar result = false;\n\t\n\tif (navigator.userAgent.toLowerCase().indexOf('macintosh') !== -1) {\n\t  result = true;\n\t} \n\treturn result;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z15ffd14bfe13325": {
+      "_id": "z15ffd14bfe13325",
+      "component": "Designer",
+      "state": "init",
+      "action":
+        "function init(conf) { \n  if (!this.isCordova() && !this.isElectron()) {\n    if ('serviceWorker' in navigator) {\n      navigator.serviceWorker.register('/cache.js');\n    }\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
