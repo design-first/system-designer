@@ -1,6 +1,6 @@
 self.addEventListener('install', function (e) {
   e.waitUntil(
-    caches.open('systemdesigner').then(function (cache) {
+    caches.open('systemdesignerv2.6.2').then(function (cache) {
       return cache.addAll([
         '/',
         'app/index.html',
@@ -41,7 +41,9 @@ self.addEventListener('install', function (e) {
         'lib/prism/prism.css',
         'lib/system-runtime/system-runtime.min.js',
         'lib/designer/vendor.js',
-        'lib/editor/vendor.js'
+        'lib/editor/vendor.js',
+        'manifest.json',
+        'img/icon.png'
       ]).then(() => self.skipWaiting());
     })
   );
@@ -52,6 +54,9 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+    return;
+  }
   event.respondWith(
     caches.match(event.request, { ignoreSearch: true }).then(response => {
       return response || fetch(event.request);
