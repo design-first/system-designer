@@ -209,7 +209,7 @@
               "component": "toolbar-item-template",
               "state": "click",
               "action":
-                "function click() { \n  this.require('modal-template').render();\t\n}",
+                "function click() { \n  $('#designer-toolbar-item-template').tooltip('hide');\n  this.require('modal-template').render();\t\n}",
               "useCoreAPI": false,
               "core": false
             },
