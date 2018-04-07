@@ -5,17 +5,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="An IDE for designing systems">
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover' name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
   <title>behavior · system </title>
   <!-- bootstrap -->
   <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- editor -->
+  <!-- editor styles -->
   <link href="styles/editor.css" rel="stylesheet">
-  <!-- codemirror -->
-  <link href="lib/codemirror/codemirror.css" rel="stylesheet">
-  <link href="lib/codemirror/theme/eclipse.css" rel="stylesheet">
-  <!-- cordova -->
-  <link href="styles/mobile.css" rel="stylesheet">
 </head>
 
 <body>
@@ -49,11 +44,13 @@
     <!-- editor -->
     <div id="designer-editor"></div>
   </div>
-  <!-- cordova -->
-  <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="scripts/mobile.js"></script>
+  <!-- ace -->
+  <script type="text/javascript" charset="utf-8" src="lib/ace/ace.js"></script>
+  <script type="text/javascript" charset="utf-8" src="lib/ace/ext-language_tools.js"></script>
   <!-- lib -->
+  <script>if (typeof module === "object") { window.module = module; module = undefined; }</script>
   <script src="lib/editor/vendor.js"></script>
+  <script>if (window.module) module = window.module;</script>
   <!-- designer -->
   <script type="text/javascript" src="scripts/editor-behavior.js"></script>
 </body>

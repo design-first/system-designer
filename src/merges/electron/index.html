@@ -5,8 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="An IDE for designing systems">
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover' name='viewport'/>
-  <link rel="icon" href="img/favicon.ico">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
   <title>System Designer</title>
   <!-- bootstrap -->
   <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,8 +13,6 @@
   <link href="lib/prism/prism.css" rel="stylesheet">
   <!-- designer styles -->
   <link href="styles/system-designer.css" rel="stylesheet">
-  <!-- designer system -->
-  <link href="systems/system-designer.json" type="application/json" rel="system">
 </head>
 
 <body id="body">
@@ -69,7 +66,11 @@
     </div>
   </div>
   <!-- lib -->
-  <script src="lib/designer/vendor.js"></script>
+  <script>if (typeof module === "object") {window.module = module; module = undefined;}</script>
+	<script src="lib/designer/vendor.js"></script>
+  <script>if (window.module) module = window.module;</script>
+  <!-- designer -->
+  <script type="text/javascript" src="scripts/system-designer.js"></script>
 </body>
 
 </html>

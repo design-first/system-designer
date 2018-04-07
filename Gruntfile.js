@@ -32,22 +32,13 @@ module.exports = function (grunt) {
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
-    mocha_istanbul: grunt.file.readJSON('tasks/mocha_istanbul.json')
+    mocha_istanbul: grunt.file.readJSON('tasks/mocha_istanbul.json'),
+    uglify: grunt.file.readJSON('tasks/uglify.json')
   });
 
   // non trivial copy
   grunt.config.merge({
     'copy': {
-      'electron-kludge': {
-        'expand': true,
-        'cwd': 'dist',
-        'src': ['*.html', 'app/index.html'],
-        'dest': 'dist',
-        'options': {
-          'process': content =>
-            content.replace('<script src=\"lib/jquery/jquery.min.js\"></script>', '<script>window.$ = window.jQuery = require(\"./lib/jquery/jquery.min.js\");</script>')
-        },
-      },
       'minify-json': {
         'expand': true,
         'cwd': 'dist/systems',
@@ -78,6 +69,8 @@ module.exports = function (grunt) {
     'copy:web-folder',
     'copy:libraries',
     'copy:ace',
+    'concat:vendor-designer',
+    'concat:vendor-editor',
     'copy:web-files',
     'json_merge:web-systems',
     'copy:web-livereload',
@@ -97,6 +90,8 @@ module.exports = function (grunt) {
     'copy:web-folder',
     'copy:libraries',
     'copy:ace',
+    'concat:vendor-designer',
+    'concat:vendor-editor',
     'copy:web-files',
     'json_merge:web-systems',
     'copy:minify-json',
@@ -110,10 +105,13 @@ module.exports = function (grunt) {
     'copy:web-folder',
     'copy:libraries',
     'copy:ace',
+    'concat:vendor-designer',
+    'concat:vendor-editor',
     'copy:electron-files',
-    'copy:electron-kludge',
     'json_merge:electron-systems',
     'copy:minify-json',
+    'concat:app',
+    'clean:systems'
   ]);
 
   // build for cordova
@@ -122,12 +120,15 @@ module.exports = function (grunt) {
     'prettier',
     'copy:web-folder',
     'copy:libraries',
+    'concat:vendor-designer',
+    'concat:cordova-vendor-editor',
+    'uglify:vendor-editor',
     'copy:codemirror',
     'copy:cordova-files',
     'json_merge:cordova-systems',
     'copy:minify-json',
-    'concat:cordova-specific',
-    'clean:systems',
+    'concat:app',
+    'clean:systems'
   ]);
 
   // default build
