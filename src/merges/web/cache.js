@@ -12,7 +12,7 @@ self.addEventListener('install', function (e) {
         'system.html',
         'type.html',
         'styles/editor.css',
-        'styles/system-designer.css',
+        'styles/designer.css',
         'systems/designer-runtime.json',
         'systems/system-designer.json',
         'systems/editor-behavior.json',
