@@ -178,15 +178,6 @@
         "function isMac() { \n\tvar result = false;\n\t\n\tif (navigator.userAgent.toLowerCase().indexOf('macintosh') !== -1) {\n\t  result = true;\n\t} \n\treturn result;\n}",
       "useCoreAPI": false,
       "core": false
-    },
-    "z15ffd14bfe13325": {
-      "_id": "z15ffd14bfe13325",
-      "component": "Designer",
-      "state": "init",
-      "action":
-        "function init(conf) { \n  if (!this.isCordova() && !this.isElectron()) {\n    if ('serviceWorker' in navigator) {\n      navigator.serviceWorker.register('./cache.js');\n    }\n  }\n}",
-      "useCoreAPI": false,
-      "core": false
     }
   },
   "types": {},
