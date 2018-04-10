@@ -807,7 +807,7 @@
       "component": "SystemFactory",
       "state": "isModel",
       "action":
-        "function isModel(name) { \n\tvar schemas = this.system().schemas(),\n\t    result = false,\n\t    prop = '';\n\t    \n\t// compatibility\n\tif (name.indexOf('@') === 0 || name === '_Component') {\n\t  result = true;  \n\t}\n\t\n\tif (!result) {\n\t  for (prop in schemas) {\n\t    if (schemas[prop]._name === name) {\n\t      result = true;\n\t      break;\n\t    }\n\t  }\n\t}\n\t\n\treturn result;\n}",
+        "function isModel(name) { \n\tvar schemas = this.system().schemas(),\n\t    result = false,\n\t    prop = '';\n\t    \n\tif (name === '_Component') {\n\t  result = true;  \n\t}\n\t\n\tif (!result) {\n\t  for (prop in schemas) {\n\t    if (schemas[prop]._name === name) {\n\t      result = true;\n\t      break;\n\t    }\n\t  }\n\t}\n\t\n\treturn result;\n}",
       "useCoreAPI": false,
       "core": false
     }
