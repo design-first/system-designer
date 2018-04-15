@@ -78,7 +78,7 @@
       "component": "Export",
       "state": "toHTML",
       "action":
-        "function toHTML(logLevel) {\n  var system = this.require('db').collections().System.find({\n    '_id': this.require('factory').system().id()\n  })[0];\n  system = JSON.parse(JSON.stringify(system));\n  delete system.classInfo;\n\n  var js = this.require('system-runtime.min.js').source();\n  var source = this.require('export-app.html').source();\n\n  source = source\n    .replace(/{{library}}/g, js)\n    .replace(/{{library}}/g, function () { return '\\$&' })\n    .replace(/{{name}}/g, this.require('factory').system().name())\n    .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n    .replace(/{{system}}/g, function (val) { return JSON.stringify(system) });\n\n  return source;\n}",
+        "function toHTML(logLevel) {\n  var system = this.require('db').collections().System.find({\n    '_id': this.require('factory').system().id()\n  })[0];\n  system = JSON.parse(JSON.stringify(system));\n  delete system.classInfo;\n\n  var source = this.require('export-app.html').source();\n\n  source = source\n    .replace(/{{name}}/g, this.require('factory').system().name())\n    .replace(/{{logLevel}}/g, $('#designer-dialog-export-options-log-level-select').val())\n    .replace(/{{system}}/g, function (val) { return JSON.stringify(system) });\n\n  return source;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -102,12 +102,6 @@
     }
   },
   "types": {},
-  "components": {
-    "Export": {
-      "export": {
-        "_id": "export"
-      }
-    }
-  },
+  "components": { "Export": { "export": { "_id": "export" } } },
   "_id": "b1b4c41801f15706"
 }

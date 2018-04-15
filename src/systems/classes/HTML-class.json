@@ -215,7 +215,7 @@
       "export-app.html": {
         "_id": "export-app.html",
         "source":
-          "<!DOCTYPE html>\n<html>\n\n<head>\n    <title>{{name}}</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n\n<body>\n    <!-- System Runtime -->\n    <script>\n{{library}}\n    </script>\n    <!-- system -->\n    <script>\n    runtime.on('ready', function ready() {\n        // set the level of log\n        this.require('logger').level('{{logLevel}}');\n        // install and start the system\n        this.install({{system}});\n    }, false, true);\n    </script>\n</body>\n\n</html>"
+          "<!DOCTYPE html>\n<html>\n\n<head>\n    <title>{{name}}</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n\n<body>\n  <!-- system runtime  -->\n  <script log=\"{{logLevel}}\" src=\"https://cdn.jsdelivr.net/npm/system-runtime@2.7.0/dist/system-runtime.min.js\"></script>\n  <!-- system -->\n  <script>\n    runtime.on('ready', function ready() {\n        // install and start the system\n        this.install({{system}});\n    }, false, true);\n  </script>\n</body>\n\n</html>"
       },
       "help-behaviors.html": {
         "_id": "help-behaviors.html",
