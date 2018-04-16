@@ -628,7 +628,7 @@
       "component": "1f1781882618102",
       "state": "click",
       "action":
-        "function click() { \n  var editor = this.require('editor'),\n      cleanSystem = this.require('store').data();\n  \n  delete cleanSystem.classInfo;\n  \n  editor.setEditor('json', JSON.stringify(cleanSystem, null, '\\t'), 2);\n}",
+        "function click() { \n  var editor = this.require('editor'),\n      data = this.require('store').data(),\n      extra = this.require('store').extra();\n \n  if (extra && extra.context) {\n    data[extra.context] = editor.getValue();\n    this.require('store').data(data);\n  }\n  \n  delete data.classInfo;\n  \n  editor.setEditor('json', JSON.stringify(data, null, '\\t'), 2);\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -655,7 +655,7 @@
       "component": "Designer",
       "state": "save",
       "action":
-        "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  switch (this.require('state').menu()) {\n    case 'name':\n      val = val.trim();\n      val = val.replace(/\\s|\\t/gi, '-')\n      .replace(/[\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '')\n      .replace(/\\r|\\n/gi,'');\n      this.require('editor').setValue(val);\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val.trim();\n      break;\n    case 'version':\n      store.version = val.trim();\n      break;\n    case 'json':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  this.require('store').data(store);\n\n  this.require('channel').$editorUpdateSystem(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}",
+        "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data();\n\n  switch (this.require('state').menu()) {\n    case 'name':\n      val = val.trim();\n      val = val.replace(/\\s|\\t/gi, '-')\n      .replace(/[\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '')\n      .replace(/\\r|\\n/gi,'');\n      this.require('editor').setValue(val);\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val.trim();\n      break;\n    case 'version':\n      store.version = val.trim();\n      break;\n    case 'bundle':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  this.require('store').data(store);\n\n  this.require('channel').$editorUpdateSystem(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -824,8 +824,8 @@
     "MenuItem": {
       "1f1781882618102": {
         "_id": "1f1781882618102",
-        "name": "json",
-        "html": "menu-item-json.html",
+        "name": "bundle",
+        "html": "menu-item-bundle.html",
         "position": 50,
         "type": "system",
         "platform": "all"
