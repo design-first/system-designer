@@ -55,7 +55,7 @@
       },
       "menu-action-version.html": {
         "_id": "menu-action-version.html",
-        "source": "<a>v2.7.0</a>"
+        "source": "<a>v2.7.1</a>"
       },
       "menu-header-behavior.html": {
         "_id": "menu-header-behavior.html",
@@ -210,12 +210,12 @@
       "export-app-github.html": {
         "_id": "export-app-github.html",
         "source":
-          "<!DOCTYPE html>\n<html>\n\n<head>\n  <title>{{name}}</title>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <!-- system -->\n  <link rel=\"system\" type=\"application/json\" href=\"{{name}}.json\">\n</head>\n\n<body>\n  <!-- system runtime  -->\n  <script log=\"{{logLevel}}\" src=\"https://cdn.jsdelivr.net/npm/system-runtime@2.7.0/dist/system-runtime.min.js\"></script>\n</body>\n\n</html>"
+          "<!DOCTYPE html>\n<html>\n\n<head>\n  <title>{{name}}</title>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <!-- system -->\n  <link rel=\"system\" type=\"application/json\" href=\"{{name}}.json\">\n</head>\n\n<body>\n  <!-- system runtime  -->\n  <script log=\"{{logLevel}}\" src=\"https://cdn.jsdelivr.net/npm/system-runtime@2.7.1/dist/system-runtime.min.js\"></script>\n</body>\n\n</html>"
       },
       "export-app.html": {
         "_id": "export-app.html",
         "source":
-          "<!DOCTYPE html>\n<html>\n\n<head>\n    <title>{{name}}</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n\n<body>\n  <!-- system runtime  -->\n  <script log=\"{{logLevel}}\" src=\"https://cdn.jsdelivr.net/npm/system-runtime@2.7.0/dist/system-runtime.min.js\"></script>\n  <!-- system -->\n  <script>\n    runtime.on('ready', function ready() {\n        // install and start the system\n        this.install({{system}});\n    }, false, true);\n  </script>\n</body>\n\n</html>"
+          "<!DOCTYPE html>\n<html>\n\n<head>\n    <title>{{name}}</title>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n\n<body>\n  <!-- system runtime  -->\n  <script log=\"{{logLevel}}\" src=\"https://cdn.jsdelivr.net/npm/system-runtime@2.7.1/dist/system-runtime.min.js\"></script>\n  <!-- system -->\n  <script>\n    runtime.on('ready', function ready() {\n        // install and start the system\n        this.install({{system}});\n    }, false, true);\n  </script>\n</body>\n\n</html>"
       },
       "help-behaviors.html": {
         "_id": "help-behaviors.html",
