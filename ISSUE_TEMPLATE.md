@@ -1,6 +1,6 @@
 For issues give the following informations related to your problem: 
 
-- [ ] System Designer version number: (ex: *v2.7.5*)
+- [ ] System Designer version number: (ex: *v2.7.6*)
 - [ ] System Designer platform: (ex: *macOS*)
 - [ ] Your OS version: (ex: *macOS 10.13.3*)
 - [ ] If use on a phone, please give the model: (ex: *iPhone X*)
