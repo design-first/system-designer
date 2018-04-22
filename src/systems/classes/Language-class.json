@@ -124,7 +124,7 @@
       "component": "Language",
       "state": "createBehavior",
       "action":
-        "function createBehavior(name, params, body) { \n\tvar behavior = '',\n\t    funcName = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '  \\n';\n\t    }\n\t    \n\t    if (name.indexOf('.') !== -1) {\n\t      funcName = name.split('.')[1];\n\t    } else {\n\t      funcName = name;\n\t    }\n\t    \n\t    behavior = \"function \" + funcName + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
+        "function createBehavior(name, params, body) { \n\tvar behavior = '',\n\t    funcName = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '  \\n';\n\t    }\n\t    \n\t    if (name.indexOf('.') !== -1) {\n\t      funcName = name.split('.')[name.split('.').length - 1];\n\t    } else {\n\t      funcName = name;\n\t    }\n\t    \n\t    behavior = \"function \" + funcName + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
       "useCoreAPI": false,
       "core": false
     },
