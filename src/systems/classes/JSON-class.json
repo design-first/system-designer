@@ -34,8 +34,506 @@
   "types": {},
   "components": {
     "JSON": {
-      "01-create-extension.json": {
-        "_id": "01-create-extension.json",
+      "00-quickstart": {
+        "_id": "00-quickstart",
+        "platform": "all",
+        "source": {
+          "name": "quick-start",
+          "master": true,
+          "version": "1.0.0",
+          "description":
+            "Quick start\n\nThis system is taken from the quick start: https://system-designer.readme.io/docs/quick-start",
+          "schemas": {
+            "154661fa5617782": {
+              "_id": "154661fa5617782",
+              "_name": "Jedi",
+              "_inherit": ["_Component"],
+              "firstName": "property",
+              "lastName": "property",
+              "father": "link",
+              "fullName": "method"
+            }
+          },
+          "models": {
+            "1a3a2150b31c099": {
+              "_id": "1a3a2150b31c099",
+              "_name": "Jedi",
+              "firstName": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": true,
+                "default": ""
+              },
+              "lastName": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": true,
+                "default": ""
+              },
+              "father": {
+                "type": "Jedi",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "fullName": { "result": "string" }
+            }
+          },
+          "behaviors": {
+            "137491d3c61213b": {
+              "_id": "137491d3c61213b",
+              "component": "100e51f87218a8f",
+              "state": "start",
+              "action":
+                "function start() {\n  var luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "11a2910bbd142e1": {
+              "_id": "11a2910bbd142e1",
+              "component": "Jedi",
+              "state": "fullName",
+              "action":
+                "function fullName() {\n  var result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {},
+          "components": {
+            "Jedi": {
+              "vador": {
+                "_id": "vador",
+                "father": "",
+                "firstName": "Dark",
+                "lastName": "Vador"
+              },
+              "luke": {
+                "_id": "luke",
+                "father": "vador",
+                "firstName": "Luke",
+                "lastName": "Skywalker"
+              }
+            }
+          },
+          "_id": "100e51f87218a8f"
+        }
+      },
+      "04-send-messages.json": {
+        "_id": "04-send-messages.json",
+        "source": {
+          "name": "send-messages",
+          "master": true,
+          "version": "1.0.0",
+          "description":
+            "Send messages threw a channel\n\n\nYou can send messages from one system to another system with channels. To do that:\n\n1. Define an event in '_Channel' schema and model.\n2. In '_Channel' 'send' method, define how to send the message to another channel (webRTC, XHR, ...).\n3. In another system, define how to get the message and send it to the system with: runtime.message().\n4. To send a message: this.require('channel').myevent(param1, param2, ...).\n5. To listen to the message, just add a behavior to the event.",
+          "schemas": {
+            "104ad1f48518376": {
+              "_id": "104ad1f48518376",
+              "_name": "_Channel",
+              "_inherit": ["_Component"],
+              "send": "event"
+            }
+          },
+          "models": {
+            "135c71078810af2": {
+              "_id": "135c71078810af2",
+              "_name": "_Channel",
+              "send": { "params": [{ "name": "message", "type": "message" }] }
+            }
+          },
+          "behaviors": {
+            "1ae8e11ece1a658": {
+              "_id": "1ae8e11ece1a658",
+              "component": "_Channel",
+              "state": "send",
+              "action": "function send(message) { \n\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {
+            "message": {
+              "name": "message",
+              "type": "object",
+              "schema": {
+                "event": {
+                  "description": "name of the event",
+                  "type": "string",
+                  "mandatory": true
+                },
+                "from": {
+                  "description": "id of the system",
+                  "type": "string",
+                  "mandatory": false
+                },
+                "data": {
+                  "description": "arguments send to the event",
+                  "type": "array",
+                  "mandatory": true
+                }
+              },
+              "core": true
+            }
+          },
+          "components": { "_Channel": { "channel": { "_id": "channel" } } },
+          "_id": "12eaf148b211195"
+        },
+        "platform": "all"
+      },
+      "01-book-collection": {
+        "_id": "01-book-collection",
+        "platform": "all",
+        "source": {
+          "name": "book-collection",
+          "master": true,
+          "version": "1.0.0",
+          "description":
+            "Create a Book collection manager\n\nThis system shows a list of books and an input to filter on that list.\n\nnote: if you create a Book Component when running the application, the list will be automatically updated",
+          "schemas": {
+            "z198ba11ccf1a29b": {
+              "_id": "z198ba11ccf1a29b",
+              "_name": "Template",
+              "_inherit": ["_Component"],
+              "source": "property",
+              "render": "method"
+            },
+            "l1f8dd1f44d1ef53": {
+              "_id": "l1f8dd1f44d1ef53",
+              "_name": "CSS",
+              "_inherit": ["_Component"],
+              "source": "property",
+              "render": "method"
+            },
+            "l1cbef1eb531773c": {
+              "_id": "l1cbef1eb531773c",
+              "_name": "List",
+              "_inherit": ["_Component"],
+              "filter": "property",
+              "render": "method"
+            },
+            "j1ca8314c081d9de": {
+              "_id": "j1ca8314c081d9de",
+              "_name": "Book",
+              "_inherit": ["_Component"],
+              "name": "property",
+              "year": "property",
+              "author": "link"
+            },
+            "k1d43e1430e1af90": {
+              "_id": "k1d43e1430e1af90",
+              "_name": "Author",
+              "_inherit": ["_Component"],
+              "firstName": "property",
+              "lastName": "property",
+              "fullName": "method"
+            }
+          },
+          "models": {
+            "o19b04191b513cf7": {
+              "_id": "o19b04191b513cf7",
+              "_name": "Template",
+              "source": {
+                "type": "html",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "render": {
+                "params": [
+                  {
+                    "name": "elt",
+                    "type": "DOMElement",
+                    "mandatory": false,
+                    "default": null
+                  }
+                ]
+              }
+            },
+            "z128c91df861dc34": {
+              "_id": "z128c91df861dc34",
+              "_name": "CSS",
+              "source": {
+                "type": "css",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "render": {}
+            },
+            "p1b9fa10ca51e9d4": {
+              "_id": "p1b9fa10ca51e9d4",
+              "_name": "List",
+              "render": {},
+              "filter": {
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "{}"
+              }
+            },
+            "o18b681c27f196a6": {
+              "_id": "o18b681c27f196a6",
+              "_name": "Book",
+              "_description": "",
+              "name": {
+                "description": "",
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "year": {
+                "description": "",
+                "type": "number",
+                "readOnly": false,
+                "mandatory": false,
+                "default": 0
+              },
+              "author": {
+                "description": "",
+                "type": "Author",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            },
+            "z174c61a72c16e21": {
+              "_id": "z174c61a72c16e21",
+              "_name": "Author",
+              "_description": "",
+              "firstName": {
+                "description": "",
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "lastName": {
+                "description": "",
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "fullName": {
+                "description": "",
+                "params": [],
+                "result": "string"
+              }
+            }
+          },
+          "behaviors": {
+            "r1e7a2121b21dd77": {
+              "_id": "r1e7a2121b21dd77",
+              "component": "k119f317c9d181db",
+              "state": "start",
+              "action":
+                "function start() { \n  // HTML\n  this.require('template').render();\n  \n  // CSS\n  this.require('list.css').render();\n  \n  // render the list\n  this.require('list').render();\n  \n  // event\n  document.getElementById('search').addEventListener('keyup', function keyup(e) {\n    this.require('list').filter(e.target.value.trim());\n  }.bind(this));\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "n1ab81101b41b375": {
+              "_id": "n1ab81101b41b375",
+              "component": "Template",
+              "state": "render",
+              "action":
+                "function render(elt) { \n  var html = this.source(),\n      domNode = elt;\n  \n  if (html) {\n    if (domNode === null) {\n      domNode = document.body;\n    }\n    \n    domNode.insertAdjacentHTML('beforeend', html);\n  }\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "g1725a1c65e1d149": {
+              "_id": "g1725a1c65e1d149",
+              "component": "CSS",
+              "state": "render",
+              "action":
+                "function render() { \n  var div = document.createElement('style');\n  div.innerHTML = this.source();\n  document.head.appendChild(div);\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "k1d4551afd717da8": {
+              "_id": "k1d4551afd717da8",
+              "component": "List",
+              "state": "render",
+              "action":
+                "function render() { \n  var items = [],\n      properties = {},\n      links = {},\n      html = '',\n      criteria = null,\n      table = document.getElementById('table');\n  \n  if (table) {\n  \n    // get data\n    if (this.filter().trim() !== '') {\n      criteria = new RegExp(this.filter().trim(), 'gi');\n      items = this.require('db').collections().Book.find({\n        name: criteria\n      });\n    } else {\n      items = this.require('db').collections().Book.find();\n    }\n    \n    properties = this.require('Book').classInfo().properties();\n    links = this.require('Book').classInfo().links();\n    \n    html = '<tr>';\n    // build table header\n    properties.forEach(function(property) {\n      html = html + '<th scope=\"col\">' + property.toUpperCase() +'</th>'; \n    });\n    links.forEach(function (link) {\n      html = html + '<th scope=\"col\">' + link.toUpperCase() +'</th>'; \n    });\n    html = html + '<tr>';\n    \n    // build table body\n    items.forEach(function (item){\n      html = html + '<tr>';\n      \n      properties.forEach(function(property) {\n        html = html + '<td>' + item[property] + '</td>';\n      });\n      \n      links.forEach(function (link) {\n        var author = this.require(item[link]);\n        \n        if (author) {\n          html = html + '<td>' + author.fullName() + '</td>';\n        } else {\n          html = html + '<td></td>';\n        }\n      }.bind(this));\n      \n      html = html + '</tr>';\n    }.bind(this));\n    \n    html = html + '</table>';\n    \n    table.innerHTML = html;\n  }\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "w1d4ac1c9821d391": {
+              "_id": "w1d4ac1c9821d391",
+              "component": "List",
+              "state": "filter",
+              "action": "function filter(value) { \n\tthis.render();\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "a1a55019f6a116d1": {
+              "_id": "a1a55019f6a116d1",
+              "component": "Book",
+              "state": "init",
+              "action":
+                "function init(conf) { \n  this.require('list').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "s106991b9f112c56": {
+              "_id": "s106991b9f112c56",
+              "component": "Book",
+              "state": "destroy",
+              "action":
+                "function destroy() { \n  this.require('list').render();\n\n  // destroy the component\n  $component.destroy(this.id());\n}",
+              "useCoreAPI": true,
+              "core": false
+            },
+            "e1792f1e6fa1b466": {
+              "_id": "e1792f1e6fa1b466",
+              "component": "Book",
+              "state": "name",
+              "action":
+                "function name(value) { \n  this.require('list').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "o10eb316e611f76c": {
+              "_id": "o10eb316e611f76c",
+              "component": "Book",
+              "state": "author",
+              "action":
+                "function author(value) { \n  this.require('list').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "k1f9321b4c91faa3": {
+              "_id": "k1f9321b4c91faa3",
+              "component": "Book",
+              "state": "year",
+              "action":
+                "function year(value) { \n  this.require('list').render();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "o1d3ca175e51c17b": {
+              "_id": "o1d3ca175e51c17b",
+              "component": "Author",
+              "state": "fullName",
+              "action":
+                "function fullName() { \n  let result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "v16a131728710660": {
+              "_id": "v16a131728710660",
+              "component": "Author",
+              "state": "firstName",
+              "action":
+                "function firstName(value) { \n this.require('list').render();\t\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "w1f4f5155c41fc51": {
+              "_id": "w1f4f5155c41fc51",
+              "component": "Author",
+              "state": "lastName",
+              "action":
+                "function lastName(value) { \n this.require('list').render();\t\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {
+            "DOMElement": {
+              "_id": "m14b771764815eca",
+              "name": "DOMElement",
+              "type": "object"
+            }
+          },
+          "components": {
+            "CSS": {
+              "list.css": {
+                "_id": "list.css",
+                "source":
+                  "body {\n  padding-top: 50px;\n  font-family: \"Helvetica Neue\",Helvetica,Arial,sans-serif;\n}\n\n.input-group {\n  padding-bottom:20px;\n}\n\ntable {\n  font-family: arial, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\ntd, th {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n}\n\nth {\n  background-color: #e7e7e7;\n}"
+              }
+            },
+            "Template": {
+              "template": {
+                "_id": "template",
+                "source":
+                  "<div class=\"input-group\">\n  <input id=\"search\" type=\"text\" class=\"form-control\" placeholder=\"search for a book name\">\n</div>\n\n<table id=\"table\"></table>"
+              }
+            },
+            "List": { "list": { "_id": "list", "filter": "" } },
+            "Book": {
+              "n193a61759c1003b": {
+                "_id": "n193a61759c1003b",
+                "author": "p183d91088f12f6a",
+                "name": "The Three Musketeers",
+                "year": 1844
+              },
+              "v1ff7018f18166da": {
+                "_id": "v1ff7018f18166da",
+                "author": "a1654216c6c11216",
+                "name": "Twenty Thousand Leagues Under the Sea",
+                "year": 1870
+              },
+              "g138f61067815e83": {
+                "_id": "g138f61067815e83",
+                "author": "r1ee7f1534e19b8b",
+                "name": "The Little Prince",
+                "year": 1943
+              }
+            },
+            "Author": {
+              "r1ee7f1534e19b8b": {
+                "_id": "r1ee7f1534e19b8b",
+                "firstName": "Antoine",
+                "lastName": "De Saint-Exupéry"
+              },
+              "a1654216c6c11216": {
+                "_id": "a1654216c6c11216",
+                "firstName": "Jules",
+                "lastName": "Verne"
+              },
+              "p183d91088f12f6a": {
+                "_id": "p183d91088f12f6a",
+                "firstName": "Alexandre",
+                "lastName": "Dumas"
+              }
+            }
+          },
+          "_id": "k119f317c9d181db"
+        }
+      },
+      "02-nodejs": {
+        "_id": "02-nodejs",
+        "platform": "electron",
+        "source": {
+          "name": "nodejs",
+          "master": true,
+          "version": "1.0.1",
+          "description":
+            "Create a server application\n\nThis example shows you how to create a Node.js application in System Designer.\n\nYou can the test the application directly in System Designer (* macOS and windows versions only).",
+          "schemas": {},
+          "models": {},
+          "behaviors": {
+            "17d001e5ae12a44": {
+              "_id": "17d001e5ae12a44",
+              "component": "1638e12721115b5",
+              "state": "start",
+              "action":
+                "function start() { \n  var http = require('http'),\n      logger = this.require('logger');\n\n  http.createServer(function (req, res) {\n    res.writeHead(200);\n    res.end('hello world\\n');\n  }).listen(1234);\n  \n  logger.info('server is running at http://127.0.0.1:1234');\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {},
+          "components": {},
+          "_id": "1638e12721115b5"
+        }
+      },
+      "04-create-extension.json": {
+        "_id": "04-create-extension.json",
         "platform": "all",
         "source": {
           "name": "extension-template",
@@ -318,70 +816,8 @@
           "_id": "h1ffb312ef619349"
         }
       },
-      "03-send-messages.json": {
-        "_id": "03-send-messages.json",
-        "source": {
-          "name": "send-messages",
-          "master": true,
-          "version": "1.0.0",
-          "description":
-            "Send messages threw a channel\n\n\nYou can send messages from one system to another system with channels. To do that:\n\n1. Define an event in '_Channel' schema and model.\n2. In '_Channel' 'send' method, define how to send the message to another channel (webRTC, XHR, ...).\n3. In another system, define how to get the message and send it to the system with: runtime.message().\n4. To send a message: this.require('channel').myevent(param1, param2, ...).\n5. To listen to the message, just add a behavior to the event.",
-          "schemas": {
-            "104ad1f48518376": {
-              "_id": "104ad1f48518376",
-              "_name": "_Channel",
-              "_inherit": ["_Component"],
-              "send": "event"
-            }
-          },
-          "models": {
-            "135c71078810af2": {
-              "_id": "135c71078810af2",
-              "_name": "_Channel",
-              "send": { "params": [{ "name": "message", "type": "message" }] }
-            }
-          },
-          "behaviors": {
-            "1ae8e11ece1a658": {
-              "_id": "1ae8e11ece1a658",
-              "component": "_Channel",
-              "state": "send",
-              "action": "function send(message) { \n\n}",
-              "useCoreAPI": false,
-              "core": false
-            }
-          },
-          "types": {
-            "message": {
-              "name": "message",
-              "type": "object",
-              "schema": {
-                "event": {
-                  "description": "name of the event",
-                  "type": "string",
-                  "mandatory": true
-                },
-                "from": {
-                  "description": "id of the system",
-                  "type": "string",
-                  "mandatory": false
-                },
-                "data": {
-                  "description": "arguments send to the event",
-                  "type": "array",
-                  "mandatory": true
-                }
-              },
-              "core": true
-            }
-          },
-          "components": { "_Channel": { "channel": { "_id": "channel" } } },
-          "_id": "12eaf148b211195"
-        },
-        "platform": "all"
-      },
-      "02-listen-collection-events.json": {
-        "_id": "02-listen-collection-events.json",
+      "05-listen-collection-events.json": {
+        "_id": "05-listen-collection-events.json",
         "source": {
           "name": "listen-collection-events",
           "master": true,
@@ -495,91 +931,6 @@
           "_id": "1d4431844018720"
         },
         "platform": "all"
-      },
-      "00-quickstart": {
-        "_id": "00-quickstart",
-        "platform": "all",
-        "source": {
-          "name": "quick-start",
-          "master": true,
-          "version": "1.0.0",
-          "description":
-            "Quick start\n\nThis system is taken from the quick start: https://system-designer.readme.io/docs/quick-start",
-          "schemas": {
-            "154661fa5617782": {
-              "_id": "154661fa5617782",
-              "_name": "Jedi",
-              "_inherit": ["_Component"],
-              "firstName": "property",
-              "lastName": "property",
-              "father": "link",
-              "fullName": "method"
-            }
-          },
-          "models": {
-            "1a3a2150b31c099": {
-              "_id": "1a3a2150b31c099",
-              "_name": "Jedi",
-              "firstName": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": true,
-                "default": ""
-              },
-              "lastName": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": true,
-                "default": ""
-              },
-              "father": {
-                "type": "Jedi",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "fullName": { "result": "string" }
-            }
-          },
-          "behaviors": {
-            "137491d3c61213b": {
-              "_id": "137491d3c61213b",
-              "component": "100e51f87218a8f",
-              "state": "start",
-              "action":
-                "function start() {\n  var luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "11a2910bbd142e1": {
-              "_id": "11a2910bbd142e1",
-              "component": "Jedi",
-              "state": "fullName",
-              "action":
-                "function fullName() {\n  var result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
-              "useCoreAPI": false,
-              "core": false
-            }
-          },
-          "types": {},
-          "components": {
-            "Jedi": {
-              "vador": {
-                "_id": "vador",
-                "father": "",
-                "firstName": "Dark",
-                "lastName": "Vador"
-              },
-              "luke": {
-                "_id": "luke",
-                "father": "vador",
-                "firstName": "Luke",
-                "lastName": "Skywalker"
-              }
-            }
-          },
-          "_id": "100e51f87218a8f"
-        }
       }
     }
   },
