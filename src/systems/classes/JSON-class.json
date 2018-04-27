@@ -187,7 +187,7 @@
         "source": {
           "name": "book-collection",
           "master": true,
-          "version": "1.0.0",
+          "version": "1.0.1",
           "description":
             "Create a Book collection manager\n\nThis system shows a list of books and an input to filter on that list.\n\nnote: if you create a Book Component when running the application, the list will be automatically updated",
           "schemas": {
@@ -329,7 +329,7 @@
               "component": "k119f317c9d181db",
               "state": "start",
               "action":
-                "function start() { \n  // HTML\n  this.require('template').render();\n  \n  // CSS\n  this.require('list.css').render();\n  \n  // render the list\n  this.require('list').render();\n  \n  // event\n  document.getElementById('search').addEventListener('keyup', function keyup(e) {\n    this.require('list').filter(e.target.value.trim());\n  }.bind(this));\n}",
+                "function start() { \n  // HTML\n  this.require('template').render();\n  \n  // CSS\n  this.require('list.css').render();\n  \n  // render the list\n  this.require('list').filter('');\n  this.require('list').render();\n  \n  // event\n  document.getElementById('search').addEventListener('keyup', function keyup(e) {\n    this.require('list').filter(e.target.value.trim());\n  }.bind(this));\n}",
               "useCoreAPI": false,
               "core": false
             },
