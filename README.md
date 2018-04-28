@@ -19,7 +19,7 @@ A system:
 
 * is defined by a model,
 * is composed by components and
-* reacts to events with behaviors.
+* reacts to events with actions that we call behaviors.
 
 ![Image Alt](https://designfirst.io/img/system.png)
 
