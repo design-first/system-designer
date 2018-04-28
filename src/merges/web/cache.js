@@ -1,8 +1,22 @@
 // System Designer - Copyright 2018 Erwan Carriou
 // Licensed under the Apache License, Version 2.0 (the "License")
-self.addEventListener('install', function (e) {
+
+const version = 'v2.8.0';
+
+const clearCaches = () => {
+  return caches.keys().then(keys => {
+    return Promise.all(keys.filter(key => {
+      return key.indexOf(version) !== 0;
+    }).map(key => {
+      return caches.delete(key);
+    })
+    );
+  })
+}
+
+self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('systemdesignerv2.8.0').then(function (cache) {
+    caches.open(version).then(cache => {
       return cache.addAll([
         '/',
         'app/index.html',
@@ -52,7 +66,11 @@ self.addEventListener('install', function (e) {
 });
 
 self.addEventListener('activate', event => {
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    clearCaches().then(() => {
+      return self.clients.claim();
+    })
+  );
 });
 
 self.addEventListener('fetch', event => {
