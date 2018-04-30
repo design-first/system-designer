@@ -187,7 +187,7 @@
         "source": {
           "name": "book-collection",
           "master": true,
-          "version": "1.0.1",
+          "version": "1.0.0",
           "description":
             "Create a Book collection manager\n\nThis system shows a list of books and an input to filter on that list.\n\nnote: if you create a Book Component when running the application, the list will be automatically updated",
           "schemas": {
@@ -329,7 +329,7 @@
               "component": "k119f317c9d181db",
               "state": "start",
               "action":
-                "function start() { \n  // HTML\n  this.require('template').render();\n  \n  // CSS\n  this.require('list.css').render();\n  \n  // render the list\n  this.require('list').filter('');\n  this.require('list').render();\n  \n  // event\n  document.getElementById('search').addEventListener('keyup', function keyup(e) {\n    this.require('list').filter(e.target.value.trim());\n  }.bind(this));\n}",
+                "function start() { \n  // add HTML\n  this.require('template').render();\n  \n  // add CSS\n  this.require('list.css').render();\n  \n  // init the filter\n  this.require('list').filter('');\n  \n  // show the list\n  this.require('list').render();\n  \n  // add listener\n  document.getElementById('search').addEventListener('keyup', function keyup(e) {\n    this.require('list').filter(e.target.value.trim());\n  }.bind(this));\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -386,57 +386,12 @@
               "useCoreAPI": true,
               "core": false
             },
-            "e1792f1e6fa1b466": {
-              "_id": "e1792f1e6fa1b466",
-              "component": "Book",
-              "state": "name",
-              "action":
-                "function name(value) { \n  this.require('list').render();\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "o10eb316e611f76c": {
-              "_id": "o10eb316e611f76c",
-              "component": "Book",
-              "state": "author",
-              "action":
-                "function author(value) { \n  this.require('list').render();\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "k1f9321b4c91faa3": {
-              "_id": "k1f9321b4c91faa3",
-              "component": "Book",
-              "state": "year",
-              "action":
-                "function year(value) { \n  this.require('list').render();\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
             "o1d3ca175e51c17b": {
               "_id": "o1d3ca175e51c17b",
               "component": "Author",
               "state": "fullName",
               "action":
                 "function fullName() { \n  let result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "v16a131728710660": {
-              "_id": "v16a131728710660",
-              "component": "Author",
-              "state": "firstName",
-              "action":
-                "function firstName(value) { \n this.require('list').render();\t\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "w1f4f5155c41fc51": {
-              "_id": "w1f4f5155c41fc51",
-              "component": "Author",
-              "state": "lastName",
-              "action":
-                "function lastName(value) { \n this.require('list').render();\t\t\n}",
               "useCoreAPI": false,
               "core": false
             }
