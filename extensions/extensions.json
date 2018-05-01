@@ -48,7 +48,7 @@
         "source": {
           "name": "extension-model-json",
           "master": false,
-          "version": "1.1.0",
+          "version": "1.1.1",
           "description": "Create a model from a JSON file",
           "schemas": {
             "p181111d5c01f97b": {
@@ -243,7 +243,7 @@
               "component": "x10b021de0a19b46",
               "state": "click",
               "action":
-                "function click() { \n  if (this.require('factory').system()) {\n    this.require('j16a581f46813de3').render();\n  } else {\n\t  this.require('message').warning('There is no system');\n\t} \n}",
+                "function click() { \n  $('#designer-toolbar-item-model-json').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n    this.require('j16a581f46813de3').render();\n  } else {\n    this.require('message').warning('There is no system');\n  } \n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -314,7 +314,7 @@
               "toolbar-item-modeljson.html": {
                 "_id": "toolbar-item-modeljson.html",
                 "source":
-                  "<button type=\"button\" id=\"designer-toolbar-item-template\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Create a model from JSON\">\n  <span class=\"glyphicon glyphicon-unchecked\" aria-hidden=\"true\"></span>\n</button>"
+                  "<button type=\"button\" id=\"designer-toolbar-item-model-json\" class=\"btn btn-default btn-lg\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Create a model from JSON\">\n  <span class=\"glyphicon glyphicon-unchecked\" aria-hidden=\"true\"></span>\n</button>"
               }
             },
             "MenuItem": {},
