@@ -530,13 +530,6 @@
       "action":
         "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  this.require('editor').paste(); \n}"
     },
-    "b1af5812c0310fcf": {
-      "_id": "b1af5812c0310fcf",
-      "component": "1dbc51300e11z12",
-      "state": "click",
-      "action":
-        "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var doc = {\n    \"name\": \"schema \" + data._name,\n    \"master\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"Schema \" + data._name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.schemas[data._id] = data;\n\n  this.require('designer').saveAs(doc, 'schema.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}"
-    },
     "y19bc51629a15aca": {
       "_id": "y19bc51629a15aca",
       "component": "tdbc51200e11z02",
@@ -695,13 +688,6 @@
         "position": 60,
         "type": "schema",
         "platform": "electron"
-      },
-      "1dbc51300e11z12": {
-        "_id": "1dbc51300e11z12",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "schema",
-        "platform": "web"
       },
       "1dbc51200e11510": {
         "_id": "1dbc51200e11510",

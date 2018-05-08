@@ -530,13 +530,6 @@
       "action":
         "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  this.require('editor').paste(); \n}"
     },
-    "c1bb2614ca314a68": {
-      "_id": "c1bb2614ca314a68",
-      "component": "1dbc51300e11z11",
-      "state": "click",
-      "action":
-        "function click() {\n  var data = this.require('store').data();\n  \n  $('#designer-toolbar-item-export-document').tooltip('hide');\n  \n  var name = data.name;\n  var doc = JSON.parse(JSON.stringify(data));\n  delete doc.classInfo;\n  this.require('designer').saveAs(doc, data.name + '.json');\n}"
-    },
     "a194c816a861f58c": {
       "_id": "a194c816a861f58c",
       "component": "sdbc51200e11z02",
@@ -740,13 +733,6 @@
         "position": 60,
         "type": "system",
         "platform": "electron"
-      },
-      "1dbc51300e11z11": {
-        "_id": "1dbc51300e11z11",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "system",
-        "platform": "web"
       },
       "13a291c27f16311": {
         "_id": "13a291c27f16311",

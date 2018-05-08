@@ -531,13 +531,6 @@
       "action":
         "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  this.require('editor').paste(); \n}"
     },
-    "i179d41548d114e6": {
-      "_id": "i179d41548d114e6",
-      "component": "1dbc51300e11z15",
-      "state": "click",
-      "action":
-        "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var name = data.state;\n  var exportName = '';\n  var doc = {\n    \"name\": \"behavior \" + name,\n    \"master\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"Behavior \" + name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.behaviors[data._id] = data;\n\n  if (this.require('store').data().component === this.require('factory').system().id()) {\n    exportName = 'behavior.' + this.require('factory').system().name() + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  } else {\n    exportName = 'behavior.' + this.require('store').data().component + '.' + name.replace(/ /gi, '-').toLowerCase() + '.json';\n  }\n\n  this.require('designer').saveAs(doc, exportName);\n}"
-    },
     "m191d0168cd1e718": {
       "_id": "m191d0168cd1e718",
       "component": "1dbc513e0e11z19",
@@ -723,13 +716,6 @@
         "position": 60,
         "type": "behavior",
         "platform": "electron"
-      },
-      "1dbc51300e11z15": {
-        "_id": "1dbc51300e11z15",
-        "html": "toolbar-item-export-document.html",
-        "position": 70,
-        "type": "behavior",
-        "platform": "web"
       },
       "1dbc51200e11611": {
         "_id": "1dbc51200e11611",
