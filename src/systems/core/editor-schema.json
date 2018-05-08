@@ -659,15 +659,6 @@
       "useCoreAPI": false,
       "core": false
     },
-    "u1cba710aea1476f": {
-      "_id": "u1cba710aea1476f",
-      "component": "p1306012ec8164d6",
-      "state": "click",
-      "action":
-        "function click() {\n  $('#designer-toolbar-item-export-document').tooltip('hide');\n\n  var data = this.require('store').data();\n  var doc = {\n    \"name\": \"schema \" + data._name,\n    \"master\": false,\n    \"version\": \"0.0.1\",\n    \"description\": \"Schema \" + data._name,\n    \"schemas\": {},\n    \"models\": {},\n    \"behaviors\": {},\n    \"types\": {},\n    \"components\": {}\n  };\n\n  // clean\n  doc.name = doc.name.trim();\n  doc.name = doc.name.replace(/ /gi, '-');\n  doc.name = doc.name.toLocaleLowerCase();\n\n  doc.schemas[data._id] = data;\n\n  this.require('designer').saveAs(doc, 'schema.' + data._name.replace(/ /gi, '-').toLowerCase() + '.json');\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "i1596a1f6141603b": {
       "_id": "i1596a1f6141603b",
       "component": "Designer",
@@ -682,7 +673,7 @@
       "component": "Designer",
       "state": "addShortcuts",
       "action":
-        "function addShorcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          // Command + E\n          case key === 69 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            this.require('1dbc51300e11z12').click();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          // Ctrl + E\n          case key === 69 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            this.require('1dbc51300e11z12').click();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}",
+        "function addShorcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
@@ -766,13 +757,6 @@
         "html": "toolbar-item-command.html",
         "platform": "electron",
         "position": 75,
-        "type": "schema"
-      },
-      "p1306012ec8164d6": {
-        "_id": "p1306012ec8164d6",
-        "html": "toolbar-item-export-document.html",
-        "platform": "electron",
-        "position": 70,
         "type": "schema"
       }
     },
