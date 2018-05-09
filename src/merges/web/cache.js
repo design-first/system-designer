@@ -1,7 +1,7 @@
 // System Designer - Copyright 2018 Erwan Carriou
 // Licensed under the Apache License, Version 2.0 (the "License")
 
-const version = 'v2.8.1';
+const version = 'v2.8.2';
 
 const clearCaches = () => {
   return caches.keys().then(keys => {
