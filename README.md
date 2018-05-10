@@ -5,7 +5,7 @@
 [![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
 [![npm](https://img.shields.io/npm/dt/system-designer.svg)](https://www.npmjs.com/package/system-designer)
 
-![Image Alt](https://designfirst.io/img/systemdesignerv2.png)
+![Image Alt](https://designfirst.io/img/systemdesigner.png)
 
 ## What is System Designer ?
 
