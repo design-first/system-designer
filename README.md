@@ -104,7 +104,7 @@ To build for [Electron](http://electron.atom.io):
 $ npm run electron
 ```
 
-Copy then the content of `/dist` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
+Copy the content of `/dist` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
 
 Then in your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project:
 
@@ -120,7 +120,7 @@ To build for [Cordova](http://cordova.apache.org):
 $ npm run cordova
 ```
 
-Copy then the content of `/dist` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
+Copy the content of `/dist` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
 
 Then in your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project:
 
