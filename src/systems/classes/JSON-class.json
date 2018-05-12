@@ -493,9 +493,9 @@
         "source": {
           "name": "extension-template",
           "master": false,
-          "version": "1.0.0",
+          "version": "1.1.0",
           "description":
-            "Create an extension\n\nExtension for creating:\n\n* menubar items,\n* toolbar items,\n* actions when clicking on them and\n* show modal dialog.",
+            "Create an extension\n\nExtension for creating:\n\n* toolbar items,\n* actions when clicking on them and\n* show modal dialog.",
           "schemas": {
             "p181111d5c01f97b": {
               "_id": "p181111d5c01f97b",
@@ -511,18 +511,6 @@
               "html": "link",
               "position": "property",
               "type": "property",
-              "platform": "property",
-              "render": "method",
-              "click": "event"
-            },
-            "l1d113198721599d": {
-              "_id": "l1d113198721599d",
-              "_name": "MenuItem",
-              "_inherit": ["_Component"],
-              "html": "link",
-              "position": "property",
-              "type": "property",
-              "name": "property",
               "platform": "property",
               "render": "method",
               "click": "event"
@@ -575,7 +563,7 @@
                 "type": "number",
                 "readOnly": false,
                 "mandatory": false,
-                "default": 100
+                "default": 70
               },
               "type": {
                 "type": "editorType",
@@ -591,42 +579,6 @@
                 "mandatory": false,
                 "default": "all"
               }
-            },
-            "u1f9a01abe31b3bf": {
-              "_id": "u1f9a01abe31b3bf",
-              "_name": "MenuItem",
-              "html": {
-                "type": "HTML",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "menuitem-template.html"
-              },
-              "position": {
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 100
-              },
-              "type": {
-                "type": "editorType",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "designer"
-              },
-              "name": {
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "template"
-              },
-              "platform": {
-                "type": "platform",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "all"
-              },
-              "render": {},
-              "click": {}
             },
             "q1d12b19f4712a7a": {
               "_id": "q1d12b19f4712a7a",
@@ -742,11 +694,6 @@
               }
             },
             "HTML": {
-              "menuitem-template.html": {
-                "_id": "menuitem-template.html",
-                "source":
-                  "<a id=\"designer-menu-item-template\" href=\"#template\">Template</a>"
-              },
               "toolbar-item-template.html": {
                 "_id": "toolbar-item-template.html",
                 "source":
@@ -758,7 +705,6 @@
                   "<div class=\"modal fade\" id=\"modal-template\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalLabel\">\n  <div class=\"modal-dialog modal-lg\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\" id=\"modalLabel\">{{title}}</h4>\n      </div>\n      <div class=\"modal-body\">\n        {{message}}\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" id=\"modal-template-cancel\">Cancel</button>\n        <button type=\"button\" class=\"btn btn-primary\" id=\"modal-template-ok\">OK</button>\n      </div>\n    </div>\n  </div>\n</div>"
               }
             },
-            "MenuItem": {},
             "Modal": {
               "modal-template": {
                 "_id": "modal-template",
