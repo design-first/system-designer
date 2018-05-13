@@ -211,33 +211,6 @@
             }
           },
           "behaviors": {
-            "d1bdde1f59f1befe": {
-              "_id": "d1bdde1f59f1befe",
-              "component": "Modal",
-              "state": "show",
-              "action":
-                "function show() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('show');\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "n1467b1097a16481": {
-              "_id": "n1467b1097a16481",
-              "component": "Modal",
-              "state": "hide",
-              "action":
-                "function hide() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('hide');\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
-            "t1fb0b150c810528": {
-              "_id": "t1fb0b150c810528",
-              "component": "Modal",
-              "state": "render",
-              "action":
-                "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#' + id).modal('show');\t\n}",
-              "useCoreAPI": false,
-              "core": false
-            },
             "z1f6731cf3219889": {
               "_id": "z1f6731cf3219889",
               "component": "x10b021de0a19b46",
@@ -270,6 +243,33 @@
               "component": "j16a581f46813de3",
               "state": "cancel",
               "action": "function cancel() { \n  this.hide();\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "v16701182a014b42": {
+              "_id": "v16701182a014b42",
+              "component": "Modal",
+              "state": "render",
+              "action":
+                "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#' + id).modal('show');\t\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "x1902b11a0a1b7d8": {
+              "_id": "x1902b11a0a1b7d8",
+              "component": "Modal",
+              "state": "hide",
+              "action":
+                "function hide() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('hide');\n}",
+              "useCoreAPI": false,
+              "core": false
+            },
+            "x16db81674e14726": {
+              "_id": "x16db81674e14726",
+              "component": "Modal",
+              "state": "show",
+              "action":
+                "function show() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('show');\n}",
               "useCoreAPI": false,
               "core": false
             }
