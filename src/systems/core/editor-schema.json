@@ -521,7 +521,7 @@
       "component": "tdbc51200e11z03",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy();\n  this.require('message').success('The text has been copied to the clipboard.');\n}"
     },
     "m17c7d1483011aa2": {
       "_id": "m17c7d1483011aa2",

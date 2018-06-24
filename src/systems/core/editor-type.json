@@ -541,7 +541,7 @@
       "component": "vdbc51200e11z03",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy();\n  this.require('message').success('The text has been copied to the clipboard.');\n}"
     },
     "w1f5751bd9e15f00": {
       "_id": "w1f5751bd9e15f00",

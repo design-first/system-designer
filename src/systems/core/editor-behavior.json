@@ -522,7 +522,7 @@
       "component": "1dbc513e0e11z15",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy();\n  this.require('message').success('The text has been copied to the clipboard.');\n}"
     },
     "f1846f199e41074c": {
       "_id": "f1846f199e41074c",
