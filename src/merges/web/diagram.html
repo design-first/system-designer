@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" manifest="system-designer.appcache">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="An IDE for designing systems">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Class Diagram</title>
+</head>
+
+<body>
+  <!-- viz -->
+  <script src="lib/viz/viz.js"></script>
+  <script src="lib/viz/full.render.js"></script>
+
+  <script>
+    var viz = new Viz();
+    
+    viz.renderSVGElement(`digraph G {
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+
+        node [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+                shape = "record"
+        ]
+
+        edge [
+                fontname = "Bitstream Vera Sans"
+                fontsize = 8
+        ]
+
+        Animal [
+                label = "{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"
+        ]
+
+     
+
+        edge [
+                arrowhead = "empty"
+        ]
+      
+        Dog -> Animal
+        Cat -> Animal
+
+        edge [
+                arrowhead = "none"
+
+                headlabel = "0..*"
+                taillabel = "0..*"
+        ]
+
+        Dog -> Cat
+}`)
+    .then(function(element) {
+      document.body.appendChild(element);
+    })
+    .catch(error => {
+      // Create a new Viz instance (@see Caveats page for more info)
+      viz = new Viz();
+  
+      // Possibly display the error
+      console.error(error);
+    });
+  </script>
+</body>
+
+</html>

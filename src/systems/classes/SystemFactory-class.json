@@ -44,6 +44,7 @@
       "addBehavior": "method",
       "getModelPaths": "method",
       "isModel": "method",
+      "isType": "method",
       "getModelPathType": "method"
     }
   },
@@ -513,6 +514,18 @@
           }
         ],
         "result": "any"
+      },
+      "isType": {
+        "description": "",
+        "params": [
+          {
+            "name": "name",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ],
+        "result": "boolean"
       }
     }
   },
@@ -838,6 +851,15 @@
       "state": "getModelPathType",
       "action":
         "function getModelPathType(model, path) { \n  var result = null;\n  var subpaths = [];\n  var subpath = '';\n  var i = 0;\n  var length = 0;\n  var structure = '';\n  var models = this.system().models();\n  var modelId = '';\n  var types = this.system().types();\n  var that = this;\n  \n  function _getModelId(name) {\n    var result = '',\n      id = '';\n\n    for (id in that.system().models()) {\n      if (that.system().models()[id]._name === name) {\n        result = id;\n        break;\n      }\n    }\n    return result;\n  }\n\n  modelId = _getModelId(model);\n  subpaths = path.split('.');\n  length = subpaths.length;\n\n  for (i = 0; i < length; i++) {\n    subpath = subpaths[i];\n    subpath = subpath.split('[')[0];\n    if (i === 0) {\n      result = models[modelId][subpath].type;\n    } else {\n      // collection\n      if (Array.isArray(result)) {\n        result = result[0];\n      }\n      // structure\n      structure = types[result];\n      if (structure && structure.schema) {\n        result = structure.schema[subpath].type;\n      }\n    }\n  }\n  return result;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "v119e617ef513e94": {
+      "_id": "v119e617ef513e94",
+      "component": "SystemFactory",
+      "state": "isType",
+      "action":
+        "function isType(name) { \n  var types = this.system().types(),\n    result = false,\n    prop = '';\n\n\tif (!result) {\n\t  for (prop in types) {\n\t    if (schemas[prop].name === name) {\n\t      result = true;\n\t      break;\n\t    }\n\t  }\n\t}\n\t\n\treturn result;\n}",
       "useCoreAPI": false,
       "core": false
     }
