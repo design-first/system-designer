@@ -2,71 +2,54 @@
 <html lang="en" manifest="system-designer.appcache">
 
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="An IDE for designing systems">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover' name='viewport'
+  />
   <link rel="icon" href="img/favicon.ico">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Class Diagram</title>
+  <title>class diagram · system </title>
+  <!-- bootstrap -->
+  <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- editor  styles -->
+  <link href="styles/diagram.css" rel="stylesheet">
+  <!-- editor system -->
+  <link href="systems/diagram.json" type="application/json" rel="system">
 </head>
 
 <body>
-  <!-- viz -->
-  <script src="lib/viz/viz.js"></script>
-  <script src="lib/viz/full.render.js"></script>
-
-  <script>
-    var viz = new Viz();
-    
-    viz.renderImageElement(`digraph G {
-        fontname = "Bitstream Vera Sans"
-        fontsize = 8
-
-        node [
-                fontname = "Bitstream Vera Sans"
-                fontsize = 8
-                shape = "record"
-        ]
-
-        edge [
-                fontname = "Bitstream Vera Sans"
-                fontsize = 8
-        ]
-
-        Animal [
-                label = "{Animal|+ name : string\l+ age : int\l|+ die() : void\l}"
-        ]
-
-     
-
-        edge [
-                arrowhead = "empty"
-        ]
-      
-        Dog -> Animal
-        Cat -> Animal
-
-        edge [
-                arrowhead = "none"
-
-                headlabel = "0..*"
-                taillabel = "0..*"
-        ]
-
-        Dog -> Cat
-}`)
-    .then(function(element) {
-      console.log(element);
-      document.body.appendChild(element);
-    })
-    .catch(error => {
-      // Create a new Viz instance (@see Caveats page for more info)
-      viz = new Viz();
-  
-      // Possibly display the error
-      console.error(error);
-    });
-  </script>
+  <!-- menubar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- menu header -->
+      <div id="designer-menubar-header" class="navbar-header"></div>
+      <div>
+        <!-- menu items -->
+        <ul id="designer-menubar-items" class="nav navbar-nav"></ul>
+        <!-- Mmnu actions -->
+        <ul id="designer-menubar-actions" class="nav navbar-nav navbar-right hidden-xs"></ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- toolbar -->
+        <div class="col-sm-3 col-md-2 sidebar">
+          <!-- toolbar items -->
+          <ul id="designer-toolbar-items" class="nav nav-sidebar"></ul>
+        </div>
+      </div>
+    </div>
+    <!-- dialog -->
+    <div id="designer-dialog"></div>
+    <!-- message -->
+    <div id="designer-message"></div>
+    <!-- diagram -->
+    <div id="designer-diagram"></div>
+  </div>
+  <!-- lib -->
+  <script src="lib/diagram/vendor.js"></script>
 </body>
 
 </html>

@@ -1148,6 +1148,15 @@
         "function runMessages(messages) { \n  messages.forEach(function (message) {\n    if (message && message.event && message.event.indexOf('$system') === -1) {\n      $db._Message.insert(message);\n    }\n  });\t\n}",
       "useCoreAPI": true,
       "core": false
+    },
+    "c107c51c3091756f": {
+      "_id": "c107c51c3091756f",
+      "component": "o195831c8251b34e",
+      "state": "click",
+      "action":
+        "function click() { \n  $('#designer-toolbar-item-graphviz').tooltip('hide');\n  \n  var system = this.require('factory').system();\n  \n  if (system) {\n    this.require('designer').open('diagram.html#' + system.id());\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
@@ -1257,6 +1266,13 @@
         "html": "toolbar-item-command.html",
         "platform": "electron",
         "position": 37,
+        "type": "designer"
+      },
+      "o195831c8251b34e": {
+        "_id": "o195831c8251b34e",
+        "html": "toolbar-item-diagram.html",
+        "platform": "web",
+        "position": 36,
         "type": "designer"
       }
     },
