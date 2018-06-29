@@ -108,7 +108,7 @@
       "component": "Export",
       "state": "toGraphviz",
       "action":
-        "function toGraphviz() { \n  let result = '';\n  return result;\n}",
+        "function toGraphviz() { \n  var schemas = this.require('factory').system().schemas();\n  var inheritance = '';\n \n  for (var schema in schemas) {\n    if (schemas[schema]._inherit && schemas[schema]._inherit.length) {\n      schemas[schema]._inherit.forEach(function(parent) {\n        inheritance += '\\n' + schemas[schema]._name + ' -> ' + parent;\n      });\n    }\n  } \n  \n  console.log('ok');\n  \n  let result = `digraph G {\n        fontname = \"Bitstream Vera Sans\"\n        fontsize = 8\n\n        node [\n          fontname = \"Bitstream Vera Sans\"\n          fontsize = 8\n          shape = \"record\"\n        ]\n\n        edge [\n          fontname = \"Bitstream Vera Sans\"\n          fontsize = 8\n        ]\n      \n        ${inheritance}\n}`;\n\nconsole.log(result)\n\n  return result;\n}",
       "useCoreAPI": false,
       "core": false
     }

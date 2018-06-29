@@ -528,7 +528,7 @@
       "component": "Workspace",
       "state": "render",
       "action":
-        "function render() { \n    var viz = new Viz();\n    \n    viz.renderImageElement(`digraph G {\n        fontname = \"Bitstream Vera Sans\"\n        fontsize = 8\n\n        node [\n                fontname = \"Bitstream Vera Sans\"\n                fontsize = 8\n                shape = \"record\"\n        ]\n\n        edge [\n                fontname = \"Bitstream Vera Sans\"\n                fontsize = 8\n        ]\n\n        Animal [\n                label = \"{Animal|+ name : string\\l+ age : int\\l|+ die() : void\\l}\"\n        ]\n\n     \n\n        edge [\n                arrowhead = \"empty\"\n        ]\n      \n        Dog -> Animal\n        Cat -> Animal\n\n        edge [\n                arrowhead = \"none\"\n\n                headlabel = \"0..*\"\n                taillabel = \"0..*\"\n        ]\n\n        Dog -> Cat\n}`)\n    .then(function(element) {\n      console.log(element);\n      document.getElementById('designer-diagram').appendChild(element);\n    })\n    .catch(error => {\n      // Create a new Viz instance (@see Caveats page for more info)\n      viz = new Viz();\n  \n      // Possibly display the error\n      console.error(error);\n    });\n}",
+        "function render() { \n    const dotGraph = this.require('export').toGraphviz();\n    var viz = new Viz();\n    \n    viz.renderSVGElement(dotGraph)\n    .then(function(element) {\n      document.getElementById('designer-diagram').appendChild(element);\n\n      runtime.require('message').success('Diagram generated.');\n    })\n    .catch(error => {\n      viz = new Viz();\n      runtime.require('message').danger(error.toString());\n    });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -537,7 +537,7 @@
       "component": "Designer",
       "state": "render",
       "action":
-        "function render() {\n  var id = '',\n    systemId = '',\n    system = null;\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  systemId = document.location.href.split('#')[1].split('?')[0];\n\n  // set editor\n  system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  \n  // extensions\n  this.installExtensions();\n  \n  document.title = 'class diagram · system ' + system.name;\n\n  // router\n  this.require('router').update();\n  \n  // shorcuts\n  this.addShortcuts();\n}",
+        "function render() {\n  var id = '',\n    systemId = '',\n    system = null;\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  // get parameters\n  systemId = document.location.href.split('#')[1].split('?')[0];\n\n  // set system\n  system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // extensions\n  this.installExtensions();\n  \n  document.title = 'class diagram · system ' + system.name;\n\n  // router\n  this.require('router').update();\n  \n  // shorcuts\n  this.addShortcuts();\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -620,6 +620,20 @@
         "html": "toolbar-item-help.html",
         "platform": "all",
         "position": 80,
+        "type": "diagram"
+      },
+      "p15e7513ed512f61": {
+        "_id": "p15e7513ed512f61",
+        "html": "toolbar-item-zoomout.html",
+        "platform": "all",
+        "position": 10,
+        "type": "diagram"
+      },
+      "q1da4e1ca6710ca2": {
+        "_id": "q1da4e1ca6710ca2",
+        "html": "toolbar-item-zoomin.html",
+        "platform": "all",
+        "position": 20,
         "type": "diagram"
       }
     },
