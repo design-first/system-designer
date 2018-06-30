@@ -528,7 +528,7 @@
       "component": "Workspace",
       "state": "render",
       "action":
-        "function render() { \n    const dotGraph = this.require('export').toGraphviz();\n    var viz = new Viz();\n    \n    viz.renderSVGElement(dotGraph)\n    .then(function(element) {\n      document.getElementById('designer-diagram').appendChild(element);\n\n      runtime.require('message').success('Diagram generated.');\n    })\n    .catch(error => {\n      viz = new Viz();\n      runtime.require('message').danger(error.toString());\n    });\n}",
+        "function render() { \n    const dotGraph = this.require('export').toGraphviz();\n    if (!this.require('viz').ref()) {\n      this.require('viz').ref(new Viz());\n    }\n \n    this.require('viz').ref().renderSVGElement(dotGraph)\n    .then(function(element) {\n      var elt = document.getElementById('designer-diagram');\n      \n      $('#designer-diagram').empty();\n      elt.appendChild(element);\n      \n      var svg = document.getElementsByTagName('svg')[0];\n      var viewbox = svg.getAttributeNS(null, 'viewBox').split(' ');\n      runtime.require('viz').viewbox(viewbox);\n\n      runtime.require('message').success('Diagram generated.');\n    })\n    .catch(error => {\n      if (!runtime.require('viz').ref()) {\n        runtime.require('viz').ref(new Viz());\n      }\n\n      runtime.require('message').danger(error.toString());\n    });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -576,15 +576,6 @@
       "useCoreAPI": false,
       "core": false
     },
-    "i1596a1f6141603b": {
-      "_id": "i1596a1f6141603b",
-      "component": "Designer",
-      "state": "installExtensions",
-      "action":
-        "function installExtensions() { \n\tvar result = {};\n\treturn result;\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "g1d47010c7e1904c": {
       "_id": "g1d47010c7e1904c",
       "component": "Designer",
@@ -600,6 +591,78 @@
       "state": "click",
       "action":
         "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-schema', '_blank', true);\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "x1c18b145e6157d8": {
+      "_id": "x1c18b145e6157d8",
+      "component": "_Channel",
+      "state": "$designerDeleteSchema",
+      "action":
+        "function $designerDeleteSchema(id) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "m12e321f21a15f05": {
+      "_id": "m12e321f21a15f05",
+      "component": "_Channel",
+      "state": "$designerCreateSchema",
+      "action":
+        "function $designerCreateSchema(id, schema) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z101721b5941bf54": {
+      "_id": "z101721b5941bf54",
+      "component": "_Channel",
+      "state": "$designerUpdateModel",
+      "action":
+        "function $designerUpdateModel(id, model) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l108ea1b11c10e8b": {
+      "_id": "l108ea1b11c10e8b",
+      "component": "_Channel",
+      "state": "$editorUpdateSchema",
+      "action":
+        "function $editorUpdateSchema(id, schema) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "b13285192b811ad1": {
+      "_id": "b13285192b811ad1",
+      "component": "_Channel",
+      "state": "$editorUpdateModel",
+      "action":
+        "function $editorUpdateModel(id, model) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "u1c69b124bc1ac09": {
+      "_id": "u1c69b124bc1ac09",
+      "component": "_Channel",
+      "state": "$editorUpdateSystem",
+      "action":
+        "function $editorUpdateSystem(id, system) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "d185231c5af12d54": {
+      "_id": "d185231c5af12d54",
+      "component": "q1da4e1ca6710ca2",
+      "state": "click",
+      "action":
+        "function click() { \n    var transformMatrix = [1, 0, 0, 1, 0, 0];\n    var svg = document.getElementsByTagName('svg')[0];\n    var viewbox = this.require('viz').viewbox();\n    var centerX = parseFloat(viewbox[2]) / 2;\n    var centerY = parseFloat(viewbox[3]) / 2;\n    var matrixGroup = svg.getElementById('graph0');\t\n    \n  function zoom(scale) {\n    for (var i = 0; i < 4; i++) {\n      transformMatrix[i] *= scale;\n    }\n    transformMatrix[4] += (1 - scale) * centerX;\n    transformMatrix[5] += (1 - scale) * centerY;\n  \t\t        \n    var newMatrix = 'matrix(' +  transformMatrix.join(' ') + ')';\n    var transformInfo = matrixGroup.getAttribute('transform').split(' matrix(')[0];\n    matrixGroup.setAttribute('transform', transformInfo + ' ' + newMatrix);\n  }\n  \n  this.require('viz').zoom(this.require('viz').zoom() + 0.1);\n  zoom(this.require('viz').zoom());\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l19d291b99311024": {
+      "_id": "l19d291b99311024",
+      "component": "p15e7513ed512f61",
+      "state": "click",
+      "action":
+        "function click() { \n  var transformMatrix = [1, 0, 0, 1, 0, 0];\n  var svg = document.getElementsByTagName('svg')[0];\n  var viewbox = this.require('viz').viewbox();;\n  var centerX = parseFloat(viewbox[2]) / 2;\n  var centerY = parseFloat(viewbox[3]) / 2;\n  var matrixGroup = svg.getElementById('graph0');\t\n  \nfunction zoom(scale) {\n  for (var i = 0; i < 4; i++) {\n    transformMatrix[i] *= scale;\n  }\n  transformMatrix[4] += (1 - scale) * centerX;\n  transformMatrix[5] += (1 - scale) * centerY;\n\t\t        \n  var newMatrix = 'matrix(' +  transformMatrix.join(' ') + ')';\n  var transformInfo = matrixGroup.getAttribute('transform').split(' matrix(')[0];\n  matrixGroup.setAttribute('transform', transformInfo + ' ' + newMatrix);\n}\n\nthis.require('viz').zoom(this.require('viz').zoom() - 0.1);\nzoom(this.require('viz').zoom());\t\n}",
       "useCoreAPI": false,
       "core": false
     }
