@@ -1154,7 +1154,7 @@
       "component": "o195831c8251b34e",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-graphviz').tooltip('hide');\n  \n  var system = this.require('factory').system();\n  \n  if (system) {\n    this.require('designer').open('diagram.html#' + system.id());\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+        "function click() { \n  $('#designer-toolbar-item-diagram').tooltip('hide');\n  \n  var system = this.require('factory').system();\n  \n  if (system) {\n    this.require('designer').open('diagram.html#' + system.id());\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
