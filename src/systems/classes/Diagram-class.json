@@ -1,6 +1,6 @@
 {
   "name": "Diagram-class",
-  "master": true,
+  "master": false,
   "version": "0.0.1",
   "description": "",
   "schemas": {
@@ -9,7 +9,8 @@
       "_name": "Diagram",
       "_inherit": ["_Component"],
       "ref": "property",
-      "zoom": "property"
+      "zoom": "property",
+      "render": "method"
     }
   },
   "models": {
@@ -30,13 +31,12 @@
         "readOnly": false,
         "mandatory": false,
         "default": 1
-      }
+      },
+      "render": { "description": "", "params": [], "result": "any" }
     }
   },
   "behaviors": {},
   "types": {},
-  "components": {
-    "Diagram": { "viz": { "_id": "viz", "ref": "", "zoom": 1 } }
-  },
+  "components": { "Diagram": {} },
   "_id": "n15bc813449110aa"
 }
