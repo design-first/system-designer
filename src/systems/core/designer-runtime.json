@@ -265,7 +265,7 @@
       "component": "16d0e138c8170b2",
       "state": "start",
       "action":
-        "function start() {\n  var bundle = '';\n  var id = '';\n  var system = '';\n  var logger = this.require('logger');\n  var helper = this.require('runtimeHelper');\n\n  // check platform\n  helper.checkElectron();\n  helper.checkCordova();\n  \n  // get the bundle\n  bundle = helper.getBundle();\n\n  // import the bundle\n  logger.info('importing the system...');\n  id = $db.importSystem(bundle);\n  logger.info('system imported');\n\n  // update title\n  document.title = bundle.name;\n\n  // start the bundle\n  system = this.require(id);\n\n  if (system && system.start) {\n    logger.info('system started');\n    logger.level('debug');\n    system.start();\n  } else {\n    logger.level('debug');\n  }\n}",
+        "function start() {\n  var bundle = '';\n  var id = '';\n  var system = '';\n  var logger = this.require('logger');\n  var helper = this.require('runtimeHelper');\n\n  // check platform\n  helper.checkElectron();\n  helper.checkCordova();\n  \n  // get the bundle\n  bundle = helper.getBundle();\n  \n  logger.level('info');\n\n  // import the bundle\n  // logger.info('importing the system...');\n  id = $db.importSystem(bundle);\n  // logger.info('system imported');\n\n  // update title\n  document.title = bundle.name;\n\n  // start the bundle\n  system = this.require(id);\n\n  if (system && system.start) {\n    // logger.info('system started');\n    logger.level('debug');\n    system.start();\n  } else {\n    logger.level('debug');\n  }\n}",
       "useCoreAPI": true,
       "core": true
     },
