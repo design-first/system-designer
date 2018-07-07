@@ -956,7 +956,7 @@
       "component": "_Channel",
       "state": "$editorUpdateModel",
       "action":
-        "function $editorUpdateModel(id, model) { \n  jsPlumb.deleteEveryEndpoint();\n\n  this.require('factory').updateModel(id, model);\n\n  this.require('designer').save();\n\n  this.require('factory').syncBehavior(model);\n  \n  this.require('designer').save();\n\n  this.require('state').space(id);\n  \n  this.require('spaces').render();\n  this.require('workspace').render();\t\n  \n   $(function () {\n    $('[role=\"tooltip\"]').hide();\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { 'show': 1500, 'hide': 100 }, trigger: 'hover' });\n  });\n}",
+        "function $editorUpdateModel(id, model) { \n  jsPlumb.deleteEveryEndpoint();\n  \n  var oldModel = this.require('factory').getGeneratedModel(model._name);\n\n  this.require('factory').updateModel(id, model);\n\n  this.require('designer').save();\n\n  this.require('factory').syncBehavior(model);\n  \n  this.require('designer').save();\n  \n  this.require('factory').syncComponent(model, oldModel, true);\n\n  this.require('state').space(id);\n  \n  this.require('spaces').render();\n  this.require('workspace').render();\t\n  \n   $(function () {\n    $('[role=\"tooltip\"]').hide();\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { 'show': 1500, 'hide': 100 }, trigger: 'hover' });\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
