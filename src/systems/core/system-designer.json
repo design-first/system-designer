@@ -72,6 +72,7 @@
       "hide": "method",
       "show": "method",
       "render": "method",
+      "click": "event",
       "_id": "p1f6f51d9f111925",
       "_inherit": ["_Component"]
     },
@@ -390,7 +391,8 @@
       "hide": {},
       "show": {},
       "render": {},
-      "_id": "w124ac16b591df57"
+      "_id": "w124ac16b591df57",
+      "click": { "description": "", "params": [] }
     },
     "f13ebe1ad331b263": {
       "_name": "MenuHeader",
@@ -1166,6 +1168,22 @@
         "function click() { \n  $('#designer-toolbar-item-diagram').tooltip('hide');\n  \n  var system = this.require('factory').system();\n  \n  if (system) {\n    this.require('designer').open('diagram.html#' + system.id(), 'diagram-' + this.require('factory').system().id());\n  } else {\n    this.require('message').warning('There is no system.');\n  }\t\n}",
       "useCoreAPI": false,
       "core": false
+    },
+    "d1128a15dc117e6f": {
+      "_id": "d1128a15dc117e6f",
+      "component": "j1b4981736918b41",
+      "state": "click",
+      "action": "function click() { \n  window.history.back();\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "t114671df7c16805": {
+      "_id": "t114671df7c16805",
+      "component": "u18d911723019b96",
+      "state": "click",
+      "action": "function click() { \n  window.history.forward();\n}",
+      "useCoreAPI": false,
+      "core": false
     }
   },
   "types": {},
@@ -1352,10 +1370,16 @@
       }
     },
     "MenuAction": {
-      "1f8571164c179ba": {
-        "_id": "1f8571164c179ba",
-        "html": "menu-action-version.html",
+      "j1b4981736918b41": {
+        "_id": "j1b4981736918b41",
+        "html": "menu-action-back.html",
         "position": 10,
+        "type": "designer"
+      },
+      "u18d911723019b96": {
+        "_id": "u18d911723019b96",
+        "html": "menu-action-forward.html",
+        "position": 20,
         "type": "designer"
       }
     },
