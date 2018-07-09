@@ -621,7 +621,7 @@
       "component": "1f1781882618102",
       "state": "click",
       "action":
-        "function click() { \n  var editor = this.require('editor'),\n      data = this.require('store').data(),\n      extra = this.require('store').extra();\n \n  if (extra && extra.context) {\n    data[extra.context] = editor.getValue();\n    this.require('store').data(data);\n  }\n  \n  delete data.classInfo;\n  \n  editor.setEditor('json', JSON.stringify(data, null, '\\t'), 2);\n}",
+        "function click() { \n  var editor = this.require('editor'),\n      data = this.require('store').data(),\n      extra = this.require('store').extra();\n \n  if (extra && extra.context && editor.getValue().indexOf('{') !== 0) {\n    data[extra.context] = editor.getValue();\n    this.require('store').data(data);\n  }\n  \n  editor.setEditor('json', JSON.stringify(data, null, '\\t'), 2);\n}",
       "useCoreAPI": false,
       "core": false
     },
