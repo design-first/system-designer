@@ -761,7 +761,7 @@
       "component": "Workspace",
       "state": "clear",
       "action":
-        "function clear() { \n  $('#designer-workspace').empty();\n  jsPlumb.ready(function () {\n    jsPlumb.deleteEveryEndpoint();\n  });\n}",
+        "function clear() { \n  $('#designer-workspace').empty();\n  jsPlumb.ready(function () {\n    try {\n      jsPlumb.deleteEveryEndpoint();\n    } catch (e) {\n      \n    }\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -850,7 +850,7 @@
       "component": "State",
       "state": "menu",
       "action":
-        "function menu(value) { \n  jsPlumb.ready(function () {\n    jsPlumb.deleteEveryEndpoint();\n  });\n\n  this.require('spaces').render();\n  this.require('workspace').clear();\n  this.require('workspace').render();\n}",
+        "function menu(value) { \n  jsPlumb.ready(function () {\n    try {\n      jsPlumb.deleteEveryEndpoint();\n    } catch (e) {\n    }\n  });\n\n  this.require('spaces').render();\n  this.require('workspace').clear();\n  this.require('workspace').render();\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -940,7 +940,7 @@
       "component": "_Channel",
       "state": "$editorUpdateSchema",
       "action":
-        "function $editorUpdateSchema(id, schema) { \n  var schemas = this.require('factory').system().schemas(),\n      models = null,\n      model = null,\n      modelId = '';\n\n  jsPlumb.deleteEveryEndpoint();\n\n  this.require('factory').syncModel(schema);\n  \n  this.require('designer').save();\n  \n  this.require('factory').updateSchema(id, schema);\n  \n  this.require('designer').save();\n\n  // sync other components\n  models = this.require('factory').system().models();\n  for (modelId in models) {\n    if (models[modelId]._name !== schema._name) {\n      model = models[modelId];\n      this.require('factory').syncComponent(model, true);\n    }\n  }\n  \n  this.require('designer').save();\n\n  this.require('state').space(id);\n  \n  this.require('spaces').render();\n  this.require('workspace').render();\t\n}",
+        "function $editorUpdateSchema(id, schema) { \n  var schemas = this.require('factory').system().schemas(),\n      models = null,\n      model = null,\n      modelId = '';\n\n  this.require('factory').syncModel(schema);\n  \n  this.require('designer').save();\n  \n  this.require('factory').updateSchema(id, schema);\n  \n  this.require('designer').save();\n\n  // sync other components\n  models = this.require('factory').system().models();\n  for (modelId in models) {\n    if (models[modelId]._name !== schema._name) {\n      model = models[modelId];\n      this.require('factory').syncComponent(model, true);\n    }\n  }\n  \n  this.require('designer').save();\n\n  this.require('state').space(id);\n  \n  this.require('spaces').render();\n  this.require('workspace').render();\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -958,7 +958,7 @@
       "component": "_Channel",
       "state": "$editorUpdateModel",
       "action":
-        "function $editorUpdateModel(id, model) { \n  jsPlumb.deleteEveryEndpoint();\n  \n  var oldModel = this.require('factory').getGeneratedModel(model._name);\n\n  this.require('factory').updateModel(id, model);\n\n  this.require('designer').save();\n\n  this.require('factory').syncBehavior(model);\n  \n  this.require('designer').save();\n  \n  this.require('factory').syncComponent(model, oldModel, true);\n\n  this.require('state').space(id);\n  \n  this.require('spaces').render();\n  this.require('workspace').render();\t\n  \n   $(function () {\n    $('[role=\"tooltip\"]').hide();\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { 'show': 1500, 'hide': 100 }, trigger: 'hover' });\n  });\n}",
+        "function $editorUpdateModel(id, model) { \n  var oldModel = this.require('factory').getGeneratedModel(model._name);\n\n  this.require('factory').updateModel(id, model);\n\n  this.require('designer').save();\n\n  this.require('factory').syncBehavior(model);\n  \n  this.require('designer').save();\n  \n  this.require('factory').syncComponent(model, oldModel, true);\n\n  this.require('state').space(id);\n  \n  this.require('spaces').render();\n  this.require('workspace').render();\t\n  \n   $(function () {\n    $('[role=\"tooltip\"]').hide();\n    $('[data-toggle=\"tooltip\"]').tooltip({ 'container': 'body', delay: { 'show': 1500, 'hide': 100 }, trigger: 'hover' });\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
