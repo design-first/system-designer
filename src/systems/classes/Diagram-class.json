@@ -8,6 +8,7 @@
       "_id": "v123b51abbb18712",
       "_name": "Diagram",
       "_inherit": ["_Component"],
+      "data": "property",
       "ref": "property",
       "zoom": "property",
       "render": "method"
@@ -32,7 +33,14 @@
         "mandatory": false,
         "default": 1
       },
-      "render": { "description": "", "params": [], "result": "any" }
+      "render": { "description": "", "params": [], "result": "any" },
+      "data": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      }
     }
   },
   "behaviors": {},

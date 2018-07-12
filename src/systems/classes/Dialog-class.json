@@ -126,6 +126,11 @@
       "_id": "k16ab6191c412fea",
       "_name": "DialogDelete",
       "_inherit": ["Dialog"]
+    },
+    "b1a8ae1c3f113625": {
+      "_id": "b1a8ae1c3f113625",
+      "_name": "DialogDropDiagram",
+      "_inherit": ["Dialog"]
     }
   },
   "models": {
@@ -144,7 +149,7 @@
         "default": ""
       },
       "data": {
-        "type": "object",
+        "type": "any",
         "readOnly": false,
         "mandatory": false,
         "default": {}
@@ -259,7 +264,12 @@
         "default": 0
       }
     },
-    "i1d79c1b51e1c166": { "_id": "i1d79c1b51e1c166", "_name": "DialogDelete" }
+    "i1d79c1b51e1c166": { "_id": "i1d79c1b51e1c166", "_name": "DialogDelete" },
+    "y11f3c1fe9b1f239": {
+      "_id": "y11f3c1fe9b1f239",
+      "_name": "DialogDropDiagram",
+      "_description": ""
+    }
   },
   "behaviors": {
     "k10e3f115ef1a83b": {
@@ -931,6 +941,33 @@
       "state": "importSystem",
       "action":
         "function importSystem() { \n  var sys = null,\n    designer = this.require('designer'),\n    message = this.require('message');\n\n  if (Object.keys(this.data()).length) {\n    if (this.require('factory').system()) {\n      this.require('factory').system().destroy();\n    }\n    \n    sys = this.require('factory').create(this.data());\n\n    // empty log\n    this.require('state').logs().forEach(function (item) {\n      this.logs().pop();\n    }.bind(this.require('state')));\n    \n    \n    // hide log\n    $('#designer-menu-item-logs-number').hide();\n    document.querySelector('#designer-menu-item-logs-number').innerHTML = 0;\n\n    designer.save();\n\n    this.require('state').space(sys.name());\n\n    this.require('spaces').render();\n    this.require('workspace').render();\n\n    this.require('router').update();\n\n    this.hide();\n\n    message.success('Importation of the system is done.');\n  } else {\n    message.danger('The system you try to import is invalid');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "p1bc351895f16e0d": {
+      "_id": "p1bc351895f16e0d",
+      "component": "DialogDropDiagram",
+      "state": "hide",
+      "action":
+        "function hide() { \n\t  $('#designer-dialog-drop-diagram-modal').modal('hide');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "g1fa4c1f2b8146c3": {
+      "_id": "g1fa4c1f2b8146c3",
+      "component": "DialogDropDiagram",
+      "state": "show",
+      "action":
+        "function show() { \n  $('#designer-dialog-drop-diagram-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "u1ab541be0216fb1": {
+      "_id": "u1ab541be0216fb1",
+      "component": "DialogDropDiagram",
+      "state": "init",
+      "action":
+        "function init(conf) { \n  var html = null,\n      dom = null;\n\n  $('#designer-dialog').empty();\n\n  html = this.require('dialog-modal-drop-diagram.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-drop-diagram-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-drop-diagram-modal-import');\n  dom.addEventListener('click', function click(event) {\n    this.require('viz').render(this.data());\n    this.require('viz').data(this.data());\n    this.hide();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-drop-diagram-modal');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      document.getElementById('designer-dialog-drop-diagram-modal-import').click();\n      return false;\n    }\n  }.bind(this));\n\n  if (!this.require('factory').system()) {\n    $('#designer-dialog-drop-diagram-modal-merge').hide();\n  }\n}",
       "useCoreAPI": false,
       "core": false
     }
