@@ -761,7 +761,7 @@
       "component": "Workspace",
       "state": "clear",
       "action":
-        "function clear() { \n  $('#designer-workspace').empty();\n  jsPlumb.ready(function () {\n    try {\n      jsPlumb.deleteEveryEndpoint();\n    } catch (e) {\n      \n    }\n  });\n}",
+        "function clear() { \n  // force hide tooltip\n  $('.designer-model [data-toggle=\"tooltip\"]').tooltip('hide');\n  $('.designer-type [data-toggle=\"tooltip\"]').tooltip('hide');\n  \n  jsPlumb.ready(function () {\n    try {\n      jsPlumb.deleteEveryEndpoint();\n    } catch (e) {\n      \n    }\n  });\n  \n  $('#designer-workspace').empty();\n}",
       "useCoreAPI": false,
       "core": false
     },
