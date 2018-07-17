@@ -521,49 +521,49 @@
       "component": "sdbc51200e11z03",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy(); \n  this.require('message').success('The text has been copied to the clipboard.');\n}"
+        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').copy(); \n  this.require('message').success('The text has been copied to the clipboard.');\n}"
     },
     "l1c2d911d83104a2": {
       "_id": "l1c2d911d83104a2",
       "component": "sdbc51200e11z04",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  this.require('editor').paste(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').paste(); \n}"
     },
     "a194c816a861f58c": {
       "_id": "a194c816a861f58c",
       "component": "sdbc51200e11z02",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').selectAll(); \n}"
     },
     "u1ad2a18ae7197d7": {
       "_id": "u1ad2a18ae7197d7",
       "component": "sdbc51200e11z01",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').redo(); \n}"
     },
     "m12f44111501c769": {
       "_id": "m12f44111501c769",
       "component": "sdbc51200e11z00",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').undo(); \n}"
     },
     "g1fcf31e19f15b6f": {
       "_id": "g1fcf31e19f15b6f",
       "component": "1dbc51200e11z10",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n}"
+        "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-system', '_blank', true); \n}"
     },
     "j190d61dacc1fb05": {
       "_id": "j190d61dacc1fb05",
       "component": "1dbc51200e116e4",
       "state": "click",
       "action":
-        "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save();\n}"
+        "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').save();\n}"
     },
     "c1076f15499194ba": {
       "_id": "c1076f15499194ba",

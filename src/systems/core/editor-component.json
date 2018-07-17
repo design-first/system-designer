@@ -521,42 +521,42 @@
       "component": "wdbc51200e11z03",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  this.require('editor').copy();\n  this.require('message').success('The text has been copied to the clipboard.');\n}"
+        "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').copy();\n  this.require('message').success('The text has been copied to the clipboard.');\n}"
     },
     "v1639613d361aacf": {
       "_id": "v1639613d361aacf",
       "component": "wdbc51200e11z04",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  this.require('editor').paste(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').paste(); \n}"
     },
     "g1a0081da861f758": {
       "_id": "g1a0081da861f758",
       "component": "wdbc51200e11z02",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  this.require('editor').selectAll(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').selectAll(); \n}"
     },
     "q1812b16012148e4": {
       "_id": "q1812b16012148e4",
       "component": "wdbc51200e11z01",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  this.require('editor').redo(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').redo(); \n}"
     },
     "f1f85510ffb1f7de": {
       "_id": "f1f85510ffb1f7de",
       "component": "wdbc51200e11z00",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  this.require('editor').undo(); \n}"
+        "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').undo(); \n}"
     },
     "a1ca6b1c67e16e93": {
       "_id": "a1ca6b1c67e16e93",
       "component": "1dbc51200e11617",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true);\n}"
+        "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://system-designer.readme.io/docs/create-a-component', '_blank', true);\n}"
     },
     "u1b6fb175031cb76": {
       "_id": "u1b6fb175031cb76",
@@ -570,7 +570,7 @@
       "component": "1dbc51200e11613",
       "state": "click",
       "action":
-        "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  this.require('designer').save();\n}"
+        "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').save();\n}"
     },
     "s10e461a0831354a": {
       "_id": "s10e461a0831354a",
@@ -648,7 +648,7 @@
       "component": "r185da17faa18ba1",
       "state": "click",
       "action":
-        "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+        "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
