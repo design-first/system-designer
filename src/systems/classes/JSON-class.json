@@ -40,9 +40,9 @@
         "source": {
           "name": "quick-start",
           "master": true,
-          "version": "1.0.0",
+          "version": "1.5.0",
           "description":
-            "Quick start\n\nThis system is taken from the quick start: https://system-designer.readme.io/docs/quick-start",
+            "Quick start\n\nThis system is taken from the quick start.",
           "schemas": {
             "154661fa5617782": {
               "_id": "154661fa5617782",
@@ -59,24 +59,30 @@
               "_id": "1a3a2150b31c099",
               "_name": "Jedi",
               "firstName": {
+                "description": "fist name of a Jedi",
                 "type": "string",
                 "readOnly": false,
                 "mandatory": true,
                 "default": ""
               },
               "lastName": {
+                "description": "last name of a Jedi",
                 "type": "string",
                 "readOnly": false,
                 "mandatory": true,
                 "default": ""
               },
               "father": {
+                "description": "father of a Jedi",
                 "type": "Jedi",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
               },
-              "fullName": { "result": "string" }
+              "fullName": {
+                "description": "full name of a Jedi",
+                "result": "string"
+              }
             }
           },
           "behaviors": {
@@ -119,75 +125,13 @@
           "_id": "100e51f87218a8f"
         }
       },
-      "04-send-messages.json": {
-        "_id": "04-send-messages.json",
-        "source": {
-          "name": "send-messages",
-          "master": true,
-          "version": "1.0.0",
-          "description":
-            "Send messages threw a channel\n\n\nYou can send messages from one system to another system with channels. To do that:\n\n1. Define an event in '_Channel' schema and model.\n2. In '_Channel' 'send' method, define how to send the message to another channel (webRTC, XHR, ...).\n3. In another system, define how to get the message and send it to the system with: runtime.message().\n4. To send a message: this.require('channel').myevent(param1, param2, ...).\n5. To listen to the message, just add a behavior to the event.",
-          "schemas": {
-            "104ad1f48518376": {
-              "_id": "104ad1f48518376",
-              "_name": "_Channel",
-              "_inherit": ["_Component"],
-              "send": "event"
-            }
-          },
-          "models": {
-            "135c71078810af2": {
-              "_id": "135c71078810af2",
-              "_name": "_Channel",
-              "send": { "params": [{ "name": "message", "type": "message" }] }
-            }
-          },
-          "behaviors": {
-            "1ae8e11ece1a658": {
-              "_id": "1ae8e11ece1a658",
-              "component": "_Channel",
-              "state": "send",
-              "action": "function send(message) { \n\n}",
-              "useCoreAPI": false,
-              "core": false
-            }
-          },
-          "types": {
-            "message": {
-              "name": "message",
-              "type": "object",
-              "schema": {
-                "event": {
-                  "description": "name of the event",
-                  "type": "string",
-                  "mandatory": true
-                },
-                "from": {
-                  "description": "id of the system",
-                  "type": "string",
-                  "mandatory": false
-                },
-                "data": {
-                  "description": "arguments send to the event",
-                  "type": "array",
-                  "mandatory": true
-                }
-              },
-              "core": true
-            }
-          },
-          "components": { "_Channel": { "channel": { "_id": "channel" } } },
-          "_id": "12eaf148b211195"
-        },
-        "platform": "all"
-      },
       "01-book-collection": {
         "_id": "01-book-collection",
         "platform": "all",
         "source": {
           "name": "book-collection",
           "master": true,
-          "version": "1.0.0",
+          "version": "1.5.0",
           "description":
             "Create a Book collection manager\n\nThis system shows a list of books and an input to filter on that list.\n\nnote: if you create a Book Component when running the application, the list will be automatically updated",
           "schemas": {
@@ -234,12 +178,14 @@
               "_id": "o19b04191b513cf7",
               "_name": "Template",
               "source": {
+                "description": "html of the template",
                 "type": "html",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
               },
               "render": {
+                "description": "render the template",
                 "params": [
                   {
                     "name": "elt",
@@ -254,18 +200,20 @@
               "_id": "z128c91df861dc34",
               "_name": "CSS",
               "source": {
+                "description": "css of the component",
                 "type": "css",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
               },
-              "render": {}
+              "render": { "description": "render the component" }
             },
             "p1b9fa10ca51e9d4": {
               "_id": "p1b9fa10ca51e9d4",
               "_name": "List",
-              "render": {},
+              "render": { "description": "render the list" },
               "filter": {
+                "description": "filter on the list",
                 "type": "string",
                 "readOnly": false,
                 "mandatory": false,
@@ -277,21 +225,21 @@
               "_name": "Book",
               "_description": "",
               "name": {
-                "description": "",
+                "description": "name of a book",
                 "type": "string",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
               },
               "year": {
-                "description": "",
+                "description": "year when the book was written",
                 "type": "number",
                 "readOnly": false,
                 "mandatory": false,
                 "default": 0
               },
               "author": {
-                "description": "",
+                "description": "author of the book",
                 "type": "Author",
                 "readOnly": false,
                 "mandatory": false,
@@ -303,21 +251,21 @@
               "_name": "Author",
               "_description": "",
               "firstName": {
-                "description": "",
+                "description": "first name of an author",
                 "type": "string",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
               },
               "lastName": {
-                "description": "",
+                "description": "last name of an author",
                 "type": "string",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
               },
               "fullName": {
-                "description": "",
+                "description": "full name of an author",
                 "params": [],
                 "result": "string"
               }
@@ -466,7 +414,7 @@
         "source": {
           "name": "nodejs",
           "master": true,
-          "version": "1.0.1",
+          "version": "1.5.0",
           "description":
             "Create a server application\n\nThis example shows you how to create a Node.js application in System Designer.\n\nYou can the test the application directly in System Designer.",
           "schemas": {},
@@ -493,7 +441,7 @@
         "source": {
           "name": "extension-template",
           "master": false,
-          "version": "1.1.0",
+          "version": "1.5.0",
           "description":
             "Create an extension\n\nExtension for creating:\n\n* toolbar items,\n* actions when clicking on them and\n* show modal dialog.",
           "schemas": {
@@ -534,12 +482,14 @@
               "_id": "w1417e1d6d613a0d",
               "_name": "HTML",
               "source": {
+                "description": "HTML of the component",
                 "type": "html",
                 "readOnly": true,
                 "mandatory": true,
                 "default": ""
               },
               "render": {
+                "description": "render the component",
                 "params": [
                   {
                     "name": "id",
@@ -554,26 +504,30 @@
               "_id": "u1f4c7177bb1a459",
               "_name": "ToolBarItem",
               "html": {
+                "description": "HTML the toolbar item",
                 "type": "HTML",
                 "readOnly": false,
                 "mandatory": false,
                 "default": "toolbar-item-template.html"
               },
               "position": {
+                "description": "position of the toolbar item in the toolbar",
                 "type": "number",
                 "readOnly": false,
                 "mandatory": false,
                 "default": 70
               },
               "type": {
+                "description": "on which context to display the toolbar item",
                 "type": "editorType",
                 "readOnly": false,
                 "mandatory": false,
                 "default": "designer"
               },
-              "render": {},
-              "click": {},
+              "render": { "description": "render the toolbar item" },
+              "click": { "description": "click on the toolbar item" },
               "platform": {
+                "description": "on which platform to display the toolbar item",
                 "type": "platform",
                 "readOnly": false,
                 "mandatory": false,
@@ -584,28 +538,33 @@
               "_id": "q1d12b19f4712a7a",
               "_name": "Modal",
               "title": {
+                "description": "title of the modal",
                 "type": "text",
                 "readOnly": true,
                 "mandatory": false,
                 "default": ""
               },
               "message": {
+                "description": "message to display",
                 "type": "text",
                 "readOnly": true,
                 "mandatory": false,
                 "default": ""
               },
               "html": {
+                "description": "HTML of the modal",
                 "type": "HTML",
                 "readOnly": false,
                 "mandatory": false,
                 "default": "modal-template.html"
               },
-              "show": {},
-              "hide": {},
-              "cancel": {},
-              "ok": {},
-              "render": {}
+              "show": { "description": "show the modal" },
+              "hide": { "description": "hide the modal" },
+              "cancel": {
+                "description": "click on the 'Cancel' button of the modal"
+              },
+              "ok": { "description": "click on the 'OK' button of the modal" },
+              "render": { "description": "render the modal" }
             }
           },
           "behaviors": {
@@ -722,7 +681,7 @@
         "source": {
           "name": "listen-collection-events",
           "master": true,
-          "version": "1.0.0",
+          "version": "1.5.0",
           "description":
             "Listen to components collection events\n\nSystem Runtime NoSQL Database is an instance of '_Database' class that sends insert, update and remove events for each collection of the database.\n\nYou can listen to all these events to perform the action you want.\n\nnote: events are send for the collections (i.e. schemas) you have created but also for the private collections of the database.",
           "schemas": {
@@ -742,12 +701,18 @@
               "_name": "_Database",
               "_core": true,
               "insert": {
+                "description":
+                  "event send when a document is inserted in a collection",
                 "params": [{ "name": "event", "type": "dbInsertEvent" }]
               },
               "update": {
+                "description":
+                  "event send when a document is updated in a collection",
                 "params": [{ "name": "event", "type": "dbUpdateEvent" }]
               },
               "remove": {
+                "description":
+                  "event send when a document is removed from a collection",
                 "params": [{ "name": "event", "type": "dbRemoveEvent" }]
               }
             }
@@ -788,13 +753,31 @@
               "type": "object",
               "schema": {
                 "collection": {
+                  "description":
+                    "id of the collection where a document has been updated",
                   "type": "string",
                   "mandatory": true,
                   "default": ""
                 },
-                "id": { "type": "string", "mandatory": true, "default": "" },
-                "field": { "type": "string", "mandatory": true, "default": "" },
-                "value": { "type": "any", "mandatory": true, "default": null }
+                "id": {
+                  "description": "id of the document that has been updated",
+                  "type": "string",
+                  "mandatory": true,
+                  "default": ""
+                },
+                "field": {
+                  "description": "field of the document that has been updated",
+                  "type": "string",
+                  "mandatory": true,
+                  "default": ""
+                },
+                "value": {
+                  "description":
+                    "value of the field of the document that has been updated",
+                  "type": "any",
+                  "mandatory": true,
+                  "default": null
+                }
               }
             },
             "dbRemoveEvent": {
@@ -803,11 +786,18 @@
               "type": "object",
               "schema": {
                 "collection": {
+                  "description":
+                    "id of the collection where a document has been removed",
                   "type": "string",
                   "mandatory": true,
                   "default": ""
                 },
-                "id": { "type": "string", "mandatory": true, "default": "" }
+                "id": {
+                  "description": "id of the document that has been removed",
+                  "type": "string",
+                  "mandatory": true,
+                  "default": ""
+                }
               }
             },
             "dbInsertEvent": {
@@ -816,11 +806,14 @@
               "type": "object",
               "schema": {
                 "collection": {
+                  "description":
+                    "id of the collection where a document has been inserted",
                   "type": "string",
                   "mandatory": true,
                   "default": ""
                 },
                 "document": {
+                  "description": "document that has been inserted",
                   "type": "object",
                   "mandatory": true,
                   "default": {}
@@ -830,6 +823,71 @@
           },
           "components": {},
           "_id": "1d4431844018720"
+        },
+        "platform": "all"
+      },
+      "03-send-messages.json": {
+        "_id": "03-send-messages.json",
+        "source": {
+          "name": "send-messages",
+          "master": true,
+          "version": "1.5.0",
+          "description":
+            "Send messages threw a channel\n\n\nYou can send messages into the current system or from one system to another system with channels. To do that:\n\n1. Define an event in '_Channel' schema and model.\n2. To listen to the message, just add a behavior to the event.\n3. To send a message: this.require('channel').myevent(param1, param2, ...).\n\n\nnote: see the tutorials for more informations.",
+          "schemas": {
+            "104ad1f48518376": {
+              "_id": "104ad1f48518376",
+              "_name": "_Channel",
+              "_inherit": ["_Component"],
+              "send": "event"
+            }
+          },
+          "models": {
+            "135c71078810af2": {
+              "_id": "135c71078810af2",
+              "_name": "_Channel",
+              "send": {
+                "description": "send a message",
+                "params": [{ "name": "message", "type": "message" }]
+              }
+            }
+          },
+          "behaviors": {
+            "1ae8e11ece1a658": {
+              "_id": "1ae8e11ece1a658",
+              "component": "_Channel",
+              "state": "send",
+              "action": "function send(message) { \n\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {
+            "message": {
+              "name": "message",
+              "type": "object",
+              "schema": {
+                "event": {
+                  "description": "name of the event",
+                  "type": "string",
+                  "mandatory": true
+                },
+                "from": {
+                  "description": "id of the system",
+                  "type": "string",
+                  "mandatory": false
+                },
+                "data": {
+                  "description": "arguments send to the event",
+                  "type": "array",
+                  "mandatory": true
+                }
+              },
+              "core": true
+            }
+          },
+          "components": { "_Channel": { "channel": { "_id": "channel" } } },
+          "_id": "12eaf148b211195"
         },
         "platform": "all"
       }
