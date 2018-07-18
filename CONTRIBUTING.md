@@ -2,7 +2,7 @@
 
 ## For questions
 
-Read the [documentation](https://system-designer.readme.io/) before to see if your questions has been answered in the documentation
+Read the [documentation](https://designfirst.io/systemdesigner/documentation/docs/what-is-system-designer.html) before to see if your questions has been answered in the documentation
 
 ## For suggestions
 

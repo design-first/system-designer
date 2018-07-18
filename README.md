@@ -144,8 +144,8 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/). All
 
 ## Documentation
 
-* [Quick Start](https://system-designer.readme.io/docs/quick-start)
-* [Documentation](https://system-designer.readme.io/)
+* [Quick Start](https://designfirst.io/systemdesigner/documentation/docs/quick-start.html)
+* [Documentation](https://designfirst.io/systemdesigner/documentation/docs/what-is-system-designer.html)
 
 ## Community
 
