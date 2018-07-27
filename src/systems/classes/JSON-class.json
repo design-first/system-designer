@@ -91,7 +91,7 @@
               "component": "100e51f87218a8f",
               "state": "start",
               "action":
-                "function start() {\n  var luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n}",
+                "function start() {\n  let luke = null,\n      logger = null;\n  \n  // get logger component\n  logger = this.require('logger');\n  \n  // get luke component\n  luke = this.require('luke');\n  \n  // get the name of the father of Luke\n  logger.info(luke.father().fullName());\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -100,7 +100,7 @@
               "component": "Jedi",
               "state": "fullName",
               "action":
-                "function fullName() {\n  var result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
+                "function fullName() {\n  const result = this.firstName() + ' ' + this.lastName();\n  return result;\n}",
               "useCoreAPI": false,
               "core": false
             }
@@ -286,7 +286,7 @@
               "component": "Template",
               "state": "render",
               "action":
-                "function render(elt) { \n  var html = this.source(),\n      domNode = elt;\n  \n  if (html) {\n    if (domNode === null) {\n      domNode = document.body;\n    }\n    \n    domNode.insertAdjacentHTML('beforeend', html);\n  }\n}",
+                "function render(elt) { \n  const html = this.source(),\n      domNode = elt;\n  \n  if (html) {\n    if (domNode === null) {\n      domNode = document.body;\n    }\n    \n    domNode.insertAdjacentHTML('beforeend', html);\n  }\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -295,7 +295,7 @@
               "component": "CSS",
               "state": "render",
               "action":
-                "function render() { \n  var div = document.createElement('style');\n  div.innerHTML = this.source();\n  document.head.appendChild(div);\n}",
+                "function render() { \n  let div = document.createElement('style');\n  div.innerHTML = this.source();\n  document.head.appendChild(div);\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -304,7 +304,7 @@
               "component": "List",
               "state": "render",
               "action":
-                "function render() { \n  var items = [],\n      properties = {},\n      links = {},\n      html = '',\n      criteria = null,\n      table = document.getElementById('table');\n  \n  if (table) {\n  \n    // get data\n    if (this.filter().trim() !== '') {\n      criteria = new RegExp(this.filter().trim(), 'gi');\n      items = this.require('db').collections().Book.find({\n        name: criteria\n      });\n    } else {\n      items = this.require('db').collections().Book.find();\n    }\n    \n    properties = this.require('Book').classInfo().properties();\n    links = this.require('Book').classInfo().links();\n    \n    html = '<tr>';\n    // build table header\n    properties.forEach(function(property) {\n      html = html + '<th scope=\"col\">' + property.toUpperCase() +'</th>'; \n    });\n    links.forEach(function (link) {\n      html = html + '<th scope=\"col\">' + link.toUpperCase() +'</th>'; \n    });\n    html = html + '<tr>';\n    \n    // build table body\n    items.forEach(function (item){\n      html = html + '<tr>';\n      \n      properties.forEach(function(property) {\n        html = html + '<td>' + item[property] + '</td>';\n      });\n      \n      links.forEach(function (link) {\n        var author = this.require(item[link]);\n        \n        if (author) {\n          html = html + '<td>' + author.fullName() + '</td>';\n        } else {\n          html = html + '<td></td>';\n        }\n      }.bind(this));\n      \n      html = html + '</tr>';\n    }.bind(this));\n    \n    html = html + '</table>';\n    \n    table.innerHTML = html;\n  }\n}",
+                "function render() { \n  let items = [],\n      properties = {},\n      links = {},\n      html = '',\n      criteria = null,\n      table = document.getElementById('table');\n  \n  if (table) {\n  \n    // get data\n    if (this.filter().trim() !== '') {\n      criteria = new RegExp(this.filter().trim(), 'gi');\n      items = this.require('db').collections().Book.find({\n        name: criteria\n      });\n    } else {\n      items = this.require('db').collections().Book.find();\n    }\n    \n    properties = this.require('Book').classInfo().properties();\n    links = this.require('Book').classInfo().links();\n    \n    html = '<tr>';\n    // build table header\n    properties.forEach(function(property) {\n      html = html + '<th scope=\"col\">' + property.toUpperCase() +'</th>'; \n    });\n    links.forEach(function (link) {\n      html = html + '<th scope=\"col\">' + link.toUpperCase() +'</th>'; \n    });\n    html = html + '<tr>';\n    \n    // build table body\n    items.forEach(function (item){\n      html = html + '<tr>';\n      \n      properties.forEach(function(property) {\n        html = html + '<td>' + item[property] + '</td>';\n      });\n      \n      links.forEach(function (link) {\n        const author = this.require(item[link]);\n        \n        if (author) {\n          html = html + '<td>' + author.fullName() + '</td>';\n        } else {\n          html = html + '<td></td>';\n        }\n      }.bind(this));\n      \n      html = html + '</tr>';\n    }.bind(this));\n    \n    html = html + '</table>';\n    \n    table.innerHTML = html;\n  }\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -425,7 +425,7 @@
               "component": "1638e12721115b5",
               "state": "start",
               "action":
-                "function start() { \n  var http = require('http'),\n      logger = this.require('logger');\n\n  http.createServer(function (req, res) {\n    res.writeHead(200);\n    res.end('hello world\\n');\n  }).listen(1234);\n  \n  logger.info('server is running at http://127.0.0.1:1234');\n}",
+                "function start() { \n  const http = require('http'),\n      logger = this.require('logger');\n\n  http.createServer(function (req, res) {\n    res.writeHead(200);\n    res.end('hello world\\n');\n  }).listen(1234);\n  \n  logger.info('server is running at http://127.0.0.1:1234');\n}",
               "useCoreAPI": false,
               "core": false
             }
@@ -582,7 +582,7 @@
               "component": "Modal",
               "state": "show",
               "action":
-                "function show() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('show');\n}",
+                "function show() { \n  const id = this.html().id().replace('.html', '');\n  $('#' + id).modal('show');\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -591,7 +591,7 @@
               "component": "Modal",
               "state": "hide",
               "action":
-                "function hide() { \n  var id = this.html().id().replace('.html', '');\n  $('#' + id).modal('hide');\n}",
+                "function hide() { \n  const id = this.html().id().replace('.html', '');\n  $('#' + id).modal('hide');\n}",
               "useCoreAPI": false,
               "core": false
             },
@@ -600,7 +600,7 @@
               "component": "Modal",
               "state": "render",
               "action":
-                "function render() { \n  var html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#' + id).modal('show');\t\n}",
+                "function render() { \n  let html = '',\n      dom = null,\n      templateId = this.html().id(),\n      id = templateId.replace('.html', '');\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.html();\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n      .replace(/{{message}}/gi, this.message())\n  );\n\n  // modal events\n  dom = document.getElementById(id + '-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById(id + '-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\t\n  \n  // show modal\n  $('#' + id).modal('show');\t\n}",
               "useCoreAPI": false,
               "core": false
             },
