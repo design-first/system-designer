@@ -286,7 +286,7 @@
               "component": "Template",
               "state": "render",
               "action":
-                "function render(elt) { \n  const html = this.source(),\n      domNode = elt;\n  \n  if (html) {\n    if (domNode === null) {\n      domNode = document.body;\n    }\n    \n    domNode.insertAdjacentHTML('beforeend', html);\n  }\n}",
+                "function render(elt) { \n  let html = this.source(),\n      domNode = elt;\n  \n  if (html) {\n    if (domNode === null) {\n      domNode = document.body;\n    }\n    \n    domNode.insertAdjacentHTML('beforeend', html);\n  }\n}",
               "useCoreAPI": false,
               "core": false
             },
