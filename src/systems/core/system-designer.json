@@ -1115,15 +1115,6 @@
       "useCoreAPI": false,
       "core": false
     },
-    "w19413126bf1bf40": {
-      "_id": "w19413126bf1bf40",
-      "component": "s1aa5c1170e1eba3",
-      "state": "click",
-      "action":
-        "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var system = this.require('factory').system();\n  \n  if (system && system.name() !== 'default') {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "y1eaaf1fe0719457": {
       "_id": "y1eaaf1fe0719457",
       "component": "_Channel",
@@ -1284,14 +1275,7 @@
       "l1f2871e69b1b85e": {
         "_id": "l1f2871e69b1b85e",
         "html": "toolbar-item-command.html",
-        "platform": "web",
-        "position": 37,
-        "type": "designer"
-      },
-      "s1aa5c1170e1eba3": {
-        "_id": "s1aa5c1170e1eba3",
-        "html": "toolbar-item-command.html",
-        "platform": "electron",
+        "platform": "all",
         "position": 37,
         "type": "designer"
       },
