@@ -29,18 +29,15 @@
     "JS": {
       "app-github.js": {
         "_id": "app-github.js",
-        "source":
-          "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @module {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// install System Runtime\nconst runtime = require('system-runtime');\n\n// set the level of log\nruntime.require('logger').level('{{logLevel}}');\n\n// install and start the system\nruntime.install({{system}});"
+        "source": "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @module {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// install System Runtime\nconst runtime = require('system-runtime');\n\n// set the level of log\nruntime.require('logger').level('{{logLevel}}');\n\n// install and start the system\nruntime.install({{system}});"
       },
       "app.js": {
         "_id": "app.js",
-        "source":
-          "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @module {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// install System Runtime\nconst runtime = require('system-runtime');\n\n// uncomment this line to debug your system\n// runtime.install('node_modules/system-runtime/extensions/mode-admin-server.json');\n\n// set the level of log\nruntime.require('logger').level('{{logLevel}}');\n\n// install and start the system\nruntime.install({{system}});"
+        "source": "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @module {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// install System Runtime\nconst runtime = require('system-runtime');\n\n// uncomment this line to debug your system\n// runtime.install('node_modules/system-runtime/extensions/mode-admin-server.json');\n\n// set the level of log\nruntime.require('logger').level('{{logLevel}}');\n\n// install and start the system\nruntime.install({{system}});"
       },
       "javascript-export.js": {
         "_id": "javascript-export.js",
-        "source":
-          "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @system {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// uncomment this line if this system runs on node.js\n// const runtime = require('system-runtime');\n\n// uncomment this line to debug your system on node.js\n// runtime.install('node_modules/system-runtime/extensions/mode-admin-server.json');\n\nruntime.require('logger').level('{{logLevel}}');\n\n"
+        "source": "/* \n * {{name}}\n * \n * @description {{description}}\n * \n * @system {{name}}\n * @version {{version}}\n * @requires system-runtime\n * \n */\n\n// uncomment this line if this system runs on node.js\n// const runtime = require('system-runtime');\n\n// uncomment this line to debug your system on node.js\n// runtime.install('node_modules/system-runtime/extensions/mode-admin-server.json');\n\nruntime.require('logger').level('{{logLevel}}');\n\n"
       }
     }
   },

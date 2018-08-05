@@ -560,8 +560,7 @@
       "_id": "f14706139781d16b",
       "component": "a1e94f187c412b2a",
       "state": "click",
-      "action":
-        "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
     },
     "b18fab15f501e117": {
       "_id": "b18fab15f501e117",
@@ -575,8 +574,7 @@
       "_id": "b105d21fac11b017",
       "component": "Designer",
       "state": "render",
-      "action":
-        "function render() {\n  var id = '',\n    systemId = '',\n    system = null;\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  // get parameters\n  systemId = document.location.href.split('#')[1].split('?')[0];\n  \n  // set system\n  system = this.require('storage').get(systemId);\n  \n  if (system) {\n    this.require('factory').create(system);\n  }\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // extensions\n  this.installExtensions();\n  \n  // title\n  if (system) {\n    document.title = 'class diagram · system ' + system.name;\n  } else {\n    document.title = 'class diagram';\n  }\n\n  // router\n  this.require('router').update();\n  \n  // shorcuts\n  this.addShortcuts();\n}",
+      "action": "function render() {\n  var id = '',\n    systemId = '',\n    system = null;\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  // get parameters\n  systemId = document.location.href.split('#')[1].split('?')[0];\n  \n  // set system\n  system = this.require('storage').get(systemId);\n  \n  if (system) {\n    this.require('factory').create(system);\n  }\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // extensions\n  this.installExtensions();\n  \n  // title\n  if (system) {\n    document.title = 'class diagram · system ' + system.name;\n  } else {\n    document.title = 'class diagram';\n  }\n\n  // router\n  this.require('router').update();\n  \n  // shorcuts\n  this.addShortcuts();\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -592,8 +590,7 @@
       "_id": "q16ab5185c81f37d",
       "component": "Router",
       "state": "update",
-      "action":
-        "function update() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  id = decodeURIComponent(document.location.href.split('#')[1]);\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + context;\n  }\n}",
+      "action": "function update() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  id = decodeURIComponent(document.location.href.split('#')[1]);\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + context;\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -601,8 +598,7 @@
       "_id": "t1e0be117b312cf0",
       "component": "_Channel",
       "state": "send",
-      "action":
-        "function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state'),\n      system = {};\n      \n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer.replace(':8888', '') + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\t\n}",
+      "action": "function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state'),\n      system = {};\n      \n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer.replace(':8888', '') + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -610,8 +606,7 @@
       "_id": "i12aee1bd7815e89",
       "component": "_Channel",
       "state": "init",
-      "action":
-        "function init(conf) { \n  this.require('_Storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
+      "action": "function init(conf) { \n  this.require('_Storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -619,8 +614,7 @@
       "_id": "g1d47010c7e1904c",
       "component": "Designer",
       "state": "addShortcuts",
-      "action":
-        "function addShortcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}",
+      "action": "function addShortcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -628,8 +622,7 @@
       "_id": "z1d2f51cbab10c86",
       "component": "q189c51d320139d0",
       "state": "click",
-      "action":
-        "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://designfirst.io/systemdesigner/documentation/docs/generate-a-class-diagram.html', '_blank', true);\t\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://designfirst.io/systemdesigner/documentation/docs/generate-a-class-diagram.html', '_blank', true);\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -637,8 +630,7 @@
       "_id": "x1c18b145e6157d8",
       "component": "_Channel",
       "state": "$designerDeleteSchema",
-      "action":
-        "function $designerDeleteSchema(id) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "action": "function $designerDeleteSchema(id) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -646,8 +638,7 @@
       "_id": "m12e321f21a15f05",
       "component": "_Channel",
       "state": "$designerCreateSchema",
-      "action":
-        "function $designerCreateSchema(id, schema) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "action": "function $designerCreateSchema(id, schema) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -655,8 +646,7 @@
       "_id": "z101721b5941bf54",
       "component": "_Channel",
       "state": "$designerUpdateModel",
-      "action":
-        "function $designerUpdateModel(id, model) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "action": "function $designerUpdateModel(id, model) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -664,8 +654,7 @@
       "_id": "l108ea1b11c10e8b",
       "component": "_Channel",
       "state": "$editorUpdateSchema",
-      "action":
-        "function $editorUpdateSchema(id, schema) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "action": "function $editorUpdateSchema(id, schema) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -673,8 +662,7 @@
       "_id": "b13285192b811ad1",
       "component": "_Channel",
       "state": "$editorUpdateModel",
-      "action":
-        "function $editorUpdateModel(id, model) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "action": "function $editorUpdateModel(id, model) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -682,8 +670,7 @@
       "_id": "u1c69b124bc1ac09",
       "component": "_Channel",
       "state": "$editorUpdateSystem",
-      "action":
-        "function $editorUpdateSystem(id, system) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
+      "action": "function $editorUpdateSystem(id, system) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -691,8 +678,7 @@
       "_id": "d185231c5af12d54",
       "component": "q1da4e1ca6710ca2",
       "state": "click",
-      "action":
-        "function click() { \n  $('#designer-toolbar-item-zoomin').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n  var matrixGroup = '';\n  \n  if (svg) {\n    matrixGroup = svg.getElementById('graph0');\t\n      \n    function zoom(scale) {\n      var previousScale = matrixGroup.getAttribute('transform').split(')')[0];\n      var transformInfo = matrixGroup.getAttribute('transform').replace(previousScale + ')', '');\n      \n      matrixGroup.setAttribute('transform', 'scale(' + scale + ') ' + transformInfo);\n    }\n    \n    this.require('viz').zoom(this.require('viz').zoom() + 0.1);\n    zoom(this.require('viz').zoom());\n    \n    this.require('message').success('Zoom x' + this.require('viz').zoom().toString().substring(0, 3) + ' applied.');\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoomin').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n  var matrixGroup = '';\n  \n  if (svg) {\n    matrixGroup = svg.getElementById('graph0');\t\n      \n    function zoom(scale) {\n      var previousScale = matrixGroup.getAttribute('transform').split(')')[0];\n      var transformInfo = matrixGroup.getAttribute('transform').replace(previousScale + ')', '');\n      \n      matrixGroup.setAttribute('transform', 'scale(' + scale + ') ' + transformInfo);\n    }\n    \n    this.require('viz').zoom(this.require('viz').zoom() + 0.1);\n    zoom(this.require('viz').zoom());\n    \n    this.require('message').success('Zoom x' + this.require('viz').zoom().toString().substring(0, 3) + ' applied.');\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -700,8 +686,7 @@
       "_id": "l19d291b99311024",
       "component": "p15e7513ed512f61",
       "state": "click",
-      "action":
-        "function click() { \n  $('#designer-toolbar-item-zoomout').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n  var matrixGroup = '';\n  \n  if (svg) {\n    matrixGroup = svg.getElementById('graph0');\t\n      \n    function zoom(scale) {\n      var previousScale = matrixGroup.getAttribute('transform').split(')')[0];\n      var transformInfo = matrixGroup.getAttribute('transform').replace(previousScale + ')', '');\n      \n      matrixGroup.setAttribute('transform', 'scale(' + scale + ') ' + transformInfo);\n    }\n  \n    this.require('viz').zoom(this.require('viz').zoom() - 0.1);\n    zoom(this.require('viz').zoom());\t\n  \n    this.require('message').success('Zoom x' + this.require('viz').zoom().toString().substring(0, 3) + ' applied.');\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoomout').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n  var matrixGroup = '';\n  \n  if (svg) {\n    matrixGroup = svg.getElementById('graph0');\t\n      \n    function zoom(scale) {\n      var previousScale = matrixGroup.getAttribute('transform').split(')')[0];\n      var transformInfo = matrixGroup.getAttribute('transform').replace(previousScale + ')', '');\n      \n      matrixGroup.setAttribute('transform', 'scale(' + scale + ') ' + transformInfo);\n    }\n  \n    this.require('viz').zoom(this.require('viz').zoom() - 0.1);\n    zoom(this.require('viz').zoom());\t\n  \n    this.require('message').success('Zoom x' + this.require('viz').zoom().toString().substring(0, 3) + ' applied.');\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -709,8 +694,7 @@
       "_id": "u1695c1c8551203c",
       "component": "Diagram",
       "state": "render",
-      "action":
-        "function render(dotFile) { \n  var dotGraph = '';\n\n  switch(true) {\n    case dotFile !== null:\n      dotGraph = dotFile;\n      document.title = 'class diagram';\n      break;\n    case this.data() !== '':\n      dotGraph = this.data();\n      document.title = 'class diagram';\n      break;\n    case this.require('factory').system() !== undefined:\n      dotGraph = this.require('export').toGraphviz();\n      break;\n    default:  \n      document.title = 'class diagram';\n      $('#designer-diagram').empty();\n      this.require('message-help').render();\n      return;\n  }\n  \n  if (!this.ref()) {\n    this.ref(new Viz());\n  }\n\n  this.ref().renderSVGElement(dotGraph)\n  .then(function(element) {\n    var elt = document.getElementById('designer-diagram');\n\n    $('#designer-diagram').empty();\n    elt.appendChild(element);\n    \n    var svg = document.getElementsByTagName('svg')[0];\n    \n    // set width and heigth\n    svg.setAttribute('width', ($(document).width() - 50) + 'px');\n    svg.setAttribute('height', ($(document).height() - 50) + 'px');\n    \n    // svg event\n    svg.addEventListener('mousedown', startDrag, false);\n    svg.addEventListener('mousemove', drag, false);\n    svg.addEventListener('mouseup', endDrag, false);\n\n    var selectedElement, dragX, dragY;\n    var reTranslate = /translate\\s*\\(([-\\+\\d\\.\\s,e]+)\\)/gi;\n\n    function startDrag(evt) {\n      var screenMatrix = svg.getScreenCTM();\n      selectedElement = document.getElementById('graph0');\n      dragX = evt.clientX / screenMatrix.a;\n      dragY = evt.clientY / screenMatrix.d;\n\n      var transform = selectedElement.getAttribute('transform');\n      var translate = reTranslate.exec(transform);\n      if (translate) {\n        var digits = translate[1].split(/\\s*[,\\s]+/);\n        dragX -= parseFloat(digits[0] || 0);\n        dragY -= parseFloat(digits[1] || 0);\n      } else {\n        translate = 'translate(0, 0)';\n        if (transform) {\n          selectedElement.setAttribute('transform', translate + transform);\n        } else {\n          selectedElement.setAttribute('transform', translate);\n        }\n      }\n    }\n\n    function drag(evt) {\n      if (selectedElement) {\n        var screenMatrix = svg.getScreenCTM();\n        var x = evt.clientX / screenMatrix.a - dragX;\n        var y = evt.clientY / screenMatrix.d - dragY;\n\n        var transform = selectedElement.getAttribute('transform');\n        transform = transform.replace(reTranslate, 'translate(' + x  + ' ' + y + ')');\n        selectedElement.setAttribute('transform', transform);\n      }\n    }\n\n    function endDrag(evt) {\n      if (selectedElement) {\n        var screenMatrix = svg.getScreenCTM();\n        var x = evt.clientX / screenMatrix.a - dragX;\n        var y = evt.clientY / screenMatrix.d - dragY;\n\n        var transform = selectedElement.getAttribute('transform');\n        transform = transform.replace(reTranslate, 'translate(' + x  + ' ' + y + ')');\n        selectedElement.setAttribute('transform', transform);\n      }\n      selectedElement = false;\n    }\n    \n    if (runtime.require('viz').zoom() === 1) {\n      runtime.require('message').success('Diagram generated.');\n    }\n  })\n  .catch(error => {\n    if (!runtime.require('viz').ref()) {\n      runtime.require('viz').ref(new Viz());\n    }\n\n    runtime.require('message').danger(error.toString());\n  });\n}",
+      "action": "function render(dotFile) { \n  var dotGraph = '';\n\n  switch(true) {\n    case dotFile !== null:\n      dotGraph = dotFile;\n      document.title = 'class diagram';\n      break;\n    case this.data() !== '':\n      dotGraph = this.data();\n      document.title = 'class diagram';\n      break;\n    case this.require('factory').system() !== undefined:\n      dotGraph = this.require('export').toGraphviz();\n      break;\n    default:  \n      document.title = 'class diagram';\n      $('#designer-diagram').empty();\n      this.require('message-help').render();\n      return;\n  }\n  \n  if (!this.ref()) {\n    this.ref(new Viz());\n  }\n\n  this.ref().renderSVGElement(dotGraph)\n  .then(function(element) {\n    var elt = document.getElementById('designer-diagram');\n\n    $('#designer-diagram').empty();\n    elt.appendChild(element);\n    \n    var svg = document.getElementsByTagName('svg')[0];\n    \n    // set width and heigth\n    svg.setAttribute('width', ($(document).width() - 50) + 'px');\n    svg.setAttribute('height', ($(document).height() - 50) + 'px');\n    \n    // svg event\n    svg.addEventListener('mousedown', startDrag, false);\n    svg.addEventListener('mousemove', drag, false);\n    svg.addEventListener('mouseup', endDrag, false);\n\n    var selectedElement, dragX, dragY;\n    var reTranslate = /translate\\s*\\(([-\\+\\d\\.\\s,e]+)\\)/gi;\n\n    function startDrag(evt) {\n      var screenMatrix = svg.getScreenCTM();\n      selectedElement = document.getElementById('graph0');\n      dragX = evt.clientX / screenMatrix.a;\n      dragY = evt.clientY / screenMatrix.d;\n\n      var transform = selectedElement.getAttribute('transform');\n      var translate = reTranslate.exec(transform);\n      if (translate) {\n        var digits = translate[1].split(/\\s*[,\\s]+/);\n        dragX -= parseFloat(digits[0] || 0);\n        dragY -= parseFloat(digits[1] || 0);\n      } else {\n        translate = 'translate(0, 0)';\n        if (transform) {\n          selectedElement.setAttribute('transform', translate + transform);\n        } else {\n          selectedElement.setAttribute('transform', translate);\n        }\n      }\n    }\n\n    function drag(evt) {\n      if (selectedElement) {\n        var screenMatrix = svg.getScreenCTM();\n        var x = evt.clientX / screenMatrix.a - dragX;\n        var y = evt.clientY / screenMatrix.d - dragY;\n\n        var transform = selectedElement.getAttribute('transform');\n        transform = transform.replace(reTranslate, 'translate(' + x  + ' ' + y + ')');\n        selectedElement.setAttribute('transform', transform);\n      }\n    }\n\n    function endDrag(evt) {\n      if (selectedElement) {\n        var screenMatrix = svg.getScreenCTM();\n        var x = evt.clientX / screenMatrix.a - dragX;\n        var y = evt.clientY / screenMatrix.d - dragY;\n\n        var transform = selectedElement.getAttribute('transform');\n        transform = transform.replace(reTranslate, 'translate(' + x  + ' ' + y + ')');\n        selectedElement.setAttribute('transform', transform);\n      }\n      selectedElement = false;\n    }\n    \n    if (runtime.require('viz').zoom() === 1) {\n      runtime.require('message').success('Diagram generated.');\n    }\n  })\n  .catch(error => {\n    if (!runtime.require('viz').ref()) {\n      runtime.require('viz').ref(new Viz());\n    }\n\n    runtime.require('message').danger(error.toString());\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -718,8 +702,7 @@
       "_id": "j1685617835183b2",
       "component": "c1b63f13c911fcc8",
       "state": "click",
-      "action":
-        "function click() { \n  $('#designer-toolbar-item-zoominit').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var message = this.require('message');\n  var data = this.require('viz').data();\n  \n  if (this.require('factory').system() || data) {\n\t this.require('viz').zoom(1);\n\t this.require('viz').render();\n  } else {\n    message.warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoominit').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var message = this.require('message');\n  var data = this.require('viz').data();\n  \n  if (this.require('factory').system() || data) {\n\t this.require('viz').zoom(1);\n\t this.require('viz').render();\n  } else {\n    message.warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -727,8 +710,7 @@
       "_id": "r1484a1f32d17210",
       "component": "q16e321bb2c15a27",
       "state": "click",
-      "action":
-        "function click() { \n  $('#designer-toolbar-item-export-diagram').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var message = this.require('message');\n  var data = this.require('viz').data();\n\n  // code inspired from the blog post\n  // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n  if (this.require('factory').system() || data) {\n    var system = null,\n      textToWrite = null,\n      textFileAsBlob = null,\n      fileNameToSaveAs = null,\n      downloadLink = null;\n    \n    if (this.require('factory').system()) {\n      system = this.require('db').collections().System.find({\n        '_id': this.require('factory').system().id()\n      })[0];\n      system = JSON.parse(JSON.stringify(system));\n      textToWrite = '<?xml version=\"1.0\" encoding=\"utf-8\" ?><!DOCTYPE svg>' + $('#designer-diagram').html();\n      fileNameToSaveAs = this.require('factory').system().name() + '.svg';\n    } else {\n      textToWrite = '<?xml version=\"1.0\" encoding=\"utf-8\" ?><!DOCTYPE svg>' + $('#designer-diagram').html();\n      fileNameToSaveAs = 'class-diagram.svg';\n    }\n\n    if (!this.require('designer').isElectron()) {\n\n      textFileAsBlob = new Blob([textToWrite], {\n        type: 'application/octet-stream'\n      });\n\n      if (navigator.msSaveBlob) {\n        navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs);\n      } else {\n        downloadLink = document.createElement('a');\n        document.body.appendChild(downloadLink);\n        downloadLink.style.display = 'none';\n        downloadLink.download = fileNameToSaveAs;\n\n        if (window.URL != null) {\n          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n        } else {\n          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n        }\n        downloadLink.click();\n        window.URL.revokeObjectURL(downloadLink.href);\n      }\n      message.success('Exportation is done.');\n    } else {\n      var { dialog } = require('electron').remote;\n      var fs = require('fs');\n      var savePath = dialog.showSaveDialog({\n        'defaultPath': '~/' + fileNameToSaveAs\n      });\n      if (savePath) {\n        fs.writeFile(savePath, textToWrite, function (err) {\n          if (err) {\n            message.danger('Exportation failed.');\n          } else {\n            message.success('Exportation is done.');\n          }\n        });\n      }\n    }\n  } else {\n    message.warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-export-diagram').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var message = this.require('message');\n  var data = this.require('viz').data();\n\n  // code inspired from the blog post\n  // https://thiscouldbebetter.wordpress.com/2012/12/18/loading-editing-and-saving-a-text-file-in-html5-using-javascrip/\n  if (this.require('factory').system() || data) {\n    var system = null,\n      textToWrite = null,\n      textFileAsBlob = null,\n      fileNameToSaveAs = null,\n      downloadLink = null;\n    \n    if (this.require('factory').system()) {\n      system = this.require('db').collections().System.find({\n        '_id': this.require('factory').system().id()\n      })[0];\n      system = JSON.parse(JSON.stringify(system));\n      textToWrite = '<?xml version=\"1.0\" encoding=\"utf-8\" ?><!DOCTYPE svg>' + $('#designer-diagram').html();\n      fileNameToSaveAs = this.require('factory').system().name() + '.svg';\n    } else {\n      textToWrite = '<?xml version=\"1.0\" encoding=\"utf-8\" ?><!DOCTYPE svg>' + $('#designer-diagram').html();\n      fileNameToSaveAs = 'class-diagram.svg';\n    }\n\n    if (!this.require('designer').isElectron()) {\n\n      textFileAsBlob = new Blob([textToWrite], {\n        type: 'application/octet-stream'\n      });\n\n      if (navigator.msSaveBlob) {\n        navigator.msSaveBlob(textFileAsBlob, fileNameToSaveAs);\n      } else {\n        downloadLink = document.createElement('a');\n        document.body.appendChild(downloadLink);\n        downloadLink.style.display = 'none';\n        downloadLink.download = fileNameToSaveAs;\n\n        if (window.URL != null) {\n          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n        } else {\n          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);\n        }\n        downloadLink.click();\n        window.URL.revokeObjectURL(downloadLink.href);\n      }\n      message.success('Exportation is done.');\n    } else {\n      var { dialog } = require('electron').remote;\n      var fs = require('fs');\n      var savePath = dialog.showSaveDialog({\n        'defaultPath': '~/' + fileNameToSaveAs\n      });\n      if (savePath) {\n        fs.writeFile(savePath, textToWrite, function (err) {\n          if (err) {\n            message.danger('Exportation failed.');\n          } else {\n            message.success('Exportation is done.');\n          }\n        });\n      }\n    }\n  } else {\n    message.warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -736,8 +718,7 @@
       "_id": "i1cfbb13c0211eef",
       "component": "Workspace",
       "state": "init",
-      "action":
-        "function init(conf) { \n  var that = this;\n\n  $('html')\n    .on('dragenter dragover', false)\n    .on('drop', function (e) {\n      e.stopPropagation();\n      e.preventDefault();\n    \n      var files = e.originalEvent.dataTransfer.files;\n      var reader = new FileReader();\n      var dotFile = '';\n      reader.onload = function (event) {\n        dotFile += event.target.result;\n      };\n      reader.onloadend = function () {\n        var DialogDropDiagram = that.require('DialogDropDiagram');\n        \n        DialogDropDiagram = new DialogDropDiagram({\n          'title': 'A diagram has been found',\n          'message': 'You can view the diagram.'\n        });\n        \n        DialogDropDiagram.data(dotFile);\n        DialogDropDiagram.show();\n      };\n      if (files[0] && files[0].name && files[0].name.indexOf('.gv') !== -1) {\n        reader.readAsText(files[0], 'UTF-8');\n      }\n    });\t\n}",
+      "action": "function init(conf) { \n  var that = this;\n\n  $('html')\n    .on('dragenter dragover', false)\n    .on('drop', function (e) {\n      e.stopPropagation();\n      e.preventDefault();\n    \n      var files = e.originalEvent.dataTransfer.files;\n      var reader = new FileReader();\n      var dotFile = '';\n      reader.onload = function (event) {\n        dotFile += event.target.result;\n      };\n      reader.onloadend = function () {\n        var DialogDropDiagram = that.require('DialogDropDiagram');\n        \n        DialogDropDiagram = new DialogDropDiagram({\n          'title': 'A diagram has been found',\n          'message': 'You can view the diagram.'\n        });\n        \n        DialogDropDiagram.data(dotFile);\n        DialogDropDiagram.show();\n      };\n      if (files[0] && files[0].name && files[0].name.indexOf('.gv') !== -1) {\n        reader.readAsText(files[0], 'UTF-8');\n      }\n    });\t\n}",
       "useCoreAPI": false,
       "core": false
     }

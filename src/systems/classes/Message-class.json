@@ -31,36 +31,31 @@
       "_id": "f1c1eb158101aab8",
       "component": "Message",
       "state": "clean",
-      "action":
-        "function clean() {\n  document.querySelector('#designer-message').innerHTML = '';\n}"
+      "action": "function clean() {\n  document.querySelector('#designer-message').innerHTML = '';\n}"
     },
     "f1bf2a100901b407": {
       "_id": "f1bf2a100901b407",
       "component": "Message",
       "state": "danger",
-      "action":
-        "function danger(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-danger.html').source(),\n        id = this.require('factory').generateId(),\n        domId = 'designer-message-danger-' + id;\n        \n    this.clean();    \n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
+      "action": "function danger(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-danger.html').source(),\n        id = this.require('factory').generateId(),\n        domId = 'designer-message-danger-' + id;\n        \n    this.clean();    \n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
     },
     "i1b72d17c6c154ab": {
       "_id": "i1b72d17c6c154ab",
       "component": "Message",
       "state": "info",
-      "action":
-        "function info(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-info.html').source(),\n      id = this.require('factory').generateId(),\n      domId = 'designer-message-info-' + id;\n      \n    this.clean();\n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
+      "action": "function info(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-info.html').source(),\n      id = this.require('factory').generateId(),\n      domId = 'designer-message-info-' + id;\n      \n    this.clean();\n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
     },
     "s1a2461e9b9155cc": {
       "_id": "s1a2461e9b9155cc",
       "component": "Message",
       "state": "success",
-      "action":
-        "function success(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-success.html').source(),\n        id = this.require('factory').generateId(),\n        domId = 'designer-message-success-' + id;\n        \n    this.clean();\n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
+      "action": "function success(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-success.html').source(),\n        id = this.require('factory').generateId(),\n        domId = 'designer-message-success-' + id;\n        \n    this.clean();\n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
     },
     "k1dd3c148c011f25": {
       "_id": "k1dd3c148c011f25",
       "component": "Message",
       "state": "warning",
-      "action":
-        "function warning(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-warning.html').source(),\n        id = this.require('factory').generateId(),\n        domId = 'designer-message-warning-' + id;\n        \n    this.clean();\n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
+      "action": "function warning(message) {\n  var id = requestAnimationFrame(function () {\n    var html = this.require('message-alert-warning.html').source(),\n        id = this.require('factory').generateId(),\n        domId = 'designer-message-warning-' + id;\n        \n    this.clean();\n    \n    message = message.replace('[object Object]', 'message can not be displayed because it is not a string.');\n        \n    document.querySelector('#designer-message').insertAdjacentHTML('afterbegin', \n      html.replace(/{{message}}/gi, message)\n          .replace(/{id}/gi, id)\n      );\n    $('#' + domId).fadeIn(500);\n    \n    setTimeout(function () {\n      $('#' + domId).fadeOut(1000, function() {\n        $(this).remove();\n      });\n    }, 4000);\n  }.bind(this));\n  \n  setTimeout(function () {\n    cancelAnimationFrame(id);\n  }, 50);\n}"
     }
   },
   "types": {},

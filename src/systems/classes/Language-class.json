@@ -114,8 +114,7 @@
       "_id": "e1e35e1690f16945",
       "component": "Language",
       "state": "createBehaviorBody",
-      "action":
-        "function createBehaviorBody(returnedType) { \n\tvar body = '  \\n';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n      switch (returnedType) {\n        case 'css':\n        case 'html':\n        case 'javascript':  \n        case 'string':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        case 'array':\n          body = \"  let result = [];\\n  return result;\\n\";\n          break;\n        case 'number':\n          body = \"  let result = 0;\\n  return result;\\n\";\n          break;\n        case 'boolean':\n          body = \"  let result = false;\\n  return result;\\n\";\n          break;\n        case 'object':\n        case 'json':\n          body = \"  let result = {};\\n  return result;\\n\";\n          break;\n        case 'date':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        case 'any':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        default:\n          body = \"  let result = {};\\n  return result;\\n\";\n          break;\n      }\n\t    break;\n\t  default:\n\t    break;\n\t}\n\t\n\treturn body;\n}",
+      "action": "function createBehaviorBody(returnedType) { \n\tvar body = '  \\n';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n      switch (returnedType) {\n        case 'css':\n        case 'html':\n        case 'javascript':  \n        case 'string':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        case 'array':\n          body = \"  let result = [];\\n  return result;\\n\";\n          break;\n        case 'number':\n          body = \"  let result = 0;\\n  return result;\\n\";\n          break;\n        case 'boolean':\n          body = \"  let result = false;\\n  return result;\\n\";\n          break;\n        case 'object':\n        case 'json':\n          body = \"  let result = {};\\n  return result;\\n\";\n          break;\n        case 'date':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        case 'any':\n          body = \"  let result = '';\\n  return result;\\n\";\n          break;\n        default:\n          body = \"  let result = {};\\n  return result;\\n\";\n          break;\n      }\n\t    break;\n\t  default:\n\t    break;\n\t}\n\t\n\treturn body;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -123,8 +122,7 @@
       "_id": "v19a5a1998c1efa2",
       "component": "Language",
       "state": "createBehavior",
-      "action":
-        "function createBehavior(name, params, body) { \n\tvar behavior = '',\n\t    funcName = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '  \\n';\n\t    }\n\t    \n\t    if (name.indexOf('.') !== -1) {\n\t      funcName = name.split('.')[name.split('.').length - 1];\n\t    } else {\n\t      funcName = name;\n\t    }\n\t    \n\t    behavior = \"function \" + funcName + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
+      "action": "function createBehavior(name, params, body) { \n\tvar behavior = '',\n\t    funcName = '';\n\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    if (body === '') {\n\t      body = '  \\n';\n\t    }\n\t    \n\t    if (name.indexOf('.') !== -1) {\n\t      funcName = name.split('.')[name.split('.').length - 1];\n\t    } else {\n\t      funcName = name;\n\t    }\n\t    \n\t    behavior = \"function \" + funcName + \"(\" + params + \") { \\n\" + body + \"}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -132,8 +130,7 @@
       "_id": "v1825c1731e17082",
       "component": "Language",
       "state": "createDestroyBehavior",
-      "action":
-        "function createDestroyBehavior() { \n\tvar behavior = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    behavior = \"function destroy() { \\n\\n  // destroy the component\\n  $component.destroy(this.id());\\n}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
+      "action": "function createDestroyBehavior() { \n\tvar behavior = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    behavior = \"function destroy() { \\n\\n  // destroy the component\\n  $component.destroy(this.id());\\n}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -141,8 +138,7 @@
       "_id": "z138a2168e11cfc5",
       "component": "Language",
       "state": "createStartBehavior",
-      "action":
-        "function createStartBehavior() { \n\tvar behavior = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    behavior = \"function start() { \\n  \\n}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
+      "action": "function createStartBehavior() { \n\tvar behavior = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    behavior = \"function start() { \\n  \\n}\";\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn behavior;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -150,8 +146,7 @@
       "_id": "a17ad5184f61b5cd",
       "component": "Language",
       "state": "createMergeComment",
-      "action":
-        "function createMergeComment(systemName) { \n\tvar comment = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    comment = '\\n  // from system ' + systemName + '\\n';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn comment;\n}",
+      "action": "function createMergeComment(systemName) { \n\tvar comment = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    comment = '\\n  // from system ' + systemName + '\\n';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn comment;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -159,8 +154,7 @@
       "_id": "s1bb671c9261461a",
       "component": "Language",
       "state": "createBehaviorHeader",
-      "action":
-        "function createBehaviorHeader(name, params) { \n\tvar header = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    header = 'function ' + name + '(' + params + ') ';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn header;\n}",
+      "action": "function createBehaviorHeader(name, params) { \n\tvar header = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    header = 'function ' + name + '(' + params + ') ';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn header;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -168,8 +162,7 @@
       "_id": "x1833b1fece19d5b",
       "component": "Language",
       "state": "createBehaviorParameters",
-      "action":
-        "function createBehaviorParameters(model) { \n\tvar params = '',\n\t    i = 0,\n\t    length = 0;\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t   if (model && model.length) {\n        length = model.length;\n        for (i = 0; i < length; i++) {\n          if (i === 0) {\n            params = model[i].name;\n          } else {\n            params = params + ', ' + model[i].name;\n          }\n        }\n      }\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn params;\n}",
+      "action": "function createBehaviorParameters(model) { \n\tvar params = '',\n\t    i = 0,\n\t    length = 0;\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t   if (model && model.length) {\n        length = model.length;\n        for (i = 0; i < length; i++) {\n          if (i === 0) {\n            params = model[i].name;\n          } else {\n            params = params + ', ' + model[i].name;\n          }\n        }\n      }\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn params;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -177,8 +170,7 @@
       "_id": "l171be17d531662a",
       "component": "Language",
       "state": "createBehaviorParametersEvent",
-      "action":
-        "function createBehaviorParametersEvent() { \n\tvar parameters = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    parameters = 'value';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn parameters;\n}",
+      "action": "function createBehaviorParametersEvent() { \n\tvar parameters = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    parameters = 'value';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn parameters;\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -186,8 +178,7 @@
       "_id": "y16ae91b06c1a586",
       "component": "Language",
       "state": "createBehaviorParametersEventArray",
-      "action":
-        "function createBehaviorParametersEventArray() { \n\tvar parameters = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    parameters = 'value, type';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn parameters;\n}",
+      "action": "function createBehaviorParametersEventArray() { \n\tvar parameters = '';\n\t\n\tswitch(this.target()) {\n\t  case 'javascript':\n\t    parameters = 'value, type';\n\t    break;\n    default:\n      break;\n\t}\n\t\n\treturn parameters;\n}",
       "useCoreAPI": false,
       "core": false
     }
