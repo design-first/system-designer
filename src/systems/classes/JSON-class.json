@@ -856,6 +856,69 @@
           "_id": "12eaf148b211195"
         },
         "platform": "all"
+      },
+      "06-create-graph-system": {
+        "_id": "06-create-graph-system",
+        "platform": "all",
+        "source": {
+          "name": "graph-system",
+          "master": true,
+          "version": "1.0.0",
+          "description": "Create a Graph system.\n\nCreate a Graph system with models that inherit from Nodes and Relationships models.",
+          "schemas": {
+            "q1fb6e179641acb7": {
+              "_id": "q1fb6e179641acb7",
+              "_name": "Nodes",
+              "_inherit": ["_Component"]
+            },
+            "q1a868198e31bce7": {
+              "_id": "q1a868198e31bce7",
+              "_name": "Relationships",
+              "_inherit": ["_Component"],
+              "incoming": "link",
+              "outgoing": "link"
+            }
+          },
+          "models": {
+            "e143b513b801a48c": {
+              "_id": "e143b513b801a48c",
+              "_name": "Nodes",
+              "_description": ""
+            },
+            "l1bf6210e8510013": {
+              "_id": "l1bf6210e8510013",
+              "_name": "Relationships",
+              "_description": "",
+              "incoming": {
+                "description": "Nodes component that starts the relationship",
+                "type": "Nodes",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "outgoing": {
+                "description": "Nodes component that ends the relationship",
+                "type": "Nodes",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            }
+          },
+          "behaviors": {
+            "k191b51f33413bc3": {
+              "_id": "k191b51f33413bc3",
+              "component": "c14393197831b88d",
+              "state": "start",
+              "action": "function start() { \n  \n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {},
+          "components": {},
+          "_id": "c14393197831b88d"
+        }
       }
     }
   },
