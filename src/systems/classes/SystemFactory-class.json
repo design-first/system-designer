@@ -18,6 +18,7 @@
       "generateId": "method",
       "getGeneratedSchema": "method",
       "getGeneratedModel": "method",
+      "getParents": "method",
       "mergeBehavior": "method",
       "mergeSystem": "method",
       "updateBehavior": "method",
@@ -532,6 +533,19 @@
           }
         ],
         "result": "boolean"
+      },
+      "getParents": {
+        "description": "",
+        "params": [
+          {
+            "description": "",
+            "name": "name",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ],
+        "result": "array"
       }
     }
   },
@@ -829,6 +843,14 @@
       "component": "SystemFactory",
       "state": "isType",
       "action": "function isType(name) { \n  var types = this.system().types(),\n    result = false,\n    prop = '';\n\n\tif (!result) {\n\t  for (prop in types) {\n\t    if (schemas[prop].name === name) {\n\t      result = true;\n\t      break;\n\t    }\n\t  }\n\t}\n\t\n\treturn result;\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "p116a812b6310e26": {
+      "_id": "p116a812b6310e26",
+      "component": "SystemFactory",
+      "state": "getParents",
+      "action": "function getParents(name) { \n  var schemaDef = null,\n      parent = '',\n      tempResult = {};\n      result = [];\n\n  function _getSchemaDef(name, schemas) {\n      var result = '',\n          id = '';\n\n      for (id in schemas) {\n          if (schemas[id]._name === name) {\n              result = schemas[id];\n              break;\n          }\n      }\n      return result;\n  }\n\n  function _searchParents(parents, states, schemas) {\n      var parent = '',\n          schemaDef = null,\n          i = 0,\n          length = 0;\n\n      length = parents.length;\n      for (i = 0; i < length; i++) {\n          parent = parents[i];\n          if (parent === '_Component') {\n              result.push('_Component');\n          } else {\n              schemaDef = _getSchemaDef(parent, schemas);\n\n              if (schemaDef._inherit) {\n                result = result.concat(schemaDef._inherit);\n                _searchParents(schemaDef._inherit, result, schemas);\n              }\n          }\n      }\n  }\n\n  schemaDef = _getSchemaDef(name, this.system().schemas());\n\n  if (schemaDef._inherit) {\n      result = result.concat(schemaDef._inherit);\n      _searchParents(schemaDef._inherit, result, this.system().schemas());\n  }\n  \n  // clean\n  result.forEach(function (parent) {\n    tempResult[parent] = parent;\n  });\n  \n  result = [];\n  for (parent in tempResult) {\n    result.push(parent);\n  }\n  \n  return result;\n}",
       "useCoreAPI": false,
       "core": false
     }
