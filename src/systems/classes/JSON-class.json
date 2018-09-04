@@ -863,7 +863,7 @@
         "source": {
           "name": "graph-system",
           "master": true,
-          "version": "1.0.0",
+          "version": "1.1.0",
           "description": "Create a Graph system.\n\nCreate a Graph system with models that inherit from Nodes and Relationships models.",
           "schemas": {
             "q1fb6e179641acb7": {
@@ -892,6 +892,7 @@
               "incoming": {
                 "description": "Nodes component that starts the relationship",
                 "type": "Nodes",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
@@ -899,6 +900,7 @@
               "outgoing": {
                 "description": "Nodes component that ends the relationship",
                 "type": "Nodes",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
