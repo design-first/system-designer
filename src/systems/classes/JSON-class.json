@@ -984,6 +984,7 @@
               "incoming": {
                 "description": "",
                 "type": "Nodes",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
@@ -991,6 +992,7 @@
               "outgoing": {
                 "description": "",
                 "type": "Nodes",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
@@ -1029,6 +1031,7 @@
               "incoming": {
                 "description": "",
                 "type": "Person",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
@@ -1036,6 +1039,7 @@
               "outgoing": {
                 "description": "",
                 "type": "Person",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
@@ -1062,6 +1066,7 @@
               "incoming": {
                 "description": "",
                 "type": "Person",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
@@ -1069,6 +1074,7 @@
               "outgoing": {
                 "description": "",
                 "type": "Book",
+                "kind": "normal",
                 "readOnly": false,
                 "mandatory": false,
                 "default": ""
@@ -1097,7 +1103,7 @@
           "behaviors": {
             "k191b51f33413bc3": {
               "_id": "k191b51f33413bc3",
-              "component": "c14393197831b88d",
+              "component": "c14393197831b99d",
               "state": "start",
               "action": "function start() { \n  // show the number of person that have read the book GraphDatabase\n  this.require('logger').info(\n    this.require('db').collections().HAS_READ.find({\n      'outgoing': {\n        '$eq': 'GraphDatabase'\n      }\n    }).length\n  );\n}",
               "useCoreAPI": false,
@@ -1142,7 +1148,7 @@
               }
             }
           },
-          "_id": "c14393197831b88d"
+          "_id": "c14393197831b99d"
         }
       }
     }
