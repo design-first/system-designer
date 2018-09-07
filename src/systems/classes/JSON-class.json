@@ -420,8 +420,302 @@
           "_id": "1638e12721115b5"
         }
       },
-      "04-create-extension.json": {
-        "_id": "04-create-extension.json",
+      "03-graph-system-example": {
+        "_id": "03-graph-system-example",
+        "platform": "all",
+        "source": {
+          "name": "graph-example",
+          "master": true,
+          "version": "1.0.0",
+          "description": "Graph system example",
+          "schemas": {
+            "q1fb6e179641acb7": {
+              "_id": "q1fb6e179641acb7",
+              "_name": "Nodes",
+              "_inherit": ["_Component"]
+            },
+            "q1a868198e31bce7": {
+              "_id": "q1a868198e31bce7",
+              "_name": "Relationships",
+              "_inherit": ["_Component"],
+              "incoming": "link",
+              "outgoing": "link"
+            },
+            "n1a88c10eff1beb6": {
+              "_id": "n1a88c10eff1beb6",
+              "_name": "Person",
+              "_inherit": ["Nodes"],
+              "name": "property",
+              "age": "property"
+            },
+            "z1747d12e621e92f": {
+              "_id": "z1747d12e621e92f",
+              "_name": "IS_FRIEND_WITH",
+              "_inherit": ["Relationships"],
+              "since": "property"
+            },
+            "i15a3614c1e17109": {
+              "_id": "i15a3614c1e17109",
+              "_name": "HAS_READ",
+              "_inherit": ["Relationships"],
+              "date": "property",
+              "rated": "property"
+            },
+            "i1d8501332c1c6bd": {
+              "_id": "i1d8501332c1c6bd",
+              "_name": "Book",
+              "_inherit": ["Nodes"],
+              "title": "property",
+              "author": "property"
+            }
+          },
+          "models": {
+            "e143b513b801a48c": {
+              "_id": "e143b513b801a48c",
+              "_name": "Nodes",
+              "_description": ""
+            },
+            "l1bf6210e8510013": {
+              "_id": "l1bf6210e8510013",
+              "_name": "Relationships",
+              "_description": "",
+              "incoming": {
+                "description": "",
+                "type": "Nodes",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "outgoing": {
+                "description": "",
+                "type": "Nodes",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            },
+            "m11c1515b7e12099": {
+              "_id": "m11c1515b7e12099",
+              "_name": "Person",
+              "_description": "",
+              "name": {
+                "description": "",
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "age": {
+                "description": "",
+                "type": "number",
+                "readOnly": false,
+                "mandatory": false,
+                "default": 0
+              }
+            },
+            "g19e531c5c819149": {
+              "_id": "g19e531c5c819149",
+              "_name": "IS_FRIEND_WITH",
+              "_description": "",
+              "since": {
+                "description": "",
+                "type": "date",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "1970-01-01T00:00:00.000Z"
+              },
+              "incoming": {
+                "description": "",
+                "type": "Person",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "outgoing": {
+                "description": "",
+                "type": "Person",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            },
+            "d11f871f899154fd": {
+              "_id": "d11f871f899154fd",
+              "_name": "HAS_READ",
+              "_description": "",
+              "date": {
+                "description": "",
+                "type": "date",
+                "readOnly": false,
+                "mandatory": false,
+                "default": "1970-01-01T00:00:00.000Z"
+              },
+              "rated": {
+                "description": "",
+                "type": "number",
+                "readOnly": false,
+                "mandatory": false,
+                "default": 0
+              },
+              "incoming": {
+                "description": "",
+                "type": "Person",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "outgoing": {
+                "description": "",
+                "type": "Book",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            },
+            "y12eff155c715742": {
+              "_id": "y12eff155c715742",
+              "_name": "Book",
+              "_description": "",
+              "title": {
+                "description": "",
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "author": {
+                "description": "",
+                "type": "string",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            }
+          },
+          "behaviors": {
+            "k191b51f33413bc3": {
+              "_id": "k191b51f33413bc3",
+              "component": "c14393197831b99d",
+              "state": "start",
+              "action": "function start() { \n  // show the number of person that have read the book GraphDatabase\n  this.require('logger').info(\n    this.require('db').collections().HAS_READ.find({\n      'outgoing': {\n        '$eq': 'GraphDatabase'\n      }\n    }).length\n  );\n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {},
+          "components": {
+            "Person": {
+              "sally": { "_id": "sally", "age": 32, "name": "Sally" },
+              "john": { "_id": "john", "age": 27, "name": "John" }
+            },
+            "IS_FRIEND_WITH": {
+              "i1c36e1b6331b0f6": {
+                "_id": "i1c36e1b6331b0f6",
+                "incoming": "john",
+                "outgoing": "sally",
+                "since": "2013-01-09T00:00:00.000Z"
+              }
+            },
+            "HAS_READ": {
+              "k132a8124351e768": {
+                "_id": "k132a8124351e768",
+                "date": "2013-02-03T00:00:00.000Z",
+                "incoming": "john",
+                "outgoing": "GraphDatabase",
+                "rated": 5
+              },
+              "s146f0142a518868": {
+                "_id": "s146f0142a518868",
+                "date": "2013-09-02T00:00:00.000Z",
+                "incoming": "sally",
+                "outgoing": "GraphDatabase",
+                "rated": 4
+              }
+            },
+            "Book": {
+              "GraphDatabase": {
+                "_id": "GraphDatabase",
+                "author": "Jim Webber, Ian Robinson",
+                "title": "Graph Database"
+              }
+            }
+          },
+          "_id": "c14393197831b99d"
+        }
+      },
+      "04-create-graph-system": {
+        "_id": "04-create-graph-system",
+        "platform": "all",
+        "source": {
+          "name": "graph-system",
+          "master": true,
+          "version": "1.1.0",
+          "description": "Create a Graph system.\n\nCreate a Graph system with models that inherit from Nodes and Relationships models.",
+          "schemas": {
+            "q1fb6e179641acb7": {
+              "_id": "q1fb6e179641acb7",
+              "_name": "Nodes",
+              "_inherit": ["_Component"]
+            },
+            "q1a868198e31bce7": {
+              "_id": "q1a868198e31bce7",
+              "_name": "Relationships",
+              "_inherit": ["_Component"],
+              "incoming": "link",
+              "outgoing": "link"
+            }
+          },
+          "models": {
+            "e143b513b801a48c": {
+              "_id": "e143b513b801a48c",
+              "_name": "Nodes",
+              "_description": ""
+            },
+            "l1bf6210e8510013": {
+              "_id": "l1bf6210e8510013",
+              "_name": "Relationships",
+              "_description": "",
+              "incoming": {
+                "description": "Nodes component that starts the relationship",
+                "type": "Nodes",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              },
+              "outgoing": {
+                "description": "Nodes component that ends the relationship",
+                "type": "Nodes",
+                "kind": "normal",
+                "readOnly": false,
+                "mandatory": false,
+                "default": ""
+              }
+            }
+          },
+          "behaviors": {
+            "k191b51f33413bc3": {
+              "_id": "k191b51f33413bc3",
+              "component": "c14393197831b88d",
+              "state": "start",
+              "action": "function start() { \n  \n}",
+              "useCoreAPI": false,
+              "core": false
+            }
+          },
+          "types": {},
+          "components": {},
+          "_id": "c14393197831b88d"
+        }
+      },
+      "06-create-extension.json": {
+        "_id": "06-create-extension.json",
         "platform": "all",
         "source": {
           "name": "extension-template",
@@ -654,8 +948,8 @@
           "_id": "h1ffb312ef619349"
         }
       },
-      "05-listen-collection-events.json": {
-        "_id": "05-listen-collection-events.json",
+      "07-listen-collection-events.json": {
+        "_id": "07-listen-collection-events.json",
         "source": {
           "name": "listen-collection-events",
           "master": true,
@@ -793,8 +1087,8 @@
         },
         "platform": "all"
       },
-      "03-send-messages.json": {
-        "_id": "03-send-messages.json",
+      "05-send-messages.json": {
+        "_id": "05-send-messages.json",
         "source": {
           "name": "send-messages",
           "master": true,
@@ -856,300 +1150,6 @@
           "_id": "12eaf148b211195"
         },
         "platform": "all"
-      },
-      "06-create-graph-system": {
-        "_id": "06-create-graph-system",
-        "platform": "all",
-        "source": {
-          "name": "graph-system",
-          "master": true,
-          "version": "1.1.0",
-          "description": "Create a Graph system.\n\nCreate a Graph system with models that inherit from Nodes and Relationships models.",
-          "schemas": {
-            "q1fb6e179641acb7": {
-              "_id": "q1fb6e179641acb7",
-              "_name": "Nodes",
-              "_inherit": ["_Component"]
-            },
-            "q1a868198e31bce7": {
-              "_id": "q1a868198e31bce7",
-              "_name": "Relationships",
-              "_inherit": ["_Component"],
-              "incoming": "link",
-              "outgoing": "link"
-            }
-          },
-          "models": {
-            "e143b513b801a48c": {
-              "_id": "e143b513b801a48c",
-              "_name": "Nodes",
-              "_description": ""
-            },
-            "l1bf6210e8510013": {
-              "_id": "l1bf6210e8510013",
-              "_name": "Relationships",
-              "_description": "",
-              "incoming": {
-                "description": "Nodes component that starts the relationship",
-                "type": "Nodes",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "outgoing": {
-                "description": "Nodes component that ends the relationship",
-                "type": "Nodes",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              }
-            }
-          },
-          "behaviors": {
-            "k191b51f33413bc3": {
-              "_id": "k191b51f33413bc3",
-              "component": "c14393197831b88d",
-              "state": "start",
-              "action": "function start() { \n  \n}",
-              "useCoreAPI": false,
-              "core": false
-            }
-          },
-          "types": {},
-          "components": {},
-          "_id": "c14393197831b88d"
-        }
-      },
-      "07-graph-system-example": {
-        "_id": "07-graph-system-example",
-        "platform": "all",
-        "source": {
-          "name": "graph-example",
-          "master": true,
-          "version": "1.0.0",
-          "description": "Graph system example",
-          "schemas": {
-            "q1fb6e179641acb7": {
-              "_id": "q1fb6e179641acb7",
-              "_name": "Nodes",
-              "_inherit": ["_Component"]
-            },
-            "q1a868198e31bce7": {
-              "_id": "q1a868198e31bce7",
-              "_name": "Relationships",
-              "_inherit": ["_Component"],
-              "incoming": "link",
-              "outgoing": "link"
-            },
-            "n1a88c10eff1beb6": {
-              "_id": "n1a88c10eff1beb6",
-              "_name": "Person",
-              "_inherit": ["Nodes"],
-              "name": "property",
-              "age": "property"
-            },
-            "z1747d12e621e92f": {
-              "_id": "z1747d12e621e92f",
-              "_name": "IS_FRIEND_WITH",
-              "_inherit": ["Relationships"],
-              "since": "property"
-            },
-            "i15a3614c1e17109": {
-              "_id": "i15a3614c1e17109",
-              "_name": "HAS_READ",
-              "_inherit": ["Relationships"],
-              "date": "property",
-              "rated": "property"
-            },
-            "i1d8501332c1c6bd": {
-              "_id": "i1d8501332c1c6bd",
-              "_name": "Book",
-              "_inherit": ["Nodes"],
-              "title": "property",
-              "author": "property"
-            }
-          },
-          "models": {
-            "e143b513b801a48c": {
-              "_id": "e143b513b801a48c",
-              "_name": "Nodes",
-              "_description": ""
-            },
-            "l1bf6210e8510013": {
-              "_id": "l1bf6210e8510013",
-              "_name": "Relationships",
-              "_description": "",
-              "incoming": {
-                "description": "",
-                "type": "Nodes",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "outgoing": {
-                "description": "",
-                "type": "Nodes",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              }
-            },
-            "m11c1515b7e12099": {
-              "_id": "m11c1515b7e12099",
-              "_name": "Person",
-              "_description": "",
-              "name": {
-                "description": "",
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "age": {
-                "description": "",
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-              }
-            },
-            "g19e531c5c819149": {
-              "_id": "g19e531c5c819149",
-              "_name": "IS_FRIEND_WITH",
-              "_description": "",
-              "since": {
-                "description": "",
-                "type": "date",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "1970-01-01T00:00:00.000Z"
-              },
-              "incoming": {
-                "description": "",
-                "type": "Person",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "outgoing": {
-                "description": "",
-                "type": "Person",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              }
-            },
-            "d11f871f899154fd": {
-              "_id": "d11f871f899154fd",
-              "_name": "HAS_READ",
-              "_description": "",
-              "date": {
-                "description": "",
-                "type": "date",
-                "readOnly": false,
-                "mandatory": false,
-                "default": "1970-01-01T00:00:00.000Z"
-              },
-              "rated": {
-                "description": "",
-                "type": "number",
-                "readOnly": false,
-                "mandatory": false,
-                "default": 0
-              },
-              "incoming": {
-                "description": "",
-                "type": "Person",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "outgoing": {
-                "description": "",
-                "type": "Book",
-                "kind": "normal",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              }
-            },
-            "y12eff155c715742": {
-              "_id": "y12eff155c715742",
-              "_name": "Book",
-              "_description": "",
-              "title": {
-                "description": "",
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              },
-              "author": {
-                "description": "",
-                "type": "string",
-                "readOnly": false,
-                "mandatory": false,
-                "default": ""
-              }
-            }
-          },
-          "behaviors": {
-            "k191b51f33413bc3": {
-              "_id": "k191b51f33413bc3",
-              "component": "c14393197831b99d",
-              "state": "start",
-              "action": "function start() { \n  // show the number of person that have read the book GraphDatabase\n  this.require('logger').info(\n    this.require('db').collections().HAS_READ.find({\n      'outgoing': {\n        '$eq': 'GraphDatabase'\n      }\n    }).length\n  );\n}",
-              "useCoreAPI": false,
-              "core": false
-            }
-          },
-          "types": {},
-          "components": {
-            "Person": {
-              "sally": { "_id": "sally", "age": 32, "name": "Sally" },
-              "john": { "_id": "john", "age": 27, "name": "John" }
-            },
-            "IS_FRIEND_WITH": {
-              "i1c36e1b6331b0f6": {
-                "_id": "i1c36e1b6331b0f6",
-                "incoming": "john",
-                "outgoing": "sally",
-                "since": "2013-01-09T00:00:00.000Z"
-              }
-            },
-            "HAS_READ": {
-              "k132a8124351e768": {
-                "_id": "k132a8124351e768",
-                "date": "2013-02-03T00:00:00.000Z",
-                "incoming": "john",
-                "outgoing": "GraphDatabase",
-                "rated": 5
-              },
-              "s146f0142a518868": {
-                "_id": "s146f0142a518868",
-                "date": "2013-09-02T00:00:00.000Z",
-                "incoming": "sally",
-                "outgoing": "GraphDatabase",
-                "rated": 4
-              }
-            },
-            "Book": {
-              "GraphDatabase": {
-                "_id": "GraphDatabase",
-                "author": "Jim Webber, Ian Robinson",
-                "title": "Graph Database"
-              }
-            }
-          },
-          "_id": "c14393197831b99d"
-        }
       }
     }
   },
