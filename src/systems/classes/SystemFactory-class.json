@@ -578,7 +578,7 @@
       "_id": "z13676132a318174",
       "component": "SystemFactory",
       "state": "generateId",
-      "action": "function generateId() {\n  function gen() {\n      return Math.floor((1 + Math.random()) * 0x10000).toString(16);\n  }\n  function getPrefix() {\n      var validPrefix = 'abcdefghijklmnopqrstuvwxyz';\n      return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));\n  }\n  \n  return getPrefix() + gen() + gen() + gen();\n}",
+      "action": "function generateId() {\n  // taken from https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript\n  function gen() {\n    return 'xxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {\n      var r = (Math.random() * 16) | 0;\n      var v = c === 'x' ? r : (r & 0x3) | 0x8;\n      return v.toString(16);\n    });\n  }\n\n  // force the uuid to start with a letter\n  function genPrefix() {\n    var validPrefix = 'abcdef';\n    return validPrefix.charAt(Math.floor(Math.random() * validPrefix.length));\n  }\n  \n  return genPrefix() + gen();\n}",
       "useCoreAPI": false,
       "core": false
     },
