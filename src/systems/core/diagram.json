@@ -777,19 +777,11 @@
       "useCoreAPI": false,
       "core": false
     },
-    "c1626414ca6120dc": {
-      "_id": "c1626414ca6120dc",
-      "component": "_Channel",
-      "state": "$designerUpdateComponent",
-      "action": "function $designerUpdateComponent(id, collection, component) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\n}",
-      "useCoreAPI": false,
-      "core": false
-    },
     "u147cf1987415896": {
       "_id": "u147cf1987415896",
       "component": "_Channel",
       "state": "$editorUpdateComponent",
-      "action": "function $editorUpdateComponent(id, collection, component) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\t\n}",
+      "action": "function $editorUpdateComponent(id, collection, component) { \n  var systemId = this.require('factory').system().id();\n  var system = this.require('storage').get(systemId);\n  \n  if (system.components && system.components[collection] && system.components[collection][id]) {\n    system.components[collection][id] = component;\n  }\n  \n  this.require('factory').create(system);\n  this.require('workspace').render();\t\t\t\n}",
       "useCoreAPI": false,
       "core": false
     }
