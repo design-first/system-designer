@@ -32,7 +32,6 @@ module.exports = function (grunt) {
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
-    mocha_istanbul: grunt.file.readJSON('tasks/mocha_istanbul.json'),
     uglify: grunt.file.readJSON('tasks/uglify.json')
   });
 
@@ -97,8 +96,7 @@ module.exports = function (grunt) {
     'concat:vendor-editor',
     'copy:web-files',
     'json_merge:web-systems',
-    'copy:minify-json',
-    'test'
+    'copy:minify-json'
   ]);
 
   // build for electron
@@ -138,10 +136,5 @@ module.exports = function (grunt) {
   // default build
   grunt.registerTask('build', [
     'web'
-  ]);
-
-  // default test
-  grunt.registerTask('test', [
-    'mocha_istanbul:smoketest'
   ]);
 };
