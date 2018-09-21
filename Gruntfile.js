@@ -31,6 +31,7 @@ module.exports = function (grunt) {
     prettier: grunt.file.readJSON('tasks/prettier.json'),
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
+    'http-server': grunt.file.readJSON('tasks/server.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
     uglify: grunt.file.readJSON('tasks/uglify.json')
   });
@@ -81,7 +82,7 @@ module.exports = function (grunt) {
 
   // start the server
   grunt.registerTask('start',
-    'connect:web-server'
+    'http-server'
   );
 
   // build for web
