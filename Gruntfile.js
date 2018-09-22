@@ -31,7 +31,6 @@ module.exports = function (grunt) {
     prettier: grunt.file.readJSON('tasks/prettier.json'),
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
-    'http-server': grunt.file.readJSON('tasks/server.json'),
     bgShell: grunt.file.readJSON('tasks/shell.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
     uglify: grunt.file.readJSON('tasks/uglify.json')
@@ -83,7 +82,7 @@ module.exports = function (grunt) {
 
   // start the server
   grunt.registerTask('start',
-    'http-server'
+    'connect:web-server'
   );
 
   // build for web
@@ -142,13 +141,13 @@ module.exports = function (grunt) {
 
   // run tests locally
   grunt.registerTask('test', [ 
-    'http-server',
+    'connect:dev-server',
     'bgShell:cypress-dev'
   ]);
 
   // run tests in CI
   grunt.registerTask('ci', [ 
-    'http-server',
+    'connect:dev-server',
     'bgShell:cypress-ci'
   ]);
 };
