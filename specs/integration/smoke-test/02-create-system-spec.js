@@ -1,4 +1,5 @@
 describe('System designer', () => {
+
   it('can create a system', () => {
     cy.visit('http://localhost:8080')
 
@@ -30,4 +31,5 @@ describe('System designer', () => {
     cy.get('#designer-toolbar-item-create').click()
     cy.get('.panel-title').should('exist')
   })
+  
 })

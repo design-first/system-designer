@@ -80,11 +80,6 @@ module.exports = function (grunt) {
     'watch'
   ]);
 
-  // start the server
-  grunt.registerTask('start',
-    'connect:web-server'
-  );
-
   // build for web
   grunt.registerTask('web', [
     'clean:build',
@@ -139,14 +134,19 @@ module.exports = function (grunt) {
     'web'
   ]);
 
+  // start the server
+  grunt.registerTask('start',
+    'connect:web-server'
+  );
+
   // run tests locally
-  grunt.registerTask('test', [ 
+  grunt.registerTask('test', [
     'connect:dev-server',
     'bgShell:cypress-dev'
   ]);
 
   // run tests in CI
-  grunt.registerTask('ci', [ 
+  grunt.registerTask('ci', [
     'connect:dev-server',
     'bgShell:cypress-ci'
   ]);
