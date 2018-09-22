@@ -1,6 +1,10 @@
 {
-  "cypress": {
+  "cypress-ci": {
     "cmd": "$(npm bin)/cypress run --record",
+    "fail": true
+  },
+  "cypress-dev": {
+    "cmd": "$(npm bin)/cypress run",
     "fail": true
   }
 }

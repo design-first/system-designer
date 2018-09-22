@@ -140,9 +140,15 @@ module.exports = function (grunt) {
     'web'
   ]);
 
-  // run the test
+  // run tests locally
   grunt.registerTask('test', [ 
     'http-server',
-    'bgShell'
+    'bgShell:cypress-dev'
+  ]);
+
+  // run tests in CI
+  grunt.registerTask('ci', [ 
+    'http-server',
+    'bgShell:cypress-ci'
   ]);
 };
