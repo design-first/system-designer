@@ -32,6 +32,7 @@ module.exports = function (grunt) {
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
     'http-server': grunt.file.readJSON('tasks/server.json'),
+    bgShell: grunt.file.readJSON('tasks/shell.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
     uglify: grunt.file.readJSON('tasks/uglify.json')
   });
@@ -137,5 +138,11 @@ module.exports = function (grunt) {
   // default build
   grunt.registerTask('build', [
     'web'
+  ]);
+
+  // run the test
+  grunt.registerTask('test', [ 
+    'http-server',
+    'bgShell'
   ]);
 };
