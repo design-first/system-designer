@@ -72,13 +72,13 @@ System Designer has a GitHub module to synchronize your work between all these a
 Clone the repository:
 
 ```sh
-$ git clone https://github.com/design-first/system-designer.git
+git clone https://github.com/design-first/system-designer.git
 ```
 
 Once you have cloned the repository, install the dependencies:
 
 ```sh
-$ npm i
+npm i
 ```	 	
 
 #### Build for web
@@ -86,13 +86,13 @@ $ npm i
 Here are the different tasks you can use to build and start System Designer:
 
 ```sh
-$ npm run web
+npm run web
 ```
 
 Then you can start the server:
 
 ```sh
-$ npm run start
+npm run start
 ```
 
 Once server started, go to [http://localhost:8080/](http://localhost:8080/).
@@ -102,7 +102,7 @@ Once server started, go to [http://localhost:8080/](http://localhost:8080/).
 To build for [Electron](http://electron.atom.io):
 
 ```sh
-$ npm run electron
+npm run electron
 ```
 
 Copy the content of `/dist` directory into your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project.
@@ -110,7 +110,7 @@ Copy the content of `/dist` directory into your [System Designer for Electron](h
 Then in your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project:
 
 ```sh
-$ npm run start
+npm run start
 ```
 
 #### Build for Cordova
@@ -118,7 +118,7 @@ $ npm run start
 To build for [Cordova](http://cordova.apache.org):
 
 ```sh
-$ npm run cordova
+npm run cordova
 ```
 
 Copy the content of `/dist` directory into your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project.
@@ -127,10 +127,10 @@ Then in your [System Designer for Cordova](https://github.com/design-first/syste
 
 ```sh
 # run ios simulator
-$ cordova run ios
+cordova run ios
 
 # run android simulator
-$ cordova run android
+cordova run android
 ```
 
 ## Development
@@ -138,7 +138,7 @@ $ cordova run android
 To start System Designer in development mode:
 
 ```sh
-$ npm run dev
+npm run dev
 ```
 
 Once server started, go to [http://localhost:9001/](http://localhost:9001/). All the modifications to the source code of System Designer will rebuild the solution and refresh the page.
