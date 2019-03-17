@@ -420,7 +420,7 @@
       "_id": "f1f43d11c0d15597",
       "component": "DialogConfig",
       "state": "ok",
-      "action": "function ok() { \n  var config = this.require('storage').get('system-designer-config');\n\n  if (!config) {\n    config = {};\n  }\n\n  config.urlClient = $('#designer-dialog-config-url-client')[0].value;\n  config.urlServer = $('#designer-dialog-config-url-server')[0].value;\n  config.githubToken = btoa($('#designer-dialog-config-github-token')[0].value);\n  config.githubRepository = $('#designer-dialog-config-github-repository')[0].value;\n  config.language = $('#designer-dialog-config-language-select').val();\n\n  this.require('storage').set('system-designer-config', config);\t\n}",
+      "action": "function ok() { \n  var config = this.require('storage').get('system-designer-config');\n  var previousLanguage = '';\n\n  if (!config) {\n    config = {};\n  }\n\n  config.urlClient = $('#designer-dialog-config-url-client')[0].value;\n  config.urlServer = $('#designer-dialog-config-url-server')[0].value;\n  config.githubToken = btoa($('#designer-dialog-config-github-token')[0].value);\n  config.githubRepository = $('#designer-dialog-config-github-repository')[0].value;\n  \n  // refresh if current language has changed\n  previousLanguage = config.language;\n  config.language = $('#designer-dialog-config-language-select').val();\n  if (previousLanguage !== config.language) {\n    window.location.reload();\n  }\n\n  this.require('storage').set('system-designer-config', config);\t\n}",
       "useCoreAPI": false,
       "core": false
     },
