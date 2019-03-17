@@ -9,7 +9,8 @@
       "source": "property",
       "_id": "p181111d5c01f97b",
       "_inherit": ["_Component"],
-      "render": "method"
+      "render": "method",
+      "getHTML": "method"
     }
   },
   "models": {
@@ -26,7 +27,8 @@
         "params": [
           { "name": "id", "type": "any", "mandatory": false, "default": null }
         ]
-      }
+      },
+      "getHTML": { "description": "", "params": [], "result": "string" }
     }
   },
   "behaviors": {
@@ -34,7 +36,15 @@
       "_id": "c103c31cc9d1821e",
       "component": "HTML",
       "state": "render",
-      "action": "function render(id) { \n  var dom = null;\n  \n  id = id || 'designer-workspace';\n  \n  if (id === 'body') {\n    dom = document.body;\n  } else {\n    dom = document.getElementById(id);\n  }\n  \n  dom.insertAdjacentHTML('beforeend', this.source());\n}",
+      "action": "function render(id) { \n  var dom = null;\n  \n  id = id || 'designer-workspace';\n  \n  if (id === 'body') {\n    dom = document.body;\n  } else {\n    dom = document.getElementById(id);\n  }\n  \n  dom.insertAdjacentHTML('beforeend', this.getHTML());\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "e5ef68c9-d858-4ac2-8eea-82580d0f29df": {
+      "_id": "e5ef68c9-d858-4ac2-8eea-82580d0f29df",
+      "component": "HTML",
+      "state": "getHTML",
+      "action": "function getHTML() { \n  var html = this.source();\n  var pattern = '';\n  var matches = null;\n  var message = '';\n  var key = '';\n  \n  // localization\n  pattern = /<i18n[^\\/]*\\/i18n>/;\n  matches = html.match(pattern);\n\n  if (matches) {\n   \n    key = matches[0].split('{')[1].split('}')[0].trim();\n    message = this.require('i18n').get(key);\n    \n    html = html.replace(matches[0], message);\n  }\n  \n  return html;\n}",
       "useCoreAPI": false,
       "core": false
     }
@@ -200,11 +210,11 @@
       },
       "help-schemas.html": {
         "_id": "help-schemas.html",
-        "source": "A schema is the definition of your model. Models are generated based on the schema definition."
+        "source": "<i18n>{help_schemas}</i18n>"
       },
       "help-system.html": {
         "_id": "help-system.html",
-        "source": "An application is a system. Once you have created one, your next step is to create a schema."
+        "source": "<i18n>{help_systems}</i18n>"
       },
       "help-types.html": {
         "_id": "help-types.html",

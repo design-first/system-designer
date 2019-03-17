@@ -7,7 +7,9 @@
     "a77b5281-cd56-477a-8201-c2ffdfe14317": {
       "_id": "a77b5281-cd56-477a-8201-c2ffdfe14317",
       "_name": "Strings",
-      "_inherit": ["_Component"]
+      "_inherit": ["_Component"],
+      "help_systems": "property",
+      "help_schemas": "property"
     },
     "c452eff3-f0f1-4dd5-ad8d-b5a3ec521352": {
       "_id": "c452eff3-f0f1-4dd5-ad8d-b5a3ec521352",
@@ -21,7 +23,21 @@
     "eabc29ab-77ba-4eee-ad98-68dac6797ee8": {
       "_id": "eabc29ab-77ba-4eee-ad98-68dac6797ee8",
       "_name": "Strings",
-      "_description": ""
+      "_description": "",
+      "help_systems": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "help_schemas": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      }
     },
     "ba12d3ed-d8cc-4809-9821-9a1351268fc5": {
       "_id": "ba12d3ed-d8cc-4809-9821-9a1351268fc5",
@@ -62,7 +78,13 @@
   "types": {},
   "components": {
     "Internationalization": { "i18n": { "_id": "i18n", "locale": "en-US" } },
-    "Strings": { "en-US": { "_id": "en-US" } }
+    "Strings": {
+      "en-US": {
+        "_id": "en-US",
+        "help_systems": "An application is a system. Once you have created one, your next step is to create a schema.",
+        "help_schemas": "A schema is the definition of your model. Models are generated based on the schema definition."
+      }
+    }
   },
   "_id": "ca2b16d9-9354-45b8-b44e-4ea273b838ad"
 }
