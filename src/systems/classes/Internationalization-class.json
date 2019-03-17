@@ -9,7 +9,12 @@
       "_name": "Strings",
       "_inherit": ["_Component"],
       "help_systems": "property",
-      "help_schemas": "property"
+      "help_schemas": "property",
+      "help_models": "property",
+      "help_types": "property",
+      "help_behaviors": "property",
+      "help_components": "property",
+      "help_logs": "property"
     },
     "c452eff3-f0f1-4dd5-ad8d-b5a3ec521352": {
       "_id": "c452eff3-f0f1-4dd5-ad8d-b5a3ec521352",
@@ -32,6 +37,41 @@
         "default": ""
       },
       "help_schemas": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "help_models": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "help_types": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "help_behaviors": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "help_components": {
+        "description": "",
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "help_logs": {
         "description": "",
         "type": "string",
         "readOnly": false,
@@ -82,7 +122,12 @@
       "en-US": {
         "_id": "en-US",
         "help_systems": "An application is a system. Once you have created one, your next step is to create a schema.",
-        "help_schemas": "A schema is the definition of your model. Models are generated based on the schema definition."
+        "help_schemas": "A schema is the definition of your model. Models are generated based on the schema definition.",
+        "help_models": "A model is an UML representation of your classes. It is generated from a schema.",
+        "help_types": "A type is used in your model to define an enumeration or a structure.",
+        "help_behaviors": "A behavior is the action to do when a method or an event is called.",
+        "help_components": "Components are your classes instances. Their states are saved in a store, a JSON object.",
+        "help_logs": "You will find here the logs of the running system.<br/><br/>Example of code to send a log:<br/><br/><i>this<br/>.require('logger')<br/>.info('hello world');</i>"
       }
     }
   },
