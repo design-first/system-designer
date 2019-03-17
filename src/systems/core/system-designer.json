@@ -754,7 +754,7 @@
       "_id": "i131bd1870a18e7a",
       "component": "e89c617b6b15d28",
       "state": "start",
-      "action": "function start() { \n  this.require('designer').render();\n}",
+      "action": "function start() { \n  var storeConfig = '';\n  \n  // set locale\n  storeConfig = this.require('storage').get('system-designer-config');\n\n  if (!storeConfig) {\n    storeConfig = {};\n  }\n\n  if (typeof storeConfig.language === 'undefined') {\n    storeConfig.language = 'en-US';\n    this.require('storage').set('system-designer-config', storeConfig);\n  } else {\n    this.require('i18n').locale(storeConfig.language);\n  }\n  \n  this.require('designer').render();\n}",
       "useCoreAPI": false,
       "core": false
     },

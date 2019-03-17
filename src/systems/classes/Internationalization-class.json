@@ -110,7 +110,7 @@
       "_id": "f71c2810-ffb7-4f19-a94b-2e08ec78d256",
       "component": "Internationalization",
       "state": "get",
-      "action": "function get(key) { \n  let strings = this.require(this.locale());\n  return strings[key]();\n}",
+      "action": "function get(key) { \n  let strings = this.require(this.locale());\n  if (!strings) {\n     strings = this.require('en-US');\n  }\n  return strings[key]();\n}",
       "useCoreAPI": false,
       "core": false
     }
