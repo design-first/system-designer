@@ -1,0 +1,220 @@
+/*
+ * System Designer
+ *
+ * https://designfirst.io/systemdesigner/
+ *
+ * Copyright 2019 Erwan Carriou
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ .designer-system-menu-export {
+  display: none!important;
+}
+#designer-dialog-config-client-type-debugging {
+  display: none!important;
+}
+#designer-dialog-config-client-form {
+  display: none!important;
+}
+#designer-dialog-config-server-form {
+  display: none!important;
+}
+body,
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  min-width: 650px!important;
+}
+html {
+  background-color: transparent!important;  
+}
+body {
+  background-color: transparent!important;
+}
+#designer-dialog-import-modal-from-file-input {
+  display: none;
+}
+#designer-dialog-import-modal-from-file-form {
+  display: none;
+}
+span.glyphicon.glyphicon-menu-left {
+  color:#337ab7!important;
+}
+
+.CodeMirror-gutter-wrapper {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* iPhone 5 / 5S / SE */
+@media only screen 
+  and (max-width: 600px)
+  and (orientation: landscape) {
+    body {
+      font-size: 12px!important;
+    }
+    .btn-group-lg>.btn, .btn-lg {
+      padding-top: 5px!important;
+    }
+    .container {
+      padding-right: 70px!important;
+    }
+    .list-group.designer-library {
+      max-height:100px!important;
+    }
+    #designer-toolbar-item-search {
+      display: none;
+    }
+    #designer-toolbar-item-command {
+      display: none;
+    }
+    #designer-toolbar-item-extension {
+      display: none;
+    }
+    .log-number {
+      position: absolute;
+      right: -20px;
+    }
+  }
+
+/* iPhone 6 / 7 / 8 */
+@media only screen 
+  and (max-width : 667px) 
+  and (orientation : landscape) {
+    .list-group.designer-library {
+      max-height:130px;
+    }
+    #designer-toolbar-item-search {
+      display: none;
+    }
+    #designer-toolbar-item-command {
+      display: none;
+    }
+    #designer-toolbar-item-extension {
+      display: none;
+    }
+    .log-number {
+      position: absolute;
+      right: -20px;
+    }
+  }
+
+/* iPhone 6+ / 7+ / 8+ */
+@media only screen 
+  and (max-width : 736px) 
+  and (orientation : landscape) {
+    .list-group.designer-library {
+      max-height:150px;
+    }
+    #designer-toolbar-item-search {
+      display: none;
+    }
+    #designer-toolbar-item-command {
+      display: none;
+    }
+    #designer-toolbar-item-extension {
+      display: none;
+    }
+  }
+
+/* iPhone X, iPhone XS */
+@media only screen 
+  and (device-width : 375px) 
+  and (device-height : 812px) 
+  and (-webkit-device-pixel-ratio : 3) 
+  and (orientation : landscape) { 
+    body,
+    .navbar-fixed-top,
+    .navbar-fixed-bottom {
+      width: 812px!important;
+    }
+    #designer-toolbar-item-command {
+      display: none;
+    }
+  }
+
+/* iPhone XR */
+@media only screen 
+  and (device-width : 414px) 
+  and (device-height : 896px) 
+  and (-webkit-device-pixel-ratio : 2) 
+  and (orientation : landscape) {
+    body,
+    .navbar-fixed-top,
+    .navbar-fixed-bottom {
+      width: 896px!important;
+    }
+    #designer-toolbar-item-command {
+      display: none;
+    } 
+  }
+
+/* iPhone XS Max */
+@media only screen 
+  and (device-width : 414px) 
+  and (device-height : 896px) 
+  and (-webkit-device-pixel-ratio : 3)
+  and (orientation : landscape) {
+    body,
+    .navbar-fixed-top,
+    .navbar-fixed-bottom {
+      width: 896px!important;
+    }
+    #designer-toolbar-item-command {
+      display: none;
+    } 
+  }
+
+/* small screens */
+@media only screen
+and (max-width : 750px)
+and (orientation: landscape) {
+  body {
+    font-size: 12px!important;
+  }
+  .btn-group-lg>.btn, .btn-lg {
+    padding-top: 6px!important;
+  }
+  .container {
+    padding-right: 70px!important;
+  }
+  .list-group.designer-library {
+    max-height:130px!important;
+  }
+  #designer-toolbar-item-search {
+    display: none;
+  }
+  #designer-toolbar-item-command {
+    display: none;
+  }
+  #designer-toolbar-item-extension {
+    display: none;
+  }
+  .log-number {
+    position: absolute;
+    right: -20px;
+  }
+}
+
+/* Phablet */
+@media only screen 
+and (max-width : 1000px) 
+and (orientation : landscape) {
+  #designer-toolbar-item-extension {
+    display: none;
+  }
+  #designer-toolbar-item-command {
+    display: none;
+  }
+}

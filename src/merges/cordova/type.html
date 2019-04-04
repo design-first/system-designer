@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" manifest="system-designer.appcache">
 
 <head>
   <meta charset="utf-8">
@@ -57,6 +57,8 @@
   <script src="lib/editor/vendor.js"></script>
   <!-- designer -->
   <script type="text/javascript" src="scripts/editor-type.js"></script>
+
+  <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./cache.js");</script>
 </body>
 
 </html>

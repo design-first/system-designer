@@ -80,6 +80,26 @@ module.exports = function (grunt) {
     'watch'
   ]);
 
+   // start the dev mode
+   grunt.registerTask('dev-cordova', [
+    'clean:build',
+    'prettier',
+    'copy:web-folder',
+    'copy:libraries',
+    'concat:vendor-designer',
+    'concat:cordova-vendor-editor',
+    'uglify:vendor-editor',
+    'copy:codemirror',
+    'copy:cordova-files',
+    'json_merge:cordova-systems',
+    'copy:minify-json',
+    'concat:app',
+    'clean:systems',
+    'copy:web-livereload',
+    'connect:watch',
+    'watch'
+  ]);
+
   // build for web
   grunt.registerTask('web', [
     'clean:build',

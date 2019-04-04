@@ -135,10 +135,22 @@ cordova run android
 
 ## Development
 
-To start System Designer in development mode:
+#### Web
+
+To start System Designer in development mode for web:
 
 ```sh
 npm run dev
+```
+
+Once server started, go to [http://localhost:9001/](http://localhost:9001/). All the modifications to the source code of System Designer will rebuild the solution and refresh the page.
+
+#### Cordova
+
+To start System Designer in development mode for cordova:
+
+```sh
+npm run dev-cordova
 ```
 
 Once server started, go to [http://localhost:9001/](http://localhost:9001/). All the modifications to the source code of System Designer will rebuild the solution and refresh the page.
