@@ -20,6 +20,7 @@ self.addEventListener('install', e => {
       return cache.addAll([
         '/',
         'app/index.html',
+        'img/icon.png',
         'img/logo.png',
         'lib/bootstrap/dist/css/bootstrap.min.css',
         'lib/bootstrap/dist/css/bootstrap.min.css.map',
