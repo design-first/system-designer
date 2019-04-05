@@ -77,18 +77,16 @@ module.exports = function (grunt) {
     'json_merge:web-systems',
     'copy:web-livereload',
     'connect:watch',
-    'watch'
+    'watch:web'
   ]);
 
    // start the dev mode
    grunt.registerTask('dev-cordova', [
     'clean:build',
-    'prettier',
     'copy:web-folder',
     'copy:libraries',
     'concat:vendor-designer',
     'concat:cordova-vendor-editor',
-    'uglify:vendor-editor',
     'copy:codemirror',
     'copy:cordova-files',
     'json_merge:cordova-systems',
@@ -97,7 +95,7 @@ module.exports = function (grunt) {
     'clean:systems',
     'copy:web-livereload',
     'connect:watch',
-    'watch'
+    'watch:cordova'
   ]);
 
   // build for web
