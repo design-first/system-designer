@@ -147,7 +147,7 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/). All
 
 #### Cordova
 
-To start System Designer in development mode for cordova:
+To start System Designer in development mode for Cordova:
 
 ```sh
 npm run dev-cordova
