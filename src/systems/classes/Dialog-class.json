@@ -131,6 +131,12 @@
       "_id": "b1a8ae1c3f113625",
       "_name": "DialogDropDiagram",
       "_inherit": ["Dialog"]
+    },
+    "f1d18452-66e4-4d67-a370-c83dd9437d83": {
+      "_id": "f1d18452-66e4-4d67-a370-c83dd9437d83",
+      "_name": "DialogInstallPWA",
+      "_inherit": ["Dialog"],
+      "deferredPrompt": "property"
     }
   },
   "models": {
@@ -269,6 +275,18 @@
       "_id": "y11f3c1fe9b1f239",
       "_name": "DialogDropDiagram",
       "_description": ""
+    },
+    "d4ae5298-d26e-4fc5-8919-aa250edea85c": {
+      "_id": "d4ae5298-d26e-4fc5-8919-aa250edea85c",
+      "_name": "DialogInstallPWA",
+      "_description": "",
+      "deferredPrompt": {
+        "description": "",
+        "type": "any",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      }
     }
   },
   "behaviors": {
@@ -893,6 +911,46 @@
       "component": "DialogDropDiagram",
       "state": "init",
       "action": "function init(conf) { \n  var html = null,\n      dom = null;\n\n  $('#designer-dialog').empty();\n\n  html = this.require('dialog-modal-drop-diagram.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n        .replace(/{{title}}/gi, this.title())\n        .replace(/{{message}}/gi, this.message())\n  );\n\n  //events\n  dom = document.getElementById('designer-dialog-drop-diagram-modal-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n\n  dom = document.getElementById('designer-dialog-drop-diagram-modal-import');\n  dom.addEventListener('click', function click(event) {\n    this.require('viz').render(this.data());\n    this.require('viz').data(this.data());\n    this.hide();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-drop-diagram-modal');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      event.stopPropagation();\n      event.preventDefault();\n      document.getElementById('designer-dialog-drop-diagram-modal-import').click();\n      return false;\n    }\n  }.bind(this));\n\n  if (!this.require('factory').system()) {\n    $('#designer-dialog-drop-diagram-modal-merge').hide();\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f560d27c-4105-4260-bf18-444a3d846cb0": {
+      "_id": "f560d27c-4105-4260-bf18-444a3d846cb0",
+      "component": "DialogInstallPWA",
+      "state": "cancel",
+      "action": "function cancel() { \n\tthis.hide();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "cc1b0d4e-3767-49d8-8dc8-5f415446445c": {
+      "_id": "cc1b0d4e-3767-49d8-8dc8-5f415446445c",
+      "component": "DialogInstallPWA",
+      "state": "show",
+      "action": "function show() { \n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  $('#designer-dialog-install-pwa-modal').modal('show');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "d9f3f449-0d74-4348-8b0f-ed2c5f990dd0": {
+      "_id": "d9f3f449-0d74-4348-8b0f-ed2c5f990dd0",
+      "component": "DialogInstallPWA",
+      "state": "hide",
+      "action": "function hide() { \n  $('#designer-dialog-install-pwa-modal').modal('hide');\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "ed9b0296-eb25-49bc-a623-9fb8082a33ec": {
+      "_id": "ed9b0296-eb25-49bc-a623-9fb8082a33ec",
+      "component": "DialogInstallPWA",
+      "state": "init",
+      "action": "function init(conf) { \n var html = '',\n      dom = null;\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.require('dialog-modal-install-pwa.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-install-pwa-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-install-pwa-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n  \n  dom = document.getElementById('designer-dialog-install-pwa-modal');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      this.ok();\n      event.stopPropagation();\n      event.preventDefault();\n      return false;\n    }\n  }.bind(this));\n  \n  // show\n  $('#designer-dialog-install-pwa-modal').modal('show');\t\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "af9fea82-f707-4dc6-bebc-67c35788472a": {
+      "_id": "af9fea82-f707-4dc6-bebc-67c35788472a",
+      "component": "DialogInstallPWA",
+      "state": "ok",
+      "action": "function ok() { \n if (this.deferredPrompt() && this.deferredPrompt().prompt) {\n    this.deferredPrompt().prompt();\n    this.deferredPrompt().userChoice.then(function()  {\n      this.deferredPrompt(null);\n    }.bind(this));\n  } \n  \n  var config = this.require('storage').get('system-designer-config');\n  if (!config) {\n    config = {};\n  }\n  config.pwaInstalled = true;\n  this.require('storage').set('system-designer-config', config);\n  this.hide();\n  \n  this.hide();\n}",
       "useCoreAPI": false,
       "core": false
     }
