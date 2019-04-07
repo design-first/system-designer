@@ -926,7 +926,7 @@
       "_id": "cc1b0d4e-3767-49d8-8dc8-5f415446445c",
       "component": "DialogInstallPWA",
       "state": "show",
-      "action": "function show() { \n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  $('#designer-dialog-install-pwa-modal').modal('show');\t\n}",
+      "action": "function show() { \n  $('#designer-dialog-install-pwa-modal').modal('show');\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -942,7 +942,7 @@
       "_id": "ed9b0296-eb25-49bc-a623-9fb8082a33ec",
       "component": "DialogInstallPWA",
       "state": "init",
-      "action": "function init(conf) { \n var html = '',\n      dom = null;\n\n  // empty area\n  $('#designer-dialog').empty();\n\n  // render\n  html = this.require('dialog-modal-install-pwa.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-install-pwa-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-install-pwa-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n  \n  dom = document.getElementById('designer-dialog-install-pwa-modal');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      this.ok();\n      event.stopPropagation();\n      event.preventDefault();\n      return false;\n    }\n  }.bind(this));\n  \n  // show\n  $('#designer-dialog-install-pwa-modal').modal('show');\t\t\n}",
+      "action": "function init(conf) { \n var html = '',\n      dom = null;\n\n  // empty area\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  $('#designer-dialog').empty();\n  \n  // render\n  html = this.require('dialog-modal-install-pwa.html');\n  document.querySelector('#designer-dialog').insertAdjacentHTML('afterbegin',\n    html.source()\n      .replace(/{{title}}/gi, this.title())\n  );\n\n  // events\n  dom = document.getElementById('designer-dialog-install-pwa-cancel');\n  dom.addEventListener('click', function click(event) {\n    this.cancel();\n  }.bind(this));\n  \n  dom = document.getElementById('designer-dialog-install-pwa-ok');\n  dom.addEventListener('click', function click(event) {\n    this.ok();\n  }.bind(this));\t\n  \n  dom = document.getElementById('designer-dialog-install-pwa-modal');\n  dom.addEventListener('keydown', function keydown(event) {\n    if (event.keyCode === 13) {\n      this.ok();\n      event.stopPropagation();\n      event.preventDefault();\n      return false;\n    }\n  }.bind(this));\n  \n  // show\n  $('#designer-dialog-install-pwa-modal').modal('show');\t\t\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -950,7 +950,7 @@
       "_id": "af9fea82-f707-4dc6-bebc-67c35788472a",
       "component": "DialogInstallPWA",
       "state": "ok",
-      "action": "function ok() { \n if (this.deferredPrompt() && this.deferredPrompt().prompt) {\n    this.deferredPrompt().prompt();\n    this.deferredPrompt().userChoice.then(function()  {\n      this.deferredPrompt(null);\n    }.bind(this));\n  } \n  \n  var config = this.require('storage').get('system-designer-config');\n  if (!config) {\n    config = {};\n  }\n  config.pwaInstalled = true;\n  this.require('storage').set('system-designer-config', config);\n  this.hide();\n  \n  this.hide();\n}",
+      "action": "function ok() { \n if (this.deferredPrompt() && this.deferredPrompt().prompt) {\n    this.deferredPrompt().prompt();\n    this.deferredPrompt().userChoice.then(function()  {\n      this.deferredPrompt(null);\n    }.bind(this));\n  } \n  \n  var config = this.require('storage').get('system-designer-config');\n  if (!config) {\n    config = {};\n  }\n  config.pwaInstalled = true;\n  this.require('storage').set('system-designer-config', config);\n  \n  this.hide();\n}",
       "useCoreAPI": false,
       "core": false
     }
