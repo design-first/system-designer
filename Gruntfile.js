@@ -28,7 +28,6 @@ module.exports = function (grunt) {
     watch: grunt.file.readJSON('tasks/watch.json'),
     clean: grunt.file.readJSON('tasks/clean.json'),
     copy: grunt.file.readJSON('tasks/copy.json'),
-    prettier: grunt.file.readJSON('tasks/prettier.json'),
     json_merge: grunt.file.readJSON('tasks/json_merge.json'),
     connect: grunt.file.readJSON('tasks/connect.json'),
     bgShell: grunt.file.readJSON('tasks/shell.json'),
@@ -101,7 +100,6 @@ module.exports = function (grunt) {
   // build for web
   grunt.registerTask('web', [
     'clean:build',
-    'prettier',
     'copy:web-folder',
     'copy:libraries',
     'copy:ace',
@@ -116,7 +114,6 @@ module.exports = function (grunt) {
   // build for electron
   grunt.registerTask('electron', [
     'clean:build',
-    'prettier',
     'copy:web-folder',
     'copy:libraries',
     'copy:ace',
@@ -133,7 +130,6 @@ module.exports = function (grunt) {
   // build for cordova
   grunt.registerTask('cordova', [
     'clean:build',
-    'prettier',
     'copy:web-folder',
     'copy:libraries',
     'concat:vendor-designer',
