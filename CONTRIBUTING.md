@@ -2,7 +2,7 @@
 
 ## For questions
 
-Read the [documentation](https://designfirst.io/systemdesigner/documentation/docs/what-is-system-designer.html) before to see if your questions has been answered in the documentation
+Read the [documentation](https://designfirst.io/systemdesigner/documentation/docs/what-is-system-designer.html) before to see if your questions has been answered in the documentation.
 
 ## For suggestions
 
@@ -12,11 +12,11 @@ Give a concrete example of what you want to see in System Designer.
 
 Give the following informations related to your problem: 
 
-- [ ] System Designer version number (ex: *v1.9.9*)
-- [ ] Platform (ex: *macOS version*)
-- [ ] Your OS version (ex: *macOS 10.13.3*)
-- [ ] If use on a phone, please give the model (ex: *iPhone 6S*)
-- [ ] Steps to reproduce the problem
+- System Designer version number: (ex: *v3.5.2*)
+- System Designer platform: (ex: *macOS*)
+- Your OS version: (ex: *macOS 10.14.4*)
+- If use on a phone, please give the model: (ex: *iPhone XS*)
+- Steps to reproduce the issue
 
 ## For contributing to System Designer codebase
 

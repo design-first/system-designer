@@ -83,7 +83,7 @@ npm i
 
 #### Build for web
 
-Here are the different tasks you can use to build and start System Designer:
+Here are the different tasks you can use to build and start System Designer as a Progressive Web App (PWA):
 
 ```sh
 npm run web
@@ -99,7 +99,7 @@ Once server started, go to [http://localhost:8080/](http://localhost:8080/).
 
 #### Build for macOS / Windows / Linux
 
-To build for [Electron](http://electron.atom.io):
+To build System Designer for [Electron](http://electron.atom.io):
 
 ```sh
 npm run electron
@@ -122,7 +122,7 @@ npm run linux
 
 #### Build for iOS / Android
 
-To build for [Cordova](http://cordova.apache.org):
+To build System Designer for [Cordova](http://cordova.apache.org):
 
 ```sh
 npm run cordova
