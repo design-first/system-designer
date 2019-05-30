@@ -110,7 +110,14 @@ Copy the content of `/dist` directory into your [System Designer for Electron](h
 Then in your [System Designer for Electron](https://github.com/design-first/system-designer-electron) project:
 
 ```sh
-npm run start
+# build for macOS
+npm run macOS
+
+# build for Windows
+npm run windows
+
+# build for Linux
+npm run linux
 ```
 
 #### Build for iOS / Android
@@ -126,11 +133,11 @@ Copy the content of `/dist` directory into your [System Designer for Cordova](ht
 Then in your [System Designer for Cordova](https://github.com/design-first/system-designer-cordova) project:
 
 ```sh
-# run ios simulator
-cordova run ios
+# build for ios
+cordova build ios
 
-# run android simulator
-cordova run android
+# build for android
+cordova build android
 ```
 
 ## Development
