@@ -97,7 +97,7 @@ npm run start
 
 Once server started, go to [http://localhost:8080/](http://localhost:8080/).
 
-#### Build for Electron
+#### Build for macOS / Windows / Linux
 
 To build for [Electron](http://electron.atom.io):
 
@@ -113,7 +113,7 @@ Then in your [System Designer for Electron](https://github.com/design-first/syst
 npm run start
 ```
 
-#### Build for Cordova
+#### Build for iOS / Android
 
 To build for [Cordova](http://cordova.apache.org):
 
@@ -145,9 +145,9 @@ npm run dev
 
 Once server started, go to [http://localhost:9001/](http://localhost:9001/). All the modifications to the source code of System Designer will rebuild the solution and refresh the page.
 
-#### Cordova
+#### Mobile devices
 
-To start System Designer in development mode for Cordova:
+To start System Designer in development mode for mobile devices:
 
 ```sh
 npm run dev-cordova
