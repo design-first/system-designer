@@ -39,7 +39,7 @@ The definition of the model is stored on a JSON format called [MSON](https://sys
 
 Once you have created your model, System Designer generates the skeletons of all your methods. You only have then to add your code to implement them.
 
-System Designer provides you helpers to manage your components. You can easily navigate threw components to create your application.
+System Designer provides you helpers to manage your components. You can easily navigate through components to create your application.
 
 #### Create components graphically
 
