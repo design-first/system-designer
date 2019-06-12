@@ -12,7 +12,7 @@ Give a concrete example of what you want to see in System Designer.
 
 Give the following informations related to your problem: 
 
-- System Designer version number: (ex: *v3.5.3*)
+- System Designer version number: (ex: *v3.5.4*)
 - System Designer platform: (ex: *macOS*)
 - Your OS version: (ex: *macOS 10.14.4*)
 - If use on a phone, please give the model: (ex: *iPhone XS*)
