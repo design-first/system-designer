@@ -49,7 +49,7 @@ In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your 
 
 #### Run your system
 
-You can run your system directly from System Designer and then export it to HTML, JSON, JavaScript, a Node.js module or a [Graphviz](http://graphviz.org) file (* macOS, Windows 10 and web version only).
+You can run your system directly from System Designer and then export it to HTML, JSON, JavaScript, a Node.js module or a [Graphviz](http://graphviz.org) file (* macOS, Windows, Linux and PWA version only).
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your system. All warnings are send and shown in System Designer.
 
@@ -61,7 +61,7 @@ All modifications to the model done inside System Designer will be send to the r
 
 #### Design on the go
 
-System Designer can be used on Windows 10, macOS, iOS, Android or any browsers. You can also install it in your project: System Designer requires no backend to work, it is a full web application.
+System Designer can be used on Windows, macOS, Linux, iOS, iPad, Android or any browsers. You can also install it in your project: System Designer requires no backend to work, it is a full web application.
 
 System Designer has a GitHub module to synchronize your work between all these apps. You can begin your design on your Mac and then continue it on your iPad.
 
