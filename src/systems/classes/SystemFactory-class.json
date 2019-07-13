@@ -666,7 +666,7 @@
       "_id": "d129be15b711107c",
       "component": "SystemFactory",
       "state": "createComponent",
-      "action": "function createComponent(collection, component) { \n  var components = this.system().components();\n  \n  function _hasSchema(name, schemas) {\n    var result = false,\n        id = '';\n\n    for (id in schemas) {\n        if (schemas[id]._name === name) {\n            result = true;\n            break;\n        }\n    }\n    return result;\n  }\n  \n  if (_hasSchema(collection, this.system().schemas())) {\n    if (typeof components[collection] === 'undefined') {\n      components[collection] = {};\n    }\n  \n    delete component.classInfo;\n  \n    components[collection][component._id] = component;\n    this.system().components(components);\n  }\n}",
+      "action": "function createComponent(collection, component) { \n  var components = this.system().components();\n  \n  function _hasSchema(name, schemas) {\n    var result = false,\n        id = '';\n\n    for (id in schemas) {\n        if (schemas[id]._name === name) {\n            result = true;\n            break;\n        }\n    }\n    return result;\n  }\n  \n  if (_hasSchema(collection, this.system().schemas())) {\n    if (typeof components[collection] === 'undefined') {\n      components[collection] = {};\n    }\n  \n    components[collection][component._id] = component;\n    this.system().components(components);\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -770,7 +770,7 @@
       "_id": "j18c34108721d01d",
       "component": "SystemFactory",
       "state": "toJSON",
-      "action": "function toJSON() { \n  var result = {};\n\t\n  if (this.system()) {\n    result = this.require('db').collections().System.find({\n      '_id': this.system().id()\n    })[0];\n  }\n\t\n  result = JSON.parse(JSON.stringify(result));\n  delete result.classInfo;\n\t\n  return result;\n}",
+      "action": "function toJSON() { \n  var result = {};\n\t\n  if (this.system()) {\n    result = this.require('db').collections().System.find({\n      '_id': this.system().id()\n    })[0];\n  }\n\t\n  result = JSON.parse(JSON.stringify(result));\n\t\n  return result;\n}",
       "useCoreAPI": false,
       "core": false
     },
