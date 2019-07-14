@@ -434,7 +434,7 @@
         "type": "string",
         "readOnly": false,
         "mandatory": false,
-        "default": "3.7.0"
+        "default": "4.0.0"
       },
       "runWindow": {
         "type": "object",
@@ -693,7 +693,7 @@
       "_id": "d185231c5af12d54",
       "component": "q1da4e1ca6710ca2",
       "state": "click",
-      "action": "function click() { \n  $('#designer-toolbar-item-zoomin').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n\n  if (svg) {\n    this.require('viz').refZoom().zoomOut();\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoomin').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n\n  if (svg) {\n    this.require('viz').refZoom().zoomIn();\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -701,7 +701,7 @@
       "_id": "l19d291b99311024",
       "component": "p15e7513ed512f61",
       "state": "click",
-      "action": "function click() { \n  $('#designer-toolbar-item-zoomout').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n\n  if (svg) {\n    this.require('viz').refZoom().zoomIn();\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoomout').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n\n  if (svg) {\n    this.require('viz').refZoom().zoomOut();\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
