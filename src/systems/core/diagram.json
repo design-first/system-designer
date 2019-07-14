@@ -131,6 +131,7 @@
       "_id": "v123b51abbb18712",
       "_name": "Diagram",
       "_inherit": ["_Component"],
+      "refZoom": "property",
       "ref": "property",
       "zoom": "property",
       "render": "method"
@@ -559,6 +560,13 @@
           }
         ],
         "result": "any"
+      },
+      "refZoom": {
+        "description": "",
+        "type": "any",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
       }
     }
   },
@@ -685,7 +693,7 @@
       "_id": "d185231c5af12d54",
       "component": "q1da4e1ca6710ca2",
       "state": "click",
-      "action": "function click() { \n  $('#designer-toolbar-item-zoomin').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n  var matrixGroup = '';\n  \n  if (svg) {\n    matrixGroup = svg.getElementById('graph0');\t\n      \n    function zoom(scale) {\n      var previousScale = matrixGroup.getAttribute('transform').split(')')[0];\n      var transformInfo = matrixGroup.getAttribute('transform').replace(previousScale + ')', '');\n      \n      matrixGroup.setAttribute('transform', 'scale(' + scale + ') ' + transformInfo);\n    }\n    \n    this.require('viz').zoom(this.require('viz').zoom() + 0.1);\n    zoom(this.require('viz').zoom());\n    \n    this.require('message').success('Zoom x' + this.require('viz').zoom().toString().substring(0, 3) + ' applied.');\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoomin').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n\n  if (svg) {\n    this.require('viz').refZoom().zoomOut();\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -693,7 +701,7 @@
       "_id": "l19d291b99311024",
       "component": "p15e7513ed512f61",
       "state": "click",
-      "action": "function click() { \n  $('#designer-toolbar-item-zoomout').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n  var matrixGroup = '';\n  \n  if (svg) {\n    matrixGroup = svg.getElementById('graph0');\t\n      \n    function zoom(scale) {\n      var previousScale = matrixGroup.getAttribute('transform').split(')')[0];\n      var transformInfo = matrixGroup.getAttribute('transform').replace(previousScale + ')', '');\n      \n      matrixGroup.setAttribute('transform', 'scale(' + scale + ') ' + transformInfo);\n    }\n  \n    this.require('viz').zoom(this.require('viz').zoom() - 0.1);\n    zoom(this.require('viz').zoom());\t\n  \n    this.require('message').success('Zoom x' + this.require('viz').zoom().toString().substring(0, 3) + ' applied.');\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoomout').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var svg = document.getElementsByTagName('svg')[0];\n\n  if (svg) {\n    this.require('viz').refZoom().zoomIn();\n  } else {\n    this.require('message').warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -701,7 +709,7 @@
       "_id": "u1695c1c8551203c",
       "component": "Diagram",
       "state": "render",
-      "action": "function render(dotFile, diagramType) { \n  var dotGraph = '',\n      storeConfig = null;\n\n  switch(true) {\n    case dotFile !== '':\n      dotGraph = dotFile;\n      document.title = 'diagrams';\n      break;\n    case this.data() !== '':\n      dotGraph = this.data();\n      document.title = 'diagrams';\n      break;\n    case this.require('factory').system() !== undefined:\n      dotGraph = this.require('export').toGraphviz(diagramType);\n      break;\n    default:  \n      document.title = 'diagrams';\n      $('#designer-diagram').empty();\n      this.require('message-help').render();\n      return;\n  }\n  \n  if (!this.ref()) {\n    this.ref(new Viz());\n  }\n\n  this.ref().renderSVGElement(dotGraph)\n  .then(function(element) {\n    var elt = document.getElementById('designer-diagram');\n\n    $('#designer-diagram').empty();\n    elt.appendChild(element);\n    \n    var svg = document.getElementsByTagName('svg')[0];\n    \n    // set width and heigth\n    svg.setAttribute('width', ($(document).width() - 50) + 'px');\n    svg.setAttribute('height', ($(document).height() - 50) + 'px');\n    \n    // svg event\n    svg.addEventListener('mousedown', startDrag, false);\n    svg.addEventListener('mousemove', drag, false);\n    svg.addEventListener('mouseup', endDrag, false);\n\n    var selectedElement, dragX, dragY;\n    var reTranslate = /translate\\s*\\(([-\\+\\d\\.\\s,e]+)\\)/gi;\n\n    function startDrag(evt) {\n      var screenMatrix = svg.getScreenCTM();\n      selectedElement = document.getElementById('graph0');\n      dragX = evt.clientX / screenMatrix.a;\n      dragY = evt.clientY / screenMatrix.d;\n\n      var transform = selectedElement.getAttribute('transform');\n      var translate = reTranslate.exec(transform);\n      if (translate) {\n        var digits = translate[1].split(/\\s*[,\\s]+/);\n        dragX -= parseFloat(digits[0] || 0);\n        dragY -= parseFloat(digits[1] || 0);\n      } else {\n        translate = 'translate(0, 0)';\n        if (transform) {\n          selectedElement.setAttribute('transform', translate + transform);\n        } else {\n          selectedElement.setAttribute('transform', translate);\n        }\n      }\n    }\n\n    function drag(evt) {\n      if (selectedElement) {\n        var screenMatrix = svg.getScreenCTM();\n        var x = evt.clientX / screenMatrix.a - dragX;\n        var y = evt.clientY / screenMatrix.d - dragY;\n\n        var transform = selectedElement.getAttribute('transform');\n        transform = transform.replace(reTranslate, 'translate(' + x  + ' ' + y + ')');\n        selectedElement.setAttribute('transform', transform);\n      }\n    }\n\n    function endDrag(evt) {\n      if (selectedElement) {\n        var screenMatrix = svg.getScreenCTM();\n        var x = evt.clientX / screenMatrix.a - dragX;\n        var y = evt.clientY / screenMatrix.d - dragY;\n\n        var transform = selectedElement.getAttribute('transform');\n        transform = transform.replace(reTranslate, 'translate(' + x  + ' ' + y + ')');\n        selectedElement.setAttribute('transform', transform);\n      }\n      selectedElement = false;\n    }\n    \n    if (runtime.require('viz').zoom() === 1) {\n      runtime.require('message').success('Diagram generated.');\n    }\n  })\n  .catch(error => {\n    if (!runtime.require('viz').ref()) {\n      runtime.require('viz').ref(new Viz());\n    }\n\n    runtime.require('message').danger(error.toString());\n  });\n}",
+      "action": "function render(dotFile, diagramType) { \n  var dotGraph = '',\n      storeConfig = null;\n\n  switch(true) {\n    case dotFile !== '':\n      dotGraph = dotFile;\n      document.title = 'diagrams';\n      break;\n    case this.data() !== '':\n      dotGraph = this.data();\n      document.title = 'diagrams';\n      break;\n    case this.require('factory').system() !== undefined:\n      dotGraph = this.require('export').toGraphviz(diagramType);\n      break;\n    default:  \n      document.title = 'diagrams';\n      $('#designer-diagram').empty();\n      this.require('message-help').render();\n      return;\n  }\n  \n  if (!this.ref()) {\n    this.ref(new Viz());\n  }\n\n  this.ref().renderSVGElement(dotGraph)\n  .then(function(element) {\n    var elt = document.getElementById('designer-diagram');\n\n    $('#designer-diagram').empty();\n    elt.appendChild(element);\n    \n    var svg = document.getElementsByTagName('svg')[0];\n    \n    // set width and heigth\n    svg.setAttribute('width', ($(document).width() - 50) + 'px');\n    svg.setAttribute('height', ($(document).height() - 50) + 'px');\n    \n     var panZoom = svgPanZoom(svg, {\n          zoomEnabled: true,\n          controlIconsEnabled: false,\n          fit: true,\n          center: true,\n          minZoom: 0.1\n        });\n        \n    this.refZoom(panZoom);\n\n    svg.addEventListener('paneresize', function(e) {\n      this.refZoom().resize();\n    }.bind(this), false);\n    \n    window.addEventListener('resize', function(e) {\n      this.refZoom().resize();\n    }.bind(this));\n  \n  }.bind(this))\n  .catch(error => {\n    if (!runtime.require('viz').ref()) {\n      runtime.require('viz').ref(new Viz());\n    }\n\n    runtime.require('message').danger(error.toString());\n  });\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -709,7 +717,7 @@
       "_id": "j1685617835183b2",
       "component": "c1b63f13c911fcc8",
       "state": "click",
-      "action": "function click() { \n  $('#designer-toolbar-item-zoominit').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var message = this.require('message');\n  var data = this.require('viz').data();\n  \n  if (this.require('factory').system() || data) {\n\t this.require('viz').zoom(1);\n\t this.require('viz').render('', this.require('state').menu());\n  } else {\n    message.warning('There is no diagram.');\n  }\n}",
+      "action": "function click() { \n  $('#designer-toolbar-item-zoominit').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var message = this.require('message');\n  var data = this.require('viz').data();\n  \n  if (this.require('factory').system() || data) {\n\t this.require('viz').refZoom().resetZoom();\n\t this.require('viz').render('', this.require('state').menu());\n  } else {\n    message.warning('There is no diagram.');\n  }\n}",
       "useCoreAPI": false,
       "core": false
     },
@@ -876,7 +884,7 @@
       }
     },
     "Workspace": {},
-    "Diagram": { "viz": { "_id": "viz", "ref": "", "zoom": 1 } }
+    "Diagram": { "viz": { "_id": "viz", "ref": "", "zoom": 1, "refZoom": "" } }
   },
   "_id": "a1c33618ac01371c"
 }
