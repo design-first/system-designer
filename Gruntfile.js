@@ -54,9 +54,7 @@ module.exports = function (grunt) {
         'dest': 'dist',
         'options': {
           'process': content =>
-            content.replace('manifest=\"system-designer.appcache\"', '')
-              .replace('manifest=\"../system-designer.appcache\"', '')
-              .replace('<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./cache.js");</script>', '')
+            content.replace('<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./cache.js");</script>', '')
               .replace('</body>', '\t<script src=\"//localhost:35729/livereload.js\"></script>\n</body>')
         },
       }
