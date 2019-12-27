@@ -174,7 +174,7 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/). All
 
 ## License
 
-Copyright © 2019 Erwan Carriou
+Copyright © 2020 Erwan Carriou
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
