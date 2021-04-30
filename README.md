@@ -1,10 +1,7 @@
 # System Designer
 
-[![npm](https://img.shields.io/npm/v/system-designer.svg)](https://www.npmjs.com/package/system-designer)
 [![Build Status](https://travis-ci.org/design-first/system-designer.svg?branch=master)](https://travis-ci.org/design-first/system-designer)
-[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://cypress.io)
-[![devDependency Status](https://david-dm.org/design-first/system-designer/dev-status.svg)](https://david-dm.org/design-first/system-designer#info=devDependencies)
-[![npm](https://img.shields.io/npm/dt/system-designer.svg)](https://www.npmjs.com/package/system-designer)
+[![system-designer](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/558dq3&style=flat-square&logo=cypress)](https://dashboard.cypress.io/projects/558dq3/runs)
 
 ![Image Alt](https://designfirst.io/img/systemdesigner.png)
 
