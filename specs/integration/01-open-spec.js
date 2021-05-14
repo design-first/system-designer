@@ -17,3 +17,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/// <reference types="cypress" />
+
+describe('System designer', () => {
+  it('should be started', () => {
+    cy.visit('/').get('#designer-spaces-type').contains('Systems')
+  })
+})
