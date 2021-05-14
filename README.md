@@ -131,15 +131,15 @@ Then in your [System Designer for Cordova](https://github.com/design-first/syste
 
 ```sh
 # build for ios
-cordova build ios
+npx cordova build ios
 
 # build for android
-cordova build android
+npx cordova build android
 ```
 
 ## Development
 
-#### Web
+### Web
 
 To start System Designer in development mode for web:
 
@@ -149,7 +149,7 @@ npm run dev
 
 Once server started, go to [http://localhost:9001/](http://localhost:9001/). All the modifications to the source code of System Designer will rebuild the solution and refresh the page.
 
-#### Mobile devices
+### Mobile devices
 
 To start System Designer in development mode for mobile devices:
 
