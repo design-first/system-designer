@@ -11,6 +11,56 @@
 </head>
 
 <body>
+  <!-- message -->
+  <div id="message">
+    <div>
+      <span>
+        YOUR SYSTEM IS RUNNING...
+      </span>
+      <span>
+        See the logs for details
+      </span>
+    </div>
+  </div>
+  <style>
+    @keyframes fadeinout {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    #message {
+      height: calc(100vh - 16px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+    }
+
+    #message div {
+      display: flex;
+      gap: 1em;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation-name: fadeinout;
+      animation-delay: 1s;
+      animation-duration: 6s;
+      animation-iteration-count: infinite;
+      border: 2px solid #7f949d;
+      border-radius: 10px;
+      padding-bottom: 4px;
+      padding: 15px;
+      color: #7f949d;
+    }
+  </style>
   <!-- system runtime -->
   <script type="text/javascript" level="warn" src="../lib/system-runtime/system-runtime.min.js"></script>
 </body>

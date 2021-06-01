@@ -9,6 +9,56 @@
 
 <body>
   <div id="system-designer-back;z-index:999999;" style="top:5px;left:10px;font-size:18px;font-family:Helvetica,Arial,sans-serif;position:absolute;background-color:white;"><a href="javascript:systemDesignerBack()" style="text-decoration:none; color:#337AB7;"><span style="font-family: 'Helvetica Neue';"> &lt; System Designer</span></a></div>
+  <!-- message -->
+  <div id="message">
+    <div>
+      <span>
+        YOUR SYSTEM IS RUNNING...
+      </span>
+      <span>
+        See the logs for details
+      </span>
+    </div>
+  </div>
+  <style>
+    @keyframes fadeinout {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    #message {
+      height: calc(100vh - 16px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+    }
+
+    #message div {
+      display: flex;
+      gap: 1em;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation-name: fadeinout;
+      animation-delay: 1s;
+      animation-duration: 6s;
+      animation-iteration-count: infinite;
+      border: 2px solid #7f949d;
+      border-radius: 10px;
+      padding-bottom: 4px;
+      padding: 15px;
+      color: #7f949d;
+    }
+  </style>
   <!-- cordova -->
   <script type="text/javascript" src="../cordova.js"></script>
   <script type="text/javascript" src="../scripts/mobile.js"></script>
