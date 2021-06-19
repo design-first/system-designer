@@ -18,10 +18,12 @@
  * limitations under the License.
  */
 
-/// <reference types="cypress" />
+import "cypress-localstorage-commands"
 
-describe('System designer', () => {
-  it('should be started', () => {
-    cy.visit('/').get('#designer-spaces-type').contains('Systems')
-  })
+beforeEach(() => {
+  cy.restoreLocalStorage()
+})
+
+afterEach(() => {
+  cy.saveLocalStorage()
 })

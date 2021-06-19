@@ -1,11 +1,13 @@
 {
   "baseUrl":"http://localhost:8080",
   "projectId": "558dq3",
-  "fixturesFolder": "specs/fixtures",
-  "integrationFolder": "specs/integration",
-  "pluginsFile": "specs/plugins",
-  "supportFile": "specs/support",
+  "fixturesFolder": "cypress/fixtures",
+  "integrationFolder": "cypress/integration",
+  "pluginsFile": "cypress/plugins",
+  "supportFile": "cypress/support",
   "screenshotsFolder": "reports/screenshots",
   "videosFolder": "reports/videos",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "ignoreTestFiles": "*.js",
+  "testFiles": "**/*.{feature,features}"
 }

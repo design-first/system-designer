@@ -17,3 +17,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+const cucumber = require('cypress-cucumber-preprocessor').default
+
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+}

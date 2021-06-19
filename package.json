@@ -51,12 +51,14 @@
     "jsplumb": "2.15.6",
     "prismjs": "1.23.0",
     "svg-pan-zoom": "3.6.1",
-    "system-runtime": "5.0.0",
+    "system-runtime": "5.0.1",
     "viz.js": "2.1.2"
   },
   "devDependencies": {
     "coffeescript": "2.5.1",
     "cypress": "7.5.0",
+    "cypress-cucumber-preprocessor": "^4.0.0",
+    "cypress-localstorage-commands": "1.4.5",
     "eslint": "7.28.0",
     "eslint-plugin-cypress": "2.11.3",
     "grunt": "1.4.1",
@@ -84,5 +86,8 @@
       "prettier --single-quote --write",
       "git add"
     ]
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
