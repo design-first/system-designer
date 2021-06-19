@@ -1,7 +1,6 @@
 # System Designer
 
-[![unit tests](https://github.com/design-first/system-designer/actions/workflows/node.js.yml/badge.svg)](https://github.com/design-first/system-runtime/actions/workflows/tests.yml)
-[![system-designer](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/558dq3&style=flat-square&logo=cypress)](https://dashboard.cypress.io/projects/558dq3/runs)
+[![functional tests](https://github.com/design-first/system-designer/actions/workflows/tests.yml/badge.svg)](https://github.com/design-first/system-designer/actions/workflows/tests.yml)
 
 ![Image Alt](https://designfirst.io/img/systemdesigner.png)
 
