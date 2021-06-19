@@ -1,6 +1,6 @@
 # System Designer
 
-[![cucumber tests](https://github.com/design-first/system-designer/actions/workflows/tests.yml/badge.svg)](https://github.com/design-first/system-designer/actions/workflows/tests.yml)
+[![cucumber tests](https://github.com/design-first/system-designer/actions/workflows/cucumber.yml/badge.svg)](https://github.com/design-first/system-designer/actions/workflows/cucumber.yml)
 
 ![Image Alt](https://designfirst.io/img/systemdesigner.png)
 
