@@ -1,1 +1,815 @@
-{"name":"editor-system","master":true,"version":"1.0.0","description":"","schemas":{"104ad1f48518376":{"_id":"104ad1f48518376","_name":"_Channel","_inherit":["_Component"],"$editorUpdateSystem":"event","$editorUpdateSchema":"event","$editorUpdateSchemaId":"event","$editorUpdateSchemaName":"event","$editorUpdateModel":"event","$editorUpdateModelId":"event","$editorUpdateType":"event","$editorDeleteType":"event","$editorUpdateBehavior":"event","$editorDeleteBehavior":"event","$editorUpdateComponent":"event","$editorUpdateComponentId":"event","$editorDeleteComponent":"event","$appLogDebug":"event","$appLogInfo":"event","$appLogWarn":"event","$appLogError":"event","$appLoadSystem":"event","$designerSync":"event","$designerCreateBehavior":"event","$designerCreateComponent":"event","$designerCreateType":"event","$designerCreateSchema":"event","$designerCreateModel":"event","$designerDeleteSchema":"event","$designerDeleteModel":"event","$designerDeleteType":"event","$designerDeleteBehavior":"event","$designerDeleteComponent":"event","$designerUpdateComponent":"event","$designerUpdateModel":"event","$designerUpdateBehavior":"event","$runtimeCreateComponent":"event","$runtimeDeleteComponent":"event","$runtimeUpdateComponent":"event","send":"event"},"z1e592183e81ce64":{"_id":"z1e592183e81ce64","_name":"Router","_inherit":["_Component"],"start":"method","update":"method"},"t19b6b11ff31158d":{"_name":"ToolBarItem","html":"link","position":"property","type":"property","render":"method","click":"event","_id":"t19b6b11ff31158d","_inherit":["_Component"],"platform":"property"},"p1f6f51d9f111925":{"_name":"MenuAction","html":"link","position":"property","type":"property","hide":"method","show":"method","render":"method","_id":"p1f6f51d9f111925","_inherit":["_Component"]},"t14a79156a81862a":{"_name":"MenuHeader","html":"link","type":"property","hide":"method","show":"method","render":"method","_id":"t14a79156a81862a","_inherit":["_Component"]},"l1d113198721599d":{"_name":"MenuItem","html":"link","position":"property","type":"property","name":"property","platform":"property","render":"method","click":"event","_id":"l1d113198721599d","_inherit":["_Component"]},"f1092816b571e03c":{"_name":"Workspace","create":"method","load":"method","clear":"method","render":"method","_id":"f1092816b571e03c","_inherit":["_Component"]},"o1ead8184af1a83e":{"_name":"Designer","_inherit":["_Component"],"version":"property","runWindow":"property","debugWindow":"property","linkModel":"method","save":"method","saveCordova":"method","saveAs":"method","welcome":"method","open":"method","render":"event","isCordova":"method","isElectron":"method","updateCordovaContext":"method","runMessages":"method","installExtensions":"method","isMac":"method","addShortcuts":"method","_id":"o1ead8184af1a83e"}},"models":{"135c71078810af2":{"_id":"135c71078810af2","_name":"_Channel","$editorUpdateSchemaName":{"params":[{"name":"name","type":"string"},{"name":"id","type":"string"}]},"$designerSync":{},"$appLoadSystem":{"params":[{"name":"system","type":"object"}]},"$designerCreateBehavior":{"params":[{"name":"behavior","type":"object"}]},"$editorUpdateBehavior":{"params":[{"name":"id","type":"string"},{"name":"behavior","type":"object"}]},"$designerUpdateBehavior":{"params":[{"name":"id","type":"string"},{"name":"behavior","type":"object"}]},"$editorDeleteBehavior":{"params":[{"name":"id","type":"string"}]},"$designerDeleteBehavior":{"params":[{"name":"id","type":"string"}]},"$designerCreateComponent":{"params":[{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$editorUpdateComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$editorUpdateComponentId":{"params":[{"name":"oldId","type":"string"},{"name":"newId","type":"string"},{"name":"collection","type":"string"}]},"$designerUpdateComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$editorDeleteComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"}]},"$designerDeleteComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"}]},"$designerCreateType":{"params":[{"name":"id","type":"string"},{"name":"type","type":"object"}]},"$editorUpdateType":{"params":[{"name":"id","type":"string"},{"name":"type","type":"object"}]},"$editorDeleteType":{"params":[{"name":"id","type":"string"}]},"$designerCreateSchema":{"params":[{"name":"id","type":"string"},{"name":"schema","type":"object"}]},"$editorUpdateSchema":{"params":[{"name":"id","type":"string"},{"name":"schema","type":"object"}]},"$editorUpdateSchemaId":{"params":[{"name":"oldId","type":"string"},{"name":"newId","type":"string"}]},"$designerDeleteSchema":{"params":[{"name":"id","type":"string"}]},"$designerCreateModel":{"params":[{"name":"id","type":"string"},{"name":"model","type":"object"}]},"$editorUpdateModel":{"params":[{"name":"id","type":"string"},{"name":"model","type":"object"}]},"$designerUpdateModel":{"params":[{"name":"id","type":"string"},{"name":"model","type":"object"}]},"$editorUpdateModelId":{"params":[{"name":"oldId","type":"string"},{"name":"newId","type":"string"}]},"$designerDeleteModel":{"params":[{"name":"id","type":"string"}]},"$designerDeleteType":{"params":[{"name":"id","type":"string"}]},"$editorUpdateSystem":{"params":[{"name":"id","type":"string"},{"name":"system","type":"object"}]},"$appLogDebug":{"params":[{"name":"message","type":"string"}]},"$appLogInfo":{"params":[{"name":"message","type":"string"}]},"$appLogWarn":{"params":[{"name":"message","type":"string"}]},"$appLogError":{"params":[{"name":"message","type":"string"}]},"$runtimeCreateComponent":{"params":[{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$runtimeDeleteComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"}]},"$runtimeUpdateComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"},{"name":"field","type":"string"},{"name":"value","type":"any"}]},"send":{"params":[{"name":"message","type":"message"}]}},"c1b00612faf188cf":{"_id":"c1b00612faf188cf","_name":"Router","start":{},"update":{}},"u1f4c7177bb1a459":{"_name":"ToolBarItem","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"render":{},"click":{},"_id":"u1f4c7177bb1a459","platform":{"type":"platform","readOnly":false,"mandatory":false,"default":"all"}},"w124ac16b591df57":{"_name":"MenuAction","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"_id":"w124ac16b591df57"},"f13ebe1ad331b263":{"_name":"MenuHeader","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"_id":"f13ebe1ad331b263"},"q129be1c61b18285":{"_id":"q129be1c61b18285","_name":"Designer","version":{"type":"string","readOnly":false,"mandatory":false,"default":"5.0.0"},"runWindow":{"type":"object","readOnly":false,"mandatory":false,"default":null},"debugWindow":{"type":"object","readOnly":false,"mandatory":false,"default":null},"linkModel":{"params":[{"name":"source","type":"string","mandatory":false,"default":""},{"name":"target","type":"string","mandatory":false,"default":""}]},"save":{},"saveCordova":{},"saveAs":{"params":[{"name":"data","type":"object","mandatory":false,"default":{}},{"name":"fileName","type":"string","mandatory":false,"default":""}]},"welcome":{},"open":{"params":[{"name":"url","type":"string","mandatory":false,"default":""},{"name":"target","type":"string","mandatory":false,"default":""},{"name":"isExt","type":"boolean","mandatory":false,"default":false}]},"render":{},"isCordova":{"result":"boolean"},"isElectron":{"result":"boolean"},"updateCordovaContext":{},"runMessages":{"params":[{"name":"messages","type":"array","mandatory":true,"default":[]}]},"installExtensions":{},"isMac":{"result":"boolean"},"addShortcuts":{}},"u1f9a01abe31b3bf":{"_id":"u1f9a01abe31b3bf","_name":"MenuItem","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"name":{"type":"string","readOnly":false,"mandatory":false,"default":""},"platform":{"type":"platform","readOnly":false,"mandatory":false,"default":"all"},"render":{},"click":{}},"v1435e1809e10be7":{"_id":"v1435e1809e10be7","_name":"Workspace","create":{},"load":{},"clear":{},"render":{}}},"behaviors":{"u1148712dc118eea":{"_id":"u1148712dc118eea","component":"sdbc51200e11z03","state":"click","action":"function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').copy(); \n  this.require('message').success('The text has been copied to the clipboard.');\n}"},"l1c2d911d83104a2":{"_id":"l1c2d911d83104a2","component":"sdbc51200e11z04","state":"click","action":"function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').paste(); \n}"},"a194c816a861f58c":{"_id":"a194c816a861f58c","component":"sdbc51200e11z02","state":"click","action":"function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').selectAll(); \n}"},"u1ad2a18ae7197d7":{"_id":"u1ad2a18ae7197d7","component":"sdbc51200e11z01","state":"click","action":"function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').redo(); \n}"},"m12f44111501c769":{"_id":"m12f44111501c769","component":"sdbc51200e11z00","state":"click","action":"function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').undo(); \n}"},"g1fcf31e19f15b6f":{"_id":"g1fcf31e19f15b6f","component":"1dbc51200e11z10","state":"click","action":"function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://designfirst.io/systemdesigner/documentation/docs/create-a-system.html', '_blank', true); \n}"},"j190d61dacc1fb05":{"_id":"j190d61dacc1fb05","component":"1dbc51200e116e4","state":"click","action":"function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').save();\n}"},"c1076f15499194ba":{"_id":"c1076f15499194ba","component":"13a291c27f16311","state":"click","action":"function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"},"a1b1d011fe31872d":{"_id":"a1b1d011fe31872d","component":"v1c4421834f1995a","state":"start","action":"function start() { \n  var storeConfig = '';\n  \n  // set locale\n  storeConfig = this.require('storage').get('system-designer-config');\n\n  if (!storeConfig) {\n    storeConfig = {};\n  }\n\n  if (typeof storeConfig.language === 'undefined') {\n    storeConfig.language = 'en-US';\n    this.require('storage').set('system-designer-config', storeConfig);\n  } else {\n    this.require('i18n').locale(storeConfig.language);\n  }\n  \n  this.require('designer').render();\n}","useCoreAPI":false,"core":false},"z1b2ed1f26c196e0":{"_id":"z1b2ed1f26c196e0","component":"MenuItem","state":"click","action":"function click() { \n  this.require('state').menu(this.name());\n}","useCoreAPI":false,"core":false},"p1e0b1155ea1f248":{"_id":"p1e0b1155ea1f248","component":"1f1781882618115","state":"click","action":"function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().name, 1);\n}","useCoreAPI":false,"core":false},"r1edbf1004f16a37":{"_id":"r1edbf1004f16a37","component":"1f1781882618114","state":"click","action":"function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'description';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().description, 1);\n}","useCoreAPI":false,"core":false},"o1626e18db0119a9":{"_id":"o1626e18db0119a9","component":"1f1781882618116","state":"click","action":"function click() { \n  var editor = this.require('editor'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'version';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().version, 1);\n}","useCoreAPI":false,"core":false},"o1363f106aa19961":{"_id":"o1363f106aa19961","component":"1f1781882618102","state":"click","action":"function click() { \n  var editor = this.require('editor'),\n      data = this.require('store').data(),\n      extra = this.require('store').extra();\n \n  if (extra && extra.context && editor.getValue().indexOf('{') !== 0) {\n    data[extra.context] = editor.getValue();\n    this.require('store').data(data);\n  }\n  \n  editor.setEditor('json', JSON.stringify(data, null, '\\t'), 2);\n}","useCoreAPI":false,"core":false},"n1a54b1da681f33e":{"_id":"n1a54b1da681f33e","component":"Workspace","state":"render","action":"function render() {\n  var Editor = null,\n    editor = null,\n    designer = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'system',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'text/x-textile',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'system',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n  \n  editor.render();\n}","useCoreAPI":false,"core":false},"g1e35b1112512787":{"_id":"g1e35b1112512787","component":"Designer","state":"render","action":"function render() {\n  var id = '',\n    system = null,\n    extra = {};\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  \n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  \n  // set editor\n  system = this.require('storage').get(id);\n  \n  this.require('factory').create(system);\n  \n  // extensions\n  this.installExtensions();\n\n  this.require('store').uuid(id);\n  this.require('store').data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  this.require('editor').initValue(this.require('store').data().name, 1);\n  \n  this.require('router').update();\n  \n  // shorcuts\n  this.addShortcuts();\n}","useCoreAPI":false,"core":false},"f199b4184ea1639d":{"_id":"f199b4184ea1639d","component":"Designer","state":"save","action":"function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data(),\n    systems = this.require('storage').get('system-designer-systems');\n    \n  if (systems && systems.systems.length === 0) {\n    this.require('message').danger('Can not save: there is no system.');\n    return;\n  }\n\n  switch (this.require('state').menu()) {\n    case 'name':\n      val = val.trim();\n      val = val.replace(/\\s|\\t/gi, '-')\n      .replace(/[\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '')\n      .replace(/\\r|\\n/gi,'');\n      this.require('editor').setValue(val);\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val.trim();\n      break;\n    case 'version':\n      store.version = val.trim();\n      break;\n    case 'bundle':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  this.require('store').data(store);\n\n  this.require('channel').$editorUpdateSystem(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}","useCoreAPI":false,"core":false},"x1645919b431ab61":{"_id":"x1645919b431ab61","component":"Router","state":"update","action":"function update() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1].split('?')[0];\n    menubar[i].href = '#' + this.require('store').uuid() + '#' + context;\n  }\n}","useCoreAPI":false,"core":false},"g1c050192531348c":{"_id":"g1c050192531348c","component":"_Channel","state":"send","action":"function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state');\n\n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer.replace(':8888', '') + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\t\n}","useCoreAPI":false,"core":false},"k1473f1cbe41b194":{"_id":"k1473f1cbe41b194","component":"_Channel","state":"init","action":"function init(conf) { \n  this.require('_Storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}","useCoreAPI":false,"core":false},"w1aa16102d712d94":{"_id":"w1aa16102d712d94","component":"x1cfa910cac1f8da","state":"click","action":"function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}","useCoreAPI":false,"core":false},"l11b92128ce147e8":{"_id":"l11b92128ce147e8","component":"k13bb31b8681ba70","state":"click","action":"function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}","useCoreAPI":false,"core":false},"p1e6c41a4bc1b4d3":{"_id":"p1e6c41a4bc1b4d3","component":"Designer","state":"addShortcuts","action":"function addShorcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}","useCoreAPI":false,"core":false}},"types":{},"components":{"Router":{"router":{"_id":"router"}},"ToolBarItem":{"sdbc51200e11z03":{"_id":"sdbc51200e11z03","html":"toolbar-item-copy.html","position":50,"type":"system","platform":"electron"},"sdbc51200e11z04":{"_id":"sdbc51200e11z04","html":"toolbar-item-paste.html","position":60,"type":"system","platform":"electron"},"13a291c27f16311":{"_id":"13a291c27f16311","html":"toolbar-item-copyright.html","position":90,"type":"system","platform":"all"},"1dbc51200e116e4":{"_id":"1dbc51200e116e4","html":"toolbar-item-save.html","position":10,"type":"system","platform":"all"},"1dbc51200e11z10":{"_id":"1dbc51200e11z10","html":"toolbar-item-help.html","position":80,"type":"system","platform":"all"},"sdbc51200e11z00":{"_id":"sdbc51200e11z00","html":"toolbar-item-undo.html","position":20,"type":"system","platform":"all"},"sdbc51200e11z01":{"_id":"sdbc51200e11z01","html":"toolbar-item-redo.html","position":30,"type":"system","platform":"all"},"sdbc51200e11z02":{"_id":"sdbc51200e11z02","html":"toolbar-item-select-all.html","position":40,"type":"system","platform":"electron"},"x1cfa910cac1f8da":{"_id":"x1cfa910cac1f8da","html":"toolbar-item-command.html","platform":"web","position":75,"type":"system"},"k13bb31b8681ba70":{"_id":"k13bb31b8681ba70","html":"toolbar-item-command.html","platform":"electron","position":75,"type":"system"}},"MenuItem":{"1f1781882618102":{"_id":"1f1781882618102","name":"bundle","html":"menu-item-bundle.html","position":50,"type":"system","platform":"all"},"1f1781882618114":{"_id":"1f1781882618114","name":"description","html":"menu-item-description.html","position":30,"type":"system","platform":"all"},"1f1781882618115":{"_id":"1f1781882618115","name":"name","html":"menu-item-name.html","position":10,"type":"system","platform":"all"},"1f1781882618116":{"_id":"1f1781882618116","name":"version","html":"menu-item-version.html","position":20,"type":"system","platform":"all"}},"Designer":{},"MenuAction":{"1f8571164c179be":{"_id":"1f8571164c179be","html":"menu-action-version.html","position":10,"type":"system"}},"MenuHeader":{"1fb101b99813a13":{"_id":"1fb101b99813a13","html":"menu-header-system.html","type":"system"}}},"_id":"v1c4421834f1995a"}
+{
+  "name": "editor-system",
+  "master": true,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "104ad1f48518376": {
+      "_id": "104ad1f48518376",
+      "_name": "_Channel",
+      "_inherit": ["_Component"],
+      "$editorUpdateSystem": "event",
+      "$editorUpdateSchema": "event",
+      "$editorUpdateSchemaId": "event",
+      "$editorUpdateSchemaName": "event",
+      "$editorUpdateModel": "event",
+      "$editorUpdateModelId": "event",
+      "$editorUpdateType": "event",
+      "$editorDeleteType": "event",
+      "$editorUpdateBehavior": "event",
+      "$editorDeleteBehavior": "event",
+      "$editorUpdateComponent": "event",
+      "$editorUpdateComponentId": "event",
+      "$editorDeleteComponent": "event",
+      "$appLogDebug": "event",
+      "$appLogInfo": "event",
+      "$appLogWarn": "event",
+      "$appLogError": "event",
+      "$appLoadSystem": "event",
+      "$designerSync": "event",
+      "$designerCreateBehavior": "event",
+      "$designerCreateComponent": "event",
+      "$designerCreateType": "event",
+      "$designerCreateSchema": "event",
+      "$designerCreateModel": "event",
+      "$designerDeleteSchema": "event",
+      "$designerDeleteModel": "event",
+      "$designerDeleteType": "event",
+      "$designerDeleteBehavior": "event",
+      "$designerDeleteComponent": "event",
+      "$designerUpdateComponent": "event",
+      "$designerUpdateModel": "event",
+      "$designerUpdateBehavior": "event",
+      "$runtimeCreateComponent": "event",
+      "$runtimeDeleteComponent": "event",
+      "$runtimeUpdateComponent": "event",
+      "send": "event"
+    },
+    "z1e592183e81ce64": {
+      "_id": "z1e592183e81ce64",
+      "_name": "Router",
+      "_inherit": ["_Component"],
+      "start": "method",
+      "update": "method"
+    },
+    "t19b6b11ff31158d": {
+      "_name": "ToolBarItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "render": "method",
+      "click": "event",
+      "_id": "t19b6b11ff31158d",
+      "_inherit": ["_Component"],
+      "platform": "property"
+    },
+    "p1f6f51d9f111925": {
+      "_name": "MenuAction",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "p1f6f51d9f111925",
+      "_inherit": ["_Component"]
+    },
+    "t14a79156a81862a": {
+      "_name": "MenuHeader",
+      "html": "link",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "t14a79156a81862a",
+      "_inherit": ["_Component"]
+    },
+    "l1d113198721599d": {
+      "_name": "MenuItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "platform": "property",
+      "render": "method",
+      "click": "event",
+      "_id": "l1d113198721599d",
+      "_inherit": ["_Component"]
+    },
+    "f1092816b571e03c": {
+      "_name": "Workspace",
+      "create": "method",
+      "load": "method",
+      "clear": "method",
+      "render": "method",
+      "_id": "f1092816b571e03c",
+      "_inherit": ["_Component"]
+    },
+    "o1ead8184af1a83e": {
+      "_name": "Designer",
+      "_inherit": ["_Component"],
+      "version": "property",
+      "runWindow": "property",
+      "debugWindow": "property",
+      "linkModel": "method",
+      "save": "method",
+      "saveCordova": "method",
+      "saveAs": "method",
+      "welcome": "method",
+      "open": "method",
+      "render": "event",
+      "isCordova": "method",
+      "isElectron": "method",
+      "updateCordovaContext": "method",
+      "runMessages": "method",
+      "installExtensions": "method",
+      "isMac": "method",
+      "addShortcuts": "method",
+      "_id": "o1ead8184af1a83e"
+    }
+  },
+  "models": {
+    "135c71078810af2": {
+      "_id": "135c71078810af2",
+      "_name": "_Channel",
+      "$editorUpdateSchemaName": {
+        "params": [
+          { "name": "name", "type": "string" },
+          { "name": "id", "type": "string" }
+        ]
+      },
+      "$designerSync": {},
+      "$appLoadSystem": { "params": [{ "name": "system", "type": "object" }] },
+      "$designerCreateBehavior": {
+        "params": [{ "name": "behavior", "type": "object" }]
+      },
+      "$editorUpdateBehavior": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "behavior", "type": "object" }
+        ]
+      },
+      "$designerUpdateBehavior": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "behavior", "type": "object" }
+        ]
+      },
+      "$editorDeleteBehavior": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerDeleteBehavior": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerCreateComponent": {
+        "params": [
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$editorUpdateComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$editorUpdateComponentId": {
+        "params": [
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$designerUpdateComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$editorDeleteComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$designerDeleteComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$designerCreateType": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "type", "type": "object" }
+        ]
+      },
+      "$editorUpdateType": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "type", "type": "object" }
+        ]
+      },
+      "$editorDeleteType": { "params": [{ "name": "id", "type": "string" }] },
+      "$designerCreateSchema": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "schema", "type": "object" }
+        ]
+      },
+      "$editorUpdateSchema": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "schema", "type": "object" }
+        ]
+      },
+      "$editorUpdateSchemaId": {
+        "params": [
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" }
+        ]
+      },
+      "$designerDeleteSchema": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerCreateModel": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
+        ]
+      },
+      "$editorUpdateModel": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
+        ]
+      },
+      "$designerUpdateModel": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
+        ]
+      },
+      "$editorUpdateModelId": {
+        "params": [
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" }
+        ]
+      },
+      "$designerDeleteModel": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerDeleteType": { "params": [{ "name": "id", "type": "string" }] },
+      "$editorUpdateSystem": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "system", "type": "object" }
+        ]
+      },
+      "$appLogDebug": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogInfo": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogWarn": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogError": { "params": [{ "name": "message", "type": "string" }] },
+      "$runtimeCreateComponent": {
+        "params": [
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$runtimeDeleteComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$runtimeUpdateComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "field", "type": "string" },
+          { "name": "value", "type": "any" }
+        ]
+      },
+      "send": { "params": [{ "name": "message", "type": "message" }] }
+    },
+    "c1b00612faf188cf": {
+      "_id": "c1b00612faf188cf",
+      "_name": "Router",
+      "start": {},
+      "update": {}
+    },
+    "u1f4c7177bb1a459": {
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "render": {},
+      "click": {},
+      "_id": "u1f4c7177bb1a459",
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
+    },
+    "w124ac16b591df57": {
+      "_name": "MenuAction",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "w124ac16b591df57"
+    },
+    "f13ebe1ad331b263": {
+      "_name": "MenuHeader",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "f13ebe1ad331b263"
+    },
+    "q129be1c61b18285": {
+      "_id": "q129be1c61b18285",
+      "_name": "Designer",
+      "version": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "5.0.0"
+      },
+      "runWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "debugWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "linkModel": {
+        "params": [
+          {
+            "name": "source",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "target",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "save": {},
+      "saveCordova": {},
+      "saveAs": {
+        "params": [
+          {
+            "name": "data",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          },
+          {
+            "name": "fileName",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "welcome": {},
+      "open": {
+        "params": [
+          {
+            "name": "url",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "target",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "isExt",
+            "type": "boolean",
+            "mandatory": false,
+            "default": false
+          }
+        ]
+      },
+      "render": {},
+      "isCordova": { "result": "boolean" },
+      "isElectron": { "result": "boolean" },
+      "updateCordovaContext": {},
+      "runMessages": {
+        "params": [
+          {
+            "name": "messages",
+            "type": "array",
+            "mandatory": true,
+            "default": []
+          }
+        ]
+      },
+      "installExtensions": {},
+      "isMac": { "result": "boolean" },
+      "addShortcuts": {}
+    },
+    "u1f9a01abe31b3bf": {
+      "_id": "u1f9a01abe31b3bf",
+      "_name": "MenuItem",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      },
+      "render": {},
+      "click": {}
+    },
+    "v1435e1809e10be7": {
+      "_id": "v1435e1809e10be7",
+      "_name": "Workspace",
+      "create": {},
+      "load": {},
+      "clear": {},
+      "render": {}
+    }
+  },
+  "behaviors": {
+    "u1148712dc118eea": {
+      "_id": "u1148712dc118eea",
+      "component": "sdbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').copy(); \n  this.require('message').success('The text has been copied to the clipboard.');\n}"
+    },
+    "l1c2d911d83104a2": {
+      "_id": "l1c2d911d83104a2",
+      "component": "sdbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').paste(); \n}"
+    },
+    "a194c816a861f58c": {
+      "_id": "a194c816a861f58c",
+      "component": "sdbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').selectAll(); \n}"
+    },
+    "u1ad2a18ae7197d7": {
+      "_id": "u1ad2a18ae7197d7",
+      "component": "sdbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').redo(); \n}"
+    },
+    "m12f44111501c769": {
+      "_id": "m12f44111501c769",
+      "component": "sdbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').undo(); \n}"
+    },
+    "g1fcf31e19f15b6f": {
+      "_id": "g1fcf31e19f15b6f",
+      "component": "1dbc51200e11z10",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://designfirst.io/systemdesigner/documentation/docs/create-a-system.html', '_blank', true); \n}"
+    },
+    "j190d61dacc1fb05": {
+      "_id": "j190d61dacc1fb05",
+      "component": "1dbc51200e116e4",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').save();\n}"
+    },
+    "c1076f15499194ba": {
+      "_id": "c1076f15499194ba",
+      "component": "13a291c27f16311",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n\n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+    },
+    "a1b1d011fe31872d": {
+      "_id": "a1b1d011fe31872d",
+      "component": "v1c4421834f1995a",
+      "state": "start",
+      "action": "function start() { \n  var storeConfig = '';\n  \n  // set locale\n  storeConfig = this.require('storage').get('system-designer-config');\n\n  if (!storeConfig) {\n    storeConfig = {};\n  }\n\n  if (typeof storeConfig.language === 'undefined') {\n    storeConfig.language = 'en-US';\n    this.require('storage').set('system-designer-config', storeConfig);\n  } else {\n    this.require('i18n').locale(storeConfig.language);\n  }\n  \n  this.require('designer').render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z1b2ed1f26c196e0": {
+      "_id": "z1b2ed1f26c196e0",
+      "component": "MenuItem",
+      "state": "click",
+      "action": "function click() { \n  this.require('state').menu(this.name());\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "p1e0b1155ea1f248": {
+      "_id": "p1e0b1155ea1f248",
+      "component": "1f1781882618115",
+      "state": "click",
+      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().name, 1);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "r1edbf1004f16a37": {
+      "_id": "r1edbf1004f16a37",
+      "component": "1f1781882618114",
+      "state": "click",
+      "action": "function click() { \n  var editor = this.require('editor'),\n    designer = this.require('designer'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'description';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().description, 1);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "o1626e18db0119a9": {
+      "_id": "o1626e18db0119a9",
+      "component": "1f1781882618116",
+      "state": "click",
+      "action": "function click() { \n  var editor = this.require('editor'),\n    extra = {},\n    data = {};\n\n  if (editor.getValue().indexOf('{') === 0) {\n    this.require('store').data(JSON.parse(editor.getValue()));\n  } else {\n    extra = this.require('store').extra();\n    if (extra && extra.context) {\n      data = this.require('store').data();\n      data[extra.context] = editor.getValue();\n      this.require('store').data(data);\n    }\n  }\n\n  extra = {};\n  extra.context = 'version';\n  this.require('store').extra(extra);\n\n  editor.setEditor('text', this.require('store').data().version, 1);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "o1363f106aa19961": {
+      "_id": "o1363f106aa19961",
+      "component": "1f1781882618102",
+      "state": "click",
+      "action": "function click() { \n  var editor = this.require('editor'),\n      data = this.require('store').data(),\n      extra = this.require('store').extra();\n \n  if (extra && extra.context && editor.getValue().indexOf('{') !== 0) {\n    data[extra.context] = editor.getValue();\n    this.require('store').data(data);\n  }\n  \n  editor.setEditor('json', JSON.stringify(data, null, '\\t'), 2);\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "n1a54b1da681f33e": {
+      "_id": "n1a54b1da681f33e",
+      "component": "Workspace",
+      "state": "render",
+      "action": "function render() {\n  var Editor = null,\n    editor = null,\n    designer = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'system',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'text/x-textile',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'system',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n  \n  editor.render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "g1e35b1112512787": {
+      "_id": "g1e35b1112512787",
+      "component": "Designer",
+      "state": "render",
+      "action": "function render() {\n  var id = '',\n    system = null,\n    extra = {};\n  \n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n  \n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  \n  // set editor\n  system = this.require('storage').get(id);\n  \n  this.require('factory').create(system);\n  \n  // extensions\n  this.installExtensions();\n\n  this.require('store').uuid(id);\n  this.require('store').data(system);\n\n  document.title = 'system ' + system.name;\n\n  extra.context = 'name';\n  this.require('store').extra(extra);\n\n  this.require('editor').initValue(this.require('store').data().name, 1);\n  \n  this.require('router').update();\n  \n  // shorcuts\n  this.addShortcuts();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f199b4184ea1639d": {
+      "_id": "f199b4184ea1639d",
+      "component": "Designer",
+      "state": "save",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    store = this.require('store').data(),\n    systems = this.require('storage').get('system-designer-systems');\n    \n  if (systems && systems.systems.length === 0) {\n    this.require('message').danger('Can not save: there is no system.');\n    return;\n  }\n\n  switch (this.require('state').menu()) {\n    case 'name':\n      val = val.trim();\n      val = val.replace(/\\s|\\t/gi, '-')\n      .replace(/[\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '')\n      .replace(/\\r|\\n/gi,'');\n      this.require('editor').setValue(val);\n      store.name = val;\n      document.title = 'system ' + store.name;\n      break;\n    case 'description':\n      store.description = val.trim();\n      break;\n    case 'version':\n      store.version = val.trim();\n      break;\n    case 'bundle':\n      store = JSON.parse(val);\n      document.title = 'system ' + store.name;\n      break;\n    default:\n      break;\n  }\n\n  this.require('store').data(store);\n\n  this.require('channel').$editorUpdateSystem(this.require('store').uuid(), this.require('store').data());\n  this.require('message').clean();\n  this.require('message').success('System saved.');\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "x1645919b431ab61": {
+      "_id": "x1645919b431ab61",
+      "component": "Router",
+      "state": "update",
+      "action": "function update() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1].split('?')[0];\n    menubar[i].href = '#' + this.require('store').uuid() + '#' + context;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "g1c050192531348c": {
+      "_id": "g1c050192531348c",
+      "component": "_Channel",
+      "state": "send",
+      "action": "function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state');\n\n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer.replace(':8888', '') + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "k1473f1cbe41b194": {
+      "_id": "k1473f1cbe41b194",
+      "component": "_Channel",
+      "state": "init",
+      "action": "function init(conf) { \n  this.require('_Storage').on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "w1aa16102d712d94": {
+      "_id": "w1aa16102d712d94",
+      "component": "x1cfa910cac1f8da",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "l11b92128ce147e8": {
+      "_id": "l11b92128ce147e8",
+      "component": "k13bb31b8681ba70",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "p1e6c41a4bc1b4d3": {
+      "_id": "p1e6c41a4bc1b4d3",
+      "component": "Designer",
+      "state": "addShortcuts",
+      "action": "function addShorcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "Router": { "router": { "_id": "router" } },
+    "ToolBarItem": {
+      "sdbc51200e11z03": {
+        "_id": "sdbc51200e11z03",
+        "html": "toolbar-item-copy.html",
+        "position": 50,
+        "type": "system",
+        "platform": "electron"
+      },
+      "sdbc51200e11z04": {
+        "_id": "sdbc51200e11z04",
+        "html": "toolbar-item-paste.html",
+        "position": 60,
+        "type": "system",
+        "platform": "electron"
+      },
+      "13a291c27f16311": {
+        "_id": "13a291c27f16311",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "system",
+        "platform": "all"
+      },
+      "1dbc51200e116e4": {
+        "_id": "1dbc51200e116e4",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "system",
+        "platform": "all"
+      },
+      "1dbc51200e11z10": {
+        "_id": "1dbc51200e11z10",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "system",
+        "platform": "all"
+      },
+      "sdbc51200e11z00": {
+        "_id": "sdbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "system",
+        "platform": "all"
+      },
+      "sdbc51200e11z01": {
+        "_id": "sdbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "system",
+        "platform": "all"
+      },
+      "sdbc51200e11z02": {
+        "_id": "sdbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "system",
+        "platform": "electron"
+      },
+      "x1cfa910cac1f8da": {
+        "_id": "x1cfa910cac1f8da",
+        "html": "toolbar-item-command.html",
+        "platform": "web",
+        "position": 75,
+        "type": "system"
+      },
+      "k13bb31b8681ba70": {
+        "_id": "k13bb31b8681ba70",
+        "html": "toolbar-item-command.html",
+        "platform": "electron",
+        "position": 75,
+        "type": "system"
+      }
+    },
+    "MenuItem": {
+      "1f1781882618102": {
+        "_id": "1f1781882618102",
+        "name": "bundle",
+        "html": "menu-item-bundle.html",
+        "position": 50,
+        "type": "system",
+        "platform": "all"
+      },
+      "1f1781882618114": {
+        "_id": "1f1781882618114",
+        "name": "description",
+        "html": "menu-item-description.html",
+        "position": 30,
+        "type": "system",
+        "platform": "all"
+      },
+      "1f1781882618115": {
+        "_id": "1f1781882618115",
+        "name": "name",
+        "html": "menu-item-name.html",
+        "position": 10,
+        "type": "system",
+        "platform": "all"
+      },
+      "1f1781882618116": {
+        "_id": "1f1781882618116",
+        "name": "version",
+        "html": "menu-item-version.html",
+        "position": 20,
+        "type": "system",
+        "platform": "all"
+      }
+    },
+    "Designer": {},
+    "MenuAction": {
+      "1f8571164c179be": {
+        "_id": "1f8571164c179be",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "system"
+      }
+    },
+    "MenuHeader": {
+      "1fb101b99813a13": {
+        "_id": "1fb101b99813a13",
+        "html": "menu-header-system.html",
+        "type": "system"
+      }
+    }
+  },
+  "_id": "v1c4421834f1995a"
+}

@@ -1,1 +1,753 @@
-{"name":"editor-model","master":true,"version":"1.0.0","description":"","schemas":{"104ad1f48518376":{"_id":"104ad1f48518376","_name":"_Channel","_inherit":["_Component"],"$editorUpdateSystem":"event","$editorUpdateSchema":"event","$editorUpdateSchemaId":"event","$editorUpdateSchemaName":"event","$editorUpdateModel":"event","$editorUpdateModelId":"event","$editorUpdateType":"event","$editorDeleteType":"event","$editorUpdateBehavior":"event","$editorDeleteBehavior":"event","$editorUpdateComponent":"event","$editorUpdateComponentId":"event","$editorDeleteComponent":"event","$appLogDebug":"event","$appLogInfo":"event","$appLogWarn":"event","$appLogError":"event","$appLoadSystem":"event","$designerSync":"event","$designerCreateBehavior":"event","$designerCreateComponent":"event","$designerCreateType":"event","$designerCreateSchema":"event","$designerCreateModel":"event","$designerDeleteSchema":"event","$designerDeleteModel":"event","$designerDeleteType":"event","$designerDeleteBehavior":"event","$designerDeleteComponent":"event","$designerUpdateComponent":"event","$designerUpdateModel":"event","$designerUpdateBehavior":"event","$runtimeCreateComponent":"event","$runtimeDeleteComponent":"event","$runtimeUpdateComponent":"event","send":"event"},"z1e592183e81ce64":{"_id":"z1e592183e81ce64","_name":"Router","_inherit":["_Component"],"start":"method","update":"method"},"t19b6b11ff31158d":{"_name":"ToolBarItem","html":"link","position":"property","type":"property","render":"method","click":"event","_id":"t19b6b11ff31158d","_inherit":["_Component"],"platform":"property"},"p1f6f51d9f111925":{"_name":"MenuAction","html":"link","position":"property","type":"property","hide":"method","show":"method","render":"method","_id":"p1f6f51d9f111925","_inherit":["_Component"]},"t14a79156a81862a":{"_name":"MenuHeader","html":"link","type":"property","hide":"method","show":"method","render":"method","_id":"t14a79156a81862a","_inherit":["_Component"]},"l1d113198721599d":{"_name":"MenuItem","html":"link","position":"property","type":"property","name":"property","platform":"property","render":"method","click":"event","_id":"l1d113198721599d","_inherit":["_Component"]},"f1092816b571e03c":{"_name":"Workspace","create":"method","load":"method","clear":"method","refresh":"method","render":"method","_id":"f1092816b571e03c","_inherit":["_Component"]},"o1ead8184af1a83e":{"_name":"Designer","_inherit":["_Component"],"version":"property","runWindow":"property","debugWindow":"property","linkModel":"method","save":"method","saveCordova":"method","saveAs":"method","welcome":"method","open":"method","render":"event","isCordova":"method","isElectron":"method","updateCordovaContext":"method","runMessages":"method","installExtensions":"method","isMac":"method","addShortcuts":"method","_id":"o1ead8184af1a83e"}},"models":{"135c71078810af2":{"_id":"135c71078810af2","_name":"_Channel","$editorUpdateSchemaName":{"params":[{"name":"name","type":"string"},{"name":"id","type":"string"}]},"$designerSync":{},"$appLoadSystem":{"params":[{"name":"system","type":"object"}]},"$designerCreateBehavior":{"params":[{"name":"behavior","type":"object"}]},"$editorUpdateBehavior":{"params":[{"name":"id","type":"string"},{"name":"behavior","type":"object"}]},"$designerUpdateBehavior":{"params":[{"name":"id","type":"string"},{"name":"behavior","type":"object"}]},"$editorDeleteBehavior":{"params":[{"name":"id","type":"string"}]},"$designerDeleteBehavior":{"params":[{"name":"id","type":"string"}]},"$designerCreateComponent":{"params":[{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$editorUpdateComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$editorUpdateComponentId":{"params":[{"name":"oldId","type":"string"},{"name":"newId","type":"string"},{"name":"collection","type":"string"}]},"$designerUpdateComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$editorDeleteComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"}]},"$designerDeleteComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"}]},"$designerCreateType":{"params":[{"name":"id","type":"string"},{"name":"type","type":"object"}]},"$editorUpdateType":{"params":[{"name":"id","type":"string"},{"name":"type","type":"object"}]},"$editorDeleteType":{"params":[{"name":"id","type":"string"}]},"$designerCreateSchema":{"params":[{"name":"id","type":"string"},{"name":"schema","type":"object"}]},"$editorUpdateSchema":{"params":[{"name":"id","type":"string"},{"name":"schema","type":"object"}]},"$editorUpdateSchemaId":{"params":[{"name":"oldId","type":"string"},{"name":"newId","type":"string"}]},"$designerDeleteSchema":{"params":[{"name":"id","type":"string"}]},"$designerCreateModel":{"params":[{"name":"id","type":"string"},{"name":"model","type":"object"}]},"$editorUpdateModel":{"params":[{"name":"id","type":"string"},{"name":"model","type":"object"}]},"$designerUpdateModel":{"params":[{"name":"id","type":"string"},{"name":"model","type":"object"}]},"$editorUpdateModelId":{"params":[{"name":"oldId","type":"string"},{"name":"newId","type":"string"}]},"$designerDeleteModel":{"params":[{"name":"id","type":"string"}]},"$designerDeleteType":{"params":[{"name":"id","type":"string"}]},"$editorUpdateSystem":{"params":[{"name":"id","type":"string"},{"name":"system","type":"object"}]},"$appLogDebug":{"params":[{"name":"message","type":"string"}]},"$appLogInfo":{"params":[{"name":"message","type":"string"}]},"$appLogWarn":{"params":[{"name":"message","type":"string"}]},"$appLogError":{"params":[{"name":"message","type":"string"}]},"$runtimeCreateComponent":{"params":[{"name":"collection","type":"string"},{"name":"component","type":"object"}]},"$runtimeDeleteComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"}]},"$runtimeUpdateComponent":{"params":[{"name":"id","type":"string"},{"name":"collection","type":"string"},{"name":"field","type":"string"},{"name":"value","type":"any"}]},"send":{"params":[{"name":"message","type":"message"}]}},"c1b00612faf188cf":{"_id":"c1b00612faf188cf","_name":"Router","start":{},"update":{}},"u1f4c7177bb1a459":{"_name":"ToolBarItem","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"render":{},"click":{},"_id":"u1f4c7177bb1a459","platform":{"type":"platform","readOnly":false,"mandatory":false,"default":"all"}},"w124ac16b591df57":{"_name":"MenuAction","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"_id":"w124ac16b591df57"},"f13ebe1ad331b263":{"_name":"MenuHeader","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"hide":{},"show":{},"render":{},"_id":"f13ebe1ad331b263"},"u1f9a01abe31b3bf":{"_id":"u1f9a01abe31b3bf","_name":"MenuItem","html":{"type":"HTML","readOnly":false,"mandatory":false,"default":""},"position":{"type":"number","readOnly":false,"mandatory":false,"default":0},"type":{"type":"editorType","readOnly":false,"mandatory":false,"default":"designer"},"name":{"type":"string","readOnly":false,"mandatory":false,"default":""},"platform":{"type":"platform","readOnly":false,"mandatory":false,"default":"all"},"render":{},"click":{}},"v1435e1809e10be7":{"_id":"v1435e1809e10be7","_name":"Workspace","create":{},"load":{},"clear":{},"render":{}},"q129be1c61b18285":{"_id":"q129be1c61b18285","_name":"Designer","version":{"type":"string","readOnly":false,"mandatory":false,"default":"5.0.0"},"runWindow":{"type":"object","readOnly":false,"mandatory":false,"default":null},"debugWindow":{"type":"object","readOnly":false,"mandatory":false,"default":null},"linkModel":{"params":[{"name":"source","type":"string","mandatory":false,"default":""},{"name":"target","type":"string","mandatory":false,"default":""}]},"save":{},"saveCordova":{},"saveAs":{"params":[{"name":"data","type":"object","mandatory":false,"default":{}},{"name":"fileName","type":"string","mandatory":false,"default":""}]},"welcome":{},"open":{"params":[{"name":"url","type":"string","mandatory":false,"default":""},{"name":"target","type":"string","mandatory":false,"default":""},{"name":"isExt","type":"boolean","mandatory":false,"default":false}]},"render":{},"isCordova":{"result":"boolean"},"isElectron":{"result":"boolean"},"updateCordovaContext":{},"runMessages":{"params":[{"name":"messages","type":"array","mandatory":true,"default":[]}]},"installExtensions":{},"isMac":{"result":"boolean"},"addShortcuts":{}}},"behaviors":{"t15f921e6a316234":{"_id":"t15f921e6a316234","component":"udbc51200e11z03","state":"click","action":"function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').copy(); \n  this.require('message').success('The text has been copied to the clipboard.');\n}"},"d10e191ee9813950":{"_id":"d10e191ee9813950","component":"udbc51200e11z04","state":"click","action":"function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').paste(); \n}"},"i1a1951779613207":{"_id":"i1a1951779613207","component":"udbc51200e11z02","state":"click","action":"function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').selectAll(); \n}"},"d1d8ee1ac3812186":{"_id":"d1d8ee1ac3812186","component":"udbc51200e11z01","state":"click","action":"function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').redo(); \n}"},"i15954170f111203":{"_id":"i15954170f111203","component":"udbc51200e11z00","state":"click","action":"function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').undo(); \n}"},"y1dbc0114c11c791":{"_id":"y1dbc0114c11c791","component":"1dbc51200e116e9","state":"click","action":"function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').save(); \n}"},"j1ac7610be61012b":{"_id":"j1ac7610be61012b","component":"1dbc51200e11615","state":"click","action":"function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://designfirst.io/systemdesigner/documentation/docs/edit-a-model.html', '_blank', true); \n}"},"g161d21f3a912625":{"_id":"g161d21f3a912625","component":"1dbc51200e11610","state":"click","action":"function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"},"d1802118f46183c0":{"_id":"d1802118f46183c0","component":"Workspace","state":"render","action":"function render() { \n  var Editor = null,\n    designer = null,\n    editor = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'model',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'application/json',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'model',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n  \n  editor.render();\n}","useCoreAPI":false,"core":false},"x1cd3e156f81600f":{"_id":"x1cd3e156f81600f","component":"Designer","state":"render","action":"function render() {\n  var systemId = '',\n    system = null,\n    sys = null,\n    id = '',\n    modelName = '',\n    modelGen = null;\n\n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1].split('?')[0]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  \n  // set system\n  system = this.require('storage').get(systemId);\n  sys = this.require('factory').create(system);\n  \n  // extensions\n  this.installExtensions();\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // set editor\n  system = this.require('storage').get(systemId);\n  model = system.models[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(model);\n\n  modelName = system.models[id]._name;\n  modelGen = this.require('factory').getGeneratedModel(modelName);\n  this.require('store').extra(modelGen);\n\n  document.title = 'model ' + model._name + ' · system ' + system.name;\n\n  this.require('editor').initValue(JSON.stringify(model, null, '\\t'), 2);\n\n  this.require('router').update();\n  \n  this.addShortcuts();\n}","useCoreAPI":false,"core":false},"s1bc6b11e9a13afd":{"_id":"s1bc6b11e9a13afd","component":"Designer","state":"save","action":"function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    message = this.require('message'),\n    model = null,\n    property = '',\n    modelGen = null,\n    hasError = false,\n    systems = this.require('storage').get('system-designer-systems');\n    \n  if (systems && systems.systems.length === 0) {\n    message.danger('Can not save your model: there is no system.');\n    return;\n  }\n  \n  try {\n    model = JSON.parse(val);\n  } catch (e) {\n    message.danger('Can not save your model: your model has an invalid structure.');\n    return;\n  }\n  \n  // _inherit check\n  if (typeof model._inherit !== 'undefined' && !Array.isArray(model._inherit)) {\n    message.danger('Invalid inheritance value: it must be an array.');\n    return;\n  }\n  \n  if (model._inherit && model._inherit.indexOf(model._name) !== -1) {\n    message.danger('Invalid inheritance value: you can not inherit from yourself.');\n    return;\n  }\n  \n  if (model._inherit && model._inherit.indexOf('') !== -1) {\n    message.danger('Invalid inheritance value: it can not be empty.');\n    return;\n  }\n\n  if (model._inherit) {\n    model._inherit.forEach(function (parent) {\n      if (parent.constructor.name !== 'String') {\n        hasError = true;\n      }\n    });\n    if (hasError) {\n      message.danger('Invalid inheritance value: it must be a string.');\n      return;\n    }\n  }\n\n  // _name check\n  if (typeof model._name === 'undefined') {\n    message.danger('The property \\'_name\\' is missing.');\n    return;\n  }\n  \n   if (model._name.constructor.name !== 'String') {\n    message.danger('The property \\'_name\\' must be a string.');\n    return;\n  }\n  \n  // clean name\n  model._name = model._name.replace(/\\s|\\t/gi, '_')\n    .replace(/[\\-\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '')\n    .replace(/\\r|\\n/gi,'');\n\n  // _id check\n  if (typeof model._id === 'undefined') {\n    message.danger('The property \\'_id\\' is missing.');\n    return;\n  }\n  \n  if (model._id.constructor.name !== 'String') {\n    message.danger('The property \\'_id\\' must be a string.');\n    return;\n  }\n\n  for (property in model) {\n    if (property.indexOf(' ') !== -1) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>Space is not authorized in the name of a property.');\n      return;\n    }\n    propVal = model[property];\n    if (typeof propVal === 'object' && !Array.isArray(propVal) && property.indexOf('_') === 0) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>A property name can not start with \\'_\\'.');\n      return;\n    }\n    if (property.indexOf('_') === 0) {\n      if (['_id', '_name', '_inherit', '_class', '_core', '_description'].indexOf(property) === -1) {\n        message.danger('Invalid value \\'' + property + '\\’.<br>Authorized values are: \\'_id\\', \\'_name\\', \\'_inherit\\', \\'_class\\', \\'_core\\' and \\'_description\\'.');\n        return;\n      }\n    }\n  }\n\n  modelGen = this.require('store').extra();\n  for (property in model) {\n    if (property.indexOf('_') !== 0 && typeof modelGen[property] === 'undefined') {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>\\'' + property + '\\’ must be defined in the schema.');\n      return;\n    }\n  }\n\n  if (this.require('store').data()._name === model._name) {\n    this.require('store').data(model);\n\n    // check if ID change\n    if (this.require('store').uuid() !== this.require('store').data()._id) {\n      this.require('channel').$editorUpdateModelId(this.require('store').uuid(), this.require('store').data()._id);\n      this.require('store').uuid(this.require('store').data()._id);\n    }\n\n    this.require('channel').$editorUpdateModel(this.require('store').uuid(), this.require('store').data());\n    message.success('Model saved.');\n  } else {\n    message.danger('You can not modify the name of a model.');\n  }\n}","useCoreAPI":false,"core":false},"z1b1ad1fdbb1a46a":{"_id":"z1b1ad1fdbb1a46a","component":"w1a78b16d7311831","state":"start","action":"function start() { \n  var storeConfig = '';\n  \n  // set locale\n  storeConfig = this.require('storage').get('system-designer-config');\n\n  if (!storeConfig) {\n    storeConfig = {};\n  }\n\n  if (typeof storeConfig.language === 'undefined') {\n    storeConfig.language = 'en-US';\n    this.require('storage').set('system-designer-config', storeConfig);\n  } else {\n    this.require('i18n').locale(storeConfig.language);\n  }\n  \n  this.require('designer').render();\n}","useCoreAPI":false,"core":false},"t12f1412dc71b53b":{"_id":"t12f1412dc71b53b","component":"Router","state":"update","action":"function update() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  id = decodeURIComponent(document.location.href.split('#')[1]);\n  collection = document.location.href.split('#')[2];\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + collection + '#' + context;\n  }\n}","useCoreAPI":false,"core":false},"q1db4d1ae7a19ae6":{"_id":"q1db4d1ae7a19ae6","component":"_Channel","state":"send","action":"function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state');\n\n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer.replace(':8888', '') + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\n}","useCoreAPI":false,"core":false},"m193c119f111fd88":{"_id":"m193c119f111fd88","component":"_Channel","state":"init","action":"function init(conf) { \n  this.require('_Storage').on('changed', function changed(obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}","useCoreAPI":false,"core":false},"s1a154168ce17fa9":{"_id":"s1a154168ce17fa9","component":"o1f40e168bd10174","state":"click","action":"function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}","useCoreAPI":false,"core":false},"c1e34c13e6b10bd9":{"_id":"c1e34c13e6b10bd9","component":"m1ff0113f491d841","state":"click","action":"function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}","useCoreAPI":false,"core":false},"f1c23c1dcb0122a3":{"_id":"f1c23c1dcb0122a3","component":"Designer","state":"addShortcuts","action":"function addShorcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}","useCoreAPI":false,"core":false}},"types":{},"components":{"Router":{"router":{"_id":"router"}},"ToolBarItem":{"udbc51200e11z03":{"_id":"udbc51200e11z03","html":"toolbar-item-copy.html","position":50,"type":"model","platform":"electron"},"udbc51200e11z04":{"_id":"udbc51200e11z04","html":"toolbar-item-paste.html","position":60,"type":"model","platform":"electron"},"1dbc51200e11610":{"_id":"1dbc51200e11610","html":"toolbar-item-copyright.html","position":90,"type":"model","platform":"all"},"1dbc51200e11615":{"_id":"1dbc51200e11615","html":"toolbar-item-help.html","position":80,"type":"model","platform":"all"},"1dbc51200e116e9":{"_id":"1dbc51200e116e9","html":"toolbar-item-save.html","position":10,"type":"model","platform":"all"},"udbc51200e11z00":{"_id":"udbc51200e11z00","html":"toolbar-item-undo.html","position":20,"type":"model","platform":"all"},"udbc51200e11z01":{"_id":"udbc51200e11z01","html":"toolbar-item-redo.html","position":30,"type":"model","platform":"all"},"udbc51200e11z02":{"_id":"udbc51200e11z02","html":"toolbar-item-select-all.html","position":40,"type":"model","platform":"electron"},"o1f40e168bd10174":{"_id":"o1f40e168bd10174","html":"toolbar-item-command.html","platform":"web","position":75,"type":"model"},"m1ff0113f491d841":{"_id":"m1ff0113f491d841","html":"toolbar-item-command.html","platform":"electron","position":75,"type":"model"}},"Designer":{},"MenuItem":{"1f1781882618108":{"_id":"1f1781882618108","name":"model","html":"menu-item-model.html","position":10,"type":"model","platform":"all"}},"MenuAction":{"1f8571164c179bh":{"_id":"1f8571164c179bh","html":"menu-action-version.html","position":10,"type":"model"}},"MenuHeader":{"1fb101b99813a16":{"_id":"1fb101b99813a16","html":"menu-header-model.html","type":"model"}},"Workspace":{}},"_id":"w1a78b16d7311831"}
+{
+  "name": "editor-model",
+  "master": true,
+  "version": "1.0.0",
+  "description": "",
+  "schemas": {
+    "104ad1f48518376": {
+      "_id": "104ad1f48518376",
+      "_name": "_Channel",
+      "_inherit": ["_Component"],
+      "$editorUpdateSystem": "event",
+      "$editorUpdateSchema": "event",
+      "$editorUpdateSchemaId": "event",
+      "$editorUpdateSchemaName": "event",
+      "$editorUpdateModel": "event",
+      "$editorUpdateModelId": "event",
+      "$editorUpdateType": "event",
+      "$editorDeleteType": "event",
+      "$editorUpdateBehavior": "event",
+      "$editorDeleteBehavior": "event",
+      "$editorUpdateComponent": "event",
+      "$editorUpdateComponentId": "event",
+      "$editorDeleteComponent": "event",
+      "$appLogDebug": "event",
+      "$appLogInfo": "event",
+      "$appLogWarn": "event",
+      "$appLogError": "event",
+      "$appLoadSystem": "event",
+      "$designerSync": "event",
+      "$designerCreateBehavior": "event",
+      "$designerCreateComponent": "event",
+      "$designerCreateType": "event",
+      "$designerCreateSchema": "event",
+      "$designerCreateModel": "event",
+      "$designerDeleteSchema": "event",
+      "$designerDeleteModel": "event",
+      "$designerDeleteType": "event",
+      "$designerDeleteBehavior": "event",
+      "$designerDeleteComponent": "event",
+      "$designerUpdateComponent": "event",
+      "$designerUpdateModel": "event",
+      "$designerUpdateBehavior": "event",
+      "$runtimeCreateComponent": "event",
+      "$runtimeDeleteComponent": "event",
+      "$runtimeUpdateComponent": "event",
+      "send": "event"
+    },
+    "z1e592183e81ce64": {
+      "_id": "z1e592183e81ce64",
+      "_name": "Router",
+      "_inherit": ["_Component"],
+      "start": "method",
+      "update": "method"
+    },
+    "t19b6b11ff31158d": {
+      "_name": "ToolBarItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "render": "method",
+      "click": "event",
+      "_id": "t19b6b11ff31158d",
+      "_inherit": ["_Component"],
+      "platform": "property"
+    },
+    "p1f6f51d9f111925": {
+      "_name": "MenuAction",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "p1f6f51d9f111925",
+      "_inherit": ["_Component"]
+    },
+    "t14a79156a81862a": {
+      "_name": "MenuHeader",
+      "html": "link",
+      "type": "property",
+      "hide": "method",
+      "show": "method",
+      "render": "method",
+      "_id": "t14a79156a81862a",
+      "_inherit": ["_Component"]
+    },
+    "l1d113198721599d": {
+      "_name": "MenuItem",
+      "html": "link",
+      "position": "property",
+      "type": "property",
+      "name": "property",
+      "platform": "property",
+      "render": "method",
+      "click": "event",
+      "_id": "l1d113198721599d",
+      "_inherit": ["_Component"]
+    },
+    "f1092816b571e03c": {
+      "_name": "Workspace",
+      "create": "method",
+      "load": "method",
+      "clear": "method",
+      "refresh": "method",
+      "render": "method",
+      "_id": "f1092816b571e03c",
+      "_inherit": ["_Component"]
+    },
+    "o1ead8184af1a83e": {
+      "_name": "Designer",
+      "_inherit": ["_Component"],
+      "version": "property",
+      "runWindow": "property",
+      "debugWindow": "property",
+      "linkModel": "method",
+      "save": "method",
+      "saveCordova": "method",
+      "saveAs": "method",
+      "welcome": "method",
+      "open": "method",
+      "render": "event",
+      "isCordova": "method",
+      "isElectron": "method",
+      "updateCordovaContext": "method",
+      "runMessages": "method",
+      "installExtensions": "method",
+      "isMac": "method",
+      "addShortcuts": "method",
+      "_id": "o1ead8184af1a83e"
+    }
+  },
+  "models": {
+    "135c71078810af2": {
+      "_id": "135c71078810af2",
+      "_name": "_Channel",
+      "$editorUpdateSchemaName": {
+        "params": [
+          { "name": "name", "type": "string" },
+          { "name": "id", "type": "string" }
+        ]
+      },
+      "$designerSync": {},
+      "$appLoadSystem": { "params": [{ "name": "system", "type": "object" }] },
+      "$designerCreateBehavior": {
+        "params": [{ "name": "behavior", "type": "object" }]
+      },
+      "$editorUpdateBehavior": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "behavior", "type": "object" }
+        ]
+      },
+      "$designerUpdateBehavior": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "behavior", "type": "object" }
+        ]
+      },
+      "$editorDeleteBehavior": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerDeleteBehavior": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerCreateComponent": {
+        "params": [
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$editorUpdateComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$editorUpdateComponentId": {
+        "params": [
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$designerUpdateComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$editorDeleteComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$designerDeleteComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$designerCreateType": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "type", "type": "object" }
+        ]
+      },
+      "$editorUpdateType": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "type", "type": "object" }
+        ]
+      },
+      "$editorDeleteType": { "params": [{ "name": "id", "type": "string" }] },
+      "$designerCreateSchema": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "schema", "type": "object" }
+        ]
+      },
+      "$editorUpdateSchema": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "schema", "type": "object" }
+        ]
+      },
+      "$editorUpdateSchemaId": {
+        "params": [
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" }
+        ]
+      },
+      "$designerDeleteSchema": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerCreateModel": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
+        ]
+      },
+      "$editorUpdateModel": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
+        ]
+      },
+      "$designerUpdateModel": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "model", "type": "object" }
+        ]
+      },
+      "$editorUpdateModelId": {
+        "params": [
+          { "name": "oldId", "type": "string" },
+          { "name": "newId", "type": "string" }
+        ]
+      },
+      "$designerDeleteModel": {
+        "params": [{ "name": "id", "type": "string" }]
+      },
+      "$designerDeleteType": { "params": [{ "name": "id", "type": "string" }] },
+      "$editorUpdateSystem": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "system", "type": "object" }
+        ]
+      },
+      "$appLogDebug": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogInfo": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogWarn": { "params": [{ "name": "message", "type": "string" }] },
+      "$appLogError": { "params": [{ "name": "message", "type": "string" }] },
+      "$runtimeCreateComponent": {
+        "params": [
+          { "name": "collection", "type": "string" },
+          { "name": "component", "type": "object" }
+        ]
+      },
+      "$runtimeDeleteComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" }
+        ]
+      },
+      "$runtimeUpdateComponent": {
+        "params": [
+          { "name": "id", "type": "string" },
+          { "name": "collection", "type": "string" },
+          { "name": "field", "type": "string" },
+          { "name": "value", "type": "any" }
+        ]
+      },
+      "send": { "params": [{ "name": "message", "type": "message" }] }
+    },
+    "c1b00612faf188cf": {
+      "_id": "c1b00612faf188cf",
+      "_name": "Router",
+      "start": {},
+      "update": {}
+    },
+    "u1f4c7177bb1a459": {
+      "_name": "ToolBarItem",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "render": {},
+      "click": {},
+      "_id": "u1f4c7177bb1a459",
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      }
+    },
+    "w124ac16b591df57": {
+      "_name": "MenuAction",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "w124ac16b591df57"
+    },
+    "f13ebe1ad331b263": {
+      "_name": "MenuHeader",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "hide": {},
+      "show": {},
+      "render": {},
+      "_id": "f13ebe1ad331b263"
+    },
+    "u1f9a01abe31b3bf": {
+      "_id": "u1f9a01abe31b3bf",
+      "_name": "MenuItem",
+      "html": {
+        "type": "HTML",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "position": {
+        "type": "number",
+        "readOnly": false,
+        "mandatory": false,
+        "default": 0
+      },
+      "type": {
+        "type": "editorType",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "designer"
+      },
+      "name": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": ""
+      },
+      "platform": {
+        "type": "platform",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "all"
+      },
+      "render": {},
+      "click": {}
+    },
+    "v1435e1809e10be7": {
+      "_id": "v1435e1809e10be7",
+      "_name": "Workspace",
+      "create": {},
+      "load": {},
+      "clear": {},
+      "render": {}
+    },
+    "q129be1c61b18285": {
+      "_id": "q129be1c61b18285",
+      "_name": "Designer",
+      "version": {
+        "type": "string",
+        "readOnly": false,
+        "mandatory": false,
+        "default": "5.0.0"
+      },
+      "runWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "debugWindow": {
+        "type": "object",
+        "readOnly": false,
+        "mandatory": false,
+        "default": null
+      },
+      "linkModel": {
+        "params": [
+          {
+            "name": "source",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "target",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "save": {},
+      "saveCordova": {},
+      "saveAs": {
+        "params": [
+          {
+            "name": "data",
+            "type": "object",
+            "mandatory": false,
+            "default": {}
+          },
+          {
+            "name": "fileName",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          }
+        ]
+      },
+      "welcome": {},
+      "open": {
+        "params": [
+          {
+            "name": "url",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "target",
+            "type": "string",
+            "mandatory": false,
+            "default": ""
+          },
+          {
+            "name": "isExt",
+            "type": "boolean",
+            "mandatory": false,
+            "default": false
+          }
+        ]
+      },
+      "render": {},
+      "isCordova": { "result": "boolean" },
+      "isElectron": { "result": "boolean" },
+      "updateCordovaContext": {},
+      "runMessages": {
+        "params": [
+          {
+            "name": "messages",
+            "type": "array",
+            "mandatory": true,
+            "default": []
+          }
+        ]
+      },
+      "installExtensions": {},
+      "isMac": { "result": "boolean" },
+      "addShortcuts": {}
+    }
+  },
+  "behaviors": {
+    "t15f921e6a316234": {
+      "_id": "t15f921e6a316234",
+      "component": "udbc51200e11z03",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-copy').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').copy(); \n  this.require('message').success('The text has been copied to the clipboard.');\n}"
+    },
+    "d10e191ee9813950": {
+      "_id": "d10e191ee9813950",
+      "component": "udbc51200e11z04",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-paste').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').paste(); \n}"
+    },
+    "i1a1951779613207": {
+      "_id": "i1a1951779613207",
+      "component": "udbc51200e11z02",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-select-all').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').selectAll(); \n}"
+    },
+    "d1d8ee1ac3812186": {
+      "_id": "d1d8ee1ac3812186",
+      "component": "udbc51200e11z01",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-redo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').redo(); \n}"
+    },
+    "i15954170f111203": {
+      "_id": "i15954170f111203",
+      "component": "udbc51200e11z00",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-undo').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('editor').undo(); \n}"
+    },
+    "y1dbc0114c11c791": {
+      "_id": "y1dbc0114c11c791",
+      "component": "1dbc51200e116e9",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-save').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').save(); \n}"
+    },
+    "j1ac7610be61012b": {
+      "_id": "j1ac7610be61012b",
+      "component": "1dbc51200e11615",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-help').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  this.require('designer').open('https://designfirst.io/systemdesigner/documentation/docs/edit-a-model.html', '_blank', true); \n}"
+    },
+    "g161d21f3a912625": {
+      "_id": "g161d21f3a912625",
+      "component": "1dbc51200e11610",
+      "state": "click",
+      "action": "function click() {\n  $('#designer-toolbar-item-copyright').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  var DialogCopyright = this.require('DialogCopyright');\n  var message = this.require('copyright.html');\n  \n  DialogCopyright = new DialogCopyright({\n    'title': 'System Designer',\n    'message': message.source().replace('{{version}}', this.require('designer').version())\n  });\n  DialogCopyright.show();\n  DialogCopyright.on('ok', function () {\n    this.hide();\n  });\n}"
+    },
+    "d1802118f46183c0": {
+      "_id": "d1802118f46183c0",
+      "component": "Workspace",
+      "state": "render",
+      "action": "function render() { \n  var Editor = null,\n    designer = null,\n    editor = null;\n\n  Editor = this.require('Editor');\n  designer = this.require('designer');\n\n  if (designer.isCordova()) {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'codemirror',\n      'context': 'model',\n      'editor': CodeMirror($('#designer-editor')[0], {\n        lineNumbers: true,\n        styleActiveLine: true,\n        'mode': 'application/json',\n        'theme': 'eclipse',\n        'tabSize': 2,\n        'autoCloseBrackets': true\n      })\n    });\n  } else {\n    editor = new Editor({\n      '_id': 'editor',\n      'type': 'ace',\n      'context': 'model',\n      'editor': ace.edit('designer-editor')\n    });\n  }\n  \n  editor.render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "x1cd3e156f81600f": {
+      "_id": "x1cd3e156f81600f",
+      "component": "Designer",
+      "state": "render",
+      "action": "function render() {\n  var systemId = '',\n    system = null,\n    sys = null,\n    id = '',\n    modelName = '',\n    modelGen = null;\n\n  // type\n  this.require('state').type(window.location.href.split('.html')[0].split('/')[window.location.href.split('.html')[0].split('/').length - 1].split('?')[0]);\n\n  if (this.isCordova()) {\n    this.updateCordovaContext();\n  }\n\n  // get parameters\n  id = document.location.href.split('#')[1].split('?')[0];\n  systemId = document.location.href.split('#')[2].split('?')[0];\n  \n  // set system\n  system = this.require('storage').get(systemId);\n  sys = this.require('factory').create(system);\n  \n  // extensions\n  this.installExtensions();\n\n  // render\n  this.require('menubar').render();\n  this.require('toolbar').render();\n  this.require('workspace').render();\n  \n  // set editor\n  system = this.require('storage').get(systemId);\n  model = system.models[id];\n\n  this.require('store').uuid(id);\n  this.require('store').data(model);\n\n  modelName = system.models[id]._name;\n  modelGen = this.require('factory').getGeneratedModel(modelName);\n  this.require('store').extra(modelGen);\n\n  document.title = 'model ' + model._name + ' · system ' + system.name;\n\n  this.require('editor').initValue(JSON.stringify(model, null, '\\t'), 2);\n\n  this.require('router').update();\n  \n  this.addShortcuts();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s1bc6b11e9a13afd": {
+      "_id": "s1bc6b11e9a13afd",
+      "component": "Designer",
+      "state": "save",
+      "action": "function save() { \n  var val = this.require('editor').getValue(),\n    designer = this.require('designer'),\n    message = this.require('message'),\n    model = null,\n    property = '',\n    modelGen = null,\n    hasError = false,\n    systems = this.require('storage').get('system-designer-systems');\n    \n  if (systems && systems.systems.length === 0) {\n    message.danger('Can not save your model: there is no system.');\n    return;\n  }\n  \n  try {\n    model = JSON.parse(val);\n  } catch (e) {\n    message.danger('Can not save your model: your model has an invalid structure.');\n    return;\n  }\n  \n  // _inherit check\n  if (typeof model._inherit !== 'undefined' && !Array.isArray(model._inherit)) {\n    message.danger('Invalid inheritance value: it must be an array.');\n    return;\n  }\n  \n  if (model._inherit && model._inherit.indexOf(model._name) !== -1) {\n    message.danger('Invalid inheritance value: you can not inherit from yourself.');\n    return;\n  }\n  \n  if (model._inherit && model._inherit.indexOf('') !== -1) {\n    message.danger('Invalid inheritance value: it can not be empty.');\n    return;\n  }\n\n  if (model._inherit) {\n    model._inherit.forEach(function (parent) {\n      if (parent.constructor.name !== 'String') {\n        hasError = true;\n      }\n    });\n    if (hasError) {\n      message.danger('Invalid inheritance value: it must be a string.');\n      return;\n    }\n  }\n\n  // _name check\n  if (typeof model._name === 'undefined') {\n    message.danger('The property \\'_name\\' is missing.');\n    return;\n  }\n  \n   if (model._name.constructor.name !== 'String') {\n    message.danger('The property \\'_name\\' must be a string.');\n    return;\n  }\n  \n  // clean name\n  model._name = model._name.replace(/\\s|\\t/gi, '_')\n    .replace(/[\\-\\!\\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\`\\{\\|\\}\\~]/gi, '')\n    .replace(/\\r|\\n/gi,'');\n\n  // _id check\n  if (typeof model._id === 'undefined') {\n    message.danger('The property \\'_id\\' is missing.');\n    return;\n  }\n  \n  if (model._id.constructor.name !== 'String') {\n    message.danger('The property \\'_id\\' must be a string.');\n    return;\n  }\n\n  for (property in model) {\n    if (property.indexOf(' ') !== -1) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>Space is not authorized in the name of a property.');\n      return;\n    }\n    propVal = model[property];\n    if (typeof propVal === 'object' && !Array.isArray(propVal) && property.indexOf('_') === 0) {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>A property name can not start with \\'_\\'.');\n      return;\n    }\n    if (property.indexOf('_') === 0) {\n      if (['_id', '_name', '_inherit', '_class', '_core', '_description'].indexOf(property) === -1) {\n        message.danger('Invalid value \\'' + property + '\\’.<br>Authorized values are: \\'_id\\', \\'_name\\', \\'_inherit\\', \\'_class\\', \\'_core\\' and \\'_description\\'.');\n        return;\n      }\n    }\n  }\n\n  modelGen = this.require('store').extra();\n  for (property in model) {\n    if (property.indexOf('_') !== 0 && typeof modelGen[property] === 'undefined') {\n      message.danger('Invalid property name \\'' + property + '\\’. <br>\\'' + property + '\\’ must be defined in the schema.');\n      return;\n    }\n  }\n\n  if (this.require('store').data()._name === model._name) {\n    this.require('store').data(model);\n\n    // check if ID change\n    if (this.require('store').uuid() !== this.require('store').data()._id) {\n      this.require('channel').$editorUpdateModelId(this.require('store').uuid(), this.require('store').data()._id);\n      this.require('store').uuid(this.require('store').data()._id);\n    }\n\n    this.require('channel').$editorUpdateModel(this.require('store').uuid(), this.require('store').data());\n    message.success('Model saved.');\n  } else {\n    message.danger('You can not modify the name of a model.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "z1b1ad1fdbb1a46a": {
+      "_id": "z1b1ad1fdbb1a46a",
+      "component": "w1a78b16d7311831",
+      "state": "start",
+      "action": "function start() { \n  var storeConfig = '';\n  \n  // set locale\n  storeConfig = this.require('storage').get('system-designer-config');\n\n  if (!storeConfig) {\n    storeConfig = {};\n  }\n\n  if (typeof storeConfig.language === 'undefined') {\n    storeConfig.language = 'en-US';\n    this.require('storage').set('system-designer-config', storeConfig);\n  } else {\n    this.require('i18n').locale(storeConfig.language);\n  }\n  \n  this.require('designer').render();\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "t12f1412dc71b53b": {
+      "_id": "t12f1412dc71b53b",
+      "component": "Router",
+      "state": "update",
+      "action": "function update() { \n  var menubar = [],\n    i = 0,\n    length = 0,\n    id = '',\n    href = '';\n\n  id = decodeURIComponent(document.location.href.split('#')[1]);\n  collection = document.location.href.split('#')[2];\n\n  // update menubar\n  menubar = $('#designer-menubar-items > li > a');\n  length = menubar.length;\n  for (i = 0; i < length; i++) {\n    href = menubar[i].href;\n    context = href.split('#')[href.split('#').length - 1];\n    menubar[i].href = '#' + id + '#' + collection + '#' + context;\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "q1db4d1ae7a19ae6": {
+      "_id": "q1db4d1ae7a19ae6",
+      "component": "_Channel",
+      "state": "send",
+      "action": "function send(message) { \n  if (message.event.indexOf('$system') !== 0) {\n    var config = this.require('storage').get('system-designer-config'),\n      designer = this.require('designer'),\n      state = this.require('state');\n\n    if (designer.isCordova()) {\n      state.messages().push(message);\n    }\n\n    this.require('storage').set('system-designer-message', message);\n\n    // message for server debug\n    if (typeof config !== 'undefined' && typeof config.debugType !== 'undefined' && config.debugType === 'server' && config.urlServer) {\n      $.post(config.urlServer.replace(':8888', '') + ':8888/' + message.event, encodeURIComponent(JSON.stringify(message.data)));\n    }\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "m193c119f111fd88": {
+      "_id": "m193c119f111fd88",
+      "component": "_Channel",
+      "state": "init",
+      "action": "function init(conf) { \n  this.require('_Storage').on('changed', function changed(obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "s1a154168ce17fa9": {
+      "_id": "s1a154168ce17fa9",
+      "component": "o1f40e168bd10174",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "c1e34c13e6b10bd9": {
+      "_id": "c1e34c13e6b10bd9",
+      "component": "m1ff0113f491d841",
+      "state": "click",
+      "action": "function click() { \n  $('#designer-toolbar-item-command').tooltip('hide');\n  if ($('#designer-dialog').children().length) {\n    $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n  }\n  \n  if (this.require('factory').system()) {\n      if ($('#designer-dialog-command-modal').length) {\n        $('#designer-dialog-input-command').val('');\n        $('#designer-dialog-command-result').empty();\n        $('#designer-dialog-command-result-area').hide();\n        $('#designer-dialog-command-modal').modal('show');\n    } else {\n      var Dialog = runtime.require('DialogCommand');\n      var dialog = new Dialog({'title':''});\n      dialog.show();\n    }\t\n  } else {\n    this.require('message').warning('There is no system.');\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    },
+    "f1c23c1dcb0122a3": {
+      "_id": "f1c23c1dcb0122a3",
+      "component": "Designer",
+      "state": "addShortcuts",
+      "action": "function addShorcuts() { \n  if (!this.isCordova()) {\n  \tif (this.isMac()) {\n      document.body.addEventListener('keydown', function keydown(event){\n        var message = this.require('message'),\n            key = event.which || event.keyCode,\n            command = event.metaKey ? event.metaKey : ((key === 91) ? true : false),\n            dialog = null,\n            Dialog = null;\n    \n        switch (true) {\n          // Command + O\n          case key === 79 && command:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this));\n  \t} else {\n      document.body.addEventListener('keydown', function keydown(event){\n        var key = event.which || event.keyCode;\n        var ctrl = event.ctrlKey ? event.ctrlKey : ((key === 17) ? true : false);\n  \n        switch (true) {\n          // Ctrl + O\n          case key === 79 && ctrl:\n            if ($('#designer-dialog').children().length) {\n              $('#' + $(\"#designer-dialog\").children()[0].id).removeClass('fade').modal('hide');\n            }\n            Dialog = runtime.require('DialogCommand');\n            dialog = new Dialog({'title':''});\n            dialog.show();\n            event.stopPropagation();\n            event.preventDefault();\n            return false;\n            break;\n          default:\n            break;\n        }\n      }.bind(this)); \n  \t}\n  }\n}",
+      "useCoreAPI": false,
+      "core": false
+    }
+  },
+  "types": {},
+  "components": {
+    "Router": { "router": { "_id": "router" } },
+    "ToolBarItem": {
+      "udbc51200e11z03": {
+        "_id": "udbc51200e11z03",
+        "html": "toolbar-item-copy.html",
+        "position": 50,
+        "type": "model",
+        "platform": "electron"
+      },
+      "udbc51200e11z04": {
+        "_id": "udbc51200e11z04",
+        "html": "toolbar-item-paste.html",
+        "position": 60,
+        "type": "model",
+        "platform": "electron"
+      },
+      "1dbc51200e11610": {
+        "_id": "1dbc51200e11610",
+        "html": "toolbar-item-copyright.html",
+        "position": 90,
+        "type": "model",
+        "platform": "all"
+      },
+      "1dbc51200e11615": {
+        "_id": "1dbc51200e11615",
+        "html": "toolbar-item-help.html",
+        "position": 80,
+        "type": "model",
+        "platform": "all"
+      },
+      "1dbc51200e116e9": {
+        "_id": "1dbc51200e116e9",
+        "html": "toolbar-item-save.html",
+        "position": 10,
+        "type": "model",
+        "platform": "all"
+      },
+      "udbc51200e11z00": {
+        "_id": "udbc51200e11z00",
+        "html": "toolbar-item-undo.html",
+        "position": 20,
+        "type": "model",
+        "platform": "all"
+      },
+      "udbc51200e11z01": {
+        "_id": "udbc51200e11z01",
+        "html": "toolbar-item-redo.html",
+        "position": 30,
+        "type": "model",
+        "platform": "all"
+      },
+      "udbc51200e11z02": {
+        "_id": "udbc51200e11z02",
+        "html": "toolbar-item-select-all.html",
+        "position": 40,
+        "type": "model",
+        "platform": "electron"
+      },
+      "o1f40e168bd10174": {
+        "_id": "o1f40e168bd10174",
+        "html": "toolbar-item-command.html",
+        "platform": "web",
+        "position": 75,
+        "type": "model"
+      },
+      "m1ff0113f491d841": {
+        "_id": "m1ff0113f491d841",
+        "html": "toolbar-item-command.html",
+        "platform": "electron",
+        "position": 75,
+        "type": "model"
+      }
+    },
+    "Designer": {},
+    "MenuItem": {
+      "1f1781882618108": {
+        "_id": "1f1781882618108",
+        "name": "model",
+        "html": "menu-item-model.html",
+        "position": 10,
+        "type": "model",
+        "platform": "all"
+      }
+    },
+    "MenuAction": {
+      "1f8571164c179bh": {
+        "_id": "1f8571164c179bh",
+        "html": "menu-action-version.html",
+        "position": 10,
+        "type": "model"
+      }
+    },
+    "MenuHeader": {
+      "1fb101b99813a16": {
+        "_id": "1fb101b99813a16",
+        "html": "menu-header-model.html",
+        "type": "model"
+      }
+    },
+    "Workspace": {}
+  },
+  "_id": "w1a78b16d7311831"
+}
