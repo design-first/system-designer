@@ -48,7 +48,7 @@
     },
     "b101ff149531913e": {
       "_id": "b101ff149531913e",
-      "_name": "RuntimeHelper",
+      "_name": "_RuntimeHelper",
       "_inherit": ["_Component"],
       "_core": true,
       "checkElectron": "method",
@@ -251,7 +251,7 @@
     },
     "k12913176cf17c75": {
       "_id": "k12913176cf17c75",
-      "_name": "RuntimeHelper",
+      "_name": "_RuntimeHelper",
       "_description": "",
       "checkElectron": { "description": "", "result": "any" },
       "checkCordova": { "description": "", "result": "any" },
@@ -278,7 +278,7 @@
     },
     "e19376157a516c7e": {
       "_id": "e19376157a516c7e",
-      "component": "RuntimeHelper",
+      "component": "_RuntimeHelper",
       "state": "checkElectron",
       "action": "function checkElectron() { \n  if (typeof global !== 'undefined' && typeof window === 'undefined') {\n    require = require;\n  }\n}",
       "useCoreAPI": false,
@@ -286,7 +286,7 @@
     },
     "u13f0f1683716328": {
       "_id": "u13f0f1683716328",
-      "component": "RuntimeHelper",
+      "component": "_RuntimeHelper",
       "state": "checkCordova",
       "action": "function checkCordova() {\n  var params = '';\n\n  function _getParams() {\n    var result = {};\n    var urlParams = [];\n    var system = null;\n\n    urlParams = document.location.href.split('?');\n\n    if (urlParams.length > 1) {\n      urlParams = urlParams[1].split('&');\n      urlParams.forEach(function (urlParam) {\n        var name = '',\n          value = '';\n\n        name = urlParam.split('=')[0].trim();\n        value = urlParam.split('=')[1].trim();\n\n        result[name] = decodeURIComponent(value);\n      });\n    }\n    return result;\n  }\n  // case of cordova    \n  if (typeof cordova !== 'undefined') {\n\n    window.messages = [];\n    window.lastPage = 'index.html';\n\n    params = _getParams();\n\n    if (Object.keys(params).length) {\n      lastPage = params.ref;\n    }\n\n    // add back button if needed\n    setTimeout(function () {\n      if (!document.getElementById('system-designer-back')) {\n        var docFragment = null;\n        var div = null;\n        var a = null;\n        var span = null;\n\n        docFragment = document.createDocumentFragment();\n        div = document.createElement('div');\n        div.setAttribute('id', 'system-designer-back');\n        div.setAttribute('style', 'top:5px;left:10px;position:absolute;font-size:18px;font-family:Helvetica,Arial,sans-serif;z-index:999999;background-color:white;');\n\n        a = document.createElement('a');\n        a.setAttribute('href', 'javascript:systemDesignerBack()');\n        a.setAttribute('style', 'text-decoration:none; color:#337AB7;');\n\n        span = document.createElement('span');\n        span.setAttribute('style', \"font-family: 'Helvetica Neue';\");\n        span.textContent = ' < System Designer';\n\n        a.appendChild(span);\n        div.appendChild(a);\n        docFragment.appendChild(div);\n\n        document.body.appendChild(docFragment);\n      }\n    }, 1000);\n  }\n}",
       "useCoreAPI": false,
@@ -294,7 +294,7 @@
     },
     "b1e5041617417d5d": {
       "_id": "b1e5041617417d5d",
-      "component": "RuntimeHelper",
+      "component": "_RuntimeHelper",
       "state": "getBundle",
       "action": "function getBundle() { \n  var storage = this.require('storage');\n  var sysId = '';\n  var bundle = '';\n  \n  sysId = document.location.href.split('#')[1].split('?')[0].split('/')[0];\n  bundle = storage.get(sysId);\n\n  // listen to messages from System Designer\n  storage.on('changed', function (obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true, true);\n  \n  return bundle;\n}",
       "useCoreAPI": true,
@@ -347,7 +347,7 @@
   },
   "components": {
     "_Channel": { "channel": { "_id": "channel", "_core": true } },
-    "RuntimeHelper": {
+    "_RuntimeHelper": {
       "runtimeHelper": { "_id": "runtimeHelper", "_core": true }
     }
   },
