@@ -1,4 +1,6 @@
 const { defineConfig } = require('cypress')
+const webpack = require('@cypress/webpack-preprocessor')
+const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin
 
 module.exports = defineConfig({
   projectId: '558dq3',
@@ -7,10 +9,33 @@ module.exports = defineConfig({
   videosFolder: 'reports/videos',
   chromeWebSecurity: false,
   e2e: {
-    // We've imported your old cypress plugins here.
-    // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
-      return require('./cypress/plugins/index.js')(on, config)
+      addCucumberPreprocessorPlugin(on, config)
+      on(
+        'file:preprocessor',
+        webpack({
+          webpackOptions: {
+            resolve: {
+              extensions: ['.js'],
+            },
+            module: {
+              rules: [
+                {
+                  test: /\.feature$/,
+                  use: [
+                    {
+                      loader: '@badeball/cypress-cucumber-preprocessor/webpack',
+                      options: config,
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        })
+      )
+
+      return config
     },
     baseUrl: 'http://localhost:8080',
     specPattern: 'cypress/e2e/**/*.feature',
