@@ -1,8 +1,9 @@
 Feature: System Designer
 
-    Scenario Outline: Users can create a system
-
+    Background:
         Given Users have opened System Designer
+
+    Scenario Outline: Users can create a system
         When Users have closed the information Dialog
         And Users click to create a system
         And Users enter system name as "<systemname>"
@@ -13,8 +14,6 @@ Feature: System Designer
             | starwars   |
 
     Scenario Outline: Users can create a schema
-
-        Given Users have opened System Designer
         When Users click on schema tab
         And Users click to create a schema
         And Users enter schema name as "<schemaname>"
@@ -25,8 +24,6 @@ Feature: System Designer
             | Jedi       |
 
     Scenario: Users can create a component
-
-        Given Users have opened System Designer
         When Users click on component tab
         And Users click to create a component
         Then Users is able to see the component

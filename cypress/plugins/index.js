@@ -18,8 +18,36 @@
  * limitations under the License.
  */
 
-const cucumber = require('cypress-cucumber-preprocessor').default
+const webpack = require('@cypress/webpack-preprocessor')
+const addCucumberPreprocessorPlugin = require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
 
 module.exports = (on, config) => {
-  on('file:preprocessor', cucumber())
+
+  addCucumberPreprocessorPlugin(on, config)
+
+  on(
+    'file:preprocessor',
+    webpack({
+      webpackOptions: {
+        resolve: {
+          extensions: ['.ts', '.js'],
+        },
+        module: {
+          rules: [
+            {
+              test: /\.feature$/,
+              use: [
+                {
+                  loader: '@badeball/cypress-cucumber-preprocessor/webpack',
+                  options: config,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    })
+  )
+
+  return config
 }

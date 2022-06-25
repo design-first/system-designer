@@ -44,9 +44,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "ace-builds": "1.5.1",
+    "ace-builds": "1.5.3",
     "bootstrap": "3.4.1",
-    "codemirror": "5.65.4",
+    "codemirror": "5.65.5",
     "github-api": "3.4.0",
     "jquery": "3.6.0",
     "jsplumb": "2.15.6",
@@ -56,11 +56,12 @@
     "viz.js": "2.1.2"
   },
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "11.2.0",
+    "@cypress/webpack-preprocessor": "5.12.0",
     "coffeescript": "2.7.0",
-    "cypress": "9.7.0",
-    "cypress-cucumber-preprocessor": "4.3.1",
-    "cypress-localstorage-commands": "1.7.0",
-    "eslint": "8.16.0",
+    "cypress": "10.2.0",
+    "cypress-localstorage-commands": "2.1.0",
+    "eslint": "8.17.0",
     "eslint-plugin-cypress": "2.12.1",
     "grunt": "1.5.3",
     "grunt-bg-shell": "2.3.3",
@@ -78,6 +79,8 @@
     "prettier": "2.6.2"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "stepDefinitions": [
+      "cypress/e2e/**/*.js"
+    ]
   }
 }
