@@ -1026,7 +1026,7 @@
       "_id": "s192131208d1553f",
       "component": "_Channel",
       "state": "init",
-      "action": "function init(conf) { \n  window.addEventListener('message', function message(event) {\n    var data = null,\n        config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n    data = JSON.parse(event.data);\n    if (data &&\n      typeof data.event !== 'undefined' &&\n      typeof data.from !== 'undefined' &&\n      typeof data.data !== 'undefined') {\n      $db._Message.insert(data);\n    }\n  }.bind(this), false);\n\n  this.require('_Storage').on('changed', function changed(obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      if (this.require('designer').debugWindow()) {\n        this.require('designer').debugWindow().postMessage(JSON.stringify(obj['system-designer-message'].newValue), '*');\n      }\n      $db._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
+      "action": "function init(conf) { \n  window.addEventListener('message', function message(event) {\n    var data = null,\n        config = this.require('storage').get('system-designer-config');\n\n    if (!config) {\n      config = {};\n    }\n    data = JSON.parse(event.data);\n    if (data &&\n      typeof data.event !== 'undefined' &&\n      typeof data.from !== 'undefined' &&\n      typeof data.data !== 'undefined') {\n      $db.collections._Message.insert(data);\n    }\n  }.bind(this), false);\n\n  this.require('_Storage').on('changed', function changed(obj) {\n    if (typeof obj['system-designer-message'] !== 'undefined') {\n      if (this.require('designer').debugWindow()) {\n        this.require('designer').debugWindow().postMessage(JSON.stringify(obj['system-designer-message'].newValue), '*');\n      }\n      $db.collections._Message.insert(obj['system-designer-message'].newValue);\n    }\n  }, true);\t\n}",
       "useCoreAPI": true,
       "core": false
     },
@@ -1082,7 +1082,7 @@
       "_id": "q1e05f1c28c13d04",
       "component": "Designer",
       "state": "runMessages",
-      "action": "function runMessages(messages) { \n  messages.forEach(function (message) {\n    if (message && message.event && message.event.indexOf('$system') === -1) {\n      $db._Message.insert(message);\n    }\n  });\t\n}",
+      "action": "function runMessages(messages) { \n  messages.forEach(function (message) {\n    if (message && message.event && message.event.indexOf('$system') === -1) {\n      $db.collections._Message.insert(message);\n    }\n  });\t\n}",
       "useCoreAPI": true,
       "core": false
     },

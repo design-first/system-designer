@@ -58,7 +58,7 @@ self.addEventListener('install', e => {
         'lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff',
         'lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2',
         'lib/prism/prism.css',
-        'lib/system-runtime/system-runtime.min.js',
+        'lib/system-runtime/system-runtime.js',
         'lib/designer/vendor.js',
         'lib/editor/vendor.js',
         'lib/diagram/vendor.js',

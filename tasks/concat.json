@@ -1,9 +1,6 @@
 {
   "app": {
     "files": {
-      "dist/scripts/designer-runtime.js": [
-        "dist/systems/designer-runtime.json"
-      ],
       "dist/scripts/editor-behavior.js": [
         "dist/systems/editor-behavior.json"
       ],
@@ -30,7 +27,29 @@
       ]
     },
     "options": {
-      "banner": "// System Designer - Copyright 2022 Erwan Carriou\n// Licensed under the Apache License, Version 2.0 (the \"License\")\nruntime.install(",
+      "banner": "// System Designer - Copyright 2022 Erwan Carriou\n// Licensed under the Apache License, Version 2.0 (the \"License\")\nimport runtime from '../lib/system-runtime/system-runtime.js'\nwindow.runtime = runtime\nruntime.install(",
+      "footer": ");"
+    }
+  },
+  "app-runtime": {
+    "files": {
+      "dist/scripts/designer-runtime.js": [
+        "dist/systems/designer-runtime.json"
+      ]
+    },
+    "options": {
+      "banner": "// System Designer - Copyright 2022 Erwan Carriou\n// Licensed under the Apache License, Version 2.0 (the \"License\")\nimport runtime from '../../lib/system-runtime/system-runtime.js'\nwindow.runtime = runtime\nruntime.install(",
+      "footer": ");"
+    }
+  },
+  "app-runtime-electron": {
+    "files": {
+      "dist/scripts/designer-runtime.js": [
+        "dist/systems/designer-runtime.json"
+      ]
+    },
+    "options": {
+      "banner": "// System Designer - Copyright 2022 Erwan Carriou\n// Licensed under the Apache License, Version 2.0 (the \"License\")\nimport runtime from '../lib/system-runtime/system-runtime.js'\nwindow.runtime = runtime\nruntime.install(",
       "footer": ");"
     }
   },
@@ -41,8 +60,7 @@
         "node_modules/bootstrap/dist/js/bootstrap.min.js",
         "node_modules/github-api/dist/GitHub.bundle.min.js",
         "node_modules/prismjs/prism.js",
-        "node_modules/jsplumb/dist/js/jsplumb.min.js",
-        "node_modules/system-runtime/dist/system-runtime.min.js"
+        "node_modules/jsplumb/dist/js/jsplumb.min.js"
       ]
     }
   },
@@ -50,8 +68,7 @@
     "files": {
       "dist/lib/editor/vendor.js": [
         "node_modules/jquery/dist/jquery.min.js",
-        "node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "node_modules/system-runtime/dist/system-runtime.min.js"
+        "node_modules/bootstrap/dist/js/bootstrap.min.js"
       ]
     }
   },
@@ -62,8 +79,7 @@
         "node_modules/viz.js/viz.js",
         "node_modules/viz.js/lite.render.js",
         "node_modules/jquery/dist/jquery.min.js",
-        "node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "node_modules/system-runtime/dist/system-runtime.min.js"
+        "node_modules/bootstrap/dist/js/bootstrap.min.js"
       ]
     }
   },
@@ -80,8 +96,7 @@
         "node_modules/codemirror/mode/css/css.js",
         "node_modules/codemirror/mode/htmlmixed/htmlmixed.js",
         "node_modules/codemirror/mode/xml/xml.js",
-        "node_modules/codemirror/addon/edit/closebrackets.js",
-        "node_modules/system-runtime/dist/system-runtime.min.js"
+        "node_modules/codemirror/addon/edit/closebrackets.js"
       ]
     }
   }

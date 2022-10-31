@@ -62,7 +62,12 @@
     }
   </style>
   <!-- system runtime -->
-  <script type="text/javascript" level="warn" src="../lib/system-runtime/system-runtime.min.js"></script>
+  <script type="module">
+    import runtime from '../lib/system-runtime/system-runtime.js'
+    runtime.require('logger').level('warn')
+    
+    window.runtime = runtime
+  </script>
 </body>
 
 </html>
