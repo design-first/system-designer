@@ -636,7 +636,7 @@
       "_id": "c1b2a41e5e61459c",
       "component": "_Channel",
       "state": "init",
-      "action": "function init(conf) { \n  this.require('_Storage').on('changed', function changed(obj) {\n  if (typeof obj['system-designer-message'] !== 'undefined') {\n    $db._Message.insert(obj['system-designer-message'].newValue);\n  }\n}, true);\n}",
+      "action": "function init(conf) { \n  this.require('_Storage').on('changed', function changed(obj) {\n  if (typeof obj['system-designer-message'] !== 'undefined') {\n    $db.collections._Message.insert(obj['system-designer-message'].newValue);\n  }\n}, true);\n}",
       "useCoreAPI": false,
       "core": false
     },

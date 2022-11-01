@@ -89,6 +89,7 @@ module.exports = function (grunt) {
     'json_merge:cordova-systems',
     'copy:minify-json',
     'concat:app',
+    'concat:app-runtime',
     'clean:systems',
     'copy:web-livereload',
     'connect:watch',
@@ -122,6 +123,7 @@ module.exports = function (grunt) {
     'json_merge:electron-systems',
     'copy:minify-json',
     'concat:app',
+    'concat:app-runtime-electron',
     'clean:systems'
   ]);
 

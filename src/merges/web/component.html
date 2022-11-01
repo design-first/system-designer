@@ -52,6 +52,10 @@
   <script type="text/javascript" charset="utf-8" src="lib/ace/ace.js"></script>
   <script type="text/javascript" charset="utf-8" src="lib/ace/ext-language_tools.js"></script>
   <!-- lib -->
+  <script type="module">
+    import runtime from './lib/system-runtime/system-runtime.js'
+    window.runtime = runtime
+  </script>
   <script src="lib/editor/vendor.js"></script>
 </body>
 

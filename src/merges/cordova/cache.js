@@ -32,7 +32,7 @@ self.addEventListener('install', e => {
         'lib/designer/vendor.js',
         'lib/editor/vendor.js',
         'lib/prism/prism.css',
-        'lib/system-runtime/system-runtime.min.js',
+        'lib/system-runtime/system-runtime.js',
         'scripts/designer-runtime.js',
         'scripts/diagram.js',
         'scripts/editor-behavior.js',
