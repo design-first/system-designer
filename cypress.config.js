@@ -1,9 +1,9 @@
 const { defineConfig } = require('cypress')
-const webpack = require('@cypress/webpack-preprocessor')
-const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin
+const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
+const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor')
+const { createEsbuildPlugin }  = require ('@badeball/cypress-cucumber-preprocessor/esbuild')
 
 module.exports = defineConfig({
-  projectId: '558dq3',
   fixturesFolder: 'cypress/fixtures',
   screenshotsFolder: 'reports/screenshots',
   videosFolder: 'reports/videos',
@@ -12,28 +12,11 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       addCucumberPreprocessorPlugin(on, config)
       on(
-        'file:preprocessor',
-        webpack({
-          webpackOptions: {
-            resolve: {
-              extensions: ['.js'],
-            },
-            module: {
-              rules: [
-                {
-                  test: /\.feature$/,
-                  use: [
-                    {
-                      loader: '@badeball/cypress-cucumber-preprocessor/webpack',
-                      options: config,
-                    },
-                  ],
-                },
-              ],
-            },
-          },
+        "file:preprocessor",
+        createBundler({
+          plugins: [createEsbuildPlugin(config)],
         })
-      )
+      );
 
       return config
     },
