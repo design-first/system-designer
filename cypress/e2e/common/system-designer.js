@@ -1,4 +1,4 @@
-import { Given, When, Then, And } from '@badeball/cypress-cucumber-preprocessor'
+import { Given, When, Then, Then as And } from '@badeball/cypress-cucumber-preprocessor'
 
 Given('Users have opened System Designer', () => {
   cy.visit('/').get('#designer-spaces-type').contains('Systems')
