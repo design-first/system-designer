@@ -1,9 +1,9 @@
-/* 
+/*
  * System Designer
- * 
+ *
  * https://designfirst.io/systemdesigner/
  *
- * Copyright 2022 Erwan Carriou
+ * Copyright 2023 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,29 +18,39 @@
  * limitations under the License.
  */
 
-document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false)
 
 function onDeviceReady() {
-  StatusBar.hide();
+  StatusBar.hide()
 }
 
-document.addEventListener('menubutton', onMenuButton, false);
+document.addEventListener('menubutton', onMenuButton, false)
 function onMenuButton() {
   if (document.location.href.indexOf('/app/') !== -1) {
-    document.location.href = '../index.html?messages=' + encodeURIComponent(JSON.stringify(mess));
+    document.location.href =
+      '../index.html?messages=' + encodeURIComponent(JSON.stringify(mess))
   } else {
-    document.location.href = 'index.html?messages=' + encodeURIComponent(JSON.stringify(mess));
+    document.location.href =
+      'index.html?messages=' + encodeURIComponent(JSON.stringify(mess))
   }
 }
 
-document.addEventListener('backbutton', systemDesignerBack, false);
+document.addEventListener('backbutton', systemDesignerBack, false)
 function systemDesignerBack() {
-  var mess = typeof messages !== 'undefined' ? messages : runtime.require('state').messages(),
-    ref = typeof lastPage !== 'undefined' ? lastPage : runtime.require('state').lastPage();
+  var mess =
+      typeof messages !== 'undefined'
+        ? messages
+        : runtime.require('state').messages(),
+    ref =
+      typeof lastPage !== 'undefined'
+        ? lastPage
+        : runtime.require('state').lastPage()
 
   if (document.location.href.indexOf('/app/') !== -1) {
-    document.location.href = '../' + ref + '?messages=' + encodeURIComponent(JSON.stringify(mess));
+    document.location.href =
+      '../' + ref + '?messages=' + encodeURIComponent(JSON.stringify(mess))
   } else {
-    document.location.href = ref + '?messages=' + encodeURIComponent(JSON.stringify(mess));
+    document.location.href =
+      ref + '?messages=' + encodeURIComponent(JSON.stringify(mess))
   }
 }

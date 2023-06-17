@@ -14,12 +14,11 @@ With System Designer you create in fact a **system** and not an application. But
 
 A system:
 
-* is defined by a model,
-* is composed by components and
-* reacts to events with actions that we call behaviors.
+- is defined by a model,
+- is composed by components and
+- reacts to events with actions that we call behaviors.
 
 ![Image Alt](https://designfirst.io/img/system.png)
-
 
 ## What can I do with System Designer ?
 
@@ -45,7 +44,7 @@ In fact, System Designer acts as an ODM (Object-Document Mapper) to manage your 
 
 #### Run your system
 
-You can run your system directly from System Designer and then export it to HTML, JSON, JavaScript, a Node.js module or a [Graphviz](http://graphviz.org) file (* macOS, Windows, Linux and PWA version only).
+You can run your system directly from System Designer and then export it to HTML, JSON, JavaScript, a Node.js module or a [Graphviz](http://graphviz.org) file (\* macOS, Windows, Linux and PWA version only).
 
 Because you have defined a model for your application, a [Dynamic Type Check](https://en.wikipedia.org/wiki/Type_system#DYNAMIC) is done on every action of your system. All warnings are send and shown in System Designer.
 
@@ -75,7 +74,7 @@ Once you have cloned the repository, install the dependencies:
 
 ```sh
 npm i
-```	 	
+```
 
 #### Build for web
 
@@ -160,17 +159,17 @@ Once server started, go to [http://localhost:9001/](http://localhost:9001/). All
 
 ## Documentation
 
-* [Quick Start](https://designfirst.io/systemdesigner/documentation/docs/quick-start.html)
-* [Documentation](https://designfirst.io/systemdesigner/documentation/docs/what-is-system-designer.html)
+- [Quick Start](https://designfirst.io/systemdesigner/documentation/docs/quick-start.html)
+- [Documentation](https://designfirst.io/systemdesigner/documentation/docs/what-is-system-designer.html)
 
 ## Community
 
-* [Code of Conduct](CODE_OF_CONDUCT.md)
-* [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
 
 ## License
 
-Copyright © 2022 Erwan Carriou
+Copyright © 2023 Erwan Carriou
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -182,7 +181,7 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License. 
+limitations under the License.
 
 **Do not use System Designer if you do not believe in Equality and Diversity.**
 

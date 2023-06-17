@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemdesigner/
  *
- * Copyright 2022 Erwan Carriou
+ * Copyright 2023 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,8 @@
  */
 
 module.exports = function (grunt) {
-
   // load tasks
-  require('load-grunt-tasks')(grunt);
+  require('load-grunt-tasks')(grunt)
 
   // load configuration
   grunt.initConfig({
@@ -32,34 +31,41 @@ module.exports = function (grunt) {
     connect: grunt.file.readJSON('tasks/connect.json'),
     bgShell: grunt.file.readJSON('tasks/shell.json'),
     concat: grunt.file.readJSON('tasks/concat.json'),
-    uglify: grunt.file.readJSON('tasks/uglify.json')
-  });
+    uglify: grunt.file.readJSON('tasks/uglify.json'),
+  })
 
   // non trivial copy
   grunt.config.merge({
-    'copy': {
+    copy: {
       'minify-json': {
-        'expand': true,
-        'cwd': 'dist/systems',
-        'src': ['*.json'],
-        'dest': 'dist/systems',
-        'options': {
-          'process': content => JSON.stringify(JSON.parse(content))
-        }
+        expand: true,
+        cwd: 'dist/systems',
+        src: ['*.json'],
+        dest: 'dist/systems',
+        options: {
+          process: (content) => JSON.stringify(JSON.parse(content)),
+        },
       },
       'web-livereload': {
-        'expand': true,
-        'cwd': 'dist',
-        'src': ['*.html', 'app/index.html'],
-        'dest': 'dist',
-        'options': {
-          'process': content =>
-            content.replace('<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./cache.js");</script>', '')
-              .replace('</body>', '\t<script src=\"//localhost:35729/livereload.js\"></script>\n</body>')
+        expand: true,
+        cwd: 'dist',
+        src: ['*.html', 'app/index.html'],
+        dest: 'dist',
+        options: {
+          process: (content) =>
+            content
+              .replace(
+                '<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("./cache.js");</script>',
+                ''
+              )
+              .replace(
+                '</body>',
+                '\t<script src="//localhost:35729/livereload.js"></script>\n</body>'
+              ),
         },
-      }
-    }
-  });
+      },
+    },
+  })
 
   // start the dev mode
   grunt.registerTask('dev', [
@@ -74,11 +80,11 @@ module.exports = function (grunt) {
     'json_merge:web-systems',
     'copy:web-livereload',
     'connect:watch',
-    'watch:web'
-  ]);
+    'watch:web',
+  ])
 
-   // start the dev mode
-   grunt.registerTask('dev-cordova', [
+  // start the dev mode
+  grunt.registerTask('dev-cordova', [
     'clean:build',
     'copy:web-folder',
     'copy:libraries',
@@ -92,8 +98,8 @@ module.exports = function (grunt) {
     'clean:systems',
     'copy:web-livereload',
     'connect:watch',
-    'watch:cordova'
-  ]);
+    'watch:cordova',
+  ])
 
   // build for web
   grunt.registerTask('web', [
@@ -106,8 +112,8 @@ module.exports = function (grunt) {
     'concat:vendor-editor',
     'copy:web-files',
     'json_merge:web-systems',
-    'copy:minify-json'
-  ]);
+    'copy:minify-json',
+  ])
 
   // build for electron
   grunt.registerTask('electron', [
@@ -122,8 +128,8 @@ module.exports = function (grunt) {
     'json_merge:electron-systems',
     'copy:minify-json',
     'concat:app',
-    'clean:systems'
-  ]);
+    'clean:systems',
+  ])
 
   // build for cordova
   grunt.registerTask('cordova', [
@@ -138,28 +144,18 @@ module.exports = function (grunt) {
     'json_merge:cordova-systems',
     'copy:minify-json',
     'concat:app',
-    'clean:systems'
-  ]);
+    'clean:systems',
+  ])
 
   // default build
-  grunt.registerTask('build', [
-    'web'
-  ]);
+  grunt.registerTask('build', ['web'])
 
   // start the server
-  grunt.registerTask('start',
-    'connect:web-server'
-  );
+  grunt.registerTask('start', 'connect:web-server')
 
   // run tests locally
-  grunt.registerTask('test', [
-    'connect:dev-server',
-    'bgShell:cypress-dev'
-  ]);
+  grunt.registerTask('test', ['connect:dev-server', 'bgShell:cypress-dev'])
 
   // run tests in CI
-  grunt.registerTask('ci', [
-    'connect:dev-server',
-    'bgShell:cypress-ci'
-  ]);
-};
+  grunt.registerTask('ci', ['connect:dev-server', 'bgShell:cypress-ci'])
+}
