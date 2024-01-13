@@ -1,10 +1,10 @@
 {
   "cypress-ci": {
-    "cmd": "$(npm bin)/cypress run --record",
+    "cmd": "npx cypress run --record",
     "fail": true
   },
   "cypress-dev": {
-    "cmd": "$(npm bin)/cypress run --config video=false",
+    "cmd": "npx cypress run --config video=false",
     "fail": true
   }
 }
