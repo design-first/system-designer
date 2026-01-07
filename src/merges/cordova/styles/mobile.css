@@ -3,7 +3,7 @@
  *
  * https://designfirst.io/systemdesigner/
  *
- * Copyright 2024 Erwan Carriou
+ * Copyright 2026 Erwan Carriou
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,31 +19,31 @@
  */
 
 .designer-system-menu-export {
-  display: none!important;
+  display: none !important;
 }
 #designer-dialog-config-client-type-debugging {
-  display: none!important;
+  display: none !important;
 }
 #designer-dialog-config-client-form {
-  display: none!important;
+  display: none !important;
 }
 #designer-dialog-config-server-form {
-  display: none!important;
+  display: none !important;
 }
 body,
 .navbar-fixed-top,
 .navbar-fixed-bottom,
 #designer-menubar-header ~ div {
-  min-width: 650px!important;
+  min-width: 650px !important;
 }
 html {
-  background-color: transparent!important;  
+  background-color: transparent !important;
 }
 body {
-  background-color: transparent!important;
+  background-color: transparent !important;
 }
 span.glyphicon.glyphicon-menu-left {
-  color:#337ab7!important;
+  color: #337ab7 !important;
 }
 
 .CodeMirror-gutter-wrapper {
@@ -53,7 +53,7 @@ span.glyphicon.glyphicon-menu-left {
 }
 
 #designer-message {
-  width: 300px!important;
+  width: 300px !important;
 }
 
 .log-number {
@@ -62,117 +62,104 @@ span.glyphicon.glyphicon-menu-left {
 }
 
 /* iPhone 5 / 5S / SE */
-@media only screen 
-  and (max-width: 600px) {
-    .container {
-      padding-right: 70px!important;
-    }
-    .list-group.designer-library {
-      max-height:110px!important;
-    }
-    #designer-toolbar-item-search {
-      display: none;
-    }
-    #designer-toolbar-item-command {
-      display: none;
-    }
-    #designer-toolbar-item-extension {
-      display: none;
-    }
+@media only screen and (max-width: 600px) {
+  .container {
+    padding-right: 70px !important;
   }
+  .list-group.designer-library {
+    max-height: 110px !important;
+  }
+  #designer-toolbar-item-search {
+    display: none;
+  }
+  #designer-toolbar-item-command {
+    display: none;
+  }
+  #designer-toolbar-item-extension {
+    display: none;
+  }
+}
 
 /* iPhone 6 / 7 / 8 */
-@media only screen 
-  and (max-width : 667px) {
-    .list-group.designer-library {
-      max-height:90;
-    }
-    #designer-dialog-import-file-modal .modal-body {
-      padding-bottom: 0;
-    }
-    #designer-dialog-import-file-modal .modal-footer {
-      padding-top: 0;
-    }
-    #designer-dialog-import-modal-from-file-form,
-    #designer-dialog-import-file-modal-well {
-      margin-bottom: 0;
-    }
-    #designer-dialog-sync-modal .modal-body {
-      padding-bottom: 0;
-    }
-    #designer-dialog-sync-modal .modal-footer {
-      padding-top: 0;
-    }
-    #designer-toolbar-item-search {
-      display: none;
-    }
-    #designer-toolbar-item-command {
-      display: none;
-    }
-    #designer-toolbar-item-extension {
-      display: none;
-    }
+@media only screen and (max-width: 667px) {
+  .list-group.designer-library {
+    max-height: 90;
   }
+  #designer-dialog-import-file-modal .modal-body {
+    padding-bottom: 0;
+  }
+  #designer-dialog-import-file-modal .modal-footer {
+    padding-top: 0;
+  }
+  #designer-dialog-import-modal-from-file-form,
+  #designer-dialog-import-file-modal-well {
+    margin-bottom: 0;
+  }
+  #designer-dialog-sync-modal .modal-body {
+    padding-bottom: 0;
+  }
+  #designer-dialog-sync-modal .modal-footer {
+    padding-top: 0;
+  }
+  #designer-toolbar-item-search {
+    display: none;
+  }
+  #designer-toolbar-item-command {
+    display: none;
+  }
+  #designer-toolbar-item-extension {
+    display: none;
+  }
+}
 
 /* iPhone 6+ / 7+ / 8+ */
-@media only screen 
-  and (max-width : 736px) {
-    .list-group.designer-library {
-      max-height:150px;
-    }
-    #designer-toolbar-item-search {
-      display: none;
-    }
-    #designer-toolbar-item-command {
-      display: none;
-    }
-    #designer-toolbar-item-extension {
-      display: none;
-    }
+@media only screen and (max-width: 736px) {
+  .list-group.designer-library {
+    max-height: 150px;
   }
+  #designer-toolbar-item-search {
+    display: none;
+  }
+  #designer-toolbar-item-command {
+    display: none;
+  }
+  #designer-toolbar-item-extension {
+    display: none;
+  }
+}
 
 /* iPhone X, iPhone XS */
-@media only screen 
-  and (device-width : 375px) 
-  and (device-height : 812px) 
-  and (-webkit-device-pixel-ratio : 3) { 
-    body,
-    .navbar-fixed-top,
-    .navbar-fixed-bottom {
-      width: 812px!important;
-    }
-    #designer-toolbar-item-command {
-      display: none;
-    }
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+  body,
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    width: 812px !important;
   }
+  #designer-toolbar-item-command {
+    display: none;
+  }
+}
 
 /* iPhone XR */
-@media only screen 
-  and (device-width : 414px) 
-  and (device-height : 896px) 
-  and (-webkit-device-pixel-ratio : 2) {
-    body,
-    .navbar-fixed-top,
-    .navbar-fixed-bottom {
-      width: 896px!important;
-    }
-    #designer-toolbar-item-command {
-      display: none;
-    } 
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  body,
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    width: 896px !important;
   }
+  #designer-toolbar-item-command {
+    display: none;
+  }
+}
 
 /* iPhone XS Max */
-@media only screen 
-  and (device-width : 414px) 
-  and (device-height : 896px) 
-  and (-webkit-device-pixel-ratio : 3) {
-    body,
-    .navbar-fixed-top,
-    .navbar-fixed-bottom {
-      width: 896px!important;
-    }
-    #designer-toolbar-item-command {
-      display: none;
-    } 
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
+  body,
+  .navbar-fixed-top,
+  .navbar-fixed-bottom {
+    width: 896px !important;
   }
-
+  #designer-toolbar-item-command {
+    display: none;
+  }
+}
