@@ -1,7 +1,7 @@
-// System Designer - Copyright 2024 Erwan Carriou
+// System Designer - Copyright 2026 Erwan Carriou
 // Licensed under the Apache License, Version 2.0 (the "License")
 
-const version = 'v5.3.0'
+const version = 'v5.4.0'
 
 const clearCaches = () => {
   return caches.keys().then((keys) => {
@@ -12,7 +12,7 @@ const clearCaches = () => {
         })
         .map((key) => {
           return caches.delete(key)
-        })
+        }),
     )
   })
 }
@@ -70,7 +70,7 @@ self.addEventListener('install', (e) => {
           'img/icon.png',
         ])
         .then(() => self.skipWaiting())
-    })
+    }),
   )
 })
 
@@ -78,7 +78,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     clearCaches().then(() => {
       return self.clients.claim()
-    })
+    }),
   )
 })
 
@@ -92,6 +92,6 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request, { ignoreSearch: true }).then((response) => {
       return response || fetch(event.request)
-    })
+    }),
   )
 })
