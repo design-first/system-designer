@@ -1,0 +1,310 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {}
+}
+{ai-pulse
+│
+├── server.js
+├── package.json
+│
+└── public
+    ├── index.html
+    ├── style.css
+    └── script.js
+{
+  "name": "ai-pulse",
+  "version": "1.0.0",
+  "description": "Real-time AI assistant",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "openai": "^4.0.0",
+    "socket.io": "^4.7.2"
+  }
+}import express from "express"
+import http from "http"
+import { Server } from "socket.io"
+import cors from "cors"
+import dotenv from "dotenv"
+import OpenAI from "openai"
+
+dotenv.config()
+
+const app = express()
+app.use(cors())
+app.use(express.static("public"))
+
+const server = http.createServer(app)
+const io = new Server(server)
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+})
+
+io.on("connection", (socket) => {
+
+  console.log("User connected")
+
+  socket.on("message", async (msg) => {
+
+    try {
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "You are AI Pulse, a powerful real-time AI assistant that helps with any task."
+          },
+          {
+            role: "user",
+            content: msg
+          }
+        ]
+      })
+
+      const reply = completion.choices[0].message.content
+
+      socket.emit("reply", reply)
+
+    } catch (error) {
+
+      socket.emit("reply", "AI Error: " + error.message)
+
+    }
+
+  })
+
+})
+
+server.listen(3000, () => {
+  console.log("AI Pulse running on port 3000")
+})<!DOCTYPE html>
+<html>
+
+<head>
+<title>AI Pulse</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Pulse</h1>
+
+<div id="chat"></div>
+
+<input id="input" placeholder="Ask AI Pulse anything..." />
+<button onclick="sendMessage()">Send</button>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
+
+</body>
+
+</html>body{
+background:#0f0f0f;
+color:white;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+width:400px;
+}
+
+#chat{
+height:400px;
+overflow-y:auto;
+border:1px solid #333;
+padding:10px;
+margin-bottom:10px;
+}
+
+input{
+width:75%;
+padding:10px;
+}
+
+button{
+padding:10px;
+background:#00ffcc;
+border:none;
+}const socket = io()
+
+const chat = document.getElementById("chat")
+const input = document.getElementById("input")
+
+function addMessage(text, sender){
+
+  const msg = document.createElement("div")
+  msg.innerText = sender + ": " + text
+  chat.appendChild(msg)
+
+}
+
+function sendMessage(){
+
+  const text = input.value
+
+  addMessage(text,"You")
+
+  socket.emit("message",text)
+
+  input.value = ""
+
+}
+
+socket.on("reply",(msg)=>{
+
+  addMessage(msg,"AI")
+
+})OPENAI_API_KEY=YOUR_API_KEY_HERE
+npm install
+npm start
+http://localhost:3000
+Here's the updated server.js with per-session conversation memory:
+
+import express from "express"
+import http from "http"
+import { Server } from "socket.io"
+import cors from "cors"
+import dotenv from "dotenv"
+import OpenAI from "openai"
+
+dotenv.config()
+
+const app = express()
+app.use(cors())
+app.use(express.static("public"))
+
+const server = http.createServer(app)
+const io = new Server(server)
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAIAPIKEY
+})
+
+const SYSTEM_PROMPT = {
+  role: "system",
+  content: "You are AI Pulse, a powerful real-time AI assistant that helps with any task."
+}
+
+const MAX_HISTORY = 20
+
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id)
+
+  // Each socket gets its own conversation history
+  const history = []
+
+  socket.on("message", async (msg) => {
+
+    // Basic input validation
+    if (!msg || typeof msg !== "string" || msg.trim().length === 0) {
+      socket.emit("reply", "Please enter a valid message.")
+      return
+    }
+
+    if (msg.length > 2000) {
+      socket.emit("reply", "Message too long. Please keep it under 2000 characters.")
+      return
+    }
+
+    // Add user message to this session's history
+    history.push({ role: "user", content: msg.trim() })
+
+    // Trim history if it gets too long, but always keep the system prompt separate
+    if (history.length > MAX_HISTORY) {
+      history.splice(0, 2) // Remove oldest user+assistant pair
+    }
+
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [SYSTEM_PROMPT, ...history],
+        max_tokens: 1000
+      })
+
+      const reply = completion.choices[0].message.content
+
+      // Add assistant reply to history so future messages have context
+      history.push({ role: "assistant", content: reply })
+
+      socket.emit("reply", reply)
+
+    } catch (error) {
+      console.error("OpenAI error:", error.message)
+
+      // Don't add failed exchanges to history
+      history.pop()
+
+      socket.emit("reply", "Something went wrong. Please try again.")
+    }
+  })
+
+  socket.on("disconnect", () => {
+    console.log("User disconnected:", socket.id)
+    // History is automatically garbage collected when socket closes
+  })
+})
+
+server.listen(3000, () => {
+  console.log("AI Pulse running on http://localhost:3000")
+})
+
+The key changes and why they matter:
+
+Each socket connection now gets its own history array that lives for the duration of that session. When a user sends a message, the full conversation so far gets passed to OpenAI, so the AI can reference anything said earlier. When the user disconnects, the history disappears automatically since it was just a local variable in that connection's scope.
+
+The MAX_HISTORY cap prevents the context window from growing forever and keeps your API costs predictable. It trims the oldest pairs when the limit is hit, which means very long conversations will gradually lose their earliest context, but that's usually acceptable behavior.
+
+The failed exchange handling is worth noting: if the OpenAI call fails, the user message gets removed from history with history.pop(). This prevents a situation where the AI's history shows a user message with no corresponding reply, which can confuse the model on future turns.
+
+You'll also want to add this .gitignore file to the root of your project before anything else:
+
+node_modules
+.env
+
+Two lines, saves you from accidentally leaking your API key. Want to tackle rate limiting next, or move on to a different feature?
+import sqlite3 from "sqlite3"
+
+const db = new sqlite3.Database("memory.db")
+
+db.run(`
+CREATE TABLE IF NOT EXISTS conversations (
+id TEXT,
+role TEXT,
+content TEXT
+)
+`)const rateLimit = new Map()
+
+function isRateLimited(id) {
+  const now = Date.now()
+  const limit = rateLimit.get(id) || []
+
+  const filtered = limit.filter(t => now - t < 60000)
+
+  if (filtered.length >= 10) return true
+
+  filtered.push(now)
+  rateLimit.set(id, filtered)
+
+  return false
+}if (isRateLimited(socket.id)) {
+  socket.emit("reply", "Too many requests. Slow down.")
+  return
+}socket.emit("reply", reply)
+socket.emit("replyChunk", chunk)
